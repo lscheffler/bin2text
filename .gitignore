@@ -1,0 +1,76 @@
+#exclude general
+*.*
+
+#include general
+#dbx data
+!*.dbf
+!*.cdx
+!*.fpt
+
+!*.dbc
+!*.dc[tx]
+
+#grafics
+!*.bmp
+!*.msk
+!*.ico
+!*.cdr
+!*.cur
+
+#programms
+!*.prg
+!*.fpw
+
+#header
+!*.h
+
+#libs (by FoxBin2prg)
+#!*.vc[xt]
+#!*.pj[xt]
+#!*.fr[xt]
+#!*.mn[xt]
+#!*.sc[xt]
+#!*.lb[xt]
+
+#FoxBin2prg
+!*.vc2
+!*.pj2
+!*.fr2
+!*.mn2
+!*.sc2
+!*.lb2
+#!*.d[bc]2
+
+#include special
+#default git
+!*.gitignore
+!/desktop.ini
+
+#diverse
+!*.reg
+!/FoxBin2prg.cfg
+#Doku
+!/Doku/**/*.htm*
+!/Doku/**/*.js
+!/Doku/**/*.gif
+!/Doku/**/*.png
+!/Doku/**/*.css
+!/Doku/*.pdm*
+
+#exclude special
+foxuser_9.*
+_command.prg
+*ref.*
+debug*.*
+Sicherungskopie*.*
+include/projsub.h
+
+#exclude github
+!*.md
+
+#nix von hier
+default/
+temp/
+tmp/
+
+bin2txt.*
