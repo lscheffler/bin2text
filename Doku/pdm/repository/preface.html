@@ -1,0 +1,222 @@
+<!DOCTYPE html PUBLIC &quot;-//W3C//DTD XHTML 1.0 Transitional//EN&quot; &quot;http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd&quot;&gt;
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="deu">
+ <head>
+  <title>Bin 2 Text</title>
+<!--- CSS Defs
+&lt;style
+
+---->
+  <style type="text/css">
+   <!--
+   Span.Example
+   {
+    color: blue;
+    font-style: ialic;
+    FONT-SIZE: 10pt;
+    WIDTH: auto;
+    FONT-FAMILY: &quot;Monospace&quot;,&quot;Courier New&quot;;
+    BACKGROUND-COLOR: #eeeeee
+  }
+   -->
+  </style>
+</head>
+<body>
+ <h1>Bin 2 Text extension</h1>
+ <p>
+  This document describes the Bin 2 Text extension for <a href="http://vfpx.codeplex.com/wikipage?title=FoxBin2Prg&referringTitle=Home" target="_blank">FoxBin2Prg</a> by Fernando D. Bozzo.
+ </p>
+ <p>
+  Documentation of the project is done with <a href="http://gorila.netlab.cz/pdm.html" target="_blank">Project Documenting Machine</a> by Martina Jindrová using the AB-plugins by myself.
+ </p>
+ <p>
+  Contents:
+ </p>
+ <ul>
+ 	<li><a href="#history">A brief history</a></li>
+    <li><a href="#howto">How to get it to work</a></li>
+    <li><a href="#more">A bit more</a></li>
+    <li><a href="#evenmore">And more</a></li>
+    <li><a href="../Project.htm" target="_top">Project documentation</a></li>
+ </ul>
+ <hr /><h2><a name="history">A brief history</a></h2>
+ <p>
+  The goal of this extension is to use <a href="http://git-scm.com" target="_blank">git</a> with VFP.
+  I come up with a bit more, it will work as a simple menu for pjx transfers too.
+ </p>
+ <p>
+  FoxBin2Prg does a great job in transfering the VFP binary sources into text files.
+   Since <em>git</em> is used a bit bit different then the common SCM (it's to tricky to decribe with my english),
+   a need of very fast atomic transfers from Bin to Text comes up.
+   My first idea was to transfer single binaries from VFP project manager, but the context menu extension works not as expected.<br/>
+   <em>If somebody knows how to figure out what particular node was right clicked on project manager, let me know, I will set this thing up to work from there too.</em>
+ </p>
+ <p>
+   So the last resort was to transfer whole projects. I've talked Fernando into processing whole pjx containers and some more great stuff.
+ </p>
+ <p>
+ 	So now we have a tool that will run, out of a menu in IDE, FoxBin2Prg  Bin &lt;&gt; Text for
+ 	<ul>
+ 		<li>the active project</li>
+ 		<li>all open projects</li>
+ 		<li>all projects of a base dir</li>
+ 	</ul>
+ 	as well as a way to run all files of all projects in path Bin &gt; Text and immediate <em>git commit</em>.
+ </p>
+ <p>
+ 	For the ones familiar with <em>git</em>,
+ 	the idea is to create backup like <em>commits</em> to the local <em>branch</em>,
+ 	that can be later <em>rebased</em> or <em>merge --squash</em> into some more meaningfull <em>commit</em>.
+ </p>
+ <p>
+ 	It is not designed to <em>push</em> or <em>pull remotes</em> or does the <em>rebase</em>. The good news is that <em>git</em> will run, if properly installed, from VFP's IDE.
+ </p>
+ <span class="example">RUN git commit -a</span>
+ <p>
+ 	I just like to fire some keys to create the <em>commit</em>.
+ </p>
+ <p>
+ 	The code does additional to FoxBin2Prg:
+ 	<ul>
+ 		<li>Include projecthook library in the list of files to process.</li>
+ 		<li>Run all projects in a row, so that FoxBin2Prg will process files shared only one time.</li>
+ 		<li>Optionaly process only files changed, comparing files checksum and, if possible, down to class level circumventing problems with vcx/scx compiling.</li>
+ 		<li>Delete files removed from libraries in FoxBin2Prg's FilePerClass mode. <strong>Not implemented yet.</strong></li>
+ 	</ul>
+ </p>
+ <hr /><h2><a name="howto">How to get it to work</a></h2>
+ <ol>
+  <li>You need <a href="http://vfpx.codeplex.com/releases/view/116407" target="_blank">FoxBin2Prg</a> at least version 1.19.42</li>
+  <li>
+  	<p>
+  		If you like to have it interacting with <em>git</em>, you need <a href="http://git-scm.com/download/win" target="_blank">git for windows</a>.
+  		<ul>
+  			<li>The <em>git</em> commands must be working in windows command line.</li>
+  			<li>The base directory must be a <em>git controled</em> directory.</li>
+  			<li>You should understand <em>git</em>.</li>
+  		</ul>
+  	</p>
+  </li>
+  <li>Compile the Bin2Text.pjx that ships with this documentation to Bin2Text.app.</li>
+  <li>
+  	Place Bin2Text.app next to FoxBin2Prg.prg.<br />
+  	It will work from any other place but then you must pick up the FoxBin2Prg.prg location.
+  </li>
+  <li>
+   Run from IDE. (Best: with project open)<br/>
+   <span class="example">DO InitMenu IN Bin2Text.app</span><br/>
+   or to define a base directory:<br />
+   <span class="example">DO InitMenu IN Bin2Text.app WITH lcHomePath</span><br/>
+   Check <a href="#InitMenu">InitMenu</a> for more information.<br/>
+   <strong>You need to run this on every start of the IDE.</strong>
+  </li>
+  <li>Use the menu.</li>
+  <li>
+    <p>There is a settings item in the menu that gives you a bit of control what happens.</p>
+  	<dl>
+  		<dt>Convert all files</dt>
+  		<dd>
+  			<p>Just let FoxBin2Prg process the whole pjx and projecthook.<br />
+  			<strong>Off</strong> is the more sophisticated thing, it just let only those files process that are changed.<br/>
+  			<strong>
+  				The basic idea is to run this for single classes. I have a bit more to code on that.<br/>
+  				Tricky to not over optimize.
+			</strong></p>
+  		</dd>
+  		<dt>Delete obsolete files.</dt>
+  		<dd>
+  			<p>If FoxBin2PRG is in the FilePerClass mode, delete text files if classes are deleted..<br />
+  				<strong>Not implemented yet.</strong></p>
+  		</dd>
+  		<dt>(git) auto commit</dt>
+  		<dd>
+  			<p>If on the git menu item it will create a timestamp message for <em>git commit</em> without interaction.<br />
+  				Off will raise the usual <em>git commit</em> dialog.</p>
+  		</dd>
+  		<dt>(git) Include pjx</dt>
+  		<dd>
+  			<p>
+  				Include pjx file itself in the Bin &gt; Text conversion of the <em>git</em> transfer.<br />
+  				Off will be faster, because the pjx needs to be closed and reopened. A change to the pjx need to be processed with the other menu items.
+  			</p>
+  		</dd>
+  	</dl>
+  </li>
+ </ol>
+  <p>
+ 	This is the most basic use of this extension.
+  </p>
+ <hr /><h2><a name="more">A bit more</a></h2>
+   <p>
+ 	While the application is made to run from the menu, I will go give the basic interfaces.
+ 	The other stuff will be in this documentation anyway. See the exact interface parameters at <a href="../code/runb2t.prg/Main.htm" target="_top">RunB2T.prg</a> in this documentation or run with help parameter.
+  </p>
+  <h3><a name="InitMenu">InitMenu</a></h3>
+   <span class="example">DO InitMenu IN Bin2Text.app [WITH lcPath]</span>
+   <p>
+   	Initialise the extension and start the menu.
+   </p>
+   <p>
+   	This can be used to set the base directory. The directory the extension feels home and places it's storage table.
+   </p>
+   <p>
+   	There are side effects of the procedure.
+   </p>
+   <ol>
+   	<li>The VFP search path will be changed in a way to find the menu program.</li>
+   	<li><em>FoxBin<u>2</u>Text</em> menu will be created before <em>WINDOWS</em> menu.</li>
+   </ol>
+   <p>
+   	See <a href="../code/runb2t.prg/Main_d.initmenu.htm" title="Skip to procedure InitMenu">InitMenu</a>
+   </p>
+  <h3><a name="Inter_Active">Inter_Active</a></h3>
+   <span class="example">DO Inter_Active IN Bin2Text.app</span>
+   <p>
+   	Call the settings form.
+   </p>
+   <p>
+   	This is what the menus settings item calls.
+   </p>
+   <p>
+   	See <a href="../code/runb2t.prg/Main_d.inter_active.htm" title="Skip to procedure Inter_Active">Inter_Active</a>
+   </p>
+  <h3><a name="PJX2Commit">PJX2Commit</a></h3>
+   <span class="example">DO PJX2Commit IN Bin2Text.app</span>
+   <p>
+   	Convert the files off the active project to text and run <em>git commit</em>.
+   </p>
+   <p>
+   	This is what the menus commit item calls.
+   </p>
+   <p>
+   	See <a href="../code/runb2t.prg/Main_d.pjx2commit.htm" title="Skip to procedure Pjx2Commit">Pjx2Commit</a>
+   </p>
+  <h3><a name="Convert_Pjx">Convert_Pjx</a></h3>
+   <span class="example">DO Convert_Pjx IN Bin2Text.app [[/?]|[lToBin[,nProjects[,nMode]]</span>
+   <p>
+   	Calls the pjx processing feature.
+   </p>
+   <p>
+   	This is what all other menus item are calling.
+   </p>
+   <p>
+   	See <a href="../code/runb2t.prg/Main_d.convert_pjx.htm" title="Skip to procedure Convert_Pjx">Convert_Pjx</a>
+   </p>
+ <hr /><h2><a name="evenmore">And more</a></h2>
+   <p>
+ 	There is one interface that offers a way to process any group of files, more complex then one can express with the FoxBin2Prg interface.
+  <h3><a name="Convert_Array">Convert_Array</a></h3>
+  </p>
+   <span class="example">DO Convert_Array IN Bin2Text.app [/?]|lToBin,cMode,@aFiles</span>
+   <p>
+   	See <a href="../code/runb2t.prg/Main_d.convert_array.htm" title="Skip to procedure Convert_Array">Convert_Array</a>
+   </p>
+  <h3><a name="Table">Storage table</a></h3>
+   <p>
+   	The app uses tables to store the settings and to cache the states of the conversions.
+   	Those tables are stored in a projcets home directory any other directory defined with <a href="InitMenu">InitMenu</a>.
+   </p>
+   <p>
+   	See <a href="../classes/bin_2_text.vcx/cls.cusstorage.storage_open.htm" title="Skip to method Storage_Open">Storage_Open</a> for a table structure.
+   </p>
+<hr /><i>&copy;2015 Lutz Scheffler Software Ingenieurbüro</i>
+</body></html>

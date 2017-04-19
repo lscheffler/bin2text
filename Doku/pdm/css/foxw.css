@@ -1,0 +1,560 @@
+body {margin: 2px;}
+html.html_h100, body.body_h100 {height:100%}
+
+.pbb_auto {page-break-before: auto}
+
+h1 {font-family: arial; color:#000080; font-weight:bold;}
+h2,.gct_h2 {font-family: arial; color:#000080; font-weight:bold;}
+h3 {font-family: arial; color:#000080; font-weight:bold;}
+h4 {font-family: arial; color:#000080; font-weight:bold;}
+
+.nom {margin-bottom: 0pt;}
+.IDObj {font-size:0.6em;}
+
+a.customlinks:hover:after {content: "\A [Comment: "attr(title)"]";}
+
+
+/* general class for general properties */
+.PropR  {padding-right: 10px; vertical-align: middle;}
+.PropL {padding-left: 10px; vertical-align: middle;}
+.PropRow {padding-top: 5px;}
+
+td.a_right {text-align: right;}
+td.a_middle {vertical-align: middle;}
+td.a_top {vertical-align: top;}
+table.a_center, td.a_center {text-align: center;}
+
+
+table.file_head {border: 0px none; border-collapse:collapse; width: 100%;}
+table.file_head td {padding: 2px 2px 2px 2px;}
+
+.brzero {border-right:0px;}
+.blzero {border-left:0;}
+
+.hexa {font-family: "Courier New";}
+
+
+td.PropR  {padding-right:10px;}
+td.Prop  {padding-left:10px;}
+
+.foxMark {font-family: "FoxFont" ;font-size:1em; vertical-align: middle;}
+
+td.Head {font-family: "Courier New" ;font-size:1em; white-space:pre;}
+
+tr.Head {background-color: #C0C0C0;}
+
+
+
+table.Prop {
+            margin:0px; padding:0px;
+            border-width:0px;
+            border-style:solid;
+           }
+
+img.imgclass, img.imgclassh {width:16px; height:16px;
+              vertical-align: middle;
+              }
+
+img.imgclassh {visibility: hidden;}
+              
+img.imgEC, img.imgECh{width:20px; height:20px;
+           vertical-align: middle;
+          }
+
+img.imgECh {visibility: hidden;}
+
+img.imgYN {width:13px; height:13px;
+           vertical-align: middle;
+           }
+
+img.imgGO {width:55px; height:28px;
+           vertical-align: middle;
+          }
+
+img.imgUD {width:13px; height:8px;
+           vertical-align: middle;
+          }
+
+img.imgOP {width:36px; height:38px;
+           vertical-align: middle;
+          }
+
+img.imgSD {width:36px; height:38px;
+           vertical-align: middle;
+          }
+
+img.imgS_ {width:41px; height:46px;
+           vertical-align: middle;
+          }
+
+img.imgPO {width:35px; height:51px;
+           vertical-align: middle;
+          }
+
+
+label.OC_Tree {}
+select.OC_Tree {font-family: "Courier New" ;font-size:1em; white-space:pre;}
+
+label.FP_List {}
+select.FP_List {}
+
+div.imgEC {display: inline;}
+
+div.imgclass {display: inline; vertical-align: middle;}
+
+
+div.TreeRow {margin: 0px 0px 0px 0px; padding: 2px 2px 2px 0px;
+             border-width:0px;
+            }
+
+div.TreeRowE {margin: 0px 0px 0px 0px; padding:0px 0px 0px 0px;
+              border-width:0px;
+              position: relative; left:20px;
+             }
+ 
+div.TreeRowH {margin:0px 0px 0px 0px; padding:0px 0px 0px 0px;
+              border-width:0px;
+              background-color: #C0C0C0;
+             }
+
+
+div.EFRX {margin: 0px 0px 0px 0px; padding: 0px 0px 10px 0px;
+          border-width:0px;
+          position: relative;
+         }
+
+
+div.SC {margin: 2px 0px 2px 0px; padding: 0px 0px 0px 0px;
+        border-width:0px; border-style:solid;
+       }
+
+div.SCH {margin: 0px 0px 0px 0px; padding: 0px 0px 0px 0px;
+         border-width:0px; border-style:solid;
+         background-color: #C0C0C0;
+        }
+
+div.SCE {margin: 0px 0px 10px 0px; padding: 0px 0px 0px 20px;
+         border-width:0px;
+         position: relative;
+        }
+
+div.SCE2 {margin: 0px 0px 0px 0px; padding: 0px 0px 0px 0px;
+          border-width:0px;
+         }
+
+span.TreeRow {margin: 0px 0px 0px 0px; padding: 0px 0px 0px 0px;
+              border-width:0px;
+              vertical-align: middle;
+             }
+
+span.SCCaption {margin: 0px 0px 0px 0px; padding: 0px 0px 0px 0px;
+                border-width:0px;
+                vertical-align: middle;
+               }
+
+
+div.block { margin-top: 1em;}
+div.block span {font-weight:bold;}
+div.block div {margin-left:1em;}
+
+
+/************************/
+/* styles for main menu */
+/************************/
+
+
+body.mainmenu {background-color:#F0F0F0; padding:0px 0px 0px 0px; margin:0px 0px 0px 0px;}
+
+div.mainmenu, img.mm_hf, img.mm_line, img.mm_body
+  {left:0px; border-width:0px;
+   margin: 0px 0px 0px 0px; padding: 0px 0px 0px 0px; position:relative;
+  }
+
+
+div.mainmenu img.mm_hf, div.mainmenu img.mm_line, div.mainmenu img.mm_body
+               {width:109px;}
+
+div.mainmenu img.mm_hf   {height:4px;}
+div.mainmenu img.mm_line {height:2px;}
+               
+
+div.mainmenuLeft {width:33%;height:100%;}
+
+div.mainmenuRight {position: absolute; top: 0px; left:33%; width:67%;height:100%; overflow:hidden;}
+
+iframe.iframe_QL {width:100%; height:100%;}
+
+
+img.imgQuickView {position: absolute; visibility: hidden; top:30px;
+                  margin: 0px 0px 0px 0px; padding: 0px 0px 0px 0px;
+                  width: 80px; height:80px;
+                  display: block; top:85%;
+                  }
+
+
+/******************************/
+/* styles for quick file list */
+/******************************/
+
+body.quickfilelist {background-color:#F0F0F0; padding:0px 0px 0px 0px;  margin:2px;}
+
+
+/***********************************/
+/* styles for menu object's detail */
+/***********************************/
+
+div.Block {
+           border-width:1px; border-style:solid; padding:2px;
+          }
+
+
+/*********************************/
+/* styles for tree pads and bars */
+/*********************************/
+div.mnxDIV {border-width:0px;
+            font-size:1em;
+            white-space: nowrap;
+           }
+
+div.mnxHead {padding-top:0px; padding-bottom:0px;
+             background-color: #C0C0C0;
+             border-width:0px;
+            }
+
+span.mnxHead {vertical-align: middle;
+             background-color: #C0C0C0;
+             }
+
+div.mnxPopup {font-weight:bold;
+              padding-top:0px; padding-bottom:0px;
+              border-width:0px; clear: left;
+             }
+  
+span.mnxPopup {vertical-align: middle;
+               border-width:0px;
+              }
+
+div.mnxBar {padding-top:0px; padding-bottom:0px;
+            border-width:0px; clear: left;
+           }
+
+span.mnxBar {vertical-align: middle;
+             border-width:0px;
+            }
+
+span.mnxPopup a, span.mnxBar a {text-decoration: none;}
+span.mnxBar a:hover, span.mnxBar a:active, span.mnxPopup a:hover, span.mnxPopup a:active {text-decoration: underline;}
+
+
+/***********************************************/
+/* styles for tree bands and object for report */
+/***********************************************/
+div.rptDIV {border-width:0px;
+            font-size:1em;
+            white-space: nowrap;
+           }
+
+
+div.rptHead {padding-top:2px; padding-bottom:2px;
+             background-color: #C0C0C0;
+            }
+
+span.rptHead {vertical-align: middle;
+             background-color: #C0C0C0;
+             }
+
+div.rptBand {font-weight:bold;
+             padding-top:2px; padding-bottom:2px;
+            }
+
+span.rptBand {vertical-align: middle;
+             }
+
+div.rptObject {padding-top:2px; padding-bottom:2px;
+              }
+
+
+/****************************/
+/* styles for report detail */
+/****************************/
+
+div.group {
+           border-width:1px; border-style:solid;
+           text-align:center; vertical-align: middle;
+           display: inline;
+          }
+
+/* colors */
+.rptDFC {padding-left:10px; width:0.5em;}
+.rptDFCh {padding-left:10px; font-family: "Courier New";}
+.rptDFCd {padding-left:10px; width:65px; text-align: right;}
+
+
+
+
+/*******************************/
+/* styles for report QuickView */
+/*******************************/
+object.box { cursor:pointer; cursor:hand; position:absolute;
+            margin: 0px 0px 0px 0px; padding: 0px 0px 0px 0px;
+           }
+
+
+div.rulerM {margin: 0px 0px 0px 0px; padding: 0px 0px 0px 0px;
+            background-color:#D3D3D3;
+            border-width: 1px; border-style: solid; border-color:#000000;
+            overflow:hidden; font-family:Tahoma; font-size:0.6em;
+            position:absolute;
+            height:0.2912in; width:0.2912in; left:0in; top:0in;
+           }
+
+
+div.rulerH {margin: 0px 0px 0px 0px; padding: 0px 0px 0px 0px;
+            background-color:#D3D3D3;
+            border-width: 1px; border-style: solid; border-color:#000000;
+            overflow:hidden; font-family:Tahoma; font-size:0.6em;
+            position:absolute;
+            height:0.2912in; left:0.3016in; top:0in;
+           }
+
+
+div.rulerV {margin: 0px 0px 0px 0px; padding: 0px 0px 0px 0px;
+            background-color:#D3D3D3;
+            border-width: 1px; border-style: solid; border-color:#000000;
+            overflow:hidden; font-family:Tahoma; font-size:0.6em;
+            position:absolute;
+            width:0.2912in; left:0in; top:0.3016in;
+           }
+
+div.band {cursor:pointer; cursor:hand;
+          margin: 0px 0px 0px 0px; padding: 0px 0px 0px 0px;
+          background-color:#D3D3D3;
+          border-width: 2px; border-style: outset; border-color:#C0C0C0;
+          overflow:hidden; font-family:Tahoma; font-size:0.8em;
+          position:absolute;
+          width:100%; left:0.3125in; height: 0.1667in;
+         }
+
+div.text {cursor:pointer; cursor:hand;position:absolute;
+          margin: 0px 0px 0px 0px; padding: 0px 0px 0px 0px;
+          border-width: 0px; z-index: 2;
+          vertical-align: middle;
+          }
+
+div.field {cursor:pointer; cursor:hand; position:absolute;
+           border-width: 1px; border-style: solid;
+           overflow:hidden;
+           margin: 0px 0px 0px 0px; padding: 0px 0px 0px 0px;
+           z-index: 2;
+           vertical-align: middle;
+          }
+
+div.box {cursor:pointer; cursor:hand; position:absolute;
+         margin: 0px 0px 0px 0px; padding: 0px 0px 0px 0px;
+         z-index: 1;
+        }
+
+
+div.dos {border-style:solid; border-color:#000000;
+        }
+
+hr.line {cursor:pointer; cursor:hand; position:absolute;
+         margin: 0px 0px 0px 0px; padding: 0px 0px 0px 0px;
+         z-index: 1;
+        }
+
+hr.highlite {cursor:pointer; cursor:hand; position:absolute;
+             margin: 0px 0px 0px 0px; padding: 0px 0px 0px 0px;
+             border-width: 2px; border-style: solid; border-color:#0000FF; visibility: hidden;
+             z-index: 2;
+            }
+
+div.highlite {cursor:pointer; cursor:hand; position:absolute;
+              margin: 0px 0px 0px 0px; padding: 0px 0px 0px 0px;
+              border-width: 2px; border-style: solid; border-color:#0000FF; visibility: hidden;
+              z-index: 2;
+             }
+
+img.picture {cursor:pointer; cursor:hand; position:absolute;
+             margin: 0px 0px 0px 0px; padding: 0px 0px 0px 0px;
+             border-width: 0px; z-index: 2;
+            }
+
+
+div.HNum  {position:absolute;
+           margin: 0px 0px 0px 0px; padding: 0px 0px 0px 0px;
+           top:10px; font-family:MS Sans Serif; font-size:0.6em; border-width: 0px;
+          }
+
+div.VNum  {position:absolute;
+           margin: 0px 0px 0px 0px; padding: 0px 0px 0px 0px;
+           left:5px; font-family:MS Sans Serif; font-size:0.6em; border-width: 0px;
+          }
+
+img.Hm  {position:absolute;
+         margin: 0px 0px 0px 0px; padding: 0px 0px 0px 0px;
+         border-width:0px;
+         background-color:#000000;
+         top:14px; height:15px; width:1px;
+        }
+
+img.HmH {position:absolute;
+         margin: 0px 0px 0px 0px; padding: 0px 0px 0px 0px;
+         border-width:0px;
+         background-color:#000000;
+         top:22px; height:7px; width:1px;
+        }
+
+img.HmQ {position:absolute;
+         margin: 0px 0px 0px 0px; padding: 0px 0px 0px 0px;
+         border-width:0px;
+         background-color:#000000;
+         top:25px; height:4px; width:1px;
+        }
+
+
+img.Vm  {position:absolute;
+         margin: 0px 0px 0px 0px; padding: 0px 0px 0px 0px;
+         border-width:0px;
+         height:1px;
+         background-color:#000000;
+         left:14px; width:15px;
+        }
+
+img.VmH {position:absolute;
+         margin: 0px 0px 0px 0px; padding: 0px 0px 0px 0px;
+         border-width:0px;
+         height:1px;
+         background-color:#000000;
+         left:22px; width:7px;
+        }
+
+img.VmQ {position:absolute;
+         margin: 0px 0px 0px 0px; padding: 0px 0px 0px 0px;
+         border-width:0px;
+         height:1px;
+         background-color:#000000;
+         left:25px; width:4px;
+        }
+
+/**********/
+/* cursor */
+/**********/
+img.Hp  {position:absolute;
+         margin: 0px 0px 0px 0px; padding: 0px 0px 0px 0px;
+         border-width:0px;
+         background-color:#000000;
+         top:0in; height:0.3125in; width:1px;
+        }
+
+img.Vp  {position:absolute;
+         margin: 0px 0px 0px 0px; padding: 0px 0px 0px 0px;
+         border-width:0px;
+         background-color:#000000;
+         left:0in; width:0.3125in; height:1px;
+        }
+
+
+
+
+/******************************/
+/* Classes for menu QuickView */
+/******************************/
+/* nastavení barvy okraje, pozadí menu, a fontu */
+.menu {border-color:#C0C0C0;
+       background-color: #C0C0C0;
+       font-family: "Tahoma"; font-size: 0.8em;
+      }
+
+/* Dock-Top */
+.menu {position: absolute; width: 100%; height: auto; left:0px ;top:0px}
+
+/* border color, backcolor and font */
+div.menuPad {}
+
+/* settings for text of pad */
+span.menuPad {}
+
+/* settings for popup */
+.menuPopup {background-color: #C0C0C0;
+            font-family: "Tahoma"; font-size: 0.8em;
+           }
+
+/* setings for bar */
+div.menuBar {}
+
+/* settings for bar text */
+span.menuBar {}
+
+
+
+/**************************************************/
+/* class for hyperlinks MemberClass a HeaderClass */
+/**************************************************/
+span.LNK_collaborative {
+                    cursor:pointer; cursor:hand;
+                    text-decoration: underline;
+                    color:#0000FF 
+                   }
+
+div.LNK_tab {
+             position:absolute;
+             background-color: #FFFFD0;
+             border-width: 1px; border-color: #000000; border-style: inset;
+             z-index:1; visibility: hidden; width: 100%;
+             }
+
+div.LNK_tab a {text-decoration: none;}
+div.LNK_tab a:hover {background-color: #0000FF; color: #FFFFD0;}
+
+
+/************************************************/
+/* Class for Back2TopClass etc.                 */
+/************************************************/
+
+div.back2 { width:auto; margin-top: 1em; clear:both;}
+div.back2 a.b2_left { float:left;}
+div.back2 a.b2_right { float:right;}
+
+/************************/
+/* Class for crosslinks */
+/************************/
+div.pdm_crosslinks {}
+div.pdm_crosslinks a, div.pdm_crosslinks span { font-family: Tahoma; font-size: 75%; }
+
+
+/************************************************/
+/* Classes for Global Classes tree              */
+/************************************************/
+.gct_h2 {margin-bottom:5px;}
+.gct_file {font-size: 75%; }
+
+
+
+
+/************************************************/
+/* Classes for DIA(X)                           */
+/************************************************/
+
+div.diaxp_mhead, div.diaxp_mhead_class
+    { background-color: #99CCFF; border-width:1px; border-style: solid; border-color:#999999;
+      padding: 5px 5px 5px 5px;
+      width: auto; height:20px;  
+      position: relative;
+      font-family: "Tahoma";  font-weight:bold; color: #000000; margin: 0px 0px 10px 0px;
+    }
+
+ div.diaxp_mhead_class
+    { font-size: 80%;}
+
+ div.diaxp_mhead_class h3, div.diaxp_mhead_class h4, div.diaxp_mhead_class h5
+   {margin: 0px 0px 0px 0px; padding: 0px 0px 0px 0px;}
+
+div.diaxp_mbody,div.diaxp_mbody_class {margin: 0px 0px 10px 5px; padding: 0px 0px 0px 0px;}
+div.diaxp_mfoot {margin: 0px 0px 10px 5px; padding: 0px 0px 0px 0px;}
+
+div.diaxp_backrefer {margin: 0px 0px 10px 5px; padding: 0px 0px 0px 0px;}
+div.diaxp_backrefer a, div.diaxp_backrefer span { font-family: Tahoma; font-size: 75%; }
+div.diaxp_backrefer span { margin-right: 0.25em; }
+
+table.clear_table {border-collapse:collapse;}

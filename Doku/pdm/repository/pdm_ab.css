@@ -1,0 +1,120 @@
+/* CSS Classes used to format the outputof _ab plug ins*/
+
+/* multiple used*/
+span.PDM_AB_Head
+/*Formated Header like Params, Return, Rermrks, Example, SeeAlso*/
+{
+ font-weight: bold;
+}
+div.PDM_AB_Body
+/*Formated Text below a Header like Return, Rermrks, Example, SeeAlso, CopyRight*/
+{
+ margin: 0px 0px 0px 20px;
+}
+/*special*/
+div.PDM_AB_Descr
+{
+ border-top-width: 0px;
+ padding-right: 0px;
+ padding-left: 0px;
+ border-left-width: 0px;
+ border-bottom-width: 0px;
+ padding-bottom: 0px;
+ margin: 0px 0px 20px 0px;
+ padding-top: 0px;
+ position: relative;
+ border-right-width: 0px;
+}
+div.PDM_AB_Remarks,
+div.PDM_AB_Example,
+div.PDM_AB_Changes,
+div.PDM_AB_SeeAlso,
+div.PDM_AB_Others,
+div.PDM_AB_CopyRight,
+div.PDM_AB_Footer
+/*Wraps all Description of Return value, Remarks, Example, See Also (links), Other text, CopyRight*/
+{
+ border-top-width: 0px;
+ padding-right: 0px;
+ padding-left: 0px;
+ border-left-width: 0px;
+ border-bottom-width: 0px;
+ padding-bottom: 0px;
+ margin: 0px 0px 20px;
+ padding-top: 0px;
+ position: relative;
+ border-right-width: 0px;
+}
+div.PDM_AB_Changes span.Change_Time
+/*Date Attribut of remarks tag*/
+{
+}
+/* Classes used to format the output inside the textblocks
+like  <code> <expr> <xhtml> <see> and SeeAlso*/
+/*Links from <see> and <SeeAlso>
+/*Missing Link - needs to be empty for "non editing"*/
+span.PDM_AB_See_Err
+{
+ text-decoration: line-through;
+}
+/*Existing Link*/
+a.PDM_AB_See
+{
+ font-size: 75%;
+ font-family: Tahoma;
+}
+/*Class for Referenze Links*/
+span.PDM_AB_Collaborative
+{
+ font-size: 75%;
+ cursor: hand;
+ color: #0000ff;
+ font-family: Tahoma;
+ text-decoration: underline;
+}
+div.PDM_AB_Link_Tab
+{
+ border-right: #000000 1px inset;
+ border-top: #000000 1px inset;
+ z-index: 1;
+ visibility: hidden;
+ border-left: #000000 1px inset;
+ border-bottom: #000000 1px inset;
+ position: absolute;
+ background-color: #ffffd0;
+}
+div.PDM_AB_Link_Tab a
+{
+ text-decoration: none;
+}
+div.PDM_AB_Link_Tab a:hover
+{
+ color: #ffffd0;
+ background-color: #0000ff;
+}
+div.PDM_AB_Link_Tab td
+{
+ text-align: CENTER;
+}
+.PDMEXPR
+{
+ display: inline;
+ border-top-style: none;
+ border-right-style: none;
+ border-left-style: none;
+ border-bottom-style: none;
+}
+.VFPEXPR
+{
+ display: inline;
+ border-top-style: none;
+ border-right-style: none;
+ border-left-style: none;
+ border-bottom-style: none;
+}
+/*Error from parsing*/
+span.PDM_AB_Error
+{
+ color: yellow;
+ background-color: red;
+}
