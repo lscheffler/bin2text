@@ -22,6 +22,91 @@
 </head>
 <body>
  <h1>Change log</h1>
+ <h2>Version 0.13.0</h2>
+ <p>Bug fixes.</p>
+ <table border="1" cellspacing="0">
+  <thead>
+   <tr>
+    <td>Item</td><td>description</td>
+   </tr>
+  </thead>
+  <tbody>
+  <tr>
+  	<td colspan="2">
+  		Bug fixes
+	 </td>
+  </tr>
+  <tr>
+   <td>New version of <i>git</i></td>
+   <td>
+   	<p>Problems with calls of git.</p>
+   	<p>This was blocking the commit menu item.</p>
+   </td>
+  </tr>
+  <tr>
+   <td>Removing obsolete files</td>
+   <td>
+   	<p>If a project in a subdir (for example a shared frame that is hold tohether trough <i>git</i> by a pjx)
+   	contains binaries not used otherwise, the text files belonging to this where deleted by an <b>all</b> operation.</p>
+   	<p>Deletion of whole libs is now limited to <b>recursive</b> operation.</p>
+   </td>
+  </tr>
+  <tr>
+   <td>Usage of menu items</td>
+   <td>
+   	The <i>git</i> related items are now disabled if <i>git</i> is not available, or if the basedir is not git<i>ed</i>.
+   </td>
+  </tr>
+  <tr>
+  	<td colspan="2">
+  		New function<br />
+    </td>
+  </tr>
+  <tr>
+   <td>New menue items</td>
+   <td>
+    <p>Menue item to start <i>bash</i> for the local directory. Experimental. Problems with to many windows opening.</p>
+   	<p>Menue item to start <i>gitk</i> git history for the local directory.</p>
+   </td>
+  </tr>
+  <tr>
+  	<td colspan="2">
+  		<a href="../code/runb2t.prg/Main_d.git_bash.htm" title="Skip to procedure git_Bash">git_Bash</a>
+    </td>
+  </tr>
+  <tr>
+   <td>New function </td>
+   <td>
+   	Start <i>bash</i> for the local directory. Experimental. Problems with to many windows opening.
+   </td>
+  </tr>
+  <tr>
+  	<td colspan="2">
+  		<a href="../code/runb2t.prg/Main_d.git_gitk.htm" title="Skip to procedure git_gitk">git_gitk</a>
+    </td>
+  </tr>
+  <tr>
+   <td>New function </td>
+   <td>
+   	Start <i>gitk</i> git history for the local directory.
+   </td>
+  </tr>
+
+  <tr>
+  	<td colspan="2">
+  		<a href="../code/runb2t.prg/Main_d.get_git_path.htm" title="Skip to procedure Get_git_Path">Get_git_Path</a><br />
+    </td>
+  </tr>
+  <tr>
+   <td>New function </td>
+   <td>
+   	<p>Read <i>git</i> existence and path from registry..</p>
+   </td>
+  </tr>
+  </tbody>
+ </table>
+
+<!------>
  <h2>Version 0.12.0</h2>
  <p>Bug fixes.</p>
  <p>Minor Changes.</p>
@@ -104,7 +189,6 @@
   </tbody>
  </table>
 
-<!------>
  <h2>Version 0.11.0</h2>
  <p>Better integration of external program <i>git</i></p>
  <p>Recursive strategy to search for projects.</p>

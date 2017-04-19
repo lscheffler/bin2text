@@ -19,7 +19,6 @@ DEFINE CLASS cusstorage AS custom 		&& The stuff that does the work.
 		*m: process_bin2text		&& Process all files of a given ayrray.
 		*m: storage_check		&& Check for valid  storage settings, alter settings
 		*m: storage_check_bin2prg		&& Check location of FoxBin2Prg.
-		*m: storage_check_git		&& Check location of git.
 		*m: storage_close		&& Close the storage file.
 		*m: storage_get		&& Get settings information out of storage
 		*m: storage_location		&& Get location for storage file.
@@ -1377,7 +1376,6 @@ DEFINE CLASS cusstorage AS custom 		&& The stuff that does the work.
 		
 		*get FoxBin2Prg.prg
 		  llWrite = THIS.Storage_Check_Bin2Prg(@loSetting,@llError) OR llWrite
-		  llWrite = THIS.Storage_Check_git(@loSetting,@llError) OR llWrite
 		
 		*auto commit [1 On; else OFF]
 		  IF !PEMSTATUS(_SCREEN,"gcB2T_Commit",5) THEN
@@ -1440,6 +1438,28 @@ DEFINE CLASS cusstorage AS custom 		&& The stuff that does the work.
 		LPARAMETERS;
 		 toSetting AS COLLECTION,;
 		 tlError
+		
+		*!*	<pdm>
+		*!*	<descr>Check if FoxBin2PRG is found, locate.</descr>
+		*!*	<params name="toSetting" type="COLLECTION" byref="1" dir="" inb="0" outb="0">
+		*!*	<short></short>
+		*!*	<detail>Object with settings.</detail>
+		*!*	</params>
+		*!*	<params name="tlError" type="Boolean" byref="1" dir="" inb="0" outb="0">
+		*!*	<short>Error</short>
+		*!*	<detail></detail>
+		*!*	</params>
+		*!*	<comment>
+		*!*	<retval type=""></retval>
+		*!*	<remarks></remarks>
+		*!*	<example></example>
+		*!*	<seealso>
+		*!*	 <see loca="" class="" pem=""></see>
+		*!*	</seealso>
+		*!*	<appliesto toref="0" toalso="0" />
+		*!*	</comment>
+		*!*	<copyright><i>&copy; 17.9.2015 Lutz Scheffler Software Ingenieurbüro</i></copyright>
+		*!*	</pdm> 
 		
 		LOCAL;
 		 lcFile   AS CHARACTER,;
@@ -1513,9 +1533,6 @@ DEFINE CLASS cusstorage AS custom 		&& The stuff that does the work.
 		ENDIF &&llSearch
 		*/get FoxBin2Prg.prg
 		
-	ENDPROC
-
-	PROCEDURE storage_check_git		&& Check location of git.
 	ENDPROC
 
 	PROCEDURE storage_close		&& Close the storage file.

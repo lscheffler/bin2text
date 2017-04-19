@@ -118,12 +118,19 @@ FUNCTION Pjx2Commit	&&Create a commit to git.
 *!*	     ENDIF &&SECONDS()-lnSec>=2
 *!*	    ENDDO &&!FILE('git_x.tmp')
     IF FILE('git_x.tmp') AND LEN(FILETOSTR('git_x.tmp'))>0 THEN
+*!*	Changed by: SF 17.9.2015
+*!*	<pdm>
+*!*	<change date="{^2015-09-17,04:43:00}">Changed by: SF<br />
+*!*	run git w/o CMD
+*!*	</change>
+*!*	</pdm>
      IF TYPE('_SCREEN.gcB2T_Commit')="C" AND _SCREEN.gcB2T_Commit=="1" THEN
-      Run_git('commit -m "'+CHRTRAN(TTOC(DATETIME(),3),'T',' ')+'" -m "auto-commit by RunB2T.app"',.F.)
+      Run_git('commit -m "'+CHRTRAN(TTOC(DATETIME(),3),'T',' ')+'" -m "auto-commit by RunB2T.app"',.F.,.F.)
       ??' - auto commit'
      ELSE  &&TYPE('_SCREEN.gcB2T_Commit')="C" AND _SCREEN.gcB2T_Commit=="1"
-      Run_git('commit',.T.)
+      Run_git('commit',.T.,.F.)
      ENDIF &&TYPE('_SCREEN.gcB2T_Commit')="C" AND _SCREEN.gcB2T_Commit=="1"
+*!*	/Changed by: SF 17.9.2015
     ELSE &&FILE('git_x.tmp') AND LEN(FILETOSTR('git_x.tmp'))>0
      ??' - nothing to commit'
     ENDIF &&FILE('git_x.tmp') AND LEN(FILETOSTR('git_x.tmp'))>0
@@ -854,7 +861,7 @@ FUNCTION InitMenu	&&Starts the IDE menu.
  lcMenu = ""
 
  Construct_Objects()
-*SET STEP ON
+
  lcFile = _SCREEN.frmB2T_Envelop.cusB2T.Storage_Check(.F.,tcHomePath)
  IF ISNULL(lcFile) THEN
   ?"Failed to init FoxBin2Prg IDE integration."
@@ -1229,7 +1236,7 @@ PROCEDURE getbranch		&&Internal. Return active git branch
 
  lcRet = ''
  IF Is_git() THEN
-  IF Run_git('rev-parse --abbrev-ref HEAD>git_x.tmp',.F.) THEN
+  IF Run_git('rev-parse --abbrev-ref HEAD>git_x.tmp',.F.,.T.) THEN
    lnSec = SECONDS()
 *!*	   DO WHILE !FILE('git_x.tmp')
 *!*	    WAIT "" WINDOW TIMEOUT 0.2
@@ -1241,7 +1248,7 @@ PROCEDURE getbranch		&&Internal. Return active git branch
     lcRet = CHRTRAN(FILETOSTR('git_x.tmp'),0h0d0a,'')
     DELETE FILE git_x.tmp
    ENDIF &&FILE('git_x.tmp')
-  ENDIF &&Run_git('rev-parse --abbrev-ref HEAD>git_x.tmp',.F.)
+  ENDIF &&Run_git('rev-parse --abbrev-ref HEAD>git_x.tmp',.F.,.T.)
  ENDIF &&Is_git()
 
  RETURN lcRet
@@ -1258,7 +1265,8 @@ ENDPROC &&GetBranch
 FUNCTION Run_git		&&Internal. Run a git root command
  LPARAMETERS;
   tcParameters,;
-  tlShow
+  tlShow,;
+  tlIn_CMD
 
 *!*	<pdm>
 *!*	<descr>Run git program</descr>
@@ -1266,9 +1274,16 @@ FUNCTION Run_git		&&Internal. Run a git root command
 *!*	<short><parameters for git/short>
 *!*	<detail></detail>
 *!*	</params>
-*!*	<params name="tlShow" type="Boolean" byref="0" dir="" inb="0" outb="0">
-*!*	<short>Show command widow >/short>
+*!*	<params name="tlShow" type="Boolean" byref="0" dir="" inb="1" outb="0">
+*!*	<short>Show command window>/short>
 *!*	<detail></detail>
+*!*	</params>
+*!*	<params name="tlIn_CMD" type="Boolean" byref="0" dir="" inb="1" outb="0">
+*!*	<short>Run command in CMD.>/short>
+*!*	<detail>
+*!*	<p>Some git commands like to be run in CMD, some dislike. Now we have a switch.</p>
+*!*	<p>In general redirection of output (git status>xy.txt) needs CMD.</p>
+*!*	</detail>
 *!*	</params>
 *!*	<remarks>Runs API_AppRun to run git.
 * Uses <i>cmd</i> to perform piping operations.</remarks>
@@ -1280,7 +1295,7 @@ FUNCTION Run_git		&&Internal. Run a git root command
 *!*	</seealso>
 *!*	<appliesto toref="0" toalso="0" />
 *!*	</comment>
-*!*	<copyright><i>&copy; 12.6.2015 Lutz Scheffler Software Ingenieurbüro</i></copyright>
+*!*	<copyright><i>&copy; 17.9.2015 Lutz Scheffler Software Ingenieurbüro</i></copyright>
 *!*	</pdm>
 
  LOCAL;
@@ -1289,13 +1304,25 @@ FUNCTION Run_git		&&Internal. Run a git root command
   llReturn AS BOOLEAN
 
  lcPath = ADDBS(FULLPATH(CURDIR()))
-*rund cmd to perform piping data
- IF Get_git_Path(@lc_Git) THEN
-  llReturn = Run_ExtApp('cmd /c "'+lc_Git+'" '+tcParameters,lcPath,IIF(tlShow,'NOR','HID'))
+*!*	Changed by: SF 17.9.2015
+*!*	<pdm>
+*!*	<change date="{^2015-09-17,04:43:00}">Changed by: SF<br />
+*!*	switch between with CMD and without.
+*!*	</change>
+*!*	</pdm>
 
- ENDIF &&Get_git_Path(@lc_git)
-*get Base Dir
-*git rev-parse --show-toplevel
+*rund cmd to perform piping data
+ DO CASE
+  CASE !Get_git_Path(@lc_Git)
+*error, no git, not gitted
+  CASE tlIn_CMD
+   llReturn = Run_ExtApp('cmd /c "'+lc_Git+'" '+tcParameters,lcPath,IIF(tlShow,'NOR','HID'))
+  OTHERWISE
+   llReturn = Run_ExtApp('"'+lc_Git+'" '+tcParameters,lcPath,IIF(tlShow,'NOR','HID'))
+ ENDCASE
+
+*!*	/Changed by: SF 17.9.2015
+
  RETURN llReturn
 ENDFUNC &&Run_git
 
