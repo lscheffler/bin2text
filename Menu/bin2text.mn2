@@ -24,10 +24,12 @@ ON PAD _000000001 OF _MSYSMENU ACTIVATE POPUP FoxBin2Tex
 	*----------------------------------
 	DEFINE POPUP FoxBin2Tex MARGIN RELATIVE SHADOW COLOR SCHEME 4
 	DEFINE BAR 1 OF FoxBin2Tex PROMPT "git \<commit Active" ;
+		SKIP FOR !PEMSTATUS(_SCREEN,'glB2T_gited',5) OR !_SCREEN.glB2T_gited ;
 		MESSAGE "Bin2Text on projects in path / git commit -a" && LOCAL;<CR> lcApp AS CHARACTER<CR><CR>lcApp = "Bin2Text.app"<CR>DO Pjx2Commit IN (lcApp)
 	ON SELECTION BAR 1 OF FoxBin2Tex DO Pjx2Commit IN Bin2Text.app
 
 	DEFINE BAR 2 OF FoxBin2Tex PROMPT "git commit \<All" ;
+		SKIP FOR !PEMSTATUS(_SCREEN,'glB2T_gited',5) OR !_SCREEN.glB2T_gited ;
 		MESSAGE "Bin2Text on projects in path / git commit -a"
 	ON SELECTION BAR 2 OF FoxBin2Tex DO Pjx2Commit IN Bin2Text.app WITH .T.
 
@@ -94,5 +96,20 @@ ON PAD _000000001 OF _MSYSMENU ACTIVATE POPUP FoxBin2Tex
 		DEFINE POPUP NewItem MARGIN RELATIVE SHADOW COLOR SCHEME 4
 	DEFINE BAR 6 OF FoxBin2Tex PROMPT "\<Settings" && LOCAL;<CR> lcApp AS CHARACTER<CR><CR>lcApp = "Bin2Text.app"<CR>DO Inter_Active IN (lcApp)
 	ON SELECTION BAR 6 OF FoxBin2Tex DO Inter_Active IN Bin2Text.app
+
+	DEFINE BAR 7 OF FoxBin2Tex PROMPT "\-"
+	ON BAR 7 OF FoxBin2Tex ACTIVATE POPUP _4g30h5ql8
+
+		*----------------------------------
+		DEFINE POPUP _4g30h5ql8 MARGIN RELATIVE SHADOW COLOR SCHEME 4
+	DEFINE BAR 8 OF FoxBin2Tex PROMPT "git history" ;
+		SKIP FOR !PEMSTATUS(_SCREEN,'glB2T_gited',5) OR !_SCREEN.glB2T_gited ;
+		MESSAGE 'Run gitk to display git history'
+	ON SELECTION BAR 8 OF FoxBin2Tex DO git_gitk IN Bin2Text.app
+
+	DEFINE BAR 9 OF FoxBin2Tex PROMPT "git bash" ;
+		SKIP FOR !PEMSTATUS(_SCREEN,'gcb2t_git',5) OR EMPTY (_SCREEN.gcb2t_git) ;
+		MESSAGE 'Run git in bash window. Experimental'
+	ON SELECTION BAR 9 OF FoxBin2Tex DO git_bash IN Bin2Text.app
 
 *</MenuCode>
