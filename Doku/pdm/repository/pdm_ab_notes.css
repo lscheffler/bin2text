@@ -1,0 +1,63 @@
+/* CSS Classes used for the default note id's of Agnes plug-ins*/
+
+/*Default note or ID not found*/
+div.PDM_AB_Note,
+div.PDM_AB_nStop,
+div.PDM_AB_nQuestion,
+div.PDM_AB_nExclamation,
+div.PDM_AB_nInformation
+{
+ margin: 0px 0px 0px 0px;
+ padding-top: 5px;
+ padding-bottom: 5px;
+ padding-left: 5px;
+ padding-right: 5px;
+ border-width:0px;
+ width: auto;
+ position: relative;
+}
+div.PDM_AB_Note div.Block_Picture,
+/*first section of note "Note"*/
+{
+ font-weight:bold;
+ margin-right: 10px;
+ width: auto;
+ float: left;
+}
+
+div.PDM_AB_nStop div.Block_Picture,
+div.PDM_AB_nQuestion div.Block_Picture,
+div.PDM_AB_nExclamation div.Block_Picture,
+div.PDM_AB_nInformation div.Block_Picture
+/*Part that holds the image*/
+{
+ width: auto;
+ float: left;
+}
+
+div.PDM_AB_Note div.Block_Text,
+/*Text of Note*/
+{
+ margin-right: 10px;
+ width: auto;
+ float: left;
+}
+div.PDM_AB_nStop div.Block_Text,
+div.PDM_AB_nQuestion div.Block_Text,
+div.PDM_AB_nExclamation div.Block_Text,
+div.PDM_AB_nInformation div.Block_Text
+/*Text of Note*/
+{
+ width: auto;
+ float: left;
+}
+
+div.PDM_AB_nStop div.Block_Picture img.NotePicture,
+div.PDM_AB_nQuestion div.Block_Picture img.NotePicture,
+div.PDM_AB_nExclamation div.Block_Picture img.NotePicture,
+div.PDM_AB_nInformation div.Block_Picture img.NotePicture
+/*Note image*/
+{
+ float: left;
+ margin-right:1em;
+}

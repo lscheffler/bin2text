@@ -1,0 +1,139 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="de" lang="de">
+<head>
+<title>Procedure CatchError</title>
+<meta content="text/html; charset=windows-1252" http-equiv="Content-Type" />
+<meta name="Generator" content="Project Documenting Machine" />
+<meta name="Version" content="1.3.1" />
+<link rel="stylesheet" href="../../css/foxw.css" type="text/css" />
+<link rel="stylesheet" href="../../css/sc.css" type="text/css" />
+<link rel="stylesheet" href="../../repository/diamp_pdm_ab.css" type="text/css" />
+<link rel="stylesheet" href="../../repository/pdm_ab.css" type="text/css" />
+<link rel="stylesheet" href="../../repository/pdm_ab_notes.css" type="text/css" />
+<script src="../../js/pdm.js" language="JavaScript" type="text/javascript"></script>
+<script src="../../repository/pdm_ab.js" language="JavaScript" type="text/javascript"></script>
+</head>
+<body>
+<div class="diaxp_mhead">CatchError Procedure</div>
+<div class="diaxp_mbody">
+<!-- Created with _diamp_pdm_ab by Agnes Beste    07.05.2015 11:24 -->
+ <div class="PDM_AB_Descr"><!-- Descr Begin -->
+Error Display. Cancel.
+ </div><!-- Descr End -->
+
+ <div class="DIAMP_PDM_AB_Syntax"><!-- Syntax Begin -->
+  <div class="SColor">
+   <div class="PEM">
+    CatchError
+   </div>
+   <div class="Para">
+    (<a href="#_4CG0OFQ1E">tcProgram</a>
+     <wbr />,<a href="#_4CG0OFQ1F">lnLineNo</a>)
+   </div>
+   <div style="clear: both"></div>
+  </div><!-- Colour End -->
+ </div><!-- Syntax End -->
+
+ <div class="DIAMP_PDM_AB_Params"><!-- Parameters Begin -->
+  <span class="PDM_AB_Head">
+   Parameter
+  </span>
+  <dl class="DIAMP_PDM_AB_Params_List">
+   <dt class="dt_">
+    <a class="DIAMP_PDM_AB_Params_ParaName" id="_4CG0OFQ1E" name="_4CG0OFQ1E">
+     <span class="PDMEXPR PDMNor" ><span class='PDMVar'>tcProgram</span></span>
+
+    </a>
+   </dt>
+   <dd class="dd_">
+    <span class="Params_Short">
+     The usual stuff.
+    </span>
+    <table class="Params_Info">
+     <colgroup>
+      <col class="ColumnValue" />
+      <col class="ColumnData" />
+     </colgroup>
+     <tbody>
+      <tr>
+       <td class="CellValue">Type</td>
+       <td class="CellData">Character</td>
+      </tr>
+      <tr>
+       <td class="CellValue">Direction</td>
+       <td class="CellData">Input</td>
+      </tr>
+     </tbody>
+    </table>
+   </dd>
+   <dt class="dt_">
+    <a class="DIAMP_PDM_AB_Params_ParaName" id="_4CG0OFQ1F" name="_4CG0OFQ1F">
+     <span class="PDMEXPR PDMNor" ><span class='PDMVar'>lnLineNo</span></span>
+
+    </a>
+   </dt>
+   <dd class="dd_">
+    <span class="Params_Short">
+     See <a class="DIAMP_PDM_AB_Para_Link" href="#_4CG0OFQ1E">tcProgram</a>.
+    </span>
+    <table class="Params_Info">
+     <colgroup>
+      <col class="ColumnValue" />
+      <col class="ColumnData" />
+     </colgroup>
+     <tbody>
+      <tr>
+       <td class="CellValue">Direction</td>
+       <td class="CellData">Input</td>
+      </tr>
+     </tbody>
+    </table>
+   </dd>
+  </dl>
+ </div><!-- Parameters End -->
+
+
+<!-- /Created with _diamp_pdm_ab by Agnes Beste    07.05.2015 11:24 -->
+
+ <div class="SC">
+  <img onclick="ExpandSC('SP_P10',-1);" class="imgEC" src="../../imgs/dotab.gif" alt="Expand/Collapse source code of procedure CatchError" id="IMG_SP_P10" />
+  <span onclick="ExpandSC('SP_P10',-1);" class="SCCaption"><a name="pm.catcherror">Source Code</a></span>
+  <div ondblclick="ExpandSC('SP_P10',-1);" class="SCE" style="display: none;" id="TX_SP_P10">
+<!-- Code Begin -->
+<pre class="PDMCODE PDMNor" ><span class='PDMCnt'>1019</span> <span class='PDMInd'> 1</span>  <span class='PDMResK'>LPARAMETERS</span><span class='PDMOper'>;</span>
+<span class='PDMCnt'>1020</span> <span class='PDMInd'> 2</span>   <span class='PDMVar'>tcProgram</span><span class='PDMOper'>,</span><span class='PDMOper'>;</span>
+<span class='PDMCnt'>1021</span> <span class='PDMInd'> 2</span>   <span class='PDMVar'>tnLineNo</span>
+<span class='PDMCnt'>1022</span> <span class='PDMInd'>  </span> 
+<span class='PDMCnt'>1023</span> <span class='PDMInd'>  </span> 
+<span class='PDMCnt'>1035</span> <span class='PDMInd'>  </span> 
+<span class='PDMCnt'>1036</span> <span class='PDMInd'> 1</span>  <span class='PDMResK'>LOCAL</span> <span class='PDMResK'>ARRAY</span><span class='PDMOper'>;</span>
+<span class='PDMCnt'>1037</span> <span class='PDMInd'> 2</span>   <span class='PDMVar'>laError</span><span class='PDMOper'>(</span><span class='PDMLit'>1</span><span class='PDMOper'>,</span><span class='PDMLit'>7</span><span class='PDMOper'>)</span>
+<span class='PDMCnt'>1038</span> <span class='PDMInd'>  </span> 
+<span class='PDMCnt'>1039</span> <span class='PDMInd'> 1</span>  <span class='PDMResF'>AERROR</span><span class='PDMOper'>(</span><span class='PDMVar'>laError</span><span class='PDMOper'>)</span>
+<span class='PDMCnt'>1040</span> <span class='PDMInd'> 1</span>  <span class='PDMResF'>MESSAGEBOX</span><span class='PDMOper'>(</span><span class='PDMStr'>'Error:'</span><span class='PDMOper'>+</span><span class='PDMResF'>PADL</span><span class='PDMOper'>(</span><span class='PDMVar'>laError</span><span class='PDMOper'>(</span><span class='PDMLit'>1</span><span class='PDMOper'>,</span><span class='PDMLit'>1</span><span class='PDMOper'>)</span><span class='PDMOper'>,</span><span class='PDMLit'>5</span><span class='PDMOper'>)</span><span class='PDMOper'>+</span><span class='PDMStr'>', '</span><span class='PDMOper'>+</span><span class='PDMVar'>laError</span><span class='PDMOper'>(</span><span class='PDMLit'>1</span><span class='PDMOper'>,</span><span class='PDMLit'>2</span><span class='PDMOper'>)</span><span class='PDMOper'>+</span><span class='PDMVar'>0h0d0a</span><span class='PDMOper'>+</span><span class='PDMOper'>;</span>
+<span class='PDMCnt'>1041</span> <span class='PDMInd'> 2</span>   <span class='PDMStr'>'Code block: '</span><span class='PDMOper'>+</span><span class='PDMVar'>tcProgram</span><span class='PDMOper'>+</span><span class='PDMVar'>0h0d0a</span><span class='PDMOper'>+</span><span class='PDMOper'>;</span>
+<span class='PDMCnt'>1042</span> <span class='PDMInd'> 2</span>   <span class='PDMStr'>'Code line: '</span><span class='PDMOper'>+</span><span class='PDMResF'>PADL</span><span class='PDMOper'>(</span><span class='PDMVar'>tnLineNo</span><span class='PDMOper'>,</span><span class='PDMLit'>7</span><span class='PDMOper'>)</span><span class='PDMOper'>,</span><span class='PDMOper'>;</span>
+<span class='PDMCnt'>1043</span> <span class='PDMInd'> 2</span>   <span class='PDMLit'>64</span><span class='PDMOper'>,</span><span class='PDMStr'>'Ooops, works not as expected.'</span><span class='PDMOper'>)</span>
+<span class='PDMCnt'>1044</span> <span class='PDMInd'> 1</span>  <span class='PDMVar'>SwitchErrorHandler</span><span class='PDMOper'>(</span><span class='PDMOper'>)</span>
+<span class='PDMCnt'>1045</span> <span class='PDMInd'> 1</span>  <span class='PDMResK'>CLEAR</span> <span class='PDMResK'>ALL</span>
+<span class='PDMCnt'>1046</span> <span class='PDMInd'> 1</span>  <span class='PDMResK'>CANCEL</span></pre>
+ <!-- Code End -->
+  </div>
+ </div>
+</div>
+<div class="diaxp_mfoot"> <div class="PDM_AB_CopyRight"><!-- Footer Begin -->
+  <hr />
+  <div class="PDM_AB_Body">
+<i>&copy; 19.4.2015 Lutz Scheffler Software Ingenieurb&uuml;ro</i>
+  </div><!-- Body End -->
+ </div><!-- Footer End -->
+</div>
+<script language="JavaScript" type="text/javascript">
+lo=document.getElementById("TX_SP_P10");
+lo.XType="SourceCode";
+lo.Dir="../../imgs/";
+
+
+</script>
+</body>
+</html>

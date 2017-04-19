@@ -1,0 +1,188 @@
+/*this is the part that is special for the DIAMP plug in*/
+
+div.DIAMP_PDM_AB_RetVal
+/*Wraps all Description of Return value, Remarks, Example, See Also (links), Other text, CopyRight*/
+{
+ border-top-width: 0px;
+ padding-right: 0px;
+ padding-left: 0px;
+ border-left-width: 0px;
+ border-bottom-width: 0px;
+ padding-bottom: 0px;
+ margin: 0px 0px 20px;
+ padding-top: 0px;
+ position: relative;
+ border-right-width: 0px;
+}
+div.DIAMP_PDM_AB_Syntax
+/*usage of a method Syntax block, */
+{
+ border-top-width: 0px;
+ border-left-width: 0px;
+ border-right-width: 0px;
+ border-bottom-width: 0px;
+ padding-left: 0px;
+ padding-top: 0px;
+ padding-right: 0px;
+ padding-bottom: 0px;
+ margin: 10px;
+ position: relative;
+ font-size: 10pt;
+ width: auto;
+ font-family: "Monospace","Courier New";
+}
+div.DIAMP_PDM_AB_Syntax div.SColor
+/*Outer div for syntax*/
+{
+ background-color: #eeeeee;
+ width: 100%;
+ border: solid 1px #eeeeee;
+}
+div.DIAMP_PDM_AB_Syntax div.RetVal
+/*Return value
+*/
+{
+ margin: 5px 0px 5px 5px;
+ float: left;
+ width: auto;
+}
+div.DIAMP_PDM_AB_Syntax div.RetValEq
+/*Return value*/
+{
+ margin: 3px 0px 5px 5px;
+ float: left;
+ width: auto;
+}
+div.DIAMP_PDM_AB_Syntax div.PEM
+/*INNER div FOR pem name*/
+{
+ margin: 5px 5px 5px 5px;
+ text-align: left;
+ vertical-align: top;
+ font-weight: bold;
+ float: left;
+ width: auto;
+}
+div.DIAMP_PDM_AB_Syntax div.Para
+/*Parameters*/
+{
+ margin: 5px 5px 5px 0px;
+ text-align: left;
+ white-space: nowrap;
+ float: left;
+ width: auto;
+}
+div.DIAMP_PDM_AB_Syntax div.RetVal a,
+div.DIAMP_PDM_AB_Syntax div.Para a
+/*Link in 'usage' section of Methods Description,
+i.e. each parameter or return value*/
+{
+ font-style: italic;
+ text-decoration: none;
+}
+div.DIAMP_PDM_AB_Syntax div.RetVal a:active,
+div.DIAMP_PDM_AB_Syntax div.Para a:active
+/*State of active for Link in 'usage' section of Methods Description,
+i.e. each parameter or return value*/
+{
+ font-weight: bold;
+ background-color: lime;
+}
+div.DIAMP_PDM_AB_Syntax div.RetVal a:hover,
+div.DIAMP_PDM_AB_Syntax div.Para a:hover
+/*State of hover for Link in 'usage' section of Methods Description,
+i.e. each parameter or return value*/
+{
+ font-weight: bolder;
+ background-color: lime;
+}
+div.DIAMP_PDM_AB_Params
+/*Description of parameters*/
+{
+ border-top-width: 0px;
+ border-left-width: 0px;
+ border-bottom-width: 0px;
+ border-right-width: 0px;
+ padding-top: 0px;
+ padding-left: 0px;
+ padding-bottom: 0px;
+ padding-right: 0px;
+ margin: 0px 0px 20px;
+ position: relative;
+}
+div.DIAMP_PDM_AB_Params dl.DIAMP_PDM_AB_Params_List
+/*List of Parameters*/
+{
+ border-top-width: 0px;
+ padding-right: 0px;
+ padding-left: 0px;
+ border-left-width: 0px;
+ border-bottom-width: 0px;
+ padding-bottom: 0px;
+ margin: 0px 0px 0px 20px;
+ padding-top: 0px;
+ position: relative;
+ border-right-width: 0px;
+}
+div.DIAMP_PDM_AB_Params dl.DIAMP_PDM_AB_Params_List dt.dt_
+/*Parameters Name
+use ... a.DIAMP_PDM_AB_Params_ParaName !*/
+{
+}
+div.DIAMP_PDM_AB_Params a.DIAMP_PDM_AB_Params_ParaName
+/*Parameters Name*/
+{
+}
+div.DIAMP_PDM_AB_Params dl.DIAMP_PDM_AB_Params_List dd.dd_
+/*Information about a Parameter*/
+{
+ left: -20px;
+ position: relative;
+}
+div.DIAMP_PDM_AB_Params span.Params_Short
+/* shorttext of a Parameter.*/
+{
+}
+div.DIAMP_PDM_AB_Params table.Params_Info
+/* table with informations about a parameter
+defined in first line of a Params prefix or within the <Params> tag */
+{
+ empty-cells:show;
+}
+div.DIAMP_PDM_AB_Params table.Params_Info col.ColumnValue
+/* first column of the table
+information value like "Type" or "ByVal"*/
+{
+ font-weight: bolder;
+}
+div.DIAMP_PDM_AB_Params table.Params_Info td.CellValue
+/* cell of first column of the table
+information value like "Type" or "ByVal"*/
+{
+ font-weight: bolder;
+}
+div.DIAMP_PDM_AB_Params table.Params_Info col.ColumnData
+/* second column of the table
+information value like "String" for value "Type"*/
+{
+}
+div.DIAMP_PDM_AB_Params table.Params_Info col.CellData
+/* cell of second column of the table
+information value like "String" for value "Type"*/
+{
+}
+div.DIAMP_PDM_AB_Params span.Params_Detail
+/* Detailtext of a Parameter.*/
+{
+}
+/* The DIAMP_AB_RetVal class is defined beyond like PDM_AB_Remarks*/
+
+div.DIAMP_PDM_AB_RetVal span.RetVal_Type
+/*Type of return value*/
+{
+}
+/*Link to parameter*/
+a.DIAMP_PDM_AB_Para_Link
+{
+}
+/*end of part that is special for the DIAMP plug in*/

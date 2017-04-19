@@ -1,0 +1,564 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="de" lang="de">
+<head>
+<title>Procedure Convert_Pjx</title>
+<meta content="text/html; charset=windows-1252" http-equiv="Content-Type" />
+<meta name="Generator" content="Project Documenting Machine" />
+<meta name="Version" content="1.3.1" />
+<link rel="stylesheet" href="../../css/foxw.css" type="text/css" />
+<link rel="stylesheet" href="../../css/sc.css" type="text/css" />
+<link rel="stylesheet" href="../../repository/diamp_pdm_ab.css" type="text/css" />
+<link rel="stylesheet" href="../../repository/pdm_ab.css" type="text/css" />
+<link rel="stylesheet" href="../../repository/pdm_ab_notes.css" type="text/css" />
+<script src="../../js/pdm.js" language="JavaScript" type="text/javascript"></script>
+<script src="../../repository/pdm_ab.js" language="JavaScript" type="text/javascript"></script>
+</head>
+<body>
+<div class="diaxp_mhead">Convert_Pjx Function</div>
+<div class="diaxp_mbody">
+<!-- Created with _diamp_pdm_ab by Agnes Beste    07.05.2015 11:24 -->
+ <div class="PDM_AB_Descr"><!-- Descr Begin -->
+Runs FoxBin2Prg for multiple projects.
+ </div><!-- Descr End -->
+
+ <div class="DIAMP_PDM_AB_Syntax"><!-- Syntax Begin -->
+  <div class="SColor">
+   <div class="RetVal"><a href="#_4CG0OFOED">RetVal</a>&nbsp;</div>   <div class="RetValEq">=</div>   <div class="PEM">
+    Convert_Pjx
+   </div>
+   <div class="Para">
+    (<a href="#_4CG0OFOEE">tlToBin</a>
+     <wbr />,<a href="#_4CG0OFOEF">tnProjects</a>
+     <wbr />,<a href="#_4CG0OFOEG">tnMode</a>)
+   </div>
+   <div style="clear: both"></div>
+  </div><!-- Colour End -->
+ </div><!-- Syntax End -->
+
+ <div class="DIAMP_PDM_AB_Params"><!-- Parameters Begin -->
+  <span class="PDM_AB_Head">
+   Parameter
+  </span>
+  <dl class="DIAMP_PDM_AB_Params_List">
+   <dt class="dt_">
+    <a class="DIAMP_PDM_AB_Params_ParaName" id="_4CG0OFOEE" name="_4CG0OFOEE">
+     <span class="PDMEXPR PDMNor" ><span class='PDMVar'>tlToBin</span></span>
+
+    </a>
+   </dt>
+   <dd class="dd_">
+    <span class="Params_Short">
+     Direction of operation.
+    </span>
+    <table class="Params_Info">
+     <colgroup>
+      <col class="ColumnValue" />
+      <col class="ColumnData" />
+     </colgroup>
+     <tbody>
+      <tr>
+       <td class="CellValue">Type</td>
+       <td class="CellData">Boolean</td>
+      </tr>
+      <tr>
+       <td class="CellValue">Direction</td>
+       <td class="CellData">Input</td>
+      </tr>
+     </tbody>
+    </table>
+    <span class="Params_Detail">
+If true, create binaries for the projects defined by <a class="DIAMP_PDM_AB_Para_Link" href="#_4CG0OFOEF">tnProjects</a>.
+    </span>
+   </dd>
+   <dt class="dt_">
+    <a class="DIAMP_PDM_AB_Params_ParaName" id="_4CG0OFOEF" name="_4CG0OFOEF">
+     <span class="PDMEXPR PDMNor" ><span class='PDMVar'>tnProjects</span></span>
+
+    </a>
+   </dt>
+   <dd class="dd_">
+    <span class="Params_Short">
+     Defines what project to be processed
+    </span>
+    <table class="Params_Info">
+     <colgroup>
+      <col class="ColumnValue" />
+      <col class="ColumnData" />
+     </colgroup>
+     <tbody>
+      <tr>
+       <td class="CellValue">Type</td>
+       <td class="CellData">Numeric</td>
+      </tr>
+      <tr>
+       <td class="CellValue">Direction</td>
+       <td class="CellData">Input</td>
+      </tr>
+     </tbody>
+    </table>
+    <span class="Params_Detail">
+
+<dl>
+ <dt>0</dt><dd>Use <span class="PDMEXPR PDMNor" ><span class='PDMResF'>GETFILE</span><span class='PDMOper'>(</span><span class='PDMOper'>)</span></span>
+ to define the file. Input is a text file if <a class="DIAMP_PDM_AB_Para_Link" href="#_4CG0OFOEE">tlToBin</a>.</dd>
+ <dt>1</dt><dd>Active project.</dd>
+ <dt>2</dt><dd>All projects open in IDE</dd>
+ <dt>3</dt><dd>All projects in hjome path.</dd>
+</dl>
+
+    </span>
+   </dd>
+   <dt class="dt_">
+    <a class="DIAMP_PDM_AB_Params_ParaName" id="_4CG0OFOEG" name="_4CG0OFOEG">
+     <span class="PDMEXPR PDMNor" ><span class='PDMVar'>tnMode</span></span>
+
+    </a>
+   </dt>
+   <dd class="dd_">
+    <span class="Params_Short">
+     Defines FoxBinToPrg mode of operation of pjx files.
+    </span>
+    <table class="Params_Info">
+     <colgroup>
+      <col class="ColumnValue" />
+      <col class="ColumnData" />
+     </colgroup>
+     <tbody>
+      <tr>
+       <td class="CellValue">Type</td>
+       <td class="CellData">Numeric</td>
+      </tr>
+      <tr>
+       <td class="CellValue">Direction</td>
+       <td class="CellData">Input</td>
+      </tr>
+     </tbody>
+    </table>
+    <span class="Params_Detail">
+
+<dl>
+ <dt>0</dt><dd>Use <span class="PDMEXPR PDMNor" ><span class='PDMStr'>"*"</span></span>
+ Convert files of project, project file and projecthook if defined.</dd>
+ <dt>1</dt><dd>Use <span class="PDMEXPR PDMNor" ><span class='PDMStr'>"*-"</span></span>
+ Convert files of project and projecthook (if defined).</dd>
+ <dt>2</dt><dd>Use <span class="PDMEXPR PDMNor" ><span class='PDMStr'>""</span></span>
+ Convert project file.</dd>
+ <dt>3</dt><dd>Use <span class="PDMEXPR PDMNor" ><span class='PDMStr'>"*-"</span></span>
+ Convert files of project, do not process projecthook (if defined).</dd>
+</dl>
+
+    </span>
+   </dd>
+  </dl>
+ </div><!-- Parameters End -->
+
+ <div class="DIAMP_PDM_AB_RetVal"><!-- Returns Begin -->
+  <div>
+   <span class="PDM_AB_Head">
+    <a id="_4CG0OFOED" name="_4CG0OFOED">
+     Return value
+    </a>
+   </span> <span class="RetVal_Ttype">Boolean</span>
+  </div>
+  <div class="PDM_AB_Body">
+True if successfull.
+  </div>
+ </div><!-- Returns End -->
+
+
+<!-- /Created with _diamp_pdm_ab by Agnes Beste    07.05.2015 11:24 -->
+
+ <div class="SC">
+  <img onclick="ExpandSC('SP_P4',-1);" class="imgEC" src="../../imgs/dotab.gif" alt="Expand/Collapse source code of procedure Convert_Pjx" id="IMG_SP_P4" />
+  <span onclick="ExpandSC('SP_P4',-1);" class="SCCaption"><a name="pm.convert_pjx">Source Code</a></span>
+  <div ondblclick="ExpandSC('SP_P4',-1);" class="SCE" style="display: none;" id="TX_SP_P4">
+<!-- Code Begin -->
+<pre class="PDMCODE PDMNor" ><span class='PDMCnt'> 132</span> <span class='PDMInd'> 1</span>  <span class='PDMResK'>LPARAMETERS</span><span class='PDMOper'>;</span>
+<span class='PDMCnt'> 133</span> <span class='PDMInd'> 2</span>   <span class='PDMVar'>tlToBin</span><span class='PDMOper'>,</span><span class='PDMOper'>;</span>
+<span class='PDMCnt'> 134</span> <span class='PDMInd'> 2</span>   <span class='PDMVar'>tnProjects</span><span class='PDMOper'>,</span><span class='PDMOper'>;</span>
+<span class='PDMCnt'> 135</span> <span class='PDMInd'> 2</span>   <span class='PDMVar'>tnMode</span>
+<span class='PDMCnt'> 136</span> <span class='PDMInd'>  </span> 
+<span class='PDMCnt'> 137</span> <span class='PDMInd'>  </span> 
+<span class='PDMCnt'> 168</span> <span class='PDMInd'>  </span> 
+<span class='PDMCnt'> 169</span> <span class='PDMInd'> 1</span>  <span class='PDMResK'>LOCAL</span><span class='PDMOper'>;</span>
+<span class='PDMCnt'> 170</span> <span class='PDMInd'> 2</span>   <span class='PDMVar'>lcOldExact</span>  <span class='PDMResK'>AS</span> <span class='PDMResK'>CHARACTER</span>
+<span class='PDMCnt'> 171</span> <span class='PDMInd'>  </span> 
+<span class='PDMCnt'> 172</span> <span class='PDMInd'> 1</span>  <span class='PDMResK'>DO</span> <span class='PDMResK'>CASE</span>
+<span class='PDMCnt'> 173</span> <span class='PDMInd'> 2</span>   <span class='PDMResK'>CASE</span> <span class='PDMResF'>VARTYPE</span><span class='PDMOper'>(</span><span class='PDMVar'>tlToBin</span><span class='PDMOper'>)</span><span class='PDMOper'>#</span><span class='PDMStr'>'L'</span>
+<span class='PDMCnt'> 174</span> <span class='PDMInd'> 3</span>    <span class='PDMVar'>tlToBin</span> <span class='PDMOper'>=</span> <span class='PDMStr'>'?'</span>
+<span class='PDMCnt'> 175</span> <span class='PDMInd'> 2</span>   <span class='PDMResK'>CASE</span> <span class='PDMResF'>VARTYPE</span><span class='PDMOper'>(</span><span class='PDMVar'>tnProjects</span><span class='PDMOper'>)</span><span class='PDMOper'>#</span><span class='PDMStr'>'N'</span>
+<span class='PDMCnt'> 176</span> <span class='PDMInd'> 3</span>    <span class='PDMVar'>tnProjects</span> <span class='PDMOper'>=</span> <span class='PDMLit'>0</span>
+<span class='PDMCnt'> 177</span> <span class='PDMInd'> 2</span>   <span class='PDMResK'>CASE</span> <span class='PDMOper'>!</span><span class='PDMResF'>BETWEEN</span><span class='PDMOper'>(</span><span class='PDMVar'>tnProjects</span><span class='PDMOper'>,</span><span class='PDMLit'>0</span><span class='PDMOper'>,</span><span class='PDMLit'>3</span><span class='PDMOper'>)</span>
+<span class='PDMCnt'> 178</span> <span class='PDMInd'> 3</span>    <span class='PDMVar'>tlToBin</span> <span class='PDMOper'>=</span> <span class='PDMStr'>'?'</span>
+<span class='PDMCnt'> 179</span> <span class='PDMInd'> 2</span>   <span class='PDMResK'>CASE</span> <span class='PDMResF'>VARTYPE</span><span class='PDMOper'>(</span><span class='PDMVar'>tnMode</span><span class='PDMOper'>)</span><span class='PDMOper'>#</span><span class='PDMStr'>'N'</span>
+<span class='PDMCnt'> 180</span> <span class='PDMInd'> 3</span>    <span class='PDMVar'>tnProjects</span> <span class='PDMOper'>=</span> <span class='PDMLit'>0</span>
+<span class='PDMCnt'> 181</span> <span class='PDMInd'> 2</span>   <span class='PDMResK'>CASE</span> <span class='PDMOper'>!</span><span class='PDMResF'>BETWEEN</span><span class='PDMOper'>(</span><span class='PDMVar'>tnMode</span><span class='PDMOper'>,</span><span class='PDMLit'>0</span><span class='PDMOper'>,</span><span class='PDMLit'>3</span><span class='PDMOper'>)</span>
+<span class='PDMCnt'> 182</span> <span class='PDMInd'> 3</span>    <span class='PDMVar'>tlToBin</span> <span class='PDMOper'>=</span> <span class='PDMStr'>'?'</span>
+<span class='PDMCnt'> 183</span> <span class='PDMInd'> 2</span>   <span class='PDMResK'>OTHERWISE</span>
+<span class='PDMCnt'> 184</span> <span class='PDMInd'> 1</span>  <span class='PDMResK'>ENDCASE</span>
+<span class='PDMCnt'> 185</span> <span class='PDMInd'>  </span> 
+<span class='PDMCnt'> 186</span> <span class='PDMInd'> 1</span>  <span class='PDMVar'>lcOldExact</span> <span class='PDMOper'>=</span> <span class='PDMResF'>SET</span><span class='PDMOper'>(</span><span class='PDMStr'>"Exact"</span><span class='PDMOper'>)</span>
+<span class='PDMCnt'> 187</span> <span class='PDMInd'> 1</span>  <span class='PDMResK'>SET</span> <span class='PDMResK'>EXACT</span> <span class='PDMResK'>ON</span>
+<span class='PDMCnt'> 188</span> <span class='PDMInd'> 1</span>  <span class='PDMResK'>IF</span> <span class='PDMResF'>VARTYPE</span><span class='PDMOper'>(</span><span class='PDMVar'>tlToBin</span><span class='PDMOper'>)</span><span class='PDMOper'>=</span><span class='PDMStr'>'C'</span><span class='PDMOper'>;</span>
+<span class='PDMCnt'> 189</span> <span class='PDMInd'> 3</span>    <span class='PDMOper'>AND</span> <span class='PDMResF'>INLIST</span><span class='PDMOper'>(</span><span class='PDMResF'>LOWER</span><span class='PDMOper'>(</span><span class='PDMVar'>tlToBin</span><span class='PDMOper'>)</span><span class='PDMOper'>,</span><span class='PDMStr'>'?'</span><span class='PDMOper'>,</span><span class='PDMStr'>'/?'</span><span class='PDMOper'>,</span><span class='PDMStr'>'-?'</span><span class='PDMOper'>,</span><span class='PDMStr'>'h'</span><span class='PDMOper'>,</span><span class='PDMStr'>'/h'</span><span class='PDMOper'>,</span><span class='PDMStr'>'-h'</span><span class='PDMOper'>,</span><span class='PDMStr'>'help'</span><span class='PDMOper'>,</span><span class='PDMStr'>'/help'</span><span class='PDMOper'>,</span><span class='PDMStr'>'-help'</span><span class='PDMOper'>)</span> <span class='PDMResK'>THEN</span>
+<span class='PDMCnt'> 190</span> <span class='PDMInd'>  </span> 
+<span class='PDMCnt'> 191</span> <span class='PDMInd'> 2</span>   <span class='PDMVar'>HelpMsg</span><span class='PDMOper'>(</span><span class='PDMLit'>1</span><span class='PDMOper'>)</span>
+<span class='PDMCnt'> 192</span> <span class='PDMInd'>  </span> 
+<span class='PDMCnt'> 193</span> <span class='PDMInd'> 2</span>   <span class='PDMResK'>SET</span> <span class='PDMResK'>EXACT</span> <span class='PDMOper'>&amp;</span><span class='PDMVar'>lcOldExact</span>
+<span class='PDMCnt'> 194</span> <span class='PDMInd'> 2</span>   <span class='PDMResK'>RETURN</span> <span class='PDMLit'>.F.</span>
+<span class='PDMCnt'> 195</span> <span class='PDMInd'> 1</span>  <span class='PDMResK'>ENDIF</span> <span class='PDMCom'>&amp;&amp;VARTYPE(tlToBin)='C' AND INLIST(LOWER(tlToBin),'?','/?','-?','h','/h','-h','help','/help','-help')</span>
+<span class='PDMCnt'> 196</span> <span class='PDMInd'>  </span> 
+<span class='PDMCnt'> 197</span> <span class='PDMInd'> 1</span>  <span class='PDMResK'>SET</span> <span class='PDMResK'>EXACT</span> <span class='PDMOper'>&amp;</span><span class='PDMVar'>lcOldExact</span>
+<span class='PDMCnt'> 198</span> <span class='PDMInd'>  </span> 
+<span class='PDMCnt'> 199</span> <span class='PDMInd'> 1</span>  <span class='PDMResK'>IF</span> <span class='PDMVar'>_VFP</span><span class='PDMOper'>.</span><span class='PDMVar'>STARTMODE</span><span class='PDMOper'>#</span><span class='PDMLit'>0</span> <span class='PDMResK'>THEN</span>
+<span class='PDMCnt'> 200</span> <span class='PDMInd'> 2</span>   <span class='PDMVar'>HelpMsg</span><span class='PDMOper'>(</span><span class='PDMLit'>2</span><span class='PDMOper'>)</span>
+<span class='PDMCnt'> 201</span> <span class='PDMInd'> 2</span>   <span class='PDMResK'>RETURN</span> <span class='PDMLit'>.F.</span>
+<span class='PDMCnt'> 202</span> <span class='PDMInd'> 1</span>  <span class='PDMResK'>ENDIF</span> <span class='PDMCom'>&amp;&amp;F_VFP.StartMode#0</span>
+<span class='PDMCnt'> 203</span> <span class='PDMInd'>  </span> 
+<span class='PDMCnt'> 204</span> <span class='PDMInd'> 1</span>  <span class='PDMVar'>SwitchErrorHandler</span><span class='PDMOper'>(</span><span class='PDMLit'>.T.</span><span class='PDMOper'>)</span>
+<span class='PDMCnt'> 205</span> <span class='PDMInd'> 1</span>  <span class='PDMResK'>RELEASE</span><span class='PDMOper'>;</span>
+<span class='PDMCnt'> 206</span> <span class='PDMInd'> 2</span>   <span class='PDMVar'>lcOldExact</span>
+<span class='PDMCnt'> 207</span> <span class='PDMInd'>  </span> 
+<span class='PDMCnt'> 208</span> <span class='PDMInd'> 1</span>  <span class='PDMResK'>LOCAL</span><span class='PDMOper'>;</span>
+<span class='PDMCnt'> 209</span> <span class='PDMInd'> 2</span>   <span class='PDMVar'>lcProj</span>      <span class='PDMResK'>AS</span> <span class='PDMResK'>CHARACTER</span><span class='PDMOper'>,</span><span class='PDMOper'>;</span>
+<span class='PDMCnt'> 210</span> <span class='PDMInd'> 2</span>   <span class='PDMVar'>lcPath</span>      <span class='PDMResK'>AS</span> <span class='PDMResK'>CHARACTER</span><span class='PDMOper'>,</span><span class='PDMOper'>;</span>
+<span class='PDMCnt'> 211</span> <span class='PDMInd'> 2</span>   <span class='PDMVar'>lcOldPath</span>   <span class='PDMResK'>AS</span> <span class='PDMResK'>CHARACTER</span><span class='PDMOper'>,</span><span class='PDMOper'>;</span>
+<span class='PDMCnt'> 212</span> <span class='PDMInd'> 2</span>   <span class='PDMVar'>lnProj</span>      <span class='PDMResK'>AS</span> <span class='PDMResK'>NUMBER</span><span class='PDMOper'>,</span><span class='PDMOper'>;</span>
+<span class='PDMCnt'> 213</span> <span class='PDMInd'> 2</span>   <span class='PDMVar'>lnProjs</span>     <span class='PDMResK'>AS</span> <span class='PDMResK'>NUMBER</span><span class='PDMOper'>,</span><span class='PDMOper'>;</span>
+<span class='PDMCnt'> 214</span> <span class='PDMInd'> 2</span>   <span class='PDMVar'>llPath</span>      <span class='PDMResK'>AS</span> <span class='PDMVar'>BOOLEAN</span><span class='PDMOper'>,</span><span class='PDMOper'>;</span>
+<span class='PDMCnt'> 215</span> <span class='PDMInd'> 2</span>   <span class='PDMVar'>lvMode</span>      <span class='PDMResK'>AS</span> <span class='PDMVar'>VARIANT</span><span class='PDMOper'>,</span><span class='PDMOper'>;</span>
+<span class='PDMCnt'> 216</span> <span class='PDMInd'> 2</span>   <span class='PDMVar'>loProject</span>   <span class='PDMResK'>AS</span> <span class='PDMResK'>PROJECT</span>
+<span class='PDMCnt'> 217</span> <span class='PDMInd'>  </span> 
+<span class='PDMCnt'> 218</span> <span class='PDMInd'> 1</span>  <span class='PDMVar'>lnProjs</span> <span class='PDMOper'>=</span> <span class='PDMLit'>1</span>
+<span class='PDMCnt'> 219</span> <span class='PDMInd'>  </span> 
+<span class='PDMCnt'> 220</span> <span class='PDMInd'> 1</span>  <span class='PDMResK'>LOCAL</span> <span class='PDMResK'>ARRAY</span><span class='PDMOper'>;</span>
+<span class='PDMCnt'> 221</span> <span class='PDMInd'> 2</span>   <span class='PDMVar'>laProjects</span><span class='PDMOper'>(</span><span class='PDMVar'>lnProjs</span><span class='PDMOper'>,</span><span class='PDMLit'>3</span><span class='PDMOper'>)</span><span class='PDMOper'>,</span><span class='PDMOper'>;</span>
+<span class='PDMCnt'> 222</span> <span class='PDMInd'> 2</span>   <span class='PDMVar'>laFiles</span><span class='PDMOper'>(</span><span class='PDMLit'>1</span><span class='PDMOper'>,</span><span class='PDMLit'>2</span><span class='PDMOper'>)</span>
+<span class='PDMCnt'> 223</span> <span class='PDMInd'>  </span> 
+<span class='PDMCnt'> 224</span> <span class='PDMInd'> 1</span>  <span class='PDMResK'>CLEAR</span>
+<span class='PDMCnt'> 225</span> <span class='PDMInd'>  </span> 
+<span class='PDMCnt'> 226</span> <span class='PDMInd'> 1</span>  <span class='PDMResK'>IF</span> <span class='PDMVar'>tlToBin</span> <span class='PDMResK'>THEN</span>
+<span class='PDMCnt'> 227</span> <span class='PDMInd'> 2</span>   <span class='PDMResK'>IF</span> <span class='PDMResF'>MESSAGEBOX</span><span class='PDMOper'>(</span><span class='PDMStr'>'Create Binary'</span><span class='PDMOper'>,</span><span class='PDMLit'>4</span><span class='PDMOper'>+</span><span class='PDMLit'>32</span><span class='PDMOper'>+</span><span class='PDMLit'>256</span><span class='PDMOper'>,</span><span class='PDMStr'>'FoxBin2Text'</span><span class='PDMOper'>,</span><span class='PDMLit'>10000</span><span class='PDMOper'>)</span><span class='PDMOper'>#</span><span class='PDMLit'>6</span> <span class='PDMResK'>THEN</span>
+<span class='PDMCnt'> 228</span> <span class='PDMInd'> 3</span>    <span class='PDMOper'>?</span><span class='PDMStr'>'Stopped by user'</span>
+<span class='PDMCnt'> 229</span> <span class='PDMInd'> 3</span>    <span class='PDMVar'>SwitchErrorHandler</span><span class='PDMOper'>(</span><span class='PDMLit'>.F.</span><span class='PDMOper'>)</span>
+<span class='PDMCnt'> 230</span> <span class='PDMInd'> 3</span>    <span class='PDMResK'>RETURN</span> <span class='PDMLit'>.F.</span>
+<span class='PDMCnt'> 231</span> <span class='PDMInd'> 2</span>   <span class='PDMResK'>ENDIF</span> <span class='PDMCom'>&amp;&amp;MESSAGEBOX('Create Binary',4+32+256,'FoxBin2Text',10000)#6</span>
+<span class='PDMCnt'> 232</span> <span class='PDMInd'> 2</span>   <span class='PDMOper'>?</span><span class='PDMStr'>'Process to binary'</span>
+<span class='PDMCnt'> 233</span> <span class='PDMInd'> 1</span>  <span class='PDMResK'>ELSE</span>  <span class='PDMCom'>&amp;&amp;tlToBin</span>
+<span class='PDMCnt'> 234</span> <span class='PDMInd'>  </span> 
+<span class='PDMCnt'> 235</span> <span class='PDMInd'> 2</span>   <span class='PDMOper'>?</span><span class='PDMStr'>'Process to text'</span>
+<span class='PDMCnt'> 236</span> <span class='PDMInd'> 1</span>  <span class='PDMResK'>ENDIF</span> <span class='PDMCom'>&amp;&amp;tlToBin</span>
+<span class='PDMCnt'> 237</span> <span class='PDMInd'>  </span> 
+<span class='PDMCnt'> 238</span> <span class='PDMInd'> 1</span>  <span class='PDMVar'>laProjects</span> <span class='PDMOper'>=</span> <span class='PDMOper'>.</span><span class='PDMResK'>NULL</span><span class='PDMOper'>.</span>
+<span class='PDMCnt'> 239</span> <span class='PDMInd'> 1</span>  <span class='PDMVar'>laFiles</span>    <span class='PDMOper'>=</span> <span class='PDMOper'>.</span><span class='PDMResK'>NULL</span><span class='PDMOper'>.</span>
+<span class='PDMCnt'> 240</span> <span class='PDMInd'>  </span> 
+<span class='PDMCnt'> 241</span> <span class='PDMInd'> 1</span>  <span class='PDMVar'>lcOldPath</span>  <span class='PDMOper'>=</span> <span class='PDMResF'>FULLPATH</span><span class='PDMOper'>(</span><span class='PDMResF'>CURDIR</span><span class='PDMOper'>(</span><span class='PDMOper'>)</span><span class='PDMOper'>)</span>
+<span class='PDMCnt'> 242</span> <span class='PDMInd'>  </span> 
+<span class='PDMCnt'> 243</span> <span class='PDMInd'> 1</span>  <span class='PDMResK'>DO</span> <span class='PDMResK'>CASE</span>
+<span class='PDMCnt'> 244</span> <span class='PDMInd'> 2</span>   <span class='PDMResK'>CASE</span> <span class='PDMVar'>tnProjects</span><span class='PDMOper'>=</span><span class='PDMLit'>0</span>
+<span class='PDMCnt'> 245</span> <span class='PDMInd'>  </span> <span class='PDMOper'>*</span><span class='PDMResF'>Getfile</span>
+<span class='PDMCnt'> 246</span> <span class='PDMInd'>  </span> 
+<span class='PDMCnt'> 247</span> <span class='PDMInd'> 3</span>    <span class='PDMResK'>LOCAL</span><span class='PDMOper'>;</span>
+<span class='PDMCnt'> 248</span> <span class='PDMInd'> 4</span>     <span class='PDMVar'>lcSourceExt</span> <span class='PDMResK'>AS</span> <span class='PDMResK'>CHARACTER</span>
+<span class='PDMCnt'> 249</span> <span class='PDMInd'>  </span> 
+<span class='PDMCnt'> 250</span> <span class='PDMInd'> 3</span>    <span class='PDMResK'>IF</span> <span class='PDMVar'>tlToBin</span> <span class='PDMResK'>THEN</span>
+<span class='PDMCnt'> 251</span> <span class='PDMInd'> 4</span>     <span class='PDMResK'>LOCAL</span><span class='PDMOper'>;</span>
+<span class='PDMCnt'> 252</span> <span class='PDMInd'> 5</span>      <span class='PDMVar'>loConverter</span> <span class='PDMResK'>AS</span> <span class='PDMResK'>OBJECT</span><span class='PDMOper'>,</span><span class='PDMOper'>;</span>
+<span class='PDMCnt'> 253</span> <span class='PDMInd'> 5</span>      <span class='PDMVar'>loInfo</span>      <span class='PDMResK'>AS</span> <span class='PDMResK'>OBJECT</span>
+<span class='PDMCnt'> 254</span> <span class='PDMInd'>  </span> 
+<span class='PDMCnt'> 255</span> <span class='PDMInd'> 4</span>     <span class='PDMVar'>Construct_Objects</span><span class='PDMOper'>(</span><span class='PDMOper'>)</span>
+<span class='PDMCnt'> 256</span> <span class='PDMInd'> 4</span>     <span class='PDMResK'>IF</span> <span class='PDMVar'>_SCREEN</span><span class='PDMOper'>.</span><span class='PDMVar'>frmB2T_Envelop</span><span class='PDMOper'>.</span><span class='PDMVar'>cusB2T</span><span class='PDMOper'>.</span><span class='PDMVar'>Get_Converter</span><span class='PDMOper'>(</span><span class='PDMOper'>,</span><span class='PDMOper'>@</span><span class='PDMVar'>loConverter</span><span class='PDMOper'>,</span><span class='PDMLit'>.T.</span><span class='PDMOper'>)</span> <span class='PDMResK'>THEN</span>
+<span class='PDMCnt'> 257</span> <span class='PDMInd'> 5</span>      <span class='PDMVar'>SwitchErrorHandler</span><span class='PDMOper'>(</span><span class='PDMLit'>.F.</span><span class='PDMOper'>)</span>
+<span class='PDMCnt'> 258</span> <span class='PDMInd'> 5</span>      <span class='PDMResK'>RETURN</span> <span class='PDMLit'>.F.</span>
+<span class='PDMCnt'> 259</span> <span class='PDMInd'> 4</span>     <span class='PDMResK'>ENDIF</span> <span class='PDMCom'>&amp;&amp;_SCREEN.frmB2T_Envelop.cusB2T.Get_Converter(@lcStorage,@loConverter,.T.)</span>
+<span class='PDMCnt'> 260</span> <span class='PDMInd'>  </span> 
+<span class='PDMCnt'> 261</span> <span class='PDMInd'>  </span> <span class='PDMCom'>*Just guess</span>
+<span class='PDMCnt'> 262</span> <span class='PDMInd'> 4</span>     <span class='PDMVar'>lcSourceExt</span> <span class='PDMOper'>=</span> <span class='PDMStr'>"PJ2"</span>
+<span class='PDMCnt'> 263</span> <span class='PDMInd'> 3</span>    <span class='PDMResK'>ELSE</span>  <span class='PDMCom'>&amp;&amp;lcSourceExt AS CHARACTER,IF tlToBin</span>
+<span class='PDMCnt'> 264</span> <span class='PDMInd'> 4</span>     <span class='PDMVar'>lcSourceExt</span> <span class='PDMOper'>=</span> <span class='PDMStr'>"PJX"</span>
+<span class='PDMCnt'> 265</span> <span class='PDMInd'> 3</span>    <span class='PDMResK'>ENDIF</span> <span class='PDMCom'>&amp;&amp;lcSourceExt AS CHARACTER,IF tlToBin</span>
+<span class='PDMCnt'> 266</span> <span class='PDMInd'>  </span> 
+<span class='PDMCnt'> 267</span> <span class='PDMInd'> 3</span>    <span class='PDMVar'>lcProj</span> <span class='PDMOper'>=</span> <span class='PDMResF'>GETFILE</span><span class='PDMOper'>(</span><span class='PDMVar'>lcSourceExt</span><span class='PDMOper'>)</span>
+<span class='PDMCnt'> 268</span> <span class='PDMInd'> 3</span>    <span class='PDMVar'>lcPath</span> <span class='PDMOper'>=</span> <span class='PDMResF'>JUSTPATH</span><span class='PDMOper'>(</span><span class='PDMVar'>lcProj</span><span class='PDMOper'>)</span>
+<span class='PDMCnt'> 269</span> <span class='PDMInd'>  </span> 
+<span class='PDMCnt'> 270</span> <span class='PDMInd'> 3</span>    <span class='PDMResK'>IF</span> <span class='PDMVar'>tlToBin</span> <span class='PDMResK'>THEN</span>
+<span class='PDMCnt'> 271</span> <span class='PDMInd'>  </span> <span class='PDMCom'>*get local text extension for project</span>
+<span class='PDMCnt'> 272</span> <span class='PDMInd'>  </span> 
+<span class='PDMCnt'> 273</span> <span class='PDMInd'> 4</span>     <span class='PDMVar'>loInfo</span>      <span class='PDMOper'>=</span> <span class='PDMVar'>loConverter</span><span class='PDMOper'>.</span><span class='PDMVar'>Get_DirSettings</span><span class='PDMOper'>(</span><span class='PDMVar'>lcPath</span><span class='PDMOper'>)</span>
+<span class='PDMCnt'> 274</span> <span class='PDMInd'> 4</span>     <span class='PDMVar'>lcSourceExt</span> <span class='PDMOper'>=</span> <span class='PDMResF'>UPPER</span><span class='PDMOper'>(</span><span class='PDMVar'>loInfo</span><span class='PDMOper'>.</span><span class='PDMVar'>c_PJ2</span><span class='PDMOper'>)</span>
+<span class='PDMCnt'> 275</span> <span class='PDMInd'>  </span> 
+<span class='PDMCnt'> 276</span> <span class='PDMInd'> 4</span>     <span class='PDMVar'>loInfo</span>      <span class='PDMOper'>=</span> <span class='PDMOper'>.</span><span class='PDMResK'>NULL</span><span class='PDMOper'>.</span>
+<span class='PDMCnt'> 277</span> <span class='PDMInd'> 4</span>     <span class='PDMVar'>loConverter</span> <span class='PDMOper'>=</span> <span class='PDMOper'>.</span><span class='PDMResK'>NULL</span><span class='PDMOper'>.</span>
+<span class='PDMCnt'> 278</span> <span class='PDMInd'> 4</span>     <span class='PDMVar'>Destruct_Objects</span><span class='PDMOper'>(</span><span class='PDMOper'>)</span>
+<span class='PDMCnt'> 279</span> <span class='PDMInd'> 3</span>    <span class='PDMResK'>ENDIF</span> <span class='PDMCom'>&amp;&amp;tlToBin</span>
+<span class='PDMCnt'> 280</span> <span class='PDMInd'>  </span> 
+<span class='PDMCnt'> 281</span> <span class='PDMInd'> 3</span>    <span class='PDMResK'>IF</span> <span class='PDMResF'>ISBLANK</span><span class='PDMOper'>(</span><span class='PDMVar'>lcProj</span><span class='PDMOper'>)</span> <span class='PDMResK'>THEN</span>
+<span class='PDMCnt'> 282</span> <span class='PDMInd'> 4</span>     <span class='PDMResK'>CD</span> <span class='PDMOper'>(</span><span class='PDMVar'>lcOldPath</span><span class='PDMOper'>)</span>
+<span class='PDMCnt'> 283</span> <span class='PDMInd'> 4</span>     <span class='PDMOper'>?</span><span class='PDMStr'>'No project found'</span>
+<span class='PDMCnt'> 284</span> <span class='PDMInd'> 4</span>     <span class='PDMVar'>SwitchErrorHandler</span><span class='PDMOper'>(</span><span class='PDMLit'>.F.</span><span class='PDMOper'>)</span>
+<span class='PDMCnt'> 285</span> <span class='PDMInd'> 4</span>     <span class='PDMResK'>RETURN</span> <span class='PDMLit'>.F.</span>
+<span class='PDMCnt'> 286</span> <span class='PDMInd'> 3</span>    <span class='PDMResK'>ENDIF</span> <span class='PDMCom'>&amp;&amp;ISBLANK(lcProj)</span>
+<span class='PDMCnt'> 287</span> <span class='PDMInd'>  </span> 
+<span class='PDMCnt'> 288</span> <span class='PDMInd'> 3</span>    <span class='PDMResK'>IF</span> <span class='PDMVar'>tlToBin</span> <span class='PDMOper'>AND</span> <span class='PDMOper'>!</span><span class='PDMResF'>UPPER</span><span class='PDMOper'>(</span><span class='PDMResF'>JUSTEXT</span><span class='PDMOper'>(</span><span class='PDMVar'>lcProj</span><span class='PDMOper'>)</span><span class='PDMOper'>==</span><span class='PDMVar'>lcSourceExt</span><span class='PDMOper'>)</span> <span class='PDMResK'>THEN</span>
+<span class='PDMCnt'> 289</span> <span class='PDMInd'> 4</span>     <span class='PDMResF'>MESSAGEBOX</span><span class='PDMOper'>(</span><span class='PDMStr'>"File is not a valid text representation of a project in this folder"</span><span class='PDMOper'>)</span>
+<span class='PDMCnt'> 290</span> <span class='PDMInd'> 4</span>     <span class='PDMVar'>SwitchErrorHandler</span><span class='PDMOper'>(</span><span class='PDMLit'>.F.</span><span class='PDMOper'>)</span>
+<span class='PDMCnt'> 291</span> <span class='PDMInd'> 4</span>     <span class='PDMResK'>RETURN</span> <span class='PDMLit'>.F.</span>
+<span class='PDMCnt'> 292</span> <span class='PDMInd'> 3</span>    <span class='PDMResK'>ENDIF</span> <span class='PDMCom'>&amp;&amp;tlToBin AND !UPPER(JUSTEXT(lcProj)==lcSourceExt)</span>
+<span class='PDMCnt'> 293</span> <span class='PDMInd'>  </span> 
+<span class='PDMCnt'> 294</span> <span class='PDMInd'> 3</span>    <span class='PDMVar'>lnProjs</span> <span class='PDMOper'>=</span> <span class='PDMLit'>1</span>
+<span class='PDMCnt'> 295</span> <span class='PDMInd'> 3</span>    <span class='PDMVar'>_SCREEN</span><span class='PDMOper'>.</span><span class='PDMResM'>ADDPROPERTY</span><span class='PDMOper'>(</span><span class='PDMStr'>'gaFiles(1,2)'</span><span class='PDMOper'>)</span>
+<span class='PDMCnt'> 296</span> <span class='PDMInd'> 3</span>    <span class='PDMVar'>_SCREEN</span><span class='PDMOper'>.</span><span class='PDMVar'>gaFiles</span><span class='PDMOper'>(</span><span class='PDMLit'>1</span><span class='PDMOper'>,</span><span class='PDMLit'>1</span><span class='PDMOper'>)</span> <span class='PDMOper'>=</span> <span class='PDMResF'>FORCEEXT</span><span class='PDMOper'>(</span><span class='PDMVar'>lcProj</span><span class='PDMOper'>,</span><span class='PDMStr'>'PJX'</span><span class='PDMOper'>)</span>
+<span class='PDMCnt'> 297</span> <span class='PDMInd'> 3</span>    <span class='PDMVar'>_SCREEN</span><span class='PDMOper'>.</span><span class='PDMVar'>gaFiles</span><span class='PDMOper'>(</span><span class='PDMLit'>1</span><span class='PDMOper'>,</span><span class='PDMLit'>2</span><span class='PDMOper'>)</span> <span class='PDMOper'>=</span> <span class='PDMResF'>IIF</span><span class='PDMOper'>(</span><span class='PDMVar'>tnMode</span><span class='PDMOper'>=</span><span class='PDMLit'>3</span><span class='PDMOper'>,</span><span class='PDMStr'>""</span><span class='PDMOper'>,</span><span class='PDMOper'>.</span><span class='PDMResK'>NULL</span><span class='PDMOper'>.</span><span class='PDMOper'>)</span>
+<span class='PDMCnt'> 298</span> <span class='PDMInd'>  </span> 
+<span class='PDMCnt'> 299</span> <span class='PDMInd'> 3</span>    <span class='PDMVar'>lcPath</span> <span class='PDMOper'>=</span> <span class='PDMResF'>JUSTPATH</span><span class='PDMOper'>(</span><span class='PDMVar'>lcProj</span><span class='PDMOper'>)</span>
+<span class='PDMCnt'> 300</span> <span class='PDMInd'> 3</span>    <span class='PDMResK'>CD</span> <span class='PDMOper'>(</span><span class='PDMVar'>lcPath</span><span class='PDMOper'>)</span>
+<span class='PDMCnt'> 301</span> <span class='PDMInd'>  </span> 
+<span class='PDMCnt'> 302</span> <span class='PDMInd'>  </span> <span class='PDMCom'>*  &amp;&amp;tnProjects=0</span>
+<span class='PDMCnt'> 303</span> <span class='PDMInd'> 2</span>   <span class='PDMResK'>CASE</span> <span class='PDMVar'>tnProjects</span><span class='PDMOper'>=</span><span class='PDMLit'>1</span>
+<span class='PDMCnt'> 304</span> <span class='PDMInd'>  </span> <span class='PDMCom'>*active project</span>
+<span class='PDMCnt'> 305</span> <span class='PDMInd'>  </span> 
+<span class='PDMCnt'> 306</span> <span class='PDMInd'> 3</span>    <span class='PDMResK'>IF</span> <span class='PDMVar'>_VFP</span><span class='PDMOper'>.</span><span class='PDMVar'>PROJECTS</span><span class='PDMOper'>.</span><span class='PDMResP'>COUNT</span><span class='PDMOper'>=</span><span class='PDMLit'>0</span> <span class='PDMResK'>THEN</span>
+<span class='PDMCnt'> 307</span> <span class='PDMInd'> 4</span>     <span class='PDMResK'>CD</span> <span class='PDMOper'>(</span><span class='PDMVar'>lcOldPath</span><span class='PDMOper'>)</span>
+<span class='PDMCnt'> 308</span> <span class='PDMInd'> 4</span>     <span class='PDMOper'>?</span><span class='PDMStr'>'No project found'</span>
+<span class='PDMCnt'> 309</span> <span class='PDMInd'> 4</span>     <span class='PDMVar'>SwitchErrorHandler</span><span class='PDMOper'>(</span><span class='PDMLit'>.F.</span><span class='PDMOper'>)</span>
+<span class='PDMCnt'> 310</span> <span class='PDMInd'> 4</span>     <span class='PDMResK'>RETURN</span> <span class='PDMLit'>.F.</span>
+<span class='PDMCnt'> 311</span> <span class='PDMInd'> 3</span>    <span class='PDMResK'>ENDIF</span> <span class='PDMCom'>&amp;&amp;_VFP.PROJECTS.COUNT=0</span>
+<span class='PDMCnt'> 312</span> <span class='PDMInd'>  </span> 
+<span class='PDMCnt'> 313</span> <span class='PDMInd'> 3</span>    <span class='PDMVar'>lnProjs</span> <span class='PDMOper'>=</span> <span class='PDMLit'>1</span>
+<span class='PDMCnt'> 314</span> <span class='PDMInd'> 3</span>    <span class='PDMVar'>_SCREEN</span><span class='PDMOper'>.</span><span class='PDMResM'>ADDPROPERTY</span><span class='PDMOper'>(</span><span class='PDMStr'>'gaFiles(1,2)'</span><span class='PDMOper'>)</span>
+<span class='PDMCnt'> 315</span> <span class='PDMInd'> 3</span>    <span class='PDMVar'>_SCREEN</span><span class='PDMOper'>.</span><span class='PDMVar'>gaFiles</span><span class='PDMOper'>(</span><span class='PDMLit'>1</span><span class='PDMOper'>,</span><span class='PDMLit'>1</span><span class='PDMOper'>)</span> <span class='PDMOper'>=</span> <span class='PDMVar'>_VFP</span><span class='PDMOper'>.</span><span class='PDMVar'>ACTIVEPROJECT</span><span class='PDMOper'>.</span><span class='PDMResP'>NAME</span>
+<span class='PDMCnt'> 316</span> <span class='PDMInd'> 3</span>    <span class='PDMVar'>_SCREEN</span><span class='PDMOper'>.</span><span class='PDMVar'>gaFiles</span><span class='PDMOper'>(</span><span class='PDMLit'>1</span><span class='PDMOper'>,</span><span class='PDMLit'>2</span><span class='PDMOper'>)</span> <span class='PDMOper'>=</span> <span class='PDMResF'>IIF</span><span class='PDMOper'>(</span><span class='PDMVar'>tnMode</span><span class='PDMOper'>=</span><span class='PDMLit'>3</span><span class='PDMOper'>,</span><span class='PDMStr'>""</span><span class='PDMOper'>,</span><span class='PDMVar'>_VFP</span><span class='PDMOper'>.</span><span class='PDMVar'>ACTIVEPROJECT</span><span class='PDMOper'>.</span><span class='PDMVar'>PROJECTHOOKLIBRARY</span><span class='PDMOper'>)</span>
+<span class='PDMCnt'> 317</span> <span class='PDMInd'>  </span> 
+<span class='PDMCnt'> 318</span> <span class='PDMInd'> 3</span>    <span class='PDMVar'>lcPath</span> <span class='PDMOper'>=</span> <span class='PDMResF'>JUSTPATH</span><span class='PDMOper'>(</span><span class='PDMVar'>_VFP</span><span class='PDMOper'>.</span><span class='PDMVar'>ACTIVEPROJECT</span><span class='PDMOper'>.</span><span class='PDMResP'>NAME</span><span class='PDMOper'>)</span>
+<span class='PDMCnt'> 319</span> <span class='PDMInd'> 3</span>    <span class='PDMResK'>CD</span> <span class='PDMOper'>(</span><span class='PDMVar'>lcPath</span><span class='PDMOper'>)</span>
+<span class='PDMCnt'> 320</span> <span class='PDMInd'>  </span> 
+<span class='PDMCnt'> 321</span> <span class='PDMInd'>  </span> <span class='PDMCom'>*  &amp;&amp;tnProjects=1</span>
+<span class='PDMCnt'> 322</span> <span class='PDMInd'> 2</span>   <span class='PDMResK'>CASE</span> <span class='PDMVar'>tnProjects</span><span class='PDMOper'>=</span><span class='PDMLit'>2</span>
+<span class='PDMCnt'> 323</span> <span class='PDMInd'>  </span> <span class='PDMCom'>*open projects</span>
+<span class='PDMCnt'> 324</span> <span class='PDMInd'> 3</span>    <span class='PDMVar'>lnProjs</span> <span class='PDMOper'>=</span> <span class='PDMVar'>_VFP</span><span class='PDMOper'>.</span><span class='PDMVar'>PROJECTS</span><span class='PDMOper'>.</span><span class='PDMResP'>COUNT</span>
+<span class='PDMCnt'> 325</span> <span class='PDMInd'> 3</span>    <span class='PDMResK'>IF</span> <span class='PDMVar'>lnProjs</span><span class='PDMOper'>=</span><span class='PDMLit'>0</span> <span class='PDMResK'>THEN</span>
+<span class='PDMCnt'> 326</span> <span class='PDMInd'> 4</span>     <span class='PDMResK'>CD</span> <span class='PDMOper'>(</span><span class='PDMVar'>lcOldPath</span><span class='PDMOper'>)</span>
+<span class='PDMCnt'> 327</span> <span class='PDMInd'> 4</span>     <span class='PDMOper'>?</span><span class='PDMStr'>'No project found'</span>
+<span class='PDMCnt'> 328</span> <span class='PDMInd'> 4</span>     <span class='PDMVar'>SwitchErrorHandler</span><span class='PDMOper'>(</span><span class='PDMLit'>.F.</span><span class='PDMOper'>)</span>
+<span class='PDMCnt'> 329</span> <span class='PDMInd'> 4</span>     <span class='PDMResK'>RETURN</span> <span class='PDMLit'>.F.</span>
+<span class='PDMCnt'> 330</span> <span class='PDMInd'> 3</span>    <span class='PDMResK'>ENDIF</span> <span class='PDMCom'>&amp;&amp;lnProjs=0</span>
+<span class='PDMCnt'> 331</span> <span class='PDMInd'>  </span> 
+<span class='PDMCnt'> 332</span> <span class='PDMInd'> 3</span>    <span class='PDMVar'>_SCREEN</span><span class='PDMOper'>.</span><span class='PDMResM'>ADDPROPERTY</span><span class='PDMOper'>(</span><span class='PDMStr'>'gaFiles('</span><span class='PDMOper'>+</span><span class='PDMResF'>TRIM</span><span class='PDMOper'>(</span><span class='PDMResF'>PADR</span><span class='PDMOper'>(</span><span class='PDMVar'>lnProjs</span><span class='PDMOper'>,</span><span class='PDMLit'>11</span><span class='PDMOper'>)</span><span class='PDMOper'>)</span><span class='PDMOper'>+</span><span class='PDMStr'>',2)'</span><span class='PDMOper'>)</span>
+<span class='PDMCnt'> 333</span> <span class='PDMInd'>  </span> 
+<span class='PDMCnt'> 334</span> <span class='PDMInd'> 3</span>    <span class='PDMVar'>lcPath</span> <span class='PDMOper'>=</span> <span class='PDMResF'>JUSTPATH</span><span class='PDMOper'>(</span><span class='PDMVar'>_VFP</span><span class='PDMOper'>.</span><span class='PDMVar'>ACTIVEPROJECT</span><span class='PDMOper'>.</span><span class='PDMResP'>NAME</span><span class='PDMOper'>)</span>
+<span class='PDMCnt'> 335</span> <span class='PDMInd'> 3</span>    <span class='PDMResK'>CD</span> <span class='PDMOper'>(</span><span class='PDMVar'>lcPath</span><span class='PDMOper'>)</span>
+<span class='PDMCnt'> 336</span> <span class='PDMInd'>  </span> 
+<span class='PDMCnt'> 337</span> <span class='PDMInd'> 3</span>    <span class='PDMVar'>lnProj</span>     <span class='PDMOper'>=</span> <span class='PDMLit'>0</span>
+<span class='PDMCnt'> 338</span> <span class='PDMInd'> 3</span>    <span class='PDMResK'>FOR</span> <span class='PDMResK'>EACH</span> <span class='PDMVar'>loProject</span> <span class='PDMResK'>IN</span> <span class='PDMVar'>_VFP</span><span class='PDMOper'>.</span><span class='PDMVar'>PROJECTS</span> <span class='PDMResK'>FOXOBJECT</span>
+<span class='PDMCnt'> 339</span> <span class='PDMInd'> 4</span>     <span class='PDMVar'>lnProj</span> <span class='PDMOper'>=</span> <span class='PDMVar'>lnProj</span><span class='PDMOper'>+</span><span class='PDMLit'>1</span>
+<span class='PDMCnt'> 340</span> <span class='PDMInd'> 4</span>     <span class='PDMVar'>_SCREEN</span><span class='PDMOper'>.</span><span class='PDMVar'>gaFiles</span><span class='PDMOper'>(</span><span class='PDMVar'>lnProj</span><span class='PDMOper'>,</span><span class='PDMLit'>1</span><span class='PDMOper'>)</span> <span class='PDMOper'>=</span> <span class='PDMVar'>loProject</span><span class='PDMOper'>.</span><span class='PDMResP'>NAME</span>
+<span class='PDMCnt'> 341</span> <span class='PDMInd'> 4</span>     <span class='PDMVar'>_SCREEN</span><span class='PDMOper'>.</span><span class='PDMVar'>gaFiles</span><span class='PDMOper'>(</span><span class='PDMVar'>lnProj</span><span class='PDMOper'>,</span><span class='PDMLit'>2</span><span class='PDMOper'>)</span> <span class='PDMOper'>=</span> <span class='PDMResF'>IIF</span><span class='PDMOper'>(</span><span class='PDMVar'>tnMode</span><span class='PDMOper'>=</span><span class='PDMLit'>3</span><span class='PDMOper'>,</span><span class='PDMStr'>""</span><span class='PDMOper'>,</span><span class='PDMVar'>loProject</span><span class='PDMOper'>.</span><span class='PDMVar'>PROJECTHOOKLIBRARY</span><span class='PDMOper'>)</span>
+<span class='PDMCnt'> 342</span> <span class='PDMInd'> 3</span>    <span class='PDMResK'>ENDFOR</span> <span class='PDMCom'>&amp;&amp;loProject</span>
+<span class='PDMCnt'> 343</span> <span class='PDMInd'>  </span> 
+<span class='PDMCnt'> 344</span> <span class='PDMInd'>  </span> <span class='PDMCom'>*  &amp;&amp;tnProjects=2</span>
+<span class='PDMCnt'> 345</span> <span class='PDMInd'> 2</span>   <span class='PDMResK'>CASE</span> <span class='PDMVar'>tnProjects</span><span class='PDMOper'>=</span><span class='PDMLit'>3</span>
+<span class='PDMCnt'> 346</span> <span class='PDMInd'>  </span> <span class='PDMCom'>*path</span>
+<span class='PDMCnt'> 347</span> <span class='PDMInd'>  </span> 
+<span class='PDMCnt'> 348</span> <span class='PDMInd'> 3</span>    <span class='PDMResK'>LOCAL</span><span class='PDMOper'>;</span>
+<span class='PDMCnt'> 349</span> <span class='PDMInd'> 4</span>     <span class='PDMVar'>lcSourceExt</span> <span class='PDMResK'>AS</span> <span class='PDMResK'>CHARACTER</span><span class='PDMOper'>,</span><span class='PDMOper'>;</span>
+<span class='PDMCnt'> 350</span> <span class='PDMInd'> 4</span>     <span class='PDMVar'>loConverter</span> <span class='PDMResK'>AS</span> <span class='PDMResK'>OBJECT</span><span class='PDMOper'>,</span><span class='PDMOper'>;</span>
+<span class='PDMCnt'> 351</span> <span class='PDMInd'> 4</span>     <span class='PDMVar'>loInfo</span>      <span class='PDMResK'>AS</span> <span class='PDMResK'>OBJECT</span>
+<span class='PDMCnt'> 352</span> <span class='PDMInd'>  </span> 
+<span class='PDMCnt'> 353</span> <span class='PDMInd'> 3</span>    <span class='PDMVar'>Construct_Objects</span><span class='PDMOper'>(</span><span class='PDMOper'>)</span>
+<span class='PDMCnt'> 354</span> <span class='PDMInd'> 3</span>    <span class='PDMResK'>IF</span> <span class='PDMVar'>_SCREEN</span><span class='PDMOper'>.</span><span class='PDMVar'>frmB2T_Envelop</span><span class='PDMOper'>.</span><span class='PDMVar'>cusB2T</span><span class='PDMOper'>.</span><span class='PDMVar'>Get_Converter</span><span class='PDMOper'>(</span><span class='PDMOper'>,</span><span class='PDMOper'>@</span><span class='PDMVar'>loConverter</span><span class='PDMOper'>,</span><span class='PDMLit'>.T.</span><span class='PDMOper'>)</span> <span class='PDMResK'>THEN</span>
+<span class='PDMCnt'> 355</span> <span class='PDMInd'> 4</span>     <span class='PDMVar'>SwitchErrorHandler</span><span class='PDMOper'>(</span><span class='PDMLit'>.F.</span><span class='PDMOper'>)</span>
+<span class='PDMCnt'> 356</span> <span class='PDMInd'> 4</span>     <span class='PDMResK'>RETURN</span> <span class='PDMLit'>.F.</span>
+<span class='PDMCnt'> 357</span> <span class='PDMInd'> 3</span>    <span class='PDMResK'>ENDIF</span> <span class='PDMCom'>&amp;&amp;_SCREEN.frmB2T_Envelop.cusB2T.Get_Converter(@lcStorage,@loConverter,.T.)</span>
+<span class='PDMCnt'> 358</span> <span class='PDMInd'>  </span> 
+<span class='PDMCnt'> 359</span> <span class='PDMInd'> 3</span>    <span class='PDMVar'>lcPath</span> <span class='PDMOper'>=</span> <span class='PDMResF'>JUSTPATH</span><span class='PDMOper'>(</span><span class='PDMVar'>_SCREEN</span><span class='PDMOper'>.</span><span class='PDMVar'>gcB2T_Path</span><span class='PDMOper'>)</span>
+<span class='PDMCnt'> 360</span> <span class='PDMInd'>  </span> 
+<span class='PDMCnt'> 361</span> <span class='PDMInd'> 3</span>    <span class='PDMResK'>CD</span> <span class='PDMOper'>(</span><span class='PDMVar'>lcPath</span><span class='PDMOper'>)</span>
+<span class='PDMCnt'> 362</span> <span class='PDMInd'>  </span> 
+<span class='PDMCnt'> 363</span> <span class='PDMInd'> 3</span>    <span class='PDMResK'>IF</span> <span class='PDMVar'>tlToBin</span> <span class='PDMResK'>THEN</span>
+<span class='PDMCnt'> 364</span> <span class='PDMInd'>  </span> <span class='PDMCom'>*get local text extension for project</span>
+<span class='PDMCnt'> 365</span> <span class='PDMInd'> 4</span>     <span class='PDMVar'>loInfo</span>      <span class='PDMOper'>=</span> <span class='PDMVar'>loConverter</span><span class='PDMOper'>.</span><span class='PDMVar'>Get_DirSettings</span><span class='PDMOper'>(</span><span class='PDMVar'>lcPath</span><span class='PDMOper'>)</span>
+<span class='PDMCnt'> 366</span> <span class='PDMInd'> 4</span>     <span class='PDMVar'>lcSourceExt</span> <span class='PDMOper'>=</span> <span class='PDMVar'>loInfo</span><span class='PDMOper'>.</span><span class='PDMVar'>c_PJ2</span>
+<span class='PDMCnt'> 367</span> <span class='PDMInd'>  </span> 
+<span class='PDMCnt'> 368</span> <span class='PDMInd'> 3</span>    <span class='PDMResK'>ELSE</span>  <span class='PDMCom'>&amp;&amp;tlToBin</span>
+<span class='PDMCnt'> 369</span> <span class='PDMInd'> 4</span>     <span class='PDMVar'>lcSourceExt</span> <span class='PDMOper'>=</span> <span class='PDMStr'>"PJX"</span>
+<span class='PDMCnt'> 370</span> <span class='PDMInd'> 3</span>    <span class='PDMResK'>ENDIF</span> <span class='PDMCom'>&amp;&amp;tlToBin</span>
+<span class='PDMCnt'> 371</span> <span class='PDMInd'>  </span> 
+<span class='PDMCnt'> 372</span> <span class='PDMInd'> 3</span>    <span class='PDMVar'>loInfo</span>      <span class='PDMOper'>=</span> <span class='PDMOper'>.</span><span class='PDMResK'>NULL</span><span class='PDMOper'>.</span>
+<span class='PDMCnt'> 373</span> <span class='PDMInd'> 3</span>    <span class='PDMVar'>loConverter</span> <span class='PDMOper'>=</span> <span class='PDMOper'>.</span><span class='PDMResK'>NULL</span><span class='PDMOper'>.</span>
+<span class='PDMCnt'> 374</span> <span class='PDMInd'> 3</span>    <span class='PDMVar'>Destruct_Objects</span><span class='PDMOper'>(</span><span class='PDMOper'>)</span>
+<span class='PDMCnt'> 375</span> <span class='PDMInd'>  </span> 
+<span class='PDMCnt'> 376</span> <span class='PDMInd'> 3</span>    <span class='PDMVar'>lnProjs</span> <span class='PDMOper'>=</span> <span class='PDMResF'>ADIR</span><span class='PDMOper'>(</span><span class='PDMVar'>laFiles</span><span class='PDMOper'>,</span><span class='PDMStr'>'*.'</span><span class='PDMOper'>+</span><span class='PDMVar'>lcSourceExt</span><span class='PDMOper'>,</span><span class='PDMStr'>'HS'</span><span class='PDMOper'>)</span>
+<span class='PDMCnt'> 377</span> <span class='PDMInd'>  </span> 
+<span class='PDMCnt'> 378</span> <span class='PDMInd'> 3</span>    <span class='PDMResK'>IF</span> <span class='PDMVar'>lnProjs</span><span class='PDMOper'>=</span><span class='PDMLit'>0</span> <span class='PDMResK'>THEN</span>
+<span class='PDMCnt'> 379</span> <span class='PDMInd'> 4</span>     <span class='PDMResK'>CD</span> <span class='PDMOper'>(</span><span class='PDMVar'>lcOldPath</span><span class='PDMOper'>)</span>
+<span class='PDMCnt'> 380</span> <span class='PDMInd'> 4</span>     <span class='PDMOper'>?</span><span class='PDMStr'>'No project found'</span>
+<span class='PDMCnt'> 381</span> <span class='PDMInd'> 4</span>     <span class='PDMVar'>SwitchErrorHandler</span><span class='PDMOper'>(</span><span class='PDMLit'>.F.</span><span class='PDMOper'>)</span>
+<span class='PDMCnt'> 382</span> <span class='PDMInd'> 4</span>     <span class='PDMResK'>RETURN</span> <span class='PDMLit'>.F.</span>
+<span class='PDMCnt'> 383</span> <span class='PDMInd'> 3</span>    <span class='PDMResK'>ENDIF</span> <span class='PDMCom'>&amp;&amp;lnProjs=0</span>
+<span class='PDMCnt'> 384</span> <span class='PDMInd'>  </span> 
+<span class='PDMCnt'> 385</span> <span class='PDMInd'> 3</span>    <span class='PDMVar'>_SCREEN</span><span class='PDMOper'>.</span><span class='PDMResM'>ADDPROPERTY</span><span class='PDMOper'>(</span><span class='PDMStr'>'gaFiles('</span><span class='PDMOper'>+</span><span class='PDMResF'>TRIM</span><span class='PDMOper'>(</span><span class='PDMResF'>PADR</span><span class='PDMOper'>(</span><span class='PDMVar'>lnProjs</span><span class='PDMOper'>,</span><span class='PDMLit'>11</span><span class='PDMOper'>)</span><span class='PDMOper'>)</span><span class='PDMOper'>+</span><span class='PDMStr'>',2)'</span><span class='PDMOper'>)</span>
+<span class='PDMCnt'> 386</span> <span class='PDMInd'>  </span> 
+<span class='PDMCnt'> 387</span> <span class='PDMInd'> 3</span>    <span class='PDMResK'>FOR</span> <span class='PDMVar'>lnProj</span> <span class='PDMOper'>=</span> <span class='PDMLit'>1</span> <span class='PDMResK'>TO</span> <span class='PDMVar'>lnProjs</span>
+<span class='PDMCnt'> 388</span> <span class='PDMInd'> 4</span>     <span class='PDMVar'>_SCREEN</span><span class='PDMOper'>.</span><span class='PDMVar'>gaFiles</span><span class='PDMOper'>(</span><span class='PDMVar'>lnProj</span><span class='PDMOper'>,</span><span class='PDMLit'>1</span><span class='PDMOper'>)</span> <span class='PDMOper'>=</span> <span class='PDMResF'>FORCEPATH</span><span class='PDMOper'>(</span><span class='PDMResF'>FORCEEXT</span><span class='PDMOper'>(</span><span class='PDMVar'>laFiles</span><span class='PDMOper'>(</span><span class='PDMVar'>lnProj</span><span class='PDMOper'>,</span><span class='PDMLit'>1</span><span class='PDMOper'>)</span><span class='PDMOper'>,</span><span class='PDMStr'>"PJX"</span><span class='PDMOper'>)</span><span class='PDMOper'>,</span><span class='PDMVar'>lcPath</span><span class='PDMOper'>)</span>
+<span class='PDMCnt'> 389</span> <span class='PDMInd'> 4</span>     <span class='PDMVar'>_SCREEN</span><span class='PDMOper'>.</span><span class='PDMVar'>gaFiles</span><span class='PDMOper'>(</span><span class='PDMVar'>lnProj</span><span class='PDMOper'>,</span><span class='PDMLit'>2</span><span class='PDMOper'>)</span> <span class='PDMOper'>=</span> <span class='PDMResF'>IIF</span><span class='PDMOper'>(</span><span class='PDMVar'>tnMode</span><span class='PDMOper'>=</span><span class='PDMLit'>3</span><span class='PDMOper'>,</span><span class='PDMStr'>""</span><span class='PDMOper'>,</span><span class='PDMOper'>.</span><span class='PDMResK'>NULL</span><span class='PDMOper'>.</span><span class='PDMOper'>)</span>
+<span class='PDMCnt'> 390</span> <span class='PDMInd'> 3</span>    <span class='PDMResK'>ENDFOR</span> <span class='PDMCom'>&amp;&amp;lnProjs</span>
+<span class='PDMCnt'> 391</span> <span class='PDMInd'>  </span> <span class='PDMCom'>*  &amp;&amp;tnProjects=3</span>
+<span class='PDMCnt'> 392</span> <span class='PDMInd'> 2</span>   <span class='PDMResK'>OTHERWISE</span>
+<span class='PDMCnt'> 393</span> <span class='PDMInd'> 3</span>    <span class='PDMResK'>CD</span> <span class='PDMOper'>(</span><span class='PDMVar'>lcOldPath</span><span class='PDMOper'>)</span>
+<span class='PDMCnt'> 394</span> <span class='PDMInd'> 3</span>    <span class='PDMOper'>?</span><span class='PDMStr'>'Parameter not defined'</span>
+<span class='PDMCnt'> 395</span> <span class='PDMInd'> 3</span>    <span class='PDMVar'>SwitchErrorHandler</span><span class='PDMOper'>(</span><span class='PDMLit'>.F.</span><span class='PDMOper'>)</span>
+<span class='PDMCnt'> 396</span> <span class='PDMInd'> 3</span>    <span class='PDMResK'>RETURN</span> <span class='PDMLit'>.F.</span>
+<span class='PDMCnt'> 397</span> <span class='PDMInd'> 1</span>  <span class='PDMResK'>ENDCASE</span>
+<span class='PDMCnt'> 398</span> <span class='PDMInd'>  </span> 
+<span class='PDMCnt'> 399</span> <span class='PDMInd'> 1</span>  <span class='PDMResK'>DO</span> <span class='PDMResK'>CASE</span>
+<span class='PDMCnt'> 400</span> <span class='PDMInd'> 2</span>   <span class='PDMResK'>CASE</span> <span class='PDMVar'>tnMode</span><span class='PDMOper'>=</span><span class='PDMLit'>0</span>
+<span class='PDMCnt'> 401</span> <span class='PDMInd'> 3</span>    <span class='PDMVar'>lvMode</span> <span class='PDMOper'>=</span> <span class='PDMStr'>"*"</span>
+<span class='PDMCnt'> 402</span> <span class='PDMInd'> 3</span>    <span class='PDMOper'>??</span><span class='PDMStr'>', generate projects and files of list'</span>
+<span class='PDMCnt'> 403</span> <span class='PDMInd'> 2</span>   <span class='PDMResK'>CASE</span> <span class='PDMVar'>tnMode</span><span class='PDMOper'>=</span><span class='PDMLit'>1</span>
+<span class='PDMCnt'> 404</span> <span class='PDMInd'> 3</span>    <span class='PDMVar'>lvMode</span> <span class='PDMOper'>=</span> <span class='PDMStr'>"*-"</span>
+<span class='PDMCnt'> 405</span> <span class='PDMInd'> 3</span>    <span class='PDMOper'>??</span><span class='PDMStr'>', generate files list'</span>
+<span class='PDMCnt'> 406</span> <span class='PDMInd'> 2</span>   <span class='PDMResK'>CASE</span> <span class='PDMVar'>tnMode</span><span class='PDMOper'>=</span><span class='PDMLit'>2</span>
+<span class='PDMCnt'> 407</span> <span class='PDMInd'> 3</span>    <span class='PDMVar'>lvMode</span> <span class='PDMOper'>=</span> <span class='PDMStr'>""</span>
+<span class='PDMCnt'> 408</span> <span class='PDMInd'> 3</span>    <span class='PDMOper'>??</span><span class='PDMStr'>', generate projects'</span>
+<span class='PDMCnt'> 409</span> <span class='PDMInd'> 2</span>   <span class='PDMResK'>CASE</span> <span class='PDMVar'>tnMode</span><span class='PDMOper'>=</span><span class='PDMLit'>3</span>
+<span class='PDMCnt'> 410</span> <span class='PDMInd'> 3</span>    <span class='PDMVar'>lvMode</span> <span class='PDMOper'>=</span> <span class='PDMStr'>"*-"</span>
+<span class='PDMCnt'> 411</span> <span class='PDMInd'> 3</span>    <span class='PDMOper'>??</span><span class='PDMStr'>', generate files list'</span>
+<span class='PDMCnt'> 412</span> <span class='PDMInd'> 2</span>   <span class='PDMResK'>OTHERWISE</span>
+<span class='PDMCnt'> 413</span> <span class='PDMInd'> 3</span>    <span class='PDMVar'>lvMode</span> <span class='PDMOper'>=</span> <span class='PDMStr'>"*"</span>
+<span class='PDMCnt'> 414</span> <span class='PDMInd'> 3</span>    <span class='PDMOper'>??</span><span class='PDMStr'>', generate projects and files of list'</span>
+<span class='PDMCnt'> 415</span> <span class='PDMInd'> 1</span>  <span class='PDMResK'>ENDCASE</span>
+<span class='PDMCnt'> 416</span> <span class='PDMInd'>  </span> 
+<span class='PDMCnt'> 417</span> <span class='PDMInd'>  </span> <span class='PDMCom'>*close all the projects in the IDE / from StorePjx</span>
+<span class='PDMCnt'> 418</span> <span class='PDMInd'>  </span> <span class='PDMCom'>*just to keep data over CLEAR ALL</span>
+<span class='PDMCnt'> 419</span> <span class='PDMInd'> 1</span>  <span class='PDMVar'>_SCREEN</span><span class='PDMOper'>.</span><span class='PDMResM'>ADDPROPERTY</span><span class='PDMOper'>(</span><span class='PDMStr'>'gaProjects(1,2)'</span><span class='PDMOper'>)</span>
+<span class='PDMCnt'> 420</span> <span class='PDMInd'>  </span> 
+<span class='PDMCnt'> 421</span> <span class='PDMInd'> 1</span>  <span class='PDMResK'>IF</span> <span class='PDMVar'>tnMode</span><span class='PDMOper'>=</span><span class='PDMLit'>3</span> <span class='PDMResK'>THEN</span>
+<span class='PDMCnt'> 422</span> <span class='PDMInd'>  </span> <span class='PDMCom'>*keep projects open, (do not parse hooks)</span>
+<span class='PDMCnt'> 423</span> <span class='PDMInd'> 2</span>   <span class='PDMVar'>_SCREEN</span><span class='PDMOper'>.</span><span class='PDMVar'>gaProjects</span> <span class='PDMOper'>=</span> <span class='PDMOper'>.</span><span class='PDMResK'>NULL</span><span class='PDMOper'>.</span>
+<span class='PDMCnt'> 424</span> <span class='PDMInd'> 1</span>  <span class='PDMResK'>ELSE</span>  <span class='PDMCom'>&amp;&amp;tnMode=3</span>
+<span class='PDMCnt'> 425</span> <span class='PDMInd'> 2</span>   <span class='PDMVar'>lnProjs</span> <span class='PDMOper'>=</span> <span class='PDMVar'>_VFP</span><span class='PDMOper'>.</span><span class='PDMVar'>PROJECTS</span><span class='PDMOper'>.</span><span class='PDMResP'>COUNT</span>
+<span class='PDMCnt'> 426</span> <span class='PDMInd'>  </span> 
+<span class='PDMCnt'> 427</span> <span class='PDMInd'> 2</span>   <span class='PDMResK'>IF</span> <span class='PDMVar'>lnProjs</span><span class='PDMOper'>=</span><span class='PDMLit'>0</span> <span class='PDMResK'>THEN</span>
+<span class='PDMCnt'> 428</span> <span class='PDMInd'>  </span> <span class='PDMCom'>*nothing to do</span>
+<span class='PDMCnt'> 429</span> <span class='PDMInd'> 3</span>    <span class='PDMVar'>_SCREEN</span><span class='PDMOper'>.</span><span class='PDMVar'>gaProjects</span> <span class='PDMOper'>=</span> <span class='PDMOper'>.</span><span class='PDMResK'>NULL</span><span class='PDMOper'>.</span>
+<span class='PDMCnt'> 430</span> <span class='PDMInd'> 3</span>    <span class='PDMResK'>FOR</span> <span class='PDMVar'>lnProj</span> <span class='PDMOper'>=</span> <span class='PDMLit'>1</span> <span class='PDMResK'>TO</span> <span class='PDMVar'>lnProjs</span>
+<span class='PDMCnt'> 431</span> <span class='PDMInd'> 4</span>     <span class='PDMVar'>_SCREEN</span><span class='PDMOper'>.</span><span class='PDMVar'>gaFiles</span><span class='PDMOper'>(</span><span class='PDMVar'>lnProj</span><span class='PDMOper'>,</span><span class='PDMLit'>2</span><span class='PDMOper'>)</span> <span class='PDMOper'>=</span> <span class='PDMStr'>""</span> <span class='PDMCom'>&amp;&amp; "no hook defined" -&gt; no hook processed :)</span>
+<span class='PDMCnt'> 432</span> <span class='PDMInd'> 3</span>    <span class='PDMResK'>ENDFOR</span> <span class='PDMCom'>&amp;&amp;lnProjs</span>
+<span class='PDMCnt'> 433</span> <span class='PDMInd'> 2</span>   <span class='PDMResK'>ELSE</span>  <span class='PDMCom'>&amp;&amp;lnProjs=0</span>
+<span class='PDMCnt'> 434</span> <span class='PDMInd'> 3</span>    <span class='PDMResK'>DIMENSION</span><span class='PDMOper'>;</span>
+<span class='PDMCnt'> 435</span> <span class='PDMInd'> 4</span>     <span class='PDMVar'>_SCREEN</span><span class='PDMOper'>.</span><span class='PDMVar'>gaProjects</span><span class='PDMOper'>(</span><span class='PDMVar'>lnProjs</span><span class='PDMOper'>,</span><span class='PDMLit'>2</span><span class='PDMOper'>)</span>
+<span class='PDMCnt'> 436</span> <span class='PDMInd'> 3</span>    <span class='PDMVar'>lnProj</span> <span class='PDMOper'>=</span> <span class='PDMLit'>0</span>
+<span class='PDMCnt'> 437</span> <span class='PDMInd'> 3</span>    <span class='PDMResK'>FOR</span> <span class='PDMResK'>EACH</span> <span class='PDMVar'>loProject</span> <span class='PDMResK'>IN</span> <span class='PDMVar'>_VFP</span><span class='PDMOper'>.</span><span class='PDMVar'>PROJECTS</span> <span class='PDMResK'>FOXOBJECT</span>
+<span class='PDMCnt'> 438</span> <span class='PDMInd'> 4</span>     <span class='PDMVar'>lnProj</span> <span class='PDMOper'>=</span> <span class='PDMVar'>lnProj</span><span class='PDMOper'>+</span><span class='PDMLit'>1</span>
+<span class='PDMCnt'> 439</span> <span class='PDMInd'> 4</span>     <span class='PDMVar'>_SCREEN</span><span class='PDMOper'>.</span><span class='PDMVar'>gaProjects</span><span class='PDMOper'>(</span><span class='PDMVar'>lnProj</span><span class='PDMOper'>,</span><span class='PDMLit'>1</span><span class='PDMOper'>)</span> <span class='PDMOper'>=</span> <span class='PDMVar'>loProject</span><span class='PDMOper'>.</span><span class='PDMResP'>NAME</span>
+<span class='PDMCnt'> 440</span> <span class='PDMInd'>  </span> <span class='PDMCom'>*SF internal</span>
+<span class='PDMCnt'> 441</span> <span class='PDMInd'> 4</span>     <span class='PDMVar'>_SCREEN</span><span class='PDMOper'>.</span><span class='PDMVar'>gaProjects</span><span class='PDMOper'>(</span><span class='PDMVar'>lnProj</span><span class='PDMOper'>,</span><span class='PDMLit'>2</span><span class='PDMOper'>)</span> <span class='PDMOper'>=</span> <span class='PDMResF'>VARTYPE</span><span class='PDMOper'>(</span><span class='PDMVar'>loProject</span><span class='PDMOper'>.</span><span class='PDMResP'>PROJECTHOOK</span><span class='PDMOper'>)</span><span class='PDMOper'>=</span><span class='PDMStr'>'O'</span><span class='PDMOper'>;</span>
+<span class='PDMCnt'> 442</span> <span class='PDMInd'> 5</span>      <span class='PDMOper'>AND</span> <span class='PDMOper'>!</span><span class='PDMResF'>ISNULL</span><span class='PDMOper'>(</span><span class='PDMVar'>loProject</span><span class='PDMOper'>.</span><span class='PDMResP'>PROJECTHOOK</span><span class='PDMOper'>)</span><span class='PDMOper'>;</span>
+<span class='PDMCnt'> 443</span> <span class='PDMInd'> 5</span>      <span class='PDMOper'>AND</span> <span class='PDMResF'>PEMSTATUS</span><span class='PDMOper'>(</span><span class='PDMVar'>loProject</span><span class='PDMOper'>.</span><span class='PDMResP'>PROJECTHOOK</span><span class='PDMOper'>,</span><span class='PDMStr'>'glCompileAll'</span><span class='PDMOper'>,</span><span class='PDMLit'>5</span><span class='PDMOper'>)</span><span class='PDMOper'>;</span>
+<span class='PDMCnt'> 444</span> <span class='PDMInd'> 5</span>      <span class='PDMOper'>AND</span> <span class='PDMVar'>loProject</span><span class='PDMOper'>.</span><span class='PDMResP'>PROJECTHOOK</span><span class='PDMOper'>.</span><span class='PDMVar'>glCompileAll</span>
+<span class='PDMCnt'> 445</span> <span class='PDMInd'>  </span> <span class='PDMCom'>*/SF internal</span>
+<span class='PDMCnt'> 446</span> <span class='PDMInd'> 5</span>      <span class='PDMVar'>loProject</span><span class='PDMOper'>.</span><span class='PDMResM'>CLOSE</span>
+<span class='PDMCnt'> 447</span> <span class='PDMInd'> 3</span>    <span class='PDMResK'>ENDFOR</span> <span class='PDMCom'>&amp;&amp;loProject</span>
+<span class='PDMCnt'> 448</span> <span class='PDMInd'> 2</span>   <span class='PDMResK'>ENDIF</span> <span class='PDMCom'>&amp;&amp;lnProjs=0</span>
+<span class='PDMCnt'> 449</span> <span class='PDMInd'> 1</span>  <span class='PDMResK'>ENDIF</span> <span class='PDMCom'>&amp;&amp;tnMode=3</span>
+<span class='PDMCnt'> 450</span> <span class='PDMInd'>  </span> 
+<span class='PDMCnt'> 451</span> <span class='PDMInd'>  </span> 
+<span class='PDMCnt'> 452</span> <span class='PDMInd'>  </span> <span class='PDMCom'>*just to keep data over CLEAR ALL</span>
+<span class='PDMCnt'> 453</span> <span class='PDMInd'> 1</span>  <span class='PDMVar'>_SCREEN</span><span class='PDMOper'>.</span><span class='PDMResM'>ADDPROPERTY</span><span class='PDMOper'>(</span><span class='PDMStr'>'gcOld_Path'</span><span class='PDMOper'>,</span><span class='PDMVar'>lcOldPath</span><span class='PDMOper'>)</span>
+<span class='PDMCnt'> 454</span> <span class='PDMInd'> 1</span>  <span class='PDMVar'>_SCREEN</span><span class='PDMOper'>.</span><span class='PDMResM'>ADDPROPERTY</span><span class='PDMOper'>(</span><span class='PDMStr'>'gvMode'</span><span class='PDMOper'>,</span><span class='PDMVar'>lvMode</span><span class='PDMOper'>)</span>
+<span class='PDMCnt'> 455</span> <span class='PDMInd'> 1</span>  <span class='PDMVar'>_SCREEN</span><span class='PDMOper'>.</span><span class='PDMResM'>ADDPROPERTY</span><span class='PDMOper'>(</span><span class='PDMStr'>'glToBin'</span><span class='PDMOper'>,</span><span class='PDMVar'>tlToBin</span><span class='PDMOper'>)</span>
+<span class='PDMCnt'> 456</span> <span class='PDMInd'>  </span> 
+<span class='PDMCnt'> 457</span> <span class='PDMInd'>  </span> <span class='PDMCom'>*to remove Classlibs so we can recreate</span>
+<span class='PDMCnt'> 458</span> <span class='PDMInd'> 1</span>  <span class='PDMResK'>CLEAR</span> <span class='PDMResK'>ALL</span>
+<span class='PDMCnt'> 459</span> <span class='PDMInd'>  </span> 
+<span class='PDMCnt'> 460</span> <span class='PDMInd'> 1</span>  <span class='PDMResK'>LOCAL</span> <span class='PDMResK'>ARRAY</span><span class='PDMOper'>;</span>
+<span class='PDMCnt'> 461</span> <span class='PDMInd'> 2</span>   <span class='PDMVar'>laFiles</span><span class='PDMOper'>(</span><span class='PDMLit'>1</span><span class='PDMOper'>)</span>
+<span class='PDMCnt'> 462</span> <span class='PDMInd'>  </span> 
+<span class='PDMCnt'> 463</span> <span class='PDMInd'> 1</span>  <span class='PDMResF'>ACOPY</span><span class='PDMOper'>(</span><span class='PDMVar'>_SCREEN</span><span class='PDMOper'>.</span><span class='PDMVar'>gaFiles</span><span class='PDMOper'>,</span><span class='PDMVar'>laFiles</span><span class='PDMOper'>)</span>
+<span class='PDMCnt'> 464</span> <span class='PDMInd'> 1</span>  <span class='PDMResF'>REMOVEPROPERTY</span><span class='PDMOper'>(</span><span class='PDMVar'>_SCREEN</span><span class='PDMOper'>,</span><span class='PDMStr'>'gaFiles'</span><span class='PDMOper'>)</span>
+<span class='PDMCnt'> 465</span> <span class='PDMInd'>  </span> 
+<span class='PDMCnt'> 466</span> <span class='PDMInd'>  </span> <span class='PDMCom'>*process Transformation</span>
+<span class='PDMCnt'> 467</span> <span class='PDMInd'> 1</span>  <span class='PDMVar'>Construct_Objects</span><span class='PDMOper'>(</span><span class='PDMOper'>)</span>
+<span class='PDMCnt'> 468</span> <span class='PDMInd'> 1</span>  <span class='PDMVar'>_SCREEN</span><span class='PDMOper'>.</span><span class='PDMVar'>frmB2T_Envelop</span><span class='PDMOper'>.</span><span class='PDMVar'>cusB2T</span><span class='PDMOper'>.</span><span class='PDMVar'>Process_Bin2Text</span><span class='PDMOper'>(</span><span class='PDMOper'>@</span><span class='PDMVar'>laFiles</span><span class='PDMOper'>,</span><span class='PDMVar'>_SCREEN</span><span class='PDMOper'>.</span><span class='PDMVar'>glToBin</span><span class='PDMOper'>,</span><span class='PDMVar'>_SCREEN</span><span class='PDMOper'>.</span><span class='PDMVar'>gvMode</span><span class='PDMOper'>)</span>
+<span class='PDMCnt'> 469</span> <span class='PDMInd'> 1</span>  <span class='PDMVar'>Destruct_Objects</span><span class='PDMOper'>(</span><span class='PDMOper'>)</span>
+<span class='PDMCnt'> 470</span> <span class='PDMInd'>  </span> 
+<span class='PDMCnt'> 471</span> <span class='PDMInd'> 1</span>  <span class='PDMResK'>CLEAR</span> <span class='PDMResK'>ALL</span>
+<span class='PDMCnt'> 472</span> <span class='PDMInd'>  </span> 
+<span class='PDMCnt'> 473</span> <span class='PDMInd'>  </span> <span class='PDMCom'>*/Move</span>
+<span class='PDMCnt'> 474</span> <span class='PDMInd'> 1</span>  <span class='PDMResF'>REMOVEPROPERTY</span><span class='PDMOper'>(</span><span class='PDMVar'>_SCREEN</span><span class='PDMOper'>,</span><span class='PDMStr'>'gvMode'</span><span class='PDMOper'>)</span>
+<span class='PDMCnt'> 475</span> <span class='PDMInd'> 1</span>  <span class='PDMResF'>REMOVEPROPERTY</span><span class='PDMOper'>(</span><span class='PDMVar'>_SCREEN</span><span class='PDMOper'>,</span><span class='PDMStr'>'glToBin'</span><span class='PDMOper'>)</span>
+<span class='PDMCnt'> 476</span> <span class='PDMInd'>  </span> 
+<span class='PDMCnt'> 477</span> <span class='PDMInd'>  </span> 
+<span class='PDMCnt'> 478</span> <span class='PDMInd'>  </span> <span class='PDMOper'>*</span><span class='PDMResK'>Move</span>
+<span class='PDMCnt'> 479</span> <span class='PDMInd'> 1</span>  <span class='PDMResK'>LOCAL</span><span class='PDMOper'>;</span>
+<span class='PDMCnt'> 480</span> <span class='PDMInd'> 2</span>   <span class='PDMVar'>lcProj</span>      <span class='PDMResK'>AS</span> <span class='PDMResK'>CHARACTER</span><span class='PDMOper'>,</span><span class='PDMOper'>;</span>
+<span class='PDMCnt'> 481</span> <span class='PDMInd'> 2</span>   <span class='PDMVar'>lcSourceExt</span> <span class='PDMResK'>AS</span> <span class='PDMResK'>CHARACTER</span><span class='PDMOper'>,</span><span class='PDMOper'>;</span>
+<span class='PDMCnt'> 482</span> <span class='PDMInd'> 2</span>   <span class='PDMVar'>lnProj</span>      <span class='PDMResK'>AS</span> <span class='PDMResK'>NUMBER</span><span class='PDMOper'>,</span><span class='PDMOper'>;</span>
+<span class='PDMCnt'> 483</span> <span class='PDMInd'> 2</span>   <span class='PDMVar'>lnProjs</span>     <span class='PDMResK'>AS</span> <span class='PDMResK'>NUMBER</span><span class='PDMOper'>,</span><span class='PDMOper'>;</span>
+<span class='PDMCnt'> 484</span> <span class='PDMInd'> 2</span>   <span class='PDMVar'>lnReturn</span>    <span class='PDMResK'>AS</span> <span class='PDMResK'>NUMBER</span><span class='PDMOper'>,</span><span class='PDMOper'>;</span>
+<span class='PDMCnt'> 485</span> <span class='PDMInd'> 2</span>   <span class='PDMVar'>llNotFound</span>  <span class='PDMResK'>AS</span> <span class='PDMVar'>BOOLEAN</span><span class='PDMOper'>,</span><span class='PDMOper'>;</span>
+<span class='PDMCnt'> 486</span> <span class='PDMInd'> 2</span>   <span class='PDMVar'>loProject</span>   <span class='PDMResK'>AS</span> <span class='PDMResK'>PROJECT</span>
+<span class='PDMCnt'> 487</span> <span class='PDMInd'>  </span> 
+<span class='PDMCnt'> 488</span> <span class='PDMInd'> 1</span>  <span class='PDMResK'>IF</span> <span class='PDMOper'>!</span><span class='PDMResF'>ISNULL</span><span class='PDMOper'>(</span><span class='PDMVar'>_SCREEN</span><span class='PDMOper'>.</span><span class='PDMVar'>gaProjects</span><span class='PDMOper'>(</span><span class='PDMLit'>1</span><span class='PDMOper'>,</span><span class='PDMLit'>1</span><span class='PDMOper'>)</span><span class='PDMOper'>)</span> <span class='PDMResK'>THEN</span>
+<span class='PDMCnt'> 489</span> <span class='PDMInd'>  </span> 
+<span class='PDMCnt'> 490</span> <span class='PDMInd'>  </span> <span class='PDMCom'>*/process Transformation</span>
+<span class='PDMCnt'> 491</span> <span class='PDMInd'> 2</span>   <span class='PDMOper'>?</span><span class='PDMStr'>''</span><span class='PDMOper'>+</span><span class='PDMVar'>0h0d0a</span><span class='PDMOper'>+</span><span class='PDMStr'>'reopen files'</span>
+<span class='PDMCnt'> 492</span> <span class='PDMInd'>  </span> 
+<span class='PDMCnt'> 493</span> <span class='PDMInd'>  </span> <span class='PDMCom'>*reopen  all the projects in the IDE / from ReStorePjx</span>
+<span class='PDMCnt'> 494</span> <span class='PDMInd'> 2</span>   <span class='PDMVar'>lnProjs</span> <span class='PDMOper'>=</span> <span class='PDMResF'>ALEN</span><span class='PDMOper'>(</span><span class='PDMVar'>_SCREEN</span><span class='PDMOper'>.</span><span class='PDMVar'>gaProjects</span><span class='PDMOper'>,</span><span class='PDMLit'>1</span><span class='PDMOper'>)</span>
+<span class='PDMCnt'> 495</span> <span class='PDMInd'> 2</span>   <span class='PDMResK'>FOR</span> <span class='PDMVar'>lnProj</span> <span class='PDMOper'>=</span> <span class='PDMVar'>lnProjs</span> <span class='PDMResK'>TO</span> <span class='PDMLit'>1</span> <span class='PDMResK'>STEP</span> <span class='PDMOper'>-</span><span class='PDMLit'>1</span>
+<span class='PDMCnt'> 496</span> <span class='PDMInd'> 3</span>    <span class='PDMVar'>lcProj</span> <span class='PDMOper'>=</span> <span class='PDMVar'>_SCREEN</span><span class='PDMOper'>.</span><span class='PDMVar'>gaProjects</span><span class='PDMOper'>(</span><span class='PDMVar'>lnProj</span><span class='PDMOper'>,</span><span class='PDMLit'>1</span><span class='PDMOper'>)</span>
+<span class='PDMCnt'> 497</span> <span class='PDMInd'> 3</span>    <span class='PDMResK'>IF</span> <span class='PDMOper'>!</span><span class='PDMResF'>FILE</span><span class='PDMOper'>(</span><span class='PDMVar'>lcProj</span><span class='PDMOper'>)</span> <span class='PDMResK'>THEN</span>
+<span class='PDMCnt'> 498</span> <span class='PDMInd'> 4</span>     <span class='PDMResK'>LOOP</span>
+<span class='PDMCnt'> 499</span> <span class='PDMInd'> 3</span>    <span class='PDMResK'>ENDIF</span> <span class='PDMCom'>&amp;&amp;!FILE(lcProj)</span>
+<span class='PDMCnt'> 500</span> <span class='PDMInd'>  </span> 
+<span class='PDMCnt'> 501</span> <span class='PDMInd'> 3</span>    <span class='PDMVar'>llNotFound</span> <span class='PDMOper'>=</span> <span class='PDMLit'>.T.</span>
+<span class='PDMCnt'> 502</span> <span class='PDMInd'> 3</span>    <span class='PDMResK'>FOR</span> <span class='PDMResK'>EACH</span> <span class='PDMVar'>loProject</span> <span class='PDMResK'>IN</span> <span class='PDMVar'>_VFP</span><span class='PDMOper'>.</span><span class='PDMVar'>PROJECTS</span> <span class='PDMResK'>FOXOBJECT</span>
+<span class='PDMCnt'> 503</span> <span class='PDMInd'> 4</span>     <span class='PDMResK'>IF</span> <span class='PDMResF'>UPPER</span><span class='PDMOper'>(</span><span class='PDMResF'>JUSTSTEM</span><span class='PDMOper'>(</span><span class='PDMVar'>loProject</span><span class='PDMOper'>.</span><span class='PDMResP'>NAME</span><span class='PDMOper'>)</span><span class='PDMOper'>)</span><span class='PDMOper'>==</span><span class='PDMVar'>lcProj</span> <span class='PDMResK'>THEN</span>
+<span class='PDMCnt'> 504</span> <span class='PDMInd'> 5</span>      <span class='PDMVar'>llNotFound</span> <span class='PDMOper'>=</span> <span class='PDMLit'>.F.</span>
+<span class='PDMCnt'> 505</span> <span class='PDMInd'> 5</span>      <span class='PDMResK'>EXIT</span>
+<span class='PDMCnt'> 506</span> <span class='PDMInd'> 4</span>     <span class='PDMResK'>ENDIF</span> <span class='PDMCom'>&amp;&amp;UPPER(JUSTSTEM(loProject.NAME))==lcProj</span>
+<span class='PDMCnt'> 507</span> <span class='PDMInd'> 3</span>    <span class='PDMResK'>ENDFOR</span> <span class='PDMCom'>&amp;&amp;loProject</span>
+<span class='PDMCnt'> 508</span> <span class='PDMInd'>  </span> 
+<span class='PDMCnt'> 509</span> <span class='PDMInd'> 3</span>    <span class='PDMResK'>IF</span> <span class='PDMVar'>llNotFound</span> <span class='PDMResK'>THEN</span>
+<span class='PDMCnt'> 510</span> <span class='PDMInd'> 4</span>     <span class='PDMResK'>MODIFY</span> <span class='PDMResK'>PROJECT</span> <span class='PDMOper'>(</span><span class='PDMVar'>lcProj</span><span class='PDMOper'>)</span> <span class='PDMResK'>NOWAIT</span> <span class='PDMResK'>SAVE</span>
+<span class='PDMCnt'> 511</span> <span class='PDMInd'> 4</span>     <span class='PDMVar'>loProject</span> <span class='PDMOper'>=</span> <span class='PDMVar'>_VFP</span><span class='PDMOper'>.</span><span class='PDMVar'>ACTIVEPROJECT</span>
+<span class='PDMCnt'> 512</span> <span class='PDMInd'> 4</span>     <span class='PDMVar'>loProject</span><span class='PDMOper'>.</span><span class='PDMResP'>VISIBLE</span> <span class='PDMOper'>=</span> <span class='PDMLit'>.F.</span>
+<span class='PDMCnt'> 513</span> <span class='PDMInd'> 4</span>     <span class='PDMVar'>loProject</span><span class='PDMOper'>.</span><span class='PDMResP'>VISIBLE</span> <span class='PDMOper'>=</span> <span class='PDMLit'>.T.</span>
+<span class='PDMCnt'> 514</span> <span class='PDMInd'>  </span> <span class='PDMOper'>*</span><span class='PDMVar'>SF</span> <span class='PDMVar'>internal</span>
+<span class='PDMCnt'> 515</span> <span class='PDMInd'> 4</span>     <span class='PDMResK'>IF</span> <span class='PDMResF'>VARTYPE</span><span class='PDMOper'>(</span><span class='PDMVar'>loProject</span><span class='PDMOper'>.</span><span class='PDMResP'>PROJECTHOOK</span><span class='PDMOper'>)</span><span class='PDMOper'>=</span><span class='PDMStr'>'O'</span><span class='PDMOper'>;</span>
+<span class='PDMCnt'> 516</span> <span class='PDMInd'> 6</span>       <span class='PDMOper'>AND</span> <span class='PDMOper'>!</span><span class='PDMResF'>ISNULL</span><span class='PDMOper'>(</span><span class='PDMVar'>loProject</span><span class='PDMOper'>.</span><span class='PDMResP'>PROJECTHOOK</span><span class='PDMOper'>)</span><span class='PDMOper'>;</span>
+<span class='PDMCnt'> 517</span> <span class='PDMInd'> 6</span>       <span class='PDMOper'>AND</span> <span class='PDMResF'>PEMSTATUS</span><span class='PDMOper'>(</span><span class='PDMVar'>loProject</span><span class='PDMOper'>.</span><span class='PDMResP'>PROJECTHOOK</span><span class='PDMOper'>,</span><span class='PDMStr'>'glCompileAll'</span><span class='PDMOper'>,</span><span class='PDMLit'>5</span><span class='PDMOper'>)</span> <span class='PDMResK'>THEN</span>
+<span class='PDMCnt'> 518</span> <span class='PDMInd'> 5</span>      <span class='PDMVar'>loProject</span><span class='PDMOper'>.</span><span class='PDMResP'>PROJECTHOOK</span><span class='PDMOper'>.</span><span class='PDMVar'>glCompileAll</span> <span class='PDMOper'>=</span> <span class='PDMVar'>_SCREEN</span><span class='PDMOper'>.</span><span class='PDMVar'>gaProjects</span><span class='PDMOper'>(</span><span class='PDMVar'>lnProj</span><span class='PDMOper'>,</span><span class='PDMLit'>2</span><span class='PDMOper'>)</span>
+<span class='PDMCnt'> 519</span> <span class='PDMInd'> 4</span>     <span class='PDMResK'>ENDIF</span> <span class='PDMCom'>&amp;&amp;VARTYPE(loProject.PROJECTHOOK)='O' AND !ISNULL(loProject.PROJECTHOOK) AND PEMSTATUS(loProject. ...</span>
+<span class='PDMCnt'> 520</span> <span class='PDMInd'>  </span> <span class='PDMCom'>*/SF internal</span>
+<span class='PDMCnt'> 521</span> <span class='PDMInd'> 3</span>    <span class='PDMResK'>ENDIF</span> <span class='PDMCom'>&amp;&amp;llNotFound</span>
+<span class='PDMCnt'> 522</span> <span class='PDMInd'> 2</span>   <span class='PDMResK'>ENDFOR</span> <span class='PDMCom'>&amp;&amp;lnProj</span>
+<span class='PDMCnt'> 523</span> <span class='PDMInd'> 1</span>  <span class='PDMResK'>ENDIF</span> <span class='PDMCom'>&amp;&amp;!ISNULL(_SCREEN.gaProjects(1,1))</span>
+<span class='PDMCnt'> 524</span> <span class='PDMInd'>  </span> 
+<span class='PDMCnt'> 525</span> <span class='PDMInd'> 1</span>  <span class='PDMResF'>REMOVEPROPERTY</span><span class='PDMOper'>(</span><span class='PDMVar'>_SCREEN</span><span class='PDMOper'>,</span><span class='PDMStr'>'gaProjects'</span><span class='PDMOper'>)</span>
+<span class='PDMCnt'> 526</span> <span class='PDMInd'>  </span> 
+<span class='PDMCnt'> 527</span> <span class='PDMInd'> 1</span>  <span class='PDMResK'>CD</span> <span class='PDMOper'>(</span><span class='PDMVar'>_SCREEN</span><span class='PDMOper'>.</span><span class='PDMVar'>gcOld_Path</span><span class='PDMOper'>)</span>
+<span class='PDMCnt'> 528</span> <span class='PDMInd'> 1</span>  <span class='PDMResF'>REMOVEPROPERTY</span><span class='PDMOper'>(</span><span class='PDMVar'>_SCREEN</span><span class='PDMOper'>,</span><span class='PDMStr'>'gcOld_Path'</span><span class='PDMOper'>)</span>
+<span class='PDMCnt'> 529</span> <span class='PDMInd'>  </span> 
+<span class='PDMCnt'> 530</span> <span class='PDMInd'> 1</span>  <span class='PDMVar'>SwitchErrorHandler</span><span class='PDMOper'>(</span><span class='PDMLit'>.F.</span><span class='PDMOper'>)</span></pre>
+ <!-- Code End -->
+  </div>
+ </div>
+</div>
+<div class="diaxp_mfoot"> <div class="PDM_AB_CopyRight"><!-- Footer Begin -->
+  <hr />
+  <div class="PDM_AB_Body">
+<i>&copy; 19.4.2015 Lutz Scheffler Software Ingenieurb&uuml;ro</i>
+  </div><!-- Body End -->
+ </div><!-- Footer End -->
+</div>
+<script language="JavaScript" type="text/javascript">
+lo=document.getElementById("TX_SP_P4");
+lo.XType="SourceCode";
+lo.Dir="../../imgs/";
+
+
+</script>
+</body>
+</html>
