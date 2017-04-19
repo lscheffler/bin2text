@@ -16,7 +16,7 @@
 <body>
 <div class="diaxp_mhead">git_bash Procedure</div>
 <div class="diaxp_mbody">
-<!-- Created with _diamp_pdm_ab by Agnes Beste    04.12.2015 07:12 -->
+<!-- Created with _diamp_pdm_ab by Agnes Beste    05.01.2016 13:27 -->
  <div class="PDM_AB_Descr"><!-- Descr Begin -->
 Run <i>git bash</i> for current directory.
  </div><!-- Descr End -->
@@ -33,18 +33,23 @@ Run <i>git bash</i> for current directory.
   </div><!-- Colour End -->
  </div><!-- Syntax End -->
 
- <div class="PDM_AB_Remarks"><!-- Remarks Begin -->
+ <div class="PDM_AB_Changes"><!-- Changes Begin -->
+  <hr />
   <span class="PDM_AB_Head">
-   Remarks
+   Changes
   </span>
   <div class="PDM_AB_Body">
-
-This is experimental. <i>git bash</i> works not as expected.
+   <span class="Change_Time">
+    05.01.2016 12:50
+   </span><br />
+Changed by: SF<br />
+	Better call for git bash without additional windows.
+	
   </div>
- </div><!-- Remarks End -->
+ </div><!-- Changes End -->
 
 
-<!-- /Created with _diamp_pdm_ab by Agnes Beste    04.12.2015 07:12 -->
+<!-- /Created with _diamp_pdm_ab by Agnes Beste    05.01.2016 13:27 -->
 
  <div class="SC">
   <img onclick="ExpandSC('SP_P7',-1);" class="imgEC" src="../../imgs/dotab.gif" alt="Expand/Collapse source code of procedure git_bash" id="IMG_SP_P7" />
@@ -58,10 +63,15 @@ This is experimental. <i>git bash</i> works not as expected.
 <span class='PDMCnt'> 947</span> <span class='PDMInd'> 2</span>   <span class='PDMVar'>lc_Git</span> <span class='PDMResK'>AS</span> <span class='PDMResK'>CHARACTER</span>
 <span class='PDMCnt'> 948</span> <span class='PDMInd'>  </span> 
 <span class='PDMCnt'> 949</span> <span class='PDMInd'> 1</span>  <span class='PDMVar'>lcPath</span> <span class='PDMOper'>=</span> <span class='PDMResF'>ADDBS</span><span class='PDMOper'>(</span><span class='PDMResF'>FULLPATH</span><span class='PDMOper'>(</span><span class='PDMResF'>CURDIR</span><span class='PDMOper'>(</span><span class='PDMOper'>)</span><span class='PDMOper'>)</span><span class='PDMOper'>)</span>
-<span class='PDMCnt'> 950</span> <span class='PDMInd'>  </span> 
-<span class='PDMCnt'> 951</span> <span class='PDMInd'> 1</span>  <span class='PDMResK'>IF</span> <span class='PDMVar'>Get_git_Path</span><span class='PDMOper'>(</span><span class='PDMOper'>@</span><span class='PDMVar'>lc_Git</span><span class='PDMOper'>)</span> <span class='PDMResK'>THEN</span>
-<span class='PDMCnt'> 952</span> <span class='PDMInd'> 2</span>   <span class='PDMVar'>llReturn</span> <span class='PDMOper'>=</span> <span class='PDMVar'>Run_ExtApp</span><span class='PDMOper'>(</span><span class='PDMStr'>'"'</span><span class='PDMOper'>+</span><span class='PDMResF'>FORCEPATH</span><span class='PDMOper'>(</span><span class='PDMStr'>'git-bash.exe'</span><span class='PDMOper'>,</span><span class='PDMResF'>JUSTPATH</span><span class='PDMOper'>(</span><span class='PDMResF'>JUSTPATH</span><span class='PDMOper'>(</span><span class='PDMVar'>lc_Git</span><span class='PDMOper'>)</span><span class='PDMOper'>)</span><span class='PDMOper'>)</span><span class='PDMOper'>+</span><span class='PDMStr'>'" '</span><span class='PDMOper'>,</span><span class='PDMVar'>lcPath</span><span class='PDMOper'>,</span><span class='PDMStr'>'NOR'</span><span class='PDMOper'>,</span><span class='PDMOper'>,</span><span class='PDMLit'>.T.</span><span class='PDMOper'>)</span>
-<span class='PDMCnt'> 953</span> <span class='PDMInd'> 1</span>  <span class='PDMResK'>ENDIF</span> <span class='PDMCom'>&amp;&amp;Get_git_Path(@lc_Git)</span></pre>
+<span class='PDMCnt'> 950</span> <span class='PDMInd'> 1</span>  <span class='PDMResK'>IF</span> <span class='PDMVar'>Get_git_Path</span><span class='PDMOper'>(</span><span class='PDMOper'>@</span><span class='PDMVar'>lc_Git</span><span class='PDMOper'>)</span> <span class='PDMResK'>THEN</span>
+<span class='PDMCnt'> 951</span> <span class='PDMInd'>  </span> <span class='PDMCom'>*!*    Changed by: SF 5.1.2016</span>
+<span class='PDMCnt'> 952</span> <span class='PDMInd'>  </span> 
+<span class='PDMCnt'> 957</span> <span class='PDMInd'>  </span> 
+<span class='PDMCnt'> 958</span> <span class='PDMInd'>  </span> <span class='PDMCom'>*  llReturn = Run_ExtApp('"'+FORCEPATH('git-bash.exe',JUSTPATH(JUSTPATH(lc_Git)))+'" ',lcPath,'NOR',,.T.)</span>
+<span class='PDMCnt'> 959</span> <span class='PDMInd'> 2</span>   <span class='PDMVar'>llReturn</span> <span class='PDMOper'>=</span> <span class='PDMVar'>Run_ExtApp</span><span class='PDMOper'>(</span><span class='PDMStr'>'"'</span><span class='PDMOper'>+</span><span class='PDMResF'>FORCEPATH</span><span class='PDMOper'>(</span><span class='PDMStr'>'bash.exe'</span><span class='PDMOper'>,</span><span class='PDMResF'>FORCEPATH</span><span class='PDMOper'>(</span><span class='PDMStr'>'bin'</span><span class='PDMOper'>,</span><span class='PDMResF'>JUSTPATH</span><span class='PDMOper'>(</span><span class='PDMResF'>JUSTPATH</span><span class='PDMOper'>(</span><span class='PDMVar'>lc_Git</span><span class='PDMOper'>)</span><span class='PDMOper'>)</span><span class='PDMOper'>)</span><span class='PDMOper'>)</span><span class='PDMOper'>+</span><span class='PDMStr'>'" '</span><span class='PDMOper'>,</span><span class='PDMVar'>lcPath</span><span class='PDMOper'>,</span><span class='PDMStr'>'NOR'</span><span class='PDMOper'>,</span><span class='PDMOper'>,</span><span class='PDMLit'>.T.</span><span class='PDMOper'>)</span>
+<span class='PDMCnt'> 960</span> <span class='PDMInd'>  </span> 
+<span class='PDMCnt'> 961</span> <span class='PDMInd'>  </span> <span class='PDMCom'>*!*    /Changed by: SF 5.1.2016</span>
+<span class='PDMCnt'> 962</span> <span class='PDMInd'> 1</span>  <span class='PDMResK'>ENDIF</span> <span class='PDMCom'>&amp;&amp;Get_git_Path(@lc_Git)</span></pre>
  <!-- Code End -->
   </div>
  </div>

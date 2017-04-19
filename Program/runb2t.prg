@@ -930,8 +930,8 @@ ENDFUNC &&InitMenu
 PROCEDURE git_bash		&&run bash
 *!*	<pdm>
 *!*	<descr>Run <i>git bash</i> for current directory.</descr>
-*!*	<remarks>This is experimental. <i>git bash</i> works not as expected.</remarks>
 *!*	<comment>
+*!*	<remarks>This is experimental. <i>git bash</i> works not as expected.</remarks>
 *!*	<retval type=""></retval>
 *!*	<example></example>
 *!*	<seealso>
@@ -947,9 +947,18 @@ PROCEDURE git_bash		&&run bash
   lc_Git AS CHARACTER
 
  lcPath = ADDBS(FULLPATH(CURDIR()))
-
  IF Get_git_Path(@lc_Git) THEN
-  llReturn = Run_ExtApp('"'+FORCEPATH('git-bash.exe',JUSTPATH(JUSTPATH(lc_Git)))+'" ',lcPath,'NOR',,.T.)
+*!*	Changed by: SF 5.1.2016
+*!*	<pdm>
+*!*	<change date="{^2016-01-05,12:50:00}">Changed by: SF<br />
+*!*	Better call for git bash without additional windows.
+*!*	</change>
+*!*	</pdm>
+
+*  llReturn = Run_ExtApp('"'+FORCEPATH('git-bash.exe',JUSTPATH(JUSTPATH(lc_Git)))+'" ',lcPath,'NOR',,.T.)
+  llReturn = Run_ExtApp('"'+FORCEPATH('bash.exe',FORCEPATH('bin',JUSTPATH(JUSTPATH(lc_Git))))+'" ',lcPath,'NOR',,.T.)
+
+*!*	/Changed by: SF 5.1.2016
  ENDIF &&Get_git_Path(@lc_Git)
 ENDPROC &&git_bash
 
