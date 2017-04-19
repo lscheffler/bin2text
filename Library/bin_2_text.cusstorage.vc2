@@ -23,8 +23,8 @@ DEFINE CLASS cusstorage AS custom 		&& The stuff that does the work.
 		*m: storage_close		&& Close the storage file.
 		*m: storage_location		&& Get location for storage file.
 		*m: storage_open		&& Opens the storage file.
-		*m: sync_checksum		&& Test change of checksum (crc32) for a given file (pair)
-		*m: sync_storage		&& Compares a help cursor with the storage table.
+		*m: sync_file		&& Test change of checksum (crc32) for a given file (pair) against the storage table.
+		*m: sync_objects		&& Compares a help cursor with the storage table. Compares objects of a vcx / scx.
 	*</DefinedPropArrayMethod>
 
 	Name = "cusstorage"
@@ -88,37 +88,25 @@ DEFINE CLASS cusstorage AS custom 		&& The stuff that does the work.
 		DO WHILE .T.
 		 DO CASE
 		  CASE lnStep=1   &&test for changes on file (checksum)
-		   llOk = !THIS.Sync_CheckSum('K',tcFile,tlToBin,tcStorage)
+		*llOk - nothing changed on file
+		   llOk = !THIS.Sync_File('K',tcFile,tlToBin,tcStorage)
 		*/  &&lnStep=1  &&test for changes on file (checksum)
 		
-		  CASE lnStep=2  &&Test access
-		   TRY
-		*Was zu testen ist
-		     USE (tcFile) ALIAS scx IN SELECT('scx')
-		    CATCH TO loException
-		* irgendein Problem
-		     llDirty = .T.
-		    FINALLY
-		*
-		   ENDTRY
-		*/   &&lnStep=3 &&Test  access
-		
-		  CASE lnStep=2 AND toSett.n_UseClassPerFile=0   &&Do not split classlib into classlib.class.vc2
-		*Sync_CheckSum was dirty, we are dirty and done
-		   llDirty = .T.
-		
-		*todo:
-		*SET obsolete classlib.class.vc2 records to be deleted
-		   #IF .F. THEN
-		    UPDATE Cur1 SET;
-		     iDirty   = -1,;
-		     tLastUse = DATETIME();
-		     FROM (tcStorage) AS Cur1;
-		     AND Cur1.cFile==tcFile;
-		     AND !EMPTY(Cur1.cObjName)
-		   #ENDIF &&.F.
-		*/
-		*  &&lnStep=2    &&Figure out if this file is to be splitted into classes
+		  CASE lnStep=2 AND toSett.n_UseClassPerFile=0    &&Do not split classlib into classlib.class.vc2
+		*Sync_File was dirty,
+		*this could be one out of two problems
+		*-file is not to be deleted (8,9) - we are not dirty
+		   SELECT;
+		    Cur1.iDirty;
+		    FROM (tcStorage) AS Cur1;
+		    WHERE Cur1.cFile==tcFile;
+		    AND Cur1.cType=='K';
+		    AND Cur1.iDirty IN (8,9)
+		*-if not found we are dirty
+		   llDirty = _TALLY=0
+		* and done
+		   llOk = .T.
+		*/  &&lnStep=2 AND toSett.n_UseClassPerFile=0   &&Do not split classlib into classlib.class.vc2
 		
 		  CASE lnStep=2
 		*just loop
@@ -188,7 +176,7 @@ DEFINE CLASS cusstorage AS custom 		&& The stuff that does the work.
 		   INDEX ON cObjName  TAG _cObj
 		   INDEX ON cUniqueId TAG _cUni
 		
-		   llDirty = THIS.Sync_Storage('k',tcFile,tlToBin,'curSCX',tcStorage)
+		   llDirty = THIS.Sync_Objects('k',tcFile,tlToBin,'curSCX',tcStorage)
 		
 		*/   &&lnStep=2 &&test for changes on classes
 		
@@ -275,25 +263,26 @@ DEFINE CLASS cusstorage AS custom 		&& The stuff that does the work.
 		DO WHILE .T.
 		 DO CASE
 		  CASE lnStep=1   &&test for changes on file (checksum)
-		   llOk = !THIS.Sync_CheckSum('V',tcFile,tlToBin,tcStorage)
+		*llOk - nothing changed on file
+		   llOk = !THIS.Sync_File('V',tcFile,tlToBin,tcStorage)
 		*/  &&lnStep=1  &&test for changes on file (checksum)
 		
-		  CASE lnStep=2 AND toSett.n_UseClassPerFile=0   &&Do not split classlib into classlib.class.vc2
-		*Sync_CheckSum was dirty, we are dirty and done
-		   llDirty = .T.
-		
-		*todo:
-		*SET obsolete classlib.class.vc2 records to be deleted
-		   #IF .F. THEN
-		    UPDATE Cur1 SET;
-		     iDirty   = -1,;
-		     tLastUse = DATETIME();
-		     FROM (tcStorage) AS Cur1;
-		     AND Cur1.cFile==tcFile;
-		     AND !EMPTY(Cur1.cObjName)
-		   #ENDIF &&.F.
-		*/
-		*  &&lnStep=2    &&Figure out if this file is to be splitted into classes
+		  CASE lnStep=2 AND toSett.n_UseClassPerFile=0    &&Do not split classlib into classlib.class.vc2
+		*Sync_File was dirty, we are dirty and done
+		*Sync_File was dirty,
+		*this could be one out of two problems
+		*-file is not to be deleted (8,9) - we are not dirty
+		   SELECT;
+		    Cur1.iDirty;
+		    FROM (tcStorage) AS Cur1;
+		    WHERE Cur1.cFile==tcFile;
+		    AND Cur1.cType=='V';
+		    AND Cur1.iDirty IN (8,9)
+		*-if not found we are dirty
+		   llDirty = _TALLY=0
+		* and done
+		   llOk = .T.
+		*/  &&lnStep=2 AND toSett.n_UseClassPerFile=0  &&Do not split classlib into classlib.class.vc2
 		
 		  CASE lnStep=2
 		*just loop
@@ -363,7 +352,7 @@ DEFINE CLASS cusstorage AS custom 		&& The stuff that does the work.
 		   INDEX ON cObjName  TAG _cObj
 		   INDEX ON cUniqueId TAG _cUni
 		
-		   llDirty = THIS.Sync_Storage('v',tcFile,tlToBin,'curVCX',tcStorage)
+		   llDirty = THIS.Sync_Objects('v',tcFile,tlToBin,'curVCX',tcStorage)
 		
 		*/   &&lnStep=6 &&test for changes on classes
 		
@@ -478,9 +467,9 @@ DEFINE CLASS cusstorage AS custom 		&& The stuff that does the work.
 		 'Code block: '+THIS.CLASS+'.'+tcMethod+0h0d0a+;
 		 'Code line: '+PADL(tnLine,7),;
 		 64,'Ooops, works not as expected.')
-		*!*	DEBUG
-		*!*	SUSPEND
-		*!*	RETRY
+		DEBUG
+		SUSPEND
+		RETRY
 		CANCEL
 		
 		*!*	<pdm>
@@ -516,6 +505,7 @@ DEFINE CLASS cusstorage AS custom 		&& The stuff that does the work.
 		 taFiles,;
 		 tcPath,;
 		 tlToBin,;
+		 tlCheckAll,;
 		 tcStorage,;
 		 toConverter
 		
@@ -536,6 +526,14 @@ DEFINE CLASS cusstorage AS custom 		&& The stuff that does the work.
 		*!*	<short>Direction.</short>
 		*!*	<detail>If <expr>.T.</expr> files changed and new will be set as unmodified.</detail>
 		*!*	</params>
+		*!*	<params name="tlCheckAll" type="Boolean" byref="0" dir="" inb="0" outb="0">
+		*!*	<short>Check existence of files.</short>
+		*!*	<detail>
+		*<p>Checks if all files listed in <pdmpara num="5" /> are used in <pdmpara num="1" />.</p>
+		*<p>If a file is not found, text file corresponding will be deleted.</p>
+		*<p>Only if <b>Delete obsolete files</b> is checked in settings dialog.</p>
+		*</detail>
+		*!*	</params>
 		*!*	<params name="tcStorage" type="Character" byref="0" dir="" inb="0" outb="0">
 		*!*	<short>Table to store actual values.</short>
 		*!*	<detail></detail>
@@ -550,9 +548,16 @@ DEFINE CLASS cusstorage AS custom 		&& The stuff that does the work.
 		*<p>The actual state will be stored in a file <b>Bin2Txt.DBF</b> in <pdmpara num="2" /> path.</p>
 		*<p>This file will hold information about any object of a vcx and information about scx.</p>
 		*<p>The function will not handle any <b>source</b> file not found in the Array.</p>
-		*<p>It is possible to remove splitted classes text file if the class is removed from an vcx. <note id="I">Not implemented yet.</note></p>
+		*<p>It is possible to delete splitted classes text file if the class is removed from an scx /vcx.</p>
+		*<p>If <pdmpara num="4" /> is true, text files for binary files removed might be deleted too.</p>
 		*</remarks>
-		*!*	<copyright><i>&copy; 14.4.2015 Lutz Scheffler Software Ingenieurbüro</i></copyright>
+		*!*	<copyright><i>&copy; 5.6.2015 Lutz Scheffler Software Ingenieurbüro</i></copyright>
+		*!*	</pdm>
+		
+		*!*	<pdm>
+		*!*	<change date="{^2015-06-04,11:19:00}">Changed by: SF<br />
+		*!*	New parameter <pdmpara num="4" />
+		*!*	</change>
 		*!*	</pdm>
 		
 		EXTERNAL ARRAY;
@@ -571,7 +576,30 @@ DEFINE CLASS cusstorage AS custom 		&& The stuff that does the work.
 		 lnLines,;
 		 lnInPut
 		
-		*todo: processing of texttobin, because the otherway around
+		*!*	Changed by: SF 4.6.2015
+		*!*	<pdm>
+		*!*	<change date="{^2015-06-04,11:31:00}">Changed by: SF<br />
+		*!*	Handle deletion of obsolete text files for binaries.
+		*!*	</change>
+		*!*	</pdm>
+		
+		 IF tlCheckAll THEN
+		*we clean up now, because of post-processing
+		*we clean up deleted now, because of post-processing
+		 DELETE Cur1;
+		  FROM (tcStorage) AS Cur1;
+		  WHERE Cur1.iDirty=-2
+		
+		*check obsolete files
+		 UPDATE Cur1 SET;
+		  iDirty   = -1,;
+		  tLastUse = DATETIME();
+		  FROM (tcStorage) AS Cur1;
+		  WHERE !EMPTY(Cur1.cFile);
+		  AND Cur1.cType IN ('V','v','R','M','d','D','P','B','K','k')
+		ENDIF &&tlCheckAll
+		*!*	/Changed by: SF 4.6.2015
+		
 		lnDirty = 0
 		FOR lnLine = lnLines TO 1 STEP -1
 		 lcFile  = taFiles(lnLine,1)
@@ -593,17 +621,17 @@ DEFINE CLASS cusstorage AS custom 		&& The stuff that does the work.
 		   loSett  = THIS.OGet_Setting(JUSTPATH(lcFile),toConverter)
 		   llDirty = THIS.Check_VCX(UPPER(lcFile),tcPath,tlToBin,tcStorage,loSett)
 		  CASE UPPER(JUSTEXT(lcFile))=="FRX"
-		   llDirty = THIS.Sync_CheckSum('R',UPPER(lcFile),tlToBin,tcStorage)
+		   llDirty = THIS.Sync_File('R',UPPER(lcFile),tlToBin,tcStorage)
 		  CASE UPPER(JUSTEXT(lcFile))=="MNX"
-		   llDirty = THIS.Sync_CheckSum('M',UPPER(lcFile),tlToBin,tcStorage)
+		   llDirty = THIS.Sync_File('M',UPPER(lcFile),tlToBin,tcStorage)
 		  CASE UPPER(JUSTEXT(lcFile))=="DBF"
-		   llDirty = THIS.Sync_CheckSum('d',UPPER(lcFile),tlToBin,tcStorage)
+		   llDirty = THIS.Sync_File('d',UPPER(lcFile),tlToBin,tcStorage)
 		  CASE UPPER(JUSTEXT(lcFile))=="DBC"
-		   llDirty = THIS.Sync_CheckSum('D',UPPER(lcFile),tlToBin,tcStorage)
+		   llDirty = THIS.Sync_File('D',UPPER(lcFile),tlToBin,tcStorage)
 		  CASE UPPER(JUSTEXT(lcFile))=="PJX"
-		   llDirty = THIS.Sync_CheckSum('P',UPPER(lcFile),tlToBin,tcStorage)
+		   llDirty = THIS.Sync_File('P',UPPER(lcFile),tlToBin,tcStorage)
 		  CASE UPPER(JUSTEXT(lcFile))=="LBX"
-		   llDirty = THIS.Sync_CheckSum('B',UPPER(lcFile),tlToBin,tcStorage)
+		   llDirty = THIS.Sync_File('B',UPPER(lcFile),tlToBin,tcStorage)
 		  CASE UPPER(JUSTEXT(lcFile))=="SCX"
 		   loSett  = THIS.OGet_Setting(JUSTPATH(lcFile),toConverter)
 		   llDirty = THIS.Check_SCX(UPPER(lcFile),tcPath,tlToBin,tcStorage,loSett)
@@ -872,7 +900,8 @@ DEFINE CLASS cusstorage AS custom 		&& The stuff that does the work.
 		LPARAMETERS;
 		 taFiles,;
 		 tlToBin,;
-		 tcMode
+		 tcMode,;
+		 tlCheckAll
 		
 		*!*	<pdm>
 		*!*	<descr>Process all files of a given Array.</descr>
@@ -906,21 +935,37 @@ DEFINE CLASS cusstorage AS custom 		&& The stuff that does the work.
 		*<p></p>
 		*</detail>
 		*!*	</params>
+		*!*	<params name="tlCheckAll" type="Boolean" byref="0" dir="" inb="0" outb="0">
+		*!*	<short>Check existence of files.</short>
+		*!*	<detail>
+		*<p>Checks if all files listed in <pdmpara num="1" /> are used.</p>
+		*<p>If a file is not found, text file corresponding will be deleted.</p>
+		*<p>Only if <b>Delete obsolete files</b> is checked in settings dialog.</p>
+		*</detail>
+		*!*	</params>
 		*!*	<retval type="Boolean">Returns succcess of operation.</retval>
 		*!*	<remarks>
 		*<b>This is the main method. What makes it different from a plain call to FoxBin2Prg is:</b>
 		*<ul>
 		* <li>Accepts a mixed array of files. (including whole PJX) </li>
 		* <li>Can limit the Bin2Text operation to dirty files only.</li>
-		* <li>Can delete obsolete classfiles in ClassPerFile operations. (Not implemented yet)</li>
+		* <li>Can delete obsolete class files in ClassPerFile operations.</li>
+		* <li>Can delete obsolete files for removed binaries if <pdmpara num="4" />.</li>
 		*</ul>
 		*<p>If text to binary, it just passes the files to FoxBin2Prg</p>
 		*<p>Creating text files, depending on a setting, it first let check FoxBin2Prg what to do.
 		* IOW what files are included in the process.</p>
 		*<p>Then it calls for <see pem="FilesToProcess" /> to see if files are changed.
 		* Only files marked as dirty will be processed.</p>
+		*<p>A postprocess will delete / remove obsolete text files.</p>
 		*!*	</remarks>
 		*!*	<copyright><i>&copy; 19.4.2015 Lutz Scheffler Software Ingenieurbüro</i></copyright>
+		*!*	</pdm>
+		
+		*!*	<pdm>
+		*!*	<change date="{^2015-06-05,11:19:00}">Changed by: SF<br />
+		*!*	New parameter <pdmpara num="4" />
+		*!*	</change>
 		*!*	</pdm>
 		
 		EXTERNAL ARRAY;
@@ -932,6 +977,7 @@ DEFINE CLASS cusstorage AS custom 		&& The stuff that does the work.
 		 lcPath      AS CHARACTER,;
 		 lcSourceExt AS CHARACTER,;
 		 lcStorage   AS CHARACTER,;
+		 lcTarget    AS CHARACTER,;
 		 lnFile      AS NUMBER,;
 		 lnFiles     AS NUMBER,;
 		 lnOffset    AS NUMBER,;
@@ -957,7 +1003,7 @@ DEFINE CLASS cusstorage AS custom 		&& The stuff that does the work.
 		 lnFiles,;
 		 lnOffsets
 		
-		lcMode = IIF(tlToBin,"PRG2BIN","BIN2PRG") 
+		lcMode = IIF(tlToBin,"PRG2BIN","BIN2PRG")
 		
 		*process sourcefiles
 		FOR lnFile = 1 TO lnFiles
@@ -1082,10 +1128,10 @@ DEFINE CLASS cusstorage AS custom 		&& The stuff that does the work.
 		* !maxiloop and !isnull(storage) -> just process files
 		* maxiloop (nur wenn !ISNULL(storage!!)) and processfiles -> run partial
 		*maxiloop and isnull(storage)
-		
+		*SET STEP ON
 		  IF !llMaxiLoop AND !ISNULL(lcStorage) THEN
 		*Complet convert is done, just store result
-		   THIS.FilesToProcess(@laFiles2,lcPath,tlToBin,lcStorage,loConverter)
+		   THIS.FilesToProcess(@laFiles2,lcPath,tlToBin,tlCheckAll,lcStorage,loConverter)
 		*but if we create binaries we may have still undone stuff like new hooks
 		   IF tlToBin THEN
 		    DIMENSION;
@@ -1116,7 +1162,7 @@ DEFINE CLASS cusstorage AS custom 		&& The stuff that does the work.
 		    ENDFOR &&lnFile
 		
 		    IF lnOffset>0 THEN
-		ACTIVATE SCREEN
+		     ACTIVATE SCREEN
 		     ?"post process projcet hooks"
 		     llFound = THIS.Convert(@laFiles2,.T.,loConverter,lnFiles)
 		
@@ -1124,13 +1170,13 @@ DEFINE CLASS cusstorage AS custom 		&& The stuff that does the work.
 		      laFiles2(1,1)
 		*just rework hooks in storage table
 		     IF loConverter.Get_Processed(@laFiles2)#0 THEN
-		      THIS.FilesToProcess(@laFiles2,lcPath,tlToBin,lcStorage,loConverter)
+		      THIS.FilesToProcess(@laFiles2,lcPath,tlToBin,.F.,lcStorage,loConverter)
 		     ENDIF &&loConverter.Get_Processed(@laFiles2)#0
 		    ENDIF &&lnOffset>0
 		
 		   ENDIF &&tlToBin
 		  ELSE  &&!llMaxiLoop AND !ISNULL(lcStorage)
-		   llProcess = THIS.FilesToProcess(@laFiles2,lcPath,tlToBin,lcStorage,loConverter)
+		   llProcess = THIS.FilesToProcess(@laFiles2,lcPath,tlToBin,tlCheckAll,lcStorage,loConverter)
 		   DO CASE
 		    CASE ISNULL(llProcess)
 		*need to process all files -> just let FoxBin2PRG do, faster.
@@ -1147,7 +1193,73 @@ DEFINE CLASS cusstorage AS custom 		&& The stuff that does the work.
 		     ENDFOR &&lnFile
 		     llFound = THIS.Convert(@laFiles2,.T.,loConverter,lnOffsets)
 		   ENDCASE
+		
 		  ENDIF &&!llMaxiLoop AND !ISNULL(lcStorage)
+		*!*	Changed by: SF 4.6.2015
+		*!*	<pdm>
+		*!*	<change date="{^2015-06-04,11:40:00}">Changed by: SF<br />
+		*!*	Code to delte / backup text files no more needed.
+		*!*	</change>
+		*!*	</pdm>
+		 
+		  IF _SCREEN.gcB2T_Delete=="1" THEN
+		*Delete obsolete classes from classlibs
+		   SELECT (lcStorage)
+		*sfx todo SQL
+		   SCAN FOR iDirty=-1
+		
+		    loSett      = THIS.oGet_Setting(JUSTPATH(cFile),loConverter)
+		    lcSourceExt = UPPER(JUSTEXT(cFile))
+		
+		    DO CASE
+		     CASE UPPER(lcSourceExt)=="VCX"
+		      lcSourceExt = loSett.c_VC2
+		     CASE UPPER(lcSourceExt)=="FRX"
+		      lcSourceExt = loSett.c_FR2
+		     CASE UPPER(lcSourceExt)=="MNX"
+		      lcSourceExt = loSett.c_MN2
+		     CASE UPPER(lcSourceExt)=="DBF"
+		      lcSourceExt = loSett.c_DB2
+		     CASE UPPER(lcSourceExt)=="DBC"
+		      lcSourceExt = loSett.c_DC2
+		     CASE UPPER(lcSourceExt)=="PJX"
+		      lcSourceExt = loSett.c_PJ2
+		     CASE UPPER(lcSourceExt)=="LBX"
+		      lcSourceExt = loSett.c_LB2
+		     CASE UPPER(lcSourceExt)=="SCX"
+		      lcSourceExt = loSett.c_CC2
+		     OTHERWISE
+		      LOOP
+		    ENDCASE
+		
+		    lcFile = JUSTPATH(cFile)+'\'+JUSTSTEM(cFile)+'.'+;
+		     EVL(FORCEEXT(ALLTRIM(cObjName),lcSourceExt),lcSourceExt)
+		
+		    DO CASE
+		     CASE !FILE(lcFile)
+		*nothing found, nothing to do
+		     CASE loSett.n_ExtraBackupLevels>0
+		*Backup (only one level deep)
+		      lcSourceExt = lcSourceExt+'.Del.Bak'
+		      lcTarget = JUSTPATH(cFile)+'\'+JUSTSTEM(cFile)+'.'+;
+		       EVL(FORCEEXT(ALLTRIM(cObjName),lcSourceExt),lcSourceExt)
+		
+		      IF FILE(lcTarget) THEN
+		       DELETE FILE &lcTarget
+		      ENDIF &&FILE(lcTarget)
+		      RENAME &lcFile TO &lcTarget
+		
+		     OTHERWISE
+		*Delete
+		      DELETE FILE &lcFile
+		    ENDCASE
+		*sfx todo SQL
+		    REPLACE;
+		     iDirty WITH -2
+		   ENDSCAN &&iDirty=-1
+		  ENDIF &&_SCREEN.gcB2T_Delete=="1"
+		*!*	/Changed by: SF 4.6.2015
+		
 		 ENDIF &&loConverter.Get_Processed(@laFiles2)#0
 		ENDIF &&llFound
 		
@@ -1484,6 +1596,7 @@ DEFINE CLASS cusstorage AS custom 		&& The stuff that does the work.
 		
 		IF USED(NVL(tcStorage,'')) THEN
 		 IF tlReset THEN
+		*reset heart beat
 		  UPDATE Cur1 SET;
 		   iDirty    = 0,;
 		   tLastUse  = DATETIME();
@@ -1651,10 +1764,21 @@ DEFINE CLASS cusstorage AS custom 		&& The stuff that does the work.
 		*   	<p>Marks an item as dirty from last run.</p>
 		*    <table border="1" cellspacing="0">
 		*     <tr><td colspan="2">Source; cType IN (d,D,K,B,M,R,V,v,k)</td></tr>
+		*     <tr>
+		*       <td>8</td>
+		*       <td>
+		*        Not deleted on last cleanup (full run with delete obsolete files)
+		*        w/o any other action.
+		*      </td>
+		*     </tr>
+		*     <tr><td>4</td><td>New</td></tr>
+		*     <tr><td>2</td><td>Changed</td></tr>
+		*     <tr><td>1</td><td>Direction to binaray. Additional to other positives</td></tr>
 		*     <tr><td>0</td><td>0k</td></tr>
-		*     <tr><td>-1</td><td>Deleted</td></tr>
-		*     <tr><td>1</td><td>Changed</td></tr>
-		*     <tr><td>2</td><td>Added</td></tr>
+		*     <tr><td>-1</td><td>to delete</td></tr>
+		*     <tr><td>-2</td><td>deleted</td></tr>
+		*     <tr><td>-3</td><td>dirty by heart beat</td></tr>
+		*     <tr><td>-4</td><td>dirty by watch dog (time)</td></tr>
 		*     <tr><td colspan="2">Heart beat</td></tr>
 		*     <tr><td>0</td><td>ok</td></tr>
 		*     <tr><td><b>1</b></td><td><b>Error. Do not compare, process all.</b></td></tr>
@@ -1678,7 +1802,7 @@ DEFINE CLASS cusstorage AS custom 		&& The stuff that does the work.
 		*!*	</comment>
 		*!*	<copyright><i>&copy; 19.4.2015 Lutz Scheffler Software Ingenieurbüro</i></copyright>
 		*!*	</pdm>
-		 
+		
 		LOCAL;
 		 llError     AS BOOLEAN,;
 		 loException AS EXCEPTION
@@ -1763,28 +1887,28 @@ DEFINE CLASS cusstorage AS custom 		&& The stuff that does the work.
 		 AND Cur1.cType=="X"
 		
 		IF RECCOUNT()=0 THEN
-		*remmove old files, anything else as unchanged
-		 DELETE Cur1;
-		  FROM Storage AS Cur1;
-		  WHERE tLastUse<=GOMONTH(DATETIME(),-3);
-		  AND !(cType=="X";
-		  OR cType=="S")
-		
+		*mark old files for reprocess
 		 UPDATE Cur1 SET;
-		  iDirty    = 0;
+		  iDirty    = -4;
 		  FROM Storage AS Cur1;
-		  WHERE !(cType=="X";
-		  OR cType=="S")
+		  WHERE Cur1.tLastUse<=GOMONTH(DATETIME(),-3);
+		  AND !(Cur1.cType=="X";
+		  OR Cur1.cType=="S")
+		
 		ELSE  &&RECCOUNT()=0
 		*heart misses a beat, all dirty
-		 DELETE Cur1;
+		 UPDATE Cur1 SET;
+		  iDirty    = -3;
 		  FROM Storage AS Cur1;
-		  WHERE !(cType=="X";
-		  OR cType=="S")
+		  WHERE Cur1.tLastUse<=GOMONTH(DATETIME(),-3);
+		  AND !(Cur1.cType=="X";
+		  OR Cur1.cType=="S")
+		
 		ENDIF &&RECCOUNT()=0
 		
 		USE IN curHelp
 		
+		*Set heart beat
 		UPDATE Cur1 SET;
 		 iDirty    = 1,;
 		 tLastUse  = DATETIME();
@@ -1795,7 +1919,7 @@ DEFINE CLASS cusstorage AS custom 		&& The stuff that does the work.
 		
 	ENDPROC
 
-	PROCEDURE sync_checksum		&& Test change of checksum (crc32) for a given file (pair)
+	PROCEDURE sync_file		&& Test change of checksum (crc32) for a given file (pair) against the storage table.
 		LPARAMETERS;
 		 tcType,;
 		 tcFile,;
@@ -1823,14 +1947,16 @@ DEFINE CLASS cusstorage AS custom 		&& The stuff that does the work.
 		*!*	<retval type="Boolean"><pdmpara num="2" /> is changed.</retval>
 		*!*	<remarks>
 		*<p>The method calculates the checksum for the file and it's. memo file.</p>
-		*<p>this will be compared with <pdmpara num="3" /> to determin if the file is changed and need to be reprocessed.</p>
+		*<p>This will be compared with <pdmpara num="4" /> to determine if the file is changed and need to be reprocessed.</p>
 		*</remarks>
 		*!*	<copyright><i>&copy; 14.4.2015 Lutz Scheffler Software Ingenieurbüro</i></copyright>
 		*!*	</pdm>
 		
 		LOCAL;
-		 lcTemp  AS CHARACTER,;
-		 llDirty AS BOOLEAN
+		 lcTemp   AS CHARACTER,;
+		 lnStep   AS NUMBER,;
+		 llDirty  AS BOOLEAN,;
+		 llRecall AS BOOLEAN
 		
 		* we do not process the index since it will change with the data anyway.
 		* I'm  not shure with the memo, my guess is it will alter the table too but I'm to lazy to check :)
@@ -1853,58 +1979,146 @@ DEFINE CLASS cusstorage AS custom 		&& The stuff that does the work.
 		  lcTemp = FORCEEXT(tcFile,'sct')
 		ENDCASE
 		
-		IF FILE(lcTemp) THEN
-		 lcTemp = SYS(2007,FILETOSTR(tcFile)+FILETOSTR(lcTemp),1)
-		ELSE  &&FILE(lcTemp)
-		 lcTemp = SYS(2007,FILETOSTR(tcFile),1)
-		ENDIF &&FILE(lcTemp)
+		*set anything "ok" that was processed by last run
+		lnDirty = IIF(tlToBin,1,0)
+		UPDATE Cur1 SET;
+		 iDirty   = lnDirty,;
+		 tLastUse = DATETIME();
+		 FROM (tcStorage) AS Cur1;
+		 WHERE Cur1.cFile==tcFile;
+		 AND Cur1.cType==tcType;
+		 AND Cur1.iDirty>=0
 		
+		*!*	Changed by: SF 5.6.2015
+		*!*	<pdm>
+		*!*	<change date="{^2015-06-05,13:09:00}">Changed by: SF<br />
+		*!*	do not deltet  a file mark for delation (because it is not obsolete)
+		*!*	</change>
+		*!*	</pdm>
+		
+		*set files marked as "to delete" by "all cleanup" as "not to delete"
+		*because file possibly exists (no existing will be parsed out below)
+		lnDirty = IIF(tlToBin,9,8)
+		UPDATE Cur1 SET;
+		 iDirty    = lnDirty,;
+		 tLastUse  = DATETIME();
+		 FROM (tcStorage) AS Cur1;
+		 WHERE Cur1.cFile==tcFile;
+		 AND Cur1.cType==tcType;
+		 AND Cur1.iDirty=-1
+		
+		*!*	/Changed by: SF 5.6.2015
+		
+		*only to process per class, iff UseClassPerFile
+		llRecall = INLIST(tcType,'V','K') AND _TALLY>0
+		
+		*create data
 		SELECT;
-		 cur1.cUniqueId;
-		 FROM (tcStorage) AS cur1;
+		 Cur1.cUniqueId,;
+		 Cur1.iDirty;
+		 FROM (tcStorage) AS Cur1;
 		 INTO CURSOR curHelp;
-		 WHERE cur1.cFile==tcFile;
-		 AND cur1.cType==tcType
+		 WHERE Cur1.cFile==tcFile;
+		 AND Cur1.cType==tcType
 		
-		DO CASE
-		 CASE  RECCOUNT()=0  &&unknown, create
-		  llDirty = True
+		lnStep  = 1
+		DO WHILE .T.
+		 DO CASE
+		  CASE lnStep=1 AND RECCOUNT()=0   &&unknown, create
+		   llDirty = True
 		
-		  lnDirty = IIF(tlToBin,0,2)
-		  INSERT INTO (tcStorage);
-		   (cType, cFile, cUniqueId, iDirty, tLastUse);
-		   VALUES;
-		   (tcType, tcFile, lcTemp, lnDirty, DATETIME())
+		   lnDirty = IIF(tlToBin,5,4)
+		   INSERT INTO (tcStorage);
+		    (cType, cFile, cUniqueId, iDirty, tLastUse);
+		    VALUES;
+		    (tcType, tcFile, lcTemp, lnDirty, DATETIME())
+		*/  &&lnStep=1 AND RECCOUNT()=0  &&unknown, create
 		
-		*/ &&RECCOUNT()=0 &&unknown, create
+		  CASE lnStep=1    &&just loop
+		*/  &&lnStep=1   &&just loop
 		
-		 CASE  !TRIM(cUniqueId)==lcTemp   &&changed, update
-		  llDirty = True
+		  CASE lnStep=2 AND INLIST(iDirty,-3,-4)	  &&file is marked as dirty, process dirty
+		   llDirty = True
 		
-		  lnDirty = IIF(tlToBin,0,1)
-		  UPDATE cur1 SET;
-		   cUniqueId = lcTemp,;
-		   iDirty    = lnDirty,;
-		   tLastUse  = DATETIME();
-		   FROM (tcStorage) AS cur1;
-		   WHERE cur1.cFile==tcFile;
-		   AND cur1.cType==tcType
+		   lnDirty = IIF(tlToBin,3,2)
+		   UPDATE Cur1 SET;
+		    cUniqueId = lcTemp,;
+		    iDirty    = lnDirty,;
+		    tLastUse  = DATETIME();
+		    FROM (tcStorage) AS Cur1;
+		    WHERE Cur1.cFile==tcFile;
+		    AND Cur1.cType==tcType
+		*/ &&lnStep=2 AND INLIST(iDirty,-3,-4)  &&file is marked as dirty, process dirty
 		
-		*/ &&!cUniqueId==lcTemp  &&changed, update
+		  CASE lnStep=2    &&just loop
+		*/  &&lnStep=2   &&just loop
 		
-		 OTHERWISE
+		  CASE lnStep=3	 	&&get file checksum
+		*!*	Changed by: SF 20.5.2015
+		*!*	<pdm>
+		*!*	<change date="{^2015-05-20,06:44:00}">Changed by SF<br />
+		*!*	Checksum changed to CRC32
+		*!*	</change>
+		*!*	</pdm>
+		
+		*!*	Changed by: SF 4.6.2015
+		*!*	<pdm>
+		*!*	<change date="{^2015-06-04,11:00:00}">Changed by: SF<br />
+		*!*	Ignore the first 4 bytes of a table. (means: bytes 1-3)
+		*VFP seems to alter <i>Last update</i> on compile. If the rest of the table is not changed, we can ignore this.
+		*!*	</change>
+		*!*	</pdm>
+		
+		   IF FILE(lcTemp) THEN
+		    lcTemp = SYS(2007,SUBSTR(FILETOSTR(tcFile),5)+FILETOSTR(lcTemp),0,1)
+		   ELSE  &&FILE(lcTemp)
+		    lcTemp = SYS(2007,SUBSTR(FILETOSTR(tcFile),5),0,1)
+		   ENDIF &&FILE(lcTemp)
+		
+		*!*	IF FILE(lcTemp) THEN
+		*!*	 lcTemp = SYS(2007,FILETOSTR(tcFile)+FILETOSTR(lcTemp),0,1)
+		*!*	ELSE  &&FILE(lcTemp)
+		*!*	 lcTemp = SYS(2007,FILETOSTR(tcFile),0,1)
+		*!*	ENDIF &&FILE(lcTemp)
+		
+		*!*	/Changed by: SF 4.6.2015
+		*!*	/Changed by SF 20.5.2015
+		*/	&&lnStep=3 	&&get file checksum
+		
+		  CASE lnStep=4 AND !TRIM(cUniqueId)==lcTemp   	 	&&changed, process dirty
+		   llDirty = True
+		
+		   lnDirty = IIF(tlToBin,3,2)
+		   UPDATE Cur1 SET;
+		    cUniqueId = lcTemp,;
+		    iDirty    = lnDirty,;
+		    tLastUse  = DATETIME();
+		    FROM (tcStorage) AS Cur1;
+		    WHERE Cur1.cFile==tcFile;
+		    AND Cur1.cType==tcType
+		*/  &&lnStep=4 AND !TRIM(cUniqueId)==lcTemp  	 	&&changed, process dirty
+		
+		  OTHERWISE
 		*ok
-		  llDirty = False
-		ENDCASE
+		   llDirty = False
+		   EXIT
+		 ENDCASE
+		
+		 IF llDirty THEN
+		  EXIT
+		 ELSE  &&llDirty
+		  lnStep = lnStep+1
+		 ENDIF &&llDirty
+		ENDDO &&.T.
 		
 		USE IN SELECT('curHelp')
 		
 		*For one or the other reason. reprocess
-		RETURN llDirty
+		RETURN llDirty OR llRecall
 		
 	ENDPROC
 
-	PROCEDURE sync_storage		&& Compares a help cursor with the storage table.
+	PROCEDURE sync_objects		&& Compares a help cursor with the storage table. Compares objects of a vcx / scx.
 		LPARAMETERS;
 		 tcType,;
 		 tcFile,;
@@ -1939,8 +2153,14 @@ DEFINE CLASS cusstorage AS custom 		&& The stuff that does the work.
 		*<p>To scx / vcx files</p>
 		*<p>This will compare the actual timestamps and uniqueeid. If anything is changed the item will be marked.</p>
 		*<p>Any mark will set the file is dirty and the function returns <expr>.T.</expr>.</p>
-		*The iDirty column will be set: 0 :no change, -1: class of library deleted, 1: item (class of vcx or scx) changed,
-		*2 new item (class of vcx or scx).</p>
+		*<p>The iDirty (see <see pem="Storage_Open"/>) column will be set to(positive odds are a result of <pdmpara num="3" /> is true):</p>
+		*<dl>
+		*<dt>8/9</dt><dd>File marked by global cleanup is not to delete.</dd>
+		*<dt>4/5</dt><dd>new</dd>
+		*<dt>2/3</dt><dd>changed</dd>
+		*<dt>0/1</dt><dd>no change</dd>
+		*<dt>-1</dt><dd>ClassPerFile is to be deleted.</dd>
+		*</dl>
 		*<p>Type of operation as set by SCCTEXT.prg with additional flag. See <see pem="Storage_Open"/>.</p>
 		*<p>
 		*<dl>
@@ -1957,7 +2177,7 @@ DEFINE CLASS cusstorage AS custom 		&& The stuff that does the work.
 		* <dt>v</dt><dd>Class of vcx</dd>
 		* <dt>k</dt><dd>Object of scx</dd>
 		*</dl>
-		* This method basically deals with classes.</p>
+		* This method basically deals with classes of vcx files and objects of scx files.</p>
 		*</remarks>
 		*!*	<comment>
 		*!*	<example></example>
@@ -1985,21 +2205,35 @@ DEFINE CLASS cusstorage AS custom 		&& The stuff that does the work.
 		*beautify off
 		 TEXT
 		#ENDIF &&.F.
-		*we clean up now, because of post-processing
-		*we clean up deleted now, because of post-processing
-		DELETE Cur1;
-		 FROM (tcStorage) AS Cur1;
-		 WHERE Cur1.iDirty<0;
-		 AND Cur1.cFile==tcFile;
-		 AND Cur1.cType==tcType
 		
-		*set anything is known
+		*set anything "ok" that was processed by last run
+		lnDirty = IIF(tlToBin,1,0)
 		UPDATE Cur1 SET;
-		 iDirty   = 0,;
+		 iDirty   = lnDirty,;
 		 tLastUse = DATETIME();
 		 FROM (tcStorage) AS Cur1;
 		 WHERE Cur1.cFile==tcFile;
-		  AND Cur1.cType==tcType
+		  AND Cur1.cType==tcType;
+		  AND Cur1.iDirty>=0
+		  
+		*!*	Changed by: SF 5.6.2015
+		*!*	<pdm>
+		*!*	<change date="{^2015-06-05,13:09:00}">Changed by: SF<br />
+		*!*	do not deltet  a file mark for delation (because it is not automatic obsolete)
+		*!*	</change>
+		*!*	</pdm>
+		
+		*set files marked as "to delete" by "all cleanup" as "not to delete"
+		*because file exists
+		lnDirty = IIF(tlToBin,9,8)
+		UPDATE Cur1 SET;
+		 iDirty    = lnDirty,;
+		 tLastUse  = DATETIME();
+		 FROM (tcStorage) AS Cur1;
+		 WHERE Cur1.cFile==tcFile;
+		  AND Cur1.cType==tcType;
+		  AND Cur1.iDirty=-1
+		*!*	/Changed by: SF 5.6.2015
 		
 		 SELECT;
 		  .T. AS lNew,;
@@ -2009,29 +2243,30 @@ DEFINE CLASS cusstorage AS custom 		&& The stuff that does the work.
 		  INTO CURSOR curHelp;
 		  WHERE Cur1.cUniqueID-Cur1.cObjName NOT IN (;
 		    SELECT;
-		     Cur2.cUniqueId-Cur2.cObjName;
-		     FROM (tcStorage) AS Cur2;
-		     WHERE Cur2.cFile==tcFile;
-		      AND Cur2.cType==tcType;
+		     Cur1_1.cUniqueId-Cur1_1.cObjName;
+		     FROM (tcStorage) AS Cur1_1;
+		     WHERE Cur1_1.cFile==tcFile;
+		      AND Cur1_1.cType==tcType;
 		   );
 		UNION;
 		 SELECT;
 		  .F. AS lNew,;
-		  Cur1.cObjName,;
-		  Cur1.cUniqueId;
-		  FROM (tcStorage) AS Cur1;
-		  WHERE Cur1.cFile==tcFile;
-		   AND Cur1.cType==tcType;
-		   AND Cur1.cUniqueId-Cur1.cObjName NOT IN(;
+		  Cur2.cObjName,;
+		  Cur2.cUniqueId;
+		  FROM (tcStorage) AS Cur2;
+		  WHERE Cur2.cFile==tcFile;
+		   AND Cur2.cType==tcType;
+		   AND Cur2.cUniqueId-Cur2.cObjName NOT IN(;
 		    SELECT;
-		     Cur2.cUniqueID-Cur2.cObjName;
-		     FROM (tcSource) AS Cur2;
+		     Cur2_1.cUniqueID-Cur2_1.cObjName;
+		     FROM (tcSource) AS Cur2_1;
 		   )
 		
-		 llDirty = RECCOUNT()>0  &&something is changed some way
+		llDirty = RECCOUNT()>0  &&something is changed some way
 		
 		*Those will have files that will no longer be valid
 		*Records will be deleted in the next run, due to post processing -> delete obsolete vc2 files!
+		*Objects with both lNew AND !lNew have replaced UniqueId!
 		UPDATE Cur1 SET;
 		 iDirty   = -1,;
 		 tLastUse = DATETIME();
@@ -2043,13 +2278,13 @@ DEFINE CLASS cusstorage AS custom 		&& The stuff that does the work.
 		   AND !Cur2.lNew;
 		  WHERE Cur2.cObjName NOT IN(;
 		    SELECT;
-		     Cur2.cObjName;
-		     FROM curHelp AS Cur2;
-		     WHERE Cur2.lNew;
+		     Cur2_1.cObjName;
+		     FROM curHelp AS Cur2_1;
+		     WHERE Cur2_1.lNew;
 		   )
 		
-		*Records changed
-		 lnDirty = IIF(tlToBin,0,1)
+		*Records changed - lNew AND !lNew needs to be checked
+		 lnDirty = IIF(tlToBin,3,2)
 		 UPDATE Cur1 SET;
 		  cUniqueId =Cur2.cUniqueId,;
 		  iDirty    = lnDirty,;
@@ -2064,8 +2299,19 @@ DEFINE CLASS cusstorage AS custom 		&& The stuff that does the work.
 		   ON Cur1.cObjName==Cur3.cObjName;
 		    AND !Cur3.lNew;
 		
+		*Records marked as dirty for heart beat failure OR  garbage needs to be checked / reprocessed
+		 UPDATE Cur1 SET;
+		  iDirty    = lnDirty,;
+		  tLastUse  = DATETIME();
+		  FROM (tcStorage) AS Cur1;
+		  WHERE Cur1.iDirty IN (-3,-4);
+		   AND Cur1.cFile==tcFile;
+		   AND Cur1.cType==tcType
+		
+		llDirty = llDirty OR _TALLY>0
+		
 		*new files
-		 lnDirty = IIF(tlToBin,0,2)
+		 lnDirty = IIF(tlToBin,5,4)
 		 INSERT INTO (tcStorage);
 		  SELECT;
 		   tcType AS cType,;

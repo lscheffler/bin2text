@@ -19,14 +19,14 @@ _PostalCode = ""
 _Country = "Deutschland"
 *--
 _Comments = ""
-_CompanyName = ""
-_FileDescription = ""
+_CompanyName = "Lutz Scheffler Software Ingenieurbüro"
+_FileDescription = "IDE Integration for FoxBin2Text and git commit for transformed files."
 _LegalCopyright = ""
 _LegalTrademark = ""
-_ProductName = ""
-_MajorVer = ""
-_MinorVer = ""
-_Revision = ""
+_ProductName = "Bin 2 Text"
+_MajorVer = "0"
+_MinorVer = "10"
+_Revision = "0"
 _LanguageID = ""
 _AutoIncrement = "0"
 *</DevInfo>
@@ -50,9 +50,11 @@ MODIFY PROJECT 'Bin2Text.pjx' NOWAIT NOSHOW NOPROJECTHOOK
 loProject = _VFP.Projects('Bin2Text.pjx')
 
 WITH loProject.FILES
-	.ADD('bin2text.app')		&& *< FileMetadata: Type="Z" Cpid="0" Timestamp="0" ID="0" ObjRev="0" />
+	.ADD('..\tools\bin2text.app')		&& *< FileMetadata: Type="Z" Cpid="0" Timestamp="0" ID="0" ObjRev="0" />
 	.ADD('doku\runb2t.pdmicl')		&& *< FileMetadata: Type="x" Cpid="1252" Timestamp="0" ID="0" ObjRev="0" />
 	.ADD('doku\runb2t.pdm')		&& *< FileMetadata: Type="x" Cpid="1252" Timestamp="0" ID="0" ObjRev="0" />
+	.ADD('doku\source\changes.html')		&& *< FileMetadata: Type="T" Cpid="1252" Timestamp="0" ID="0" ObjRev="0" />
+	.ADD('doku\source\preface.html')		&& *< FileMetadata: Type="T" Cpid="1252" Timestamp="0" ID="0" ObjRev="0" />
 	.ADD('library\bin_2_text.vcx')		&& *< FileMetadata: Type="V" Cpid="1252" Timestamp="0" ID="0" ObjRev="544" />
 	.ADD('menu\bin2text.mnx')		&& *< FileMetadata: Type="M" Cpid="1252" Timestamp="0" ID="0" ObjRev="544" />
 	.ADD('program\runb2t.prg')		&& *< FileMetadata: Type="P" Cpid="1252" Timestamp="0" ID="0" ObjRev="544" />
@@ -62,14 +64,17 @@ WITH loProject.FILES
 	.ITEM('__newproject.f2b').Remove()
 
 	*<FileComments>
+	.ITEM(lcCurdir + '..\tools\bin2text.app').Description = 'Just to compile'
 	.ITEM(lcCurdir + 'library\bin_2_text.vcx').Description = 'The stuff we need to work.'
 	.ITEM(lcCurdir + 'program\runb2t.prg').Description = 'Main program. Defines Interfaces.'
 	*</FileComments>
 
 	*<ExcludedFiles>
-	.ITEM(lcCurdir + 'bin2text.app').Exclude = .T.
+	.ITEM(lcCurdir + '..\tools\bin2text.app').Exclude = .T.
 	.ITEM(lcCurdir + 'doku\runb2t.pdmicl').Exclude = .T.
 	.ITEM(lcCurdir + 'doku\runb2t.pdm').Exclude = .T.
+	.ITEM(lcCurdir + 'doku\source\changes.html').Exclude = .T.
+	.ITEM(lcCurdir + 'doku\source\preface.html').Exclude = .T.
 	.ITEM(lcCurdir + 'stuff.h').Exclude = .T.
 	*</ExcludedFiles>
 
