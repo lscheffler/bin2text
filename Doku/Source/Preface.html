@@ -32,12 +32,17 @@
   Contents:
  </p>
  <ul>
+ 	<li><a href="#change">Change log</a></li>
  	<li><a href="#history">A brief history</a></li>
     <li><a href="#howto">How to get it to work</a></li>
     <li><a href="#more">A bit more</a></li>
     <li><a href="#evenmore">And more</a></li>
     <li><a href="../Project.htm" target="_top">Project documentation</a></li>
  </ul>
+ <hr /><h2><a name="change">Change log</a></h2>
+ <p>
+  See <a href="./Changes.html" title="Show change log">Change log</a>.
+ </p>
  <hr /><h2><a name="history">A brief history</a></h2>
  <p>
   The goal of this extension is to use <a href="http://git-scm.com" target="_blank">git</a> with VFP.
@@ -80,7 +85,9 @@
  		<li>Include projecthook library in the list of files to process.</li>
  		<li>Run all projects in a row, so that FoxBin2Prg will process files shared only one time.</li>
  		<li>Optionaly process only files changed, comparing files checksum and, if possible, down to class level circumventing problems with vcx/scx compiling.</li>
- 		<li>Delete files removed from libraries in FoxBin2Prg's FilePerClass mode. <strong>Not implemented yet.</strong></li>
+ 		<li>Delete class files if classes are renoved from libraries in FoxBin2Prg's FilePerClass mode.</li>
+ 		<li>Delete object files (basically environment) if removed from forms in FoxBin2Prg's FilePerClass mode.</li>
+ 		<li>Delete text files for binary files deleted. This works only when processing the whole path to text.</li>
  	</ul>
  </p>
  <hr /><h2><a name="howto">How to get it to work</a></h2>
@@ -124,22 +131,52 @@
   		</dd>
   		<dt>Delete obsolete files.</dt>
   		<dd>
-  			<p>If FoxBin2PRG is in the FilePerClass mode, delete text files if classes are deleted..<br />
-  				<strong>Not implemented yet.</strong></p>
+  			<ul>
+  				<li>If FoxBin2PRG is in the FilePerClass mode, delete classes text files if classes are deleted from libraries.</li>
+  				<li>If FoxBin2PRG is in the FilePerClass mode, delete object text files if environment is deleted from form.</li>
+  				<li>Processing a whole path to text, delete all text files where binary files are deleted, including class / object files.</li>
+  			</ul>
+  			<p>If FoxBin2Prg is set to create backups, the files will be renamed to *.del.bak</p>
+  			<p>Only one level of backups will be created.</p>
+  		</dd>
+  		<dt>git - on branch ***</dt>
+  		<dd>
+  			<p>Displays current <i>git branch</i>.</p>
+  			<p>Only available if base directory is controled by <i>git</i>.</p>
   		</dd>
   		<dt>(git) auto commit</dt>
   		<dd>
   			<p>If on the git menu item it will create a timestamp message for <em>git commit</em> without interaction.<br />
   				Off will raise the usual <em>git commit</em> dialog.</p>
+  			<p>Only available if base directory is controled by <i>git</i>.</p>
   		</dd>
   		<dt>(git) Include pjx</dt>
   		<dd>
   			<p>
+  				Only fur Menu item <i>git <u>c</u>ommit Active</i>
+  			</p>
+  			<p>
   				Include pjx file itself in the Bin &gt; Text conversion of the <em>git</em> transfer.<br />
   				Off will be faster, because the pjx needs to be closed and reopened. A change to the pjx need to be processed with the other menu items.
   			</p>
+  			<p>Only available if base directory is controled by <i>git</i>.</p>
   		</dd>
   	</dl>
+  </li>
+  <li>
+  	<p>Log file</p>
+  	<p>A log is available by checking the storage table.</p>
+   <span class="example">
+   	USE (_SCREEN.gcB2T_Path)<br/>
+   	BROWSE LAST
+   </span>
+  	<p>
+  		The definition of the fields is to be found in
+  		<a href="../classes/bin_2_text.vcx/cls.cusstorage.storage_open.htm" title="Skip to method Storage_Open">Storage_Open</a>.
+  	</p>
+  	<p>
+  		A timestamp tLastUse gives the moment of last touch while iDirty gives information about the last action.
+  	</p>
   </li>
  </ol>
   <p>
@@ -164,6 +201,7 @@
    <ol>
    	<li>The VFP search path will be changed in a way to find the menu program.</li>
    	<li><em>FoxBin<u>2</u>Text</em> menu will be created before <em>WINDOWS</em> menu.</li>
+   	<li>Some properties (gcB2T_*) will be added to _SCREEN.</li>
    </ol>
    <p>
    	See <a href="../code/runb2t.prg/Main_d.initmenu.htm" title="Skip to procedure InitMenu">InitMenu</a>
@@ -182,10 +220,10 @@
   <h3><a name="PJX2Commit">PJX2Commit</a></h3>
    <span class="example">DO PJX2Commit IN Bin2Text.app</span>
    <p>
-   	Convert the files off the active project to text and run <em>git commit</em>.
+   	Convert the files of the active project / all projects to text and run <em>git commit</em>.
    </p>
    <p>
-   	This is what the menus commit item calls.
+   	This is what the menus commit items are calling.
    </p>
    <p>
    	See <a href="../code/runb2t.prg/Main_d.pjx2commit.htm" title="Skip to procedure Pjx2Commit">Pjx2Commit</a>
@@ -208,12 +246,19 @@
   </p>
    <span class="example">DO Convert_Array IN Bin2Text.app [/?]|lToBin,cMode,@aFiles</span>
    <p>
+   	This is will process the file list.
+   </p>
+   <p>
+   	If binaries run with this are not in a project known to Convert_Pjx,
+   	text files related might be deleted with the <i>delete obsolete files</i> process.
+   </p>
+   <p>
    	See <a href="../code/runb2t.prg/Main_d.convert_array.htm" title="Skip to procedure Convert_Array">Convert_Array</a>
    </p>
   <h3><a name="Table">Storage table</a></h3>
    <p>
    	The app uses tables to store the settings and to cache the states of the conversions.
-   	Those tables are stored in a projcets home directory any other directory defined with <a href="InitMenu">InitMenu</a>.
+   	Those tables are stored in a projcets home directory or any other directory defined with <a href="InitMenu">InitMenu</a>.
    </p>
    <p>
    	See <a href="../classes/bin_2_text.vcx/cls.cusstorage.storage_open.htm" title="Skip to method Storage_Open">Storage_Open</a> for a table structure.

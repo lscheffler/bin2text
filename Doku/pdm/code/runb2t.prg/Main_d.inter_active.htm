@@ -16,7 +16,7 @@
 <body>
 <div class="diaxp_mhead">Inter_Active Function</div>
 <div class="diaxp_mbody">
-<!-- Created with _diamp_pdm_ab by Agnes Beste    07.05.2015 11:24 -->
+<!-- Created with _diamp_pdm_ab by Agnes Beste    05.06.2015 15:47 -->
  <div class="PDM_AB_Descr"><!-- Descr Begin -->
 Run settings mask.
  </div><!-- Descr End -->
@@ -27,7 +27,7 @@ Run settings mask.
     Inter_Active
    </div>
    <div class="Para">
-    ([<a href="#_4CG0OFO3J">tcHelp</a>])
+    ([<a href="#_4D90XTYLC">tcHelp</a>])
    </div>
    <div style="clear: both"></div>
   </div><!-- Colour End -->
@@ -39,7 +39,7 @@ Run settings mask.
   </span>
   <dl class="DIAMP_PDM_AB_Params_List">
    <dt class="dt_">
-    <a class="DIAMP_PDM_AB_Params_ParaName" id="_4CG0OFO3J" name="_4CG0OFO3J">
+    <a class="DIAMP_PDM_AB_Params_ParaName" id="_4D90XTYLC" name="_4D90XTYLC">
      <span class="PDMEXPR PDMNor" ><span class='PDMVar'>tcHelp</span></span>
 
     </a>
@@ -83,33 +83,39 @@ To configure this program.
  </div><!-- Remarks End -->
 
 
-<!-- /Created with _diamp_pdm_ab by Agnes Beste    07.05.2015 11:24 -->
+<!-- /Created with _diamp_pdm_ab by Agnes Beste    05.06.2015 15:47 -->
 
  <div class="SC">
   <img onclick="ExpandSC('SP_P3',-1);" class="imgEC" src="../../imgs/dotab.gif" alt="Expand/Collapse source code of procedure Inter_Active" id="IMG_SP_P3" />
   <span onclick="ExpandSC('SP_P3',-1);" class="SCCaption"><a name="pm.inter_active">Source Code</a></span>
   <div ondblclick="ExpandSC('SP_P3',-1);" class="SCE" style="display: none;" id="TX_SP_P3">
 <!-- Code Begin -->
-<pre class="PDMCODE PDMNor" ><span class='PDMCnt'> 101</span> <span class='PDMInd'> 1</span>  <span class='PDMResK'>LPARAMETERS</span><span class='PDMOper'>;</span>
-<span class='PDMCnt'> 102</span> <span class='PDMInd'> 2</span>   <span class='PDMVar'>tcHelp</span>
-<span class='PDMCnt'> 103</span> <span class='PDMInd'>  </span> 
-<span class='PDMCnt'> 104</span> <span class='PDMInd'>  </span> 
-<span class='PDMCnt'> 113</span> <span class='PDMInd'>  </span> 
-<span class='PDMCnt'> 114</span> <span class='PDMInd'> 1</span>  <span class='PDMResK'>IF</span> <span class='PDMResF'>PCOUNT</span><span class='PDMOper'>(</span><span class='PDMOper'>)</span><span class='PDMOper'>=</span><span class='PDMLit'>1</span> <span class='PDMResK'>THEN</span>
-<span class='PDMCnt'> 115</span> <span class='PDMInd'> 2</span>   <span class='PDMVar'>HelpMsg</span><span class='PDMOper'>(</span><span class='PDMLit'>7</span><span class='PDMOper'>)</span>
-<span class='PDMCnt'> 116</span> <span class='PDMInd'> 2</span>   <span class='PDMResK'>RETURN</span> <span class='PDMLit'>.F.</span>
-<span class='PDMCnt'> 117</span> <span class='PDMInd'> 1</span>  <span class='PDMResK'>ENDIF</span> <span class='PDMCom'>&amp;&amp;PCOUNT()=1</span>
-<span class='PDMCnt'> 118</span> <span class='PDMInd'>  </span> 
-<span class='PDMCnt'> 119</span> <span class='PDMInd'> 1</span>  <span class='PDMResK'>IF</span> <span class='PDMVar'>_VFP</span><span class='PDMOper'>.</span><span class='PDMVar'>STARTMODE</span><span class='PDMOper'>#</span><span class='PDMLit'>0</span> <span class='PDMResK'>THEN</span>
-<span class='PDMCnt'> 120</span> <span class='PDMInd'> 2</span>   <span class='PDMVar'>HelpMsg</span><span class='PDMOper'>(</span><span class='PDMLit'>8</span><span class='PDMOper'>)</span>
-<span class='PDMCnt'> 121</span> <span class='PDMInd'> 2</span>   <span class='PDMResK'>RETURN</span> <span class='PDMLit'>.F.</span>
-<span class='PDMCnt'> 122</span> <span class='PDMInd'> 1</span>  <span class='PDMResK'>ENDIF</span> <span class='PDMCom'>&amp;&amp;F_VFP.StartMode#0</span>
-<span class='PDMCnt'> 123</span> <span class='PDMInd'>  </span> 
-<span class='PDMCnt'> 124</span> <span class='PDMInd'> 1</span>  <span class='PDMVar'>SwitchErrorHandler</span><span class='PDMOper'>(</span><span class='PDMLit'>.T.</span><span class='PDMOper'>)</span>
-<span class='PDMCnt'> 125</span> <span class='PDMInd'> 1</span>  <span class='PDMVar'>Construct_Objects</span><span class='PDMOper'>(</span><span class='PDMOper'>)</span>
-<span class='PDMCnt'> 126</span> <span class='PDMInd'> 1</span>  <span class='PDMVar'>_SCREEN</span><span class='PDMOper'>.</span><span class='PDMVar'>frmB2T_Envelop</span><span class='PDMOper'>.</span><span class='PDMVar'>cusB2T</span><span class='PDMOper'>.</span><span class='PDMVar'>Settings_Check</span><span class='PDMOper'>(</span><span class='PDMLit'>.T.</span><span class='PDMOper'>)</span>
-<span class='PDMCnt'> 127</span> <span class='PDMInd'> 1</span>  <span class='PDMVar'>Destruct_Objects</span><span class='PDMOper'>(</span><span class='PDMOper'>)</span>
-<span class='PDMCnt'> 128</span> <span class='PDMInd'> 1</span>  <span class='PDMVar'>SwitchErrorHandler</span><span class='PDMOper'>(</span><span class='PDMLit'>.F.</span><span class='PDMOper'>)</span></pre>
+<pre class="PDMCODE PDMNor" ><span class='PDMCnt'> 142</span> <span class='PDMInd'> 1</span>  <span class='PDMResK'>LPARAMETERS</span><span class='PDMOper'>;</span>
+<span class='PDMCnt'> 143</span> <span class='PDMInd'> 2</span>   <span class='PDMVar'>tcHelp</span>
+<span class='PDMCnt'> 144</span> <span class='PDMInd'>  </span> 
+<span class='PDMCnt'> 145</span> <span class='PDMInd'>  </span> 
+<span class='PDMCnt'> 154</span> <span class='PDMInd'>  </span> 
+<span class='PDMCnt'> 155</span> <span class='PDMInd'> 1</span>  <span class='PDMResK'>IF</span> <span class='PDMResF'>PCOUNT</span><span class='PDMOper'>(</span><span class='PDMOper'>)</span><span class='PDMOper'>=</span><span class='PDMLit'>1</span> <span class='PDMResK'>THEN</span>
+<span class='PDMCnt'> 156</span> <span class='PDMInd'> 2</span>   <span class='PDMVar'>HelpMsg</span><span class='PDMOper'>(</span><span class='PDMLit'>7</span><span class='PDMOper'>)</span>
+<span class='PDMCnt'> 157</span> <span class='PDMInd'> 2</span>   <span class='PDMResK'>RETURN</span> <span class='PDMLit'>.F.</span>
+<span class='PDMCnt'> 158</span> <span class='PDMInd'> 1</span>  <span class='PDMResK'>ENDIF</span> <span class='PDMCom'>&amp;&amp;PCOUNT()=1</span>
+<span class='PDMCnt'> 159</span> <span class='PDMInd'>  </span> 
+<span class='PDMCnt'> 160</span> <span class='PDMInd'> 1</span>  <span class='PDMResK'>IF</span> <span class='PDMVar'>_VFP</span><span class='PDMOper'>.</span><span class='PDMVar'>STARTMODE</span><span class='PDMOper'>#</span><span class='PDMLit'>0</span> <span class='PDMResK'>THEN</span>
+<span class='PDMCnt'> 161</span> <span class='PDMInd'> 2</span>   <span class='PDMVar'>HelpMsg</span><span class='PDMOper'>(</span><span class='PDMLit'>8</span><span class='PDMOper'>)</span>
+<span class='PDMCnt'> 162</span> <span class='PDMInd'> 2</span>   <span class='PDMResK'>RETURN</span> <span class='PDMLit'>.F.</span>
+<span class='PDMCnt'> 163</span> <span class='PDMInd'> 1</span>  <span class='PDMResK'>ENDIF</span> <span class='PDMCom'>&amp;&amp;F_VFP.StartMode#0</span>
+<span class='PDMCnt'> 164</span> <span class='PDMInd'>  </span> 
+<span class='PDMCnt'> 165</span> <span class='PDMInd'> 1</span>  <span class='PDMVar'>SwitchErrorHandler</span><span class='PDMOper'>(</span><span class='PDMLit'>.T.</span><span class='PDMOper'>)</span>
+<span class='PDMCnt'> 166</span> <span class='PDMInd'> 1</span>  <span class='PDMVar'>Construct_Objects</span><span class='PDMOper'>(</span><span class='PDMOper'>)</span>
+<span class='PDMCnt'> 167</span> <span class='PDMInd'> 1</span>  <span class='PDMVar'>_SCREEN</span><span class='PDMOper'>.</span><span class='PDMResM'>ADDPROPERTY</span><span class='PDMOper'>(</span><span class='PDMStr'>'gcOld_Path'</span><span class='PDMOper'>,</span><span class='PDMResF'>FULLPATH</span><span class='PDMOper'>(</span><span class='PDMResF'>CURDIR</span><span class='PDMOper'>(</span><span class='PDMOper'>)</span><span class='PDMOper'>)</span><span class='PDMOper'>)</span>
+<span class='PDMCnt'> 168</span> <span class='PDMInd'> 1</span>  <span class='PDMResK'>CD</span> <span class='PDMOper'>(</span><span class='PDMResF'>JUSTPATH</span><span class='PDMOper'>(</span><span class='PDMVar'>_SCREEN</span><span class='PDMOper'>.</span><span class='PDMVar'>gcB2T_Path</span><span class='PDMOper'>)</span><span class='PDMOper'>)</span>
+<span class='PDMCnt'> 169</span> <span class='PDMInd'>  </span> 
+<span class='PDMCnt'> 170</span> <span class='PDMInd'> 1</span>  <span class='PDMVar'>_SCREEN</span><span class='PDMOper'>.</span><span class='PDMVar'>frmB2T_Envelop</span><span class='PDMOper'>.</span><span class='PDMVar'>cusB2T</span><span class='PDMOper'>.</span><span class='PDMVar'>Settings_Check</span><span class='PDMOper'>(</span><span class='PDMLit'>.T.</span><span class='PDMOper'>)</span>
+<span class='PDMCnt'> 171</span> <span class='PDMInd'> 1</span>  <span class='PDMVar'>Destruct_Objects</span><span class='PDMOper'>(</span><span class='PDMOper'>)</span>
+<span class='PDMCnt'> 172</span> <span class='PDMInd'>  </span> 
+<span class='PDMCnt'> 173</span> <span class='PDMInd'> 1</span>  <span class='PDMResK'>CD</span> <span class='PDMOper'>(</span><span class='PDMVar'>_SCREEN</span><span class='PDMOper'>.</span><span class='PDMVar'>gcOld_Path</span><span class='PDMOper'>)</span>
+<span class='PDMCnt'> 174</span> <span class='PDMInd'> 1</span>  <span class='PDMResF'>REMOVEPROPERTY</span><span class='PDMOper'>(</span><span class='PDMVar'>_SCREEN</span><span class='PDMOper'>,</span><span class='PDMStr'>'gcOld_Path'</span><span class='PDMOper'>)</span>
+<span class='PDMCnt'> 175</span> <span class='PDMInd'> 1</span>  <span class='PDMVar'>SwitchErrorHandler</span><span class='PDMOper'>(</span><span class='PDMLit'>.F.</span><span class='PDMOper'>)</span></pre>
  <!-- Code End -->
   </div>
  </div>

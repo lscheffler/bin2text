@@ -25,6 +25,7 @@ DEFINE CLASS frminterface AS form 		&& Just to create an interface as well as a 
 	*< OBJECTDATA: ObjPath="chkDel" UniqueID="" Timestamp="" />
 	*< OBJECTDATA: ObjPath="lblGit_Opt" UniqueID="" Timestamp="" />
 	*< OBJECTDATA: ObjPath="chkGit_Opt" UniqueID="" Timestamp="" />
+	*< OBJECTDATA: ObjPath="Shape1" UniqueID="" Timestamp="" />
 	*< OBJECTDATA: ObjPath="lblGit" UniqueID="" Timestamp="" />
 
 	*<DefinedPropArrayMethod>
@@ -51,7 +52,7 @@ DEFINE CLASS frminterface AS form 		&& Just to create an interface as well as a 
 		Alignment = 0, ;
 		Caption = "", ;
 		Height = 17, ;
-		Left = 111, ;
+		Left = 119, ;
 		Name = "chkAll", ;
 		TabIndex = 7, ;
 		ToolTipText = "Convert all files or only changed files. Only for Bin to Text.", ;
@@ -63,7 +64,7 @@ DEFINE CLASS frminterface AS form 		&& Just to create an interface as well as a 
 		Alignment = 0, ;
 		Caption = "", ;
 		Height = 17, ;
-		Left = 111, ;
+		Left = 119, ;
 		Name = "chkAutoCommit", ;
 		TabIndex = 12, ;
 		ToolTipText = 'Commit with message "Timestamp" without message edit. ', ;
@@ -75,7 +76,7 @@ DEFINE CLASS frminterface AS form 		&& Just to create an interface as well as a 
 		Alignment = 0, ;
 		Caption = "", ;
 		Height = 17, ;
-		Left = 111, ;
+		Left = 119, ;
 		Name = "chkDel", ;
 		TabIndex = 9, ;
 		ToolTipText = "For FilePerClass. Delete text files for removed classes. Only  Bin to Text. Not implemented yet.", ;
@@ -148,47 +149,53 @@ DEFINE CLASS frminterface AS form 		&& Just to create an interface as well as a 
 		*< END OBJECT: ClassLib="bin_2_text.vcx" BaseClass="custom" />
 
 	ADD OBJECT 'lblAll' AS label WITH ;
+		Alignment = 1, ;
 		Caption = "Convert all files", ;
 		Height = 17, ;
 		Left = 5, ;
 		Name = "lblAll", ;
 		TabIndex = 6, ;
 		Top = 70, ;
-		Width = 100
+		Width = 108
 		*< END OBJECT: BaseClass="label" />
 
 	ADD OBJECT 'lblAutoCommit' AS label WITH ;
+		Alignment = 1, ;
 		Caption = "Auto commit", ;
 		Height = 17, ;
 		Left = 6, ;
 		Name = "lblAutoCommit", ;
 		TabIndex = 11, ;
 		Top = 150, ;
-		Width = 100
+		Width = 108
 		*< END OBJECT: BaseClass="label" />
 
 	ADD OBJECT 'lblDel' AS label WITH ;
+		Alignment = 1, ;
 		Caption = "Delete obsolet files", ;
 		Height = 17, ;
 		Left = 5, ;
 		Name = "lblDel", ;
 		TabIndex = 8, ;
 		Top = 100, ;
-		Width = 100
+		Width = 108
 		*< END OBJECT: BaseClass="label" />
 
 	ADD OBJECT 'lblGit' AS label WITH ;
-		Caption = "git", ;
-		FontUnderline = .T., ;
+		Alignment = 2, ;
+		AutoSize = .T., ;
+		Caption = "  git  ", ;
+		FontBold = .T., ;
 		Height = 17, ;
-		Left = 6, ;
+		Left = 278, ;
 		Name = "lblGit", ;
 		TabIndex = 10, ;
 		Top = 130, ;
-		Width = 100
+		Width = 28
 		*< END OBJECT: BaseClass="label" />
 
 	ADD OBJECT 'lblGit_Opt' AS label WITH ;
+		Alignment = 1, ;
 		Caption = "Include pjx", ;
 		Height = 17, ;
 		Left = 137, ;
@@ -199,47 +206,58 @@ DEFINE CLASS frminterface AS form 		&& Just to create an interface as well as a 
 		*< END OBJECT: BaseClass="label" />
 
 	ADD OBJECT 'lblMain' AS label WITH ;
+		Alignment = 1, ;
 		Caption = "Main programm", ;
 		Height = 17, ;
 		Left = 6, ;
 		Name = "lblMain", ;
 		TabIndex = 3, ;
 		Top = 40, ;
-		Width = 100
+		Width = 108
 		*< END OBJECT: BaseClass="label" />
 
 	ADD OBJECT 'lblPath' AS label WITH ;
+		Alignment = 1, ;
 		Caption = "Storage", ;
 		Height = 17, ;
 		Left = 5, ;
 		Name = "lblPath", ;
 		TabIndex = 1, ;
 		Top = 10, ;
-		Width = 100
+		Width = 108
 		*< END OBJECT: BaseClass="label" />
+
+	ADD OBJECT 'Shape1' AS shape WITH ;
+		Height = 3, ;
+		Left = 5, ;
+		Name = "Shape1", ;
+		SpecialEffect = 0, ;
+		Top = 137, ;
+		Width = 590
+		*< END OBJECT: BaseClass="shape" />
 
 	ADD OBJECT 'txtMain' AS textbox WITH ;
 		Anchor = 10, ;
 		Height = 23, ;
-		Left = 110, ;
+		Left = 118, ;
 		Name = "txtMain", ;
 		ReadOnly = .T., ;
 		TabIndex = 4, ;
 		ToolTipText = "Path to FoxBin2PRG.prg main program.", ;
 		Top = 37, ;
-		Width = 449
+		Width = 441
 		*< END OBJECT: BaseClass="textbox" />
 
 	ADD OBJECT 'txtPath' AS textbox WITH ;
 		Anchor = 10, ;
 		Height = 23, ;
-		Left = 110, ;
+		Left = 118, ;
 		Name = "txtPath", ;
 		ReadOnly = .T., ;
 		TabIndex = 2, ;
 		ToolTipText = "Path to storage table.", ;
 		Top = 7, ;
-		Width = 484
+		Width = 476
 		*< END OBJECT: BaseClass="textbox" />
 	
 	PROCEDURE settings_get		&& Get the settings an put the values of the surface objects.
@@ -298,6 +316,40 @@ DEFINE CLASS frminterface AS form 		&& Just to create an interface as well as a 
 		toObject.ADD(IIF(THIS.chkDel.VALUE,"1","0"),"gcB2T_Delete")
 		
 		toObject.ADD(THIS.glSet,"glSet")
+		
+	ENDPROC
+
+	PROCEDURE Show
+		LPARAMETERS;
+		 tnStyle
+		
+		LOCAL;
+		 lcBranch AS CHARACTER
+		
+		lcBranch = GetBranch()
+		
+		WITH THIS
+		 IF EMPTY(lcBranch) THEN
+		  .lblAutoCommit.VISIBLE = .F.
+		  .chkAutoCommit.VISIBLE = .F.
+		  .lblGit_Opt.VISIBLE    = .F.
+		  .chkGit_Opt.VISIBLE    = .F.
+		  .Shape1.VISIBLE        = .F.
+		  .lblGit.VISIBLE        = .F.
+		 ELSE  &&EMPTY(lcBranch)
+		  .lblGit.CAPTION = '  git - on branch '+lcBranch+'  '
+		
+		*.<<@N>>.VISIBLE = .T.
+		  .lblAutoCommit.VISIBLE = .T.
+		  .chkAutoCommit.VISIBLE = .T.
+		  .lblGit_Opt.VISIBLE    = .T.
+		  .chkGit_Opt.VISIBLE    = .T.
+		  .Shape1.VISIBLE        = .T.
+		  .lblGit.VISIBLE        = .T.
+		 ENDIF &&EMPTY(lcBranch)
+		ENDWITH &&THIS
+		
+		RETURN DODEFAULT(@tnStyle)
 		
 	ENDPROC
 

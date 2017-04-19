@@ -24,23 +24,30 @@ SwitchErrorHandler(.F.)
 
 FUNCTION Pjx2Commit	&&Create a commit to git.
  LPARAMETERS;
-  tcHelp
+  tlAll
 
 *!*	<pdm>
 *!*	<descr>Create a commit to git.</descr>
-*!*	<params name="tcHelp" type="Variant" byref="0" dir="" inb="1" outb="1">
-*!*	<short>Any value will raise help text.</short>
+*!*	<params name="tlAll" type="Boolean" byref="0" dir="" inb="1" outb="1">
+*!*	<short>Process whole path.</short>
 *!*	<detail></detail>
 *!*	</params>
 *!*	<retval type="Boolean">True if successfull.</retval>
-*!*	<remarks>This calls FoxBin2PRG for the active project project. And runs a git commit.</remarks>
-*!*	<copyright><i>&copy; 21.4.2015 Lutz Scheffler Software Ingenieurbüro</i></copyright>
+*!*	<remarks>This calls FoxBin2PRG to process active project or all projects in the path. And runs a git commit.</remarks>
+*!*	<copyright><i>&copy; 05.6.2015 Lutz Scheffler Software Ingenieurbüro</i></copyright>
 *!*	</pdm>
 
- IF PCOUNT()=1 THEN
+*!*	<pdm>
+*!*	<change date="{^2015-06-04,11:19:00}">Changed by: SF<br />
+*!*	New parameter <pdmpara num="1" />
+*!*	</change>
+*!*	</pdm>
+ 
+
+ IF !VARTYPE(tlAll)='L' THEN
   HelpMsg(3)
   RETURN .F.
- ENDIF &&PCOUNT()=1
+ ENDIF &&!VARTYPE(tlAll)='L'
 
  IF _VFP.STARTMODE#0 THEN
   HelpMsg(4)
@@ -65,36 +72,70 @@ FUNCTION Pjx2Commit	&&Create a commit to git.
  ENDIF &&!PEMSTATUS(_SCREEN,"gcB2T_GitPjx",5)
 
  SwitchErrorHandler(.F.)
- IF Convert_Pjx(.F.,1,IIF(_SCREEN.gcB2T_GitPjx="1",1,3)) THEN
+ IF Convert_Pjx(.F.,IIF(tlAll,3,1),ICASE(tlAll,0,_SCREEN.gcB2T_GitPjx="1",4,3)) THEN
   SwitchErrorHandler(.T.)
   _SCREEN.ADDPROPERTY('gcOld_Path',FULLPATH(CURDIR()))
   CD (JUSTPATH(_SCREEN.gcB2T_Path))
 
   IF DIRECTORY('.git',1) THEN
-   #IF .F. THEN
-*beautify off
-*do not mess up git commands
-    TEXT
-#ENDIF &&.F.
-   RUN /2 git add -A
-   IF TYPE('_SCREEN.gcB2T_Commit')="C" AND _SCREEN.gcB2T_Commit=="1" THEN
-    tcHelp = 'RUN /2 git commit -am "'+CHRTRAN(TTOC(DATETIME(),3),'T',' ')+'" -m "auto-commit by RunB2T.app"'
-    &tcHelp
-   ELSE  &&TYPE('_SCREEN.gcB2T_Commit')="C" AND _SCREEN.gcB2T_Commit=="1"
-    RUN /2 git commit -a
-   ENDIF &&TYPE('_SCREEN.gcB2T_Commit')="C" AND _SCREEN.gcB2T_Commit=="1"
-#IF .F. THEN
-*beautify on
-    ENDTEXT
-   #ENDIF &&.F.
+*!*	Changed by: SF 4.6.2015
+*!*	<pdm>
+*!*	<change date="{^2015-06-04,11:23:00}">Changed by: SF<br />
+*!*	<p>New way to run <i>git</i> withour <expr>RUN</expr></p>
+*<p>Run <i>git commit</i> only if somthing is to commit.</p>
+*!*	</change>
+*!*	</pdm>
+
+   DELETE FILE git_x.tmp
+   DO WHILE FILE('git_x.tmp')
+    WAIT "" WINDOW TIMEOUT 0.2
+   ENDDO &&FILE('git_x.tmp')
+
+   LOCAL;
+    lcBat  AS CHARACTER,;
+    lcPath AS CHARACTER
+
+   TEXT TO lcBat NOSHOW
+git add -A
+git status --porcelain>git_x.tmp
+   ENDTEXT &&lcBat
+   STRTOFILE(lcBat,'git_x.bat')
+
+   lcPath = ADDBS(FULLPATH(CURDIR()))
+   IF Run_ShellExecute(0,0h00,lcPath+'git_x.bat',0h00,lcPath+0h00,.F.) THEN
+    LOCAL;
+     lnSec AS NUMBER
+
+    lnSec = SECONDS()
+    DO WHILE !FILE('git_x.tmp')
+     WAIT "" WINDOW TIMEOUT 0.2
+     IF SECONDS()-lnSec>=2 THEN
+      EXIT
+     ENDIF &&SECONDS()-lnSec>=2
+    ENDDO &&!FILE('git_x.tmp')
+    IF FILE('git_x.tmp') AND LEN(FILETOSTR('git_x.tmp'))>0 THEN
+     IF TYPE('_SCREEN.gcB2T_Commit')="C" AND _SCREEN.gcB2T_Commit=="1" THEN
+      Run_git('commit -m "'+CHRTRAN(TTOC(DATETIME(),3),'T',' ')+'" -m "auto-commit by RunB2T.app"',.F.)
+      ??' - auto commit'
+     ELSE  &&TYPE('_SCREEN.gcB2T_Commit')="C" AND _SCREEN.gcB2T_Commit=="1"
+      Run_git('commit',.T.)
+     ENDIF &&TYPE('_SCREEN.gcB2T_Commit')="C" AND _SCREEN.gcB2T_Commit=="1"
+    ELSE &&FILE('git_x.tmp') AND LEN(FILETOSTR('git_x.tmp'))>0
+     ??' - nothing to commit'
+    ENDIF &&FILE('git_x.tmp') AND LEN(FILETOSTR('git_x.tmp'))>0
+    DELETE FILE git_x.*
+   ENDIF &&Run_ShellExecute(0,0h00,lcPath+'git_x.bat',0h00,lcPath+0h00,.F.)
+*!*	/Changed by: SF 4.6.2015
+
   ELSE  &&DIRECTORY('.git',1)
    =MESSAGEBOX('Run "git init" to enable git.',0,'',10000)
   ENDIF &&DIRECTORY('.git',1)
+
   CD (_SCREEN.gcOld_Path)
   REMOVEPROPERTY(_SCREEN,'gcOld_Path')
   SwitchErrorHandler(.F.)
- ENDIF &&Convert_Pjx(.F.,IIF(_SCREEN.gcB2T_GitPjx="1",2,1),0)
 
+ ENDIF &&Convert_Pjx(.F.,IIF(tlAll,3,1),ICASE(tlAll,0,_SCREEN.gcB2T_GitPjx="1",4,3))
 ENDFUNC &&Pjx2Commit
 
 FUNCTION Inter_Active &&Run settings mask.
@@ -123,8 +164,14 @@ FUNCTION Inter_Active &&Run settings mask.
 
  SwitchErrorHandler(.T.)
  Construct_Objects()
+ _SCREEN.ADDPROPERTY('gcOld_Path',FULLPATH(CURDIR()))
+ CD (JUSTPATH(_SCREEN.gcB2T_Path))
+
  _SCREEN.frmB2T_Envelop.cusB2T.Settings_Check(.T.)
  Destruct_Objects()
+
+ CD (_SCREEN.gcOld_Path)
+ REMOVEPROPERTY(_SCREEN,'gcOld_Path')
  SwitchErrorHandler(.F.)
 ENDFUNC &&Inter_Active
 
@@ -147,7 +194,7 @@ FUNCTION Convert_Pjx &&Runs FoxBin2Prg for multiple projects.
 * <dt>0</dt><dd>Use <expr>GETFILE()</expr> to define the file. Input is a text file if <pdmpara num="1"/>.</dd>
 * <dt>1</dt><dd>Active project.</dd>
 * <dt>2</dt><dd>All projects open in IDE</dd>
-* <dt>3</dt><dd>All projects in hjome path.</dd>
+* <dt>3</dt><dd>All projects in home path.</dd>
 *</dl>
 *</detail>
 *!*	</params>
@@ -158,13 +205,19 @@ FUNCTION Convert_Pjx &&Runs FoxBin2Prg for multiple projects.
 * <dt>0</dt><dd>Use <expr>"*"</expr> Convert files of project, project file and projecthook if defined.</dd>
 * <dt>1</dt><dd>Use <expr>"*-"</expr> Convert files of project and projecthook (if defined).</dd>
 * <dt>2</dt><dd>Use <expr>""</expr> Convert project file.</dd>
-* <dt>3</dt><dd>Use <expr>"*-"</expr> Convert files of project, do not process projecthook (if defined).</dd>
+* <dt>3</dt><dd>Use <expr>"*-"</expr> Convert files of project, do not process projecthook (if defined). Keep project open</dd>
+* <dt>4</dt><dd>Use <expr>"*"</expr> Convert files of project, project file, do not process projecthook (if defined).</dd>
 *</dl>
 *</detail>
 *!*	<retval type="Boolean">True if successfull.</retval>
 *!*	</params>
-*!*	<copyright><i>&copy; 19.4.2015 Lutz Scheffler Software Ingenieurbüro</i></copyright>
+*!*	<copyright><i>&copy; 05.6.2015 Lutz Scheffler Software Ingenieurbüro</i></copyright>
+
+*!*	<change date="{^2015-05-12,09:56:00}">Changed by: SF<br />
+*!*	New value for parameter <pdmpara num="3" /> "4"
+*!*	</change>
 *!*	</pdm>
+
 
  LOCAL;
   lcOldExact  AS CHARACTER
@@ -178,7 +231,7 @@ FUNCTION Convert_Pjx &&Runs FoxBin2Prg for multiple projects.
    tlToBin = '?'
   CASE VARTYPE(tnMode)#'N'
    tnProjects = 0
-  CASE !BETWEEN(tnMode,0,3)
+  CASE !BETWEEN(tnMode,0,4)
    tlToBin = '?'
   OTHERWISE
  ENDCASE
@@ -212,6 +265,7 @@ FUNCTION Convert_Pjx &&Runs FoxBin2Prg for multiple projects.
   lnProj      AS NUMBER,;
   lnProjs     AS NUMBER,;
   llPath      AS BOOLEAN,;
+  llCheckAll  AS BOOLEAN,;
   lvMode      AS VARIANT,;
   loProject   AS PROJECT
 
@@ -240,9 +294,11 @@ FUNCTION Convert_Pjx &&Runs FoxBin2Prg for multiple projects.
 
  lcOldPath  = FULLPATH(CURDIR())
 
+ llCheckAll = !tlToBin
  DO CASE
   CASE tnProjects=0
 *Getfile
+   llCheckAll = .F.
 
    LOCAL;
     lcSourceExt AS CHARACTER
@@ -294,7 +350,7 @@ FUNCTION Convert_Pjx &&Runs FoxBin2Prg for multiple projects.
    lnProjs = 1
    _SCREEN.ADDPROPERTY('gaFiles(1,2)')
    _SCREEN.gaFiles(1,1) = FORCEEXT(lcProj,'PJX')
-   _SCREEN.gaFiles(1,2) = IIF(tnMode=3,"",.NULL.)
+   _SCREEN.gaFiles(1,2) = ICASE(tnMode=3,"",tnMode=4,"",.NULL.)
 
    lcPath = JUSTPATH(lcProj)
    CD (lcPath)
@@ -302,6 +358,7 @@ FUNCTION Convert_Pjx &&Runs FoxBin2Prg for multiple projects.
 *  &&tnProjects=0
   CASE tnProjects=1
 *active project
+   llCheckAll = .F.
 
    IF _VFP.PROJECTS.COUNT=0 THEN
     CD (lcOldPath)
@@ -313,7 +370,7 @@ FUNCTION Convert_Pjx &&Runs FoxBin2Prg for multiple projects.
    lnProjs = 1
    _SCREEN.ADDPROPERTY('gaFiles(1,2)')
    _SCREEN.gaFiles(1,1) = _VFP.ACTIVEPROJECT.NAME
-   _SCREEN.gaFiles(1,2) = IIF(tnMode=3,"",_VFP.ACTIVEPROJECT.PROJECTHOOKLIBRARY)
+   _SCREEN.gaFiles(1,2) = ICASE(tnMode=3,"",tnMode=4,"",_VFP.ACTIVEPROJECT.PROJECTHOOKLIBRARY)
 
    lcPath = JUSTPATH(_VFP.ACTIVEPROJECT.NAME)
    CD (lcPath)
@@ -321,6 +378,8 @@ FUNCTION Convert_Pjx &&Runs FoxBin2Prg for multiple projects.
 *  &&tnProjects=1
   CASE tnProjects=2
 *open projects
+   llCheckAll = .F.
+
    lnProjs = _VFP.PROJECTS.COUNT
    IF lnProjs=0 THEN
     CD (lcOldPath)
@@ -338,7 +397,7 @@ FUNCTION Convert_Pjx &&Runs FoxBin2Prg for multiple projects.
    FOR EACH loProject IN _VFP.PROJECTS FOXOBJECT
     lnProj = lnProj+1
     _SCREEN.gaFiles(lnProj,1) = loProject.NAME
-    _SCREEN.gaFiles(lnProj,2) = IIF(tnMode=3,"",loProject.PROJECTHOOKLIBRARY)
+    _SCREEN.gaFiles(lnProj,2) = ICASE(tnMode=3,"",tnMode=4,"",loProject.PROJECTHOOKLIBRARY)
    ENDFOR &&loProject
 
 *  &&tnProjects=2
@@ -386,7 +445,7 @@ FUNCTION Convert_Pjx &&Runs FoxBin2Prg for multiple projects.
 
    FOR lnProj = 1 TO lnProjs
     _SCREEN.gaFiles(lnProj,1) = FORCEPATH(FORCEEXT(laFiles(lnProj,1),"PJX"),lcPath)
-    _SCREEN.gaFiles(lnProj,2) = IIF(tnMode=3,"",.NULL.)
+    _SCREEN.gaFiles(lnProj,2) = ICASE(tnMode=3,"",tnMode=4,"",.NULL.)
    ENDFOR &&lnProjs
 *  &&tnProjects=3
   OTHERWISE
@@ -398,19 +457,25 @@ FUNCTION Convert_Pjx &&Runs FoxBin2Prg for multiple projects.
 
  DO CASE
   CASE tnMode=0
-   lvMode = "*"
+   lvMode     = "*"
    ??', generate projects and files of list'
   CASE tnMode=1
-   lvMode = "*-"
+   llCheckAll = .F.
+   lvMode     = "*-"
    ??', generate files list'
   CASE tnMode=2
-   lvMode = ""
+   llCheckAll = .F.
+   lvMode     = ""
    ??', generate projects'
   CASE tnMode=3
-   lvMode = "*-"
+   llCheckAll = .F.
+   lvMode     = "*-"
    ??', generate files list'
+  CASE tnMode=4
+   lvMode     = "*"
+   ??', generate projects and files of list'
   OTHERWISE
-   lvMode = "*"
+   lvMode     = "*"
    ??', generate projects and files of list'
  ENDCASE
 
@@ -433,7 +498,30 @@ FUNCTION Convert_Pjx &&Runs FoxBin2Prg for multiple projects.
   ELSE  &&lnProjs=0
    DIMENSION;
     _SCREEN.gaProjects(lnProjs,2)
-   lnProj = 0
+
+*!*	Changed by SF 12.5.2015
+*!*	<pdm>
+*!*	<change date="{^2015-05-12,11:36:00}">Changed by SF<br />
+*!*	Make <expr>ACTIVEPROJECT</expr> active after reopen
+*!*	</change>
+*!*	</pdm>
+
+*Active on top, to make it active on reopen
+   lnProj = 1
+   loProject = _VFP.ACTIVEPROJECT
+   _SCREEN.gaProjects(lnProj,1) = loProject.NAME
+*SF internal
+   _SCREEN.gaProjects(lnProj,2) = VARTYPE(loProject.PROJECTHOOK)='O';
+    AND !ISNULL(loProject.PROJECTHOOK);
+    AND PEMSTATUS(loProject.PROJECTHOOK,'glCompileAll',5);
+    AND loProject.PROJECTHOOK.glCompileAll
+*/SF internal
+   loProject.CLOSE
+
+*   lnProj = 0
+
+*!*	/Changed by SF 12.5.2015
+
    FOR EACH loProject IN _VFP.PROJECTS FOXOBJECT
     lnProj = lnProj+1
     _SCREEN.gaProjects(lnProj,1) = loProject.NAME
@@ -443,7 +531,7 @@ FUNCTION Convert_Pjx &&Runs FoxBin2Prg for multiple projects.
      AND PEMSTATUS(loProject.PROJECTHOOK,'glCompileAll',5);
      AND loProject.PROJECTHOOK.glCompileAll
 */SF internal
-     loProject.CLOSE
+    loProject.CLOSE
    ENDFOR &&loProject
   ENDIF &&lnProjs=0
  ENDIF &&tnMode=3
@@ -453,6 +541,7 @@ FUNCTION Convert_Pjx &&Runs FoxBin2Prg for multiple projects.
  _SCREEN.ADDPROPERTY('gcOld_Path',lcOldPath)
  _SCREEN.ADDPROPERTY('gvMode',lvMode)
  _SCREEN.ADDPROPERTY('glToBin',tlToBin)
+ _SCREEN.ADDPROPERTY('glCheckAll',llCheckAll)
 
 *to remove Classlibs so we can recreate
  CLEAR ALL
@@ -465,7 +554,8 @@ FUNCTION Convert_Pjx &&Runs FoxBin2Prg for multiple projects.
 
 *process Transformation
  Construct_Objects()
- _SCREEN.frmB2T_Envelop.cusB2T.Process_Bin2Text(@laFiles,_SCREEN.glToBin,_SCREEN.gvMode)
+
+ _SCREEN.frmB2T_Envelop.cusB2T.Process_Bin2Text(@laFiles,_SCREEN.glToBin,_SCREEN.gvMode,_SCREEN.glCheckAll AND _SCREEN.gcB2T_Delete=="1")
  Destruct_Objects()
 
  CLEAR ALL
@@ -473,6 +563,7 @@ FUNCTION Convert_Pjx &&Runs FoxBin2Prg for multiple projects.
 */Move
  REMOVEPROPERTY(_SCREEN,'gvMode')
  REMOVEPROPERTY(_SCREEN,'glToBin')
+ REMOVEPROPERTY(_SCREEN,'glCheckAll')
 
 
 *Move
@@ -524,6 +615,18 @@ FUNCTION Convert_Pjx &&Runs FoxBin2Prg for multiple projects.
 
  REMOVEPROPERTY(_SCREEN,'gaProjects')
 
+*!*	Changed by: SF 5.6.2015
+*!*	<pdm>
+*!*	<change date="{^2015-06-05,11:14:00}">Changed by: SF<br />
+*!*	Output of current git branch
+*!*	</change>
+*!*	</pdm>
+ lcProj = GetBranch()
+ IF !EMPTY(lcProj) THEN
+  ?'On branch '+lcProj
+ ENDIF &&!EMPTY(lcProj)
+*!*	/Changed by: SF 5.6.2015
+
  CD (_SCREEN.gcOld_Path)
  REMOVEPROPERTY(_SCREEN,'gcOld_Path')
 
@@ -560,8 +663,12 @@ FUNCTION Convert_Array	&&Runs FoxBin2Prg for multiple files.
 *!*	<remarks>
 *<p>Transfers a bunch of files</p>
 *<p>Processes binaries. If <pdmpara num="1"/> the source files will be determined be the code.</p>
+*<note id="E" title="Warning">
+* Note that the files processed will be cached by the normal process of this programm. A operation that raises deletion
+* like <i>Delete obsolete files</i> might delete text files without warning.
+*</note>
 *</remarks>
-*!*	<copyright><i>&copy; 19.4.2015 Lutz Scheffler Software Ingenieurbüro</i></copyright>
+*!*	<copyright><i>&copy; 05.6.2015 Lutz Scheffler Software Ingenieurbüro</i></copyright>
 *!*	</pdm>
 
  EXTERNAL ARRAY;
@@ -783,6 +890,180 @@ ENDFUNC &&Destruct_Objects
 
 *!*	/Changed by SF 11.4.2015
 
+*!*	Geändert durch: SF 4.6.2015
+*!*	<pdm>
+*!*	<change date="{^2015-06-04,11:20:00}">Geändert durch: SF<br />
+*!*	Add output of curent git branch (if one exist)
+*!*	</change>
+*!*	</pdm>
+
+PROCEDURE GetBranch
+
+*!*	<pdm>
+*!*	<descr>Output of current git branch</descr>
+*!*	<retval type="Character">Branch, empty if no git active</retval>
+*!*	<comment>
+*!*	<remarks></remarks>
+*!*	<example></example>
+*!*	<seealso>
+*!*	 <see loca="" class="" pem=""></see>
+*!*	</seealso>
+*!*	<appliesto toref="0" toalso="0" />
+*!*	</comment>
+*!*	<copyright><i>&copy; 4.6.2015 Lutz Scheffler Software Ingenieurbüro</i></copyright>
+*!*	</pdm>
+
+ LOCAL;
+  lcRet AS CHARACTER,;
+  lnSec AS NUMBER
+
+ lcRet = ''
+ IF DIRECTORY('.git',1) THEN
+  DELETE FILE git_x.tmp
+  DO WHILE FILE('git_x.tmp')
+   WAIT "" WINDOW TIMEOUT 0.2
+  ENDDO &&FILE('git_x.tmp')
+  IF Run_git('rev-parse --abbrev-ref HEAD>git_x.tmp',.F.) THEN
+   lnSec = SECONDS()
+   DO WHILE !FILE('git_x.tmp')
+    WAIT "" WINDOW TIMEOUT 0.2
+    IF SECONDS()-lnSec>=2 THEN
+     EXIT
+    ENDIF &&SECONDS()-lnSec>=2
+   ENDDO &&!FILE('git_x.tmp')
+   IF FILE('git_x.tmp') THEN
+    lcRet = CHRTRAN(FILETOSTR('git_x.tmp'),0h0d0a,'')
+   ENDIF &&FILE('git_x.tmp')
+   DELETE FILE git_x.tmp
+  ENDIF &&Run_git('rev-parse --abbrev-ref HEAD>git_x.tmp',.F.)
+ ENDIF &&DIRECTORY('.git',1)
+ RETURN lcRet
+ENDPROC &&GetBranch
+*!*	/Geändert durch: SF 4.6.2015
+
+*!*	Changed by: SF 5.6.2015
+*!*	<pdm>
+*!*	<change date="{^2015-06-05,08:07:00}">Changed by SF<br />
+*!*	Move git run from <expr>RUN</expr> to ShellExecute
+*!*	</change>
+*!*	</pdm>
+
+FUNCTION Run_git
+ LPARAMETERS;
+  tcParameters,;
+  tlShow
+
+*!*	<pdm>
+*!*	<descr>Run git program</descr>
+*!*	<params name="tcParameters" type="Character" byref="0" dir="" inb="0" outb="0">
+*!*	<short><parameters for git/short>
+*!*	<detail></detail>
+*!*	</params>
+*!*	<params name="tlShow" type="Boolean" byref="0" dir="" inb="0" outb="0">
+*!*	<short>Show command widow >/short>
+*!*	<detail></detail>
+*!*	</params>
+*!*	<remarks>Runs ShellExecute to run git.
+* Uses <i>cmd</i> to perform piping operations.</remarks>
+*!*	<retval type="Boolean">Success</retval>
+*!*	<comment>
+*!*	<example></example>
+*!*	<seealso>
+*!*	 <see loca="" class="" pem=""></see>
+*!*	</seealso>
+*!*	<appliesto toref="0" toalso="0" />
+*!*	</comment>
+*!*	<copyright><i>&copy; 4.6.2015 Lutz Scheffler Software Ingenieurbüro</i></copyright>
+*!*	</pdm>
+
+ LOCAL;
+  lcPath   AS CHARACTER,;
+  llReturn AS BOOLEAN
+
+ DECLARE INTEGER ShellExecute IN "Shell32.dll";
+  INTEGER HWND, ;
+  STRING lpVerb, ;
+  STRING lpFile, ;
+  STRING lpParameters, ;
+  STRING lpDirectory, ;
+  LONG nShowCmd
+
+ lcPath = ADDBS(FULLPATH(CURDIR()))
+*rund cmd to perform piping data
+ IF ">"$tcParameters THEN
+  llReturn = Run_ShellExecute(0,0h00,'cmd','/c git '+tcParameters+0h00,lcPath+0h00,IIF(tlShow,10,0))
+ ELSE  &&">"$tcParameters
+  llReturn = Run_ShellExecute(0,0h00,'git',tcParameters+0h00,lcPath+0h00,IIF(tlShow,10,0))
+ ENDIF &&">"$tcParameters
+
+ RETURN llReturn
+ENDFUNC &&Run_git
+
+FUNCTION Run_ShellExecute
+ LPARAMETERS;
+  tvPara1,;
+  tvPara2,;
+  tvPara3,;
+  tvPara4,;
+  tvPara5,;
+  tvPara6
+
+*!*	<pdm>
+*!*	<descr>Run ShellExecute</descr>
+*!*	<params name="tvPara1" type="Variant" byref="0" dir="" inb="0" outb="0">
+*!*	<short>Parameter for ShellExecute</short>
+*!*	<detail></detail>
+*!*	</params>
+*!*	<params name="tvPara2" type="Variant" byref="0" dir="" inb="0" outb="0">
+*!*	<short>Parameter for ShellExecute</short>
+*!*	<detail></detail>
+*!*	</params>
+*!*	<params name="tvPara3" type="Variant" byref="0" dir="" inb="0" outb="0">
+*!*	<short>Parameter for ShellExecute</short>
+*!*	<detail></detail>
+*!*	</params>
+*!*	<params name="tvPara4" type="Variant" byref="0" dir="" inb="0" outb="0">
+*!*	<short>Parameter for ShellExecute</short>
+*!*	<detail></detail>
+*!*	</params>
+*!*	<params name="tvPara5" type="Variant" byref="0" dir="" inb="0" outb="0">
+*!*	<short>Parameter for ShellExecute</short>
+*!*	<detail></detail>
+*!*	</params>
+*!*	<params name="tvPara6" type="Variant" byref="0" dir="" inb="0" outb="0">
+*!*	<short>Parameter for ShellExecute</short>
+*!*	<detail></detail>
+*!*	</params>
+*!*	<retval type="Boolean">Success</retval>
+*!*	<comment>
+*!*	<remarks></remarks>
+*!*	<example></example>
+*!*	<seealso>
+*!*	 <see loca="" class="" pem=""></see>
+*!*	</seealso>
+*!*	<appliesto toref="0" toalso="0" />
+*!*	</comment>
+*!*	<copyright><i>&copy; 5.6.2015 Lutz Scheffler Software Ingenieurbüro</i></copyright>
+*!*	</pdm>
+
+ LOCAL;
+  lnReturn AS NUMBER
+
+ DECLARE INTEGER ShellExecute IN "Shell32.dll";
+  INTEGER HWND, ;
+  STRING lpVerb, ;
+  STRING lpFile, ;
+  STRING lpParameters, ;
+  STRING lpDirectory, ;
+  LONG nShowCmd
+
+ lnReturn = ShellExecute(tvPara1,tvPara2,tvPara3,tvPara4,tvPara5,tvPara6)
+
+ RETURN lnReturn>32
+
+ENDFUNC &&Run_ShellExecute
+*!*	/Changed by SF 5.6.2015
+
 FUNCTION HelpMsg	&&Internal
 
  #DEFINE dcText_DE_H00;
@@ -825,11 +1106,14 @@ FUNCTION HelpMsg	&&Internal
   [Nur aus der IDE starten.]
 
  #DEFINE dcText_DE_H03;
-  "DO Pjx2Commit IN Bin2Text.app [/?]"+0h0d0a+;
+  "DO Pjx2Commit IN Bin2Text.app [/?]|[lAll]"+0h0d0a+;
   [ Wandle alle Dateien aller PJX im Verzeichnis nach Text]+0h0d0a+;
-  [ und starte "git commit -a"]+0h0d0a+;
+  [ und starte "git add -A" + "git commit"]+0h0d0a+;
   [ Parameter:]+0h0d0a+;
-  [  /?        Zeigt diesen Hilfstext]
+  [  /?        Zeigt diesen Hilfstext]+0h0d0a+;
+  [  lAll      Dateien die einzubeziehen sind]+0h0d0a+;
+  [            .T. Alle Projekte im Pfad]+0h0d0a+;
+  [            .F. Aktives Projekt (default)]
 
  #DEFINE dcText_DE_H04;
   "DO Pjx2Commit IN Bin2Text.app [/?]"+0h0D0A0D0A+;
@@ -916,11 +1200,14 @@ FUNCTION HelpMsg	&&Internal
   [Run from IDE only.]
 
  #DEFINE dcText_EN_H03;
-  "DO Pjx2Commit IN Bin2Text.app [/?]"+0h0d0a+;
+  "DO Pjx2Commit IN Bin2Text.app [/?]|[lAll]"+0h0d0a+;
   [ Process all containied in all PJX in Folder to text]+0h0d0a+;
-  [ and run "git commit -a"]+0h0d0a+;
+  [ and run "git add -A" + "git commit"]+0h0d0a+;
   [ Parameter:]+0h0d0a+;
-  [  /?        This help message]
+  [  /?        This help message]+0h0d0a+;
+  [  lAll      Process files]+0h0d0a+;
+  [            .T. process all projects in path]+0h0d0a+;
+  [            .F. process active project (default)]
 
  #DEFINE dcText_EN_H04;
   "DO Pjx2Commit IN Bin2Text.app [/?]"+0h0D0A0D0A+;

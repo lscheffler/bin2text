@@ -23,13 +23,17 @@ ON PAD _000000001 OF _MSYSMENU ACTIVATE POPUP FoxBin2Tex
 
 	*----------------------------------
 	DEFINE POPUP FoxBin2Tex MARGIN RELATIVE SHADOW COLOR SCHEME 4
-	DEFINE BAR 1 OF FoxBin2Tex PROMPT "git \<commit all" ;
+	DEFINE BAR 1 OF FoxBin2Tex PROMPT "git \<commit Active" ;
 		MESSAGE "Bin2Text on projects in path / git commit -a" && LOCAL;<CR> lcApp AS CHARACTER<CR><CR>lcApp = "Bin2Text.app"<CR>DO Pjx2Commit IN (lcApp)
 	ON SELECTION BAR 1 OF FoxBin2Tex DO Pjx2Commit IN Bin2Text.app
 
-	DEFINE BAR 2 OF FoxBin2Tex PROMPT "\<Bin to Text" ;
+	DEFINE BAR 2 OF FoxBin2Tex PROMPT "git commit \<All" ;
+		MESSAGE "Bin2Text on projects in path / git commit -a"
+	ON SELECTION BAR 2 OF FoxBin2Tex DO Pjx2Commit IN Bin2Text.app WITH .T.
+
+	DEFINE BAR 3 OF FoxBin2Tex PROMPT "\<Bin to Text" ;
 		MESSAGE "Bin2Text"
-	ON BAR 2 OF FoxBin2Tex ACTIVATE POPUP Bin2Text
+	ON BAR 3 OF FoxBin2Tex ACTIVATE POPUP Bin2Text
 
 		*----------------------------------
 		DEFINE POPUP Bin2Text MARGIN RELATIVE SHADOW COLOR SCHEME 4
@@ -51,9 +55,9 @@ ON PAD _000000001 OF _MSYSMENU ACTIVATE POPUP FoxBin2Tex
 			MESSAGE "Bin2Text, pick up file"
 		ON SELECTION BAR 4 OF Bin2Text DO Convert_Pjx IN Bin2Text.app WITH .F.,0,0
 
-	DEFINE BAR 3 OF FoxBin2Tex PROMPT "\<Text to Bin" ;
+	DEFINE BAR 4 OF FoxBin2Tex PROMPT "\<Text to Bin" ;
 		MESSAGE "Text2Bin"
-	ON BAR 3 OF FoxBin2Tex ACTIVATE POPUP Text2Bin
+	ON BAR 4 OF FoxBin2Tex ACTIVATE POPUP Text2Bin
 
 		*----------------------------------
 		DEFINE POPUP Text2Bin MARGIN RELATIVE SHADOW COLOR SCHEME 4
@@ -75,12 +79,12 @@ ON PAD _000000001 OF _MSYSMENU ACTIVATE POPUP FoxBin2Tex
 			MESSAGE "Text2Bin pick a file"
 		ON SELECTION BAR 4 OF Text2Bin DO Convert_Pjx IN Bin2Text.app WITH .T.,0,0
 
-	DEFINE BAR 4 OF FoxBin2Tex PROMPT "\-"
-	ON BAR 4 OF FoxBin2Tex ACTIVATE POPUP NewItem
+	DEFINE BAR 5 OF FoxBin2Tex PROMPT "\-"
+	ON BAR 5 OF FoxBin2Tex ACTIVATE POPUP NewItem
 
 		*----------------------------------
 		DEFINE POPUP NewItem MARGIN RELATIVE SHADOW COLOR SCHEME 4
-	DEFINE BAR 5 OF FoxBin2Tex PROMPT "\<Settings" && LOCAL;<CR> lcApp AS CHARACTER<CR><CR>lcApp = "Bin2Text.app"<CR>DO Inter_Active IN (lcApp)
-	ON SELECTION BAR 5 OF FoxBin2Tex DO Inter_Active IN Bin2Text.app
+	DEFINE BAR 6 OF FoxBin2Tex PROMPT "\<Settings" && LOCAL;<CR> lcApp AS CHARACTER<CR><CR>lcApp = "Bin2Text.app"<CR>DO Inter_Active IN (lcApp)
+	ON SELECTION BAR 6 OF FoxBin2Tex DO Inter_Active IN Bin2Text.app
 
 *</MenuCode>
