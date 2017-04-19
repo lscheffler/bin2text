@@ -1,7 +1,7 @@
 <!DOCTYPE html PUBLIC &quot;-//W3C//DTD XHTML 1.0 Transitional//EN&quot; &quot;http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd&quot;&gt;
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="deu">
  <head>
-  <title>change log</title>
+  <title>Change log</title>
 <!--- CSS Defs
 &lt;style
 
@@ -22,6 +22,119 @@
 </head>
 <body>
  <h1>Change log</h1>
+ <h2>Version 0.11.0</h2>
+ <p>Better integration of external program <i>git</i></p>
+ <p>Rekursive strategy to search for projects.</p>
+ <p>Bug fixes.</p>
+ <table border="1" cellspacing="0">
+  <thead>
+   <tr>
+    <td>Item</td><td>description</td>
+   </tr>
+  </thead>
+  <tbody>
+  <tr>
+  	<td colspan="2">
+  		Minor Changes, bug fixes
+	 </td>
+  </tr>
+  <tr>
+   <td>general</td>
+   <td>Better <i>git</i> integration.</td>
+  </tr>
+  <tr>
+   <td>general</td>
+   <td>If <i>git</i> control is active, <i>git root</i> is used as basedir.</td>
+  </tr>
+  <tr>
+  	<td>InitMenu</td>
+  	<td>
+  	<p>SET EXACT is now set to original value.</p>
+  </td>
+  </tr>
+  <tr>
+  	<td>Bug fix</td>
+  	<td>
+  	<p>Problem with single file processing.<br />Failure when aborting file open dialog..</p>
+  </td>
+  </tr>
+  <tr>
+  	<td colspan="2">
+  		Run_ShellExecute<br />
+  		<a href="../code/runb2t.prg/Main_d.run_extapp.htm" title="Skip to procedure Run_ExtApp">Run_ExtApp</a>
+	  </td>
+  </tr>
+  <tr>
+   <td>Function replaced</td>
+   <td>Changed from ShellExecute to Ed Raus API_AppRun.</td>
+  </tr>
+  <tr>
+  	<td colspan="2">
+  		<a href="../code/runb2t.prg/Main_d.is_git.htm" title="Skip to procedure Is_git">Is_git</a>
+	  </td>
+  </tr>
+  <tr>
+   <td>New Function</td>
+   <td>Return if a directory is under <i>git</i> control.</td>
+  </tr>
+  <tr>
+  	<td colspan="2">
+  		<a href="../code/runb2t.prg/Main_d.getgitbasedir.htm" title="Skip to procedure GetGitBaseDir">GetGitBaseDir</a>
+	  </td>
+  </tr>
+  <tr>
+   <td>New Function</td>
+   <td>Return the <i>git root</i> directory for a given directory. Empty return means not under <i>git</i> control.</td>
+  </tr>
+  <tr>
+  	<td colspan="2">
+  		<a href="../code/runb2t.prg/Main_d.scandir.htm" title="Skip to method ScanDir">ScanDir</a>
+	  </td>
+  </tr>
+  <tr>
+   <td>New function</td>
+   <td>
+		New function to recursivly parse directories and search for project files.
+  	</td>
+  </tr>
+  <tr>
+  	<td colspan="2">
+  		<a href="../code/runb2t.prg/Main_d.dir_action.htm" title="Skip to method Dir_Action">Dir_Action</a>
+	  </td>
+  </tr>
+  <tr>
+   <td>New function</td>
+   <td>
+		New function to recursivly parse directories and search for project files.
+  	</td>
+  </tr>
+  <tr>
+  	<td colspan="2">
+  		<a href="../classes/bin_2_text.vcx/cls.cusstorage.process_bin2text.htm" title="Skip to method Process_Bin2Text">Process_Bin2Text</a>
+	  </td>
+  </tr>
+  <tr>
+   <td>Bug fix</td>
+   <td>
+	   	<p>
+   			<expr>MODIFY PROJCET .. NOPROJECTHOOK</expr> checks for existence of <expr>PROJECTHOOKLIBRARY</expr>.
+   		</p>
+	   	<p>
+   			This will fail if cloning a project from plain text. Switched to SQL SELECT from PJX table.
+   		</p>
+  	</td>
+  </tr>
+  <tr>
+   <td>Changed strategy</td>
+   <td>
+	   	<p>
+   			If tlToBin <expr>PROJECTHOOKLIBRARY</expr> will be read from recreated binary.
+   		</p>
+  	</td>
+  </tr>
+  </tbody>
+ </table>
+
  <h2>Version 0.10.0</h2>
  <p>The detection of changed files is improved. Chnges to the table headers by compile without any change of the data itself will be ignored.</p>
  <p>Handling of obsolete files is introduced.</p>
@@ -126,7 +239,8 @@
   <tr>
    <td>Delete</td>
    <td>Code to deal with the <i>delete obsolete files</i> problem.</td>
-   </tbody>
+  </tr>
+  </tbody>
  </table>
  <hr /><i>&copy;2015 Lutz Scheffler Software Ingenieurbüro</i>
 </body></html>
