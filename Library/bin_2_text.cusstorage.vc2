@@ -1241,7 +1241,6 @@ DEFINE CLASS cusstorage AS custom 		&& The stuff that does the work.
 		
 		  IF _SCREEN.gcB2T_Delete=="1" THEN
 		*Delete obsolete classes from classlibs
-		SET STEP ON 
 		   SELECT (lcStorage)
 		*sfx todo SQL
 		   SCAN FOR iDirty=-1
