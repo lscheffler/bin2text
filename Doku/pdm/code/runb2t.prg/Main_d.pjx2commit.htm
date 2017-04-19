@@ -16,18 +16,18 @@
 <body>
 <div class="diaxp_mhead">Pjx2Commit Function</div>
 <div class="diaxp_mbody">
-<!-- Created with _diamp_pdm_ab by Agnes Beste    15.06.2015 12:22 -->
+<!-- Created with _diamp_pdm_ab by Agnes Beste    15.09.2015 13:35 -->
  <div class="PDM_AB_Descr"><!-- Descr Begin -->
 Create a commit to git.
  </div><!-- Descr End -->
 
  <div class="DIAMP_PDM_AB_Syntax"><!-- Syntax Begin -->
   <div class="SColor">
-   <div class="RetVal"><a href="#_4DJ0QIG8C">RetVal</a>&nbsp;</div>   <div class="RetValEq">=</div>   <div class="PEM">
+   <div class="RetVal"><a href="#_4G30T4XQ0">RetVal</a>&nbsp;</div>   <div class="RetValEq">=</div>   <div class="PEM">
     Pjx2Commit
    </div>
    <div class="Para">
-    ([<a href="#_4DJ0QIG8D">tlAll</a>])
+    ([<a href="#_4G30T4XQ1">tlAll</a>])
    </div>
    <div style="clear: both"></div>
   </div><!-- Colour End -->
@@ -39,7 +39,7 @@ Create a commit to git.
   </span>
   <dl class="DIAMP_PDM_AB_Params_List">
    <dt class="dt_">
-    <a class="DIAMP_PDM_AB_Params_ParaName" id="_4DJ0QIG8D" name="_4DJ0QIG8D">
+    <a class="DIAMP_PDM_AB_Params_ParaName" id="_4G30T4XQ1" name="_4G30T4XQ1">
      <span class="PDMEXPR PDMNor" ><span class='PDMVar'>tlAll</span></span>
 
     </a>
@@ -75,7 +75,7 @@ Create a commit to git.
  <div class="DIAMP_PDM_AB_RetVal"><!-- Returns Begin -->
   <div>
    <span class="PDM_AB_Head">
-    <a id="_4DJ0QIG8C" name="_4DJ0QIG8C">
+    <a id="_4G30T4XQ0" name="_4G30T4XQ0">
      Return value
     </a>
    </span> <span class="RetVal_Ttype">Boolean</span>
@@ -105,7 +105,7 @@ This calls FoxBin2PRG to process active project or all projects in the path. And
     04.06.2015 11:19
    </span><br />
 Changed by: SF<br />
-	New parameter <a class="DIAMP_PDM_AB_Para_Link" href="#_4DJ0QIG8D">tlAll</a>
+	New parameter <a class="DIAMP_PDM_AB_Para_Link" href="#_4G30T4XQ1">tlAll</a>
 	
   </div>
   <div class="PDM_AB_Body">
@@ -121,7 +121,7 @@ Changed by: SF<br />
  </div><!-- Changes End -->
 
 
-<!-- /Created with _diamp_pdm_ab by Agnes Beste    15.06.2015 12:22 -->
+<!-- /Created with _diamp_pdm_ab by Agnes Beste    15.09.2015 13:35 -->
 
  <div class="SC">
   <img onclick="ExpandSC('SP_P2',-1);" class="imgEC" src="../../imgs/dotab.gif" alt="Expand/Collapse source code of procedure Pjx2Commit" id="IMG_SP_P2" />
@@ -153,7 +153,7 @@ Changed by: SF<br />
 <span class='PDMCnt'>  61</span> <span class='PDMInd'> 3</span>    <span class='PDMVar'>lcStorage</span> <span class='PDMResK'>AS</span> <span class='PDMResK'>CHARACTER</span>
 <span class='PDMCnt'>  62</span> <span class='PDMInd'>  </span> 
 <span class='PDMCnt'>  63</span> <span class='PDMInd'> 2</span>   <span class='PDMVar'>Construct_Objects</span><span class='PDMOper'>(</span><span class='PDMOper'>)</span>
-<span class='PDMCnt'>  64</span> <span class='PDMInd'> 2</span>   <span class='PDMVar'>lcStorage</span> <span class='PDMOper'>=</span> <span class='PDMVar'>_SCREEN</span><span class='PDMOper'>.</span><span class='PDMVar'>frmB2T_Envelop</span><span class='PDMOper'>.</span><span class='PDMVar'>cusB2T</span><span class='PDMOper'>.</span><span class='PDMVar'>Settings_Check</span><span class='PDMOper'>(</span><span class='PDMOper'>)</span>
+<span class='PDMCnt'>  64</span> <span class='PDMInd'> 2</span>   <span class='PDMVar'>lcStorage</span> <span class='PDMOper'>=</span> <span class='PDMVar'>_SCREEN</span><span class='PDMOper'>.</span><span class='PDMVar'>frmB2T_Envelop</span><span class='PDMOper'>.</span><span class='PDMVar'>cusB2T</span><span class='PDMOper'>.</span><span class='PDMVar'>Storage_Check</span><span class='PDMOper'>(</span><span class='PDMOper'>)</span>
 <span class='PDMCnt'>  65</span> <span class='PDMInd'> 2</span>   <span class='PDMVar'>_SCREEN</span><span class='PDMOper'>.</span><span class='PDMVar'>frmB2T_Envelop</span><span class='PDMOper'>.</span><span class='PDMVar'>cusB2T</span><span class='PDMOper'>.</span><span class='PDMVar'>Storage_Close</span><span class='PDMOper'>(</span><span class='PDMVar'>lcStorage</span><span class='PDMOper'>,</span><span class='PDMLit'>.T.</span><span class='PDMOper'>)</span>
 <span class='PDMCnt'>  66</span> <span class='PDMInd'> 2</span>   <span class='PDMVar'>Destruct_Objects</span><span class='PDMOper'>(</span><span class='PDMOper'>)</span>
 <span class='PDMCnt'>  67</span> <span class='PDMInd'>  </span> 
@@ -188,9 +188,9 @@ Changed by: SF<br />
 <span class='PDMCnt'> 101</span> <span class='PDMInd'> 4</span>     <span class='PDMVar'>lcBat</span>  <span class='PDMResK'>AS</span> <span class='PDMResK'>CHARACTER</span><span class='PDMOper'>,</span><span class='PDMOper'>;</span>
 <span class='PDMCnt'> 102</span> <span class='PDMInd'> 4</span>     <span class='PDMVar'>lcPath</span> <span class='PDMResK'>AS</span> <span class='PDMResK'>CHARACTER</span>
 <span class='PDMCnt'> 103</span> <span class='PDMInd'>  </span> 
-<span class='PDMCnt'> 104</span> <span class='PDMInd'> 3</span>    <span class='PDMResK'>TEXT</span> <span class='PDMResK'>TO</span> <span class='PDMVar'>lcBat</span> <span class='PDMResK'>NOSHOW</span>
-<span class='PDMCnt'> 105</span> <span class='PDMInd'>  </span> <span class='PDMVar'>git</span> <span class='PDMResK'>add</span> <span class='PDMOper'>-</span><span class='PDMVar'>A</span>
-<span class='PDMCnt'> 106</span> <span class='PDMInd'>  </span> <span class='PDMVar'>git</span> <span class='PDMResK'>status</span> <span class='PDMOper'>-</span><span class='PDMOper'>-</span><span class='PDMVar'>porcelain</span><span class='PDMOper'>&gt;</span><span class='PDMVar'>git_x</span><span class='PDMOper'>.</span><span class='PDMVar'>tmp</span>
+<span class='PDMCnt'> 104</span> <span class='PDMInd'> 3</span>    <span class='PDMResK'>TEXT</span> <span class='PDMResK'>TO</span> <span class='PDMVar'>lcBat</span> <span class='PDMResK'>NOSHOW</span> <span class='PDMResK'>TEXTMERGE</span>
+<span class='PDMCnt'> 105</span> <span class='PDMInd'>  </span> <span class='PDMStr'>"&lt;&lt;_SCREEN.gcB2t_git&gt;&gt;"</span> <span class='PDMResK'>add</span> <span class='PDMOper'>-</span><span class='PDMVar'>A</span>
+<span class='PDMCnt'> 106</span> <span class='PDMInd'>  </span> <span class='PDMStr'>"&lt;&lt;_SCREEN.gcB2t_git&gt;&gt;"</span> <span class='PDMResK'>status</span> <span class='PDMOper'>-</span><span class='PDMOper'>-</span><span class='PDMVar'>porcelain</span><span class='PDMOper'>&gt;</span><span class='PDMVar'>git_x</span><span class='PDMOper'>.</span><span class='PDMVar'>tmp</span>
 <span class='PDMCnt'> 107</span> <span class='PDMInd'> 3</span>    <span class='PDMResK'>ENDTEXT</span> <span class='PDMCom'>&amp;&amp;lcBat</span>
 <span class='PDMCnt'> 108</span> <span class='PDMInd'> 3</span>    <span class='PDMResF'>STRTOFILE</span><span class='PDMOper'>(</span><span class='PDMVar'>lcBat</span><span class='PDMOper'>,</span><span class='PDMStr'>'git_x.bat'</span><span class='PDMOper'>)</span>
 <span class='PDMCnt'> 109</span> <span class='PDMInd'>  </span> 

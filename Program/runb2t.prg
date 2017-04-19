@@ -61,7 +61,7 @@ FUNCTION Pjx2Commit	&&Create a commit to git.
    lcStorage AS CHARACTER
 
   Construct_Objects()
-  lcStorage = _SCREEN.frmB2T_Envelop.cusB2T.Settings_Check()
+  lcStorage = _SCREEN.frmB2T_Envelop.cusB2T.Storage_Check()
   _SCREEN.frmB2T_Envelop.cusB2T.Storage_Close(lcStorage,.T.)
   Destruct_Objects()
 
@@ -101,9 +101,9 @@ FUNCTION Pjx2Commit	&&Create a commit to git.
     lcBat  AS CHARACTER,;
     lcPath AS CHARACTER
 
-   TEXT TO lcBat NOSHOW
-git add -A
-git status --porcelain>git_x.tmp
+   TEXT TO lcBat NOSHOW TEXTMERGE
+"<<_SCREEN.gcB2t_git>>" add -A
+"<<_SCREEN.gcB2t_git>>" status --porcelain>git_x.tmp
    ENDTEXT &&lcBat
    STRTOFILE(lcBat,'git_x.bat')
 
@@ -171,7 +171,7 @@ FUNCTION Inter_Active &&Run settings mask.
  _SCREEN.ADDPROPERTY('gcOld_Path',FULLPATH(CURDIR()))
  CD (JUSTPATH(_SCREEN.gcB2T_Path))
 
- _SCREEN.frmB2T_Envelop.cusB2T.Settings_Check(.T.)
+ _SCREEN.frmB2T_Envelop.cusB2T.Storage_Check(.T.)
  Destruct_Objects()
 
  CD (_SCREEN.gcOld_Path)
@@ -422,6 +422,15 @@ FUNCTION Convert_Pjx &&Runs FoxBin2Prg for multiple projects.
 *  &&tnProjects=2
   CASE tnProjects=3
 *path
+*!*	Changed by: SF 15.9.2015
+*!*	<pdm>
+*!*	<change date="{^2015-09-15,10:45:00}">Changed by: SF<br />
+*!*	Do not delete obsolete libraries etc on <b>all</b> run. This runs only base dir.
+*!*	Hidden projects in subdirectories storing extra stuff might exist.
+*!*	</change>
+*!*	</pdm>
+   llCheckAll = .F.
+*!*	/Changed by: SF 15.9.2015
 
    LOCAL;
     lcSourceExt AS CHARACTER,;
@@ -669,7 +678,7 @@ FUNCTION Convert_Pjx &&Runs FoxBin2Prg for multiple projects.
 *!*	Output of current git branch
 *!*	</change>
 *!*	</pdm>
- lcProj = GetBranch()
+ lcProj = getbranch()
  IF !EMPTY(lcProj) THEN
   ?'On branch '+lcProj
  ENDIF &&!EMPTY(lcProj)
@@ -846,7 +855,7 @@ FUNCTION InitMenu	&&Starts the IDE menu.
 
  Construct_Objects()
 *SET STEP ON
- lcFile = _SCREEN.frmB2T_Envelop.cusB2T.Settings_Check(.F.,tcHomePath)
+ lcFile = _SCREEN.frmB2T_Envelop.cusB2T.Storage_Check(.F.,tcHomePath)
  IF ISNULL(lcFile) THEN
   ?"Failed to init FoxBin2Prg IDE integration."
  ELSE  &&ISNULL(lcFile)
@@ -903,6 +912,64 @@ FUNCTION InitMenu	&&Starts the IDE menu.
  SwitchErrorHandler(.F.)
 
 ENDFUNC &&InitMenu
+
+*!*	Changed by: SF 15.9.2015
+*!*	<pdm>
+*!*	<change date="{^2015-09-15,08:03:00}">Changed by: SF<br />
+*!*	New procedures <see pem="git_bash" /> <see pem="git_gitk" /> to run a git bash and history.
+*!*	</change>
+*!*	</pdm>
+
+PROCEDURE git_bash		&&run bash
+*!*	<pdm>
+*!*	<descr>Run <i>git bash</i> for current directory.</descr>
+*!*	<remarks>This is experimental. <i>git bash</i> works not as expected.</remarks>
+*!*	<comment>
+*!*	<retval type=""></retval>
+*!*	<example></example>
+*!*	<seealso>
+*!*	 <see loca="" class="" pem=""></see>
+*!*	</seealso>
+*!*	<appliesto toref="0" toalso="0" />
+*!*	</comment>
+*!*	<copyright><i>&copy; 15.9.2015 Lutz Scheffler Software Ingenieurbüro</i></copyright>
+*!*	</pdm>
+
+ LOCAL;
+  lcPath AS CHARACTER,;
+  lc_Git AS CHARACTER
+
+ lcPath = ADDBS(FULLPATH(CURDIR()))
+
+ IF Get_git_Path(@lc_Git) THEN
+  llReturn = Run_ExtApp('"'+FORCEPATH('git-bash.exe',JUSTPATH(JUSTPATH(lc_Git)))+'" ',lcPath,'NOR',,.T.)
+ ENDIF &&Get_git_Path(@lc_Git)
+ENDPROC &&git_bash
+
+PROCEDURE git_gitk &&run gitk
+*!*	<pdm>
+*!*	<descr>Run <i>gitk</i> for current directory.</descr>
+*!*	<remarks>GUI for <i>git</i> history.</remarks>
+*!*	<comment>
+*!*	<retval type=""></retval>
+*!*	<example></example>
+*!*	<seealso>
+*!*	 <see loca="" class="" pem=""></see>
+*!*	</seealso>
+*!*	<appliesto toref="0" toalso="0" />
+*!*	</comment>
+*!*	<copyright><i>&copy; 15.9.2015 Lutz Scheffler Software Ingenieurbüro</i></copyright>
+*!*	</pdm>
+ LOCAL;
+  lcPath AS CHARACTER
+
+ lcPath = ADDBS(FULLPATH(CURDIR()))
+
+ IF Is_git() THEN
+  llReturn = Run_ExtApp('"'+FORCEPATH('gitk.exe',JUSTPATH(_SCREEN.gcB2t_git))+'" ',lcPath,'NOR',,.T.)
+ ENDIF &&Is_git()
+ENDPROC &&git_gitk
+*!*	/Changed by: SF 15.9.2015
 
 *!*	Changed by SF 11.4.2015
 *!*	<pdm>
@@ -978,9 +1045,14 @@ FUNCTION Is_git		&&Internal. Check if a directory is under git control
 *!*	</comment>
 *!*	<copyright><i>&copy; 12.6.2015 Lutz Scheffler Software Ingenieurbüro</i></copyright>
 *!*	</pdm>
+ LOCAL;
+  llIs_git AS BOOLEAN
 
- RETURN !EMPTY(GetGitBaseDir(tcPath))
-ENDFUNC &&IsGit
+ llIs_git = !EMPTY(GetGitBaseDir(tcPath))
+ _SCREEN.ADDPROPERTY('glB2T_gited',llIs_git)
+
+ RETURN llIs_git
+ENDFUNC &&Is_Git
 
 FUNCTION GetGitBaseDir		&&Internal. Return git root directory
  LPARAMETERS;
@@ -1006,6 +1078,7 @@ FUNCTION GetGitBaseDir		&&Internal. Return git root directory
 
  LOCAL;
   lcTemp   AS CHARACTER,;
+  lc_Git   AS CHARACTER,;
   lcReturn AS CHARACTER
 
  lcReturn = ''
@@ -1014,20 +1087,118 @@ FUNCTION GetGitBaseDir		&&Internal. Return git root directory
   tcPath = FULLPATH(CURDIR())
  ENDIF &&VARTYPE(tcPath)#'C'
 
- lcTemp = FORCEPATH('git_x.tmp',tcPath)
 
- IF Run_ExtApp('cmd /c git rev-parse --show-toplevel>>git_x.tmp',tcPath,'HID') THEN
-  IF FILE(lcTemp) THEN
-   lcReturn = CHRTRAN(FILETOSTR(lcTemp),'/'+0h0d0a,'\')
-  ENDIF &&FILE(lcTemp)
- ENDIF &&Run_ExtApp('cmd /c git rev-parse --show-toplevel>>git_x.tmp',tcPath,'HID')
+ IF Get_git_Path(@lc_Git) THEN
 
- DELETE FILE &lcTemp
+  lcTemp = FORCEPATH('git_x.tmp',tcPath)
+
+  IF Run_ExtApp('cmd /c "'+lc_Git+'" rev-parse --show-toplevel>>git_x.tmp',tcPath,'HID') THEN
+   IF FILE(lcTemp) THEN
+    lcReturn = CHRTRAN(FILETOSTR(lcTemp),'/'+0h0d0a,'\')
+   ENDIF &&FILE(lcTemp)
+  ENDIF &&Run_ExtApp('cmd /c "'+_SCREEN.gcB2t_git+'" rev-parse --show-toplevel>>git_x.tmp',tcPath,'HID')
+
+  DELETE FILE &lcTemp
+
+ ENDIF &&Get_git_Path(@lc_git)
 
  RETURN lcReturn
 ENDFUNC &&GetGitBaseDir
 *!*	/Changed by: SF 12.6.2015
 
+FUNCTION Get_git_Path &&Internal. Get installation status of git and path to binaries.
+ LPARAMETERS;
+  tc_git
+
+*!*	<pdm>
+*!*	<descr>Get installation status of git and paht to git binaries.</descr>
+*!*	<params name="tc_git" type="Character" byref="1" dir="out" inb="0" outb="0">
+*!*	<short>Path to git.exe.</short>
+*!*	<detail>Includes git.exe</detail>
+*!*	</params>
+*!*	<retval type="Boolean">Path found</retval>
+*!*	<remarks>Checks <i>HKLM\software\Microsoft\Windows\CurrentVersion\Uninstall\Git_is1\</i>
+*!*	for existence, returns the path out of <i>InstallLocation</i> value.</remarks>
+*!*	<comment>
+*!*	<example></example>
+*!*	<seealso>
+*!*	 <see loca="" class="" pem=""></see>
+*!*	</seealso>
+*!*	<appliesto toref="0" toalso="0" />
+*!*	</comment>
+*!*	<copyright><i>&copy; 14.9.2015 Lutz Scheffler Software Ingenieurbüro</i></copyright>
+*!*	</pdm>
+
+ #DEFINE ERROR_SUCCESS		0	&& OK
+ #DEFINE HKEY_LOCAL_MACHINE          -2147483646  && BITSET(0,31)+2
+
+ #DEFINE KEY_WOW64_64KEY 0x0100
+ #DEFINE KEY_READ 0x20019
+
+ LOCAL;
+  llReturn AS BOOLEAN
+
+ IF PEMSTATUS(_SCREEN,'gcB2T_git',5) THEN
+*read from storage or set
+  tc_git = _SCREEN.gcB2t_git
+ ELSE  &&PEMSTATUS(_SCREEN,'gcB2T_git',5)
+*try to read registry
+  DECLARE INTEGER RegOpenKeyEx IN advapi32;
+   INTEGER nHKey, STRING cSubKey, INTEGER ulOptions, INTEGER samDesired, INTEGER @nResult
+
+  DECLARE INTEGER RegCloseKey IN Win32API ;
+   INTEGER nHKey
+
+  DECLARE INTEGER RegQueryValueEx IN Win32API ;
+   INTEGER nHKey, STRING lpszValueName, INTEGER dwReserved,;
+   INTEGER @lpdwType, STRING @lpbData, INTEGER @lpcbData
+
+  LOCAL;
+   lcReg    AS CHARACTER
+
+  LOCAL;
+   lnSubKey,;
+   lpdwReserved,;
+   lpdwType,;
+   lpbData,;
+   lpcbData,;
+   lnErrCode AS INTEGER
+
+  tc_git = ''
+  STORE 0              TO lpdwReserved,lpdwType
+  STORE SPACE(256)     TO lpbData
+  STORE LEN(m.lpbData) TO lpcbData
+  lnSubKey = 0
+  lcReg = "SOFTWARE\Microsoft\Windows\CurrentVersion\Uninstall\Git_is1\"
+
+*openkey
+  lnErrCode = RegOpenKeyEx(HKEY_LOCAL_MACHINE,m.lcReg,0,KEY_READ+KEY_WOW64_64KEY,@m.lnSubKey)
+  IF m.lnErrCode=ERROR_SUCCESS THEN
+*ReadKey
+   m.lnErrCode=RegQueryValueEx(lnSubKey,'InstallLocation',;
+    m.lpdwReserved,@lpdwType,@lpbData,@lpcbData)
+
+* Check for error
+   IF m.lnErrCode=ERROR_SUCCESS THEN
+    tc_git = ADDBS(LEFT(m.lpbData,m.lpcbData-1))+'cmd\git.exe'
+   ENDIF &&m.lnErrCode=ERROR_SUCCESS
+*/ReadKey
+
+*CloseKey
+   =RegCloseKey(m.lnSubKey)
+   lnSubKey = 0
+*/CloseKey
+  ENDIF &&m.lnErrCode=ERROR_SUCCESS
+*/openkey
+
+  _SCREEN.ADDPROPERTY('gcB2T_git',IIF(FILE(m.tc_git),m.tc_git,''))
+
+ ENDIF &&PEMSTATUS(_SCREEN,'gcB2T_git',5)
+
+ llReturn = FILE(m.tc_git)
+
+ RETURN m.llReturn
+ENDFUNC &&Get_git_Path
 
 *!*	Geändert durch: SF 4.6.2015
 *!*	<pdm>
@@ -1036,7 +1207,7 @@ ENDFUNC &&GetGitBaseDir
 *!*	</change>
 *!*	</pdm>
 
-PROCEDURE GetBranch		&&Internal. Return active git branch
+PROCEDURE getbranch		&&Internal. Return active git branch
 
 *!*	<pdm>
 *!*	<descr>Output of current git branch</descr>
@@ -1114,22 +1285,33 @@ FUNCTION Run_git		&&Internal. Run a git root command
 
  LOCAL;
   lcPath   AS CHARACTER,;
+  lc_Git   AS CHARACTER,;
   llReturn AS BOOLEAN
 
  lcPath = ADDBS(FULLPATH(CURDIR()))
 *rund cmd to perform piping data
- llReturn = Run_ExtApp('cmd /c git '+tcParameters,lcPath,IIF(tlShow,'NOR','HID'))
+ IF Get_git_Path(@lc_Git) THEN
+  llReturn = Run_ExtApp('cmd /c "'+lc_Git+'" '+tcParameters,lcPath,IIF(tlShow,'NOR','HID'))
+
+ ENDIF &&Get_git_Path(@lc_git)
 *get Base Dir
 *git rev-parse --show-toplevel
  RETURN llReturn
 ENDFUNC &&Run_git
 
+*!*	Changed by: SF 15.9.2015
+*!*	<pdm>
+*!*	<change date="{^2015-09-15,08:21:00}">Changed by: SF<br />
+*!*	new parameter for async working
+*!*	</change>
+*!*	</pdm>
 FUNCTION Run_ExtApp		&&Internal. Run external app
  LPARAMETERS;
   tcCommandLine,;
   tcLaunchDir,;
   tcWindowMode,;
-  tnExitCode
+  tnExitCode,;
+  tlNoWait
 
 *!*	<pdm>
 *!*	<descr>Run Ed Raus API_AppRun</descr>
@@ -1146,8 +1328,12 @@ FUNCTION Run_ExtApp		&&Internal. Run external app
 *!*	<detail>Window Start Mode, one of (HID, NOR, MIN, MAX) or empty
 *defaults to empty, the default for the executable is used</detail>
 *!*	</params>
-*!*	<params name="tnExitCode" type="Variant" byref="0" dir="out" inb="0" outb="0">
+*!*	<params name="tnExitCode" type="Variant" byref="1" dir="out" inb="1" outb="0">
 *!*	<short>Exitcode of the app.</short>
+*!*	<detail></detail>
+*!*	</params>
+*!*	<params name="tlNoWait" type="Boolean" byref="0" dir="out" inb="1" outb="0">
+*!*	<short>Do not wait for external application.</short>
 *!*	<detail></detail>
 *!*	</params>
 *!*	<retval type="Boolean">Success (<pdmpara num="4" /><expr>=0</expr>)</retval>
@@ -1167,17 +1353,23 @@ FUNCTION Run_ExtApp		&&Internal. Run external app
   loAPI AS "API_AppRun" OF "..\..\BIN2TEXT\LIBRARY\BIN_2_TEXT.VCX"
 
 *for testing purposes
-* lcVCX = 'e:\se\tools\bin2text\library\Bin_2_Text.vcx'
+ lcVCX = 'e:\se\tools\bin2text\library\Bin_2_Text.vcx'
 *runnning
- lcVCX = 'Bin_2_Text.vcx'
+* lcVCX = 'Bin_2_Text.vcx'
 
  loAPI = NEWOBJECT('API_AppRun',lcVCX,'',tcCommandLine,tcLaunchDir,tcWindowMode)
  tnExitCode = -1
 
  IF VARTYPE(loAPI)='O' AND !ISNULL(loAPI) THEN
-  IF loAPI.LaunchAppAndWait() THEN
-   tnExitCode = NVL(loAPI.CheckProcessExitCode(),-1)
-  ENDIF &&loAPI.LaunchAppAndWait()
+  IF tlNoWait THEN
+   IF loAPI.LaunchApp() THEN
+    tnExitCode = NVL(loAPI.CheckProcessExitCode(),-1)
+   ENDIF &&loAPI.LaunchApp()
+  ELSE  &&tlNoWait
+   IF loAPI.LaunchAppAndWait() THEN
+    tnExitCode = NVL(loAPI.CheckProcessExitCode(),-1)
+   ENDIF &&loAPI.LaunchAppAndWait()
+  ENDIF &&tlNoWait
  ENDIF &&VARTYPE(loAPI)='O' AND !ISNULL(loAPI)
 
  loAPI = .NULL.
@@ -1185,6 +1377,7 @@ FUNCTION Run_ExtApp		&&Internal. Run external app
  RETURN tnExitCode=0
 
 ENDFUNC &&Run_ExtApp
+*!*	/Changed by: SF 15.9.2015
 *!*	/Changed by SF 12.6.2015
 
 FUNCTION HelpMsg	&&Internal. Display help message for external functions
