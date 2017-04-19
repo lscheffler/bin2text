@@ -42,7 +42,7 @@ FUNCTION Pjx2Commit	&&Create a commit to git.
 *!*	New parameter <pdmpara num="1" />
 *!*	</change>
 *!*	</pdm>
- 
+
 
  IF !VARTYPE(tlAll)='L' THEN
   HelpMsg(3)
@@ -77,7 +77,7 @@ FUNCTION Pjx2Commit	&&Create a commit to git.
   _SCREEN.ADDPROPERTY('gcOld_Path',FULLPATH(CURDIR()))
   CD (JUSTPATH(_SCREEN.gcB2T_Path))
 
-  IF DIRECTORY('.git',1) THEN
+  IF Is_git() THEN
 *!*	Changed by: SF 4.6.2015
 *!*	<pdm>
 *!*	<change date="{^2015-06-04,11:23:00}">Changed by: SF<br />
@@ -85,11 +85,17 @@ FUNCTION Pjx2Commit	&&Create a commit to git.
 *<p>Run <i>git commit</i> only if somthing is to commit.</p>
 *!*	</change>
 *!*	</pdm>
+   LOCAL;
+    lnSec AS NUMBER
 
-   DELETE FILE git_x.tmp
-   DO WHILE FILE('git_x.tmp')
-    WAIT "" WINDOW TIMEOUT 0.2
-   ENDDO &&FILE('git_x.tmp')
+*!*	   DELETE FILE git_x.tmp
+*!*	   lnSec = SECONDS()
+*!*	   DO WHILE FILE('git_x.tmp')
+*!*	    WAIT "" WINDOW TIMEOUT 0.2
+*!*	    IF SECONDS()-lnSec>=2 THEN
+*!*	     EXIT
+*!*	    ENDIF &&SECONDS()-lnSec>=2
+*!*	   ENDDO &&FILE('git_x.tmp')
 
    LOCAL;
     lcBat  AS CHARACTER,;
@@ -102,17 +108,15 @@ git status --porcelain>git_x.tmp
    STRTOFILE(lcBat,'git_x.bat')
 
    lcPath = ADDBS(FULLPATH(CURDIR()))
-   IF Run_ShellExecute(0,0h00,lcPath+'git_x.bat',0h00,lcPath+0h00,.F.) THEN
-    LOCAL;
-     lnSec AS NUMBER
+   IF Run_ExtApp('cmd /c '+lcPath+'git_x.bat',lcPath,'HID') THEN
 
-    lnSec = SECONDS()
-    DO WHILE !FILE('git_x.tmp')
-     WAIT "" WINDOW TIMEOUT 0.2
-     IF SECONDS()-lnSec>=2 THEN
-      EXIT
-     ENDIF &&SECONDS()-lnSec>=2
-    ENDDO &&!FILE('git_x.tmp')
+*!*	    lnSec = SECONDS()
+*!*	    DO WHILE !FILE('git_x.tmp')
+*!*	     WAIT "" WINDOW TIMEOUT 0.2
+*!*	     IF SECONDS()-lnSec>=2 THEN
+*!*	      EXIT
+*!*	     ENDIF &&SECONDS()-lnSec>=2
+*!*	    ENDDO &&!FILE('git_x.tmp')
     IF FILE('git_x.tmp') AND LEN(FILETOSTR('git_x.tmp'))>0 THEN
      IF TYPE('_SCREEN.gcB2T_Commit')="C" AND _SCREEN.gcB2T_Commit=="1" THEN
       Run_git('commit -m "'+CHRTRAN(TTOC(DATETIME(),3),'T',' ')+'" -m "auto-commit by RunB2T.app"',.F.)
@@ -124,12 +128,12 @@ git status --porcelain>git_x.tmp
      ??' - nothing to commit'
     ENDIF &&FILE('git_x.tmp') AND LEN(FILETOSTR('git_x.tmp'))>0
     DELETE FILE git_x.*
-   ENDIF &&Run_ShellExecute(0,0h00,lcPath+'git_x.bat',0h00,lcPath+0h00,.F.)
+   ENDIF &&Run_ExtApp('cmd /c 'lcPath+'git_x.bat',lcPath,'HID')
 *!*	/Changed by: SF 4.6.2015
 
-  ELSE  &&DIRECTORY('.git',1)
+  ELSE  &&Is_git()
    =MESSAGEBOX('Run "git init" to enable git.',0,'',10000)
-  ENDIF &&DIRECTORY('.git',1)
+  ENDIF &&Is_git()
 
   CD (_SCREEN.gcOld_Path)
   REMOVEPROPERTY(_SCREEN,'gcOld_Path')
@@ -195,6 +199,7 @@ FUNCTION Convert_Pjx &&Runs FoxBin2Prg for multiple projects.
 * <dt>1</dt><dd>Active project.</dd>
 * <dt>2</dt><dd>All projects open in IDE</dd>
 * <dt>3</dt><dd>All projects in home path.</dd>
+* <dt>4</dt><dd>All projects in home path, with subdirs.</dd>
 *</dl>
 *</detail>
 *!*	</params>
@@ -211,10 +216,14 @@ FUNCTION Convert_Pjx &&Runs FoxBin2Prg for multiple projects.
 *</detail>
 *!*	<retval type="Boolean">True if successfull.</retval>
 *!*	</params>
-*!*	<copyright><i>&copy; 05.6.2015 Lutz Scheffler Software Ingenieurbüro</i></copyright>
+*!*	<copyright><i>&copy; 12.6.2015 Lutz Scheffler Software Ingenieurbüro</i></copyright>
 
 *!*	<change date="{^2015-05-12,09:56:00}">Changed by: SF<br />
 *!*	New value for parameter <pdmpara num="3" /> "4"
+*!*	</change>
+*!*	</pdm>
+*!*	<change date="{^2015-06-12,15:56:00}">Changed by: SF<br />
+*!*	New value for parameter <pdmpara num="2" /> "4"
 *!*	</change>
 *!*	</pdm>
 
@@ -227,7 +236,7 @@ FUNCTION Convert_Pjx &&Runs FoxBin2Prg for multiple projects.
    tlToBin = '?'
   CASE VARTYPE(tnProjects)#'N'
    tnProjects = 0
-  CASE !BETWEEN(tnProjects,0,3)
+  CASE !BETWEEN(tnProjects,0,4)
    tlToBin = '?'
   CASE VARTYPE(tnMode)#'N'
    tnProjects = 0
@@ -323,7 +332,7 @@ FUNCTION Convert_Pjx &&Runs FoxBin2Prg for multiple projects.
    lcProj = GETFILE(lcSourceExt)
    lcPath = JUSTPATH(lcProj)
 
-   IF tlToBin THEN
+   IF !EMPTY(lcProj) AND tlToBin THEN
 *get local text extension for project
 
     loInfo      = loConverter.Get_DirSettings(lcPath)
@@ -339,13 +348,23 @@ FUNCTION Convert_Pjx &&Runs FoxBin2Prg for multiple projects.
     ?'No project found'
     SwitchErrorHandler(.F.)
     RETURN .F.
-   ENDIF &&ISBLANK(lcProj)
+   ENDIF &&!EMPTY(lcProj) AND ISBLANK(lcProj)
 
-   IF tlToBin AND !UPPER(JUSTEXT(lcProj)==lcSourceExt) THEN
+*!*	Changed by: SF 11.6.2015
+*!*	<pdm>
+*!*	<change date="{^2015-06-11,20:21:00}">Changed by: SF<br />
+*!*	reworked wrong bracket
+*!*	</change>
+*!*	</pdm>
+
+   IF tlToBin AND !UPPER(JUSTEXT(lcProj))==lcSourceExt THEN
+*   IF tlToBin AND !UPPER(JUSTEXT(lcProj)==lcSourceExt) THEN
     MESSAGEBOX("File is not a valid text representation of a project in this folder")
     SwitchErrorHandler(.F.)
     RETURN .F.
-   ENDIF &&tlToBin AND !UPPER(JUSTEXT(lcProj)==lcSourceExt)
+   ENDIF &&tlToBin AND !UPPER(JUSTEXT(lcProj))==lcSourceExt
+
+*!*	/Changed by: SF 11.6.2015
 
    lnProjs = 1
    _SCREEN.ADDPROPERTY('gaFiles(1,2)')
@@ -448,6 +467,35 @@ FUNCTION Convert_Pjx &&Runs FoxBin2Prg for multiple projects.
     _SCREEN.gaFiles(lnProj,2) = ICASE(tnMode=3,"",tnMode=4,"",.NULL.)
    ENDFOR &&lnProjs
 *  &&tnProjects=3
+  CASE tnProjects=4
+*path, recursive
+   LOCAL;
+    lcSourceExt AS CHARACTER,;
+    loConverter AS OBJECT
+
+   Construct_Objects()
+   IF _SCREEN.frmB2T_Envelop.cusB2T.Get_Converter(,@loConverter,.T.) THEN
+    SwitchErrorHandler(.F.)
+    RETURN .F.
+   ENDIF &&_SCREEN.frmB2T_Envelop.cusB2T.Get_Converter(@lcStorage,@loConverter,.T.)
+
+   lcPath = JUSTPATH(_SCREEN.gcB2T_Path)
+
+   CD (lcPath)
+
+   _SCREEN.ADDPROPERTY('gaFiles(1,2)')
+
+   ScanDir(lcPath,tlToBin,loConverter)
+
+   loConverter = .NULL.
+   Destruct_Objects()
+
+   lnProjs = IIF(EMPTY(_SCREEN.gaFiles),0,ALEN(_SCREEN.gaFiles,1))
+
+   FOR lnProj = 1 TO lnProjs
+    _SCREEN.gaFiles(lnProj,2) = ICASE(tnMode=3,"",tnMode=4,"",.NULL.)
+   ENDFOR &&lnProjs
+*  &&tnProjects=4
   OTHERWISE
    CD (lcOldPath)
    ?'Parameter not defined'
@@ -730,7 +778,7 @@ FUNCTION InitMenu	&&Starts the IDE menu.
 *!*	<descr>Starts the IDE menu.</descr>
 *!*	<params name="tcHomePath" type="Character" byref="0" dir="" inb="1" outb="1">
 *!*	<short>Home path of he actual VFP IDE.</short>
-*!*	<detail></detail>
+*!*	<detail>The default is not easy. If under <i>git</i> control, <i>git root</i></detail>
 *!*	</params>
 *!*	<params name="tlNoMenu" type="Boolean" byref="0" dir="" inb="1" outb="1">
 *!*	<short>Just read the IDE settings.</short>
@@ -772,6 +820,17 @@ FUNCTION InitMenu	&&Starts the IDE menu.
   RETURN .F.
  ENDIF &&VARTYPE(tcHomePath)='C' AND INLIST(LOWER(tcHomePath),'?','/?','-?','h','/h','-h','help','/help','-help')
 
+*!*	Changed by: SF 10.6.2015
+*!*	<pdm>
+*!*	<change date="{^2015-06-10,21:47:00}">Changed by: SF<br />
+*!*	Reset <expr>SET EXACT</expr>
+*!*	</change>
+*!*	</pdm>
+
+ SET EXACT &lcOldExact
+
+*!*	/Changed by: SF 10.6.2015
+
  SwitchErrorHandler(.T.)
 
  LOCAL;
@@ -786,6 +845,7 @@ FUNCTION InitMenu	&&Starts the IDE menu.
  lcMenu = ""
 
  Construct_Objects()
+*SET STEP ON
  lcFile = _SCREEN.frmB2T_Envelop.cusB2T.Settings_Check(.F.,tcHomePath)
  IF ISNULL(lcFile) THEN
   ?"Failed to init FoxBin2Prg IDE integration."
@@ -851,7 +911,7 @@ ENDFUNC &&InitMenu
 *!*	</change>
 *!*	</pdm>
 
-FUNCTION Construct_Objects	&&Internal
+FUNCTION Construct_Objects	&&Internal. Create FoxBin2PRG instance
 
 *!*	<pdm>
 *!*	<descr>Instantiate an instance of the business object of this application.</descr>
@@ -872,7 +932,7 @@ FUNCTION Construct_Objects	&&Internal
  RETURN
 ENDFUNC &&Construct_Objects
 
-FUNCTION Destruct_Objects	&&Internal
+FUNCTION Destruct_Objects	&&Internal. Removes FoxBin2PRG instance
 
 *!*	<pdm>
 *!*	<descr>Remove an instance of the business object of this application.</descr>
@@ -890,6 +950,85 @@ ENDFUNC &&Destruct_Objects
 
 *!*	/Changed by SF 11.4.2015
 
+*!*	Changed by: SF 12.6.2015
+*!*	<pdm>
+*!*	<change date="{^2015-06-12,09:35:00}">Changed by: SF<br />
+*!*	Added function to check if path is under git control and get git base dir
+*!*	</change>
+*!*	</pdm>
+
+FUNCTION Is_git		&&Internal. Check if a directory is under git control
+ LPARAMETERS;
+  tcPath
+
+*!*	<pdm>
+*!*	<descr>Return if a directory is und git control.</descr>
+*!*	<params name="tcPath" type="Character" byref="0" dir="" inb="0" outb="0">
+*!*	<short>Path to investigate.</short>
+*!*	<detail></detail>
+*!*	</params>
+*!*	<retval type="Boolean"><pdmpara num="1" /> is under git control.</retval>
+*!*	<comment>
+*!*	<remarks></remarks>
+*!*	<example></example>
+*!*	<seealso>
+*!*	 <see loca="" class="" pem=""></see>
+*!*	</seealso>
+*!*	<appliesto toref="0" toalso="0" />
+*!*	</comment>
+*!*	<copyright><i>&copy; 12.6.2015 Lutz Scheffler Software Ingenieurbüro</i></copyright>
+*!*	</pdm>
+
+ RETURN !EMPTY(GetGitBaseDir(tcPath))
+ENDFUNC &&IsGit
+
+FUNCTION GetGitBaseDir		&&Internal. Return git root directory
+ LPARAMETERS;
+  tcPath
+
+*!*	<pdm>
+*!*	<descr>Returns the git root directory of a given directory.</descr>
+*!*	<params name="tcPath" type="Character" byref="0" dir="" inb="1" outb="1">
+*!*	<short>Path to investigate.</short>
+*!*	<detail>Default is <expr>FULLPATH(CURDIR())</expr></detail>
+*!*	</params>
+*!*	<retval type="Character">Root directory of <pdmpara num="1" />. Empty if <pdmpara num="1" /> is not under git control.</retval>
+*!*	<comment>
+*!*	<remarks></remarks>
+*!*	<example></example>
+*!*	<seealso>
+*!*	 <see loca="" class="" pem=""></see>
+*!*	</seealso>
+*!*	<appliesto toref="0" toalso="0" />
+*!*	</comment>
+*!*	<copyright><i>&copy; 12.6.2015 Lutz Scheffler Software Ingenieurbüro</i></copyright>
+*!*	</pdm>
+
+ LOCAL;
+  lcTemp   AS CHARACTER,;
+  lcReturn AS CHARACTER
+
+ lcReturn = ''
+
+ IF VARTYPE(tcPath)#'C' THEN
+  tcPath = FULLPATH(CURDIR())
+ ENDIF &&VARTYPE(tcPath)#'C'
+
+ lcTemp = FORCEPATH('git_x.tmp',tcPath)
+
+ IF Run_ExtApp('cmd /c git rev-parse --show-toplevel>>git_x.tmp',tcPath,'HID') THEN
+  IF FILE(lcTemp) THEN
+   lcReturn = CHRTRAN(FILETOSTR(lcTemp),'/'+0h0d0a,'\')
+  ENDIF &&FILE(lcTemp)
+ ENDIF &&Run_ExtApp('cmd /c git rev-parse --show-toplevel>>git_x.tmp',tcPath,'HID')
+
+ DELETE FILE &lcTemp
+
+ RETURN lcReturn
+ENDFUNC &&GetGitBaseDir
+*!*	/Changed by: SF 12.6.2015
+
+
 *!*	Geändert durch: SF 4.6.2015
 *!*	<pdm>
 *!*	<change date="{^2015-06-04,11:20:00}">Geändert durch: SF<br />
@@ -897,7 +1036,7 @@ ENDFUNC &&Destruct_Objects
 *!*	</change>
 *!*	</pdm>
 
-PROCEDURE GetBranch
+PROCEDURE GetBranch		&&Internal. Return active git branch
 
 *!*	<pdm>
 *!*	<descr>Output of current git branch</descr>
@@ -918,37 +1057,34 @@ PROCEDURE GetBranch
   lnSec AS NUMBER
 
  lcRet = ''
- IF DIRECTORY('.git',1) THEN
-  DELETE FILE git_x.tmp
-  DO WHILE FILE('git_x.tmp')
-   WAIT "" WINDOW TIMEOUT 0.2
-  ENDDO &&FILE('git_x.tmp')
+ IF Is_git() THEN
   IF Run_git('rev-parse --abbrev-ref HEAD>git_x.tmp',.F.) THEN
    lnSec = SECONDS()
-   DO WHILE !FILE('git_x.tmp')
-    WAIT "" WINDOW TIMEOUT 0.2
-    IF SECONDS()-lnSec>=2 THEN
-     EXIT
-    ENDIF &&SECONDS()-lnSec>=2
-   ENDDO &&!FILE('git_x.tmp')
+*!*	   DO WHILE !FILE('git_x.tmp')
+*!*	    WAIT "" WINDOW TIMEOUT 0.2
+*!*	    IF SECONDS()-lnSec>=2 THEN
+*!*	     EXIT
+*!*	    ENDIF &&SECONDS()-lnSec>=2
+*!*	   ENDDO &&!FILE('git_x.tmp')
    IF FILE('git_x.tmp') THEN
     lcRet = CHRTRAN(FILETOSTR('git_x.tmp'),0h0d0a,'')
+    DELETE FILE git_x.tmp
    ENDIF &&FILE('git_x.tmp')
-   DELETE FILE git_x.tmp
   ENDIF &&Run_git('rev-parse --abbrev-ref HEAD>git_x.tmp',.F.)
- ENDIF &&DIRECTORY('.git',1)
+ ENDIF &&Is_git()
+
  RETURN lcRet
 ENDPROC &&GetBranch
 *!*	/Geändert durch: SF 4.6.2015
 
-*!*	Changed by: SF 5.6.2015
+*!*	Changed by: SF 12.6.2015
 *!*	<pdm>
-*!*	<change date="{^2015-06-05,08:07:00}">Changed by SF<br />
-*!*	Move git run from <expr>RUN</expr> to ShellExecute
+*!*	<change date="{^2015-06-12,08:07:00}">Changed by SF<br />
+*!*	Move git ShellExecute from <expr>RUN</expr> to API_AppRun
 *!*	</change>
 *!*	</pdm>
 
-FUNCTION Run_git
+FUNCTION Run_git		&&Internal. Run a git root command
  LPARAMETERS;
   tcParameters,;
   tlShow
@@ -963,7 +1099,7 @@ FUNCTION Run_git
 *!*	<short>Show command widow >/short>
 *!*	<detail></detail>
 *!*	</params>
-*!*	<remarks>Runs ShellExecute to run git.
+*!*	<remarks>Runs API_AppRun to run git.
 * Uses <i>cmd</i> to perform piping operations.</remarks>
 *!*	<retval type="Boolean">Success</retval>
 *!*	<comment>
@@ -973,68 +1109,48 @@ FUNCTION Run_git
 *!*	</seealso>
 *!*	<appliesto toref="0" toalso="0" />
 *!*	</comment>
-*!*	<copyright><i>&copy; 4.6.2015 Lutz Scheffler Software Ingenieurbüro</i></copyright>
+*!*	<copyright><i>&copy; 12.6.2015 Lutz Scheffler Software Ingenieurbüro</i></copyright>
 *!*	</pdm>
 
  LOCAL;
   lcPath   AS CHARACTER,;
   llReturn AS BOOLEAN
 
- DECLARE INTEGER ShellExecute IN "Shell32.dll";
-  INTEGER HWND, ;
-  STRING lpVerb, ;
-  STRING lpFile, ;
-  STRING lpParameters, ;
-  STRING lpDirectory, ;
-  LONG nShowCmd
-
  lcPath = ADDBS(FULLPATH(CURDIR()))
 *rund cmd to perform piping data
- IF ">"$tcParameters THEN
-  llReturn = Run_ShellExecute(0,0h00,'cmd','/c git '+tcParameters+0h00,lcPath+0h00,IIF(tlShow,10,0))
- ELSE  &&">"$tcParameters
-  llReturn = Run_ShellExecute(0,0h00,'git',tcParameters+0h00,lcPath+0h00,IIF(tlShow,10,0))
- ENDIF &&">"$tcParameters
-
+ llReturn = Run_ExtApp('cmd /c git '+tcParameters,lcPath,IIF(tlShow,'NOR','HID'))
+*get Base Dir
+*git rev-parse --show-toplevel
  RETURN llReturn
 ENDFUNC &&Run_git
 
-FUNCTION Run_ShellExecute
+FUNCTION Run_ExtApp		&&Internal. Run external app
  LPARAMETERS;
-  tvPara1,;
-  tvPara2,;
-  tvPara3,;
-  tvPara4,;
-  tvPara5,;
-  tvPara6
+  tcCommandLine,;
+  tcLaunchDir,;
+  tcWindowMode,;
+  tnExitCode
 
 *!*	<pdm>
-*!*	<descr>Run ShellExecute</descr>
-*!*	<params name="tvPara1" type="Variant" byref="0" dir="" inb="0" outb="0">
-*!*	<short>Parameter for ShellExecute</short>
+*!*	<descr>Run Ed Raus API_AppRun</descr>
+*!*	<params name="tcCommandLine" type="Variant" byref="0" dir="" inb="0" outb="0">
+*!*	<short>Command to run</short>
 *!*	<detail></detail>
 *!*	</params>
-*!*	<params name="tvPara2" type="Variant" byref="0" dir="" inb="0" outb="0">
-*!*	<short>Parameter for ShellExecute</short>
+*!*	<params name="tcLaunchDir" type="Variant" byref="0" dir="" inb="0" outb="0">
+*!*	<short>Path to run <pdmpara num="1" /> in.</short>
 *!*	<detail></detail>
 *!*	</params>
-*!*	<params name="tvPara3" type="Variant" byref="0" dir="" inb="0" outb="0">
-*!*	<short>Parameter for ShellExecute</short>
+*!*	<params name="tcWindowMode" type="Variant" byref="0" dir="" inb="0" outb="0">
+*!*	<short>Window Start Mode</short>
+*!*	<detail>Window Start Mode, one of (HID, NOR, MIN, MAX) or empty
+*defaults to empty, the default for the executable is used</detail>
+*!*	</params>
+*!*	<params name="tnExitCode" type="Variant" byref="0" dir="out" inb="0" outb="0">
+*!*	<short>Exitcode of the app.</short>
 *!*	<detail></detail>
 *!*	</params>
-*!*	<params name="tvPara4" type="Variant" byref="0" dir="" inb="0" outb="0">
-*!*	<short>Parameter for ShellExecute</short>
-*!*	<detail></detail>
-*!*	</params>
-*!*	<params name="tvPara5" type="Variant" byref="0" dir="" inb="0" outb="0">
-*!*	<short>Parameter for ShellExecute</short>
-*!*	<detail></detail>
-*!*	</params>
-*!*	<params name="tvPara6" type="Variant" byref="0" dir="" inb="0" outb="0">
-*!*	<short>Parameter for ShellExecute</short>
-*!*	<detail></detail>
-*!*	</params>
-*!*	<retval type="Boolean">Success</retval>
+*!*	<retval type="Boolean">Success (<pdmpara num="4" /><expr>=0</expr>)</retval>
 *!*	<comment>
 *!*	<remarks></remarks>
 *!*	<example></example>
@@ -1043,28 +1159,35 @@ FUNCTION Run_ShellExecute
 *!*	</seealso>
 *!*	<appliesto toref="0" toalso="0" />
 *!*	</comment>
-*!*	<copyright><i>&copy; 5.6.2015 Lutz Scheffler Software Ingenieurbüro</i></copyright>
+*!*	<copyright><i>&copy; 12.6.2015 Lutz Scheffler Software Ingenieurbüro</i></copyright>
 *!*	</pdm>
 
  LOCAL;
-  lnReturn AS NUMBER
+  lcVCX AS CHARACTER,;
+  loAPI AS "API_AppRun" OF "..\..\BIN2TEXT\LIBRARY\BIN_2_TEXT.VCX"
 
- DECLARE INTEGER ShellExecute IN "Shell32.dll";
-  INTEGER HWND, ;
-  STRING lpVerb, ;
-  STRING lpFile, ;
-  STRING lpParameters, ;
-  STRING lpDirectory, ;
-  LONG nShowCmd
+*for testing purposes
+* lcVCX = 'e:\se\tools\bin2text\library\Bin_2_Text.vcx'
+*runnning
+ lcVCX = 'Bin_2_Text.vcx'
 
- lnReturn = ShellExecute(tvPara1,tvPara2,tvPara3,tvPara4,tvPara5,tvPara6)
+ loAPI = NEWOBJECT('API_AppRun',lcVCX,'',tcCommandLine,tcLaunchDir,tcWindowMode)
+ tnExitCode = -1
 
- RETURN lnReturn>32
+ IF VARTYPE(loAPI)='O' AND !ISNULL(loAPI) THEN
+  IF loAPI.LaunchAppAndWait() THEN
+   tnExitCode = NVL(loAPI.CheckProcessExitCode(),-1)
+  ENDIF &&loAPI.LaunchAppAndWait()
+ ENDIF &&VARTYPE(loAPI)='O' AND !ISNULL(loAPI)
 
-ENDFUNC &&Run_ShellExecute
-*!*	/Changed by SF 5.6.2015
+ loAPI = .NULL.
 
-FUNCTION HelpMsg	&&Internal
+ RETURN tnExitCode=0
+
+ENDFUNC &&Run_ExtApp
+*!*	/Changed by SF 12.6.2015
+
+FUNCTION HelpMsg	&&Internal. Display help message for external functions
 
  #DEFINE dcText_DE_H00;
   [Run:]+0h0d0a+;
@@ -1304,7 +1427,7 @@ FUNCTION HelpMsg	&&Internal
  SET MEMOWIDTH TO (lnMemo)
 ENDFUNC &&HelpMsg
 
-PROCEDURE CatchError
+PROCEDURE CatchError		&&Error handler
  LPARAMETERS;
   tcProgram,;
   tnLineNo
@@ -1331,11 +1454,14 @@ PROCEDURE CatchError
   'Code line: '+PADL(tnLineNo,7),;
   64,'Ooops, works not as expected.')
  SwitchErrorHandler()
+ DEBUG
+ SUSPEND
+ RETRY
  CLEAR ALL
  CANCEL
 ENDPROC &&CatchError
 
-PROCEDURE SwitchErrorHandler
+PROCEDURE SwitchErrorHandler		&&Toggle error handler
  LPARAMETERS;
   tlOn
 
@@ -1371,3 +1497,123 @@ PROCEDURE SwitchErrorHandler
    ON ERROR
  ENDCASE
 ENDPROC &&SwitchErrorHandler
+
+PROCEDURE ScanDir		&&Internal. Recursivly scan directories
+ LPARAMETERS;
+  tcDir,;
+  tlToBin,;
+  toConverter
+
+*!*	<pdm>
+*!*	<descr>Scan a directory recursive.</descr>
+*!*	<params name="tcDir" type="Character" byref="0" dir="" inb="0" outb="0">
+*!*	<short>Directory to scan</short>
+*!*	<detail></detail>
+*!*	</params>
+*!*	<params name="tlToBin" type="Boolean" byref="0" dir="" inb="0" outb="0">
+*!*	<short>Program will create binary codes from text</short>
+*!*	<detail></detail>
+*!*	</params>
+*!*	<params name="toConverter" type="Object" byref="0" dir="" inb="0" outb="0">
+*!*	<short>FoxBin2Text object to firure out settings of a given directory.</short>
+*!*	<detail></detail>
+*!*	</params>
+*!*	<comment>
+*!*	<retval type=""></retval>
+*!*	<remarks></remarks>
+*!*	<example></example>
+*!*	<seealso>
+*!*	 <see loca="" class="" pem=""></see>
+*!*	</seealso>
+*!*	<appliesto toref="0" toalso="0" />
+*!*	</comment>
+*!*	<copyright><i>&copy; 15.6.2015 Lutz Scheffler Software Ingenieurbüro</i></copyright>
+*!*	</pdm>
+
+ LOCAL;
+  lnLoop1,;
+  lcOldDir
+
+ LOCAL ARRAY;
+  laDir(1)
+
+ lcOldDir = FULLPATH(CURDIR())
+ CD (tcDir)
+ FOR lnLoop1 = 1 TO ADIR(laDir,'','D')
+  IF INLIST(laDir(lnLoop1,1),'.','..') THEN
+   LOOP
+  ENDIF &&INLIST(laDir(lnLoop1,1),'.','..')
+  ScanDir(ADDBS(ADDBS(tcDir)+laDir(lnLoop1,1)),tlToBin,toConverter)
+ ENDFOR &&lnLoop1
+ Dir_Action(tcDir,tlToBin,toConverter)
+ CD (lcOldDir)
+ENDPROC &&ScanDir
+
+PROCEDURE Dir_Action		&&Internal. Parse a directory for projcets (binary or text)
+ LPARAMETERS;
+  tcDir,;
+  tlToBin,;
+  toConverter
+
+*!*	<pdm>
+*!*	<descr>Scan a directory for project files (binary or text representation).</descr>
+*!*	<params name="tcDir" type="Character" byref="0" dir="" inb="0" outb="0">
+*!*	<short>Directory to scan</short>
+*!*	<detail></detail>
+*!*	</params>
+*!*	<params name="tlToBin" type="Boolean" byref="0" dir="" inb="0" outb="0">
+*!*	<short>Program will create binariy codes from text</short>
+*!*	<detail></detail>
+*!*	</params>
+*!*	<params name="toConverter" type="Object" byref="0" dir="" inb="0" outb="0">
+*!*	<short>FoxBin2Text object to firure out settings of a given directory.</short>
+*!*	<detail></detail>
+*!*	</params>
+*!*	<comment>
+*!*	<retval type=""></retval>
+*!*	<remarks></remarks>
+*!*	<example></example>
+*!*	<seealso>
+*!*	 <see loca="" class="" pem=""></see>
+*!*	</seealso>
+*!*	<appliesto toref="0" toalso="0" />
+*!*	</comment>
+*!*	<copyright><i>&copy; 15.6.2015 Lutz Scheffler Software Ingenieurbüro</i></copyright>
+*!*	</pdm>
+
+ LOCAL;
+  lnProj      AS NUMBER,;
+  lnProjs     AS NUMBER,;
+  lnFiles     AS NUMBER,;
+  lcSourceExt AS CHARACTER,;
+  loConverter AS OBJECT,;
+  loInfo      AS OBJECT
+
+ LOCAL ARRAY;
+  laFiles(1,1)
+
+ IF tlToBin THEN
+*get local text extension for project
+  loInfo      = toConverter.Get_DirSettings(tcDir)
+  lcSourceExt = loInfo.c_PJ2
+
+ ELSE  &&tlToBin
+  lcSourceExt = "PJX"
+ ENDIF &&tlToBin
+
+ loInfo      = .NULL.
+
+ lnProjs = ADIR(laFiles,'*.'+lcSourceExt,'HS')
+
+ IF lnProjs>0 THEN
+  lnFiles = IIF(EMPTY(_SCREEN.gaFiles),0,ALEN(_SCREEN.gaFiles,1))
+
+  DIMENSION;
+   _SCREEN.gaFiles(lnFiles+lnProjs,2)
+
+  FOR lnProj = 1 TO lnProjs
+   _SCREEN.gaFiles(lnFiles+lnProj,1) = FORCEPATH(FORCEEXT(laFiles(lnProj,1),"PJX"),tcDir)
+  ENDFOR &&lnProjs
+ ENDIF &&lnProjs>0
+
+ENDPROC &&Dir_Action
