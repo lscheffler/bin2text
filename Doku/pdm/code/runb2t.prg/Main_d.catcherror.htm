@@ -16,7 +16,7 @@
 <body>
 <div class="diaxp_mhead">CatchError Procedure</div>
 <div class="diaxp_mbody">
-<!-- Created with _diamp_pdm_ab by Agnes Beste    17.09.2015 05:24 -->
+<!-- Created with _diamp_pdm_ab by Agnes Beste    04.12.2015 07:12 -->
  <div class="PDM_AB_Descr"><!-- Descr Begin -->
 Error Display. Cancel.
  </div><!-- Descr End -->
@@ -27,8 +27,8 @@ Error Display. Cancel.
     CatchError
    </div>
    <div class="Para">
-    (<a href="#_4G50BKYF3">tcProgram</a>
-     <wbr />,<a href="#_4G50BKYF4">lnLineNo</a>)
+    (<a href="#_4IB0FFSJE">tcProgram</a>
+     <wbr />,<a href="#_4IB0FFSJF">lnLineNo</a>)
    </div>
    <div style="clear: both"></div>
   </div><!-- Colour End -->
@@ -40,7 +40,7 @@ Error Display. Cancel.
   </span>
   <dl class="DIAMP_PDM_AB_Params_List">
    <dt class="dt_">
-    <a class="DIAMP_PDM_AB_Params_ParaName" id="_4G50BKYF3" name="_4G50BKYF3">
+    <a class="DIAMP_PDM_AB_Params_ParaName" id="_4IB0FFSJE" name="_4IB0FFSJE">
      <span class="PDMEXPR PDMNor" ><span class='PDMVar'>tcProgram</span></span>
 
     </a>
@@ -67,14 +67,14 @@ Error Display. Cancel.
     </table>
    </dd>
    <dt class="dt_">
-    <a class="DIAMP_PDM_AB_Params_ParaName" id="_4G50BKYF4" name="_4G50BKYF4">
+    <a class="DIAMP_PDM_AB_Params_ParaName" id="_4IB0FFSJF" name="_4IB0FFSJF">
      <span class="PDMEXPR PDMNor" ><span class='PDMVar'>lnLineNo</span></span>
 
     </a>
    </dt>
    <dd class="dd_">
     <span class="Params_Short">
-     See <a class="DIAMP_PDM_AB_Para_Link" href="#_4G50BKYF3">tcProgram</a>.
+     See <a class="DIAMP_PDM_AB_Para_Link" href="#_4IB0FFSJE">tcProgram</a>.
     </span>
     <table class="Params_Info">
      <colgroup>
@@ -93,33 +93,33 @@ Error Display. Cancel.
  </div><!-- Parameters End -->
 
 
-<!-- /Created with _diamp_pdm_ab by Agnes Beste    17.09.2015 05:24 -->
+<!-- /Created with _diamp_pdm_ab by Agnes Beste    04.12.2015 07:12 -->
 
  <div class="SC">
   <img onclick="ExpandSC('SP_P18',-1);" class="imgEC" src="../../imgs/dotab.gif" alt="Expand/Collapse source code of procedure CatchError" id="IMG_SP_P18" />
   <span onclick="ExpandSC('SP_P18',-1);" class="SCCaption"><a name="pm.catcherror">Source Code</a></span>
   <div ondblclick="ExpandSC('SP_P18',-1);" class="SCE" style="display: none;" id="TX_SP_P18">
 <!-- Code Begin -->
-<pre class="PDMCODE PDMNor" ><span class='PDMCnt'>1651</span> <span class='PDMInd'> 1</span>  <span class='PDMResK'>LPARAMETERS</span><span class='PDMOper'>;</span>
-<span class='PDMCnt'>1652</span> <span class='PDMInd'> 2</span>   <span class='PDMVar'>tcProgram</span><span class='PDMOper'>,</span><span class='PDMOper'>;</span>
-<span class='PDMCnt'>1653</span> <span class='PDMInd'> 2</span>   <span class='PDMVar'>tnLineNo</span>
-<span class='PDMCnt'>1654</span> <span class='PDMInd'>  </span> 
-<span class='PDMCnt'>1655</span> <span class='PDMInd'>  </span> 
-<span class='PDMCnt'>1667</span> <span class='PDMInd'>  </span> 
-<span class='PDMCnt'>1668</span> <span class='PDMInd'> 1</span>  <span class='PDMResK'>LOCAL</span> <span class='PDMResK'>ARRAY</span><span class='PDMOper'>;</span>
-<span class='PDMCnt'>1669</span> <span class='PDMInd'> 2</span>   <span class='PDMVar'>laError</span><span class='PDMOper'>(</span><span class='PDMLit'>1</span><span class='PDMOper'>,</span><span class='PDMLit'>7</span><span class='PDMOper'>)</span>
-<span class='PDMCnt'>1670</span> <span class='PDMInd'>  </span> 
-<span class='PDMCnt'>1671</span> <span class='PDMInd'> 1</span>  <span class='PDMResF'>AERROR</span><span class='PDMOper'>(</span><span class='PDMVar'>laError</span><span class='PDMOper'>)</span>
-<span class='PDMCnt'>1672</span> <span class='PDMInd'> 1</span>  <span class='PDMResF'>MESSAGEBOX</span><span class='PDMOper'>(</span><span class='PDMStr'>'Error:'</span><span class='PDMOper'>+</span><span class='PDMResF'>PADL</span><span class='PDMOper'>(</span><span class='PDMVar'>laError</span><span class='PDMOper'>(</span><span class='PDMLit'>1</span><span class='PDMOper'>,</span><span class='PDMLit'>1</span><span class='PDMOper'>)</span><span class='PDMOper'>,</span><span class='PDMLit'>5</span><span class='PDMOper'>)</span><span class='PDMOper'>+</span><span class='PDMStr'>', '</span><span class='PDMOper'>+</span><span class='PDMVar'>laError</span><span class='PDMOper'>(</span><span class='PDMLit'>1</span><span class='PDMOper'>,</span><span class='PDMLit'>2</span><span class='PDMOper'>)</span><span class='PDMOper'>+</span><span class='PDMVar'>0h0d0a</span><span class='PDMOper'>+</span><span class='PDMOper'>;</span>
-<span class='PDMCnt'>1673</span> <span class='PDMInd'> 2</span>   <span class='PDMStr'>'Code block: '</span><span class='PDMOper'>+</span><span class='PDMVar'>tcProgram</span><span class='PDMOper'>+</span><span class='PDMVar'>0h0d0a</span><span class='PDMOper'>+</span><span class='PDMOper'>;</span>
-<span class='PDMCnt'>1674</span> <span class='PDMInd'> 2</span>   <span class='PDMStr'>'Code line: '</span><span class='PDMOper'>+</span><span class='PDMResF'>PADL</span><span class='PDMOper'>(</span><span class='PDMVar'>tnLineNo</span><span class='PDMOper'>,</span><span class='PDMLit'>7</span><span class='PDMOper'>)</span><span class='PDMOper'>,</span><span class='PDMOper'>;</span>
-<span class='PDMCnt'>1675</span> <span class='PDMInd'> 2</span>   <span class='PDMLit'>64</span><span class='PDMOper'>,</span><span class='PDMStr'>'Ooops, works not as expected.'</span><span class='PDMOper'>)</span>
-<span class='PDMCnt'>1676</span> <span class='PDMInd'> 1</span>  <span class='PDMVar'>SwitchErrorHandler</span><span class='PDMOper'>(</span><span class='PDMOper'>)</span>
-<span class='PDMCnt'>1677</span> <span class='PDMInd'> 1</span>  <span class='PDMResK'>DEBUG</span>
-<span class='PDMCnt'>1678</span> <span class='PDMInd'> 1</span>  <span class='PDMResK'>SUSPEND</span>
-<span class='PDMCnt'>1679</span> <span class='PDMInd'> 1</span>  <span class='PDMResK'>RETRY</span>
-<span class='PDMCnt'>1680</span> <span class='PDMInd'> 1</span>  <span class='PDMResK'>CLEAR</span> <span class='PDMResK'>ALL</span>
-<span class='PDMCnt'>1681</span> <span class='PDMInd'> 1</span>  <span class='PDMResK'>CANCEL</span></pre>
+<pre class="PDMCODE PDMNor" ><span class='PDMCnt'>1675</span> <span class='PDMInd'> 1</span>  <span class='PDMResK'>LPARAMETERS</span><span class='PDMOper'>;</span>
+<span class='PDMCnt'>1676</span> <span class='PDMInd'> 2</span>   <span class='PDMVar'>tcProgram</span><span class='PDMOper'>,</span><span class='PDMOper'>;</span>
+<span class='PDMCnt'>1677</span> <span class='PDMInd'> 2</span>   <span class='PDMVar'>tnLineNo</span>
+<span class='PDMCnt'>1678</span> <span class='PDMInd'>  </span> 
+<span class='PDMCnt'>1679</span> <span class='PDMInd'>  </span> 
+<span class='PDMCnt'>1691</span> <span class='PDMInd'>  </span> 
+<span class='PDMCnt'>1692</span> <span class='PDMInd'> 1</span>  <span class='PDMResK'>LOCAL</span> <span class='PDMResK'>ARRAY</span><span class='PDMOper'>;</span>
+<span class='PDMCnt'>1693</span> <span class='PDMInd'> 2</span>   <span class='PDMVar'>laError</span><span class='PDMOper'>(</span><span class='PDMLit'>1</span><span class='PDMOper'>,</span><span class='PDMLit'>7</span><span class='PDMOper'>)</span>
+<span class='PDMCnt'>1694</span> <span class='PDMInd'>  </span> 
+<span class='PDMCnt'>1695</span> <span class='PDMInd'> 1</span>  <span class='PDMResF'>AERROR</span><span class='PDMOper'>(</span><span class='PDMVar'>laError</span><span class='PDMOper'>)</span>
+<span class='PDMCnt'>1696</span> <span class='PDMInd'> 1</span>  <span class='PDMResF'>MESSAGEBOX</span><span class='PDMOper'>(</span><span class='PDMStr'>'Error:'</span><span class='PDMOper'>+</span><span class='PDMResF'>PADL</span><span class='PDMOper'>(</span><span class='PDMVar'>laError</span><span class='PDMOper'>(</span><span class='PDMLit'>1</span><span class='PDMOper'>,</span><span class='PDMLit'>1</span><span class='PDMOper'>)</span><span class='PDMOper'>,</span><span class='PDMLit'>5</span><span class='PDMOper'>)</span><span class='PDMOper'>+</span><span class='PDMStr'>', '</span><span class='PDMOper'>+</span><span class='PDMVar'>laError</span><span class='PDMOper'>(</span><span class='PDMLit'>1</span><span class='PDMOper'>,</span><span class='PDMLit'>2</span><span class='PDMOper'>)</span><span class='PDMOper'>+</span><span class='PDMVar'>0h0d0a</span><span class='PDMOper'>+</span><span class='PDMOper'>;</span>
+<span class='PDMCnt'>1697</span> <span class='PDMInd'> 2</span>   <span class='PDMStr'>'Code block: '</span><span class='PDMOper'>+</span><span class='PDMVar'>tcProgram</span><span class='PDMOper'>+</span><span class='PDMVar'>0h0d0a</span><span class='PDMOper'>+</span><span class='PDMOper'>;</span>
+<span class='PDMCnt'>1698</span> <span class='PDMInd'> 2</span>   <span class='PDMStr'>'Code line: '</span><span class='PDMOper'>+</span><span class='PDMResF'>PADL</span><span class='PDMOper'>(</span><span class='PDMVar'>tnLineNo</span><span class='PDMOper'>,</span><span class='PDMLit'>7</span><span class='PDMOper'>)</span><span class='PDMOper'>,</span><span class='PDMOper'>;</span>
+<span class='PDMCnt'>1699</span> <span class='PDMInd'> 2</span>   <span class='PDMLit'>64</span><span class='PDMOper'>,</span><span class='PDMStr'>'Ooops, works not as expected.'</span><span class='PDMOper'>)</span>
+<span class='PDMCnt'>1700</span> <span class='PDMInd'> 1</span>  <span class='PDMVar'>SwitchErrorHandler</span><span class='PDMOper'>(</span><span class='PDMOper'>)</span>
+<span class='PDMCnt'>1701</span> <span class='PDMInd'> 1</span>  <span class='PDMResK'>DEBUG</span>
+<span class='PDMCnt'>1702</span> <span class='PDMInd'> 1</span>  <span class='PDMResK'>SUSPEND</span>
+<span class='PDMCnt'>1703</span> <span class='PDMInd'> 1</span>  <span class='PDMResK'>RETRY</span>
+<span class='PDMCnt'>1704</span> <span class='PDMInd'> 1</span>  <span class='PDMResK'>CLEAR</span> <span class='PDMResK'>ALL</span>
+<span class='PDMCnt'>1705</span> <span class='PDMInd'> 1</span>  <span class='PDMResK'>CANCEL</span></pre>
  <!-- Code End -->
   </div>
  </div>

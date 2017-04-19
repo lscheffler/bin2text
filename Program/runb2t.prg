@@ -1164,6 +1164,7 @@ FUNCTION Get_git_Path &&Internal. Get installation status of git and path to bin
    lcReg    AS CHARACTER
 
   LOCAL;
+   lnKey,;
    lnSubKey,;
    lpdwReserved,;
    lpdwType,;
@@ -1171,32 +1172,55 @@ FUNCTION Get_git_Path &&Internal. Get installation status of git and path to bin
    lpcbData,;
    lnErrCode AS INTEGER
 
-  tc_git = ''
-  STORE 0              TO lpdwReserved,lpdwType
-  STORE SPACE(256)     TO lpbData
-  STORE LEN(m.lpbData) TO lpcbData
-  lnSubKey = 0
-  lcReg = "SOFTWARE\Microsoft\Windows\CurrentVersion\Uninstall\Git_is1\"
+*!*	Changed by: SF 1.12.2015
+*!*	<pdm>
+*!*	<change date="{^2015-12-01,11:30:00}">Changed by: SF<br />
+*!*	use mulitple keys
+*!*	</change>
+*!*	</pdm>
 
-*openkey
-  lnErrCode = RegOpenKeyEx(HKEY_LOCAL_MACHINE,m.lcReg,0,KEY_READ+KEY_WOW64_64KEY,@m.lnSubKey)
-  IF m.lnErrCode=ERROR_SUCCESS THEN
+  LOCAL ARRAY;
+   laRegs(3,2)
+
+  laRegs(1,1) = "SOFTWARE\Microsoft\Windows\CurrentVersion\Uninstall\Git_is1\"
+  laRegs(1,2) = 'InstallLocation'
+  laRegs(2,1) = "SOFTWARE\GitForWindows\"
+  laRegs(2,2) = 'InstallPath'
+  laRegs(3,1) = "SOFTWARE\WOW6432Node\GitForWindows\"
+  laRegs(3,2) = 'InstallPath'
+
+
+  FOR lnKey = 1 TO ALEN(laRegs,1)
+   tc_git = ''
+   STORE 0              TO lpdwReserved,lpdwType
+   STORE SPACE(256)     TO lpbData
+   STORE LEN(m.lpbData) TO lpcbData
+   lnSubKey = 0
+   lcReg = laRegs(lnKey,1)
+   lnErrCode = RegOpenKeyEx(HKEY_LOCAL_MACHINE,m.lcReg,0,KEY_READ+KEY_WOW64_64KEY,@m.lnSubKey)
+   IF m.lnErrCode=ERROR_SUCCESS THEN
 *ReadKey
-   m.lnErrCode=RegQueryValueEx(lnSubKey,'InstallLocation',;
-    m.lpdwReserved,@lpdwType,@lpbData,@lpcbData)
+    m.lnErrCode=RegQueryValueEx(lnSubKey,laRegs(lnKey,2),;
+     m.lpdwReserved,@lpdwType,@lpbData,@lpcbData)
 
 * Check for error
-   IF m.lnErrCode=ERROR_SUCCESS THEN
-    tc_git = ADDBS(LEFT(m.lpbData,m.lpcbData-1))+'cmd\git.exe'
-   ENDIF &&m.lnErrCode=ERROR_SUCCESS
+    IF m.lnErrCode=ERROR_SUCCESS THEN
+     tc_git = ADDBS(LEFT(m.lpbData,m.lpcbData-1))+'cmd\git.exe'
+    ENDIF &&m.lnErrCode=ERROR_SUCCESS
 */ReadKey
 
 *CloseKey
-   =RegCloseKey(m.lnSubKey)
-   lnSubKey = 0
+    =RegCloseKey(m.lnSubKey)
+    lnSubKey = 0
 */CloseKey
-  ENDIF &&m.lnErrCode=ERROR_SUCCESS
-*/openkey
+   ENDIF &&m.lnErrCode=ERROR_SUCCESS
+   IF FILE(m.tc_git) THEN
+    EXIT
+   ENDIF &&FILE(m.tc_git)
+  ENDFOR &&lnKey
+
+  lcReg = "SOFTWARE\Microsoft\Windows\CurrentVersion\Uninstall\Git_is1\"
+*!*	/Changed by: SF 1.12.2015
 
   _SCREEN.ADDPROPERTY('gcB2T_git',IIF(FILE(m.tc_git),m.tc_git,''))
 
