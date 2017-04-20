@@ -50,12 +50,14 @@
 !*.reg
 !/FoxBin2prg.cfg
 #Doku
-!/Doku/**/*.htm*
+!/Doku/**/*.htm
+!/Doku/**/*.html
 !/Doku/**/*.js
 !/Doku/**/*.gif
 !/Doku/**/*.png
 !/Doku/**/*.css
 !/Doku/*.pdm*
+#/Doku/**/*.**.bak
 
 #exclude special
 foxuser_9.*
@@ -67,6 +69,10 @@ include/projsub.h
 
 #exclude github
 !*.md
+!/bin2text.app
+!/content/**/*.gif
+!/content/**/*.png
+!/content/**/*.jpg
 
 #nix von hier
 default/
