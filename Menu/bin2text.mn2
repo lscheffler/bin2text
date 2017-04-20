@@ -53,13 +53,19 @@ ON PAD _000000001 OF _MSYSMENU ACTIVATE POPUP FoxBin2Tex
 			MESSAGE "Bin2Text on projects in path" && LOCAL;<CR> lcApp AS CHARACTER<CR><CR>lcApp = "Bin2Text.app"<CR>DO Convert_Pjx IN (lcApp) WITH .F.,3,0
 		ON SELECTION BAR 3 OF Bin2Text DO Convert_Pjx IN Bin2Text.app WITH .F.,3,0
 
-		DEFINE BAR 4 OF Bin2Text PROMPT "\<Get File" ;
+		DEFINE BAR 4 OF Bin2Text PROMPT "\<Get PJX" ;
 			MESSAGE "Bin2Text, pick up file"
 		ON SELECTION BAR 4 OF Bin2Text DO Convert_Pjx IN Bin2Text.app WITH .F.,0,0
 
-		DEFINE BAR 5 OF Bin2Text PROMPT "Path \<recursive" ;
+		DEFINE BAR 5 OF Bin2Text PROMPT "Get \<File"
+		ON SELECTION BAR 5 OF Bin2Text DO Convert_File IN Bin2Text.app WITH .F.,.F.
+
+		DEFINE BAR 6 OF Bin2Text PROMPT "Get \<Class"
+		ON SELECTION BAR 6 OF Bin2Text DO Convert_File IN Bin2Text.app WITH .F.,.T.
+
+		DEFINE BAR 7 OF Bin2Text PROMPT "Path \<recursive" ;
 			MESSAGE "Text2Bin on projects in path and all subdirectories"
-		ON SELECTION BAR 5 OF Bin2Text DO Convert_Pjx IN Bin2Text.app WITH .F.,4,0
+		ON SELECTION BAR 7 OF Bin2Text DO Convert_Pjx IN Bin2Text.app WITH .F.,4,0
 
 	DEFINE BAR 4 OF FoxBin2Tex PROMPT "\<Text to Bin" ;
 		MESSAGE "Text2Bin"
@@ -81,13 +87,19 @@ ON PAD _000000001 OF _MSYSMENU ACTIVATE POPUP FoxBin2Tex
 			MESSAGE "Text2Bin on projects in path" && LOCAL;<CR> lcApp AS CHARACTER<CR><CR>lcApp = "Bin2Text.app"<CR>DO Convert_Pjx IN (lcApp) WITH .T.,3,0
 		ON SELECTION BAR 3 OF Text2Bin DO Convert_Pjx IN Bin2Text.app WITH .T.,3,0
 
-		DEFINE BAR 4 OF Text2Bin PROMPT "\<Get File" ;
+		DEFINE BAR 4 OF Text2Bin PROMPT "\<Get PJX" ;
 			MESSAGE "Text2Bin pick a file"
 		ON SELECTION BAR 4 OF Text2Bin DO Convert_Pjx IN Bin2Text.app WITH .T.,0,0
 
-		DEFINE BAR 5 OF Text2Bin PROMPT "Path \<recursive" ;
+		DEFINE BAR 5 OF Text2Bin PROMPT "Get \<File"
+		ON SELECTION BAR 5 OF Text2Bin DO Convert_File IN Bin2Text.app WITH .T.,.F.
+
+		DEFINE BAR 6 OF Text2Bin PROMPT "Get \<Class"
+		ON SELECTION BAR 6 OF Text2Bin DO Convert_File IN Bin2Text.app WITH .T.,.T.
+
+		DEFINE BAR 7 OF Text2Bin PROMPT "Path \<recursive" ;
 			MESSAGE "Text2Bin on projects in path and all subdirectories"
-		ON SELECTION BAR 5 OF Text2Bin DO Convert_Pjx IN Bin2Text.app WITH .T.,4,0
+		ON SELECTION BAR 7 OF Text2Bin DO Convert_Pjx IN Bin2Text.app WITH .T.,4,0
 
 	DEFINE BAR 5 OF FoxBin2Tex PROMPT "\-"
 	ON BAR 5 OF FoxBin2Tex ACTIVATE POPUP NewItem

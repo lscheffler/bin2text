@@ -414,6 +414,12 @@ DEFINE CLASS cusstorage AS custom 		&& The stuff that does the work.
 		*!*	<copyright><i>&copy; 14.4.2015 Lutz Scheffler Software Ingenieurbüro</i></copyright>
 		*!*	</pdm>
 		
+		*!*	<pdm>
+		*!*	<change date="{^2017-03-13,13:00:00}">Changed by: SF<br />
+		*!*	Modified to deal with single classes of libraries.
+		*!*	</change>
+		*!*	</pdm>
+		
 		EXTERNAL ARRAY;
 		 taFiles
 		
@@ -430,13 +436,18 @@ DEFINE CLASS cusstorage AS custom 		&& The stuff that does the work.
 		
 		FOR lnFile = 1 TO lnFiles
 		ACTIVATE SCREEN
-		 lcFile = taFiles(lnFile,1)
+		
+		lcFile      = taFiles(lnFile,1)
+		lcFile_Test = lcFile
+		 IF '::'$lcFile_Test THEN
+		  lcFile_Test = FORCEEXT(STRTRAN(lcFile_Test,'::','.'),'')
+		 ENDIF &&'::'$lcFile_Test
+		
 		 ?JUSTFNAME(lcFile)
-		 IF !FILE(lcFile) THEN
+		 IF !FILE(lcFile_Test) THEN
 		  ?? " - not found"
 		  LOOP
-		 ENDIF &&!FILE(lcFile)
-		
+		 ENDIF &&!FILE(lcFile_Test)
 		
 		 toConverter.l_ProcessFiles = .T.
 		 toConverter.UpdateProgressbar('',lnFile+tnOffset,lnFiles+tnOffset+1,0)
@@ -902,7 +913,8 @@ DEFINE CLASS cusstorage AS custom 		&& The stuff that does the work.
 		 taFiles,;
 		 tlToBin,;
 		 tcMode,;
-		 tlCheckAll
+		 tlCheckAll,;
+		 tlIncludeAll
 		
 		*!*	<pdm>
 		*!*	<descr>Process all files of a given Array.</descr>
@@ -944,6 +956,18 @@ DEFINE CLASS cusstorage AS custom 		&& The stuff that does the work.
 		*<p>Only if <b>Delete obsolete files</b> is checked in settings dialog.</p>
 		*</detail>
 		*!*	</params>
+		
+		*!*	</params>
+		*!*	<params name="tlIncludeAll" type="Boolean" byref="0" dir="" inb="1" outb="0">
+		*!*	<short>Convert all files.</short>
+		*!*	<detail>
+		*<p>Controls if all files are transformed.</p>
+		*<p>If <pdmpara num="2" /> is <expr>False</expr> only the files changed might be transformed.
+		*This can override stored setting.</p>
+		*<p>If parameter is not passed, this default to the setting stored.</p>
+		*</detail>
+		*!*	</params>
+		
 		*!*	<retval type="Boolean">Returns succcess of operation.</retval>
 		*!*	<remarks>
 		*<b>This is the main method. What makes it different from a plain call to FoxBin2Prg is:</b>
@@ -968,28 +992,46 @@ DEFINE CLASS cusstorage AS custom 		&& The stuff that does the work.
 		*!*	New parameter <pdmpara num="4" />
 		*!*	</change>
 		*!*	</pdm>
+		*!*	<pdm>
+		*!*	<change date="{^2017-03-13,13:00:00}">Changed by: SF<br />
+		*!*	Modified to deal with single classes of libraries.
+		*!*	</change>
+		*!*	</pdm>
+		*!*	<pdm>
+		*!*	<change date="{^2017-03-13,14:00:00}">Changed by: SF<br />
+		*!*	<pdmpara num="1" /> may now hold text files for Text To Bin operation.
+		*!*	</change>
+		*!*	</pdm>
+		*!*	<pdm>
+		*!*	<change date="{^2017-03-13,16:00:00}">Changed by: SF<br />
+		*!*	New parameter <pdmpara num="5" /> to force single file operation.
+		*!*	</change>
+		*!*	</pdm>
 		
 		EXTERNAL ARRAY;
 		 taFiles
 		
 		LOCAL;
-		 lcFile      AS CHARACTER,;
-		 lcMode      AS CHARACTER,;
-		 lcPath      AS CHARACTER,;
-		 lcSourceExt AS CHARACTER,;
-		 lcStorage   AS CHARACTER,;
-		 lcTarget    AS CHARACTER,;
-		 lnFile      AS NUMBER,;
-		 lnFiles     AS NUMBER,;
-		 lnOffset    AS NUMBER,;
-		 lnOffsets   AS NUMBER,;
-		 lnReturn    AS NUMBER,;
-		 llFound     AS BOOLEAN,;
-		 llMaxiLoop  AS BOOLEAN,;
-		 lvTime      AS VARIANT,;
-		 loProject   AS PROJECT,;
-		 loSett      AS OBJECT,;
-		 loConverter AS "c_foxbin2prg" OF "E:\x\Helper\ThirdParty\VFPX\FoxBin2PRG\FOXBIN2PRG.PRG"
+		 lcFile       AS CHARACTER,;
+		 lcMode       AS CHARACTER,;
+		 lcPath       AS CHARACTER,;
+		 lcSourceExt  AS CHARACTER,;
+		 lcStorage    AS CHARACTER,;
+		 lcTarget     AS CHARACTER,;
+		 lcClass      AS CHARACTER,;
+		 lnFile       AS NUMBER,;
+		 lnFiles      AS NUMBER,;
+		 lnFilesFound AS NUMBER,;
+		 lnOffset     AS NUMBER,;
+		 lnOffsets    AS NUMBER,;
+		 lnReturn     AS NUMBER,;
+		 llFound      AS BOOLEAN,;
+		 llMaxiLoop   AS BOOLEAN,;
+		 lvTemp       AS VARIANT,;
+		 lvTime       AS VARIANT,;
+		 loProject    AS PROJECT,;
+		 loSett       AS OBJECT,;
+		 loConverter  AS "c_foxbin2prg" OF "E:\x\Helper\ThirdParty\VFPX\FoxBin2PRG\FOXBIN2PRG.PRG"
 		
 		lvTime = SECONDS()
 		IF THIS.Get_Converter(@lcStorage,@loConverter) THEN
@@ -997,22 +1039,35 @@ DEFINE CLASS cusstorage AS custom 		&& The stuff that does the work.
 		ENDIF &&THIS.Get_Converter(@lcStorage,@loConverter)
 		
 		LOCAL ARRAY;
-		 laFiles(ALEN(taFiles,1),4)
+		 laFiles(ALEN(taFiles,1),6)
 		
 		laFiles = NIL
 		STORE ALEN(taFiles,1) TO;
 		 lnFiles,;
 		 lnOffsets
 		
+		lnFilesFound = 0
+		
 		lcMode = IIF(tlToBin,"PRG2BIN","BIN2PRG")
 		
 		*process sourcefiles
 		FOR lnFile = 1 TO lnFiles
+		 lnFilesFound = lnFilesFound+1
 		*wie machen wir das wenn wir noch keine pjx haben?!!!
-		 IF tlToBin THEN
-		  loSett      = THIS.oGet_Setting(JUSTPATH(taFiles(lnFile,1)),loConverter)
-		  lcSourceExt = UPPER(JUSTEXT(taFiles(lnFile,1)))
 		
+		*extract class for processing
+		 lcClass = ""
+		 IF '::'$taFiles(lnFile,1) THEN
+		  taFiles(lnFile,1) = STRTRAN(taFiles(lnFile,1),'::','.')
+		  lcClass           = "::"+JUSTEXT(taFiles(lnFile,1))
+		  taFiles(lnFile,1)	= FORCEEXT( taFiles(lnFile,1),'')
+		 ENDIF &&'::'$taFiles(lnFile,1)
+		
+		 loSett      = THIS.oGet_Setting(JUSTPATH(taFiles(lnFile,1)),loConverter)
+		 lcSourceExt = UPPER(JUSTEXT(taFiles(lnFile,1)))
+		 IF tlToBin THEN
+		
+		*if binary file is send, gather text file extension
 		  DO CASE
 		   CASE UPPER(lcSourceExt)=="VCX"
 		    lcSourceExt = loSett.c_VC2
@@ -1029,42 +1084,92 @@ DEFINE CLASS cusstorage AS custom 		&& The stuff that does the work.
 		   CASE UPPER(lcSourceExt)=="LBX"
 		    lcSourceExt = loSett.c_LB2
 		   CASE UPPER(lcSourceExt)=="SCX"
-		    lcSourceExt = loSett.c_CC2
+		    lcSourceExt = loSett.c_SC2
+		
+		*check if just a text file name is send,
+		*for the logic of the programm, we need the binary, do we swap
+		   CASE UPPER(lcSourceExt)==loSett.c_VC2
+		    taFiles(lnFile,1) = FORCEEXT(taFiles(lnFile,1),"VCX")
+		   CASE UPPER(lcSourceExt)==loSett.c_FR2
+		    taFiles(lnFile,1) = FORCEEXT(taFiles(lnFile,1),"FRX")
+		   CASE UPPER(lcSourceExt)==loSett.c_MN2
+		    taFiles(lnFile,1) = FORCEEXT(taFiles(lnFile,1),"MNX")
+		   CASE UPPER(lcSourceExt)==loSett.c_DB2
+		    taFiles(lnFile,1) = FORCEEXT(taFiles(lnFile,1),"DBF")
+		   CASE UPPER(lcSourceExt)==loSett.c_DC2
+		    taFiles(lnFile,1) = FORCEEXT(taFiles(lnFile,1),"DBC")
+		   CASE UPPER(lcSourceExt)==loSett.c_PJ2
+		    taFiles(lnFile,1) = FORCEEXT(taFiles(lnFile,1),"PJX")
+		   CASE UPPER(lcSourceExt)==loSett.c_LB2
+		    taFiles(lnFile,1) = FORCEEXT(taFiles(lnFile,1),"LBX")
+		   CASE UPPER(lcSourceExt)==loSett.c_SC2
+		    taFiles(lnFile,1) = FORCEEXT(taFiles(lnFile,1),"SCX")
 		   OTHERWISE
+		*Error, no known extension
+		    lcSourceExt = ""
 		  ENDCASE
 		
-		  laFiles(lnFile,1) = FORCEEXT(taFiles(lnFile,1),lcSourceExt)	&&Source File of transformation; Bin or Text
 		 ELSE  &&tlToBin
-		  laFiles(lnFile,1) = taFiles(lnFile,1)							&&Source File of transformation; Bin or Text
+		*check if just a binary file name is send, as expected
+		  DO CASE
+		   CASE UPPER(lcSourceExt)=="VCX"
+		   CASE UPPER(lcSourceExt)=="FRX"
+		   CASE UPPER(lcSourceExt)=="MNX"
+		   CASE UPPER(lcSourceExt)=="DBF"
+		   CASE UPPER(lcSourceExt)=="DBC"
+		   CASE UPPER(lcSourceExt)=="PJX"
+		   CASE UPPER(lcSourceExt)=="LBX"
+		   CASE UPPER(lcSourceExt)=="SCX"
+		   OTHERWISE
+		*Error, no known extension
+		    lcSourceExt = ""
+		  ENDCASE
 		 ENDIF &&tlToBin
 		
-		 laFiles(lnFile,2) = tcMode 									&&a project file bin or text
-		 laFiles(lnFile,3) = taFiles(lnFile,1)							&&VFP Bin File
+		 IF EMPTY(lcSourceExt) THEN
+		*undefined extension, just ignore
+		  ADEL(laFiles,lnFilesFound)
+		  lnFilesFound = lnFilesFound-1
+		  lnOffsets   = lnOffsets-1
+		  IF lnFilesFound=0 THEN
+		   EXIT
+		  ELSE  &&lnFilesFound=0
+		   DIMENSION;
+		    laFiles(lnOffsets,4)
+		   LOOP
+		  ENDIF &&lnFilesFound=0
+		 ELSE  &&EMPTY(lcSourceExt)
+		  laFiles(lnFilesFound,1) = FORCEEXT(taFiles(lnFile,1),lcSourceExt)+;
+		   lcClass															&&Source File of transformation; Text or Text
+		 ENDIF &&EMPTY(lcSourceExt)
+		
+		 laFiles(lnFilesFound,2) = tcMode 									&&a project file bin or text
+		 laFiles(lnFilesFound,3) = taFiles(lnFile,1)							&&VFP Bin File
 		 DO CASE
 		  CASE !UPPER(JUSTEXT(taFiles(lnFile,1)))='PJX'
 		*nothing to do
-		   laFiles(lnFile,4) = 0										&&No Hook
-		   laFiles(lnFile,2) = lcMode									&&not a project file
+		   laFiles(lnFilesFound,4) = 0										&&No Hook
+		   laFiles(lnFilesFound,2) = lcMode									&&not a project file
 		  CASE ALEN(taFiles,2)<2
 		*nothing defined yet, parse later
-		   laFiles(lnFile,4) = 2										&&No Hook, but mybe after conversion
+		   laFiles(lnFilesFound,4) = 2										&&No Hook, but maybe after conversion
 		  CASE ALEN(taFiles,2)<2 AND !tlToBin
 		*nothing defined, parse later
-		   laFiles(lnFile,4) = 1										&&No Hook, but maybe
+		   laFiles(lnFilesFound,4) = 1										&&No Hook, but maybe
 		  CASE ISNULL(taFiles(lnFile,2))
 		*nothing defined yet, parse again after processing (if pjx changed)
-		   laFiles(lnFile,4) = 2										&&No Hook, but mybe after conversion
+		   laFiles(lnFilesFound,4) = 2										&&No Hook, but mybe after conversion
 		  CASE ISNULL(taFiles(lnFile,2)) AND !tlToBin
 		*nothing defined yet, parse later
-		   laFiles(lnFile,4) = 1										&&No Hook, but maybe
+		   laFiles(lnFilesFound,4) = 1										&&No Hook, but maybe
 		  CASE EMPTY(taFiles(lnFile,2))
 		*nothing hook defined yet, but may change again after processing (if pjx changed)
-		   laFiles(lnFile,4) = 2										&&No Hook, but mybe after conversion
+		   laFiles(lnFilesFound,4) = 2										&&No Hook, but mybe after conversion
 		  CASE EMPTY(taFiles(lnFile,2)) AND !tlToBin
 		*no Hook, do nothing
-		   laFiles(lnFile,4) = 0										&&No Hook
+		   laFiles(lnFilesFound,4) = 0										&&No Hook
 		  CASE tlToBin
-		   laFiles(lnFile,4) = 2										&&we have a hook, but check after conversion again
+		   laFiles(lnFilesFound,4) = 2										&&we have a hook, but check after conversion again
 		  OTHERWISE  && tlToBin
 		*Hook, to text
 		   lnOffsets = lnOffsets+1
@@ -1076,7 +1181,7 @@ DEFINE CLASS cusstorage AS custom 		&& The stuff that does the work.
 		   laFiles(lnOffsets,3) = taFiles(lnFile,2)						&&VFP Bin File
 		   laFiles(lnOffsets,4) = 0										&&no Hook
 		
-		   laFiles(lnFile,4) = 0
+		   laFiles(lnFilesFound,4) = 0										&&no Hook
 		 ENDCASE
 		ENDFOR &&lnFile
 		
@@ -1089,33 +1194,37 @@ DEFINE CLASS cusstorage AS custom 		&& The stuff that does the work.
 		
 		IF !tlToBin THEN
 		*process transformation, only for Bin 2 Text (Text 2 Bin will be read after recreating)
-		FOR lnFile = 1 TO lnFiles
-		 lcFile = laFiles(lnFile,3)
-		 IF laFiles(lnFile,4)=1 AND FILE(lcFile) AND UPPER(JUSTEXT(lcFile))=='PJX' THEN
+		 FOR lnFile = 1 TO lnFilesFound
+		  lcFile = laFiles(lnFile,3)
+		  IF laFiles(lnFile,4)=1 AND FILE(lcFile) AND UPPER(JUSTEXT(lcFile))=='PJX' THEN
 		
-		  MODIFY PROJECT (lcFile) NOWAIT NOSHOW NOPROJECTHOOK
-		  loProject = _VFP.PROJECTS(JUSTFNAME(lcFile))
-		  lcFile    = loProject.PROJECTHOOKLIBRARY
-		  loProject.CLOSE
+		   MODIFY PROJECT (lcFile) NOWAIT NOSHOW NOPROJECTHOOK
+		   loProject = _VFP.PROJECTS(JUSTFNAME(lcFile))
+		   lcFile    = loProject.PROJECTHOOKLIBRARY
+		   loProject.CLOSE
 		
-		  IF !EMPTY(lcFile) THEN
-		   lnOffsets = lnOffsets+1
-		   DIMENSION;
-		    laFiles(lnOffsets,5)
+		   IF !EMPTY(lcFile) THEN
+		    lnOffsets = lnOffsets+1
+		    DIMENSION;
+		     laFiles(lnOffsets,5)
 		
-		   laFiles(lnOffsets,1) = lcFile								&&Source File of transformation; Bin
-		   laFiles(lnOffsets,2) = lcMode								&&not a project file
-		   laFiles(lnOffsets,3) = lcFile								&&VFP Bin File
-		   laFiles(lnOffsets,4) = 0										&&No Hook :)
-		  ENDIF &&!EMPTY(lcFile)
-		 ENDIF &&laFiles(lnFile,4)=1 AND FILE(lcFile) AND UPPER(JUSTEXT(lcFile))=='PJX'
-		ENDFOR &&lnFile
-		ENDIF &&!tlToBin 
+		    laFiles(lnOffsets,1) = lcFile								&&Source File of transformation; Bin
+		    laFiles(lnOffsets,2) = lcMode								&&not a project file
+		    laFiles(lnOffsets,3) = lcFile								&&VFP Bin File
+		    laFiles(lnOffsets,4) = 0										&&No Hook :)
+		   ENDIF &&!EMPTY(lcFile)
+		  ENDIF &&laFiles(lnFile,4)=1 AND FILE(lcFile) AND UPPER(JUSTEXT(lcFile))=='PJX'
+		 ENDFOR &&lnFile
+		ENDIF &&!tlToBin
 		
 		*!*	/Change by: SF 15.6.2015
 		
 		* only bin to text for now and switch not all set
-		llMaxiLoop = !tlToBin AND !ISNULL(lcStorage) AND TYPE('_SCREEN.gcB2T_Opt')="C" AND _SCREEN.gcB2T_Opt=="1"
+		IF PCOUNT()<5 THEN
+		 tlIncludeAll = NIL
+		ENDIF &&PCOUNT()<5
+		
+		llMaxiLoop = !tlToBin AND !ISNULL(lcStorage) AND NVL(!tlIncludeAll,TYPE('_SCREEN.gcB2T_Opt')="C" AND _SCREEN.gcB2T_Opt=="1")
 		llFound = .T.
 		
 		lcPath = JUSTPATH(_SCREEN.gcB2T_Path)
@@ -1123,7 +1232,11 @@ DEFINE CLASS cusstorage AS custom 		&& The stuff that does the work.
 		loConverter.LoadProgressbarForm()
 		ACTIVATE SCREEN
 		
-		llFound = THIS.Convert(@laFiles,!llMaxiLoop,loConverter,0)
+		IF lnFilesFound>0 THEN
+		 llFound = THIS.Convert(@laFiles,!llMaxiLoop,loConverter,0)
+		ELSE  &&lnFilesFound>0
+		 llFound = False
+		ENDIF &&lnFilesFound>0
 		
 		*ReRun only file(s) changed
 		IF llFound THEN
@@ -1138,7 +1251,7 @@ DEFINE CLASS cusstorage AS custom 		&& The stuff that does the work.
 		*Note! This will change the array!
 		*just process all if
 		* !maxiloop and !isnull(storage) -> just process files
-		* maxiloop (nur wenn !ISNULL(storage!!)) and processfiles -> run partial
+		* maxiloop (only if  !ISNULL(storage!!)) and processfiles -> run partial
 		*maxiloop and isnull(storage)
 		*SET STEP ON
 		  IF !llMaxiLoop AND !ISNULL(lcStorage) THEN
@@ -1150,7 +1263,7 @@ DEFINE CLASS cusstorage AS custom 		&& The stuff that does the work.
 		     laFiles2(1,2)
 		
 		    lnOffset = 0
-		    FOR lnFile = 1 TO lnFiles
+		    FOR lnFile = 1 TO lnFilesFound
 		     lcFile = laFiles(lnFile,3)
 		     IF laFiles(lnFile,4)>1 AND FILE(lcFile) AND UPPER(JUSTEXT(lcFile))=='PJX' THEN
 		
@@ -1200,7 +1313,7 @@ DEFINE CLASS cusstorage AS custom 		&& The stuff that does the work.
 		    IF lnOffset>0 THEN
 		     ACTIVATE SCREEN
 		     ?"post process projcet hooks"
-		     llFound = THIS.Convert(@laFiles2,.T.,loConverter,lnFiles)
+		     llFound = THIS.Convert(@laFiles2,.T.,loConverter,lnFilesFound)
 		
 		     DIMENSION;
 		      laFiles2(1,1)
@@ -1216,7 +1329,7 @@ DEFINE CLASS cusstorage AS custom 		&& The stuff that does the work.
 		   DO CASE
 		    CASE ISNULL(llProcess)
 		*need to process all files -> just let FoxBin2PRG do, faster.
-		     llFound = THIS.Convert(@laFiles,.T.,loConverter,lnFiles)
+		     llFound = THIS.Convert(@laFiles,.T.,loConverter,lnFilesFound)
 		    CASE llProcess
 		*If not processed in first loop, process now, file by file.
 		     loConverter.l_ProcessFiles = .T.
@@ -1263,7 +1376,8 @@ DEFINE CLASS cusstorage AS custom 		&& The stuff that does the work.
 		     CASE UPPER(lcSourceExt)=="LBX"
 		      lcSourceExt = loSett.c_LB2
 		     CASE UPPER(lcSourceExt)=="SCX"
-		      lcSourceExt = loSett.c_CC2
+		*Fehler: c_CC2 statt c_SC2
+		      lcSourceExt = loSett.c_SC2
 		     OTHERWISE
 		      LOOP
 		    ENDCASE

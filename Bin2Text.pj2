@@ -33,7 +33,7 @@ _AutoIncrement = "0"
 
 
 *<BuildProj>
-*<.HomeDir = 'e:\se\tools\x\bin2text' />
+*<.HomeDir = 'e:\se\bin2text' />
 
 FOR EACH loProject IN _VFP.Projects FOXOBJECT
 	loProject.Close()
