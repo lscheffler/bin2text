@@ -390,7 +390,8 @@ DEFINE CLASS cusstorage AS custom 		&& The stuff that does the work.
 		 taFiles,;
 		 tlProcess,;
 		 toConverter,;
-		 tnOffset
+		 tnOffset,;
+		 toSetting
 		
 		*!*	<pdm>
 		*!*	<descr>Converts a preprocessed bunch of files with FoxBin2Prg.Execute</descr>
@@ -416,8 +417,12 @@ DEFINE CLASS cusstorage AS custom 		&& The stuff that does the work.
 		*!*	<short>Offset for progress bar.</short>
 		*!*	<detail></detail>
 		*!*	</params>
+		*!*	<params name="toSetting" type="Object" byref="0" dir="" inb="1" outb="0">
+		*!*	<short>Settinngs object</short>
+		*!*	<detail>A settings object as returned by FoxBin2PRgs Get_DirSettings. May be used to manipulate special settings.</detail>
+		*!*	</params>
 		*!*	<retval type="Boolean">Operation successfully ended.</retval>
-		*!*	<copyright><i>&copy; 28.3.2017 Lutz Scheffler Software Ingenieurbüro</i></copyright>
+		*!*	<copyright><i>&copy; 13.4.2017 Lutz Scheffler Software Ingenieurbüro</i></copyright>
 		*!*	</pdm>
 		
 		*!*	<pdm>
@@ -446,10 +451,10 @@ DEFINE CLASS cusstorage AS custom 		&& The stuff that does the work.
 		toConverter.l_AutoClearProcessedFiles = .T.
 		
 		FOR lnFile = 1 TO lnFiles
-		ACTIVATE SCREEN
+		 ACTIVATE SCREEN
 		
-		lcFile      = taFiles(lnFile,1)
-		lcFile_Test = lcFile
+		 lcFile      = taFiles(lnFile,1)
+		 lcFile_Test = lcFile
 		 IF '::'$lcFile_Test THEN
 		  lcFile_Test = FORCEEXT(STRTRAN(lcFile_Test,'::','.',1,1),'')
 		 ENDIF &&'::'$lcFile_Test
@@ -464,10 +469,17 @@ DEFINE CLASS cusstorage AS custom 		&& The stuff that does the work.
 		 toConverter.UpdateProgressbar('',lnFile+tnOffset,lnFiles+tnOffset+1,0)
 		 toConverter.l_ProcessFiles = tlProcess
 		
-		 IF toConverter.Execute(lcFile,taFiles(lnFile,2),"0","0","0","0","1")#0 THEN
+		*!*	obj.execute(cInputFile [,cType [,cTextName [,lGenText [,cDontShowErrors [,cDebug;
+		*!*	 [,cDontShowProgress [,oModule [,oEx [,lRelanzarError [,cOriginalFileName;
+		*!*	 [,cRecompile [,cNoTimestamps [,cBackupLevels [,cClearUniqueID [,cOptimizeByFilestamp [,cCFG_File]]]]]]]]]]]]]]])
+		 IF toConverter.Execute(lcFile,taFiles(lnFile,2),"0","0","0","0",;
+		   "1")#0 THEN 
+		*!*	 IF toConverter.Execute(lcFile,taFiles(lnFile,2),"0","0","0","0",;
+		*!*	   "1",NIL,NIL,NIL,NIL,;
+		*!*	   NIL,NIL,NIL,NIL,NIL,toSetting)#0 THEN 
 		  llOk = .F.
 		  EXIT
-		 ENDIF &&toConverter.Execute(lcFile,taFiles(lnFile,2),"0","0","1","0","1")#0
+		 ENDIF &&toConverter.Execute(lcFile,taFiles(lnFile,2),"0","0","0","0", "1",NIL,NIL,NIL,NIL, NIL,NIL,NIL,NIL,NIL, ...
 		
 		 toConverter.l_AutoClearProcessedFiles = .F.
 		ENDFOR &&lnFile
@@ -925,7 +937,8 @@ DEFINE CLASS cusstorage AS custom 		&& The stuff that does the work.
 		 tlToBin,;
 		 tcMode,;
 		 tlCheckAll,;
-		 tlIncludeAll
+		 tlIncludeAll,;
+		 toSetting
 		
 		*!*	<pdm>
 		*!*	<descr>Process all files of a given Array.</descr>
@@ -978,6 +991,11 @@ DEFINE CLASS cusstorage AS custom 		&& The stuff that does the work.
 		*<p>If True, the file will not be synched with the storage table./p>
 		*<p>If parameter is not passed, this default to the setting stored.</p>
 		*</detail>
+		*!*	</params>
+		*!*	<params name="toSetting" type="Object" byref="0" dir="" inb="1" outb="0">
+		*!*	<short>Settinngs object</short>
+		*!*	<detail>A settings object as returned by FoxBin2PRgs Get_DirSettings. May be used to manipulate special settings.<br />
+		*Will be passed to <see pem="Convert" /></detail>
 		*!*	</params>
 		
 		*!*	<retval type="Boolean">Returns succcess of operation.</retval>
@@ -1250,7 +1268,7 @@ DEFINE CLASS cusstorage AS custom 		&& The stuff that does the work.
 		ACTIVATE SCREEN
 		
 		IF lnFilesFound>0 THEN
-		 llFound = THIS.Convert(@laFiles,!llMaxiLoop,loConverter,0)
+		 llFound = THIS.Convert(@laFiles,!llMaxiLoop,loConverter,0,toSetting)
 		ELSE  &&lnFilesFound>0
 		 llFound = False
 		ENDIF &&lnFilesFound>0
@@ -1331,7 +1349,7 @@ DEFINE CLASS cusstorage AS custom 		&& The stuff that does the work.
 		    IF lnOffset>0 THEN
 		     ACTIVATE SCREEN
 		     ?"post process projcet hooks"
-		     llFound = THIS.Convert(@laFiles2,.T.,loConverter,lnFilesFound)
+		     llFound = THIS.Convert(@laFiles2,.T.,loConverter,lnFilesFound,toSetting)
 		
 		     DIMENSION;
 		      laFiles2(1,1)
@@ -1347,7 +1365,7 @@ DEFINE CLASS cusstorage AS custom 		&& The stuff that does the work.
 		   DO CASE
 		    CASE ISNULL(llProcess)
 		*need to process all files -> just let FoxBin2PRG do, faster.
-		     llFound = THIS.Convert(@laFiles,.T.,loConverter,lnFilesFound)
+		     llFound = THIS.Convert(@laFiles,.T.,loConverter,lnFilesFound,toSetting)
 		    CASE llProcess
 		*If not processed in first loop, process now, file by file.
 		     loConverter.l_ProcessFiles = .T.
@@ -1358,7 +1376,7 @@ DEFINE CLASS cusstorage AS custom 		&& The stuff that does the work.
 		     FOR lnFile = 1 TO lnFiles
 		      laFiles2(lnFile,2) = lcMode
 		     ENDFOR &&lnFile
-		     llFound = THIS.Convert(@laFiles2,.T.,loConverter,lnOffsets)
+		     llFound = THIS.Convert(@laFiles2,.T.,loConverter,lnOffsets,toSetting)
 		   ENDCASE
 		
 		  ENDIF &&!llMaxiLoop AND !ISNULL(lcStorage)

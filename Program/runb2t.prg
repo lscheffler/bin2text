@@ -835,8 +835,9 @@ FUNCTION Convert_File  	&&Runs FoxBin2Prg for a single file or vcx/class.
  _SCREEN.ADDPROPERTY('gcSource',"")
  _SCREEN.ADDPROPERTY('gcTarget',"")
  _SCREEN.ADDPROPERTY('gcClass',"")
- _SCREEN.ADDPROPERTY('gcOld_CFG',"")
- _SCREEN.ADDPROPERTY('gcCFG_File',"")
+* _SCREEN.ADDPROPERTY('gcOld_CFG',"")
+* _SCREEN.ADDPROPERTY('gcCFG_File',"")
+ _SCREEN.ADDPROPERTY('goInfo',.NULL.)
 
  STORE "" TO;
   _SCREEN.gaProjects
@@ -949,24 +950,32 @@ FUNCTION Convert_File  	&&Runs FoxBin2Prg for a single file or vcx/class.
 *!*	      _SCREEN.gcTarget = _SCREEN.gaProjects(1,3)
 *!*	     ENDIF &&EMPTY(_SCREEN.gaProjects(1,3))
 
-     _SCREEN.gcCFG_File = FORCEPATH('foxbin2prg.cfg',JUSTPATH(_SCREEN.gaProjects(1,1)))
-     lvTemp = 0h0d0a+"UseClassPerFile: "+PADL(EVL(loinfo.n_UseClassPerFile,1),1)+;
-      0h0d0a+"ClassPerFileCheck: 0"+;
-      0h0d0a+"RedirectClassPerFileToMain: 1"+;
-      0h0d0a+"RedirectClassType: 1"
-     IF FILE(_SCREEN.gcCFG_File) THEN
-*add string to config file, looks like last entry have precedence
-      _SCREEN.gcOld_CFG = FILETOSTR(_SCREEN.gcCFG_File)
-      STRTOFILE(STRTRAN(STRTRAN(STRTRAN(STRTRAN(_SCREEN.gcOld_CFG,;
-       "UseClassPerFile"           ,"*UseClassPerFile"           ,1,-1,1),;
-       "ClassPerFileCheck"         ,"*ClassPerFileCheck"         ,1,-1,1),;
-       "RedirectClassPerFileToMain","*RedirectClassPerFileToMain",1,-1,1),;
-       "RedirectClassType"         ,"*RedirectClassType"         ,1,-1,1)+;
-       lvTemp,_SCREEN.gcCFG_File)
-     ELSE  &&FILE(_SCREEN.gcCFG_File)
-*just a config file
-      STRTOFILE(lvTemp,_SCREEN.gcCFG_File)
-     ENDIF &&FILE(_SCREEN.gcCFG_File)
+*     _SCREEN.gcCFG_File = FORCEPATH('foxbin2prg.cfg',JUSTPATH(_SCREEN.gaProjects(1,1)))
+     SET STEP ON
+*     RETURN
+
+     loInfo.n_UseClassPerFile            = EVL(loInfo.n_UseClassPerFile,1)
+     loInfo.l_ClassPerFileCheck          = .F.
+     loInfo.l_RedirectClassPerFileToMain = .T.
+     loInfo.n_RedirectClassType          = 1
+
+*!*	     lvTemp = 0h0d0a+"UseClassPerFile: "+PADL(),1)+;
+*!*	      0h0d0a+"ClassPerFileCheck: 0"+;
+*!*	      0h0d0a+"RedirectClassPerFileToMain: 1"+;
+*!*	      0h0d0a+"RedirectClassType: 1"
+*!*	     IF FILE(_SCREEN.gcCFG_File) THEN
+*!*	*add string to config file, looks like last entry have precedence
+*!*	      _SCREEN.gcOld_CFG = FILETOSTR(_SCREEN.gcCFG_File)
+*!*	      STRTOFILE(STRTRAN(STRTRAN(STRTRAN(STRTRAN(_SCREEN.gcOld_CFG,;
+*!*	       "UseClassPerFile"           ,"*UseClassPerFile"           ,1,-1,1),;
+*!*	       "ClassPerFileCheck"         ,"*ClassPerFileCheck"         ,1,-1,1),;
+*!*	       "RedirectClassPerFileToMain","*RedirectClassPerFileToMain",1,-1,1),;
+*!*	       "RedirectClassType"         ,"*RedirectClassType"         ,1,-1,1)+;
+*!*	       lvTemp,_SCREEN.gcCFG_File)
+*!*	     ELSE  &&FILE(_SCREEN.gcCFG_File)
+*!*	*just a config file
+*!*	      STRTOFILE(lvTemp,_SCREEN.gcCFG_File)
+*!*	     ENDIF &&FILE(_SCREEN.gcCFG_File)
 
      _SCREEN.gaProjects(1,1) = _SCREEN.gaProjects(1,1)+'::import'
 *_SCREEN.gaProjects(1,1) = _SCREEN.gaProjects(1,1)
@@ -1008,7 +1017,7 @@ FUNCTION Convert_File  	&&Runs FoxBin2Prg for a single file or vcx/class.
 
  ENDIF &&llReturn
 
- loInfo = .NULL.
+ _SCREEN.goInfo = loInfo
 
  Destruct_Objects()
 
@@ -1029,17 +1038,17 @@ FUNCTION Convert_File  	&&Runs FoxBin2Prg for a single file or vcx/class.
    llReturn
 
 
-  llReturn = _SCREEN.frmB2T_Envelop.cusB2T.Process_Bin2Text(@laFiles,_SCREEN.glToBin,"",.F.,.T.)
+  llReturn = _SCREEN.frmB2T_Envelop.cusB2T.Process_Bin2Text(@laFiles,_SCREEN.glToBin,"",.F.,.T.,_SCREEN.goInfo)
 
   Destruct_Objects()
 
-  IF !EMPTY(_SCREEN.gcCFG_File) THEN
-*SingleClass worker
-   IF EMPTY(_SCREEN.gcOld_CFG) THEN
-    DELETE FILE (_SCREEN.gcCFG_File)
-   ELSE  &&EMPTY(_SCREEN.gcOld_CFG)
-    STRTOFILE(_SCREEN.gcOld_CFG,_SCREEN.gcCFG_File)
-   ENDIF &&EMPTY(_SCREEN.gcOld_CFG)
+*!*	  IF !EMPTY(_SCREEN.gcCFG_File) THEN
+*!*	*SingleClass worker
+*!*	   IF EMPTY(_SCREEN.gcOld_CFG) THEN
+*!*	    DELETE FILE (_SCREEN.gcCFG_File)
+*!*	   ELSE  &&EMPTY(_SCREEN.gcOld_CFG)
+*!*	    STRTOFILE(_SCREEN.gcOld_CFG,_SCREEN.gcCFG_File)
+*!*	   ENDIF &&EMPTY(_SCREEN.gcOld_CFG)
 
 *!*	*move class, if
 *!*	*remove temp file, if
@@ -1051,16 +1060,17 @@ FUNCTION Convert_File  	&&Runs FoxBin2Prg for a single file or vcx/class.
 *!*	*    DELETE FILE (_SCREEN.gaProjects(1,1))
 *!*	   ENDIF &&!EMPTY(_SCREEN.gcSource)
 */SingleClass worker
-  ENDIF &&!EMPTY(_SCREEN.gcCFG_File)
+*!*	  ENDIF &&!EMPTY(_SCREEN.gcCFG_File)
 
  ENDIF &&llReturn
 
- REMOVEPROPERTY(_SCREEN,'gcCFG_File')
- REMOVEPROPERTY(_SCREEN,'gcOld_CFG')
+*!*	 REMOVEPROPERTY(_SCREEN,'gcCFG_File')
+*!*	 REMOVEPROPERTY(_SCREEN,'gcOld_CFG')
  REMOVEPROPERTY(_SCREEN,'gcSource')
  REMOVEPROPERTY(_SCREEN,'gcTarget')
  REMOVEPROPERTY(_SCREEN,'gaProjects')
  REMOVEPROPERTY(_SCREEN,'glToBin')
+ REMOVEPROPERTY(_SCREEN,'goInfo')
 
  SwitchErrorHandler(.F.)
  RETURN llReturn
