@@ -1,7 +1,30 @@
+#DEFINE dlUseBash .F.
+
 LPARAMETERS;
  tv01,tv02,tv03,tv04,tv05,tv06,tv07,tv08,;
  tv09,tv10,tv11,tv12,tv13,tv14,tv15,tv16,;
  tv17,tv18,tv19,tv20,tv21,tv22,tv23,tv24
+
+Construct_Objects()
+IF _SCREEN.frmB2T_Envelop.cusB2T.Get_Converter(,@loConverter,.T.) THEN
+ SwitchErrorHandler(.F.)
+ RETURN .F.
+ENDIF &&_SCREEN.frmB2T_Envelop.cusB2T.Get_Converter(@lcStorage,@loConverter,.T.)
+DEBUG
+SUSPEND
+
+*!*	?SYS(16)
+*!*	IF VARTYPE(__DOTNETBRIDGE) != "O"
+*!*		do wwDotNetBridge  && Load library
+*!*	ENDIF
+
+*!*	lowwDotNetBridge = CreateObject("wwDotNetBridge","V4")
+*!*	lowwDotNetBridge.LoadAssembly("HashTools.dll")
+*!*	ASSERT !lowwDotNetBridge.lError ;
+*!*	       Message PROG()+":"+ chr(13);
+*!*	       + lowwDotNetBridge.cErrorMsg
+
+*!*	RETURN
 
 *!*	<pdm>
 *!*	<descr>Just an error catcher.</descr>
@@ -98,8 +121,9 @@ FUNCTION Pjx2Commit	&&Create a commit to git.
 *!*	   ENDDO &&FILE('git_x.tmp')
 
    LOCAL;
-    lcBat  AS CHARACTER,;
-    lcPath AS CHARACTER
+    lcBat    AS CHARACTER,;
+    lcPath   AS CHARACTER,;
+    lcCommit AS CHARACTER
 
    TEXT TO lcBat NOSHOW TEXTMERGE
 "<<_SCREEN.gcB2t_git>>" add -A
@@ -125,8 +149,9 @@ FUNCTION Pjx2Commit	&&Create a commit to git.
 *!*	</change>
 *!*	</pdm>
      IF TYPE('_SCREEN.gcB2T_Commit')="C" AND _SCREEN.gcB2T_Commit=="1" THEN
-      Run_git('commit -m "'+CHRTRAN(TTOC(DATETIME(),3),'T',' ')+'" -m "auto-commit by RunB2T.app"',.F.,.F.)
-      ??' - auto commit'
+      lcCommit = CHRTRAN(TTOC(DATETIME(),3),'T',' ')
+      Run_git('commit -m "'+lcCommit+'" -m "auto-commit by RunB2T.app"',.F.,.F.)
+      ??' - auto commit '+lcCommit
      ELSE  &&TYPE('_SCREEN.gcB2T_Commit')="C" AND _SCREEN.gcB2T_Commit=="1"
       Run_git('commit',.T.,.F.)
      ENDIF &&TYPE('_SCREEN.gcB2T_Commit')="C" AND _SCREEN.gcB2T_Commit=="1"
@@ -294,11 +319,11 @@ FUNCTION Convert_Pjx &&Runs FoxBin2Prg for multiple projects.
  CLEAR
 
  IF tlToBin THEN
-  IF MESSAGEBOX('Create Binary',4+32+256,'FoxBin2Text',10000)#6 THEN
+  IF MESSAGEBOX('Create Binary?',4+32+256,'FoxBin2Text',10000)#6 THEN
    ?'Stopped by user'
    SwitchErrorHandler(.F.)
    RETURN .F.
-  ENDIF &&MESSAGEBOX('Create Binary',4+32+256,'FoxBin2Text',10000)#6
+  ENDIF &&MESSAGEBOX('Create Binary?',4+32+256,'FoxBin2Text',10000)#6
   ?'Process to binary'
  ELSE  &&tlToBin
 
@@ -336,10 +361,14 @@ FUNCTION Convert_Pjx &&Runs FoxBin2Prg for multiple projects.
     lcSourceExt = "PJX"
    ENDIF &&lcSourceExt AS CHARACTER,IF tlToBin
 
+   lcPath = JUSTPATH(_SCREEN.gcB2T_Path)
+   CD (lcPath)
+
    lcProj = GETFILE(lcSourceExt)
-   lcPath = JUSTPATH(lcProj)
 
    IF !EMPTY(lcProj) AND tlToBin THEN
+    lcPath = JUSTPATH(lcProj)
+
 *get local text extension for project
 
     loInfo      = loConverter.Get_DirSettings(lcPath)
@@ -611,7 +640,7 @@ FUNCTION Convert_Pjx &&Runs FoxBin2Prg for multiple projects.
  CLEAR ALL
 
  LOCAL ARRAY;
-  laFiles(1)
+  laFiles(1,1)
 
  ACOPY(_SCREEN.gaFiles,laFiles)
  REMOVEPROPERTY(_SCREEN,'gaFiles')
@@ -697,6 +726,346 @@ FUNCTION Convert_Pjx &&Runs FoxBin2Prg for multiple projects.
  SwitchErrorHandler(.F.)
 ENDFUNC &&Convert_Pjx
 
+FUNCTION Convert_File  	&&Runs FoxBin2Prg for a single file or vcx/class.
+ LPARAMETERS;
+  tlToBin,;
+  tlSingleClass
+
+*!*	<pdm>
+*!*	<descr>Runs FoxBin2Prg for a single file or class.</descr>
+*!*	<params name="tlToBin" type="Boolean" byref="0" dir="" inb="0" outb="0">
+*!*	<short>Direction of operation.</short>
+*!*	<detail>
+*<p>If true, create binaries from the text files corresponding <pdmpara num="2" />.</p>
+*<p>If false create text files.(Default)</p>
+*</detail>
+*!*	<params name="tlSingleClass" type="Boolean" byref="0" dir="" inb="0" outb="0">
+*!*	<short>Mode of file pickup, allows processing of single classes.</short>
+*!*	<detail>
+*<p>If true, pick up a single class via <expr>AGETCLASS()</expr>.</p>
+*<p>If false, any source file.(Default)</p>
+*<p>FoxBin2Prg will run in appropriate mode.</p>
+*</detail>
+*!*	</params>
+*!*	<retval type="Boolean">Returns succcess of operation.</retval>
+*!*	<remarks>
+*<p>Runs a pickup for a file and transforms it.
+*Will always transform, neither the file is changed or not.</p>
+*<p>Picking a bin file for Text To Bin mode will select the txt file fitting.
+*Same for selecting a class, it will process the classes text file if existing.</p>
+*</remarks>
+*!*	<comment>
+*!*	<example></example>
+*!*	<seealso>
+*!*	 <see loca="" class="" pem=""></see>
+*!*	</seealso>
+*!*	<appliesto toref="0" toalso="0" />
+*!*	</comment>
+*!*	<copyright><i>&copy; 22.3.2017 Lutz Scheffler Software Ingenieurbüro</i></copyright>
+*!*	</pdm>
+
+ IF _VFP.STARTMODE#0 THEN
+  HelpMsg(2)
+  RETURN .F.
+ ENDIF &&F_VFP.StartMode#0
+
+ LOCAL;
+  lcOldExact
+
+ lcOldExact = SET("Exact")
+ SET EXACT ON
+ IF VARTYPE(tlToBin)='C';
+   AND INLIST(LOWER(tlToBin),'?','/?','-?','h','/h','-h','help','/help','-help') THEN
+
+  HelpMsg(11)
+
+  SET EXACT &lcOldExact
+  RETURN .F.
+ ENDIF &&VARTYPE(tlToBin)='C' AND INLIST(LOWER(tlToBin),'?','/?','-?','h','/h','-h','help','/help','-help')
+
+ SET EXACT &lcOldExact
+
+ SwitchErrorHandler(.T.)
+
+ LOCAL;
+  lcFileTypes,;
+  lcFile,;
+  lcSourceExt,;
+  lvTemp,;
+  llReturn,;
+  loConverter AS OBJECT,;
+  loInfo      AS OBJECT
+
+ Construct_Objects()
+ IF _SCREEN.frmB2T_Envelop.cusB2T.Get_Converter(,@loConverter,.T.) THEN
+  Destruct_Objects()
+  SwitchErrorHandler(.F.)
+  ?"Error"
+  RETURN .F.
+ ENDIF &&_SCREEN.frmB2T_Envelop.cusB2T.Get_Converter(@lcStorage,@loConverter,.T.)
+
+ lcPath = FULLPATH(CURDIR())
+
+ loInfo      = loConverter.Get_DirSettings(lcPath)
+
+*!*	SET STEP ON
+*!*	return
+
+ lcFileTypes = 'VCX;FRX;MNX;SCX;LBX;DBF;DBC'
+
+ IF tlToBin THEN
+  lvTemp = UPPER(loInfo.c_VC2)
+  lcFileTypes = lcFileTypes+";*."+lvTemp+":"+lvTemp
+  lvTemp = UPPER(loInfo.c_FR2)
+  lcFileTypes = lcFileTypes+";*."+lvTemp+":"+lvTemp
+  lvTemp = UPPER(loInfo.c_MN2)
+  lcFileTypes = lcFileTypes+";*."+lvTemp+":"+lvTemp
+  lvTemp = UPPER(loInfo.c_SC2)
+  lcFileTypes = lcFileTypes+";*."+lvTemp+":"+lvTemp
+  lvTemp = UPPER(loInfo.c_LB2)
+  lcFileTypes = lcFileTypes+";*."+lvTemp+":"+lvTemp
+  lvTemp = UPPER(loInfo.c_DB2)
+  lcFileTypes = lcFileTypes+";*."+lvTemp+":"+lvTemp
+  lvTemp = UPPER(loInfo.c_DC2)
+  lcFileTypes = lcFileTypes+";*."+lvTemp+":"+lvTemp
+ ENDIF &&tlToBin
+
+ _SCREEN.ADDPROPERTY('glToBin',tlToBin)
+ _SCREEN.ADDPROPERTY('gaProjects(1,3)')
+ _SCREEN.ADDPROPERTY('gcSource',"")
+ _SCREEN.ADDPROPERTY('gcTarget',"")
+ _SCREEN.ADDPROPERTY('gcClass',"")
+ _SCREEN.ADDPROPERTY('gcOld_CFG',"")
+ _SCREEN.ADDPROPERTY('gcCFG_File',"")
+
+ STORE "" TO;
+  _SCREEN.gaProjects
+
+ IF tlToBin THEN
+  lvTemp = "Convert To Text"
+ ELSE  &&tlToBin
+  lvTemp = "Convert to Bin"
+ ENDIF &&tlToBin
+
+ IF tlSingleClass THEN
+  AGETCLASS(_SCREEN.gaProjects)	&&AGETCLASS(_SCREEN.gaProjects,'','',lvTemp) fails
+  DIMENSION;
+   _SCREEN.gaProjects(1,3)
+ ELSE  &&tlSingleClass
+  _SCREEN.gaProjects(1,1) = GETFILE(lcFileTypes,'','',0,lvTemp)
+ ENDIF &&tlSingleClass
+
+ llReturn = .T.
+
+ IF llReturn AND EMPTY(_SCREEN.gaProjects(1,1)) THEN
+*Nothing selected, GetFile cancled
+*No Message
+  llReturn = .F.
+ ENDIF &&llReturn AND EMPTY(_SCREEN.gaProjects(1,1))
+
+ loInfo      = loConverter.Get_DirSettings(JUSTPATH(_SCREEN.gaProjects(1,1)))
+
+ IF llReturn AND INLIST(UPPER(JUSTEXT(_SCREEN.gaProjects(1,1))),'PJX',loInfo.c_PJ2) THEN
+*no project here
+  ?JUSTEXT(_SCREEN.gaProjects(1,1))+' file not allowed here.'
+  llReturn = .F.
+ ENDIF &&llReturn AND INLIST(UPPER(JUSTEXT(_SCREEN.gaProjects(1,1))),'PJX',loInfo.c_PJ2)
+
+ IF llReturn THEN
+* if to Bin
+* if binary picked, need to figure out rules of textfile extension by path
+* if SingleClass
+* build up by rules
+* fileformat
+  IF tlToBin THEN
+   lcSourceExt = UPPER(JUSTEXT(_SCREEN.gaProjects(1,1)))
+
+*if binary file is send, gather text file extension
+   DO CASE
+*rethink this
+*possibly protest / note on class picked from multi VC2
+    CASE UPPER(lcSourceExt)=="VCX" AND tlSingleClass
+     _SCREEN.gaProjects(1,3) = _SCREEN.gaProjects(1,1)
+     lcSourceExt             = _SCREEN.gaProjects(1,2)+'.'+loInfo.c_VC2
+    CASE UPPER(lcSourceExt)=="VCX"
+     lcSourceExt = loInfo.c_VC2
+    CASE UPPER(lcSourceExt)=="FRX"
+     lcSourceExt = loInfo.c_FR2
+    CASE UPPER(lcSourceExt)=="MNX"
+     lcSourceExt = loInfo.c_MN2
+    CASE UPPER(lcSourceExt)=="DBF"
+     lcSourceExt = loInfo.c_DB2
+    CASE UPPER(lcSourceExt)=="DBC"
+     lcSourceExt = loInfo.c_DC2
+    CASE UPPER(lcSourceExt)=="PJX"
+     lcSourceExt = loInfo.c_PJ2
+    CASE UPPER(lcSourceExt)=="LBX"
+     lcSourceExt = loInfo.c_LB2
+    CASE UPPER(lcSourceExt)=="SCX"
+     lcSourceExt = loInfo.c_SC2
+   ENDCASE
+
+   _SCREEN.gaProjects(1,1) = FORCEEXT(_SCREEN.gaProjects(1,1),lcSourceExt)
+
+   IF !FILE(_SCREEN.gaProjects(1,1)) THEN
+    ?'File '+_SCREEN.gaProjects(1,1)+' not found.'
+    llReturn = .F.
+   ENDIF &&!FILE(_SCREEN.gaProjects(1,1))
+
+   IF llReturn THEN
+    IF MESSAGEBOX('Create Binary?',4+32+256,'FoxBin2Text',10000)#6 THEN
+     ?'Stopped by user'
+     llReturn = .F.
+    ELSE &&MESSAGEBOX('Create Binary?',4+32+256,'FoxBin2Text',10000)#6
+     ?'Process to binary'
+    ENDIF &&MESSAGEBOX('Create Binary?',4+32+256,'FoxBin2Text',10000)#6
+   ENDIF &&llReturn
+
+   IF llReturn THEN
+*SingleClass worker
+*now the tricky thing
+*do we process a single class to binary
+*FoxBin2Prg is not very helpfull here
+*so we need a kludge
+
+*check if we pick a single class
+*this is, the file should contain the classlib
+*if the filename is different to classlib file, it's a single class
+
+    lvTemp        = JUSTSTEM(LOWER(STREXTRACT(FILETOSTR(_SCREEN.gaProjects(1,1)),'SourceFile="','"',1)))
+    tlSingleClass = !EMPTY(STRTRAN(LOWER(JUSTSTEM(_SCREEN.gaProjects(1,1))),lvTemp,''))
+    IF tlSingleClass THEN
+*now we need to work around
+*see if we have a config file on files directory
+*first we figure out the classes name
+
+*!*	     IF EMPTY(_SCREEN.gaProjects(1,2)) THEN
+*!*	      _SCREEN.gaProjects(1,2) = JUSTEXT(LOWER(JUSTSTEM(_SCREEN.gaProjects(1,1))))
+*!*	     ENDIF &&EMPTY(_SCREEN.gaProjects(1,2))
+
+*!*	     IF EMPTY(_SCREEN.gaProjects(1,3)) THEN
+*!*	      _SCREEN.gcTarget = FORCEPATH(lvTemp+'.vcx',JUSTPATH(_SCREEN.gaProjects(1,1)))
+*!*	     ELSE  &&EMPTY(_SCREEN.gaProjects(1,3))
+*!*	      _SCREEN.gcTarget = _SCREEN.gaProjects(1,3)
+*!*	     ENDIF &&EMPTY(_SCREEN.gaProjects(1,3))
+
+     _SCREEN.gcCFG_File = FORCEPATH('foxbin2prg.cfg',JUSTPATH(_SCREEN.gaProjects(1,1)))
+     lvTemp = 0h0d0a+"UseClassPerFile: "+PADL(EVL(loinfo.n_UseClassPerFile,1),1)+;
+      0h0d0a+"ClassPerFileCheck: 0"+;
+      0h0d0a+"RedirectClassPerFileToMain: 1"+;
+      0h0d0a+"RedirectClassType: 1"
+     IF FILE(_SCREEN.gcCFG_File) THEN
+*add string to config file, looks like last entry have precedence
+      _SCREEN.gcOld_CFG = FILETOSTR(_SCREEN.gcCFG_File)
+      STRTOFILE(STRTRAN(STRTRAN(STRTRAN(STRTRAN(_SCREEN.gcOld_CFG,;
+       "UseClassPerFile"           ,"*UseClassPerFile"           ,1,-1,1),;
+       "ClassPerFileCheck"         ,"*ClassPerFileCheck"         ,1,-1,1),;
+       "RedirectClassPerFileToMain","*RedirectClassPerFileToMain",1,-1,1),;
+       "RedirectClassType"         ,"*RedirectClassType"         ,1,-1,1)+;
+       lvTemp,_SCREEN.gcCFG_File)
+     ELSE  &&FILE(_SCREEN.gcCFG_File)
+*just a config file
+      STRTOFILE(lvTemp,_SCREEN.gcCFG_File)
+     ENDIF &&FILE(_SCREEN.gcCFG_File)
+
+     _SCREEN.gaProjects(1,1) = _SCREEN.gaProjects(1,1)+'::import'
+*_SCREEN.gaProjects(1,1) = _SCREEN.gaProjects(1,1)
+*!*	      STRTOFILE(STRTRAN(STRTRAN(STRTRAN(_SCREEN.gcOld_CFG,;
+*!*	       "UseClassPerFile"           ,"*UseClassPerFile"           ,1,-1,1),;
+*!*	       "ClassPerFileCheck"         ,"*ClassPerFileCheck"         ,1,-1,1),;
+*!*	       "RedirectClassPerFileToMain","*RedirectClassPerFileToMain",1,-1,1)+;
+*!*	       0h0d0a+"UseClassPerFile: 0"+0h0d0a+"UseClassPerFile: 0"+0h0d0a+"ClassPerFileCheck: 0",_SCREEN.gcCFG_File)
+*!*	     ELSE  &&FILE(_SCREEN.gcCFG_File)
+*!*	*just a config file
+*!*	      STRTOFILE("UseClassPerFile: 0"+0h0d0a+"UseClassPerFile: 0"+0h0d0a+"ClassPerFileCheck: 0",_SCREEN.gcCFG_File)
+*!*	     ENDIF &&FILE(_SCREEN.gcCFG_File)
+
+*let's see if the vcx is existing
+*!*	     IF !FILE(_SCREEN.gcTarget) THEN
+*!*	      CREATE CLASSLIB (_SCREEN.gcTarget)
+*!*	     ENDIF &&FILE(_SCREEN.gcTarget)
+
+*!*	     _SCREEN.gcSource        = SYS(2015)
+*!*	     lvTemp                  = FILETOSTR(_SCREEN.gaProjects(1,1))
+*!*	*     lvTemp                  = STRTRAN(lvTemp,'','',1,-1,1)
+*!*	     _SCREEN.gcSource        = FORCEPATH(_SCREEN.gcSource+'.vc2',JUSTPATH(_SCREEN.gaProjects(1,1)))
+*!*	     STRTOFILE(lvTemp,_SCREEN.gcSource)
+*!*	     _SCREEN.gaProjects(1,1) = _SCREEN.gcSource
+*!*	     _SCREEN.gcSource        = FORCEEXT(_SCREEN.gcSource,'VCX')
+
+    ENDIF &&tlSingleClass
+
+*/SingleClass worker
+   ENDIF &&llReturn
+
+
+  ELSE &&tlToBin
+   IF tlSingleClass THEN
+    _SCREEN.gaProjects(1,1) = _SCREEN.gaProjects(1,1)+'::'+_SCREEN.gaProjects(1,2)+'::export'
+    ?'Process to text'
+   ENDIF &&tlSingleClass
+  ENDIF &&tlToBin
+
+ ENDIF &&llReturn
+
+ loInfo = .NULL.
+
+ Destruct_Objects()
+
+ IF llReturn THEN
+
+
+  CLEAR ALL
+
+*process Transformation
+  Construct_Objects()
+
+  LOCAL ARRAY;
+   laFiles(1,1)
+
+  ACOPY(_SCREEN.gaProjects,laFiles)
+
+  LOCAL;
+   llReturn
+
+
+  llReturn = _SCREEN.frmB2T_Envelop.cusB2T.Process_Bin2Text(@laFiles,_SCREEN.glToBin,"",.F.,.T.)
+
+  Destruct_Objects()
+
+  IF !EMPTY(_SCREEN.gcCFG_File) THEN
+*SingleClass worker
+   IF EMPTY(_SCREEN.gcOld_CFG) THEN
+    DELETE FILE (_SCREEN.gcCFG_File)
+   ELSE  &&EMPTY(_SCREEN.gcOld_CFG)
+    STRTOFILE(_SCREEN.gcOld_CFG,_SCREEN.gcCFG_File)
+   ENDIF &&EMPTY(_SCREEN.gcOld_CFG)
+
+*!*	*move class, if
+*!*	*remove temp file, if
+*!*	   IF !EMPTY(_SCREEN.gcSource) THEN
+*!*	    IF llReturn THEN
+*!*	     ADD CLASS (_SCREEN.gaProjects(1,2)) OF (_SCREEN.gcSource) TO (_SCREEN.gcTarget) OVERWRITE
+*!*	    ENDIF &&llReturn
+*!*	    DELETE FILE FORCEEXT(_SCREEN.gcSource,'*')
+*!*	*    DELETE FILE (_SCREEN.gaProjects(1,1))
+*!*	   ENDIF &&!EMPTY(_SCREEN.gcSource)
+*/SingleClass worker
+  ENDIF &&!EMPTY(_SCREEN.gcCFG_File)
+
+ ENDIF &&llReturn
+
+ REMOVEPROPERTY(_SCREEN,'gcCFG_File')
+ REMOVEPROPERTY(_SCREEN,'gcOld_CFG')
+ REMOVEPROPERTY(_SCREEN,'gcSource')
+ REMOVEPROPERTY(_SCREEN,'gcTarget')
+ REMOVEPROPERTY(_SCREEN,'gaProjects')
+ REMOVEPROPERTY(_SCREEN,'glToBin')
+
+ SwitchErrorHandler(.F.)
+ RETURN llReturn
+ENDFUNC &&Convert_File
+
 FUNCTION Convert_Array	&&Runs FoxBin2Prg for multiple files.
  LPARAMETERS;
   tlToBin,;
@@ -719,8 +1088,10 @@ FUNCTION Convert_Array	&&Runs FoxBin2Prg for multiple files.
 *!*	<params name="taFiles" type="Array" byref="1" dir="" inb="0" outb="0">
 *!*	<short>Array with files</short>
 *!*	<detail>
-* <p>One column, full qualified filename of binary</p>
-* <p>Optional second column, if first colum is a project, projecthook.</p>
+* <p>One column, full qualified filename of binary. or text.
+* If <pdmpara num="1" /> is <expr>false</expr>, the column can declare a class in form <i>File<b>::Class</b></i>
+* as used by FoxBin2Prg for libraries.</p>
+* <p>Optional second column, if first column is a project, projecthook.</p>
 *</detail>
 *!*	</params>
 *!*	<retval type="Boolean">True if successfull.</retval>
@@ -732,7 +1103,7 @@ FUNCTION Convert_Array	&&Runs FoxBin2Prg for multiple files.
 * like <i>Delete obsolete files</i> might delete text files without warning.
 *</note>
 *</remarks>
-*!*	<copyright><i>&copy; 05.6.2015 Lutz Scheffler Software Ingenieurbüro</i></copyright>
+*!*	<copyright><i>&copy; 23.3.2017 Lutz Scheffler Software Ingenieurbüro</i></copyright>
 *!*	</pdm>
 
  EXTERNAL ARRAY;
@@ -929,7 +1300,7 @@ ENDFUNC &&InitMenu
 
 PROCEDURE git_bash		&&run bash
 *!*	<pdm>
-*!*	<descr>Run <i>git bash</i> for current directory.</descr>
+*!*	<descr>Run <i>git bash</i> for current project in git based irectory.</descr>
 *!*	<comment>
 *!*	<remarks>This is experimental. <i>git bash</i> works not as expected.</remarks>
 *!*	<retval type=""></retval>
@@ -939,15 +1310,30 @@ PROCEDURE git_bash		&&run bash
 *!*	</seealso>
 *!*	<appliesto toref="0" toalso="0" />
 *!*	</comment>
-*!*	<copyright><i>&copy; 15.9.2015 Lutz Scheffler Software Ingenieurbüro</i></copyright>
+*!*	<copyright><i>&copy; 14.3.2016 Lutz Scheffler Software Ingenieurbüro</i></copyright>
+*!*	</pdm>
+
+*!*	Changed by: SF 14.3.2016
+*!*	<pdm>
+*!*	<change date="{^2016-03-14,10:56:00}">Changed by: SF<br />
+*!*	Git bash starts in git base directory. Uses location of active project, if no project, the current path.
+*!* If not under git control at all, location of active project or current path.
+*!*	</change>
 *!*	</pdm>
 
  LOCAL;
-  lcPath AS CHARACTER,;
   lc_Git AS CHARACTER
 
- lcPath = ADDBS(FULLPATH(CURDIR()))
  IF Get_git_Path(@lc_Git) THEN
+  LOCAL;
+   lcOldPath AS CHARACTER,;
+   lcPath    AS CHARACTER
+
+  lcOldPath = FULLPATH(CURDIR())
+  lcPath    = GetBaseDir()
+
+  CD (lcPath)
+
 *!*	Changed by: SF 5.1.2016
 *!*	<pdm>
 *!*	<change date="{^2016-01-05,12:50:00}">Changed by: SF<br />
@@ -955,11 +1341,18 @@ PROCEDURE git_bash		&&run bash
 *!*	</change>
 *!*	</pdm>
 
-*  llReturn = Run_ExtApp('"'+FORCEPATH('git-bash.exe',JUSTPATH(JUSTPATH(lc_Git)))+'" ',lcPath,'NOR',,.T.)
-  llReturn = Run_ExtApp('"'+FORCEPATH('bash.exe',FORCEPATH('bin',JUSTPATH(JUSTPATH(lc_Git))))+'" ',lcPath,'NOR',,.T.)
+  #IF dlUseBash THEN
+   llReturn = Run_ExtApp('"'+FORCEPATH('git-bash.exe',JUSTPATH(JUSTPATH(lc_Git)))+'"',lcPath,'NOR',,.T.)
+  #ELSE  &&dlUseBash
+   llReturn = Run_ExtApp('"'+FORCEPATH('bash.exe',FORCEPATH('bin',JUSTPATH(JUSTPATH(lc_Git))))+'" ',lcPath,'NOR',,.T.)
+  #ENDIF &&dlUseBash
+
+  CD (lcOldPath)
 
 *!*	/Changed by: SF 5.1.2016
  ENDIF &&Get_git_Path(@lc_Git)
+
+*!*	/Changed by: SF 14.3.2016
 ENDPROC &&git_bash
 
 PROCEDURE git_gitk &&run gitk
@@ -1070,6 +1463,34 @@ FUNCTION Is_git		&&Internal. Check if a directory is under git control
  RETURN llIs_git
 ENDFUNC &&Is_Git
 
+FUNCTION GetBaseDir		&&Internal. Return base directory
+*!*	<pdm>
+*!*	<descr>Returns the git root directory of a given directory.</descr>
+*!*	<retval type="Character">
+*!*	Root directory of <expr>_VFP.ACTIVEPROJECT</expr>.<br />
+*!*	If no project open root directory of current directory,<br />
+*!*	If not under git control directory of <expr>_VFP.ACTIVEPROJECT</expr>, if no project opn current directory.
+*!*	</retval>
+*!*	<comment>
+*!*	<remarks></remarks>
+*!*	<example></example>
+*!*	<seealso>
+*!*	 <see loca="" class="" pem=""></see>
+*!*	</seealso>
+*!*	<appliesto toref="0" toalso="0" />
+*!*	</comment>
+*!*	<copyright><i>&copy; 12..201 Lutz Scheffler Software Ingenieurbüro</i></copyright>
+*!*	</pdm>
+
+ LOCAL;
+  lcReturn AS CHARACTER
+
+ lcReturn = IIF(_VFP.PROJECTS.COUNT>0,JUSTPATH(_VFP.ACTIVEPROJECT.NAME),FULLPATH(CURDIR()))
+ lcReturn = ADDBS(EVL(GetGitBaseDir(),lcReturn))
+
+ RETURN lcReturn
+ENDFUNC &&GetBaseDir
+
 FUNCTION GetGitBaseDir		&&Internal. Return git root directory
  LPARAMETERS;
   tcPath
@@ -1089,7 +1510,7 @@ FUNCTION GetGitBaseDir		&&Internal. Return git root directory
 *!*	</seealso>
 *!*	<appliesto toref="0" toalso="0" />
 *!*	</comment>
-*!*	<copyright><i>&copy; 12.6.2015 Lutz Scheffler Software Ingenieurbüro</i></copyright>
+*!*	<copyright><i>&copy; 16.6.2015 Lutz Scheffler Software Ingenieurbüro</i></copyright>
 *!*	</pdm>
 
  LOCAL;
@@ -1215,6 +1636,7 @@ FUNCTION Get_git_Path &&Internal. Get installation status of git and path to bin
 * Check for error
     IF m.lnErrCode=ERROR_SUCCESS THEN
      tc_git = ADDBS(LEFT(m.lpbData,m.lpcbData-1))+'cmd\git.exe'
+*     tc_git = ADDBS(LEFT(m.lpbData,m.lpcbData-1))+'git-bash.exe'
     ENDIF &&m.lnErrCode=ERROR_SUCCESS
 */ReadKey
 
@@ -1455,6 +1877,8 @@ FUNCTION HelpMsg	&&Internal. Display help message for external functions
   [ Starte Menü]+0h0D0A0D0A+;
   [DO Convert_Array IN RunB2T.prg]+" [OF Bin2Text.app]"+0h0d0a+;
   [ IDE Interface für FoxBin2Prg, für ein Datei Array]+0h0D0A0D0A+;
+  [DO Convert_File IN RunB2T.prg]+" [OF Bin2Text.app]"+0h0d0a+;
+  [ IDE Interface für FoxBin2Prg, für eine wählbare Datei oder Klasse.]
 
  #DEFINE dcText_DE_H01;
   "DO Convert_Pjx IN Bin2Text.app [[/?]|[lToBin[,nProjects[,nMode]]"+0h0d0a+;
@@ -1519,7 +1943,7 @@ FUNCTION HelpMsg	&&Internal. Display help message for external functions
 
  #DEFINE dcText_DE_H09;
   "DO Convert_Array IN Bin2Text.app [/?]|lToBin,cMode,@aFiles"+0h0d0a+;
-  [ IDE interface for FoxBin2Prg, to be used with menu]+0h0d0a+;
+  [ IDE interface für FoxBin2Prg, to be used with menu]+0h0d0a+;
   [ Parameter:]+0h0d0a+;
   [  /?        Zeigt diesen Hilfstext]+0h0d0a+;
   [  aFiles    Array mit Dateien]+0h0d0a+;
@@ -1529,12 +1953,24 @@ FUNCTION HelpMsg	&&Internal. Display help message for external functions
   [            sonst werden Textdateien erzeugt.(Default)]+0h0d0a+;
   [  cMode     Modus für Projekt - Dateien.]+0h0d0a+;
   [            Optional in FoxBin2PRG Stil]+0h0d0a+;
-  [            Wenn dieser Parameter nitch angegben ist werden pjx wie einfache Dateien behandelt]+0h0d0a+;
+  [            Wenn dieser Parameter nicht angegben ist werden pjx wie einfache Dateien behandelt]+0h0d0a+;
   [Classlibraries und Projecthooks werden nicht freigegeben.]
 
  #DEFINE dcText_DE_H10;
   "DO Convert_Array IN Bin2Text.app [/?]|lToBin,cMode,@aFiles"+0h0D0A0D0A+;
   [Nur aus der IDE starten.]
+
+ #DEFINE dcText_DE_H11;
+  "DO Convert_File IN Bin2Text.app [/?]|[lToBin[,lSingleClass]]"+0h0d0a+;
+  [ IDE interface für FoxBin2Prg, um eine wählbare Datei zu transformieren.]+0h0d0a+;
+  [ Parameter:]+0h0d0a+;
+  [  /?            Zeigt diesen Hilfstext]+0h0d0a+;
+  [  lToBin        Wenn wahr werden die Biärdateien erzeugt,]+0h0d0a+;
+  [                sonst werden Textdateien erzeugt.(Default)]+0h0d0a+;
+  [                Optional in FoxBin2PRG Stil]+0h0d0a+;
+  [  lSingleClass  Bestimme eine Klasse zum Transformieren.]+0h0d0a+;
+  [Führt ein CLEAR ALL aus.]
+
 ************************************************
  #DEFINE dcText_EN_H00;
   [Run:]+0h0d0a+;
@@ -1548,7 +1984,9 @@ FUNCTION HelpMsg	&&Internal. Display help message for external functions
   [DO InitMenu IN RunB2T.prg]+0h0d0a+;
   [ Run menu]+0h0D0A0D0A+;
   [DO Convert_Array IN Bin2Text.app]+0h0d0a+;
-  [ IDE interface for FoxBin2Prg, to be used an array of files.]
+  [ IDE interface for FoxBin2Prg, to be used with an array of files.]+;
+  [DO Convert_File IN RunB2T.prg]+" [OF Bin2Text.app]"+0h0d0a+;
+  [ IDE interface for FoxBin2Prg, pick a file or class to convert.]
 
  #DEFINE dcText_EN_H01;
   "DO Convert_Pjx IN Bin2Text.app [/?]|[lToBin[,nProjects[,nMode]]"+0h0d0a+;
@@ -1630,6 +2068,18 @@ FUNCTION HelpMsg	&&Internal. Display help message for external functions
   "DO Convert_Array IN Bin2Text.app [/?]|lToBin,cMode,@aFiles"+0h0D0A0D0A+;
   [Run from IDE only.]
 
+
+ #DEFINE dcText_EN_H11;
+  "DO Convert_File IN Bin2Text.app [/?]|[lToBin[,lSingleClass]]"+0h0d0a+;
+  [ IDE interface for FoxBin2Prg, pick a file or class to transform.]+0h0d0a+;
+  [ Parameter:]+0h0d0a+;
+  [  /?            This help message]+0h0d0a+;
+  [  lToBin        If true, create binaries,]+0h0d0a+;
+  [                if false create text files.(Default)]+0h0d0a+;
+  [                Optional in FoxBin2PRG style]+0h0d0a+;
+  [  lSingleClass  Select a class to  transform.]+0h0d0a+;
+  [This will use CLEAR ALL!]
+
  LPARAMETERS;
   tnHelp
 
@@ -1670,6 +2120,8 @@ FUNCTION HelpMsg	&&Internal. Display help message for external functions
    lcOut = dcText_EN_H09
   CASE tnHelp=10
    lcOut = dcText_EN_H10
+  CASE tnHelp=11
+   lcOut = dcText_EN_H11
   OTHERWISE
    lcOut = dcText_EN_H00
  ENDCASE

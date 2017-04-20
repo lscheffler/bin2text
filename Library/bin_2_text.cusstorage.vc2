@@ -100,11 +100,14 @@ DEFINE CLASS cusstorage AS custom 		&& The stuff that does the work.
 		   SELECT;
 		    Cur1.iDirty;
 		    FROM (tcStorage) AS Cur1;
+		    INTO CURSOR curHelp;
 		    WHERE Cur1.cFile==tcFile;
 		    AND Cur1.cType=='K';
 		    AND Cur1.iDirty IN (8,9)
 		*-if not found we are dirty
-		   llDirty = _TALLY=0
+		   llDirty = RECCOUNT('curHelp')=0
+		
+		   USE IN curHelp
 		* and done
 		   llOk = .T.
 		*/  &&lnStep=2 AND toSett.n_UseClassPerFile=0   &&Do not split classlib into classlib.class.vc2
@@ -276,11 +279,14 @@ DEFINE CLASS cusstorage AS custom 		&& The stuff that does the work.
 		   SELECT;
 		    Cur1.iDirty;
 		    FROM (tcStorage) AS Cur1;
+		    INTO CURSOR curHelp;
 		    WHERE Cur1.cFile==tcFile;
 		    AND Cur1.cType=='V';
 		    AND Cur1.iDirty IN (8,9)
 		*-if not found we are dirty
-		   llDirty = _TALLY=0
+		   llDirty = RECCOUNT('curHelp')=0
+		
+		   USE IN curHelp
 		* and done
 		   llOk = .T.
 		*/  &&lnStep=2 AND toSett.n_UseClassPerFile=0  &&Do not split classlib into classlib.class.vc2
@@ -411,12 +417,17 @@ DEFINE CLASS cusstorage AS custom 		&& The stuff that does the work.
 		*!*	<detail></detail>
 		*!*	</params>
 		*!*	<retval type="Boolean">Operation successfully ended.</retval>
-		*!*	<copyright><i>&copy; 14.4.2015 Lutz Scheffler Software Ingenieurbüro</i></copyright>
+		*!*	<copyright><i>&copy; 28.3.2017 Lutz Scheffler Software Ingenieurbüro</i></copyright>
 		*!*	</pdm>
 		
 		*!*	<pdm>
 		*!*	<change date="{^2017-03-13,13:00:00}">Changed by: SF<br />
 		*!*	Modified to deal with single classes of libraries.
+		*!*	</change>
+		*!*	</pdm>
+		*!*	<pdm>
+		*!*	<change date="{^2017-03-28,12:00:00}">Changed by: SF<br />
+		*!*	Modified to deal ::(import|export)
 		*!*	</change>
 		*!*	</pdm>
 		
@@ -440,7 +451,7 @@ DEFINE CLASS cusstorage AS custom 		&& The stuff that does the work.
 		lcFile      = taFiles(lnFile,1)
 		lcFile_Test = lcFile
 		 IF '::'$lcFile_Test THEN
-		  lcFile_Test = FORCEEXT(STRTRAN(lcFile_Test,'::','.'),'')
+		  lcFile_Test = FORCEEXT(STRTRAN(lcFile_Test,'::','.',1,1),'')
 		 ENDIF &&'::'$lcFile_Test
 		
 		 ?JUSTFNAME(lcFile)
@@ -964,6 +975,7 @@ DEFINE CLASS cusstorage AS custom 		&& The stuff that does the work.
 		*<p>Controls if all files are transformed.</p>
 		*<p>If <pdmpara num="2" /> is <expr>False</expr> only the files changed might be transformed.
 		*This can override stored setting.</p>
+		*<p>If True, the file will not be synched with the storage table./p>
 		*<p>If parameter is not passed, this default to the setting stored.</p>
 		*</detail>
 		*!*	</params>
@@ -984,7 +996,7 @@ DEFINE CLASS cusstorage AS custom 		&& The stuff that does the work.
 		* Only files marked as dirty will be processed.</p>
 		*<p>A postprocess will delete / remove obsolete text files.</p>
 		*!*	</remarks>
-		*!*	<copyright><i>&copy; 19.4.2015 Lutz Scheffler Software Ingenieurbüro</i></copyright>
+		*!*	<copyright><i>&copy; 28.3.2017 Lutz Scheffler Software Ingenieurbüro</i></copyright>
 		*!*	</pdm>
 		
 		*!*	<pdm>
@@ -1005,6 +1017,11 @@ DEFINE CLASS cusstorage AS custom 		&& The stuff that does the work.
 		*!*	<pdm>
 		*!*	<change date="{^2017-03-13,16:00:00}">Changed by: SF<br />
 		*!*	New parameter <pdmpara num="5" /> to force single file operation.
+		*!*	</change>
+		*!*	</pdm>
+		*!*	<pdm>
+		*!*	<change date="{^2017-03-28,12:00:00}">Changed by: SF<br />
+		*!*	Modified to deal ::(import|export)
 		*!*	</change>
 		*!*	</pdm>
 		
@@ -1058,7 +1075,7 @@ DEFINE CLASS cusstorage AS custom 		&& The stuff that does the work.
 		*extract class for processing
 		 lcClass = ""
 		 IF '::'$taFiles(lnFile,1) THEN
-		  taFiles(lnFile,1) = STRTRAN(taFiles(lnFile,1),'::','.')
+		  taFiles(lnFile,1) = STRTRAN(taFiles(lnFile,1),'::','.',1,1)
 		  lcClass           = "::"+JUSTEXT(taFiles(lnFile,1))
 		  taFiles(lnFile,1)	= FORCEEXT( taFiles(lnFile,1),'')
 		 ENDIF &&'::'$taFiles(lnFile,1)
@@ -1239,7 +1256,8 @@ DEFINE CLASS cusstorage AS custom 		&& The stuff that does the work.
 		ENDIF &&lnFilesFound>0
 		
 		*ReRun only file(s) changed
-		IF llFound THEN
+		*Ignore Storage if tlIncludeAll 
+		IF NVL(!tlIncludeAll,True) AND llFound THEN
 		 LOCAL ARRAY;
 		  laFiles2(1,2)
 		
@@ -1411,7 +1429,7 @@ DEFINE CLASS cusstorage AS custom 		&& The stuff that does the work.
 		*!*	/Changed by: SF 4.6.2015
 		
 		 ENDIF &&loConverter.Get_Processed(@laFiles2)#0
-		ENDIF &&llFound
+		ENDIF &&NVL(!tlIncludeAll,True) AND llFound
 		
 		loConverter.UnloadProgressbarForm()
 		loConverter =  NIL
