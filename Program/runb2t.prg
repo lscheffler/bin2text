@@ -837,7 +837,7 @@ FUNCTION Convert_File  	&&Runs FoxBin2Prg for a single file or vcx/class.
  _SCREEN.ADDPROPERTY('gcClass',"")
 * _SCREEN.ADDPROPERTY('gcOld_CFG',"")
 * _SCREEN.ADDPROPERTY('gcCFG_File',"")
- _SCREEN.ADDPROPERTY('goInfo',.NULL.)
+ _SCREEN.ADDPROPERTY('glInfo',.F.)
 
  STORE "" TO;
   _SCREEN.gaProjects
@@ -951,13 +951,7 @@ FUNCTION Convert_File  	&&Runs FoxBin2Prg for a single file or vcx/class.
 *!*	     ENDIF &&EMPTY(_SCREEN.gaProjects(1,3))
 
 *     _SCREEN.gcCFG_File = FORCEPATH('foxbin2prg.cfg',JUSTPATH(_SCREEN.gaProjects(1,1)))
-     SET STEP ON
 *     RETURN
-
-     loInfo.n_UseClassPerFile            = EVL(loInfo.n_UseClassPerFile,1)
-     loInfo.l_ClassPerFileCheck          = .F.
-     loInfo.l_RedirectClassPerFileToMain = .T.
-     loInfo.n_RedirectClassType          = 1
 
 *!*	     lvTemp = 0h0d0a+"UseClassPerFile: "+PADL(),1)+;
 *!*	      0h0d0a+"ClassPerFileCheck: 0"+;
@@ -1017,7 +1011,9 @@ FUNCTION Convert_File  	&&Runs FoxBin2Prg for a single file or vcx/class.
 
  ENDIF &&llReturn
 
- _SCREEN.goInfo = loInfo
+ _SCREEN.glInfo = .T.
+
+ loInfo = .NULL.
 
  Destruct_Objects()
 
@@ -1035,10 +1031,34 @@ FUNCTION Convert_File  	&&Runs FoxBin2Prg for a single file or vcx/class.
   ACOPY(_SCREEN.gaProjects,laFiles)
 
   LOCAL;
-   llReturn
+   llReturn,;
+   loConverter AS OBJECT,;
+   loInfo      AS OBJECT
 
+  llReturn = .T.
+******
+  IF _SCREEN.glInfo THEN
 
-  llReturn = _SCREEN.frmB2T_Envelop.cusB2T.Process_Bin2Text(@laFiles,_SCREEN.glToBin,"",.F.,.T.,_SCREEN.goInfo)
+   IF _SCREEN.frmB2T_Envelop.cusB2T.Get_Converter(,@loConverter,.T.) THEN
+    Destruct_Objects()
+    SwitchErrorHandler(.F.)
+    ?"Error"
+    llReturn = .F.
+   ENDIF &&_SCREEN.frmB2T_Envelop.cusB2T.Get_Converter(@lcStorage,@loConverter,.T.)
+   loInfo      = loConverter.Get_DirSettings(JUSTPATH(_SCREEN.gaProjects(1,1)))
+
+   IF llReturn THEN
+    loInfo.n_UseClassPerFile            = EVL(loInfo.n_UseClassPerFile,1)
+    loInfo.l_ClassPerFileCheck          = .F.
+    loInfo.l_RedirectClassPerFileToMain = .T.
+    loInfo.n_RedirectClassType          = 1
+   ENDIF &&llReturn
+  ENDIF &&_SCREEN.glInfo
+******
+
+  llReturn = llReturn AND _SCREEN.frmB2T_Envelop.cusB2T.Process_Bin2Text(@laFiles,_SCREEN.glToBin,"",.F.,.T.,loInfo)
+
+  loInfo = .NULL.
 
   Destruct_Objects()
 
@@ -1070,7 +1090,7 @@ FUNCTION Convert_File  	&&Runs FoxBin2Prg for a single file or vcx/class.
  REMOVEPROPERTY(_SCREEN,'gcTarget')
  REMOVEPROPERTY(_SCREEN,'gaProjects')
  REMOVEPROPERTY(_SCREEN,'glToBin')
- REMOVEPROPERTY(_SCREEN,'goInfo')
+ REMOVEPROPERTY(_SCREEN,'glInfo')
 
  SwitchErrorHandler(.F.)
  RETURN llReturn
@@ -1472,6 +1492,27 @@ FUNCTION Is_git		&&Internal. Check if a directory is under git control
 
  RETURN llIs_git
 ENDFUNC &&Is_Git
+
+PROCEDURE Print_ActiveBranch  
+*!*	<pdm>
+*!*	<!-- <descr>Print the active branch to _SCREEN</descr> -->
+*!*	<comment>
+*!*	<retval type=""></retval>
+*!*	<remarks></remarks>
+*!*	<example></example>
+*!*	<seealso>
+*!*	 <see loca="" class="" pem=""></see>
+*!*	</seealso>
+*!*	<appliesto toref="0" toalso="0" />
+*!*	</comment>
+*!*	<copyright><i>&copy; 8.11.2017 Lutz Scheffler Software Ingenieurbüro</i></copyright>
+*!*	</pdm>
+ 
+  IF Is_Git() THEN
+  ?'On branch '+GetBranch()
+ ENDIF &&Is_Git()
+ENDPROC &&Print_ActiveBranch 
+
 
 FUNCTION GetBaseDir		&&Internal. Return base directory
 *!*	<pdm>

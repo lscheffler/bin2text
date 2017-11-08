@@ -472,14 +472,10 @@ DEFINE CLASS cusstorage AS custom 		&& The stuff that does the work.
 		*!*	obj.execute(cInputFile [,cType [,cTextName [,lGenText [,cDontShowErrors [,cDebug;
 		*!*	 [,cDontShowProgress [,oModule [,oEx [,lRelanzarError [,cOriginalFileName;
 		*!*	 [,cRecompile [,cNoTimestamps [,cBackupLevels [,cClearUniqueID [,cOptimizeByFilestamp [,cCFG_File]]]]]]]]]]]]]]])
-		 IF toConverter.Execute(lcFile,taFiles(lnFile,2),"0","0","0","0",;
-		   "1")#0 THEN 
-		*!*	 IF toConverter.Execute(lcFile,taFiles(lnFile,2),"0","0","0","0",;
-		*!*	   "1",NIL,NIL,NIL,NIL,;
-		*!*	   NIL,NIL,NIL,NIL,NIL,toSetting)#0 THEN 
+		 IF toConverter.Execute(lcFile,taFiles(lnFile,2),"0","0","0","0","1",,,,,,,,,,toSetting)#0 THEN
 		  llOk = .F.
 		  EXIT
-		 ENDIF &&toConverter.Execute(lcFile,taFiles(lnFile,2),"0","0","0","0", "1",NIL,NIL,NIL,NIL, NIL,NIL,NIL,NIL,NIL, ...
+		 ENDIF &&toConverter.Execute(lcFile,taFiles(lnFile,2),"0","0","0","0","1", ,,,,,,,,,toSetting)#0
 		
 		 toConverter.l_AutoClearProcessedFiles = .F.
 		ENDFOR &&lnFile
