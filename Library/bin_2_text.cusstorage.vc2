@@ -1043,26 +1043,27 @@ DEFINE CLASS cusstorage AS custom 		&& The stuff that does the work.
 		 taFiles
 		
 		LOCAL;
-		 lcFile       AS CHARACTER,;
-		 lcMode       AS CHARACTER,;
-		 lcPath       AS CHARACTER,;
-		 lcSourceExt  AS CHARACTER,;
-		 lcStorage    AS CHARACTER,;
-		 lcTarget     AS CHARACTER,;
-		 lcClass      AS CHARACTER,;
-		 lnFile       AS NUMBER,;
-		 lnFiles      AS NUMBER,;
-		 lnFilesFound AS NUMBER,;
-		 lnOffset     AS NUMBER,;
-		 lnOffsets    AS NUMBER,;
-		 lnReturn     AS NUMBER,;
-		 llFound      AS BOOLEAN,;
-		 llMaxiLoop   AS BOOLEAN,;
-		 lvTemp       AS VARIANT,;
-		 lvTime       AS VARIANT,;
-		 loProject    AS PROJECT,;
-		 loSett       AS OBJECT,;
-		 loConverter  AS "c_foxbin2prg" OF "E:\x\Helper\ThirdParty\VFPX\FoxBin2PRG\FOXBIN2PRG.PRG"
+		 lcFile        AS CHARACTER,;
+		 lcMode        AS CHARACTER,;
+		 lcPath        AS CHARACTER,;
+		 lcSourceExt   AS CHARACTER,;
+		 lcStorage     AS CHARACTER,;
+		 lcTarget      AS CHARACTER,;
+		 lcClass       AS CHARACTER,;
+		 lnFile        AS NUMBER,;
+		 lnFiles       AS NUMBER,;
+		 lnFilesFound  AS NUMBER,;
+		 lnOffset      AS NUMBER,;
+		 lnOffsets     AS NUMBER,;
+		 lnReturn      AS NUMBER,;
+		 llFound       AS BOOLEAN,;
+		 llMaxiLoop    AS BOOLEAN,;
+		 llSingleClass AS BOOLEAN,;
+		 lvTemp        AS VARIANT,;
+		 lvTime        AS VARIANT,;
+		 loProject     AS PROJECT,;
+		 loSett        AS OBJECT,;
+		 loConverter   AS "c_foxbin2prg" OF "E:\x\Helper\ThirdParty\VFPX\FoxBin2PRG\FOXBIN2PRG.PRG"
 		
 		lvTime = SECONDS()
 		IF THIS.Get_Converter(@lcStorage,@loConverter) THEN
@@ -1092,6 +1093,7 @@ DEFINE CLASS cusstorage AS custom 		&& The stuff that does the work.
 		  taFiles(lnFile,1) = STRTRAN(taFiles(lnFile,1),'::','.',1,1)
 		  lcClass           = "::"+JUSTEXT(taFiles(lnFile,1))
 		  taFiles(lnFile,1)	= FORCEEXT( taFiles(lnFile,1),'')
+		  llSingleClass     = True
 		 ENDIF &&'::'$taFiles(lnFile,1)
 		
 		 loSett      = THIS.oGet_Setting(JUSTPATH(taFiles(lnFile,1)),loConverter)
@@ -1100,6 +1102,8 @@ DEFINE CLASS cusstorage AS custom 		&& The stuff that does the work.
 		
 		*if binary file is send, gather text file extension
 		  DO CASE
+		   CASE llSingleClass
+		    lcSourceExt = "VCX"
 		   CASE UPPER(lcSourceExt)=="VCX"
 		    lcSourceExt = loSett.c_VC2
 		   CASE UPPER(lcSourceExt)=="FRX"
@@ -1118,7 +1122,7 @@ DEFINE CLASS cusstorage AS custom 		&& The stuff that does the work.
 		    lcSourceExt = loSett.c_SC2
 		
 		*check if just a text file name is send,
-		*for the logic of the programm, we need the binary, do we swap
+		*for the logic of the programm, we need the binary, so we swap
 		   CASE UPPER(lcSourceExt)==loSett.c_VC2
 		    taFiles(lnFile,1) = FORCEEXT(taFiles(lnFile,1),"VCX")
 		   CASE UPPER(lcSourceExt)==loSett.c_FR2
@@ -1175,7 +1179,7 @@ DEFINE CLASS cusstorage AS custom 		&& The stuff that does the work.
 		 ENDIF &&EMPTY(lcSourceExt)
 		
 		 laFiles(lnFilesFound,2) = tcMode 									&&a project file bin or text
-		 laFiles(lnFilesFound,3) = taFiles(lnFile,1)							&&VFP Bin File
+		 laFiles(lnFilesFound,3) = taFiles(lnFile,1)						&&VFP Bin File
 		 DO CASE
 		  CASE !UPPER(JUSTEXT(taFiles(lnFile,1)))='PJX'
 		*nothing to do
@@ -1212,7 +1216,7 @@ DEFINE CLASS cusstorage AS custom 		&& The stuff that does the work.
 		   laFiles(lnOffsets,3) = taFiles(lnFile,2)						&&VFP Bin File
 		   laFiles(lnOffsets,4) = 0										&&no Hook
 		
-		   laFiles(lnFilesFound,4) = 0										&&no Hook
+		   laFiles(lnFilesFound,4) = 0									&&no Hook
 		 ENDCASE
 		ENDFOR &&lnFile
 		
@@ -1242,7 +1246,7 @@ DEFINE CLASS cusstorage AS custom 		&& The stuff that does the work.
 		    laFiles(lnOffsets,1) = lcFile								&&Source File of transformation; Bin
 		    laFiles(lnOffsets,2) = lcMode								&&not a project file
 		    laFiles(lnOffsets,3) = lcFile								&&VFP Bin File
-		    laFiles(lnOffsets,4) = 0										&&No Hook :)
+		    laFiles(lnOffsets,4) = 0									&&No Hook :)
 		   ENDIF &&!EMPTY(lcFile)
 		  ENDIF &&laFiles(lnFile,4)=1 AND FILE(lcFile) AND UPPER(JUSTEXT(lcFile))=='PJX'
 		 ENDFOR &&lnFile
@@ -1270,7 +1274,7 @@ DEFINE CLASS cusstorage AS custom 		&& The stuff that does the work.
 		ENDIF &&lnFilesFound>0
 		
 		*ReRun only file(s) changed
-		*Ignore Storage if tlIncludeAll 
+		*Ignore Storage if tlIncludeAll
 		IF NVL(!tlIncludeAll,True) AND llFound THEN
 		 LOCAL ARRAY;
 		  laFiles2(1,2)

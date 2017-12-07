@@ -616,6 +616,20 @@ FUNCTION Convert_Pjx &&Runs FoxBin2Prg for multiple projects.
 *!*	/Changed by SF 12.5.2015
 
    FOR EACH loProject IN _VFP.PROJECTS FOXOBJECT
+*!*	Changed by: SF 7.12.2017
+*!*	<pdm>
+*!*	<change date="{^2017-12-07,14:10:00}">Changed by: SF<br />
+*!*	Active project should not be added twice
+*!*	</change>
+*!*	</pdm>
+
+* place changed code here
+
+*!*	/Changed by: SF 7.12.2017
+ 
+    IF _SCREEN.gaProjects(1,1)==loProject.NAME THEN
+     LOOP
+    ENDIF &&_SCREEN.gaProjects(1,1)==loProject.NAME
     lnProj = lnProj+1
     _SCREEN.gaProjects(lnProj,1) = loProject.NAME
 *SF internal
@@ -843,9 +857,9 @@ FUNCTION Convert_File  	&&Runs FoxBin2Prg for a single file or vcx/class.
   _SCREEN.gaProjects
 
  IF tlToBin THEN
-  lvTemp = "Convert To Text"
+  lvTemp = "Convert To Bin"
  ELSE  &&tlToBin
-  lvTemp = "Convert to Bin"
+  lvTemp = "Convert to Text"
  ENDIF &&tlToBin
 
  IF tlSingleClass THEN
@@ -879,6 +893,7 @@ FUNCTION Convert_File  	&&Runs FoxBin2Prg for a single file or vcx/class.
 * build up by rules
 * fileformat
   IF tlToBin THEN
+
    lcSourceExt = UPPER(JUSTEXT(_SCREEN.gaProjects(1,1)))
 
 *if binary file is send, gather text file extension
@@ -971,7 +986,12 @@ FUNCTION Convert_File  	&&Runs FoxBin2Prg for a single file or vcx/class.
 *!*	      STRTOFILE(lvTemp,_SCREEN.gcCFG_File)
 *!*	     ENDIF &&FILE(_SCREEN.gcCFG_File)
 
-     _SCREEN.gaProjects(1,1) = _SCREEN.gaProjects(1,1)+'::import'
+*     _SCREEN.gaProjects(1,1) = _SCREEN.gaProjects(1,1)+'::import'
+
+     lvTemp = JUSTEXT(JUSTSTEM(_SCREEN.gaProjects(1,1)))
+     _SCREEN.gaProjects(1,1) = FORCEEXT(FORCEPATH(JUSTSTEM(JUSTSTEM(_SCREEN.gaProjects(1,1))),JUSTPATH(_SCREEN.gaProjects(1,1))),m.lcSourceExt)+;
+      '::'+lvTemp+'::import'
+
 *_SCREEN.gaProjects(1,1) = _SCREEN.gaProjects(1,1)
 *!*	      STRTOFILE(STRTRAN(STRTRAN(STRTRAN(_SCREEN.gcOld_CFG,;
 *!*	       "UseClassPerFile"           ,"*UseClassPerFile"           ,1,-1,1),;
@@ -1493,7 +1513,7 @@ FUNCTION Is_git		&&Internal. Check if a directory is under git control
  RETURN llIs_git
 ENDFUNC &&Is_Git
 
-PROCEDURE Print_ActiveBranch  
+PROCEDURE Print_ActiveBranch
 *!*	<pdm>
 *!*	<!-- <descr>Print the active branch to _SCREEN</descr> -->
 *!*	<comment>
@@ -1507,11 +1527,11 @@ PROCEDURE Print_ActiveBranch
 *!*	</comment>
 *!*	<copyright><i>&copy; 8.11.2017 Lutz Scheffler Software Ingenieurbüro</i></copyright>
 *!*	</pdm>
- 
-  IF Is_Git() THEN
-  ?'On branch '+GetBranch()
+
+ IF Is_git() THEN
+  ?'On branch '+getbranch()
  ENDIF &&Is_Git()
-ENDPROC &&Print_ActiveBranch 
+ENDPROC &&Print_ActiveBranch
 
 
 FUNCTION GetBaseDir		&&Internal. Return base directory
