@@ -10,8 +10,8 @@ ExpandAllPM=2
 AutoPrint=0
 ClearOutDir=1
 Incremental=0
-PJXFile=E:\SE\Tools\Bin2Text.pjx
-OutDir=E:\SE\Tools\Bin2Text\Doku\PDM
+PJXFile=E:\SE\Bin2Text\Bin2Text.pjx
+OutDir=E:\SE\Bin2Text\Doku\PDM
 IncludeSC=2
 IncludeSC_S=
 IncludeDD=2
@@ -230,14 +230,14 @@ EC_Expr=1
 [CUS]
 Generate=1
 OL_Files=0
-AlwaysCTR=0
+AlwaysCTR=1
 GLCSS=
 GLJS=
 [CUS_FL]
 =http://vfpx.codeplex.com/wikipage?title=FoxBin2Prg&refer,0,FoxBin2Prg
 =http://git-scm.com/download/win,0,git for windows
 =http://gorila.netlab.cz/pdm.html,0,PDM
-=E:\SE\Tools\Bin2Text\Doku\Source\Changes.html,1,Changes
+=E:\SE\Bin2Text\Doku\Source\Changes.html,1,Changes
 [GENERAL_FrP]
 [GENERAL_FL]
 [GENERAL_Setup]
@@ -259,7 +259,7 @@ EnhancedKeywordsSC=1
 [GENERAL_COMM]
 =MuhMiMa
 [GENERAL_PO]
-Link=E:\SE\Tools\Bin2Text\Doku\Source\Preface.html                                                                                                      
+Link=E:\SE\Bin2Text\Doku\Source\Preface.html                                                                                                                              
 CopyToRepository=1
 [GCT]
 Generate=1

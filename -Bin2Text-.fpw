@@ -1,3 +1,4 @@
-RESOURCE = 'E:\SE\Bin2Text\FoxUser_9.dbf'
+RESOURCE = 'FoxUser_9.dbf'
+*RESOURCE = 'E:\SE\Bin2Text\FoxUser_9.dbf'
 COMMAND  = DO E:\SE\Bin2Text\Bin2Text.prg
 *TEDIT    = /N C:\Program Files (x86)\IDM Computer Solutions\UEStudio\UEStudio.exe

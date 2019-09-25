@@ -16,7 +16,7 @@
 <body>
 <div class="diaxp_mhead">Dir_Action Procedure</div>
 <div class="diaxp_mbody">
-<!-- Created with _diamp_pdm_ab by Agnes Beste    05.01.2016 13:27 -->
+<!-- Created with _diamp_pdm_ab by Agnes Beste    25.09.2019 20:00 -->
  <div class="PDM_AB_Descr"><!-- Descr Begin -->
 Scan a directory for project files (binary or text representation).
  </div><!-- Descr End -->
@@ -27,9 +27,9 @@ Scan a directory for project files (binary or text representation).
     Dir_Action
    </div>
    <div class="Para">
-    (<a href="#_4J90SUKOJ">tcDir</a>
-     <wbr />,<a href="#_4J90SUKOK">tlToBin</a>
-     <wbr />,<a href="#_4J90SUKOL">toConverter</a>)
+    (<a href="#_5L516VF98">tcDir</a>
+     <wbr />,<a href="#_5L516VF99">tlToBin</a>
+     <wbr />,<a href="#_5L516VF9A">toConverter</a>)
    </div>
    <div style="clear: both"></div>
   </div><!-- Colour End -->
@@ -41,7 +41,7 @@ Scan a directory for project files (binary or text representation).
   </span>
   <dl class="DIAMP_PDM_AB_Params_List">
    <dt class="dt_">
-    <a class="DIAMP_PDM_AB_Params_ParaName" id="_4J90SUKOJ" name="_4J90SUKOJ">
+    <a class="DIAMP_PDM_AB_Params_ParaName" id="_5L516VF98" name="_5L516VF98">
      <span class="PDMEXPR PDMNor" ><span class='PDMVar'>tcDir</span></span>
 
     </a>
@@ -68,7 +68,7 @@ Scan a directory for project files (binary or text representation).
     </table>
    </dd>
    <dt class="dt_">
-    <a class="DIAMP_PDM_AB_Params_ParaName" id="_4J90SUKOK" name="_4J90SUKOK">
+    <a class="DIAMP_PDM_AB_Params_ParaName" id="_5L516VF99" name="_5L516VF99">
      <span class="PDMEXPR PDMNor" ><span class='PDMVar'>tlToBin</span></span>
 
     </a>
@@ -95,7 +95,7 @@ Scan a directory for project files (binary or text representation).
     </table>
    </dd>
    <dt class="dt_">
-    <a class="DIAMP_PDM_AB_Params_ParaName" id="_4J90SUKOL" name="_4J90SUKOL">
+    <a class="DIAMP_PDM_AB_Params_ParaName" id="_5L516VF9A" name="_5L516VF9A">
      <span class="PDMEXPR PDMNor" ><span class='PDMVar'>toConverter</span></span>
 
     </a>
@@ -125,55 +125,55 @@ Scan a directory for project files (binary or text representation).
  </div><!-- Parameters End -->
 
 
-<!-- /Created with _diamp_pdm_ab by Agnes Beste    05.01.2016 13:27 -->
+<!-- /Created with _diamp_pdm_ab by Agnes Beste    25.09.2019 20:00 -->
 
  <div class="SC">
-  <img onclick="ExpandSC('SP_P21',-1);" class="imgEC" src="../../imgs/dotab.gif" alt="Expand/Collapse source code of procedure Dir_Action" id="IMG_SP_P21" />
-  <span onclick="ExpandSC('SP_P21',-1);" class="SCCaption"><a name="pm.dir_action">Source Code</a></span>
-  <div ondblclick="ExpandSC('SP_P21',-1);" class="SCE" style="display: none;" id="TX_SP_P21">
+  <img onclick="ExpandSC('SP_P24',-1);" class="imgEC" src="../../imgs/dotab.gif" alt="Expand/Collapse source code of procedure Dir_Action" id="IMG_SP_P24" />
+  <span onclick="ExpandSC('SP_P24',-1);" class="SCCaption"><a name="pm.dir_action">Source Code</a></span>
+  <div ondblclick="ExpandSC('SP_P24',-1);" class="SCE" style="display: none;" id="TX_SP_P24">
 <!-- Code Begin -->
-<pre class="PDMCODE PDMNor" ><span class='PDMCnt'>1806</span> <span class='PDMInd'> 1</span>  <span class='PDMResK'>LPARAMETERS</span><span class='PDMOper'>;</span>
-<span class='PDMCnt'>1807</span> <span class='PDMInd'> 2</span>   <span class='PDMVar'>tcDir</span><span class='PDMOper'>,</span><span class='PDMOper'>;</span>
-<span class='PDMCnt'>1808</span> <span class='PDMInd'> 2</span>   <span class='PDMVar'>tlToBin</span><span class='PDMOper'>,</span><span class='PDMOper'>;</span>
-<span class='PDMCnt'>1809</span> <span class='PDMInd'> 2</span>   <span class='PDMVar'>toConverter</span>
-<span class='PDMCnt'>1810</span> <span class='PDMInd'>  </span> 
-<span class='PDMCnt'>1811</span> <span class='PDMInd'>  </span> 
-<span class='PDMCnt'>1836</span> <span class='PDMInd'>  </span> 
-<span class='PDMCnt'>1837</span> <span class='PDMInd'> 1</span>  <span class='PDMResK'>LOCAL</span><span class='PDMOper'>;</span>
-<span class='PDMCnt'>1838</span> <span class='PDMInd'> 2</span>   <span class='PDMVar'>lnProj</span>      <span class='PDMResK'>AS</span> <span class='PDMResK'>NUMBER</span><span class='PDMOper'>,</span><span class='PDMOper'>;</span>
-<span class='PDMCnt'>1839</span> <span class='PDMInd'> 2</span>   <span class='PDMVar'>lnProjs</span>     <span class='PDMResK'>AS</span> <span class='PDMResK'>NUMBER</span><span class='PDMOper'>,</span><span class='PDMOper'>;</span>
-<span class='PDMCnt'>1840</span> <span class='PDMInd'> 2</span>   <span class='PDMVar'>lnFiles</span>     <span class='PDMResK'>AS</span> <span class='PDMResK'>NUMBER</span><span class='PDMOper'>,</span><span class='PDMOper'>;</span>
-<span class='PDMCnt'>1841</span> <span class='PDMInd'> 2</span>   <span class='PDMVar'>lcSourceExt</span> <span class='PDMResK'>AS</span> <span class='PDMResK'>CHARACTER</span><span class='PDMOper'>,</span><span class='PDMOper'>;</span>
-<span class='PDMCnt'>1842</span> <span class='PDMInd'> 2</span>   <span class='PDMVar'>loConverter</span> <span class='PDMResK'>AS</span> <span class='PDMResK'>OBJECT</span><span class='PDMOper'>,</span><span class='PDMOper'>;</span>
-<span class='PDMCnt'>1843</span> <span class='PDMInd'> 2</span>   <span class='PDMVar'>loInfo</span>      <span class='PDMResK'>AS</span> <span class='PDMResK'>OBJECT</span>
-<span class='PDMCnt'>1844</span> <span class='PDMInd'>  </span> 
-<span class='PDMCnt'>1845</span> <span class='PDMInd'> 1</span>  <span class='PDMResK'>LOCAL</span> <span class='PDMResK'>ARRAY</span><span class='PDMOper'>;</span>
-<span class='PDMCnt'>1846</span> <span class='PDMInd'> 2</span>   <span class='PDMVar'>laFiles</span><span class='PDMOper'>(</span><span class='PDMLit'>1</span><span class='PDMOper'>,</span><span class='PDMLit'>1</span><span class='PDMOper'>)</span>
-<span class='PDMCnt'>1847</span> <span class='PDMInd'>  </span> 
-<span class='PDMCnt'>1848</span> <span class='PDMInd'> 1</span>  <span class='PDMResK'>IF</span> <span class='PDMVar'>tlToBin</span> <span class='PDMResK'>THEN</span>
-<span class='PDMCnt'>1849</span> <span class='PDMInd'>  </span> <span class='PDMCom'>*get local text extension for project</span>
-<span class='PDMCnt'>1850</span> <span class='PDMInd'> 2</span>   <span class='PDMVar'>loInfo</span>      <span class='PDMOper'>=</span> <span class='PDMVar'>toConverter</span><span class='PDMOper'>.</span><span class='PDMVar'>Get_DirSettings</span><span class='PDMOper'>(</span><span class='PDMVar'>tcDir</span><span class='PDMOper'>)</span>
-<span class='PDMCnt'>1851</span> <span class='PDMInd'> 2</span>   <span class='PDMVar'>lcSourceExt</span> <span class='PDMOper'>=</span> <span class='PDMVar'>loInfo</span><span class='PDMOper'>.</span><span class='PDMVar'>c_PJ2</span>
-<span class='PDMCnt'>1852</span> <span class='PDMInd'>  </span> 
-<span class='PDMCnt'>1853</span> <span class='PDMInd'> 1</span>  <span class='PDMResK'>ELSE</span>  <span class='PDMCom'>&amp;&amp;tlToBin</span>
-<span class='PDMCnt'>1854</span> <span class='PDMInd'> 2</span>   <span class='PDMVar'>lcSourceExt</span> <span class='PDMOper'>=</span> <span class='PDMStr'>"PJX"</span>
-<span class='PDMCnt'>1855</span> <span class='PDMInd'> 1</span>  <span class='PDMResK'>ENDIF</span> <span class='PDMCom'>&amp;&amp;tlToBin</span>
-<span class='PDMCnt'>1856</span> <span class='PDMInd'>  </span> 
-<span class='PDMCnt'>1857</span> <span class='PDMInd'> 1</span>  <span class='PDMVar'>loInfo</span>      <span class='PDMOper'>=</span> <span class='PDMOper'>.</span><span class='PDMResK'>NULL</span><span class='PDMOper'>.</span>
-<span class='PDMCnt'>1858</span> <span class='PDMInd'>  </span> 
-<span class='PDMCnt'>1859</span> <span class='PDMInd'> 1</span>  <span class='PDMVar'>lnProjs</span> <span class='PDMOper'>=</span> <span class='PDMResF'>ADIR</span><span class='PDMOper'>(</span><span class='PDMVar'>laFiles</span><span class='PDMOper'>,</span><span class='PDMStr'>'*.'</span><span class='PDMOper'>+</span><span class='PDMVar'>lcSourceExt</span><span class='PDMOper'>,</span><span class='PDMStr'>'HS'</span><span class='PDMOper'>)</span>
-<span class='PDMCnt'>1860</span> <span class='PDMInd'>  </span> 
-<span class='PDMCnt'>1861</span> <span class='PDMInd'> 1</span>  <span class='PDMResK'>IF</span> <span class='PDMVar'>lnProjs</span><span class='PDMOper'>&gt;</span><span class='PDMLit'>0</span> <span class='PDMResK'>THEN</span>
-<span class='PDMCnt'>1862</span> <span class='PDMInd'> 2</span>   <span class='PDMVar'>lnFiles</span> <span class='PDMOper'>=</span> <span class='PDMResF'>IIF</span><span class='PDMOper'>(</span><span class='PDMResF'>EMPTY</span><span class='PDMOper'>(</span><span class='PDMVar'>_SCREEN</span><span class='PDMOper'>.</span><span class='PDMVar'>gaFiles</span><span class='PDMOper'>)</span><span class='PDMOper'>,</span><span class='PDMLit'>0</span><span class='PDMOper'>,</span><span class='PDMResF'>ALEN</span><span class='PDMOper'>(</span><span class='PDMVar'>_SCREEN</span><span class='PDMOper'>.</span><span class='PDMVar'>gaFiles</span><span class='PDMOper'>,</span><span class='PDMLit'>1</span><span class='PDMOper'>)</span><span class='PDMOper'>)</span>
-<span class='PDMCnt'>1863</span> <span class='PDMInd'>  </span> 
-<span class='PDMCnt'>1864</span> <span class='PDMInd'> 2</span>   <span class='PDMResK'>DIMENSION</span><span class='PDMOper'>;</span>
-<span class='PDMCnt'>1865</span> <span class='PDMInd'> 3</span>    <span class='PDMVar'>_SCREEN</span><span class='PDMOper'>.</span><span class='PDMVar'>gaFiles</span><span class='PDMOper'>(</span><span class='PDMVar'>lnFiles</span><span class='PDMOper'>+</span><span class='PDMVar'>lnProjs</span><span class='PDMOper'>,</span><span class='PDMLit'>2</span><span class='PDMOper'>)</span>
-<span class='PDMCnt'>1866</span> <span class='PDMInd'>  </span> 
-<span class='PDMCnt'>1867</span> <span class='PDMInd'> 2</span>   <span class='PDMResK'>FOR</span> <span class='PDMVar'>lnProj</span> <span class='PDMOper'>=</span> <span class='PDMLit'>1</span> <span class='PDMResK'>TO</span> <span class='PDMVar'>lnProjs</span>
-<span class='PDMCnt'>1868</span> <span class='PDMInd'> 3</span>    <span class='PDMVar'>_SCREEN</span><span class='PDMOper'>.</span><span class='PDMVar'>gaFiles</span><span class='PDMOper'>(</span><span class='PDMVar'>lnFiles</span><span class='PDMOper'>+</span><span class='PDMVar'>lnProj</span><span class='PDMOper'>,</span><span class='PDMLit'>1</span><span class='PDMOper'>)</span> <span class='PDMOper'>=</span> <span class='PDMResF'>FORCEPATH</span><span class='PDMOper'>(</span><span class='PDMResF'>FORCEEXT</span><span class='PDMOper'>(</span><span class='PDMVar'>laFiles</span><span class='PDMOper'>(</span><span class='PDMVar'>lnProj</span><span class='PDMOper'>,</span><span class='PDMLit'>1</span><span class='PDMOper'>)</span><span class='PDMOper'>,</span><span class='PDMStr'>"PJX"</span><span class='PDMOper'>)</span><span class='PDMOper'>,</span><span class='PDMVar'>tcDir</span><span class='PDMOper'>)</span>
-<span class='PDMCnt'>1869</span> <span class='PDMInd'> 2</span>   <span class='PDMResK'>ENDFOR</span> <span class='PDMCom'>&amp;&amp;lnProjs</span>
-<span class='PDMCnt'>1870</span> <span class='PDMInd'> 1</span>  <span class='PDMResK'>ENDIF</span> <span class='PDMCom'>&amp;&amp;lnProjs&gt;0</span>
-<span class='PDMCnt'>1871</span> <span class='PDMInd'>  </span> </pre>
+<pre class="PDMCODE PDMNor" ><span class='PDMCnt'>2268</span> <span class='PDMInd'> 1</span>  <span class='PDMResK'>LPARAMETERS</span><span class='PDMOper'>;</span>
+<span class='PDMCnt'>2269</span> <span class='PDMInd'> 2</span>   <span class='PDMVar'>tcDir</span><span class='PDMOper'>,</span><span class='PDMOper'>;</span>
+<span class='PDMCnt'>2270</span> <span class='PDMInd'> 2</span>   <span class='PDMVar'>tlToBin</span><span class='PDMOper'>,</span><span class='PDMOper'>;</span>
+<span class='PDMCnt'>2271</span> <span class='PDMInd'> 2</span>   <span class='PDMVar'>toConverter</span>
+<span class='PDMCnt'>2272</span> <span class='PDMInd'>  </span> 
+<span class='PDMCnt'>2273</span> <span class='PDMInd'>  </span> 
+<span class='PDMCnt'>2298</span> <span class='PDMInd'>  </span> 
+<span class='PDMCnt'>2299</span> <span class='PDMInd'> 1</span>  <span class='PDMResK'>LOCAL</span><span class='PDMOper'>;</span>
+<span class='PDMCnt'>2300</span> <span class='PDMInd'> 2</span>   <span class='PDMVar'>lnProj</span>      <span class='PDMResK'>AS</span> <span class='PDMResK'>NUMBER</span><span class='PDMOper'>,</span><span class='PDMOper'>;</span>
+<span class='PDMCnt'>2301</span> <span class='PDMInd'> 2</span>   <span class='PDMVar'>lnProjs</span>     <span class='PDMResK'>AS</span> <span class='PDMResK'>NUMBER</span><span class='PDMOper'>,</span><span class='PDMOper'>;</span>
+<span class='PDMCnt'>2302</span> <span class='PDMInd'> 2</span>   <span class='PDMVar'>lnFiles</span>     <span class='PDMResK'>AS</span> <span class='PDMResK'>NUMBER</span><span class='PDMOper'>,</span><span class='PDMOper'>;</span>
+<span class='PDMCnt'>2303</span> <span class='PDMInd'> 2</span>   <span class='PDMVar'>lcSourceExt</span> <span class='PDMResK'>AS</span> <span class='PDMResK'>CHARACTER</span><span class='PDMOper'>,</span><span class='PDMOper'>;</span>
+<span class='PDMCnt'>2304</span> <span class='PDMInd'> 2</span>   <span class='PDMVar'>loConverter</span> <span class='PDMResK'>AS</span> <span class='PDMResK'>OBJECT</span><span class='PDMOper'>,</span><span class='PDMOper'>;</span>
+<span class='PDMCnt'>2305</span> <span class='PDMInd'> 2</span>   <span class='PDMVar'>loInfo</span>      <span class='PDMResK'>AS</span> <span class='PDMResK'>OBJECT</span>
+<span class='PDMCnt'>2306</span> <span class='PDMInd'>  </span> 
+<span class='PDMCnt'>2307</span> <span class='PDMInd'> 1</span>  <span class='PDMResK'>LOCAL</span> <span class='PDMResK'>ARRAY</span><span class='PDMOper'>;</span>
+<span class='PDMCnt'>2308</span> <span class='PDMInd'> 2</span>   <span class='PDMVar'>laFiles</span><span class='PDMOper'>(</span><span class='PDMLit'>1</span><span class='PDMOper'>,</span><span class='PDMLit'>1</span><span class='PDMOper'>)</span>
+<span class='PDMCnt'>2309</span> <span class='PDMInd'>  </span> 
+<span class='PDMCnt'>2310</span> <span class='PDMInd'> 1</span>  <span class='PDMResK'>IF</span> <span class='PDMVar'>m</span><span class='PDMOper'>.</span><span class='PDMVar'>tlToBin</span> <span class='PDMResK'>THEN</span>
+<span class='PDMCnt'>2311</span> <span class='PDMInd'>  </span> <span class='PDMCom'>*get local text extension for project</span>
+<span class='PDMCnt'>2312</span> <span class='PDMInd'> 2</span>   <span class='PDMVar'>loInfo</span>      <span class='PDMOper'>=</span> <span class='PDMVar'>m</span><span class='PDMOper'>.</span><span class='PDMVar'>toConverter</span><span class='PDMOper'>.</span><span class='PDMVar'>Get_DirSettings</span><span class='PDMOper'>(</span><span class='PDMVar'>m</span><span class='PDMOper'>.</span><span class='PDMVar'>tcDir</span><span class='PDMOper'>)</span>
+<span class='PDMCnt'>2313</span> <span class='PDMInd'> 2</span>   <span class='PDMVar'>lcSourceExt</span> <span class='PDMOper'>=</span> <span class='PDMVar'>m</span><span class='PDMOper'>.</span><span class='PDMVar'>loInfo</span><span class='PDMOper'>.</span><span class='PDMVar'>c_PJ2</span>
+<span class='PDMCnt'>2314</span> <span class='PDMInd'>  </span> 
+<span class='PDMCnt'>2315</span> <span class='PDMInd'> 1</span>  <span class='PDMResK'>ELSE</span>  <span class='PDMCom'>&amp;&amp;m.tlToBin</span>
+<span class='PDMCnt'>2316</span> <span class='PDMInd'> 2</span>   <span class='PDMVar'>lcSourceExt</span> <span class='PDMOper'>=</span> <span class='PDMStr'>"PJX"</span>
+<span class='PDMCnt'>2317</span> <span class='PDMInd'> 1</span>  <span class='PDMResK'>ENDIF</span> <span class='PDMCom'>&amp;&amp;m.tlToBin</span>
+<span class='PDMCnt'>2318</span> <span class='PDMInd'>  </span> 
+<span class='PDMCnt'>2319</span> <span class='PDMInd'> 1</span>  <span class='PDMVar'>loInfo</span>      <span class='PDMOper'>=</span> <span class='PDMOper'>.</span><span class='PDMResK'>NULL</span><span class='PDMOper'>.</span>
+<span class='PDMCnt'>2320</span> <span class='PDMInd'>  </span> 
+<span class='PDMCnt'>2321</span> <span class='PDMInd'> 1</span>  <span class='PDMVar'>lnProjs</span> <span class='PDMOper'>=</span> <span class='PDMResF'>ADIR</span><span class='PDMOper'>(</span><span class='PDMVar'>laFiles</span><span class='PDMOper'>,</span><span class='PDMStr'>'*.'</span><span class='PDMOper'>+</span><span class='PDMVar'>m</span><span class='PDMOper'>.</span><span class='PDMVar'>lcSourceExt</span><span class='PDMOper'>,</span><span class='PDMStr'>'HS'</span><span class='PDMOper'>)</span>
+<span class='PDMCnt'>2322</span> <span class='PDMInd'>  </span> 
+<span class='PDMCnt'>2323</span> <span class='PDMInd'> 1</span>  <span class='PDMResK'>IF</span> <span class='PDMVar'>m</span><span class='PDMOper'>.</span><span class='PDMVar'>lnProjs</span><span class='PDMOper'>&gt;</span><span class='PDMLit'>0</span> <span class='PDMResK'>THEN</span>
+<span class='PDMCnt'>2324</span> <span class='PDMInd'> 2</span>   <span class='PDMVar'>lnFiles</span> <span class='PDMOper'>=</span> <span class='PDMResF'>IIF</span><span class='PDMOper'>(</span><span class='PDMResF'>EMPTY</span><span class='PDMOper'>(</span><span class='PDMVar'>_SCREEN</span><span class='PDMOper'>.</span><span class='PDMVar'>gaFiles</span><span class='PDMOper'>)</span><span class='PDMOper'>,</span><span class='PDMLit'>0</span><span class='PDMOper'>,</span><span class='PDMResF'>ALEN</span><span class='PDMOper'>(</span><span class='PDMVar'>_SCREEN</span><span class='PDMOper'>.</span><span class='PDMVar'>gaFiles</span><span class='PDMOper'>,</span><span class='PDMLit'>1</span><span class='PDMOper'>)</span><span class='PDMOper'>)</span>
+<span class='PDMCnt'>2325</span> <span class='PDMInd'>  </span> 
+<span class='PDMCnt'>2326</span> <span class='PDMInd'> 2</span>   <span class='PDMResK'>DIMENSION</span><span class='PDMOper'>;</span>
+<span class='PDMCnt'>2327</span> <span class='PDMInd'> 3</span>    <span class='PDMVar'>_SCREEN</span><span class='PDMOper'>.</span><span class='PDMVar'>gaFiles</span><span class='PDMOper'>(</span><span class='PDMVar'>m</span><span class='PDMOper'>.</span><span class='PDMVar'>lnFiles</span><span class='PDMOper'>+</span><span class='PDMVar'>m</span><span class='PDMOper'>.</span><span class='PDMVar'>lnProjs</span><span class='PDMOper'>,</span><span class='PDMLit'>2</span><span class='PDMOper'>)</span>
+<span class='PDMCnt'>2328</span> <span class='PDMInd'>  </span> 
+<span class='PDMCnt'>2329</span> <span class='PDMInd'> 2</span>   <span class='PDMResK'>FOR</span> <span class='PDMVar'>lnProj</span> <span class='PDMOper'>=</span> <span class='PDMLit'>1</span> <span class='PDMResK'>TO</span> <span class='PDMVar'>m</span><span class='PDMOper'>.</span><span class='PDMVar'>lnProjs</span>
+<span class='PDMCnt'>2330</span> <span class='PDMInd'> 3</span>    <span class='PDMVar'>_SCREEN</span><span class='PDMOper'>.</span><span class='PDMVar'>gaFiles</span><span class='PDMOper'>(</span><span class='PDMVar'>m</span><span class='PDMOper'>.</span><span class='PDMVar'>lnFiles</span><span class='PDMOper'>+</span><span class='PDMVar'>m</span><span class='PDMOper'>.</span><span class='PDMVar'>lnProj</span><span class='PDMOper'>,</span><span class='PDMLit'>1</span><span class='PDMOper'>)</span> <span class='PDMOper'>=</span> <span class='PDMResF'>FORCEPATH</span><span class='PDMOper'>(</span><span class='PDMResF'>FORCEEXT</span><span class='PDMOper'>(</span><span class='PDMVar'>laFiles</span><span class='PDMOper'>(</span><span class='PDMVar'>m</span><span class='PDMOper'>.</span><span class='PDMVar'>lnProj</span><span class='PDMOper'>,</span><span class='PDMLit'>1</span><span class='PDMOper'>)</span><span class='PDMOper'>,</span><span class='PDMStr'>"PJX"</span><span class='PDMOper'>)</span><span class='PDMOper'>,</span><span class='PDMVar'>m</span><span class='PDMOper'>.</span><span class='PDMVar'>tcDir</span><span class='PDMOper'>)</span>
+<span class='PDMCnt'>2331</span> <span class='PDMInd'> 2</span>   <span class='PDMResK'>ENDFOR</span> <span class='PDMCom'>&amp;&amp;lnProjs</span>
+<span class='PDMCnt'>2332</span> <span class='PDMInd'> 1</span>  <span class='PDMResK'>ENDIF</span> <span class='PDMCom'>&amp;&amp;m.lnProjs&gt;0</span>
+<span class='PDMCnt'>2333</span> <span class='PDMInd'>  </span> </pre>
  <!-- Code End -->
   </div>
  </div>
@@ -186,7 +186,7 @@ Scan a directory for project files (binary or text representation).
  </div><!-- Footer End -->
 </div>
 <script language="JavaScript" type="text/javascript">
-lo=document.getElementById("TX_SP_P21");
+lo=document.getElementById("TX_SP_P24");
 lo.XType="SourceCode";
 lo.Dir="../../imgs/";
 

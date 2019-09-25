@@ -88,43 +88,46 @@ DEFINE CLASS cusstorage AS custom 		&& The stuff that does the work.
 		lnStep  = 1
 		DO WHILE .T.
 		 DO CASE
-		  CASE lnStep=1   &&test for changes on file (checksum)
+		  CASE m.lnStep=1   &&test for changes on file (checksum)
 		*llOk - nothing changed on file
-		   llOk = !THIS.Sync_File('K',tcFile,tlToBin,tcStorage)
-		*/  &&lnStep=1  &&test for changes on file (checksum)
+		   llOk = !THIS.Sync_File('K',m.tcFile,m.tlToBin,m.tcStorage)
+		*/  &&m.lnStep=1  &&test for changes on file (checksum)
 		
-		  CASE lnStep=2 AND toSett.n_UseClassPerFile=0    &&Do not split classlib into classlib.class.vc2
+		  CASE m.lnStep=2 AND toSett.n_UseClassPerFile=0    &&Do not split classlib into classlib.class.vc2
 		*Sync_File was dirty,
 		*this could be one out of two problems
 		*-file is not to be deleted (8,9) - we are not dirty
 		   SELECT;
 		    Cur1.iDirty;
-		    FROM (tcStorage) AS Cur1;
-		    WHERE Cur1.cFile==tcFile;
+		    FROM (m.tcStorage) AS Cur1;
+		    INTO CURSOR curHelp;
+		    WHERE Cur1.cFile==m.tcFile;
 		    AND Cur1.cType=='K';
 		    AND Cur1.iDirty IN (8,9)
 		*-if not found we are dirty
-		   llDirty = _TALLY=0
+		   llDirty = RECCOUNT('curHelp')=0
+		
+		   USE IN curHelp
 		* and done
 		   llOk = .T.
-		*/  &&lnStep=2 AND toSett.n_UseClassPerFile=0   &&Do not split classlib into classlib.class.vc2
+		*/  &&m.lnStep=2 AND toSett.n_UseClassPerFile=0   &&Do not split classlib into classlib.class.vc2
 		
-		  CASE lnStep=2
+		  CASE m.lnStep=2
 		*just loop
 		
-		  CASE lnStep=3  &&Test access
+		  CASE m.lnStep=3  &&Test access
 		   TRY
 		*Was zu testen ist
-		     USE (tcFile) ALIAS scx IN SELECT('scx')
+		     USE (m.tcFile) ALIAS scx IN SELECT('scx')
 		    CATCH TO loException
 		* irgendein Problem
 		     llDirty = .T.
 		    FINALLY
 		*
 		   ENDTRY
-		*/   &&lnStep=3 &&Test  access
+		*/   &&m.lnStep=3 &&Test  access
 		
-		  CASE lnStep=4    &&Test if VCX is usable
+		  CASE m.lnStep=4    &&Test if VCX is usable
 		*okä, now test this thing
 		   SELECT;
 		    Cur1.UniqueID,;
@@ -135,33 +138,33 @@ DEFINE CLASS cusstorage AS custom 		&& The stuff that does the work.
 		    AND LEN(Cur1.PARENT)=0;
 		    GROUP BY 1 HAVING nCount>1
 		
-		*/  &&lnStep=4   &&Test if SCX is usable
+		*/  &&m.lnStep=4   &&Test if SCX is usable
 		
-		  CASE lnStep=5 AND RECCOUNT()>0
+		  CASE m.lnStep=5 AND RECCOUNT()>0
 		*UniqueID not so unique
 		*rebuild, delete from Storage
 		   TRY
 		*Was zu testen ist
-		     USE (tcFile) ALIAS vcx IN SELECT('vcx') EXCLUSIVE
+		     USE (m.tcFile) ALIAS vcx IN SELECT('vcx') EXCLUSIVE
 		
 		     SELECT vcx
 		     REPLACE;
 		      UniqueID WITH SYS(2015);
 		      FOR PLATFORM='WINDOWS'
 		
-		     USE (tcFile) ALIAS scx IN SELECT('scx')
+		     USE (m.tcFile) ALIAS scx IN SELECT('scx')
 		    CATCH TO loException
 		* irgendein Problem
 		     llDirty = .T.
 		    FINALLY
 		*
 		   ENDTRY
-		*/   &&lnStep=5 &&Test if SCX is usable
+		*/   &&m.lnStep=5 &&Test if SCX is usable
 		
-		  CASE lnStep=5
+		  CASE m.lnStep=5
 		*just loop
 		
-		  CASE lnStep=6  &&test for changes on classes
+		  CASE m.lnStep=6  &&test for changes on classes
 		*(only if checksum is changed)
 		
 		*so now let's see if something is changed
@@ -177,19 +180,19 @@ DEFINE CLASS cusstorage AS custom 		&& The stuff that does the work.
 		   INDEX ON cObjName  TAG _cObj
 		   INDEX ON cUniqueId TAG _cUni
 		
-		   llDirty = THIS.Sync_Objects('k',tcFile,tlToBin,'curSCX',tcStorage)
+		   llDirty = THIS.Sync_Objects('k',m.tcFile,m.tlToBin,'curSCX',m.tcStorage)
 		
-		*/   &&lnStep=2 &&test for changes on classes
+		*/   &&m.lnStep=2 &&test for changes on classes
 		
 		  OTHERWISE && end loop
 		   EXIT
 		 ENDCASE
 		
-		 IF llDirty OR llOk THEN
+		 IF m.llDirty OR m.llOk THEN 
 		  EXIT
-		 ELSE  &&llDirty
-		  lnStep = lnStep+1
-		 ENDIF &&llDirty
+		 ELSE  &&m.llDirty
+		  lnStep = m.lnStep+1
+		 ENDIF &&m.llDirty OR m.llOk
 		
 		ENDDO &&.T.
 		
@@ -198,7 +201,7 @@ DEFINE CLASS cusstorage AS custom 		&& The stuff that does the work.
 		USE IN SELECT('curSCX')
 		
 		*For one or the other reason. reprocess
-		RETURN llDirty
+		RETURN m.llDirty
 		
 		
 	ENDPROC
@@ -263,44 +266,47 @@ DEFINE CLASS cusstorage AS custom 		&& The stuff that does the work.
 		lnStep  = 1
 		DO WHILE .T.
 		 DO CASE
-		  CASE lnStep=1   &&test for changes on file (checksum)
+		  CASE m.lnStep=1   &&test for changes on file (checksum)
 		*llOk - nothing changed on file
-		   llOk = !THIS.Sync_File('V',tcFile,tlToBin,tcStorage)
-		*/  &&lnStep=1  &&test for changes on file (checksum)
+		   llOk = !THIS.Sync_File('V',m.tcFile,m.tlToBin,m.tcStorage)
+		*/  &&m.lnStep=1  &&test for changes on file (checksum)
 		
-		  CASE lnStep=2 AND toSett.n_UseClassPerFile=0    &&Do not split classlib into classlib.class.vc2
+		  CASE m.lnStep=2 AND toSett.n_UseClassPerFile=0    &&Do not split classlib into classlib.class.vc2
 		*Sync_File was dirty, we are dirty and done
 		*Sync_File was dirty,
 		*this could be one out of two problems
 		*-file is not to be deleted (8,9) - we are not dirty
 		   SELECT;
 		    Cur1.iDirty;
-		    FROM (tcStorage) AS Cur1;
-		    WHERE Cur1.cFile==tcFile;
+		    FROM (m.tcStorage) AS Cur1;
+		    INTO CURSOR curHelp;
+		    WHERE Cur1.cFile==m.tcFile;
 		    AND Cur1.cType=='V';
 		    AND Cur1.iDirty IN (8,9)
 		*-if not found we are dirty
-		   llDirty = _TALLY=0
+		   llDirty = RECCOUNT('curHelp')=0
+		
+		   USE IN curHelp
 		* and done
 		   llOk = .T.
-		*/  &&lnStep=2 AND toSett.n_UseClassPerFile=0  &&Do not split classlib into classlib.class.vc2
+		*/  &&m.lnStep=2 AND toSett.n_UseClassPerFile=0  &&Do not split classlib into classlib.class.vc2
 		
-		  CASE lnStep=2
+		  CASE m.lnStep=2
 		*just loop
 		
-		  CASE lnStep=3  &&Test access
+		  CASE m.lnStep=3  &&Test access
 		   TRY
 		*Was zu testen ist
-		     USE (tcFile) ALIAS vcx IN SELECT('vcx')
+		     USE (m.tcFile) ALIAS vcx IN SELECT('vcx')
 		    CATCH TO loException
 		* irgendein Problem
 		     llDirty = .T.
 		    FINALLY
 		*
 		   ENDTRY
-		*/   &&lnStep=3 &&Test  access
+		*/   &&m.lnStep=3 &&Test  access
 		
-		  CASE lnStep=4    &&Test if VCX is usable
+		  CASE m.lnStep=4    &&Test if VCX is usable
 		*okä, now test this thing
 		   SELECT;
 		    Cur1.UniqueID,;
@@ -311,33 +317,33 @@ DEFINE CLASS cusstorage AS custom 		&& The stuff that does the work.
 		    AND LEN(Cur1.PARENT)=0;
 		    GROUP BY 1 HAVING nCount>1
 		
-		*/  &&lnStep=4   &&Test if VCX is usable
+		*/  &&m.lnStep=4   &&Test if VCX is usable
 		
-		  CASE lnStep=5 AND RECCOUNT()>0
+		  CASE m.lnStep=5 AND RECCOUNT()>0
 		*UniqueID not so unique
 		*rebuild, delete from Storage
 		   TRY
 		*Was zu testen ist
-		     USE (tcFile) ALIAS vcx IN SELECT('vcx') EXCLUSIVE
+		     USE (m.tcFile) ALIAS vcx IN SELECT('vcx') EXCLUSIVE
 		
 		     SELECT vcx
 		     REPLACE;
 		      UniqueID WITH SYS(2015);
 		      FOR PLATFORM='WINDOWS'
 		
-		     USE (tcFile) ALIAS vcx IN SELECT('vcx')
+		     USE (m.tcFile) ALIAS vcx IN SELECT('vcx')
 		    CATCH TO loException
 		* irgendein Problem
 		     llDirty = .T.
 		    FINALLY
 		*
 		   ENDTRY
-		*/   &&lnStep=5 &&Test if VCX is usable
+		*/   &&m.lnStep=5 &&Test if VCX is usable
 		
-		  CASE lnStep=5
+		  CASE m.lnStep=5
 		*just loop
 		
-		  CASE lnStep=6  &&test for changes on classes
+		  CASE m.lnStep=6  &&test for changes on classes
 		*(only if checksum is changed)
 		
 		*so now let's see if something is changed
@@ -353,19 +359,19 @@ DEFINE CLASS cusstorage AS custom 		&& The stuff that does the work.
 		   INDEX ON cObjName  TAG _cObj
 		   INDEX ON cUniqueId TAG _cUni
 		
-		   llDirty = THIS.Sync_Objects('v',tcFile,tlToBin,'curVCX',tcStorage)
+		   llDirty = THIS.Sync_Objects('v',m.tcFile,m.tlToBin,'curVCX',m.tcStorage)
 		
-		*/   &&lnStep=6 &&test for changes on classes
+		*/   &&m.lnStep=6 &&test for changes on classes
 		
 		  OTHERWISE && end loop
 		   EXIT
 		 ENDCASE
 		
-		 IF llDirty OR llOk THEN
+		 IF m.llDirty OR m.llOk THEN
 		  EXIT
-		 ELSE  &&llDirty
-		  lnStep = lnStep+1
-		 ENDIF &&llDirty
+		 ELSE  &&m.llDirty
+		  lnStep = m.lnStep+1
+		 ENDIF &&m.llDirty OR m.llOk
 		
 		ENDDO &&.T.
 		
@@ -374,7 +380,7 @@ DEFINE CLASS cusstorage AS custom 		&& The stuff that does the work.
 		USE IN SELECT('curVCX')
 		
 		*For one or the other reason. reprocess
-		RETURN llDirty
+		RETURN m.llDirty
 		
 		
 	ENDPROC
@@ -384,7 +390,8 @@ DEFINE CLASS cusstorage AS custom 		&& The stuff that does the work.
 		 taFiles,;
 		 tlProcess,;
 		 toConverter,;
-		 tnOffset
+		 tnOffset,;
+		 toSetting
 		
 		*!*	<pdm>
 		*!*	<descr>Converts a preprocessed bunch of files with FoxBin2Prg.Execute</descr>
@@ -410,8 +417,23 @@ DEFINE CLASS cusstorage AS custom 		&& The stuff that does the work.
 		*!*	<short>Offset for progress bar.</short>
 		*!*	<detail></detail>
 		*!*	</params>
+		*!*	<params name="toSetting" type="Object" byref="0" dir="" inb="1" outb="0">
+		*!*	<short>Settinngs object</short>
+		*!*	<detail>A settings object as returned by FoxBin2PRgs Get_DirSettings. May be used to manipulate special settings.</detail>
+		*!*	</params>
 		*!*	<retval type="Boolean">Operation successfully ended.</retval>
-		*!*	<copyright><i>&copy; 14.4.2015 Lutz Scheffler Software Ingenieurbüro</i></copyright>
+		*!*	<copyright><i>&copy; 13.4.2017 Lutz Scheffler Software Ingenieurbüro</i></copyright>
+		*!*	</pdm>
+		
+		*!*	<pdm>
+		*!*	<change date="{^2017-03-13,13:00:00}">Changed by: SF<br />
+		*!*	Modified to deal with single classes of libraries.
+		*!*	</change>
+		*!*	</pdm>
+		*!*	<pdm>
+		*!*	<change date="{^2017-03-28,12:00:00}">Changed by: SF<br />
+		*!*	Modified to deal ::(import|export)
+		*!*	</change>
 		*!*	</pdm>
 		
 		EXTERNAL ARRAY;
@@ -428,29 +450,37 @@ DEFINE CLASS cusstorage AS custom 		&& The stuff that does the work.
 		
 		toConverter.l_AutoClearProcessedFiles = .T.
 		
-		FOR lnFile = 1 TO lnFiles
-		ACTIVATE SCREEN
-		 lcFile = taFiles(lnFile,1)
-		 ?JUSTFNAME(lcFile)
-		 IF !FILE(lcFile) THEN
+		FOR lnFile = 1 TO m.lnFiles
+		 ACTIVATE SCREEN
+		
+		 lcFile      = taFiles(m.lnFile,1)
+		 lcFile_Test = m.lcFile
+		 IF '::'$m.lcFile_Test THEN
+		  m.lcFile_Test = FORCEEXT(STRTRAN(m.lcFile_Test,'::','.',1,1),'')
+		 ENDIF &&'::'$m.lcFile_Test
+		
+		 ?JUSTFNAME(m.lcFile)
+		 IF !FILE(m.lcFile_Test) THEN
 		  ?? " - not found"
 		  LOOP
-		 ENDIF &&!FILE(lcFile)
-		
+		 ENDIF &&!FILE(m.lcFile_Test)
 		
 		 toConverter.l_ProcessFiles = .T.
-		 toConverter.UpdateProgressbar('',lnFile+tnOffset,lnFiles+tnOffset+1,0)
+		 toConverter.UpdateProgressbar('',m.lnFile+tnOffset,m.lnFiles+tnOffset+1,0)
 		 toConverter.l_ProcessFiles = tlProcess
 		
-		 IF toConverter.Execute(lcFile,taFiles(lnFile,2),"0","0","0","0","1")#0 THEN
+		*!*	obj.execute(cInputFile [,cType [,cTextName [,lGenText [,cDontShowErrors [,cDebug;
+		*!*	 [,cDontShowProgress [,oModule [,oEx [,lRelanzarError [,cOriginalFileName;
+		*!*	 [,cRecompile [,cNoTimestamps [,cBackupLevels [,cClearUniqueID [,cOptimizeByFilestamp [,cCFG_File]]]]]]]]]]]]]]])
+		 IF toConverter.Execute(m.lcFile,taFiles(m.lnFile,2),"0","0","0","0","1",,,,,,,,,,m.toSetting)#0 THEN
 		  llOk = .F.
 		  EXIT
-		 ENDIF &&toConverter.Execute(lcFile,taFiles(lnFile,2),"0","0","1","0","1")#0
+		 ENDIF &&toConverter.Execute(m.lcFile,taFiles(m.lnFile,2),"0","0","0","0","1", ,,,,,,,,,m.toSetting)#0
 		
 		 toConverter.l_AutoClearProcessedFiles = .F.
 		ENDFOR &&lnFile
 		
-		RETURN llOk
+		RETURN m.llOk
 		
 	ENDPROC
 
@@ -464,9 +494,9 @@ DEFINE CLASS cusstorage AS custom 		&& The stuff that does the work.
 		 laError(1,7)
 		
 		AERROR(laError)
-		MESSAGEBOX('Error:'+PADL(tnError,5)+', '+MESSAGE()+0h0d0a+;
-		 'Code block: '+THIS.CLASS+'.'+tcMethod+0h0d0a+;
-		 'Code line: '+PADL(tnLine,7),;
+		MESSAGEBOX('Error:'+PADL(m.tnError,5)+', '+MESSAGE()+0h0d0a+;
+		 'Code block: '+THIS.CLASS+'.'+m.tcMethod+0h0d0a+;
+		 'Code line: '+PADL(m.tnLine,7),;
 		 64,'Ooops, works not as expected.')
 		DEBUG
 		SUSPEND
@@ -584,76 +614,76 @@ DEFINE CLASS cusstorage AS custom 		&& The stuff that does the work.
 		*!*	</change>
 		*!*	</pdm>
 		
-		 IF tlCheckAll THEN
+		 IF m.tlCheckAll THEN
 		*we clean up now, because of post-processing
 		*we clean up deleted now, because of post-processing
 		 DELETE Cur1;
-		  FROM (tcStorage) AS Cur1;
+		  FROM (m.tcStorage) AS Cur1;
 		  WHERE Cur1.iDirty=-2
 		
 		*check obsolete files
 		 UPDATE Cur1 SET;
 		  iDirty   = -1,;
 		  tLastUse = DATETIME();
-		  FROM (tcStorage) AS Cur1;
+		  FROM (m.tcStorage) AS Cur1;
 		  WHERE !EMPTY(Cur1.cFile);
 		  AND Cur1.cType IN ('V','v','R','M','d','D','P','B','K','k')
-		ENDIF &&tlCheckAll
+		ENDIF &&m.tlCheckAll
 		*!*	/Changed by: SF 4.6.2015
 		
 		lnDirty = 0
 		FOR lnLine = lnLines TO 1 STEP -1
-		 lcFile  = taFiles(lnLine,1)
+		 lcFile  = taFiles(m.lnLine,1)
 		 llDirty = .F.
 		 DO CASE
-		  CASE !TRIM(taFiles(lnLine,2))=="O" AND  tlToBin
+		  CASE !TRIM(taFiles(m.lnLine,2))=="O" AND  m.tlToBin
 		*ToBin, we process only output (binaries only)
-		   lnInPut = lnInPut-1
-		  CASE !TRIM(taFiles(lnLine,2))=="I" AND !tlToBin
+		   lnInPut = m.lnInPut-1
+		  CASE !TRIM(taFiles(m.lnLine,2))=="I" AND !m.tlToBin
 		*ToText, we process only input
-		   lnInPut = lnInPut-1
-		  CASE !TRIM(taFiles(lnLine,3))=="P1"
+		   lnInPut = m.lnInPut-1
+		  CASE !TRIM(taFiles(m.lnLine,3))=="P1"
 		*File must be processed
-		   lnInPut = lnInPut-1
-		  CASE !TRIM(taFiles(lnLine,6))=="X0"
+		   lnInPut = m.lnInPut-1
+		  CASE !TRIM(taFiles(m.lnLine,6))=="X0"
 		*file must be main file, no split file
-		   lnInPut = lnInPut-1
-		  CASE UPPER(JUSTEXT(lcFile))=="VCX"
-		   loSett  = THIS.OGet_Setting(JUSTPATH(lcFile),toConverter)
-		   llDirty = THIS.Check_VCX(UPPER(lcFile),tcPath,tlToBin,tcStorage,loSett)
-		  CASE UPPER(JUSTEXT(lcFile))=="FRX"
-		   llDirty = THIS.Sync_File('R',UPPER(lcFile),tlToBin,tcStorage)
-		  CASE UPPER(JUSTEXT(lcFile))=="MNX"
-		   llDirty = THIS.Sync_File('M',UPPER(lcFile),tlToBin,tcStorage)
-		  CASE UPPER(JUSTEXT(lcFile))=="DBF"
-		   llDirty = THIS.Sync_File('d',UPPER(lcFile),tlToBin,tcStorage)
-		  CASE UPPER(JUSTEXT(lcFile))=="DBC"
-		   llDirty = THIS.Sync_File('D',UPPER(lcFile),tlToBin,tcStorage)
-		  CASE UPPER(JUSTEXT(lcFile))=="PJX"
-		   llDirty = THIS.Sync_File('P',UPPER(lcFile),tlToBin,tcStorage)
-		  CASE UPPER(JUSTEXT(lcFile))=="LBX"
-		   llDirty = THIS.Sync_File('B',UPPER(lcFile),tlToBin,tcStorage)
-		  CASE UPPER(JUSTEXT(lcFile))=="SCX"
-		   loSett  = THIS.OGet_Setting(JUSTPATH(lcFile),toConverter)
-		   llDirty = THIS.Check_SCX(UPPER(lcFile),tcPath,tlToBin,tcStorage,loSett)
+		   lnInPut = m.lnInPut-1
+		  CASE UPPER(JUSTEXT(m.lcFile))=="VCX"
+		   loSett  = THIS.OGet_Setting(JUSTPATH(m.lcFile),m.toConverter)
+		   llDirty = THIS.Check_VCX(UPPER(m.lcFile),tcPath,m.tlToBin,m.tcStorage,m.loSett)
+		  CASE UPPER(JUSTEXT(m.lcFile))=="FRX"
+		   llDirty = THIS.Sync_File('R',UPPER(m.lcFile),m.tlToBin,m.tcStorage)
+		  CASE UPPER(JUSTEXT(m.lcFile))=="MNX"
+		   llDirty = THIS.Sync_File('M',UPPER(m.lcFile),m.tlToBin,m.tcStorage)
+		  CASE UPPER(JUSTEXT(m.lcFile))=="DBF"
+		   llDirty = THIS.Sync_File('d',UPPER(m.lcFile),m.tlToBin,m.tcStorage)
+		  CASE UPPER(JUSTEXT(m.lcFile))=="DBC"
+		   llDirty = THIS.Sync_File('D',UPPER(m.lcFile),m.tlToBin,m.tcStorage)
+		  CASE UPPER(JUSTEXT(m.lcFile))=="PJX"
+		   llDirty = THIS.Sync_File('P',UPPER(m.lcFile),m.tlToBin,m.tcStorage)
+		  CASE UPPER(JUSTEXT(m.lcFile))=="LBX"
+		   llDirty = THIS.Sync_File('B',UPPER(m.lcFile),m.tlToBin,m.tcStorage)
+		  CASE UPPER(JUSTEXT(m.lcFile))=="SCX"
+		   loSett  = THIS.OGet_Setting(JUSTPATH(m.lcFile),m.toConverter)
+		   llDirty = THIS.Check_SCX(UPPER(m.lcFile),tcPath,m.tlToBin,m.tcStorage,m.loSett)
 		  OTHERWISE
 		   llDirty = .T.
 		 ENDCASE
-		 IF llDirty THEN
-		  lnDirty = lnDirty+1
-		 ELSE  &&llDirty
-		  ADEL(taFiles,MAX(lnLine,1))
-		 ENDIF &&llDirty
-		ENDFOR &&lnLine
+		 IF m.llDirty THEN
+		  lnDirty = m.lnDirty+1
+		 ELSE  &&m.llDirty
+		  ADEL(taFiles,MAX(m.lnLine,1))
+		 ENDIF &&m.llDirty
+		ENDFOR &&m.lnLine
 		
 		DIMENSION;
-		 taFiles(MAX(lnDirty,1),ALEN(taFiles,2))
+		 taFiles(MAX(m.lnDirty,1),ALEN(taFiles,2))
 		
-		IF lnDirty<1 THEN
+		IF m.lnDirty<1 THEN
 		 taFiles = ''
-		ENDIF &&lnLine<1
+		ENDIF &&m.lnDirty<1
 		
-		RETURN IIF(lnDirty=lnInPut,NIL,lnDirty>0)
+		RETURN IIF(m.lnDirty=m.lnInPut,NIL,m.lnDirty>0)
 		
 	ENDPROC
 
@@ -689,28 +719,28 @@ DEFINE CLASS cusstorage AS custom 		&& The stuff that does the work.
 		 tcStorage = THIS.Storage_Open(_SCREEN.gcB2T_Path)
 		ELSE  &&PEMSTATUS(_SCREEN,'gcB2T_Path',5) AND VARTYPE(_SCREEN.gcB2T_Path)='C' AND FILE(_SCREEN.gcB2T_Path)
 		 tcStorage = THIS.Storage_Check(False)
-		 IF ISNULL(tcStorage) THEN
+		 IF ISNULL(m.tcStorage) THEN
 		  llOk = False
-		 ENDIF &&ISNULL(tcStorage)
+		 ENDIF &&ISNULL(m.tcStorage)
 		ENDIF &&PEMSTATUS(_SCREEN,'gcB2T_Path',5) AND VARTYPE(_SCREEN.gcB2T_Path)='C' AND FILE(_SCREEN.gcB2T_Path)
 		
-		IF llOk THEN
+		IF m.llOk THEN
 		 toConverter = NEWOBJECT("c_foxbin2prg",_SCREEN.gcB2T_FB2T)
-		 IF !VARTYPE(toConverter)="O" OR ISNULL(toConverter) THEN
+		 IF !VARTYPE(toConverter)="O" OR ISNULL(m.toConverter) THEN
 		  toConverter = NIL
 		  llOk = False
-		 ENDIF &&!TYPE(toConverter)="O" OR ISNULL(toConverter)
-		ELSE  &&llok
+		 ENDIF &&!TYPE(toConverter)="O" OR ISNULL(m.toConverter)
+		ELSE  &&m.llOk
 		 toConverter = NIL
-		ENDIF &&llok
+		ENDIF &&m.llOk
 		
-		llOk = !llOk
-		IF (llOk OR tlCloseTable) AND !ISNULL(tcStorage) THEN
-		 THIS.Storage_Close(tcStorage,True)
+		llOk = !m.llOk
+		IF (m.llOk OR tlCloseTable) AND !ISNULL(m.tcStorage) THEN 
+		 THIS.Storage_Close(m.tcStorage,True)
 		 tcStorage = NIL
-		ENDIF &&llOk OR lloktlCloseTable
+		ENDIF &&(m.llOk OR tlCloseTable) AND !ISNULL(m.tcStorage)
 		
-		RETURN llOk
+		RETURN m.llOk
 		
 	ENDPROC
 
@@ -877,8 +907,7 @@ DEFINE CLASS cusstorage AS custom 		&& The stuff that does the work.
 		
 		LOCAL;
 		 lcTemp    AS CHARACTER,;
-		 loSett    AS OBJECT,;
-		 loSetts   AS COLLECTION
+		 loSett    AS OBJECT
 		
 		
 		IF !PEMSTATUS(THIS,'goSetts',5) THEN
@@ -886,14 +915,14 @@ DEFINE CLASS cusstorage AS custom 		&& The stuff that does the work.
 		ENDIF &&!PEMSTATUS(THIS,'goSetts',5)
 		
 		lcTemp = SYS(2007,UPPER(tcPath),0,2)
-		IF THIS.goSetts.GETKEY(lcTemp)#0 THEN
-		 loSett = THIS.goSetts.ITEM(lcTemp)
-		ELSE  &&THIS.goSetts.GETKEY(lcTemp)#0
+		IF THIS.goSetts.GETKEY(m.lcTemp)#0 THEN
+		 loSett = THIS.goSetts.ITEM(m.lcTemp)
+		ELSE  &&THIS.goSetts.GETKEY(m.lcTemp)#0
 		 loSett = toConverter.Get_DirSettings(tcPath)
-		 THIS.goSetts.ADD(loSett,lcTemp)
-		ENDIF &&THIS.goSetts.GETKEY(lcTemp)#0
+		 THIS.goSetts.ADD(m.loSett,m.lcTemp)
+		ENDIF &&THIS.goSetts.GETKEY(m.lcTemp)#0
 		
-		RETURN loSett
+		RETURN m.loSett
 		
 	ENDPROC
 
@@ -902,7 +931,9 @@ DEFINE CLASS cusstorage AS custom 		&& The stuff that does the work.
 		 taFiles,;
 		 tlToBin,;
 		 tcMode,;
-		 tlCheckAll
+		 tlCheckAll,;
+		 tlIncludeAll,;
+		 toSetting
 		
 		*!*	<pdm>
 		*!*	<descr>Process all files of a given Array.</descr>
@@ -944,6 +975,24 @@ DEFINE CLASS cusstorage AS custom 		&& The stuff that does the work.
 		*<p>Only if <b>Delete obsolete files</b> is checked in settings dialog.</p>
 		*</detail>
 		*!*	</params>
+		
+		*!*	</params>
+		*!*	<params name="tlIncludeAll" type="Boolean" byref="0" dir="" inb="1" outb="0">
+		*!*	<short>Convert all files.</short>
+		*!*	<detail>
+		*<p>Controls if all files are transformed.</p>
+		*<p>If <pdmpara num="2" /> is <expr>False</expr> only the files changed might be transformed.
+		*This can override stored setting.</p>
+		*<p>If True, the file will not be synched with the storage table./p>
+		*<p>If parameter is not passed, this default to the setting stored.</p>
+		*</detail>
+		*!*	</params>
+		*!*	<params name="toSetting" type="Object" byref="0" dir="" inb="1" outb="0">
+		*!*	<short>Settinngs object</short>
+		*!*	<detail>A settings object as returned by FoxBin2PRgs Get_DirSettings. May be used to manipulate special settings.<br />
+		*Will be passed to <see pem="Convert" /></detail>
+		*!*	</params>
+		
 		*!*	<retval type="Boolean">Returns succcess of operation.</retval>
 		*!*	<remarks>
 		*<b>This is the main method. What makes it different from a plain call to FoxBin2Prg is:</b>
@@ -960,7 +1009,7 @@ DEFINE CLASS cusstorage AS custom 		&& The stuff that does the work.
 		* Only files marked as dirty will be processed.</p>
 		*<p>A postprocess will delete / remove obsolete text files.</p>
 		*!*	</remarks>
-		*!*	<copyright><i>&copy; 19.4.2015 Lutz Scheffler Software Ingenieurbüro</i></copyright>
+		*!*	<copyright><i>&copy; 28.3.2017 Lutz Scheffler Software Ingenieurbüro</i></copyright>
 		*!*	</pdm>
 		
 		*!*	<pdm>
@@ -968,28 +1017,50 @@ DEFINE CLASS cusstorage AS custom 		&& The stuff that does the work.
 		*!*	New parameter <pdmpara num="4" />
 		*!*	</change>
 		*!*	</pdm>
+		*!*	<pdm>
+		*!*	<change date="{^2017-03-13,13:00:00}">Changed by: SF<br />
+		*!*	Modified to deal with single classes of libraries.
+		*!*	</change>
+		*!*	</pdm>
+		*!*	<pdm>
+		*!*	<change date="{^2017-03-13,14:00:00}">Changed by: SF<br />
+		*!*	<pdmpara num="1" /> may now hold text files for Text To Bin operation.
+		*!*	</change>
+		*!*	</pdm>
+		*!*	<pdm>
+		*!*	<change date="{^2017-03-13,16:00:00}">Changed by: SF<br />
+		*!*	New parameter <pdmpara num="5" /> to force single file operation.
+		*!*	</change>
+		*!*	</pdm>
+		*!*	<pdm>
+		*!*	<change date="{^2017-03-28,12:00:00}">Changed by: SF<br />
+		*!*	Modified to deal ::(import|export)
+		*!*	</change>
+		*!*	</pdm>
 		
 		EXTERNAL ARRAY;
 		 taFiles
 		
 		LOCAL;
-		 lcFile      AS CHARACTER,;
-		 lcMode      AS CHARACTER,;
-		 lcPath      AS CHARACTER,;
-		 lcSourceExt AS CHARACTER,;
-		 lcStorage   AS CHARACTER,;
-		 lcTarget    AS CHARACTER,;
-		 lnFile      AS NUMBER,;
-		 lnFiles     AS NUMBER,;
-		 lnOffset    AS NUMBER,;
-		 lnOffsets   AS NUMBER,;
-		 lnReturn    AS NUMBER,;
-		 llFound     AS BOOLEAN,;
-		 llMaxiLoop  AS BOOLEAN,;
-		 lvTime      AS VARIANT,;
-		 loProject   AS PROJECT,;
-		 loSett      AS OBJECT,;
-		 loConverter AS "c_foxbin2prg" OF "E:\x\Helper\ThirdParty\VFPX\FoxBin2PRG\FOXBIN2PRG.PRG"
+		 lcFile        AS CHARACTER,;
+		 lcMode        AS CHARACTER,;
+		 lcPath        AS CHARACTER,;
+		 lcSourceExt   AS CHARACTER,;
+		 lcStorage     AS CHARACTER,;
+		 lcTarget      AS CHARACTER,;
+		 lcClass       AS CHARACTER,;
+		 lnFile        AS NUMBER,;
+		 lnFiles       AS NUMBER,;
+		 lnFilesFound  AS NUMBER,;
+		 lnOffset      AS NUMBER,;
+		 lnOffsets     AS NUMBER,;
+		 llFound       AS BOOLEAN,;
+		 llMaxiLoop    AS BOOLEAN,;
+		 llSingleClass AS BOOLEAN,;
+		 lvTime        AS VARIANT,;
+		 loProject     AS PROJECT,;
+		 loSett        AS OBJECT,;
+		 loConverter   AS "c_foxbin2prg" OF "E:\x\Helper\ThirdParty\VFPX\FoxBin2PRG\FOXBIN2PRG.PRG"
 		
 		lvTime = SECONDS()
 		IF THIS.Get_Converter(@lcStorage,@loConverter) THEN
@@ -997,88 +1068,154 @@ DEFINE CLASS cusstorage AS custom 		&& The stuff that does the work.
 		ENDIF &&THIS.Get_Converter(@lcStorage,@loConverter)
 		
 		LOCAL ARRAY;
-		 laFiles(ALEN(taFiles,1),4)
+		 laFiles(ALEN(taFiles,1),6)
 		
 		laFiles = NIL
 		STORE ALEN(taFiles,1) TO;
 		 lnFiles,;
 		 lnOffsets
 		
-		lcMode = IIF(tlToBin,"PRG2BIN","BIN2PRG")
+		lnFilesFound = 0
+		
+		lcMode = IIF(m.tlToBin,"PRG2BIN","BIN2PRG")
 		
 		*process sourcefiles
-		FOR lnFile = 1 TO lnFiles
+		FOR lnFile = 1 TO m.lnFiles
+		 lnFilesFound = m.lnFilesFound+1
 		*wie machen wir das wenn wir noch keine pjx haben?!!!
-		 IF tlToBin THEN
-		  loSett      = THIS.oGet_Setting(JUSTPATH(taFiles(lnFile,1)),loConverter)
-		  lcSourceExt = UPPER(JUSTEXT(taFiles(lnFile,1)))
 		
+		*extract class for processing
+		 lcClass = ""
+		 IF '::'$taFiles(m.lnFile,1) THEN
+		  taFiles(m.lnFile,1) = STRTRAN(taFiles(m.lnFile,1),'::','.',1,1)
+		  lcClass           = "::"+JUSTEXT(taFiles(m.lnFile,1))
+		  taFiles(m.lnFile,1)	= FORCEEXT( taFiles(m.lnFile,1),'')
+		  llSingleClass     = True
+		 ENDIF &&'::'$taFiles(m.lnFile,1)
+		
+		 loSett      = THIS.oGet_Setting(JUSTPATH(taFiles(m.lnFile,1)),m.loConverter)
+		 lcSourceExt = UPPER(JUSTEXT(taFiles(m.lnFile,1)))
+		 IF m.tlToBin THEN
+		
+		*if binary file is send, gather text file extension
 		  DO CASE
-		   CASE UPPER(lcSourceExt)=="VCX"
-		    lcSourceExt = loSett.c_VC2
-		   CASE UPPER(lcSourceExt)=="FRX"
-		    lcSourceExt = loSett.c_FR2
-		   CASE UPPER(lcSourceExt)=="MNX"
-		    lcSourceExt = loSett.c_MN2
-		   CASE UPPER(lcSourceExt)=="DBF"
-		    lcSourceExt = loSett.c_DB2
-		   CASE UPPER(lcSourceExt)=="DBC"
-		    lcSourceExt = loSett.c_DC2
-		   CASE UPPER(lcSourceExt)=="PJX"
-		    lcSourceExt = loSett.c_PJ2
-		   CASE UPPER(lcSourceExt)=="LBX"
-		    lcSourceExt = loSett.c_LB2
-		   CASE UPPER(lcSourceExt)=="SCX"
-		    lcSourceExt = loSett.c_CC2
+		   CASE m.llSingleClass
+		    lcSourceExt = "VCX"
+		   CASE UPPER(m.lcSourceExt)=="VCX"
+		    lcSourceExt = m.loSett.c_VC2
+		   CASE UPPER(m.lcSourceExt)=="FRX"
+		    lcSourceExt = m.loSett.c_FR2
+		   CASE UPPER(m.lcSourceExt)=="MNX"
+		    lcSourceExt = m.loSett.c_MN2
+		   CASE UPPER(m.lcSourceExt)=="DBF"
+		    lcSourceExt = m.loSett.c_DB2
+		   CASE UPPER(m.lcSourceExt)=="DBC"
+		    lcSourceExt = m.loSett.c_DC2
+		   CASE UPPER(m.lcSourceExt)=="PJX"
+		    lcSourceExt = m.loSett.c_PJ2
+		   CASE UPPER(m.lcSourceExt)=="LBX"
+		    lcSourceExt = m.loSett.c_LB2
+		   CASE UPPER(m.lcSourceExt)=="SCX"
+		    lcSourceExt = m.loSett.c_SC2
+		
+		*check if just a text file name is send,
+		*for the logic of the programm, we need the binary, so we swap
+		   CASE UPPER(m.lcSourceExt)==m.loSett.c_VC2
+		    taFiles(m.lnFile,1) = FORCEEXT(taFiles(m.lnFile,1),"VCX")
+		   CASE UPPER(m.lcSourceExt)==m.loSett.c_FR2
+		    taFiles(m.lnFile,1) = FORCEEXT(taFiles(m.lnFile,1),"FRX")
+		   CASE UPPER(m.lcSourceExt)==m.loSett.c_MN2
+		    taFiles(m.lnFile,1) = FORCEEXT(taFiles(m.lnFile,1),"MNX")
+		   CASE UPPER(m.lcSourceExt)==m.loSett.c_DB2
+		    taFiles(m.lnFile,1) = FORCEEXT(taFiles(m.lnFile,1),"DBF")
+		   CASE UPPER(m.lcSourceExt)==m.loSett.c_DC2
+		    taFiles(m.lnFile,1) = FORCEEXT(taFiles(m.lnFile,1),"DBC")
+		   CASE UPPER(m.lcSourceExt)==m.loSett.c_PJ2
+		    taFiles(m.lnFile,1) = FORCEEXT(taFiles(m.lnFile,1),"PJX")
+		   CASE UPPER(m.lcSourceExt)==m.loSett.c_LB2
+		    taFiles(m.lnFile,1) = FORCEEXT(taFiles(m.lnFile,1),"LBX")
+		   CASE UPPER(m.lcSourceExt)==m.loSett.c_SC2
+		    taFiles(m.lnFile,1) = FORCEEXT(taFiles(m.lnFile,1),"SCX")
 		   OTHERWISE
+		*Error, no known extension
+		    lcSourceExt = ""
 		  ENDCASE
 		
-		  laFiles(lnFile,1) = FORCEEXT(taFiles(lnFile,1),lcSourceExt)	&&Source File of transformation; Bin or Text
-		 ELSE  &&tlToBin
-		  laFiles(lnFile,1) = taFiles(lnFile,1)							&&Source File of transformation; Bin or Text
-		 ENDIF &&tlToBin
+		 ELSE  &&m.tlToBin
+		*check if just a binary file name is send, as expected
+		  DO CASE
+		   CASE UPPER(m.lcSourceExt)=="VCX"
+		   CASE UPPER(m.lcSourceExt)=="FRX"
+		   CASE UPPER(m.lcSourceExt)=="MNX"
+		   CASE UPPER(m.lcSourceExt)=="DBF"
+		   CASE UPPER(m.lcSourceExt)=="DBC"
+		   CASE UPPER(m.lcSourceExt)=="PJX"
+		   CASE UPPER(m.lcSourceExt)=="LBX"
+		   CASE UPPER(m.lcSourceExt)=="SCX"
+		   OTHERWISE
+		*Error, no known extension
+		    lcSourceExt = ""
+		  ENDCASE
+		 ENDIF &&m.tlToBin
 		
-		 laFiles(lnFile,2) = tcMode 									&&a project file bin or text
-		 laFiles(lnFile,3) = taFiles(lnFile,1)							&&VFP Bin File
+		 IF EMPTY(m.lcSourceExt) THEN
+		*undefined extension, just ignore
+		  ADEL(laFiles,m.lnFilesFound)
+		  lnFilesFound = m.lnFilesFound-1
+		  lnOffsets   = m.lnOffsets-1
+		  IF m.lnFilesFound=0 THEN
+		   EXIT
+		  ELSE  &&m.lnFilesFound=0
+		   DIMENSION;
+		    laFiles(m.lnOffsets,4)
+		   LOOP
+		  ENDIF &&m.lnFilesFound=0
+		 ELSE  &&EMPTY(m.lcSourceExt)
+		  laFiles(m.lnFilesFound,1) = FORCEEXT(taFiles(m.lnFile,1),m.lcSourceExt)+;
+		   m.lcClass															&&Source File of transformation; Text or Text
+		 ENDIF &&EMPTY(m.lcSourceExt)
+		
+		 laFiles(m.lnFilesFound,2) = m.tcMode 									&&a project file bin or text
+		 laFiles(m.lnFilesFound,3) = taFiles(m.lnFile,1)						&&VFP Bin File
 		 DO CASE
-		  CASE !UPPER(JUSTEXT(taFiles(lnFile,1)))='PJX'
+		  CASE !UPPER(JUSTEXT(taFiles(m.lnFile,1)))='PJX'
 		*nothing to do
-		   laFiles(lnFile,4) = 0										&&No Hook
-		   laFiles(lnFile,2) = lcMode									&&not a project file
+		   laFiles(m.lnFilesFound,4) = 0										&&No Hook
+		   laFiles(m.lnFilesFound,2) = m.lcMode									&&not a project file
 		  CASE ALEN(taFiles,2)<2
 		*nothing defined yet, parse later
-		   laFiles(lnFile,4) = 2										&&No Hook, but mybe after conversion
-		  CASE ALEN(taFiles,2)<2 AND !tlToBin
+		   laFiles(m.lnFilesFound,4) = 2										&&No Hook, but maybe after conversion
+		  CASE ALEN(taFiles,2)<2 AND !m.tlToBin
 		*nothing defined, parse later
-		   laFiles(lnFile,4) = 1										&&No Hook, but maybe
-		  CASE ISNULL(taFiles(lnFile,2))
+		   laFiles(m.lnFilesFound,4) = 1										&&No Hook, but maybe
+		  CASE ISNULL(taFiles(m.lnFile,2))
 		*nothing defined yet, parse again after processing (if pjx changed)
-		   laFiles(lnFile,4) = 2										&&No Hook, but mybe after conversion
-		  CASE ISNULL(taFiles(lnFile,2)) AND !tlToBin
+		   laFiles(m.lnFilesFound,4) = 2										&&No Hook, but mybe after conversion
+		  CASE ISNULL(taFiles(m.lnFile,2)) AND !m.tlToBin
 		*nothing defined yet, parse later
-		   laFiles(lnFile,4) = 1										&&No Hook, but maybe
-		  CASE EMPTY(taFiles(lnFile,2))
+		   laFiles(m.lnFilesFound,4) = 1										&&No Hook, but maybe
+		  CASE EMPTY(taFiles(m.lnFile,2))
 		*nothing hook defined yet, but may change again after processing (if pjx changed)
-		   laFiles(lnFile,4) = 2										&&No Hook, but mybe after conversion
-		  CASE EMPTY(taFiles(lnFile,2)) AND !tlToBin
+		   laFiles(m.lnFilesFound,4) = 2										&&No Hook, but mybe after conversion
+		  CASE EMPTY(taFiles(m.lnFile,2)) AND !m.tlToBin
 		*no Hook, do nothing
-		   laFiles(lnFile,4) = 0										&&No Hook
-		  CASE tlToBin
-		   laFiles(lnFile,4) = 2										&&we have a hook, but check after conversion again
-		  OTHERWISE  && tlToBin
+		   laFiles(m.lnFilesFound,4) = 0										&&No Hook
+		  CASE m.tlToBin
+		   laFiles(m.lnFilesFound,4) = 2										&&we have a hook, but check after conversion again
+		  OTHERWISE  && m.tlToBin
 		*Hook, to text
-		   lnOffsets = lnOffsets+1
+		   lnOffsets = m.lnOffsets+1
 		   DIMENSION;
-		    laFiles(lnOffsets,4)
+		    laFiles(m.lnOffsets,4)
 		
-		   laFiles(lnOffsets,1) = taFiles(lnFile,2)						&&Source File of transformation; Bin
-		   laFiles(lnOffsets,2) = lcMode								&&not a project file
-		   laFiles(lnOffsets,3) = taFiles(lnFile,2)						&&VFP Bin File
-		   laFiles(lnOffsets,4) = 0										&&no Hook
+		   laFiles(m.lnOffsets,1) = taFiles(m.lnFile,2)						&&Source File of transformation; Bin
+		   laFiles(m.lnOffsets,2) = m.lcMode								&&not a project file
+		   laFiles(m.lnOffsets,3) = taFiles(m.lnFile,2)						&&VFP Bin File
+		   laFiles(m.lnOffsets,4) = 0										&&no Hook
 		
-		   laFiles(lnFile,4) = 0
+		   laFiles(m.lnFilesFound,4) = 0									&&no Hook
 		 ENDCASE
-		ENDFOR &&lnFile
+		ENDFOR &&m.lnFile
 		
 		*!*	Change by: SF 15.6.2015
 		*!*	<pdm>
@@ -1087,35 +1224,39 @@ DEFINE CLASS cusstorage AS custom 		&& The stuff that does the work.
 		*!*	</change>
 		*!*	</pdm>
 		
-		IF !tlToBin THEN
+		IF !m.tlToBin THEN
 		*process transformation, only for Bin 2 Text (Text 2 Bin will be read after recreating)
-		FOR lnFile = 1 TO lnFiles
-		 lcFile = laFiles(lnFile,3)
-		 IF laFiles(lnFile,4)=1 AND FILE(lcFile) AND UPPER(JUSTEXT(lcFile))=='PJX' THEN
+		 FOR lnFile = 1 TO m.lnFilesFound
+		  lcFile = laFiles(m.lnFile,3)
+		  IF laFiles(m.lnFile,4)=1 AND FILE(m.lcFile) AND UPPER(JUSTEXT(m.lcFile))=='PJX' THEN
 		
-		  MODIFY PROJECT (lcFile) NOWAIT NOSHOW NOPROJECTHOOK
-		  loProject = _VFP.PROJECTS(JUSTFNAME(lcFile))
-		  lcFile    = loProject.PROJECTHOOKLIBRARY
-		  loProject.CLOSE
+		   MODIFY PROJECT (m.lcFile) NOWAIT NOSHOW NOPROJECTHOOK
+		   loProject = _VFP.PROJECTS(JUSTFNAME(m.lcFile))
+		   lcFile    = m.loProject.PROJECTHOOKLIBRARY
+		   loProject.CLOSE
 		
-		  IF !EMPTY(lcFile) THEN
-		   lnOffsets = lnOffsets+1
-		   DIMENSION;
-		    laFiles(lnOffsets,5)
+		   IF !EMPTY(m.lcFile) THEN
+		    lnOffsets = m.lnOffsets+1
+		    DIMENSION;
+		     laFiles(m.lnOffsets,5)
 		
-		   laFiles(lnOffsets,1) = lcFile								&&Source File of transformation; Bin
-		   laFiles(lnOffsets,2) = lcMode								&&not a project file
-		   laFiles(lnOffsets,3) = lcFile								&&VFP Bin File
-		   laFiles(lnOffsets,4) = 0										&&No Hook :)
-		  ENDIF &&!EMPTY(lcFile)
-		 ENDIF &&laFiles(lnFile,4)=1 AND FILE(lcFile) AND UPPER(JUSTEXT(lcFile))=='PJX'
-		ENDFOR &&lnFile
-		ENDIF &&!tlToBin 
+		    laFiles(m.lnOffsets,1) = m.lcFile								&&Source File of transformation; Bin
+		    laFiles(m.lnOffsets,2) = m.lcMode								&&not a project file
+		    laFiles(m.lnOffsets,3) = m.lcFile								&&VFP Bin File
+		    laFiles(m.lnOffsets,4) = 0									&&No Hook :)
+		   ENDIF &&!EMPTY(m.lcFile)
+		  ENDIF &&laFiles(m.lnFile,4)=1 AND FILE(m.lcFile) AND UPPER(JUSTEXT(m.lcFile))=='PJX'
+		 ENDFOR &&m.lnFile
+		ENDIF &&!m.tlToBin
 		
 		*!*	/Change by: SF 15.6.2015
 		
 		* only bin to text for now and switch not all set
-		llMaxiLoop = !tlToBin AND !ISNULL(lcStorage) AND TYPE('_SCREEN.gcB2T_Opt')="C" AND _SCREEN.gcB2T_Opt=="1"
+		IF PCOUNT()<5 THEN
+		 tlIncludeAll = NIL
+		ENDIF &&PCOUNT()<5
+		
+		llMaxiLoop = !m.tlToBin AND !ISNULL(m.lcStorage) AND NVL(!m.tlIncludeAll,TYPE('_SCREEN.gcB2T_Opt')="C" AND _SCREEN.gcB2T_Opt=="1")
 		llFound = .T.
 		
 		lcPath = JUSTPATH(_SCREEN.gcB2T_Path)
@@ -1123,10 +1264,15 @@ DEFINE CLASS cusstorage AS custom 		&& The stuff that does the work.
 		loConverter.LoadProgressbarForm()
 		ACTIVATE SCREEN
 		
-		llFound = THIS.Convert(@laFiles,!llMaxiLoop,loConverter,0)
+		IF m.lnFilesFound>0 THEN
+		 llFound = THIS.Convert(@laFiles,!m.llMaxiLoop,m.loConverter,0,m.toSetting)
+		ELSE  &&m.lnFilesFound>0
+		 llFound = False
+		ENDIF &&m.lnFilesFound>0
 		
 		*ReRun only file(s) changed
-		IF llFound THEN
+		*Ignore Storage if tlIncludeAll
+		IF NVL(!m.tlIncludeAll,True) AND m.llFound THEN
 		 LOCAL ARRAY;
 		  laFiles2(1,2)
 		
@@ -1138,21 +1284,21 @@ DEFINE CLASS cusstorage AS custom 		&& The stuff that does the work.
 		*Note! This will change the array!
 		*just process all if
 		* !maxiloop and !isnull(storage) -> just process files
-		* maxiloop (nur wenn !ISNULL(storage!!)) and processfiles -> run partial
+		* maxiloop (only if  !ISNULL(storage!!)) and processfiles -> run partial
 		*maxiloop and isnull(storage)
 		*SET STEP ON
-		  IF !llMaxiLoop AND !ISNULL(lcStorage) THEN
+		  IF !m.llMaxiLoop AND !ISNULL(m.lcStorage) THEN
 		*Complet convert is done, just store result
-		   THIS.FilesToProcess(@laFiles2,lcPath,tlToBin,tlCheckAll,lcStorage,loConverter)
+		   THIS.FilesToProcess(@laFiles2,m.lcPath,m.tlToBin,m.tlCheckAll,m.lcStorage,m.loConverter)
 		*but if we create binaries we may have still undone stuff like new hooks
-		   IF tlToBin THEN
+		   IF m.tlToBin THEN
 		    DIMENSION;
 		     laFiles2(1,2)
 		
 		    lnOffset = 0
-		    FOR lnFile = 1 TO lnFiles
-		     lcFile = laFiles(lnFile,3)
-		     IF laFiles(lnFile,4)>1 AND FILE(lcFile) AND UPPER(JUSTEXT(lcFile))=='PJX' THEN
+		    FOR lnFile = 1 TO m.lnFilesFound
+		     lcFile = laFiles(m.lnFile,3)
+		     IF laFiles(m.lnFile,4)>1 AND FILE(m.lcFile) AND UPPER(JUSTEXT(m.lcFile))=='PJX' THEN
 		
 		*!*	Changed by: SF 11.6.2015
 		*!*	<pdm>
@@ -1161,12 +1307,12 @@ DEFINE CLASS cusstorage AS custom 		&& The stuff that does the work.
 		*!*	</change>
 		*!*	</pdm>
 		
-		*!*	      MODIFY PROJECT (lcFile) NOWAIT NOSHOW NOPROJECTHOOK
-		*!*	      loProject = _VFP.PROJECTS(JUSTFNAME(lcFile))
-		*!*	      lcFile    = loProject.PROJECTHOOKLIBRARY
+		*!*	      MODIFY PROJECT (m.lcFile) NOWAIT NOSHOW NOPROJECTHOOK
+		*!*	      loProject = _VFP.PROJECTS(JUSTFNAME(m.lcFile))
+		*!*	      m.lcFile    = loProject.PROJECTHOOKLIBRARY
 		*!*	      loProject.CLOSE
 		
-		      USE (lcFile) ALIAS curPJX IN SELECT('curPJX')
+		      USE (m.lcFile) ALIAS curPJX IN SELECT('curPJX')
 		      SELECT;
 		       Cur1.NAME AS cFile;
 		       FROM curPJX AS Cur1;
@@ -1176,47 +1322,47 @@ DEFINE CLASS cusstorage AS custom 		&& The stuff that does the work.
 		      IF RECCOUNT()=0 OR EMPTY(cFile) THEN
 		       lcFile    = ''
 		      ELSE  &&RECCOUNT()=0
-		       lcFile    = ADDBS(JUSTPATH(lcFile))+SYS(2014,ALLTRIM(cFile),lcFile)
+		       lcFile    = ADDBS(JUSTPATH(m.lcFile))+SYS(2014,ALLTRIM(cFile),m.lcFile)
 		      ENDIF &&RECCOUNT()=0
 		      USE IN curW
 		      USE IN curPJX
 		
 		*!*	/Changed by: SF 11.6.2015
 		
-		      IF !EMPTY(lcFile) THEN
-		       lnOffset = lnOffset+1
+		      IF !EMPTY(m.lcFile) THEN
+		       lnOffset = m.lnOffset+1
 		       DIMENSION;
-		        laFiles2(lnOffset,2)
+		        laFiles2(m.lnOffset,2)
 		
-		       loSett      = THIS.oGet_Setting(JUSTPATH(lcFile),loConverter)
-		       lcSourceExt = loSett.c_VC2
+		       loSett      = THIS.oGet_Setting(JUSTPATH(m.lcFile),m.loConverter)
+		       lcSourceExt = m.loSett.c_VC2
 		
-		       laFiles2(lnOffset,1) = FORCEEXT(lcFile,lcSourceExt)			&&Source File of transformation; Bin
-		       laFiles2(lnOffset,2) = lcMode								&&not a project file
-		      ENDIF &&!EMPTY(lcFile)
-		     ENDIF &&laFiles(lnFile,4)>1 AND FILE(lcFile) AND UPPER(JUSTEXT(lcFile))=='PJX'
+		       laFiles2(m.lnOffset,1) = FORCEEXT(m.lcFile,m.lcSourceExt)			&&Source File of transformation; Bin
+		       laFiles2(m.lnOffset,2) = m.lcMode								&&not a project file
+		      ENDIF &&!EMPTY(m.lcFile)
+		     ENDIF &&laFiles(m.lnFile,4)>1 AND FILE(m.lcFile) AND UPPER(JUSTEXT(m.lcFile))=='PJX'
 		    ENDFOR &&lnFile
 		
-		    IF lnOffset>0 THEN
+		    IF m.lnOffset>0 THEN
 		     ACTIVATE SCREEN
 		     ?"post process projcet hooks"
-		     llFound = THIS.Convert(@laFiles2,.T.,loConverter,lnFiles)
+		     llFound = THIS.Convert(@laFiles2,.T.,m.loConverter,m.lnFilesFound,m.toSetting)
 		
 		     DIMENSION;
 		      laFiles2(1,1)
 		*just rework hooks in storage table
 		     IF loConverter.Get_Processed(@laFiles2)#0 THEN
-		      THIS.FilesToProcess(@laFiles2,lcPath,tlToBin,.F.,lcStorage,loConverter)
+		      THIS.FilesToProcess(@laFiles2,m.lcPath,m.tlToBin,.F.,m.lcStorage,m.loConverter)
 		     ENDIF &&loConverter.Get_Processed(@laFiles2)#0
-		    ENDIF &&lnOffset>0
+		    ENDIF &&m.lnOffset>0
 		
-		   ENDIF &&tlToBin
-		  ELSE  &&!llMaxiLoop AND !ISNULL(lcStorage)
-		   llProcess = THIS.FilesToProcess(@laFiles2,lcPath,tlToBin,tlCheckAll,lcStorage,loConverter)
+		   ENDIF &&m.tlToBin
+		  ELSE  &&!m.llMaxiLoop AND !ISNULL(m.lcStorage)
+		   llProcess = THIS.FilesToProcess(@laFiles2,m.lcPath,m.tlToBin,m.tlCheckAll,m.lcStorage,m.loConverter)
 		   DO CASE
 		    CASE ISNULL(llProcess)
 		*need to process all files -> just let FoxBin2PRG do, faster.
-		     llFound = THIS.Convert(@laFiles,.T.,loConverter,lnFiles)
+		     llFound = THIS.Convert(@laFiles,.T.,m.loConverter,m.lnFilesFound,m.toSetting)
 		    CASE llProcess
 		*If not processed in first loop, process now, file by file.
 		     loConverter.l_ProcessFiles = .T.
@@ -1224,13 +1370,13 @@ DEFINE CLASS cusstorage AS custom 		&& The stuff that does the work.
 		
 		     lnFiles  = ALEN(laFiles2,1)
 		*just set "not a project"
-		     FOR lnFile = 1 TO lnFiles
-		      laFiles2(lnFile,2) = lcMode
+		     FOR lnFile = 1 TO m.lnFiles
+		      laFiles2(m.lnFile,2) = m.lcMode
 		     ENDFOR &&lnFile
-		     llFound = THIS.Convert(@laFiles2,.T.,loConverter,lnOffsets)
+		     llFound = THIS.Convert(@laFiles2,.T.,m.loConverter,m.lnOffsets,m.toSetting)
 		   ENDCASE
 		
-		  ENDIF &&!llMaxiLoop AND !ISNULL(lcStorage)
+		  ENDIF &&!m.llMaxiLoop AND !ISNULL(m.lcStorage)
 		*!*	Changed by: SF 4.6.2015
 		*!*	<pdm>
 		*!*	<change date="{^2015-06-04,11:40:00}">Changed by: SF<br />
@@ -1240,49 +1386,50 @@ DEFINE CLASS cusstorage AS custom 		&& The stuff that does the work.
 		
 		  IF _SCREEN.gcB2T_Delete=="1" THEN
 		*Delete obsolete classes from classlibs
-		   SELECT (lcStorage)
+		   SELECT (m.lcStorage)
 		*sfx todo SQL
 		   SCAN FOR iDirty=-1
 		
-		    loSett      = THIS.oGet_Setting(JUSTPATH(cFile),loConverter)
+		    loSett      = THIS.oGet_Setting(JUSTPATH(cFile),m.loConverter)
 		    lcSourceExt = UPPER(JUSTEXT(cFile))
 		
 		    DO CASE
-		     CASE UPPER(lcSourceExt)=="VCX"
-		      lcSourceExt = loSett.c_VC2
-		     CASE UPPER(lcSourceExt)=="FRX"
-		      lcSourceExt = loSett.c_FR2
-		     CASE UPPER(lcSourceExt)=="MNX"
-		      lcSourceExt = loSett.c_MN2
-		     CASE UPPER(lcSourceExt)=="DBF"
-		      lcSourceExt = loSett.c_DB2
-		     CASE UPPER(lcSourceExt)=="DBC"
-		      lcSourceExt = loSett.c_DC2
-		     CASE UPPER(lcSourceExt)=="PJX"
-		      lcSourceExt = loSett.c_PJ2
-		     CASE UPPER(lcSourceExt)=="LBX"
-		      lcSourceExt = loSett.c_LB2
-		     CASE UPPER(lcSourceExt)=="SCX"
-		      lcSourceExt = loSett.c_CC2
+		     CASE UPPER(m.lcSourceExt)=="VCX"
+		      lcSourceExt = m.loSett.c_VC2
+		     CASE UPPER(m.lcSourceExt)=="FRX"
+		      lcSourceExt = m.loSett.c_FR2
+		     CASE UPPER(m.lcSourceExt)=="MNX"
+		      lcSourceExt = m.loSett.c_MN2
+		     CASE UPPER(m.lcSourceExt)=="DBF"
+		      lcSourceExt = m.loSett.c_DB2
+		     CASE UPPER(m.lcSourceExt)=="DBC"
+		      lcSourceExt = m.loSett.c_DC2
+		     CASE UPPER(m.lcSourceExt)=="PJX"
+		      lcSourceExt = m.loSett.c_PJ2
+		     CASE UPPER(m.lcSourceExt)=="LBX"
+		      lcSourceExt = m.loSett.c_LB2
+		     CASE UPPER(m.lcSourceExt)=="SCX"
+		*Fehler: c_CC2 statt c_SC2
+		      lcSourceExt = m.loSett.c_SC2
 		     OTHERWISE
 		      LOOP
 		    ENDCASE
 		
 		    lcFile = JUSTPATH(cFile)+'\'+JUSTSTEM(cFile)+'.'+;
-		     EVL(FORCEEXT(ALLTRIM(cObjName),lcSourceExt),lcSourceExt)
+		     EVL(FORCEEXT(ALLTRIM(cObjName),m.lcSourceExt),m.lcSourceExt)
 		
 		    DO CASE
-		     CASE !FILE(lcFile)
+		     CASE !FILE(m.lcFile)
 		*nothing found, nothing to do
-		     CASE loSett.n_ExtraBackupLevels>0
+		     CASE m.loSett.n_ExtraBackupLevels>0
 		*Backup (only one level deep)
-		      lcSourceExt = lcSourceExt+'.Del.Bak'
+		      lcSourceExt = m.lcSourceExt+'.Del.Bak'
 		      lcTarget = JUSTPATH(cFile)+'\'+JUSTSTEM(cFile)+'.'+;
-		       EVL(FORCEEXT(ALLTRIM(cObjName),lcSourceExt),lcSourceExt)
+		       EVL(FORCEEXT(ALLTRIM(cObjName),m.lcSourceExt),m.lcSourceExt)
 		
-		      IF FILE(lcTarget) THEN
+		      IF FILE(m.lcTarget) THEN
 		       DELETE FILE &lcTarget
-		      ENDIF &&FILE(lcTarget)
+		      ENDIF &&FILE(m.lcTarget)
 		      RENAME &lcFile TO &lcTarget
 		
 		     OTHERWISE
@@ -1296,21 +1443,21 @@ DEFINE CLASS cusstorage AS custom 		&& The stuff that does the work.
 		  ENDIF &&_SCREEN.gcB2T_Delete=="1"
 		*!*	/Changed by: SF 4.6.2015
 		
-		 ENDIF &&loConverter.Get_Processed(@laFiles2)#0
-		ENDIF &&llFound
+		 ENDIF &&m.loConverter.Get_Processed(@laFiles2)#0
+		ENDIF &&NVL(!m.tlIncludeAll,True) AND m.llFound
 		
 		loConverter.UnloadProgressbarForm()
 		loConverter =  NIL
 		
-		THIS.Storage_Close(lcStorage,llFound)
+		THIS.Storage_Close(m.lcStorage,m.llFound)
 		
 		ACTIVATE SCREEN
-		IF !llFound THEN
+		IF !m.llFound THEN
 		 ?"Conversion is canceled"
-		ENDIF &&!llFound
-		??' Duration:',SECONDS()-lvTime
+		ENDIF &&!m.llFound
+		??' Duration:',SECONDS()-m.lvTime
 		
-		RETURN llFound
+		RETURN m.llFound
 		
 	ENDPROC
 
@@ -1343,39 +1490,44 @@ DEFINE CLASS cusstorage AS custom 		&& The stuff that does the work.
 		LOCAL;
 		 lcFile    AS CHARACTER,;
 		 lcStorage AS CHARACTER,;
-		 llSearch  AS BOOLEAN,;
 		 llWrite   AS BOOLEAN,;
 		 llError   AS BOOLEAN,;
 		 loSetting AS COLLECTION
 		
 		IF PCOUNT()>1 AND VARTYPE(tcHomePath)='C' THEN
 		*Storage_Location works different with parameter set
-		 lcFile    = THIS.Storage_Location(tcHomePath)
+		 lcFile    = THIS.Storage_Location(m.tcHomePath)
 		ELSE  &&PCOUNT()>1 AND VARTYPE(tcHomePath)='C'
 		 lcFile    = THIS.Storage_Location()
 		ENDIF &&PCOUNT()>1 AND VARTYPE(tcHomePath)='C'
 		
-		IF ISNULL(lcFile) THEN
+		IF ISNULL(m.lcFile) THEN
 		 llError = True
-		ELSE  &&ISNULL(lcFile)
+		ELSE  &&ISNULL(m.lcFile)
 		
-		 lcStorage = THIS.Storage_Open(lcFile)
+		 lcStorage = THIS.Storage_Open(m.lcFile)
 		
-		 IF ISNULL(lcStorage) THEN
+		 IF ISNULL(m.lcStorage) THEN
 		  llError = True
-		 ELSE  &&ISNULL(lcStorage)
+		 ELSE  &&ISNULL(m.lcStorage)
 		
 		  loSetting = NEWOBJECT('collection')
-		  THIS.Storage_Get("S",loSetting,lcStorage)
+		  THIS.Storage_Get("S",m.loSetting,m.lcStorage)
 		
 		*Storage Path
 		  IF !PEMSTATUS(_SCREEN,"gcB2T_Path",5) THEN
-		   loSetting.ADD(lcFile,"gcB2T_Path")
+		   loSetting.ADD(m.lcFile,"gcB2T_Path")
 		   llWrite = True
 		  ENDIF &&!PEMSTATUS(_SCREEN,"gcB2T_Path",5)
 		
 		*get FoxBin2Prg.prg
-		  llWrite = THIS.Storage_Check_Bin2Prg(@loSetting,@llError) OR llWrite
+		  llWrite = THIS.Storage_Check_Bin2Prg(@loSetting,@llError) OR m.llWrite
+		
+		*GUI Path
+		  IF !PEMSTATUS(_SCREEN,"gcB2T_GUI",5) THEN
+		   loSetting.ADD(FORCEPATH('gitk.exe',JUSTPATH(_SCREEN.gcB2T_git)),"gcB2T_GUI")
+		   llWrite = True
+		  ENDIF &&!PEMSTATUS(_SCREEN,"gcB2T_GUI",5)
 		
 		*auto commit [1 On; else OFF]
 		  IF !PEMSTATUS(_SCREEN,"gcB2T_Commit",5) THEN
@@ -1401,36 +1553,42 @@ DEFINE CLASS cusstorage AS custom 		&& The stuff that does the work.
 		   llWrite = True
 		  ENDIF &&!PEMSTATUS(_SCREEN,"gcB2T_Delete",5)
 		
-		  IF !llError AND tlInterActive THEN
+		*Use bash for git operations [1 On; else OFF]
+		  IF !PEMSTATUS(_SCREEN,"gcB2T_UseBash",5) THEN
+		   loSetting.ADD("1","gcB2T_UseBash")
+		   llWrite = True
+		  ENDIF &&!PEMSTATUS(_SCREEN,"gcB2T_UseBash",5)
+		
+		  IF !m.llError AND m.tlInterActive THEN
 		*Interactive
 		   _SCREEN.ADDPROPERTY("glSet",False)
 		
 		*run interactive form
-		   THIS.PARENT.Storage_Get(loSetting)
+		   THIS.PARENT.Storage_Get(m.loSetting)
 		   THIS.PARENT.SHOW(1)
-		   THIS.PARENT.Storage_Put(loSetting)
+		   THIS.PARENT.Storage_Put(m.loSetting)
 		
 		   llWrite = loSetting.ITEM("glSet")
 		   loSetting.REMOVE("glSet")
 		
-		  ENDIF  &&!llError AND !ISNULL(lcStorage) AND tlInterActive
-		 ENDIF &&ISNULL(lcStorage)
-		ENDIF  &&ISNULL(lcFile)
+		  ENDIF  &&!m.llError AND !ISNULL(m.lcStorage) AND m.tlInterActive
+		 ENDIF &&ISNULL(m.lcStorage)
+		ENDIF  &&ISNULL(m.lcFile)
 		
-		IF llError THEN
+		IF m.llError THEN
 		 lcStorage = NIL
-		 THIS.Storage_Close(lcStorage,.T.)
-		ELSE  &&llError
-		 IF llWrite THEN
-		  THIS.Storage_Set("S",loSetting,lcStorage)
-		 ENDIF &&llWrite
-		 IF tlInterActive THEN
-		  THIS.Storage_Close(lcStorage,.T.)
+		 THIS.Storage_Close(m.lcStorage,.T.)
+		ELSE  &&m.llError
+		 IF m.llWrite THEN
+		  THIS.Storage_Set("S",m.loSetting,m.lcStorage)
+		 ENDIF &&m.llWrite
+		 IF m.tlInterActive THEN
+		  THIS.Storage_Close(m.lcStorage,.T.)
 		  lcStorage = NIL
-		 ENDIF &&tlInterActive
-		ENDIF &&llError
+		 ENDIF &&m.tlInterActive
+		ENDIF &&m.llError
 		
-		RETURN lcStorage
+		RETURN m.lcStorage
 		
 	ENDPROC
 
@@ -1464,73 +1622,71 @@ DEFINE CLASS cusstorage AS custom 		&& The stuff that does the work.
 		LOCAL;
 		 lcFile   AS CHARACTER,;
 		 lnLoop   AS INTEGER,;
-		 llSearch AS BOOLEAN,;
-		 llWrite  AS BOOLEAN
+		 llSearch AS BOOLEAN
 		
 		llSearch = False
 		IF !PEMSTATUS(_SCREEN,"gcB2T_FB2T",5) THEN
 		 llSearch = True
 		ENDIF &&!PEMSTATUS(_SCREEN,"gcB2T_FB2T",5)
 		
-		IF !llSearch AND !FILE(_SCREEN.gcB2T_FB2T) THEN
+		IF !m.llSearch AND !FILE(_SCREEN.gcB2T_FB2T) THEN
 		 llSearch = True
 		 MESSAGEBOX('FoxBin2PRG not found in'+0h0D0A+;
 		  '"'+_SCREEN.gcB2T_FB2T+'"')
-		ENDIF &&!llsearch AND !FILE(_SCREEN.gcB2T_FB2T)
-		IF llSearch THEN
+		ENDIF &&!m.llSearch AND !FILE(_SCREEN.gcB2T_FB2T)
+		IF m.llSearch THEN
 		 lcFile = ''
 		
 		 IF FILE("FoxBin2PRG.prg") THEN
 		  lcFile = FULLPATH("FoxBin2PRG.prg")
 		 ELSE  &&FILE("FoxBin2PRG.prg")
 		  lnLoop = 1
-		  lcFile = SYS(16,lnLoop)
-		  DO WHILE LEN(lcFile)>0
-		   IF UPPER(JUSTEXT(lcFile)) = "APP" THEN
+		  lcFile = SYS(16,m.lnLoop)
+		  DO WHILE LEN(m.lcFile)>0
+		   IF UPPER(JUSTEXT(m.lcFile)) = "APP" THEN
 		    IF lcFile="PROCEDURE " THEN
-		     lcFile = ADDBS(JUSTPATH(STREXTRACT(lcFile,' ',' ',2,2)))
-		    ELSE  &&lcFile="PROCEDURE "
-		     lcFile = JUSTPATH(lcFile)
-		    ENDIF &&lcFile="PROCEDURE "
+		     lcFile = ADDBS(JUSTPATH(STREXTRACT(m.lcFile,' ',' ',2,2)))
+		    ELSE  &&m.lcFile="PROCEDURE "
+		     lcFile = JUSTPATH(m.lcFile)
+		    ENDIF &&m.lcFile="PROCEDURE "
 		    EXIT
-		   ENDIF &&UPPER(JUSTEXT(lcFile)) = "APP"
-		   IF UPPER(STREXTRACT(lcFile,' ',' ',1))=="BIN2PRG";
-		     OR UPPER(STREXTRACT(lcFile,' ',' ',1))=="INTER_ACTIVE" THEN
-		    lcFile = ADDBS(JUSTPATH(STREXTRACT(lcFile,' ',' ',2,2)))
+		   ENDIF &&UPPER(JUSTEXT(m.lcFile)) = "APP"
+		   IF UPPER(STREXTRACT(m.lcFile,' ',' ',1))=="BIN2PRG";
+		     OR UPPER(STREXTRACT(m.lcFile,' ',' ',1))=="INTER_ACTIVE" THEN
+		    lcFile = ADDBS(JUSTPATH(STREXTRACT(m.lcFile,' ',' ',2,2)))
 		    EXIT
-		   ENDIF &&UPPER(STREXTRACT(lcFile,' ',' ',1))=="BIN2PRG" OR UPPER(STREXTRACT(lcFile,' ',' ',1))=="INTER_ACTIVE"
-		   lnLoop = lnLoop+1
-		   lcFile = SYS(16,lnLoop)
-		  ENDDO &&LEN(lcFile)>0
+		   ENDIF &&UPPER(STREXTRACT(m.lcFile,' ',' ',1))=="BIN2PRG" OR UPPER(STREXTRACT(m.lcFile,' ',' ',1))=="INTER_ACTIVE"
+		   lnLoop = m.lnLoop+1
+		   lcFile = SYS(16,m.lnLoop)
+		  ENDDO &&LEN(m.lcFile)>0
 		 ENDIF &&FILE("FoxBin2PRG.prg")
 		
 		*Try .. EndTry bei IntelliScript
 		 LOCAL;
 		  loException AS EXCEPTION
 		
-		 lcFile = FORCEPATH("FoxBin2PRG.prg",lcFile)
+		 lcFile = FORCEPATH("FoxBin2PRG.prg",m.lcFile)
 		 TRY
 		*Was zu testen ist
-		   lcFile = LOCFILE(lcFile,'prg')
+		   lcFile = LOCFILE(m.lcFile,'prg')
 		  CATCH TO loException
 		   tlError = True
 		  FINALLY
 		*
 		 ENDTRY
 		
-		 IF !FILE(lcFile) OR !UPPER(JUSTFNAME(lcFile))="FOXBIN2PRG.PRG" THEN
+		 IF !FILE(m.lcFile) OR !UPPER(JUSTFNAME(m.lcFile))="FOXBIN2PRG.PRG" THEN
 		  tlError = True
 		  lcFile  = ''
 		  MESSAGEBOX('FoxBin2PRG not found')
-		 ENDIF &&!FILE(lcFile) OR !UPPER(JUSTFNAME(lcfile))="FOXBIN2PRG.PRG"
+		 ENDIF &&!FILE(m.lcFile) OR !UPPER(JUSTFNAME(m.lcFile))="FOXBIN2PRG.PRG"
 		
 		 IF toSetting.GETKEY("gcB2T_FB2T")>0 THEN
 		*File defined but not found
 		  toSetting.REMOVE("gcB2T_FB2T")
-		 ENDIF &&loSetting.GetKey("gcB2T_FB2T")>0
-		 toSetting.ADD(lcFile,"gcB2T_FB2T")
-		 llWrite = True
-		ENDIF &&llSearch
+		 ENDIF &&toSetting.GetKey("gcB2T_FB2T")>0
+		 toSetting.ADD(m.lcFile,"gcB2T_FB2T")
+		ENDIF &&m.llSearch
 		*/get FoxBin2Prg.prg
 		
 	ENDPROC
@@ -1557,18 +1713,18 @@ DEFINE CLASS cusstorage AS custom 		&& The stuff that does the work.
 		*!*	</pdm>
 		
 		
-		IF USED(NVL(tcStorage,'')) THEN
-		 IF tlReset THEN
+		IF USED(NVL(m.tcStorage,'')) THEN
+		 IF m.tlReset THEN
 		*reset heart beat
 		  UPDATE Cur1 SET;
 		   iDirty    = 0,;
 		   tLastUse  = DATETIME();
-		   FROM (tcStorage) AS Cur1;
+		   FROM (m.tcStorage) AS Cur1;
 		   WHERE Cur1.cType=="X"
-		 ENDIF &&tlReset
+		 ENDIF &&m.tlReset
 		
-		 USE IN (tcStorage)
-		ENDIF &&USED(tcStorage)
+		 USE IN (m.tcStorage)
+		ENDIF &&USED(m.tcStorage)
 		
 	ENDPROC
 
@@ -1609,9 +1765,9 @@ DEFINE CLASS cusstorage AS custom 		&& The stuff that does the work.
 		SELECT;
 		 cur1.cFile,;
 		 cur1.cUniqueId;
-		 FROM (tcStorage) AS cur1;
+		 FROM (m.tcStorage) AS cur1;
 		 INTO CURSOR curHelp;
-		 WHERE cur1.cType==tcType
+		 WHERE cur1.cType==m.tcType
 		
 		llOk = RECCOUNT()>0
 		toSetting.REMOVE(-1)
@@ -1622,7 +1778,7 @@ DEFINE CLASS cusstorage AS custom 		&& The stuff that does the work.
 		
 		USE IN SELECT('curHelp')
 		
-		RETURN llOk
+		RETURN m.llOk
 		
 	ENDPROC
 
@@ -1657,12 +1813,12 @@ DEFINE CLASS cusstorage AS custom 		&& The stuff that does the work.
 		DO CASE
 		 CASE PCOUNT()>0 AND !VARTYPE(tcHomePath)="C"
 		  lcFile = NIL
-		 CASE PCOUNT()>0 AND !DIRECTORY(tcHomePath)
+		 CASE PCOUNT()>0 AND !DIRECTORY(m.tcHomePath)
 		  lcFile = NIL
-		 CASE PCOUNT()>0 AND Is_git(tcHomePath)
-		  lcFile = FORCEPATH('Bin2Txt.DBF',GetGitBaseDir(tcHomePath))
+		 CASE PCOUNT()>0 AND Is_git(m.tcHomePath)
+		  lcFile = FORCEPATH('Bin2Txt.DBF',GetGitBaseDir(m.tcHomePath))
 		 CASE PCOUNT()>0
-		  lcFile = FORCEPATH('Bin2Txt.DBF',tcHomePath)
+		  lcFile = FORCEPATH('Bin2Txt.DBF',m.tcHomePath)
 		 CASE PEMSTATUS(_SCREEN,'gcB2T_Path',5) AND VARTYPE(_SCREEN.gcB2T_Path)='C' AND FILE(_SCREEN.gcB2T_Path)
 		* we say we have a settings file
 		  lcFile = _SCREEN.gcB2T_Path
@@ -1689,15 +1845,15 @@ DEFINE CLASS cusstorage AS custom 		&& The stuff that does the work.
 		  lcFile = FORCEPATH('Bin2Txt.DBF',FULLPATH(CURDIR()))
 		ENDCASE
 		
-		IF !ISNULL(lcFile) AND Is_git(JUSTPATH(lcFile)) THEN
+		IF !ISNULL(m.lcFile) AND Is_git(JUSTPATH(m.lcFile)) THEN
 		*the storage table should not be under git control, in case create / modify .gitignore
 		 LOCAL;
 		  lcX AS CHARACTER,;
 		  lcY AS CHARACTER,;
 		  lcZ AS CHARACTER
 		
-		 lcX = FORCEPATH('.gitignore',JUSTPATH(lcFile))
-		 lcY = LOWER(FORCEEXT(JUSTFNAME(lcFile),"*"))
+		 lcX = FORCEPATH('.gitignore',JUSTPATH(m.lcFile))
+		 lcY = LOWER(FORCEEXT(JUSTFNAME(m.lcFile),"*"))
 		 IF FILE(lcX) THEN
 		  lcZ = FILETOSTR(lcX)
 		  IF !lcY$lcZ THEN
@@ -1711,9 +1867,9 @@ DEFINE CLASS cusstorage AS custom 		&& The stuff that does the work.
 		 ELSE &&FILE(lcIgnore)
 		  STRTOFILE(lcY,lcX)
 		 ENDIF &&FILE(lcX)
-		ENDIF &&!ISNULL(lcFile) AND Is_git(JUSTPATH(lcFile))
+		ENDIF &&!ISNULL(m.lcFile) AND Is_git(JUSTPATH(m.lcFile))
 		
-		RETURN lcFile
+		RETURN m.lcFile
 		
 	ENDPROC
 
@@ -1829,9 +1985,9 @@ DEFINE CLASS cusstorage AS custom 		&& The stuff that does the work.
 		
 		llError = .F.
 		
-		IF !FILE(tcFile) THEN
+		IF !FILE(m.tcFile) THEN
 		 TRY
-		   CREATE TABLE (tcFile) (cType c(1), cFile c(240), cObjName c(240), cUniqueId c(16) NOCPTRANS, iDirty I, tLastUse T)
+		   CREATE TABLE (m.tcFile) (cType c(1), cFile c(240), cObjName c(240), cUniqueId c(16) NOCPTRANS, iDirty I, tLastUse T)
 		   INDEX ON cType		TAG _cType
 		*Like SCCTEXT.prg
 		*(d=DBC, D=DBF, K=Form, B=Label, M=Menu, R=Report, V=Classlibrary)
@@ -1854,17 +2010,17 @@ DEFINE CLASS cusstorage AS custom 		&& The stuff that does the work.
 		  FINALLY
 		 ENDTRY
 		
-		 IF llError THEN
+		 IF m.llError THEN
 		*we can't handle
 		*process all
 		  USE IN SELECT('Storage')
 		  RETURN NIL
-		 ENDIF &&llError
-		ENDIF &&!FILE(tcFile)
+		 ENDIF &&m.llError
+		ENDIF &&!FILE(m.tcFile)
 		
 		TRY
 		*Was zu testen ist
-		  USE (tcFile) ALIAS Storage IN SELECT('Storage') EXCLUSIVE
+		  USE (m.tcFile) ALIAS Storage IN SELECT('Storage') EXCLUSIVE
 		
 		  SELECT Storage
 		  PACK
@@ -1874,15 +2030,15 @@ DEFINE CLASS cusstorage AS custom 		&& The stuff that does the work.
 		*dann eben kein pack, egal
 		  llError = .T.
 		 FINALLY
-		  USE (tcFile) ALIAS Storage IN SELECT('Storage')
+		  USE (m.tcFile) ALIAS Storage IN SELECT('Storage')
 		ENDTRY
 		
-		IF llError THEN
+		IF m.llError THEN
 		*we can't handle
 		*process all
 		 USE IN SELECT('Storage')
 		 RETURN NIL
-		ENDIF &&llError
+		ENDIF &&m.llError
 		
 		*check heart beat for existence (and set as error to fix problems)
 		SELECT;
@@ -1892,7 +2048,7 @@ DEFINE CLASS cusstorage AS custom 		&& The stuff that does the work.
 		 WHERE Cur1.cType=="X"
 		
 		IF RECCOUNT()=0 THEN
-		 INSERT INTO (tcFile);
+		 INSERT INTO (m.tcFile);
 		  (cFile,cObjName ,cType,iDirty);
 		  VALUES;
 		  ("Check heart beat","internal","X", 2)
@@ -1966,30 +2122,31 @@ DEFINE CLASS cusstorage AS custom 		&& The stuff that does the work.
 		*</remarks>
 		*!*	<copyright><i>&copy; 14.4.2015 Lutz Scheffler Software Ingenieurbüro</i></copyright>
 		*!*	</pdm>
-		 
+		
 		LOCAL;
-		 lnItem AS INTEGER,;
-		 llOk   AS BOOLEAN
+		 lcKey   AS CHARACTER,;
+		 lcValue AS CHARACTER,;
+		 lnItem  AS INTEGER
 		
-		FOR lnItem = 1 TO toSetting.COUNT
-		 lcKey   = toSetting.GETKEY(lnItem)
-		 lcValue = toSetting.ITEM(lnItem)
+		FOR lnItem = 1 TO m.toSetting.COUNT
+		 lcKey   = m.toSetting.GETKEY(m.lnItem)
+		 lcValue = m.toSetting.ITEM(m.lnItem)
 		
-		 _SCREEN.ADDPROPERTY(lcKey,lcValue)
+		 _SCREEN.ADDPROPERTY(m.lcKey,m.lcValue)
 		
 		 UPDATE cur1 SET;
-		  cFile    = lcValue,;
+		  cFile    = m.lcValue,;
 		  iDirty   = 0,;
 		  tLastUse = DATETIME();
-		  FROM (tcStorage) AS cur1;
-		  WHERE cur1.cUniqueId==lcKey;
-		  AND cur1.cType==tcType
+		  FROM (m.tcStorage) AS cur1;
+		  WHERE cur1.cUniqueId==m.lcKey;
+		  AND cur1.cType==m.tcType
 		
 		 IF _TALLY=0 THEN
-		  INSERT INTO (tcStorage);
+		  INSERT INTO (m.tcStorage);
 		   (cType, cFile, cUniqueId, iDirty, tLastUse);
 		   VALUES;
-		   (tcType, lcValue, lcKey, 0, DATETIME())
+		   (m.tcType, m.lcValue, m.lcKey, 0, DATETIME())
 		 ENDIF &&_TALLY=0
 		ENDFOR &&lnLoop
 		
@@ -2037,32 +2194,32 @@ DEFINE CLASS cusstorage AS custom 		&& The stuff that does the work.
 		* we do not process the index since it will change with the data anyway.
 		* I'm  not shure with the memo, my guess is it will alter the table too but I'm to lazy to check :)
 		DO CASE
-		 CASE tcType="V"
-		  lcTemp = FORCEEXT(tcFile,'vct')
-		 CASE tcType="R"
-		  lcTemp = FORCEEXT(tcFile,'frt')
-		 CASE tcType="M"
-		  lcTemp = FORCEEXT(tcFile,'mnt')
-		 CASE tcType="d"
-		  lcTemp = FORCEEXT(tcFile,'fpt')
-		 CASE tcType="D"
-		  lcTemp = FORCEEXT(tcFile,'dct')
-		 CASE tcType="P"
-		  lcTemp = FORCEEXT(tcFile,'pjt')
-		 CASE tcType="B"
-		  lcTemp = FORCEEXT(tcFile,'lbt')
-		 CASE tcType="K"
-		  lcTemp = FORCEEXT(tcFile,'sct')
+		 CASE m.tcType="V"
+		  lcTemp = FORCEEXT(m.tcFile,'vct')
+		 CASE m.tcType="R"
+		  lcTemp = FORCEEXT(m.tcFile,'frt')
+		 CASE m.tcType="M"
+		  lcTemp = FORCEEXT(m.tcFile,'mnt')
+		 CASE m.tcType="d"
+		  lcTemp = FORCEEXT(m.tcFile,'fpt')
+		 CASE m.tcType="D"
+		  lcTemp = FORCEEXT(m.tcFile,'dct')
+		 CASE m.tcType="P"
+		  lcTemp = FORCEEXT(m.tcFile,'pjt')
+		 CASE m.tcType="B"
+		  lcTemp = FORCEEXT(m.tcFile,'lbt')
+		 CASE m.tcType="K"
+		  lcTemp = FORCEEXT(m.tcFile,'sct')
 		ENDCASE
 		
 		*set anything "ok" that was processed by last run
-		lnDirty = IIF(tlToBin,1,0)
+		lnDirty = IIF(m.tlToBin,1,0)
 		UPDATE Cur1 SET;
-		 iDirty   = lnDirty,;
+		 iDirty   = m.lnDirty,;
 		 tLastUse = DATETIME();
-		 FROM (tcStorage) AS Cur1;
-		 WHERE Cur1.cFile==tcFile;
-		 AND Cur1.cType==tcType;
+		 FROM (m.tcStorage) AS Cur1;
+		 WHERE Cur1.cFile==m.tcFile;
+		 AND Cur1.cType==m.tcType;
 		 AND Cur1.iDirty>=0
 		
 		*!*	Changed by: SF 5.6.2015
@@ -2074,62 +2231,62 @@ DEFINE CLASS cusstorage AS custom 		&& The stuff that does the work.
 		
 		*set files marked as "to delete" by "all cleanup" as "not to delete"
 		*because file possibly exists (no existing will be parsed out below)
-		lnDirty = IIF(tlToBin,9,8)
+		lnDirty = IIF(m.tlToBin,9,8)
 		UPDATE Cur1 SET;
-		 iDirty    = lnDirty,;
+		 iDirty    = m.lnDirty,;
 		 tLastUse  = DATETIME();
-		 FROM (tcStorage) AS Cur1;
-		 WHERE Cur1.cFile==tcFile;
-		 AND Cur1.cType==tcType;
+		 FROM (m.tcStorage) AS Cur1;
+		 WHERE Cur1.cFile==m.tcFile;
+		 AND Cur1.cType==m.tcType;
 		 AND Cur1.iDirty=-1
 		
 		*!*	/Changed by: SF 5.6.2015
 		
 		*only to process per class, iff UseClassPerFile
-		llRecall = INLIST(tcType,'V','K') AND _TALLY>0
+		llRecall = INLIST(m.tcType,'V','K') AND _TALLY>0
 		
 		*create data
 		SELECT;
 		 Cur1.cUniqueId,;
 		 Cur1.iDirty;
-		 FROM (tcStorage) AS Cur1;
+		 FROM (m.tcStorage) AS Cur1;
 		 INTO CURSOR curHelp;
-		 WHERE Cur1.cFile==tcFile;
-		 AND Cur1.cType==tcType
+		 WHERE Cur1.cFile==m.tcFile;
+		 AND Cur1.cType==m.tcType
 		
 		lnStep  = 1
 		DO WHILE .T.
 		 DO CASE
-		  CASE lnStep=1 AND RECCOUNT()=0   &&unknown, create
+		  CASE m.lnStep=1 AND RECCOUNT()=0   &&unknown, create
 		   llDirty = True
 		
-		   lnDirty = IIF(tlToBin,5,4)
-		   INSERT INTO (tcStorage);
+		   lnDirty = IIF(m.tlToBin,5,4)
+		   INSERT INTO (m.tcStorage);
 		    (cType, cFile, cUniqueId, iDirty, tLastUse);
 		    VALUES;
-		    (tcType, tcFile, lcTemp, lnDirty, DATETIME())
-		*/  &&lnStep=1 AND RECCOUNT()=0  &&unknown, create
+		    (m.tcType, m.tcFile, m.lcTemp, m.lnDirty, DATETIME())
+		*/  &&m.lnStep=1 AND RECCOUNT()=0  &&unknown, create
 		
-		  CASE lnStep=1    &&just loop
-		*/  &&lnStep=1   &&just loop
+		  CASE m.lnStep=1    &&just loop
+		*/  &&m.lnStep=1   &&just loop
 		
-		  CASE lnStep=2 AND INLIST(iDirty,-3,-4)	  &&file is marked as dirty, process dirty
+		  CASE m.lnStep=2 AND INLIST(iDirty,-3,-4)	  &&file is marked as dirty, process dirty
 		   llDirty = True
 		
-		   lnDirty = IIF(tlToBin,3,2)
+		   lnDirty = IIF(m.tlToBin,3,2)
 		   UPDATE Cur1 SET;
-		    cUniqueId = lcTemp,;
-		    iDirty    = lnDirty,;
+		    cUniqueId = m.lcTemp,;
+		    iDirty    = m.lnDirty,;
 		    tLastUse  = DATETIME();
-		    FROM (tcStorage) AS Cur1;
-		    WHERE Cur1.cFile==tcFile;
-		    AND Cur1.cType==tcType
-		*/ &&lnStep=2 AND INLIST(iDirty,-3,-4)  &&file is marked as dirty, process dirty
+		    FROM (m.tcStorage) AS Cur1;
+		    WHERE Cur1.cFile==m.tcFile;
+		    AND Cur1.cType==m.tcType
+		*/ &&m.lnStep=2 AND INLIST(iDirty,-3,-4)  &&file is marked as dirty, process dirty
 		
-		  CASE lnStep=2    &&just loop
-		*/  &&lnStep=2   &&just loop
+		  CASE m.lnStep=2    &&just loop
+		*/  &&m.lnStep=2   &&just loop
 		
-		  CASE lnStep=3	 	&&get file checksum
+		  CASE m.lnStep=3	 	&&get file checksum
 		*!*	Changed by: SF 20.5.2015
 		*!*	<pdm>
 		*!*	<change date="{^2015-05-20,06:44:00}">Changed by SF<br />
@@ -2145,34 +2302,34 @@ DEFINE CLASS cusstorage AS custom 		&& The stuff that does the work.
 		*!*	</change>
 		*!*	</pdm>
 		
-		   IF FILE(lcTemp) THEN
-		    lcTemp = SYS(2007,SUBSTR(FILETOSTR(tcFile),5)+FILETOSTR(lcTemp),0,1)
-		   ELSE  &&FILE(lcTemp)
-		    lcTemp = SYS(2007,SUBSTR(FILETOSTR(tcFile),5),0,1)
-		   ENDIF &&FILE(lcTemp)
+		   IF FILE(m.lcTemp) THEN
+		    lcTemp = SYS(2007,SUBSTR(FILETOSTR(m.tcFile),5)+FILETOSTR(m.lcTemp),0,1)
+		   ELSE  &&FILE(m.lcTemp)
+		    lcTemp = SYS(2007,SUBSTR(FILETOSTR(m.tcFile),5),0,1)
+		   ENDIF &&FILE(m.lcTemp)
 		
-		*!*	IF FILE(lcTemp) THEN
-		*!*	 lcTemp = SYS(2007,FILETOSTR(tcFile)+FILETOSTR(lcTemp),0,1)
-		*!*	ELSE  &&FILE(lcTemp)
-		*!*	 lcTemp = SYS(2007,FILETOSTR(tcFile),0,1)
-		*!*	ENDIF &&FILE(lcTemp)
+		*!*	IF FILE(m.lcTemp) THEN
+		*!*	 m.lcTemp = SYS(2007,FILETOSTR(m.tcFile)+FILETOSTR(m.lcTemp),0,1)
+		*!*	ELSE  &&FILE(m.lcTemp)
+		*!*	 lcTemp = SYS(2007,FILETOSTR(m.tcFile),0,1)
+		*!*	ENDIF &&FILE(m.lcTemp)
 		
 		*!*	/Changed by: SF 4.6.2015
 		*!*	/Changed by SF 20.5.2015
-		*/	&&lnStep=3 	&&get file checksum
+		*/	&&m.lnStep=3 	&&get file checksum
 		
-		  CASE lnStep=4 AND !TRIM(cUniqueId)==lcTemp   	 	&&changed, process dirty
+		  CASE m.lnStep=4 AND !TRIM(cUniqueId)==m.lcTemp   	 	&&changed, process dirty
 		   llDirty = True
 		
-		   lnDirty = IIF(tlToBin,3,2)
+		   lnDirty = IIF(m.tlToBin,3,2)
 		   UPDATE Cur1 SET;
-		    cUniqueId = lcTemp,;
-		    iDirty    = lnDirty,;
+		    cUniqueId = m.lcTemp,;
+		    iDirty    = m.lnDirty,;
 		    tLastUse  = DATETIME();
-		    FROM (tcStorage) AS Cur1;
-		    WHERE Cur1.cFile==tcFile;
-		    AND Cur1.cType==tcType
-		*/  &&lnStep=4 AND !TRIM(cUniqueId)==lcTemp  	 	&&changed, process dirty
+		    FROM (m.tcStorage) AS Cur1;
+		    WHERE Cur1.cFile==m.tcFile;
+		    AND Cur1.cType==m.tcType
+		*/  &&m.lnStep=4 AND !TRIM(cUniqueId)==m.lcTemp  	 	&&changed, process dirty
 		
 		  OTHERWISE
 		*ok
@@ -2180,17 +2337,17 @@ DEFINE CLASS cusstorage AS custom 		&& The stuff that does the work.
 		   EXIT
 		 ENDCASE
 		
-		 IF llDirty THEN
+		 IF m.llDirty THEN
 		  EXIT
-		 ELSE  &&llDirty
-		  lnStep = lnStep+1
-		 ENDIF &&llDirty
+		 ELSE  &&m.llDirty
+		  lnStep = m.lnStep+1
+		 ENDIF &&m.llDirty
 		ENDDO &&.T.
 		
 		USE IN SELECT('curHelp')
 		
 		*For one or the other reason. reprocess
-		RETURN llDirty OR llRecall
+		RETURN m.llDirty OR m.llRecall
 		
 	ENDPROC
 
@@ -2283,13 +2440,13 @@ DEFINE CLASS cusstorage AS custom 		&& The stuff that does the work.
 		#ENDIF &&.F.
 		
 		*set anything "ok" that was processed by last run
-		lnDirty = IIF(tlToBin,1,0)
+		lnDirty = IIF(m.tlToBin,1,0)
 		UPDATE Cur1 SET;
-		 iDirty   = lnDirty,;
+		 iDirty   = m.lnDirty,;
 		 tLastUse = DATETIME();
-		 FROM (tcStorage) AS Cur1;
-		 WHERE Cur1.cFile==tcFile;
-		  AND Cur1.cType==tcType;
+		 FROM (m.tcStorage) AS Cur1;
+		 WHERE Cur1.cFile==m.tcFile;
+		  AND Cur1.cType==m.tcType;
 		  AND Cur1.iDirty>=0
 		  
 		*!*	Changed by: SF 5.6.2015
@@ -2301,13 +2458,13 @@ DEFINE CLASS cusstorage AS custom 		&& The stuff that does the work.
 		
 		*set files marked as "to delete" by "all cleanup" as "not to delete"
 		*because file exists
-		lnDirty = IIF(tlToBin,9,8)
+		lnDirty = IIF(m.tlToBin,9,8)
 		UPDATE Cur1 SET;
-		 iDirty    = lnDirty,;
+		 iDirty    = m.lnDirty,;
 		 tLastUse  = DATETIME();
-		 FROM (tcStorage) AS Cur1;
-		 WHERE Cur1.cFile==tcFile;
-		  AND Cur1.cType==tcType;
+		 FROM (m.tcStorage) AS Cur1;
+		 WHERE Cur1.cFile==m.tcFile;
+		  AND Cur1.cType==m.tcType;
 		  AND Cur1.iDirty=-1
 		*!*	/Changed by: SF 5.6.2015
 		
@@ -2320,18 +2477,18 @@ DEFINE CLASS cusstorage AS custom 		&& The stuff that does the work.
 		  WHERE Cur1.cUniqueID-Cur1.cObjName NOT IN (;
 		    SELECT;
 		     Cur1_1.cUniqueId-Cur1_1.cObjName;
-		     FROM (tcStorage) AS Cur1_1;
-		     WHERE Cur1_1.cFile==tcFile;
-		      AND Cur1_1.cType==tcType;
+		     FROM (m.tcStorage) AS Cur1_1;
+		     WHERE Cur1_1.cFile==m.tcFile;
+		      AND Cur1_1.cType==m.tcType;
 		   );
 		UNION;
 		 SELECT;
 		  .F. AS lNew,;
 		  Cur2.cObjName,;
 		  Cur2.cUniqueId;
-		  FROM (tcStorage) AS Cur2;
-		  WHERE Cur2.cFile==tcFile;
-		   AND Cur2.cType==tcType;
+		  FROM (m.tcStorage) AS Cur2;
+		  WHERE Cur2.cFile==m.tcFile;
+		   AND Cur2.cType==m.tcType;
 		   AND Cur2.cUniqueId-Cur2.cObjName NOT IN(;
 		    SELECT;
 		     Cur2_1.cUniqueID-Cur2_1.cObjName;
@@ -2346,11 +2503,11 @@ DEFINE CLASS cusstorage AS custom 		&& The stuff that does the work.
 		UPDATE Cur1 SET;
 		 iDirty   = -1,;
 		 tLastUse = DATETIME();
-		 FROM (tcStorage) AS Cur1;
+		 FROM (m.tcStorage) AS Cur1;
 		 INNER JOIN curHelp AS Cur2;
 		  ON Cur1.cObjName==Cur2.cObjName;
-		   AND Cur1.cFile==tcFile;
-		   AND Cur1.cType==tcType;
+		   AND Cur1.cFile==m.tcFile;
+		   AND Cur1.cType==m.tcType;
 		   AND !Cur2.lNew;
 		  WHERE Cur2.cObjName NOT IN(;
 		    SELECT;
@@ -2360,16 +2517,16 @@ DEFINE CLASS cusstorage AS custom 		&& The stuff that does the work.
 		   )
 		
 		*Records changed - lNew AND !lNew needs to be checked
-		 lnDirty = IIF(tlToBin,3,2)
+		 lnDirty = IIF(m.tlToBin,3,2)
 		 UPDATE Cur1 SET;
 		  cUniqueId =Cur2.cUniqueId,;
-		  iDirty    = lnDirty,;
+		  iDirty    = m.lnDirty,;
 		  tLastUse  = DATETIME();
-		  FROM (tcStorage) AS Cur1;
+		  FROM (m.tcStorage) AS Cur1;
 		  INNER JOIN curHelp AS Cur2;
 		   ON Cur1.cObjName==Cur2.cObjName;
-		    AND Cur1.cFile==tcFile;
-		    AND Cur1.cType==tcType;
+		    AND Cur1.cFile==m.tcFile;
+		    AND Cur1.cType==m.tcType;
 		    AND Cur2.lNew;
 		  INNER JOIN curHelp AS Cur3;
 		   ON Cur1.cObjName==Cur3.cObjName;
@@ -2377,24 +2534,24 @@ DEFINE CLASS cusstorage AS custom 		&& The stuff that does the work.
 		
 		*Records marked as dirty for heart beat failure OR  garbage needs to be checked / reprocessed
 		 UPDATE Cur1 SET;
-		  iDirty    = lnDirty,;
+		  iDirty    = m.lnDirty,;
 		  tLastUse  = DATETIME();
-		  FROM (tcStorage) AS Cur1;
+		  FROM (m.tcStorage) AS Cur1;
 		  WHERE Cur1.iDirty IN (-3,-4);
-		   AND Cur1.cFile==tcFile;
-		   AND Cur1.cType==tcType
+		   AND Cur1.cFile==m.tcFile;
+		   AND Cur1.cType==m.tcType
 		
-		llDirty = llDirty OR _TALLY>0
+		llDirty = m.llDirty OR _TALLY>0
 		
 		*new files
-		 lnDirty = IIF(tlToBin,5,4)
-		 INSERT INTO (tcStorage);
+		 lnDirty = IIF(m.tlToBin,5,4)
+		 INSERT INTO (m.tcStorage);
 		  SELECT;
-		   tcType AS cType,;
-		   CAST(tcFile AS c(240)) AS cFile,;
+		   m.tcType AS cType,;
+		   CAST(m.tcFile AS c(240)) AS cFile,;
 		   Cur2.cObjName,;
 		   Cur2.cUniqueId,;
-		   CAST(lnDirty AS I) AS iDirty,;
+		   CAST(m.lnDirty AS I) AS iDirty,;
 		   DATETIME() AS tLastUse;
 		   FROM curHelp AS Cur2;
 		   WHERE Cur2.lNew;
@@ -2413,7 +2570,7 @@ DEFINE CLASS cusstorage AS custom 		&& The stuff that does the work.
 		USE IN SELECT('curHelp')
 		
 		*For one or the other reason. reprocess
-		RETURN llDirty
+		RETURN m.llDirty
 		
 	ENDPROC
 
