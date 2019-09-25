@@ -16,7 +16,7 @@
 <body>
 <div class="diaxp_mhead">SwitchErrorHandler Procedure</div>
 <div class="diaxp_mbody">
-<!-- Created with _diamp_pdm_ab by Agnes Beste    05.01.2016 13:27 -->
+<!-- Created with _diamp_pdm_ab by Agnes Beste    25.09.2019 20:00 -->
  <div class="PDM_AB_Descr"><!-- Descr Begin -->
 Turn ErrorHandler on and off
  </div><!-- Descr End -->
@@ -27,7 +27,7 @@ Turn ErrorHandler on and off
     SwitchErrorHandler
    </div>
    <div class="Para">
-    (<a href="#_4J90SUK4R">tlOn</a>)
+    (<a href="#_5L516VEMH">tlOn</a>)
    </div>
    <div style="clear: both"></div>
   </div><!-- Colour End -->
@@ -39,7 +39,7 @@ Turn ErrorHandler on and off
   </span>
   <dl class="DIAMP_PDM_AB_Params_List">
    <dt class="dt_">
-    <a class="DIAMP_PDM_AB_Params_ParaName" id="_4J90SUK4R" name="_4J90SUK4R">
+    <a class="DIAMP_PDM_AB_Params_ParaName" id="_5L516VEMH" name="_5L516VEMH">
      <span class="PDMEXPR PDMNor" ><span class='PDMVar'>tlOn</span></span>
 
     </a>
@@ -69,31 +69,31 @@ Turn ErrorHandler on and off
  </div><!-- Parameters End -->
 
 
-<!-- /Created with _diamp_pdm_ab by Agnes Beste    05.01.2016 13:27 -->
+<!-- /Created with _diamp_pdm_ab by Agnes Beste    25.09.2019 20:00 -->
 
  <div class="SC">
-  <img onclick="ExpandSC('SP_P19',-1);" class="imgEC" src="../../imgs/dotab.gif" alt="Expand/Collapse source code of procedure SwitchErrorHandler" id="IMG_SP_P19" />
-  <span onclick="ExpandSC('SP_P19',-1);" class="SCCaption"><a name="pm.switcherrorhandler">Source Code</a></span>
-  <div ondblclick="ExpandSC('SP_P19',-1);" class="SCE" style="display: none;" id="TX_SP_P19">
+  <img onclick="ExpandSC('SP_P22',-1);" class="imgEC" src="../../imgs/dotab.gif" alt="Expand/Collapse source code of procedure SwitchErrorHandler" id="IMG_SP_P22" />
+  <span onclick="ExpandSC('SP_P22',-1);" class="SCCaption"><a name="pm.switcherrorhandler">Source Code</a></span>
+  <div ondblclick="ExpandSC('SP_P22',-1);" class="SCE" style="display: none;" id="TX_SP_P22">
 <!-- Code Begin -->
-<pre class="PDMCODE PDMNor" ><span class='PDMCnt'>1718</span> <span class='PDMInd'> 1</span>  <span class='PDMResK'>LPARAMETERS</span><span class='PDMOper'>;</span>
-<span class='PDMCnt'>1719</span> <span class='PDMInd'> 2</span>   <span class='PDMVar'>tlOn</span>
-<span class='PDMCnt'>1720</span> <span class='PDMInd'>  </span> 
-<span class='PDMCnt'>1721</span> <span class='PDMInd'>  </span> 
-<span class='PDMCnt'>1738</span> <span class='PDMInd'>  </span> 
-<span class='PDMCnt'>1739</span> <span class='PDMInd'> 1</span>  <span class='PDMResK'>DO</span> <span class='PDMResK'>CASE</span>
-<span class='PDMCnt'>1740</span> <span class='PDMInd'> 2</span>   <span class='PDMResK'>CASE</span> <span class='PDMVar'>tlOn</span>
-<span class='PDMCnt'>1741</span> <span class='PDMInd'> 3</span>    <span class='PDMVar'>_SCREEN</span><span class='PDMOper'>.</span><span class='PDMResM'>ADDPROPERTY</span><span class='PDMOper'>(</span><span class='PDMStr'>'gcB2T_Err'</span><span class='PDMOper'>,</span><span class='PDMResK'>ON</span><span class='PDMOper'>(</span><span class='PDMStr'>'Error'</span><span class='PDMOper'>)</span><span class='PDMOper'>)</span>
-<span class='PDMCnt'>1742</span> <span class='PDMInd'> 3</span>    <span class='PDMResK'>ON</span> <span class='PDMResK'>ERROR</span> <span class='PDMResK'>DO</span> <span class='PDMVar'>CatchError</span> <span class='PDMResK'>WITH</span> <span class='PDMResF'>PROGRAM</span><span class='PDMOper'>(</span> <span class='PDMOper'>)</span><span class='PDMOper'>,</span> <span class='PDMResF'>LINENO</span><span class='PDMOper'>(</span> <span class='PDMOper'>)</span>
-<span class='PDMCnt'>1743</span> <span class='PDMInd'> 2</span>   <span class='PDMResK'>CASE</span> <span class='PDMResF'>PEMSTATUS</span><span class='PDMOper'>(</span><span class='PDMVar'>_SCREEN</span><span class='PDMOper'>,</span><span class='PDMStr'>'gcB2T_Err'</span><span class='PDMOper'>,</span><span class='PDMLit'>5</span><span class='PDMOper'>)</span>
-<span class='PDMCnt'>1744</span> <span class='PDMInd'> 3</span>    <span class='PDMResK'>LOCAL</span><span class='PDMOper'>;</span>
-<span class='PDMCnt'>1745</span> <span class='PDMInd'> 4</span>     <span class='PDMVar'>lcTemp</span>
-<span class='PDMCnt'>1746</span> <span class='PDMInd'> 3</span>    <span class='PDMVar'>lcTemp</span> <span class='PDMOper'>=</span> <span class='PDMVar'>_SCREEN</span><span class='PDMOper'>.</span><span class='PDMVar'>gcB2T_Err</span>
-<span class='PDMCnt'>1747</span> <span class='PDMInd'> 3</span>    <span class='PDMResF'>REMOVEPROPERTY</span><span class='PDMOper'>(</span><span class='PDMVar'>_SCREEN</span><span class='PDMOper'>,</span><span class='PDMStr'>'gcB2T_Err'</span><span class='PDMOper'>)</span>
-<span class='PDMCnt'>1748</span> <span class='PDMInd'> 3</span>    <span class='PDMResK'>ON</span> <span class='PDMResK'>ERROR</span> <span class='PDMOper'>&amp;</span><span class='PDMVar'>lcTemp</span>
-<span class='PDMCnt'>1749</span> <span class='PDMInd'> 2</span>   <span class='PDMResK'>OTHERWISE</span>
-<span class='PDMCnt'>1750</span> <span class='PDMInd'> 3</span>    <span class='PDMResK'>ON</span> <span class='PDMResK'>ERROR</span>
-<span class='PDMCnt'>1751</span> <span class='PDMInd'> 1</span>  <span class='PDMResK'>ENDCASE</span></pre>
+<pre class="PDMCODE PDMNor" ><span class='PDMCnt'>2180</span> <span class='PDMInd'> 1</span>  <span class='PDMResK'>LPARAMETERS</span><span class='PDMOper'>;</span>
+<span class='PDMCnt'>2181</span> <span class='PDMInd'> 2</span>   <span class='PDMVar'>tlOn</span>
+<span class='PDMCnt'>2182</span> <span class='PDMInd'>  </span> 
+<span class='PDMCnt'>2183</span> <span class='PDMInd'>  </span> 
+<span class='PDMCnt'>2200</span> <span class='PDMInd'>  </span> 
+<span class='PDMCnt'>2201</span> <span class='PDMInd'> 1</span>  <span class='PDMResK'>DO</span> <span class='PDMResK'>CASE</span>
+<span class='PDMCnt'>2202</span> <span class='PDMInd'> 2</span>   <span class='PDMResK'>CASE</span> <span class='PDMVar'>m</span><span class='PDMOper'>.</span><span class='PDMVar'>tlOn</span>
+<span class='PDMCnt'>2203</span> <span class='PDMInd'> 3</span>    <span class='PDMVar'>_SCREEN</span><span class='PDMOper'>.</span><span class='PDMResM'>ADDPROPERTY</span><span class='PDMOper'>(</span><span class='PDMStr'>'gcB2T_Err'</span><span class='PDMOper'>,</span><span class='PDMResK'>ON</span><span class='PDMOper'>(</span><span class='PDMStr'>'Error'</span><span class='PDMOper'>)</span><span class='PDMOper'>)</span>
+<span class='PDMCnt'>2204</span> <span class='PDMInd'> 3</span>    <span class='PDMResK'>ON</span> <span class='PDMResK'>ERROR</span> <span class='PDMResK'>DO</span> <span class='PDMVar'>CatchError</span> <span class='PDMResK'>WITH</span> <span class='PDMResF'>PROGRAM</span><span class='PDMOper'>(</span> <span class='PDMOper'>)</span><span class='PDMOper'>,</span> <span class='PDMResF'>LINENO</span><span class='PDMOper'>(</span> <span class='PDMOper'>)</span>
+<span class='PDMCnt'>2205</span> <span class='PDMInd'> 2</span>   <span class='PDMResK'>CASE</span> <span class='PDMResF'>PEMSTATUS</span><span class='PDMOper'>(</span><span class='PDMVar'>_SCREEN</span><span class='PDMOper'>,</span><span class='PDMStr'>'gcB2T_Err'</span><span class='PDMOper'>,</span><span class='PDMLit'>5</span><span class='PDMOper'>)</span>
+<span class='PDMCnt'>2206</span> <span class='PDMInd'> 3</span>    <span class='PDMResK'>LOCAL</span><span class='PDMOper'>;</span>
+<span class='PDMCnt'>2207</span> <span class='PDMInd'> 4</span>     <span class='PDMVar'>lcTemp</span>
+<span class='PDMCnt'>2208</span> <span class='PDMInd'> 3</span>    <span class='PDMVar'>lcTemp</span> <span class='PDMOper'>=</span> <span class='PDMVar'>_SCREEN</span><span class='PDMOper'>.</span><span class='PDMVar'>gcB2T_Err</span>
+<span class='PDMCnt'>2209</span> <span class='PDMInd'> 3</span>    <span class='PDMResF'>REMOVEPROPERTY</span><span class='PDMOper'>(</span><span class='PDMVar'>_SCREEN</span><span class='PDMOper'>,</span><span class='PDMStr'>'gcB2T_Err'</span><span class='PDMOper'>)</span>
+<span class='PDMCnt'>2210</span> <span class='PDMInd'> 3</span>    <span class='PDMResK'>ON</span> <span class='PDMResK'>ERROR</span> <span class='PDMOper'>&amp;</span><span class='PDMVar'>lcTemp</span>
+<span class='PDMCnt'>2211</span> <span class='PDMInd'> 2</span>   <span class='PDMResK'>OTHERWISE</span>
+<span class='PDMCnt'>2212</span> <span class='PDMInd'> 3</span>    <span class='PDMResK'>ON</span> <span class='PDMResK'>ERROR</span>
+<span class='PDMCnt'>2213</span> <span class='PDMInd'> 1</span>  <span class='PDMResK'>ENDCASE</span></pre>
  <!-- Code End -->
   </div>
  </div>
@@ -106,7 +106,7 @@ Turn ErrorHandler on and off
  </div><!-- Footer End -->
 </div>
 <script language="JavaScript" type="text/javascript">
-lo=document.getElementById("TX_SP_P19");
+lo=document.getElementById("TX_SP_P22");
 lo.XType="SourceCode";
 lo.Dir="../../imgs/";
 

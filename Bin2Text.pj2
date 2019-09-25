@@ -50,13 +50,13 @@ MODIFY PROJECT 'Bin2Text.pjx' NOWAIT NOSHOW NOPROJECTHOOK
 loProject = _VFP.Projects('Bin2Text.pjx')
 
 WITH loProject.FILES
-	.ADD('bin2text.app')		&& *< FileMetadata: Type="Z" Cpid="0" Timestamp="0" ID="0" ObjRev="0" />
-	.ADD('doku\runb2t.pdmicl')		&& *< FileMetadata: Type="x" Cpid="1252" Timestamp="0" ID="0" ObjRev="0" />
-	.ADD('doku\runb2t.pdm')		&& *< FileMetadata: Type="x" Cpid="1252" Timestamp="0" ID="0" ObjRev="0" />
-	.ADD('library\bin_2_text.vcx')		&& *< FileMetadata: Type="V" Cpid="1252" Timestamp="0" ID="0" ObjRev="544" />
-	.ADD('menu\bin2text.mnx')		&& *< FileMetadata: Type="M" Cpid="1252" Timestamp="0" ID="0" ObjRev="544" />
-	.ADD('program\runb2t.prg')		&& *< FileMetadata: Type="P" Cpid="1252" Timestamp="0" ID="0" ObjRev="544" />
-	.ADD('stuff.h')		&& *< FileMetadata: Type="T" Cpid="1252" Timestamp="0" ID="0" ObjRev="0" />
+	.ADD('bin2text.app')		&& *< FileMetadata: Type="Z" Cpid="0" Timestamp="0" ID="0" ObjRev="0" User="" />
+	.ADD('doku\runb2t.pdmicl')		&& *< FileMetadata: Type="x" Cpid="1252" Timestamp="0" ID="0" ObjRev="0" User="" />
+	.ADD('doku\runb2t.pdm')		&& *< FileMetadata: Type="x" Cpid="1252" Timestamp="0" ID="0" ObjRev="0" User="" />
+	.ADD('library\bin_2_text.vcx')		&& *< FileMetadata: Type="V" Cpid="1252" Timestamp="0" ID="0" ObjRev="544" User="" />
+	.ADD('menu\bin2text.mnx')		&& *< FileMetadata: Type="M" Cpid="1252" Timestamp="0" ID="0" ObjRev="544" User="" />
+	.ADD('program\runb2t.prg')		&& *< FileMetadata: Type="P" Cpid="1252" Timestamp="0" ID="0" ObjRev="544" User="" />
+	.ADD('stuff.h')		&& *< FileMetadata: Type="T" Cpid="1252" Timestamp="0" ID="0" ObjRev="0" User="" />
 	*</BuildProj>
 
 	.ITEM('__newproject.f2b').Remove()
@@ -86,6 +86,7 @@ WITH loProject
 	*<.CmntStyle = 1 />
 	*<.NoLogo = .F. />
 	*<.SaveCode = .T. />
+	*<.User = '' />
 	.ProjectHookLibrary = ''
 	.ProjectHookClass = ''
 	*</ProjectProperties>

@@ -16,14 +16,14 @@
 <body>
 <div class="diaxp_mhead">getbranch Procedure</div>
 <div class="diaxp_mbody">
-<!-- Created with _diamp_pdm_ab by Agnes Beste    05.01.2016 13:27 -->
+<!-- Created with _diamp_pdm_ab by Agnes Beste    25.09.2019 20:00 -->
  <div class="PDM_AB_Descr"><!-- Descr Begin -->
 Output of current git branch
  </div><!-- Descr End -->
 
  <div class="DIAMP_PDM_AB_Syntax"><!-- Syntax Begin -->
   <div class="SColor">
-   <div class="RetVal"><a href="#_4J90SUIUU">RetVal</a>&nbsp;</div>   <div class="RetValEq">=</div>   <div class="PEM">
+   <div class="RetVal"><a href="#_5L516VD6U">RetVal</a>&nbsp;</div>   <div class="RetValEq">=</div>   <div class="PEM">
     getbranch
    </div>
    <div class="Para">
@@ -36,7 +36,7 @@ Output of current git branch
  <div class="DIAMP_PDM_AB_RetVal"><!-- Returns Begin -->
   <div>
    <span class="PDM_AB_Head">
-    <a id="_4J90SUIUU" name="_4J90SUIUU">
+    <a id="_5L516VD6U" name="_5L516VD6U">
      Return value
     </a>
    </span> <span class="RetVal_Ttype">Character</span>
@@ -47,38 +47,33 @@ Branch, empty if no git active
  </div><!-- Returns End -->
 
 
-<!-- /Created with _diamp_pdm_ab by Agnes Beste    05.01.2016 13:27 -->
+<!-- /Created with _diamp_pdm_ab by Agnes Beste    25.09.2019 20:00 -->
 
  <div class="SC">
-  <img onclick="ExpandSC('SP_P14',-1);" class="imgEC" src="../../imgs/dotab.gif" alt="Expand/Collapse source code of procedure getbranch" id="IMG_SP_P14" />
-  <span onclick="ExpandSC('SP_P14',-1);" class="SCCaption"><a name="pm.getbranch">Source Code</a></span>
-  <div ondblclick="ExpandSC('SP_P14',-1);" class="SCE" style="display: none;" id="TX_SP_P14">
+  <img onclick="ExpandSC('SP_P17',-1);" class="imgEC" src="../../imgs/dotab.gif" alt="Expand/Collapse source code of procedure getbranch" id="IMG_SP_P17" />
+  <span onclick="ExpandSC('SP_P17',-1);" class="SCCaption"><a name="pm.getbranch">Source Code</a></span>
+  <div ondblclick="ExpandSC('SP_P17',-1);" class="SCE" style="display: none;" id="TX_SP_P17">
 <!-- Code Begin -->
-<pre class="PDMCODE PDMNor" ><span class='PDMCnt'>1251</span> <span class='PDMInd'>  </span> 
-<span class='PDMCnt'>1252</span> <span class='PDMInd'>  </span> 
-<span class='PDMCnt'>1265</span> <span class='PDMInd'>  </span> 
-<span class='PDMCnt'>1266</span> <span class='PDMInd'> 1</span>  <span class='PDMResK'>LOCAL</span><span class='PDMOper'>;</span>
-<span class='PDMCnt'>1267</span> <span class='PDMInd'> 2</span>   <span class='PDMVar'>lcRet</span> <span class='PDMResK'>AS</span> <span class='PDMResK'>CHARACTER</span><span class='PDMOper'>,</span><span class='PDMOper'>;</span>
-<span class='PDMCnt'>1268</span> <span class='PDMInd'> 2</span>   <span class='PDMVar'>lnSec</span> <span class='PDMResK'>AS</span> <span class='PDMResK'>NUMBER</span>
-<span class='PDMCnt'>1269</span> <span class='PDMInd'>  </span> 
-<span class='PDMCnt'>1270</span> <span class='PDMInd'> 1</span>  <span class='PDMVar'>lcRet</span> <span class='PDMOper'>=</span> <span class='PDMStr'>''</span>
-<span class='PDMCnt'>1271</span> <span class='PDMInd'> 1</span>  <span class='PDMResK'>IF</span> <span class='PDMVar'>Is_git</span><span class='PDMOper'>(</span><span class='PDMOper'>)</span> <span class='PDMResK'>THEN</span>
-<span class='PDMCnt'>1272</span> <span class='PDMInd'> 2</span>   <span class='PDMResK'>IF</span> <span class='PDMVar'>Run_git</span><span class='PDMOper'>(</span><span class='PDMStr'>'rev-parse --abbrev-ref HEAD&gt;git_x.tmp'</span><span class='PDMOper'>,</span><span class='PDMLit'>.F.</span><span class='PDMOper'>,</span><span class='PDMLit'>.T.</span><span class='PDMOper'>)</span> <span class='PDMResK'>THEN</span>
-<span class='PDMCnt'>1273</span> <span class='PDMInd'> 3</span>    <span class='PDMVar'>lnSec</span> <span class='PDMOper'>=</span> <span class='PDMResF'>SECONDS</span><span class='PDMOper'>(</span><span class='PDMOper'>)</span>
-<span class='PDMCnt'>1274</span> <span class='PDMInd'>  </span> <span class='PDMCom'>*!*       DO WHILE !FILE('git_x.tmp')</span>
-<span class='PDMCnt'>1275</span> <span class='PDMInd'>  </span> <span class='PDMCom'>*!*        WAIT "" WINDOW TIMEOUT 0.2</span>
-<span class='PDMCnt'>1276</span> <span class='PDMInd'>  </span> <span class='PDMCom'>*!*        IF SECONDS()-lnSec&gt;=2 THEN</span>
-<span class='PDMCnt'>1277</span> <span class='PDMInd'>  </span> <span class='PDMCom'>*!*         EXIT</span>
-<span class='PDMCnt'>1278</span> <span class='PDMInd'>  </span> <span class='PDMCom'>*!*        ENDIF &amp;&amp;SECONDS()-lnSec&gt;=2</span>
-<span class='PDMCnt'>1279</span> <span class='PDMInd'>  </span> <span class='PDMCom'>*!*       ENDDO &amp;&amp;!FILE('git_x.tmp')</span>
-<span class='PDMCnt'>1280</span> <span class='PDMInd'> 3</span>    <span class='PDMResK'>IF</span> <span class='PDMResF'>FILE</span><span class='PDMOper'>(</span><span class='PDMStr'>'git_x.tmp'</span><span class='PDMOper'>)</span> <span class='PDMResK'>THEN</span>
-<span class='PDMCnt'>1281</span> <span class='PDMInd'> 4</span>     <span class='PDMVar'>lcRet</span> <span class='PDMOper'>=</span> <span class='PDMResF'>CHRTRAN</span><span class='PDMOper'>(</span><span class='PDMResF'>FILETOSTR</span><span class='PDMOper'>(</span><span class='PDMStr'>'git_x.tmp'</span><span class='PDMOper'>)</span><span class='PDMOper'>,</span><span class='PDMVar'>0h0d0a</span><span class='PDMOper'>,</span><span class='PDMStr'>''</span><span class='PDMOper'>)</span>
-<span class='PDMCnt'>1282</span> <span class='PDMInd'> 4</span>     <span class='PDMResK'>DELETE</span> <span class='PDMResK'>FILE</span> <span class='PDMVar'>git_x</span><span class='PDMOper'>.</span><span class='PDMVar'>tmp</span>
-<span class='PDMCnt'>1283</span> <span class='PDMInd'> 3</span>    <span class='PDMResK'>ENDIF</span> <span class='PDMCom'>&amp;&amp;FILE('git_x.tmp')</span>
-<span class='PDMCnt'>1284</span> <span class='PDMInd'> 2</span>   <span class='PDMResK'>ENDIF</span> <span class='PDMCom'>&amp;&amp;Run_git('rev-parse --abbrev-ref HEAD&gt;git_x.tmp',.F.,.T.)</span>
-<span class='PDMCnt'>1285</span> <span class='PDMInd'> 1</span>  <span class='PDMResK'>ENDIF</span> <span class='PDMCom'>&amp;&amp;Is_git()</span>
-<span class='PDMCnt'>1286</span> <span class='PDMInd'>  </span> 
-<span class='PDMCnt'>1287</span> <span class='PDMInd'> 1</span>  <span class='PDMResK'>RETURN</span> <span class='PDMVar'>lcRet</span></pre>
+<pre class="PDMCODE PDMNor" ><span class='PDMCnt'>1657</span> <span class='PDMInd'>  </span> 
+<span class='PDMCnt'>1658</span> <span class='PDMInd'>  </span> 
+<span class='PDMCnt'>1671</span> <span class='PDMInd'>  </span> 
+<span class='PDMCnt'>1672</span> <span class='PDMInd'> 1</span>  <span class='PDMResK'>LOCAL</span><span class='PDMOper'>;</span>
+<span class='PDMCnt'>1673</span> <span class='PDMInd'> 2</span>   <span class='PDMVar'>lcRet</span> <span class='PDMResK'>AS</span> <span class='PDMResK'>CHARACTER</span><span class='PDMOper'>,</span><span class='PDMOper'>;</span>
+<span class='PDMCnt'>1674</span> <span class='PDMInd'> 2</span>   <span class='PDMVar'>lnSec</span> <span class='PDMResK'>AS</span> <span class='PDMResK'>NUMBER</span>
+<span class='PDMCnt'>1675</span> <span class='PDMInd'>  </span> 
+<span class='PDMCnt'>1676</span> <span class='PDMInd'> 1</span>  <span class='PDMVar'>lcRet</span> <span class='PDMOper'>=</span> <span class='PDMStr'>''</span>
+<span class='PDMCnt'>1677</span> <span class='PDMInd'> 1</span>  <span class='PDMResK'>IF</span> <span class='PDMVar'>Is_git</span><span class='PDMOper'>(</span><span class='PDMOper'>)</span> <span class='PDMResK'>THEN</span>
+<span class='PDMCnt'>1678</span> <span class='PDMInd'> 2</span>   <span class='PDMResK'>IF</span> <span class='PDMVar'>Run_git</span><span class='PDMOper'>(</span><span class='PDMStr'>'rev-parse --abbrev-ref HEAD&gt;git_x.tmp'</span><span class='PDMOper'>,</span><span class='PDMLit'>.F.</span><span class='PDMOper'>,</span><span class='PDMLit'>.F.</span><span class='PDMOper'>,</span><span class='PDMLit'>.T.</span><span class='PDMOper'>)</span> <span class='PDMResK'>THEN</span>
+<span class='PDMCnt'>1679</span> <span class='PDMInd'> 3</span>    <span class='PDMVar'>lnSec</span> <span class='PDMOper'>=</span> <span class='PDMResF'>SECONDS</span><span class='PDMOper'>(</span><span class='PDMOper'>)</span>
+<span class='PDMCnt'>1680</span> <span class='PDMInd'>  </span> 
+<span class='PDMCnt'>1681</span> <span class='PDMInd'> 3</span>    <span class='PDMResK'>IF</span> <span class='PDMResF'>FILE</span><span class='PDMOper'>(</span><span class='PDMStr'>'git_x.tmp'</span><span class='PDMOper'>)</span> <span class='PDMResK'>THEN</span>
+<span class='PDMCnt'>1682</span> <span class='PDMInd'> 4</span>     <span class='PDMVar'>lcRet</span> <span class='PDMOper'>=</span> <span class='PDMResF'>CHRTRAN</span><span class='PDMOper'>(</span><span class='PDMResF'>FILETOSTR</span><span class='PDMOper'>(</span><span class='PDMStr'>'git_x.tmp'</span><span class='PDMOper'>)</span><span class='PDMOper'>,</span><span class='PDMVar'>0h0d0a</span><span class='PDMOper'>,</span><span class='PDMStr'>''</span><span class='PDMOper'>)</span>
+<span class='PDMCnt'>1683</span> <span class='PDMInd'> 4</span>     <span class='PDMResK'>DELETE</span> <span class='PDMResK'>FILE</span> <span class='PDMVar'>git_x</span><span class='PDMOper'>.</span><span class='PDMVar'>tmp</span>
+<span class='PDMCnt'>1684</span> <span class='PDMInd'> 3</span>    <span class='PDMResK'>ENDIF</span> <span class='PDMCom'>&amp;&amp;FILE('git_x.tmp')</span>
+<span class='PDMCnt'>1685</span> <span class='PDMInd'> 2</span>   <span class='PDMResK'>ENDIF</span> <span class='PDMCom'>&amp;&amp;Run_git('rev-parse --abbrev-ref HEAD&gt;git_x.tmp',.F.,.F.,.T.)</span>
+<span class='PDMCnt'>1686</span> <span class='PDMInd'> 1</span>  <span class='PDMResK'>ENDIF</span> <span class='PDMCom'>&amp;&amp;Is_git()</span>
+<span class='PDMCnt'>1687</span> <span class='PDMInd'>  </span> 
+<span class='PDMCnt'>1688</span> <span class='PDMInd'> 1</span>  <span class='PDMResK'>RETURN</span> <span class='PDMVar'>m</span><span class='PDMOper'>.</span><span class='PDMVar'>lcRet</span></pre>
  <!-- Code End -->
   </div>
  </div>
@@ -91,7 +86,7 @@ Branch, empty if no git active
  </div><!-- Footer End -->
 </div>
 <script language="JavaScript" type="text/javascript">
-lo=document.getElementById("TX_SP_P14");
+lo=document.getElementById("TX_SP_P17");
 lo.XType="SourceCode";
 lo.Dir="../../imgs/";
 
