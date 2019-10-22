@@ -50,15 +50,15 @@ DEFINE CLASS cusenvironment AS custom 		&& Default settings for DATASESSION
 		 tlNoSet
 		
 		WITH THIS
-		 IF VARTYPE(tcStartPath)='C' AND DIRECTORY(tcStartPath) THEN
-		  .hcStartPath = ADDBS(tcStartPath)
-		 ENDIF &&VARTYPE(tcStartPath ...
+		 IF VARTYPE(m.tcStartPath)='C' AND DIRECTORY(m.tcStartPath) THEN
+		  .hcStartPath = ADDBS(m.tcStartPath)
+		 ENDIF &&VARTYPE(m.tcStartPath ...
 		
 		*wenn die Klasse durch CREATEOBJECT oder ADDOBJECT gerufen wird
 		*Wenn dabei tlIsApplication dann True.
 		*False bekommen wir immer, wenn wir das Init durch ein Object im Container starten.
 		*und dann soll THIS.glIsApplication auch schön so bleiben wie es ist
-		 .glIsApplication = IIF(TYPE('tlIsApplication')='L' AND tlIsApplication,True,.glIsApplication)
+		 .glIsApplication = IIF(TYPE('tlIsApplication')='L' AND m.tlIsApplication,True,.glIsApplication)
 		
 		*-- Einstellungen der SET- und ON-Befehle speichern
 		*dies wird in Main.prg geschrieben, da dort schon die ersten Veränderungen vorgenommen werden.
@@ -66,9 +66,9 @@ DEFINE CLASS cusenvironment AS custom 		&& Default settings for DATASESSION
 		
 		 .Store_(IIF(.glIsApplication,2^0+2^1+2^2,2^0))
 		
-		 IF !tlNoSet THEN
+		 IF !m.tlNoSet THEN
 		  .Set_(2^0)
-		 ENDIF &&!tlNoSet
+		 ENDIF &&!m.tlNoSet
 		
 		*!*	 IF .glIsApplication THEN
 		*!*	  PUSH MENU _MSYSMENU
@@ -96,17 +96,17 @@ DEFINE CLASS cusenvironment AS custom 		&& Default settings for DATASESSION
 		
 		  WITH .raSettings(.rnSetting,1)
 		   lvTemp = .gcOldResource
-		   IF lvTemp='OFF' THEN
+		   IF m.lvTemp='OFF' THEN
 		    SET RESOURCE OFF
-		   ELSE &&lvTemp='OFF'
+		   ELSE &&m.lvTemp='OFF'
 		    lvTemp = .gcOldResource_FName
-		    IF FILE(lvTemp) THEN
-		     SET RESOURCE TO (lvTemp)
-		    ELSE &&FILE(lvTemp)
+		    IF FILE(m.lvTemp) THEN
+		     SET RESOURCE TO (m.lvTemp)
+		    ELSE &&FILE(m.lvTemp)
 		*    SET RESOURCE TO
 		     SET RESOURCE OFF
-		    ENDIF &&FILE(lvTemp)
-		   ENDIF &&lvTemp='OFF'
+		    ENDIF &&FILE(m.lvTemp)
+		   ENDIF &&m.lvTemp='OFF'
 		  ENDWITH &&.raSettings(.rnSetting,1)
 		 ENDWITH &&THIS
 		ENDIF &&APPLICATION.STARTMODE=0
@@ -128,21 +128,21 @@ DEFINE CLASS cusenvironment AS custom 		&& Default settings for DATASESSION
 		  RETURN
 		 ENDIF &&EMPTY(.rnSetting)
 		
-		 IF PCOUNT()>1 AND BETWEEN(tnPos,1,.rnSetting) THEN
-		  .rnSetting = tnPos
-		 ENDIF &&PCOUNT()s>1 AND BETWEEN(tnpos,1,.rnSetting)
+		 IF PCOUNT()>1 AND BETWEEN(m.tnPos,1,.rnSetting) THEN
+		  .rnSetting = m.tnPos
+		 ENDIF &&PCOUNT()s>1 AND BETWEEN(m.tnPos,1,.rnSetting)
 		
-		 IF BITAND(tnSet,2^2)=2^2 AND .raSettings(.rnSetting,4) THEN
+		 IF BITAND(m.tnSet,2^2)=2^2 AND .raSettings(.rnSetting,4) THEN
 		  POP MENU _MSYSMENU TO MASTER
 		  .raSettings(.rnSetting,3) = True
-		 ENDIF &&BITAND(tnSet,2^2)=2^2 AND .raSettings(.rnSetting,4)
+		 ENDIF &&BITAND(m.tnSet,2^2)=2^2 AND .raSettings(.rnSetting,4)
 		
-		 IF BITAND(tnSet,2^0)=2^0 AND .raSettings(.rnSetting,2) THEN
+		 IF BITAND(m.tnSet,2^0)=2^0 AND .raSettings(.rnSetting,2) THEN
 		  .Restore_Private(.raSettings(.rnSetting,1))
-		 ENDIF &&BITAND(tnSet,2^0)=2^0 AND .raSettings(.rnSetting,2)
-		 IF BITAND(tnSet,2^1)=2^1 AND .raSettings(.rnSetting,3) THEN
+		 ENDIF &&BITAND(m.tnSet,2^0)=2^0 AND .raSettings(.rnSetting,2)
+		 IF BITAND(m.tnSet,2^1)=2^1 AND .raSettings(.rnSetting,3) THEN
 		  .Restore_Global(.raSettings(.rnSetting,1))
-		 ENDIF &&BITAND(tnSet,2^1)=2^1 AND .raSettings(.rnSetting,3)
+		 ENDIF &&BITAND(m.tnSet,2^1)=2^1 AND .raSettings(.rnSetting,3)
 		
 		 .raSettings(.rnSetting,1) = NIL
 		 .raSettings(.rnSetting,2) = False
@@ -173,9 +173,9 @@ DEFINE CLASS cusenvironment AS custom 		&& Default settings for DATASESSION
 		 lvTemp = .gcOldAlternate
 		 SET ALTERNATE &lvTemp
 		 lvTemp = .gcOldAlternate_FName
-		 IF FILE(lvTemp) THEN
-		  lvTemp = '"'+lvTemp+'" ADDITIVE'
-		 ENDIF &&FILE(lvTemp)
+		 IF FILE(m.lvTemp) THEN
+		  lvTemp = '"'+m.lvTemp+'" ADDITIVE'
+		 ENDIF &&FILE(m.lvTemp)
 		 SET ALTERNATE TO &lvTemp
 		
 		 lvTemp = .gcOldAsserts
@@ -185,11 +185,11 @@ DEFINE CLASS cusenvironment AS custom 		&& Default settings for DATASESSION
 		 SET BELL &lvTemp
 		 .gcOldBell              = SET('BELL')
 		 lvTemp = .gcOldBell_FName
-		 IF FILE(lvTemp) THEN
-		  SET BELL TO (lvTemp)
-		 ELSE &&FILE(lvTemp)
+		 IF FILE(m.lvTemp) THEN
+		  SET BELL TO (m.lvTemp)
+		 ELSE &&FILE(m.lvTemp)
 		  SET BELL TO
-		 ENDIF &&FILE(lvTemp)
+		 ENDIF &&FILE(m.lvTemp)
 		
 		 lvTemp = .gcOldBrowseIME
 		 SET BROWSEIME &lvTemp
@@ -199,10 +199,10 @@ DEFINE CLASS cusenvironment AS custom 		&& Default settings for DATASESSION
 		
 		 lvTemp = .gcOldClock
 		 SET CLOCK &lvTemp
-		 IF lvTemp='ON' THEN
+		 IF m.lvTemp='ON' THEN
 		  lvTemp = .gcOldClock_Coord
 		  SET CLOCK TO &lvTemp
-		 ENDIF &&lvTemp='ON'
+		 ENDIF &&m.lvTemp='ON'
 		
 		 lvTemp = .gcOldCompatible+' '+.gcOldCompatible_Prompt
 		 SET COMPATIBLE &lvTemp
@@ -211,9 +211,9 @@ DEFINE CLASS cusenvironment AS custom 		&& Default settings for DATASESSION
 		 SET CONSOLE &lvTemp
 		
 		 lvTemp = .gcOldCoverage
-		 IF FILE(lvTemp) THEN
-		  lvTemp = '"'+lvTemp+'" ADDITIVE'
-		 ENDIF &&FILE(lvTemp)
+		 IF FILE(m.lvTemp) THEN
+		  lvTemp = '"'+m.lvTemp+'" ADDITIVE'
+		 ENDIF &&FILE(m.lvTemp)
 		
 		 SET COVERAGE TO &lvTemp
 		
@@ -224,11 +224,11 @@ DEFINE CLASS cusenvironment AS custom 		&& Default settings for DATASESSION
 		 SET CURSOR &lvTemp
 		
 		 lvTemp = .gcOldDefault
-		 IF DIRECTORY(lvTemp) THEN
-		  SET DEFAULT TO (lvTemp)
-		 ELSE &&DIRECTORY(lvTemp)
+		 IF DIRECTORY(m.lvTemp) THEN
+		  SET DEFAULT TO (m.lvTemp)
+		 ELSE &&DIRECTORY(m.lvTemp)
 		  SET DEFAULT TO
-		 ENDIF &&DIRECTORY(lvTemp)
+		 ENDIF &&DIRECTORY(m.lvTemp)
 		
 		 lvTemp = .gcOldDevice
 		 SET DEVICE TO &lvTemp
@@ -245,9 +245,9 @@ DEFINE CLASS cusenvironment AS custom 		&& Default settings for DATASESSION
 		 lvTemp = .gcOldEventTracking
 		 SET EVENTTRACKING &lvTemp
 		 lvTemp = .gcOldEventTracking_FName
-		 IF FILE(lvTemp) THEN
-		  lvTemp = '"'+lvTemp+'" ADDITIVE'
-		 ENDIF &&FILE(lvTemp)
+		 IF FILE(m.lvTemp) THEN
+		  lvTemp = '"'+m.lvTemp+'" ADDITIVE'
+		 ENDIF &&FILE(m.lvTemp)
 		 SET EVENTTRACKING TO &lvTemp
 		
 		 lvTemp = .gnOldFDoW
@@ -264,7 +264,7 @@ DEFINE CLASS cusenvironment AS custom 		&& Default settings for DATASESSION
 		
 		 IF .gcOldHelp='ON' AND FILE(.gcOldHelp_FName) THEN
 		  lvTemp = .gcOldHelp_FName
-		  SET HELP TO (lvTemp)
+		  SET HELP TO (m.lvTemp)
 		  SET HELP ON
 		 ELSE &&.gcOldHelp='ON' ...
 		  SET HELP OFF
@@ -284,10 +284,10 @@ DEFINE CLASS cusenvironment AS custom 		&& Default settings for DATASESSION
 		 SET NOTIFY &lvTemp
 		
 		 lvTemp = .gcOldNullDisplay
-		 SET NULLDISPLAY TO (lvTemp)
+		 SET NULLDISPLAY TO (m.lvTemp)
 		
 		 lvTemp = .gnOldOdoMeter
-		 SET ODOMETER TO (lvTemp)
+		 SET ODOMETER TO (m.lvTemp)
 		
 		 lvTemp = .gcOldOLEObject
 		 SET OLEOBJECT &lvTemp
@@ -323,17 +323,17 @@ DEFINE CLASS cusenvironment AS custom 		&& Default settings for DATASESSION
 		
 		 IF APPLICATION.STARTMODE=0 THEN
 		  lvTemp = .gcOldResource
-		  IF lvTemp='OFF' THEN
+		  IF m.lvTemp='OFF' THEN
 		   SET RESOURCE OFF
-		  ELSE &&lvTemp='OFF'
+		  ELSE &&m.lvTemp='OFF'
 		   lvTemp = .gcOldResource_FName
-		   IF FILE(lvTemp) THEN
-		    SET RESOURCE TO (lvTemp)
-		   ELSE &&FILE(lvTemp)
+		   IF FILE(m.lvTemp) THEN
+		    SET RESOURCE TO (m.lvTemp)
+		   ELSE &&FILE(m.lvTemp)
 		*    SET RESOURCE TO
 		    SET RESOURCE OFF
-		   ENDIF &&FILE(lvTemp)
-		  ENDIF &&lvTemp='OFF'
+		   ENDIF &&FILE(m.lvTemp)
+		  ENDIF &&m.lvTemp='OFF'
 		 ENDIF &&APPLICATION.STARTMODE=0
 		
 		 lvTemp = .gcOldSpace
@@ -346,10 +346,10 @@ DEFINE CLASS cusenvironment AS custom 		&& Default settings for DATASESSION
 		 SET STATUS BAR &lvTemp
 		
 		 lvTemp = .gnOldStrictDate
-		 SET STRICTDATE TO (lvTemp)
+		 SET STRICTDATE TO (m.lvTemp)
 		
 		 lvTemp = .gnOldTypeAhead
-		 SET TYPEAHEAD TO (lvTemp)
+		 SET TYPEAHEAD TO (m.lvTemp)
 		
 		 lvTemp = .gcOldUDFParms
 		 SET UDFPARMS TO &lvTemp
@@ -357,16 +357,16 @@ DEFINE CLASS cusenvironment AS custom 		&& Default settings for DATASESSION
 		 CD (.gcOldDir)
 		
 		 lvTemp = .gcOldOnShutDown
-		 ON SHUTDOWN &lvTemp
+		 ON SHUTDOWN &m.lvTemp
 		
 		 lvTemp = .gcOldOnError
-		 ON ERROR &lvTemp
+		 ON ERROR &m.lvTemp
 		
 		 lvTemp = .gcOldOnEscape
-		 ON ESCAPE &lvTemp
+		 ON ESCAPE &m.lvTemp
 		
 		 lvTemp = .gcOldOnPage
-		 ON PAGE &lvTemp
+		 ON PAGE &m.lvTemp
 		
 		 _SCREEN.CAPTION = .gcOldScreenCaption
 		 _SCREEN.ICON    = .gcOldScreenIcon
@@ -381,7 +381,7 @@ DEFINE CLASS cusenvironment AS custom 		&& Default settings for DATASESSION
 		
 		 #IFNDEF dnVersion8_Prog THEN
 		  lvTemp = .gnOldReportBehavior
-		  SET REPORTBEHAVIOR (lvTemp)
+		  SET REPORTBEHAVIOR (m.lvTemp)
 		
 		  _REPORTOUTPUT  = .gnOldReportOutput
 		  _REPORTPREVIEW = .gnOldReportPreview
@@ -419,23 +419,23 @@ DEFINE CLASS cusenvironment AS custom 		&& Default settings for DATASESSION
 		 SET AUTOSAVE &lvTemp
 		
 		 lvTemp = .gnOldBlockSize
-		 SET BLOCKSIZE TO (lvTemp)
+		 SET BLOCKSIZE TO (m.lvTemp)
 		
 		 lvTemp = .gcOldCarry
 		 SET CARRY &lvTemp
 		
 		 lvTemp = .gcOldCollate
-		 SET COLLATE TO (lvTemp)
+		 SET COLLATE TO (m.lvTemp)
 		
 		 lvTemp = .gcOldConfirm
 		 SET CONFIRM &lvTemp
 		
 		 lvTemp = .gcOldDatabase
-		 IF DBUSED(lvTemp) THEN
-		  SET DATABASE TO (lvTemp)
-		 ELSE &&DBUSED(lvTemp)
+		 IF DBUSED(m.lvTemp) THEN
+		  SET DATABASE TO (m.lvTemp)
+		 ELSE &&DBUSED(m.lvTemp)
 		  SET DATABASE TO
-		 ENDIF &&DBUSED(lvTemp)
+		 ENDIF &&DBUSED(m.lvTemp)
 		
 		 lvTemp = .gcOldDeleted
 		 SET DELETED &lvTemp
@@ -453,7 +453,7 @@ DEFINE CLASS cusenvironment AS custom 		&& Default settings for DATASESSION
 		 SET LOCK &lvTemp
 		
 		 lvTemp = .gnOldMemoWidth
-		 SET MEMOWIDTH TO (lvTemp)
+		 SET MEMOWIDTH TO (m.lvTemp)
 		
 		 lvTemp = .gcOldMultiLocks
 		 SET MULTILOCKS &lvTemp
@@ -466,20 +466,20 @@ DEFINE CLASS cusenvironment AS custom 		&& Default settings for DATASESSION
 		
 		 #IFDEF dnVersion8_Prog THEN
 		  lvTemp = .gnOldReprocess
-		  SET REPROCESS TO (lvTemp)
+		  SET REPROCESS TO (m.lvTemp)
 		 #ELSE &&dnVersion8_Prog
 		  lvTemp = .gnOldReprocess
 		  IF .gnOldReprocessMode=0 THEN
-		   SET REPROCESS TO (lvTemp)
+		   SET REPROCESS TO (m.lvTemp)
 		  ELSE &&.gnOldReprocessMode=0
-		   SET REPROCESS TO (lvTemp) SECONDS
+		   SET REPROCESS TO (m.lvTemp) SECONDS
 		  ENDIF &&.gnOldReprocessMode=0
 		
 		  lvTemp = .gnOldReprocess_S
 		  IF .gnOldReprocessMode_S=0 THEN
-		   SET REPROCESS TO (lvTemp) SYSTEM
+		   SET REPROCESS TO (m.lvTemp) SYSTEM
 		  ELSE &&.gnOldReprocessMode_S=0
-		   SET REPROCESS TO (lvTemp) SECONDS SYSTEM
+		   SET REPROCESS TO (m.lvTemp) SECONDS SYSTEM
 		  ENDIF &&.gnOldReprocessMode_S=0
 		 #ENDIF &&dnVersion8_Prog
 		
@@ -508,14 +508,14 @@ DEFINE CLASS cusenvironment AS custom 		&& Default settings for DATASESSION
 		 &lvTemp
 		
 		 lvTemp = .gnOldDecimals
-		 SET DECIMALS TO (lvTemp)
+		 SET DECIMALS TO (m.lvTemp)
 		
 		 lvTemp = .gcOldPoint
-		 IF EMPTY(lvTemp) THEN
+		 IF EMPTY(m.lvTemp) THEN
 		  SET POINT TO
-		 ELSE &&EMPTY(lvTemp)
-		  SET POINT TO (lvTemp)
-		 ENDIF &&EMPTY(lvTemp)
+		 ELSE &&EMPTY(m.lvTemp)
+		  SET POINT TO (m.lvTemp)
+		 ENDIF &&EMPTY(m.lvTemp)
 		
 		 lvTemp = .gcOldDate
 		 SET DATE &lvTemp
@@ -536,17 +536,17 @@ DEFINE CLASS cusenvironment AS custom 		&& Default settings for DATASESSION
 		 SET CENTURY &lvTemp
 		
 		 lvTemp = .gnOldHours
-		 SET HOURS TO (lvTemp)
+		 SET HOURS TO (m.lvTemp)
 		
 		 lvTemp = .gcOldSeconds
 		 SET SECONDS &lvTemp
 		
 		 lvTemp = .gcOldMark
-		 IF EMPTY(lvTemp) THEN
+		 IF EMPTY(m.lvTemp) THEN
 		  SET MARK TO
-		 ELSE &&EMPTY(lvTemp)
-		  SET MARK TO (lvTemp)
-		 ENDIF &&EMPTY(lvTemp)
+		 ELSE &&EMPTY(m.lvTemp)
+		  SET MARK TO (m.lvTemp)
+		 ENDIF &&EMPTY(m.lvTemp)
 		
 		
 		 #IFNDEF dnVersion7_Prog
@@ -629,19 +629,18 @@ DEFINE CLASS cusenvironment AS custom 		&& Default settings for DATASESSION
 		ENDIF &&PCOUNT()=0 OR VARTYPE(tnSet)#'N'
 		*-- SET- und ON-Befehle einstellen
 		WITH THIS
-		 IF BITAND(tnSet,2^0)=2^0 THEN
+		 IF BITAND(m.tnSet,2^0)=2^0 THEN
 		  .Set_Private()
-		 ENDIF &&BITAND(tnSet,2^0)=2^0
-		 IF BITAND(tnSet,2^1)=2^1 THEN
+		 ENDIF &&BITAND(m.tnSet,2^0)=2^0
+		 IF BITAND(m.tnSet,2^1)=2^1 THEN
 		  .Set_Global()
-		 ENDIF &&BITAND(tnSet,2^1)=2^1
+		 ENDIF &&BITAND(m.tnSet,2^1)=2^1
 		ENDWITH &&THIS
 		
 	ENDPROC
 
 	PROCEDURE set_global		&& Setze Einstellungen, die für das ganze Programm, unabhängig von DATASESSION gelten. (Wird einmal für das Programm durchgeführt)
 		LOCAL ;
-		 lcPath AS CHARACTER,;
 		 lvTemp AS VARIANT
 		
 		WITH THIS
@@ -791,10 +790,10 @@ DEFINE CLASS cusenvironment AS custom 		&& Default settings for DATASESSION
 		
 		*Falls wir auf dem Terminalserver sind:
 		 lvTemp = VAL(OS(10))
-		 IF BITAND(lvTemp,16+256)#0 THEN
+		 IF BITAND(m.lvTemp,16+256)#0 THEN
 		*Bitmap OFF
 		*  SYS(602,0)
-		 ENDIF &&BITAND(lvTemp,16+256)#0
+		 ENDIF &&BITAND(m.lvTemp,16+256)#0
 		
 		 ON KEY LABEL ALT+F10 *
 		 SYS(2450,0)
@@ -895,11 +894,11 @@ DEFINE CLASS cusenvironment AS custom 		&& Default settings for DATASESSION
 		*Date von SYSFORMAT lösen (um Jahrtausend anzuzeigen)
 		 lvTemp = SET('DATE',1)
 		 DO CASE
-		  CASE lvTemp=0
+		  CASE m.lvTemp=0
 		   SET DATE MDY
-		  CASE lvTemp=1
+		  CASE m.lvTemp=1
 		   SET DATE DMY
-		  CASE lvTemp=2
+		  CASE m.lvTemp=2
 		   SET DATE YMD
 		 ENDCASE
 		
@@ -946,20 +945,20 @@ DEFINE CLASS cusenvironment AS custom 		&& Default settings for DATASESSION
 		  .raSettings(.rnSetting,1) = CREATEOBJECT('RELATION')
 		 #ENDIF &&dnVersion7_Prog
 		
-		 IF BITAND(tnSet,2^2)=2^2 THEN
+		 IF BITAND(m.tnSet,2^2)=2^2 THEN
 		  PUSH MENU _MSYSMENU
 		  .raSettings(.rnSetting,4) = True
-		 ENDIF &&BITAND(tnSet,2^2)=2^2
+		 ENDIF &&BITAND(m.tnSet,2^2)=2^2
 		
-		 IF BITAND(tnSet,2^0+2^1)>0 THEN
+		 IF BITAND(m.tnSet,2^0+2^1)>0 THEN
 		*Privat auch speichern wenn global
 		  .Store_Private(.raSettings(.rnSetting,1))
 		  .raSettings(.rnSetting,2) = True
-		 ENDIF &&BITAND(tnSet,2^0+2^1)>0
-		 IF BITAND(tnSet,2^1)=2^1 THEN
+		 ENDIF &&BITAND(m.tnSet,2^0+2^1)>0
+		 IF BITAND(m.tnSet,2^1)=2^1 THEN
 		  .Store_Global(.raSettings(.rnSetting,1))
 		  .raSettings(.rnSetting,3) = True
-		 ENDIF &&BITAND(tnSet,2^1)=2^1
+		 ENDIF &&BITAND(m.tnSet,2^1)=2^1
 		
 		 RETURN .rnSetting
 		ENDWITH &&THIS
@@ -1142,7 +1141,7 @@ DEFINE CLASS cusenvironment AS custom 		&& Default settings for DATASESSION
 		 .gaToolBars( 1,3) = [D]
 		* .gaToolBars( 1,3) = [{DNARROW}]
 		 .gaToolBars( 2,1) = dcTB_DATADESIGNER_LOC
-		 .gaToolBars( 2,2) = dcTB_DATADESIGNER_LOC_UK
+		 .gaToolBars( 2,2) = dcTB_DATADESIGNER_LOC_UK4
 		 .gaToolBars( 2,3) = [D]
 		* .gaToolBars( 2,3) = [{DNARROW}]
 		 .gaToolBars( 3,1) = dcTB_DEBUGGER_LOC

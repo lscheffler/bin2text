@@ -16,7 +16,7 @@
 <body>
 <div class="diaxp_mhead">git_gitk Procedure</div>
 <div class="diaxp_mbody">
-<!-- Created with _diamp_pdm_ab by Agnes Beste    05.01.2016 13:27 -->
+<!-- Created with _diamp_pdm_ab by Agnes Beste    25.09.2019 20:00 -->
  <div class="PDM_AB_Descr"><!-- Descr Begin -->
 Run <i>gitk</i> for current directory.
  </div><!-- Descr End -->
@@ -43,23 +43,42 @@ GUI for <i>git</i> history.
   </div>
  </div><!-- Remarks End -->
 
+ <div class="PDM_AB_Changes"><!-- Changes Begin -->
+  <hr />
+  <span class="PDM_AB_Head">
+   Changes
+  </span>
+  <div class="PDM_AB_Body">
+   <span class="Change_Time">
+    25.09.2019 08:35
+   </span><br />
+changed by SF<br />
+	Run selectable GUI instead of gitk
+	
+  </div>
+ </div><!-- Changes End -->
 
-<!-- /Created with _diamp_pdm_ab by Agnes Beste    05.01.2016 13:27 -->
+
+<!-- /Created with _diamp_pdm_ab by Agnes Beste    25.09.2019 20:00 -->
 
  <div class="SC">
-  <img onclick="ExpandSC('SP_P8',-1);" class="imgEC" src="../../imgs/dotab.gif" alt="Expand/Collapse source code of procedure git_gitk" id="IMG_SP_P8" />
-  <span onclick="ExpandSC('SP_P8',-1);" class="SCCaption"><a name="pm.git_gitk">Source Code</a></span>
-  <div ondblclick="ExpandSC('SP_P8',-1);" class="SCE" style="display: none;" id="TX_SP_P8">
+  <img onclick="ExpandSC('SP_P9',-1);" class="imgEC" src="../../imgs/dotab.gif" alt="Expand/Collapse source code of procedure git_gitk" id="IMG_SP_P9" />
+  <span onclick="ExpandSC('SP_P9',-1);" class="SCCaption"><a name="pm.git_gitk">Source Code</a></span>
+  <div ondblclick="ExpandSC('SP_P9',-1);" class="SCE" style="display: none;" id="TX_SP_P9">
 <!-- Code Begin -->
-<pre class="PDMCODE PDMNor" ><span class='PDMCnt'> 966</span> <span class='PDMInd'>  </span> 
-<span class='PDMCnt'> 979</span> <span class='PDMInd'> 1</span>  <span class='PDMResK'>LOCAL</span><span class='PDMOper'>;</span>
-<span class='PDMCnt'> 980</span> <span class='PDMInd'> 2</span>   <span class='PDMVar'>lcPath</span> <span class='PDMResK'>AS</span> <span class='PDMResK'>CHARACTER</span>
-<span class='PDMCnt'> 981</span> <span class='PDMInd'>  </span> 
-<span class='PDMCnt'> 982</span> <span class='PDMInd'> 1</span>  <span class='PDMVar'>lcPath</span> <span class='PDMOper'>=</span> <span class='PDMResF'>ADDBS</span><span class='PDMOper'>(</span><span class='PDMResF'>FULLPATH</span><span class='PDMOper'>(</span><span class='PDMResF'>CURDIR</span><span class='PDMOper'>(</span><span class='PDMOper'>)</span><span class='PDMOper'>)</span><span class='PDMOper'>)</span>
-<span class='PDMCnt'> 983</span> <span class='PDMInd'>  </span> 
-<span class='PDMCnt'> 984</span> <span class='PDMInd'> 1</span>  <span class='PDMResK'>IF</span> <span class='PDMVar'>Is_git</span><span class='PDMOper'>(</span><span class='PDMOper'>)</span> <span class='PDMResK'>THEN</span>
-<span class='PDMCnt'> 985</span> <span class='PDMInd'> 2</span>   <span class='PDMVar'>llReturn</span> <span class='PDMOper'>=</span> <span class='PDMVar'>Run_ExtApp</span><span class='PDMOper'>(</span><span class='PDMStr'>'"'</span><span class='PDMOper'>+</span><span class='PDMResF'>FORCEPATH</span><span class='PDMOper'>(</span><span class='PDMStr'>'gitk.exe'</span><span class='PDMOper'>,</span><span class='PDMResF'>JUSTPATH</span><span class='PDMOper'>(</span><span class='PDMVar'>_SCREEN</span><span class='PDMOper'>.</span><span class='PDMVar'>gcB2t_git</span><span class='PDMOper'>)</span><span class='PDMOper'>)</span><span class='PDMOper'>+</span><span class='PDMStr'>'" '</span><span class='PDMOper'>,</span><span class='PDMVar'>lcPath</span><span class='PDMOper'>,</span><span class='PDMStr'>'NOR'</span><span class='PDMOper'>,</span><span class='PDMOper'>,</span><span class='PDMLit'>.T.</span><span class='PDMOper'>)</span>
-<span class='PDMCnt'> 986</span> <span class='PDMInd'> 1</span>  <span class='PDMResK'>ENDIF</span> <span class='PDMCom'>&amp;&amp;Is_git()</span></pre>
+<pre class="PDMCODE PDMNor" ><span class='PDMCnt'>1317</span> <span class='PDMInd'>  </span> 
+<span class='PDMCnt'>1330</span> <span class='PDMInd'>  </span> 
+<span class='PDMCnt'>1331</span> <span class='PDMInd'>  </span> <span class='PDMCom'>*!*    changed by SF 25.9.2019</span>
+<span class='PDMCnt'>1332</span> <span class='PDMInd'>  </span> 
+<span class='PDMCnt'>1337</span> <span class='PDMInd'>  </span> 
+<span class='PDMCnt'>1338</span> <span class='PDMInd'> 1</span>  <span class='PDMResK'>LOCAL</span><span class='PDMOper'>;</span>
+<span class='PDMCnt'>1339</span> <span class='PDMInd'> 2</span>   <span class='PDMVar'>lcPath</span> <span class='PDMResK'>AS</span> <span class='PDMResK'>CHARACTER</span>
+<span class='PDMCnt'>1340</span> <span class='PDMInd'>  </span> 
+<span class='PDMCnt'>1341</span> <span class='PDMInd'> 1</span>  <span class='PDMVar'>lcPath</span> <span class='PDMOper'>=</span> <span class='PDMResF'>ADDBS</span><span class='PDMOper'>(</span><span class='PDMResF'>FULLPATH</span><span class='PDMOper'>(</span><span class='PDMResF'>CURDIR</span><span class='PDMOper'>(</span><span class='PDMOper'>)</span><span class='PDMOper'>)</span><span class='PDMOper'>)</span>
+<span class='PDMCnt'>1342</span> <span class='PDMInd'>  </span> 
+<span class='PDMCnt'>1343</span> <span class='PDMInd'> 1</span>  <span class='PDMResK'>IF</span> <span class='PDMVar'>Is_git</span><span class='PDMOper'>(</span><span class='PDMOper'>)</span> <span class='PDMResK'>THEN</span>
+<span class='PDMCnt'>1344</span> <span class='PDMInd'> 2</span>   <span class='PDMVar'>llReturn</span> <span class='PDMOper'>=</span> <span class='PDMVar'>Run_ExtApp</span><span class='PDMOper'>(</span><span class='PDMStr'>'"'</span><span class='PDMOper'>+</span><span class='PDMVar'>_SCREEN</span><span class='PDMOper'>.</span><span class='PDMVar'>gcB2T_GUI</span><span class='PDMOper'>+</span><span class='PDMStr'>'" '</span><span class='PDMOper'>,</span><span class='PDMVar'>m</span><span class='PDMOper'>.</span><span class='PDMVar'>lcPath</span><span class='PDMOper'>,</span><span class='PDMStr'>'NOR'</span><span class='PDMOper'>,</span><span class='PDMOper'>,</span><span class='PDMLit'>.T.</span><span class='PDMOper'>)</span>
+<span class='PDMCnt'>1345</span> <span class='PDMInd'> 1</span>  <span class='PDMResK'>ENDIF</span> <span class='PDMCom'>&amp;&amp;Is_git()</span></pre>
  <!-- Code End -->
   </div>
  </div>
@@ -72,7 +91,7 @@ GUI for <i>git</i> history.
  </div><!-- Footer End -->
 </div>
 <script language="JavaScript" type="text/javascript">
-lo=document.getElementById("TX_SP_P8");
+lo=document.getElementById("TX_SP_P9");
 lo.XType="SourceCode";
 lo.Dir="../../imgs/";
 

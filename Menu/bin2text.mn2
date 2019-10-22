@@ -53,13 +53,19 @@ ON PAD _000000001 OF _MSYSMENU ACTIVATE POPUP FoxBin2Tex
 			MESSAGE "Bin2Text on projects in path" && LOCAL;<CR> lcApp AS CHARACTER<CR><CR>lcApp = "Bin2Text.app"<CR>DO Convert_Pjx IN (lcApp) WITH .F.,3,0
 		ON SELECTION BAR 3 OF Bin2Text DO Convert_Pjx IN Bin2Text.app WITH .F.,3,0
 
-		DEFINE BAR 4 OF Bin2Text PROMPT "\<Get File" ;
+		DEFINE BAR 4 OF Bin2Text PROMPT "\<Get PJX" ;
 			MESSAGE "Bin2Text, pick up file"
 		ON SELECTION BAR 4 OF Bin2Text DO Convert_Pjx IN Bin2Text.app WITH .F.,0,0
 
-		DEFINE BAR 5 OF Bin2Text PROMPT "Path \<recursive" ;
+		DEFINE BAR 5 OF Bin2Text PROMPT "Get \<File"
+		ON SELECTION BAR 5 OF Bin2Text DO Convert_File IN Bin2Text.app WITH .F.,.F.
+
+		DEFINE BAR 6 OF Bin2Text PROMPT "Get \<Class"
+		ON SELECTION BAR 6 OF Bin2Text DO Convert_File IN Bin2Text.app WITH .F.,.T.
+
+		DEFINE BAR 7 OF Bin2Text PROMPT "Path \<recursive" ;
 			MESSAGE "Text2Bin on projects in path and all subdirectories"
-		ON SELECTION BAR 5 OF Bin2Text DO Convert_Pjx IN Bin2Text.app WITH .F.,4,0
+		ON SELECTION BAR 7 OF Bin2Text DO Convert_Pjx IN Bin2Text.app WITH .F.,4,0
 
 	DEFINE BAR 4 OF FoxBin2Tex PROMPT "\<Text to Bin" ;
 		MESSAGE "Text2Bin"
@@ -81,13 +87,19 @@ ON PAD _000000001 OF _MSYSMENU ACTIVATE POPUP FoxBin2Tex
 			MESSAGE "Text2Bin on projects in path" && LOCAL;<CR> lcApp AS CHARACTER<CR><CR>lcApp = "Bin2Text.app"<CR>DO Convert_Pjx IN (lcApp) WITH .T.,3,0
 		ON SELECTION BAR 3 OF Text2Bin DO Convert_Pjx IN Bin2Text.app WITH .T.,3,0
 
-		DEFINE BAR 4 OF Text2Bin PROMPT "\<Get File" ;
+		DEFINE BAR 4 OF Text2Bin PROMPT "\<Get PJX" ;
 			MESSAGE "Text2Bin pick a file"
 		ON SELECTION BAR 4 OF Text2Bin DO Convert_Pjx IN Bin2Text.app WITH .T.,0,0
 
-		DEFINE BAR 5 OF Text2Bin PROMPT "Path \<recursive" ;
+		DEFINE BAR 5 OF Text2Bin PROMPT "Get \<File"
+		ON SELECTION BAR 5 OF Text2Bin DO Convert_File IN Bin2Text.app WITH .T.,.F.
+
+		DEFINE BAR 6 OF Text2Bin PROMPT "Get \<Class"
+		ON SELECTION BAR 6 OF Text2Bin DO Convert_File IN Bin2Text.app WITH .T.,.T.
+
+		DEFINE BAR 7 OF Text2Bin PROMPT "Path \<recursive" ;
 			MESSAGE "Text2Bin on projects in path and all subdirectories"
-		ON SELECTION BAR 5 OF Text2Bin DO Convert_Pjx IN Bin2Text.app WITH .T.,4,0
+		ON SELECTION BAR 7 OF Text2Bin DO Convert_Pjx IN Bin2Text.app WITH .T.,4,0
 
 	DEFINE BAR 5 OF FoxBin2Tex PROMPT "\-"
 	ON BAR 5 OF FoxBin2Tex ACTIVATE POPUP NewItem
@@ -102,14 +114,14 @@ ON PAD _000000001 OF _MSYSMENU ACTIVATE POPUP FoxBin2Tex
 
 		*----------------------------------
 		DEFINE POPUP _4g30h5ql8 MARGIN RELATIVE SHADOW COLOR SCHEME 4
-	DEFINE BAR 8 OF FoxBin2Tex PROMPT "git history" ;
-		SKIP FOR !PEMSTATUS(_SCREEN,'glB2T_gited',5) OR !_SCREEN.glB2T_gited ;
-		MESSAGE 'Run gitk to display git history'
+	DEFINE BAR 8 OF FoxBin2Tex PROMPT "GUI" ;
+		SKIP FOR !PEMSTATUS(_SCREEN,'glB2T_gited',5) OR !_SCREEN.glB2T_gited OR !PEMSTATUS(_SCREEN,'gcB2T_GUI',5) OR !FILE(_SCREEN.gcB2T_GUI) ;
+		MESSAGE 'Run a GUI for git'
 	ON SELECTION BAR 8 OF FoxBin2Tex DO git_gitk IN Bin2Text.app
 
-	DEFINE BAR 9 OF FoxBin2Tex PROMPT "git bash" ;
+	DEFINE BAR 9 OF FoxBin2Tex PROMPT "git shell" ;
 		SKIP FOR !PEMSTATUS(_SCREEN,'gcb2t_git',5) OR EMPTY (_SCREEN.gcb2t_git) ;
-		MESSAGE 'Run git in bash window. Experimental'
+		MESSAGE 'Run git in shell window.'
 	ON SELECTION BAR 9 OF FoxBin2Tex DO git_bash IN Bin2Text.app
 
 *</MenuCode>

@@ -23,7 +23,7 @@
 <body>
  <h1>Bin 2 Text extension</h1>
  <p>
-  This document describes the Bin 2 Text extension for <a href="http://vfpx.codeplex.com/wikipage?title=FoxBin2Prg&referringTitle=Home" target="_blank">FoxBin2Prg</a> by Fernando D. Bozzo.
+  This document describes the <a href="https://github.com/lscheffler/bin2text" target="_blank">Bin 2 Text</a> extension for <a href="https://github.com/fdbozzo/foxbin2prg" target="_blank">FoxBin2Prg</a> by Fernando D. Bozzo.
  </p>
  <p>
   Documentation of the project is done with <a href="http://gorila.netlab.cz/pdm.html" target="_blank">Project Documenting Machine</a> by Martina Jindrová using the AB-plugins by myself.
@@ -86,21 +86,21 @@
  		<li>Include projecthook library in the list of files to process.</li>
  		<li>Run all projects in a row, so that FoxBin2Prg will process files shared only one time.</li>
  		<li>Optionaly process only files changed, comparing files checksum and, if possible, down to class level circumventing problems with vcx/scx compiling.</li>
- 		<li>Delete class files if classes are renoved from libraries in FoxBin2Prg's FilePerClass mode.</li>
+ 		<li>Delete class files if classes are removed from libraries in FoxBin2Prg's FilePerClass mode.</li>
  		<li>Delete object files (basically environment) if removed from forms in FoxBin2Prg's FilePerClass mode.</li>
  		<li>Delete text files for binary files deleted. This works only when processing the whole path to text.</li>
  	</ul>
  </p>
  <hr /><h2><a name="howto">How to get it to work</a></h2>
  <ol>
-  <li>You need <a href="http://vfpx.codeplex.com/releases/view/116407" target="_blank">FoxBin2Prg</a> at least version 1.19.42</li>
+  <li>You need <a href="https://github.com/fdbozzo/foxbin2prg" target="_blank">FoxBin2Prg</a> at least version 1.19.42</li>
   <li>
   	<p>
   		If you like to have it interacting with <em>git</em>, you need <a href="http://git-scm.com/download/win" target="_blank">git for windows</a>.
   	</p>
   	<p>
-  		The programm is tested with <i>git for windows</i> version 2.6.4.windows.1 (2015-12-14) 32 and 64bit.
-  		See <a href="https://vfpx.codeplex.com/wikipage?title=Bin%202%20Text%20Extension&referringTitle=Home">VFPX, Bin 2 Text Extension</a> for latest <i>git</i> version supported.
+  		The programm is tested with <i>git for windows</i> version 2.12.2.windows.1 (2017-03-24) 32 and 64bit.
+  		See <a href="https://github.com/lscheffler/bin2text">Bin 2 Text Extension</a> for latest <i>git</i> version supported.
   		<ul>
   			<li>The <em>git</em> commands must be working in windows command line.</li>
   			<li>The base directory must be a <em>git controled</em> directory.</li>
@@ -125,6 +125,10 @@
   <li>
     <p>There is a settings item in the menu that gives you a bit of control what happens.</p>
   	<dl>
+  		<dt>GUI</dt>
+  		<dd>
+  			<p>Selects a program to run as git GUI. Default is <i>gitk</i></p>
+  		</dd>
   		<dt>Convert all files</dt>
   		<dd>
   			<p>Just let FoxBin2Prg process the whole pjx and projecthook.<br />
@@ -163,6 +167,13 @@
   			<p>
   				Include pjx file itself in the Bin &gt; Text conversion of the <em>git</em> transfer.<br />
   				Off will be faster, because the pjx needs to be closed and reopened. A change to the pjx need to be processed with the other menu items.
+  			</p>
+  			<p>Only available if base directory is controled by <i>git</i>.</p>
+  		</dd>
+  		<dt>(git) Use bash</dt>
+  		<dd>
+  			<p>
+  				Controls several <i>git</i> operations. Defines if the operation runs in bash (Default) or in cmd.
   			</p>
   			<p>Only available if base directory is controled by <i>git</i>.</p>
   		</dd>
@@ -263,10 +274,10 @@
   <h3><a name="Table">Storage table</a></h3>
    <p>
    	The app uses tables to store the settings and to cache the states of the conversions.
-   	Those tables are stored in a projcets home directory or any other directory defined with <a href="InitMenu">InitMenu</a>.
+   	Those tables are stored in a projcets home directory or any other directory defined with <a href="../code/runb2t.prg/Main_d.initmenu.htm">InitMenu</a>.
    </p>
    <p>
    	See <a href="../classes/bin_2_text.vcx/cls.cusstorage.storage_open.htm" title="Skip to method Storage_Open">Storage_Open</a> for a table structure.
    </p>
-<hr /><i>&copy;2015 Lutz Scheffler Software Ingenieurbüro</i>
+<hr /><i>&copy;2019 Lutz Scheffler Software Ingenieurbüro</i>
 </body></html>
