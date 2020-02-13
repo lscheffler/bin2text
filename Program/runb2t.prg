@@ -54,7 +54,7 @@ FUNCTION Pjx2Commit	&&Create a commit to git.
 *!*	</change>
 *!*	</pdm>
 
- 
+
 
  IF !VARTYPE(m.tlAll)='L' THEN
   HelpMsg(3)
@@ -110,11 +110,11 @@ FUNCTION Pjx2Commit	&&Create a commit to git.
    lcPath = ADDBS(FULLPATH(CURDIR()))
    IF TYPE('_SCREEN.gcB2T_UseBash')="C" AND _SCREEN.gcB2T_UseBash=="1" AND Get_git_Path(@lc_Git) THEN
 
-    llSuccess = Run_git('add -A',.F.,.F.,.F.)
-    llSuccess = llSuccess AND Run_git('status --porcelain>git_x.tmp',.F.,.F.,.T.)
+    llSuccess = Run_git('add -A 2>>git_err.txt',.F.,.F.,.T.)
+    llSuccess = llSuccess AND Run_git('status --porcelain>git_x.tmp 2>>git_err.txt',.F.,.F.,.T.)
 
    ELSE  &&TYPE('_SCREEN.gcB2T_UseBash')="C" AND _SCREEN.gcB2T_UseBash=="1" AND Get_git_Path(@lc_Git)
-   
+
     TEXT TO lcBat NOSHOW TEXTMERGE
 "<<m.lc_Git>>" add -A
 "<<m.lc_Git>>" status --porcelain>git_x.tmp
@@ -144,10 +144,18 @@ FUNCTION Pjx2Commit	&&Create a commit to git.
       Run_git('commit',.T.,.T.,.F.)
      ENDIF &&TYPE('_SCREEN.gcB2T_Commit')="C" AND _SCREEN.gcB2T_Commit=="1"
 *!*	/Changed by: SF 17.9.2015
-    ELSE  &&m.llSuccess
+    ELSE  && FILE('git_x.tmp') AND LEN(FILETOSTR('git_x.tmp'))>0
      ??' - nothing to commit'
     ENDIF &&FILE('git_x.tmp') AND LEN(FILETOSTR('git_x.tmp'))>0
     DELETE FILE git_x.*
+   ELSE  &&m.llSuccess
+    IF FILE('git_err.txt') THEN
+     ? 'failed:'
+     ?FILETOSTR('git_err.txt')
+     DELETE FILE git_err.txt
+    ELSE  &&FILE('git_err.txt')
+     ? 'failed.'
+    ENDIF &&FILE('git_err.txt')
    ENDIF &&m.llSuccess
 *!*	/Changed by: SF 4.6.2015
 
@@ -711,7 +719,7 @@ FUNCTION Convert_Pjx &&Runs FoxBin2Prg for multiple projects.
 *!*	Output of current git branch
 *!*	</change>
 *!*	</pdm>
- lcProj = getbranch()
+ lcProj = GetBranch()
  IF !EMPTY(m.lcProj) THEN
   ?'On branch '+m.lcProj
  ENDIF &&!EMPTY(m.lcProj)
@@ -1443,7 +1451,7 @@ PROCEDURE Print_ActiveBranch
 *!*	</pdm>
 
  IF Is_git() THEN
-  ?'On branch '+getbranch()
+  ?'On branch '+GetBranch()
  ENDIF &&Is_Git()
 ENDPROC &&Print_ActiveBranch
 
@@ -1653,13 +1661,13 @@ ENDFUNC &&Get_git_Path
 *!*	</change>
 *!*	</pdm>
 
-PROCEDURE getbranch		&&Internal. Return active git branch
+PROCEDURE GetBranch		&&Internal. Return active git branch
 
 *!*	<pdm>
 *!*	<descr>Output of current git branch</descr>
 *!*	<retval type="Character">Branch, empty if no git active</retval>
 *!*	<comment>
-*!*	<remarks></remarks>
+*!*	<remarks>Also adds active branch to caption.</remarks>
 *!*	<example></example>
 *!*	<seealso>
 *!*	 <see loca="" class="" pem=""></see>
@@ -1671,7 +1679,7 @@ PROCEDURE getbranch		&&Internal. Return active git branch
 
  LOCAL;
   lcRet AS CHARACTER,;
-  lnSec AS NUMBER
+  lcCap AS CHARACTER
 
  lcRet = ''
  IF Is_git() THEN
@@ -1684,6 +1692,11 @@ PROCEDURE getbranch		&&Internal. Return active git branch
    ENDIF &&FILE('git_x.tmp')
   ENDIF &&Run_git('rev-parse --abbrev-ref HEAD>git_x.tmp',.F.,.F.,.T.)
  ENDIF &&Is_git()
+
+ IF !EMPTY(m.lcRet) THEN
+  lcCap = _SCREEN.CAPTION
+  _SCREEN.CAPTION = SUBSTR(m.lcCap,1,EVL(AT(' on branch',m.lcCap),LEN(m.lcCap)+1)-1)+' on branch '+m.lcRet
+ ENDIF &&!EMPTY(m.lcRet)
 
  RETURN m.lcRet
 ENDPROC &&GetBranch
