@@ -54,7 +54,7 @@ FUNCTION Pjx2Commit	&&Create a commit to git.
 *!*	</change>
 *!*	</pdm>
 
- 
+
 
  IF !VARTYPE(m.tlAll)='L' THEN
   HelpMsg(3)
@@ -98,8 +98,9 @@ FUNCTION Pjx2Commit	&&Create a commit to git.
 *!*	</change>
 *!*	</pdm>
    LOCAL;
-    lnSec     AS NUMBER,;
-    llSuccess AS BOOLEAN
+    lnSec       AS NUMBER,;
+    lnErrorCode AS NUMBER,;
+    llSuccess   AS BOOLEAN
 
    LOCAL;
     lcBat    AS CHARACTER,;
@@ -111,10 +112,11 @@ FUNCTION Pjx2Commit	&&Create a commit to git.
    IF TYPE('_SCREEN.gcB2T_UseBash')="C" AND _SCREEN.gcB2T_UseBash=="1" AND Get_git_Path(@lc_Git) THEN
 
     llSuccess = Run_git('add -A',.F.,.F.,.F.)
-    llSuccess = llSuccess AND Run_git('status --porcelain>git_x.tmp',.F.,.F.,.T.)
-
+*    llSuccess = m.llSuccess AND Run_git('status --porcelain>git_x.tmp',.F.,.F.,.T.)
+    = m.llSuccess AND Run_git('diff --cached --exit-code',.F.,.F.,.F.,@lnErrorCode)
+    llSuccess = m.llSuccess AND m.lnErrorCode=1  &&lnErrorCode -> files staged but not commited
    ELSE  &&TYPE('_SCREEN.gcB2T_UseBash')="C" AND _SCREEN.gcB2T_UseBash=="1" AND Get_git_Path(@lc_Git)
-   
+
     TEXT TO lcBat NOSHOW TEXTMERGE
 "<<m.lc_Git>>" add -A
 "<<m.lc_Git>>" status --porcelain>git_x.tmp
@@ -122,32 +124,32 @@ FUNCTION Pjx2Commit	&&Create a commit to git.
     STRTOFILE(m.lcBat,'git_x.bat')
     llSuccess = Run_ExtApp('cmd /c "'+m.lcPath+'git_x.bat"',m.lcPath,'HID')
 
+    llSuccess = m.llSuccess AND FILE('git_x.tmp') AND LEN(FILETOSTR('git_x.tmp'))>0
+
+    DELETE FILE git_x.*
    ENDIF &&TYPE('_SCREEN.gcB2T_UseBash')="C" AND _SCREEN.gcB2T_UseBash=="1" AND Get_git_Path(@lc_Git)
 
    IF m.llSuccess THEN
-    IF FILE('git_x.tmp') AND LEN(FILETOSTR('git_x.tmp'))>0 THEN
 *!*	Changed by: SF 17.9.2015
 *!*	<pdm>
 *!*	<change date="{^2015-09-17,04:43:00}">Changed by: SF<br />
 *!*	run git w/o CMD
 *!*	</change>
 *!*	</pdm>
-     IF TYPE('_SCREEN.gcB2T_Commit')="C" AND _SCREEN.gcB2T_Commit=="1" THEN
-      lcCommit = CHRTRAN(TTOC(DATETIME(),3),'T',' ')
-      llSuccess = Run_git('commit -m "'+m.lcCommit+'" -m "auto-commit by RunB2T.app"',.F.,.F.,.F.)
-      IF m.llSuccess THEN
-       ??' - auto commit '+m.lcCommit
-      ELSE  &&m.llSuccess
-       ?' commit failed'
-      ENDIF &&m.llSuccess
-     ELSE  &&TYPE('_SCREEN.gcB2T_Commit')="C" AND _SCREEN.gcB2T_Commit=="1"
-      Run_git('commit',.T.,.T.,.F.)
-     ENDIF &&TYPE('_SCREEN.gcB2T_Commit')="C" AND _SCREEN.gcB2T_Commit=="1"
+    IF TYPE('_SCREEN.gcB2T_Commit')="C" AND _SCREEN.gcB2T_Commit=="1" THEN
+     lcCommit = CHRTRAN(TTOC(DATETIME(),3),'T',' ')
+     llSuccess = Run_git('commit -m "'+m.lcCommit+'" -m "auto-commit by RunB2T.app"',.F.,.F.,.F.)
+     IF m.llSuccess THEN
+      ??' - auto commit '+m.lcCommit
+     ELSE  &&m.llSuccess
+      ?' commit failed'
+     ENDIF &&m.llSuccess
+    ELSE  &&TYPE('_SCREEN.gcB2T_Commit')="C" AND _SCREEN.gcB2T_Commit=="1"
+     Run_git('commit',.T.,.T.,.F.)
+    ENDIF &&TYPE('_SCREEN.gcB2T_Commit')="C" AND _SCREEN.gcB2T_Commit=="1"
 *!*	/Changed by: SF 17.9.2015
-    ELSE  &&m.llSuccess
-     ??' - nothing to commit'
-    ENDIF &&FILE('git_x.tmp') AND LEN(FILETOSTR('git_x.tmp'))>0
-    DELETE FILE git_x.*
+   ELSE  &&m.llSuccess
+    ??' - nothing to commit'
    ENDIF &&m.llSuccess
 *!*	/Changed by: SF 4.6.2015
 
@@ -704,6 +706,8 @@ FUNCTION Convert_Pjx &&Runs FoxBin2Prg for multiple projects.
  ENDIF &&!ISNULL(_SCREEN.gaProjects(1,1))
 
  REMOVEPROPERTY(_SCREEN,'gaProjects')
+
+ CLEAR ALL
 
 *!*	Changed by: SF 5.6.2015
 *!*	<pdm>
@@ -1701,7 +1705,8 @@ FUNCTION Run_git		&&Internal. Run a git root command
   tcParameters,;
   tlShow,;
   tlIn_Shell,;
-  tlComplex
+  tlComplex,;
+  tnExitCode
 
 *!*	<pdm>
 *!*	<descr>Run git program</descr>
@@ -1727,6 +1732,10 @@ FUNCTION Run_git		&&Internal. Run a git root command
 *!*	<p>A rather complex command, like a pipe.</p>
 *!*	</detail>
 *!*	</params>
+*!*	<params name="tnExitCode" type="Variant" byref="1" dir="out" inb="1" outb="0">
+*!*	<short>Exitcode of the app.</short>
+*!*	<detail>Exitcode as provided by <see pem="Run_ExtApp" /> to use of calling code.</detail>
+*!*	</params>
 *!*	<remarks>Run API_AppRun to run git.
 * Uses <i>cmd</i> to perform piping operations.</remarks>
 *!*	<retval type="Boolean">Success</retval>
@@ -1746,6 +1755,12 @@ FUNCTION Run_git		&&Internal. Run a git root command
 *!*	New Parameter, new way to call bash.
 *!*	</change>
 *!*	</pdm>
+*!*	Changed by: SF 28.05.2020
+*!*	<pdm>
+*!*	<change date="{^2020-05-28,08:17:00}">Changed by: SF<br />
+*!*	New Parameter, return ExitCode of external program.
+*!*	</change>
+*!*	</pdm>
 
 
  LOCAL;
@@ -1761,28 +1776,29 @@ FUNCTION Run_git		&&Internal. Run a git root command
 *!*	</change>
 *!*	</pdm>
 
+ tnExitCode = 0
 *rund cmd to perform piping data
  DO CASE
   CASE !Get_git_Path(@lc_Git)
 *error, no git, not gitted
   CASE !m.tlIn_Shell AND m.tlComplex
-*shoul run without shell, but command is to complex, for example a pipe
+*should run without shell, but command is to complex, for example a pipe
    llReturn = Run_ExtApp('"'+FORCEPATH('bash.exe',FORCEPATH('bin',JUSTPATH(JUSTPATH(lc_Git))))+'" --login -i '+;
     '-c "git '+CHRTRAN(m.tcParameters,'\','/')+'"',;
-    m.lcPath,IIF(m.tlShow,'NOR','HID'))
+    m.lcPath,IIF(m.tlShow,'NOR','HID'),@tnExitCode)
   CASE !m.tlIn_Shell
 *just command
-   llReturn = Run_ExtApp('"'+m.lc_Git+'" '+m.tcParameters,m.lcPath,IIF(m.tlShow,'NOR','HID'))
+   llReturn = Run_ExtApp('"'+m.lc_Git+'" '+m.tcParameters,m.lcPath,IIF(m.tlShow,'NOR','HID'),@tnExitCode)
 
   CASE m.tlIn_Shell AND TYPE('_SCREEN.gcB2T_UseBash')="C" AND _SCREEN.gcB2T_UseBash=="1"
 *command with bash
    llReturn = Run_ExtApp('"'+FORCEPATH('git-bash.exe',JUSTPATH(JUSTPATH(m.lc_Git)))+'" '+;
     '-c "git '+CHRTRAN(m.tcParameters,'\','/')+'"',;
-    m.lcPath,IIF(m.tlShow,'NOR','HID'))
+    m.lcPath,IIF(m.tlShow,'NOR','HID'),@tnExitCode)
 
   CASE m.tlIn_Shell
 *command with cmd
-   llReturn = Run_ExtApp('cmd /c "'+m.lc_Git+'" '+m.tcParameters,m.lcPath,IIF(m.tlShow,'NOR','HID'))
+   llReturn = Run_ExtApp('cmd /c "'+m.lc_Git+'" '+m.tcParameters,m.lcPath,IIF(m.tlShow,'NOR','HID'),@tnExitCode)
   OTHERWISE
  ENDCASE
 
@@ -1859,7 +1875,9 @@ FUNCTION Run_ExtApp		&&Internal. Run external app
    ENDIF &&m.loAPI.LaunchApp()
   ELSE  &&m.tlNoWait
    IF m.loAPI.LaunchAppAndWait() THEN
-    tnExitCode = NVL(m.loAPI.CheckProcessExitCode(),-1)
+*    tnExitCode = NVL(m.loAPI.CheckProcessExitCode(),-1)
+    tnExitCode = m.loAPI.CheckProcessExitCode()
+    tnExitCode = NVL(m.tnExitCode,-1)
    ENDIF &&m.loAPI.LaunchAppAndWait()
   ENDIF &&m.tlNoWait
  ENDIF &&VARTYPE(m.loAPI)='O' AND !ISNULL(m.loAPI)

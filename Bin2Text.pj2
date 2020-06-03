@@ -40,14 +40,14 @@ FOR EACH loProject IN _VFP.Projects FOXOBJECT
 ENDFOR
 
 STRTOFILE( '', '__newproject.f2b' )
-BUILD PROJECT Bin2Text.pjx FROM '__newproject.f2b'
+BUILD PROJECT bin2text.pjx FROM '__newproject.f2b'
 FOR EACH loProject IN _VFP.Projects FOXOBJECT
 	loProject.Close()
 ENDFOR
 
-MODIFY PROJECT 'Bin2Text.pjx' NOWAIT NOSHOW NOPROJECTHOOK
+MODIFY PROJECT 'bin2text.pjx' NOWAIT NOSHOW NOPROJECTHOOK
 
-loProject = _VFP.Projects('Bin2Text.pjx')
+loProject = _VFP.Projects('bin2text.pjx')
 
 WITH loProject.FILES
 	.ADD('bin2text.app')		&& *< FileMetadata: Type="Z" Cpid="0" Timestamp="0" ID="0" ObjRev="0" User="" />
@@ -87,13 +87,13 @@ WITH loProject
 	*<.NoLogo = .F. />
 	*<.SaveCode = .T. />
 	*<.User = '' />
-	.ProjectHookLibrary = ''
-	.ProjectHookClass = ''
+	.ProjectHookLibrary = 'library\hook.vcx'
+	.ProjectHookClass = 'bin2text_hook'
 	*</ProjectProperties>
 ENDWITH
 
 
-_VFP.Projects('Bin2Text.pjx').Close()
+_VFP.Projects('bin2text.pjx').Close()
 *ERASE '__newproject.f2b'
 CD (lcCurdir)
 RETURN
