@@ -1679,7 +1679,10 @@ PROCEDURE getbranch		&&Internal. Return active git branch
 
  lcRet = ''
  IF Is_git() THEN
-  IF Run_git('rev-parse --abbrev-ref HEAD>git_x.tmp',.F.,.F.,.T.) THEN
+*schlägt irgendwie mit bash fehl, daher erstmal wieder cmd
+  IF Run_git('rev-parse --abbrev-ref HEAD>git_x.tmp',.F.,.T.,.T.) THEN
+*  IF Run_git('rev-parse --abbrev-ref HEAD>git_x.tmp',.F.,.T.,.T.) THEN
+
    lnSec = SECONDS()
 
    IF FILE('git_x.tmp') THEN
@@ -1864,7 +1867,6 @@ FUNCTION Run_ExtApp		&&Internal. Run external app
 *for testing purposes
  lcVCX = 'e:\se\tools\bin2text\library\Bin_2_Text.vcx'
 *runnning
-
  loAPI = NEWOBJECT('API_AppRun',m.lcVCX,'',m.tcCommandLine,m.tcLaunchDir,m.tcWindowMode)
  tnExitCode = -1
 
