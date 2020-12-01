@@ -3,6 +3,9 @@ LPARAMETERS;
  tv09,tv10,tv11,tv12,tv13,tv14,tv15,tv16,;
  tv17,tv18,tv19,tv20,tv21,tv22,tv23,tv24
 
+LOCAL;
+loConverter
+ 
 Construct_Objects()
 IF _SCREEN.frmB2T_Envelop.cusB2T.Get_Converter(,@loConverter,.T.) THEN
  SwitchErrorHandler(.F.)
@@ -27,7 +30,8 @@ ENDIF &&_SCREEN.frmB2T_Envelop.cusB2T.Get_Converter(@lcStorage,@loConverter,.T.)
 SwitchErrorHandler(.T.)
 HelpMsg(0)
 SwitchErrorHandler(.F.)
-
+?Is_git()
+?getbranch()
 FUNCTION Pjx2Commit	&&Create a commit to git.
  LPARAMETERS;
   tlAll
@@ -53,8 +57,6 @@ FUNCTION Pjx2Commit	&&Create a commit to git.
 *!*	New way to deal with bash, switchable bash support.
 *!*	</change>
 *!*	</pdm>
-
-
 
  IF !VARTYPE(m.tlAll)='L' THEN
   HelpMsg(3)
@@ -1681,7 +1683,10 @@ PROCEDURE getbranch		&&Internal. Return active git branch
  IF Is_git() THEN
 *schlägt irgendwie mit bash fehl, daher erstmal wieder cmd
   IF Run_git('rev-parse --abbrev-ref HEAD>git_x.tmp',.F.,.T.,.T.) THEN
-*  IF Run_git('rev-parse --abbrev-ref HEAD>git_x.tmp',.F.,.T.,.T.) THEN
+*!*	  IF Run_git('rev-parse --abbrev-ref HEAD>git_x.tmp',.F.,.F.,.T.) THEN
+*!*	DEBUG
+*!*	suspend
+*!*	  IF Run_git('rev-parse --abbrev-ref HEAD',.F.,.F.,.T.) THEN
 
    lnSec = SECONDS()
 
@@ -1771,7 +1776,7 @@ FUNCTION Run_git		&&Internal. Run a git root command
   lc_Git   AS CHARACTER,;
   llReturn AS BOOLEAN
 
- lcPath = ADDBS(FULLPATH(CURDIR()))
+ lcPath = JUSTPATH(FULLPATH(CURDIR()))
 *!*	Changed by: SF 17.9.2015
 *!*	<pdm>
 *!*	<change date="{^2015-09-17,04:43:00}">Changed by: SF<br />
@@ -1809,7 +1814,7 @@ FUNCTION Run_git		&&Internal. Run a git root command
 
  RETURN m.llReturn
 
-ENDFUNC &&Run_git_bash
+ENDFUNC &&Run_git
 
 *!*	Changed by: SF 15.9.2015
 *!*	<pdm>
@@ -1865,7 +1870,7 @@ FUNCTION Run_ExtApp		&&Internal. Run external app
   loAPI AS "API_AppRun" OF "..\..\BIN2TEXT\LIBRARY\BIN_2_TEXT.VCX"
 
 *for testing purposes
- lcVCX = 'e:\se\tools\bin2text\library\Bin_2_Text.vcx'
+ lcVCX = 'e:\se\bin2text\library\Bin_2_Text.vcx'
 *runnning
  loAPI = NEWOBJECT('API_AppRun',m.lcVCX,'',m.tcCommandLine,m.tcLaunchDir,m.tcWindowMode)
  tnExitCode = -1

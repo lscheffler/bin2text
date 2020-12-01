@@ -71,10 +71,9 @@ DEFINE CLASS api_apprun AS custom 		&& Ed Raus API_AppRun, see UT download
 				.inProcessHandle = NULL
 			ENDIF
 		ENDWITH
+		CLEAR DLLS CheckExitCode, KillProc, CrPr, GetCurrProc, WaitInpIdle, WaitOnAppExit, CloseHand
 		DODEFAULT()
 		
-			
-			
 	ENDPROC
 
 	PROCEDURE extractdword
@@ -235,6 +234,7 @@ DEFINE CLASS api_apprun AS custom 		&& Ed Raus API_AppRun, see UT download
 			*		lpszStartupDir - ptr-> the starting directory.  If none provided to method, pass a null pointer
 			*		lpStartInfo - ptr-> a STARTUPINFO structure.  We use one structure member at times.
 			*		lpProcessInfo - ptr-> a PROCESS_INFORMATION structure, used to return PID/PHANDLE detail.  We use one member
+		*Declare Integer Wow64EnableWow64FsRedirection In kernel32 Integer nEnable
 			DECLARE SHORT CreateProcess IN WIN32API AS CrPr ;
 				STRING lpszModuleName, ;
 				STRING @lpszCommandLine, ;
@@ -247,6 +247,7 @@ DEFINE CLASS api_apprun AS custom 		&& Ed Raus API_AppRun, see UT download
 				STRING @lpStartInfo, ;
 				STRING @lpProcessInfo
 		
+		*Wow64EnableWow64FsRedirection(.f.)
 			LOCAL cProcessInfo, cStartUpInfo
 		
 			*	Make default Structures for the CreateProcess call
