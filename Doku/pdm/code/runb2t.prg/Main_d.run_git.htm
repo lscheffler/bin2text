@@ -16,21 +16,24 @@
 <body>
 <div class="diaxp_mhead">Run_git Function</div>
 <div class="diaxp_mbody">
-<!-- Created with _diamp_pdm_ab by Agnes Beste    25.09.2019 20:00 -->
+<!-- Created with _diamp_pdm_ab by Agnes Beste    02.03.2021 21:06 -->
  <div class="PDM_AB_Descr"><!-- Descr Begin -->
 Run git program
  </div><!-- Descr End -->
 
  <div class="DIAMP_PDM_AB_Syntax"><!-- Syntax Begin -->
   <div class="SColor">
-   <div class="RetVal"><a href="#_5L516VDHN">RetVal</a>&nbsp;</div>   <div class="RetValEq">=</div>   <div class="PEM">
+   <div class="RetVal"><a href="#_5ZS198BO9">RetVal</a>&nbsp;</div>   <div class="RetValEq">=</div>   <div class="PEM">
     Run_git
    </div>
    <div class="Para">
-    (<a href="#_5L516VDHO">tcParameters</a>
-     [<wbr />,<a href="#_5L516VDHP">tlShow</a>
-     [<wbr />,<a href="#_5L516VDHQ">tlIn_Shell</a>
-     [<wbr />,<a href="#_5L516VDHR">tlComplex</a>]]])
+    (<a href="#_5ZS198BOA">tcParameters</a>
+     <wbr />,<a href="#_5ZS198BOB">tcLaunchPath</a>
+     [<wbr />,<a href="#_5ZS198BOC">tlShow</a>
+     [<wbr />,<a href="#_5ZS198BOD">tlIn_Shell</a>
+     
+     [<wbr />,<a href="#_5ZS198BOE">tlComplex</a>
+     [<wbr />,@<a href="#_5ZS198BOF">tnExitCode</a>]]]])
    </div>
    <div style="clear: both"></div>
   </div><!-- Colour End -->
@@ -42,14 +45,14 @@ Run git program
   </span>
   <dl class="DIAMP_PDM_AB_Params_List">
    <dt class="dt_">
-    <a class="DIAMP_PDM_AB_Params_ParaName" id="_5L516VDHO" name="_5L516VDHO">
+    <a class="DIAMP_PDM_AB_Params_ParaName" id="_5ZS198BOA" name="_5ZS198BOA">
      <span class="PDMEXPR PDMNor" ><span class='PDMVar'>tcParameters</span></span>
 
     </a>
    </dt>
    <dd class="dd_">
     <span class="Params_Short">
-     
+     parameters for git
     </span>
     <table class="Params_Info">
      <colgroup>
@@ -69,7 +72,34 @@ Run git program
     </table>
    </dd>
    <dt class="dt_">
-    <a class="DIAMP_PDM_AB_Params_ParaName" id="_5L516VDHP" name="_5L516VDHP">
+    <a class="DIAMP_PDM_AB_Params_ParaName" id="_5ZS198BOB" name="_5ZS198BOB">
+     <span class="PDMEXPR PDMNor" ><span class='PDMVar'>tcLaunchPath</span></span>
+
+    </a>
+   </dt>
+   <dd class="dd_">
+    <span class="Params_Short">
+     Launch path
+    </span>
+    <table class="Params_Info">
+     <colgroup>
+      <col class="ColumnValue" />
+      <col class="ColumnData" />
+     </colgroup>
+     <tbody>
+      <tr>
+       <td class="CellValue">Type</td>
+       <td class="CellData">Character</td>
+      </tr>
+      <tr>
+       <td class="CellValue">Direction</td>
+       <td class="CellData">Input</td>
+      </tr>
+     </tbody>
+    </table>
+   </dd>
+   <dt class="dt_">
+    <a class="DIAMP_PDM_AB_Params_ParaName" id="_5ZS198BOC" name="_5ZS198BOC">
      <span class="PDMEXPR PDMNor" ><span class='PDMVar'>tlShow</span></span>
 
     </a>
@@ -100,7 +130,7 @@ Run git program
     </table>
    </dd>
    <dt class="dt_">
-    <a class="DIAMP_PDM_AB_Params_ParaName" id="_5L516VDHQ" name="_5L516VDHQ">
+    <a class="DIAMP_PDM_AB_Params_ParaName" id="_5ZS198BOD" name="_5ZS198BOD">
      <span class="PDMEXPR PDMNor" ><span class='PDMVar'>tlIn_Shell</span></span>
 
     </a>
@@ -137,7 +167,7 @@ Run git program
     </span>
    </dd>
    <dt class="dt_">
-    <a class="DIAMP_PDM_AB_Params_ParaName" id="_5L516VDHR" name="_5L516VDHR">
+    <a class="DIAMP_PDM_AB_Params_ParaName" id="_5ZS198BOE" name="_5ZS198BOE">
      <span class="PDMEXPR PDMNor" ><span class='PDMVar'>tlComplex</span></span>
 
     </a>
@@ -168,9 +198,47 @@ Run git program
     </table>
     <span class="Params_Detail">
 
-	<p>Only if <a class="DIAMP_PDM_AB_Para_Link" href="#_5L516VDHQ">tlIn_Shell</a> is false.</p>
+	<p>Only if <a class="DIAMP_PDM_AB_Para_Link" href="#_5ZS198BOD">tlIn_Shell</a> is false.</p>
 	<p>A rather complex command, like a pipe.</p>
 	
+    </span>
+   </dd>
+   <dt class="dt_">
+    <a class="DIAMP_PDM_AB_Params_ParaName" id="_5ZS198BOF" name="_5ZS198BOF">
+     <span class="PDMEXPR PDMNor" ><span class='PDMVar'>tnExitCode</span></span>
+
+    </a>
+   </dt>
+   <dd class="dd_">
+    <span class="Params_Short">
+     Exitcode of the app.
+    </span>
+    <table class="Params_Info">
+     <colgroup>
+      <col class="ColumnValue" />
+      <col class="ColumnData" />
+     </colgroup>
+     <tbody>
+      <tr>
+       <td class="CellValue">Type</td>
+       <td class="CellData">Variant</td>
+      </tr>
+      <tr>
+       <td class="CellValue">By reference</td>
+       <td class="CellData">&nbsp;</td>
+      </tr>
+      <tr>
+       <td class="CellValue">Direction</td>
+       <td class="CellData">out</td>
+      </tr>
+      <tr>
+       <td class="CellValue">Optional</td>
+      <td class="CellData">&nbsp;</td>
+      </tr>
+     </tbody>
+    </table>
+    <span class="Params_Detail">
+Exitcode as provided by <a class="PDM_AB_See" href="../../code/runb2t.prg/main_d.run_extapp.htm" title="Skip to file Run_ExtApp">Run_ExtApp</a> to use of calling code.
     </span>
    </dd>
   </dl>
@@ -179,7 +247,7 @@ Run git program
  <div class="DIAMP_PDM_AB_RetVal"><!-- Returns Begin -->
   <div>
    <span class="PDM_AB_Head">
-    <a id="_5L516VDHN" name="_5L516VDHN">
+    <a id="_5ZS198BO9" name="_5ZS198BO9">
      Return value
     </a>
    </span> <span class="RetVal_Ttype">Boolean</span>
@@ -199,6 +267,18 @@ Run API_AppRun to run git.
  Uses <i>cmd</i> to perform piping operations.
   </div>
  </div><!-- Remarks End -->
+
+ <div class="PDM_AB_SeeAlso"><!-- SeeAlso Begin -->
+  <span class="PDM_AB_Head">
+   See also
+  </span>
+  <div class="PDM_AB_Body">
+<a class="PDM_AB_See" href="../../code/runb2t.prg/main_d.run_extapp.htm" title="Skip to file Run_ExtApp">Run_ExtApp</a>
+  </div><!-- Body End -->
+  <!--- "Applies to" need to be inserted here---->
+  <PlaceAppliesTo_Here />
+  <!--- /"Applies to" need to be inserted here---->
+ </div><!-- SeeAlso End -->
 
  <div class="PDM_AB_Changes"><!-- Changes Begin -->
   <hr />
@@ -221,66 +301,117 @@ Changed by: SF<br />
 	New Parameter, new way to call bash.
 	
   </div>
+  <div class="PDM_AB_Body">
+   <span class="Change_Time">
+    28.05.2020 08:17
+   </span><br />
+Changed by: SF<br />
+	New Parameter, return ExitCode of external program.
+	
+  </div>
+  <div class="PDM_AB_Body">
+   <span class="Change_Time">
+    11.02.2021 15:52
+   </span><br />
+Changed by: SF<br />
+	New Parameter, Launchpath.<br/>
+	Changed strategy to call, check for 64bit git
+	
+  </div>
  </div><!-- Changes End -->
 
 
-<!-- /Created with _diamp_pdm_ab by Agnes Beste    25.09.2019 20:00 -->
+<!-- /Created with _diamp_pdm_ab by Agnes Beste    02.03.2021 21:06 -->
 
  <div class="SC">
-  <img onclick="ExpandSC('SP_P18',-1);" class="imgEC" src="../../imgs/dotab.gif" alt="Expand/Collapse source code of procedure Run_git" id="IMG_SP_P18" />
-  <span onclick="ExpandSC('SP_P18',-1);" class="SCCaption"><a name="pm.run_git">Source Code</a></span>
-  <div ondblclick="ExpandSC('SP_P18',-1);" class="SCE" style="display: none;" id="TX_SP_P18">
+  <img onclick="ExpandSC('SP_P19',-1);" class="imgEC" src="../../imgs/dotab.gif" alt="Expand/Collapse source code of procedure Run_git" id="IMG_SP_P19" />
+  <span onclick="ExpandSC('SP_P19',-1);" class="SCCaption"><a name="pm.run_git">Source Code</a></span>
+  <div ondblclick="ExpandSC('SP_P19',-1);" class="SCE" style="display: none;" id="TX_SP_P19">
 <!-- Code Begin -->
-<pre class="PDMCODE PDMNor" ><span class='PDMCnt'>1700</span> <span class='PDMInd'> 1</span>  <span class='PDMResK'>LPARAMETERS</span><span class='PDMOper'>;</span>
-<span class='PDMCnt'>1701</span> <span class='PDMInd'> 2</span>   <span class='PDMVar'>tcParameters</span><span class='PDMOper'>,</span><span class='PDMOper'>;</span>
-<span class='PDMCnt'>1702</span> <span class='PDMInd'> 2</span>   <span class='PDMVar'>tlShow</span><span class='PDMOper'>,</span><span class='PDMOper'>;</span>
-<span class='PDMCnt'>1703</span> <span class='PDMInd'> 2</span>   <span class='PDMVar'>tlIn_Shell</span><span class='PDMOper'>,</span><span class='PDMOper'>;</span>
-<span class='PDMCnt'>1704</span> <span class='PDMInd'> 2</span>   <span class='PDMVar'>tlComplex</span>
-<span class='PDMCnt'>1705</span> <span class='PDMInd'>  </span> 
-<span class='PDMCnt'>1706</span> <span class='PDMInd'>  </span> 
-<span class='PDMCnt'>1742</span> <span class='PDMInd'>  </span> 
-<span class='PDMCnt'>1743</span> <span class='PDMInd'>  </span> <span class='PDMCom'>*!*    Changed by: SF 25.9.2019</span>
-<span class='PDMCnt'>1744</span> <span class='PDMInd'>  </span> 
-<span class='PDMCnt'>1749</span> <span class='PDMInd'>  </span> 
-<span class='PDMCnt'>1750</span> <span class='PDMInd'>  </span> 
-<span class='PDMCnt'>1751</span> <span class='PDMInd'> 1</span>  <span class='PDMResK'>LOCAL</span><span class='PDMOper'>;</span>
-<span class='PDMCnt'>1752</span> <span class='PDMInd'> 2</span>   <span class='PDMVar'>lcPath</span>   <span class='PDMResK'>AS</span> <span class='PDMResK'>CHARACTER</span><span class='PDMOper'>,</span><span class='PDMOper'>;</span>
-<span class='PDMCnt'>1753</span> <span class='PDMInd'> 2</span>   <span class='PDMVar'>lc_Git</span>   <span class='PDMResK'>AS</span> <span class='PDMResK'>CHARACTER</span><span class='PDMOper'>,</span><span class='PDMOper'>;</span>
-<span class='PDMCnt'>1754</span> <span class='PDMInd'> 2</span>   <span class='PDMVar'>llReturn</span> <span class='PDMResK'>AS</span> <span class='PDMVar'>BOOLEAN</span>
-<span class='PDMCnt'>1755</span> <span class='PDMInd'>  </span> 
-<span class='PDMCnt'>1756</span> <span class='PDMInd'> 1</span>  <span class='PDMVar'>lcPath</span> <span class='PDMOper'>=</span> <span class='PDMResF'>ADDBS</span><span class='PDMOper'>(</span><span class='PDMResF'>FULLPATH</span><span class='PDMOper'>(</span><span class='PDMResF'>CURDIR</span><span class='PDMOper'>(</span><span class='PDMOper'>)</span><span class='PDMOper'>)</span><span class='PDMOper'>)</span>
-<span class='PDMCnt'>1757</span> <span class='PDMInd'>  </span> <span class='PDMCom'>*!*    Changed by: SF 17.9.2015</span>
-<span class='PDMCnt'>1758</span> <span class='PDMInd'>  </span> 
-<span class='PDMCnt'>1763</span> <span class='PDMInd'>  </span> 
-<span class='PDMCnt'>1764</span> <span class='PDMInd'>  </span> <span class='PDMCom'>*rund cmd to perform piping data</span>
-<span class='PDMCnt'>1765</span> <span class='PDMInd'> 1</span>  <span class='PDMResK'>DO</span> <span class='PDMResK'>CASE</span>
-<span class='PDMCnt'>1766</span> <span class='PDMInd'> 2</span>   <span class='PDMResK'>CASE</span> <span class='PDMOper'>!</span><span class='PDMVar'>Get_git_Path</span><span class='PDMOper'>(</span><span class='PDMOper'>@</span><span class='PDMVar'>lc_Git</span><span class='PDMOper'>)</span>
-<span class='PDMCnt'>1767</span> <span class='PDMInd'>  </span> <span class='PDMCom'>*error, no git, not gitted</span>
-<span class='PDMCnt'>1768</span> <span class='PDMInd'> 2</span>   <span class='PDMResK'>CASE</span> <span class='PDMOper'>!</span><span class='PDMVar'>m</span><span class='PDMOper'>.</span><span class='PDMVar'>tlIn_Shell</span> <span class='PDMOper'>AND</span> <span class='PDMVar'>m</span><span class='PDMOper'>.</span><span class='PDMVar'>tlComplex</span>
-<span class='PDMCnt'>1769</span> <span class='PDMInd'>  </span> <span class='PDMCom'>*shoul run without shell, but command is to complex, for example a pipe</span>
-<span class='PDMCnt'>1770</span> <span class='PDMInd'> 3</span>    <span class='PDMVar'>llReturn</span> <span class='PDMOper'>=</span> <span class='PDMVar'>Run_ExtApp</span><span class='PDMOper'>(</span><span class='PDMStr'>'"'</span><span class='PDMOper'>+</span><span class='PDMResF'>FORCEPATH</span><span class='PDMOper'>(</span><span class='PDMStr'>'bash.exe'</span><span class='PDMOper'>,</span><span class='PDMResF'>FORCEPATH</span><span class='PDMOper'>(</span><span class='PDMStr'>'bin'</span><span class='PDMOper'>,</span><span class='PDMResF'>JUSTPATH</span><span class='PDMOper'>(</span><span class='PDMResF'>JUSTPATH</span><span class='PDMOper'>(</span><span class='PDMVar'>lc_Git</span><span class='PDMOper'>)</span><span class='PDMOper'>)</span><span class='PDMOper'>)</span><span class='PDMOper'>)</span><span class='PDMOper'>+</span><span class='PDMStr'>'" --login -i '</span><span class='PDMOper'>+</span><span class='PDMOper'>;</span>
-<span class='PDMCnt'>1771</span> <span class='PDMInd'> 4</span>     <span class='PDMStr'>'-c "git '</span><span class='PDMOper'>+</span><span class='PDMResF'>CHRTRAN</span><span class='PDMOper'>(</span><span class='PDMVar'>m</span><span class='PDMOper'>.</span><span class='PDMVar'>tcParameters</span><span class='PDMOper'>,</span><span class='PDMStr'>'\'</span><span class='PDMOper'>,</span><span class='PDMStr'>'/'</span><span class='PDMOper'>)</span><span class='PDMOper'>+</span><span class='PDMStr'>'"'</span><span class='PDMOper'>,</span><span class='PDMOper'>;</span>
-<span class='PDMCnt'>1772</span> <span class='PDMInd'> 4</span>     <span class='PDMVar'>m</span><span class='PDMOper'>.</span><span class='PDMVar'>lcPath</span><span class='PDMOper'>,</span><span class='PDMResF'>IIF</span><span class='PDMOper'>(</span><span class='PDMVar'>m</span><span class='PDMOper'>.</span><span class='PDMVar'>tlShow</span><span class='PDMOper'>,</span><span class='PDMStr'>'NOR'</span><span class='PDMOper'>,</span><span class='PDMStr'>'HID'</span><span class='PDMOper'>)</span><span class='PDMOper'>)</span>
-<span class='PDMCnt'>1773</span> <span class='PDMInd'> 2</span>   <span class='PDMResK'>CASE</span> <span class='PDMOper'>!</span><span class='PDMVar'>m</span><span class='PDMOper'>.</span><span class='PDMVar'>tlIn_Shell</span>
-<span class='PDMCnt'>1774</span> <span class='PDMInd'>  </span> <span class='PDMCom'>*just command</span>
-<span class='PDMCnt'>1775</span> <span class='PDMInd'> 3</span>    <span class='PDMVar'>llReturn</span> <span class='PDMOper'>=</span> <span class='PDMVar'>Run_ExtApp</span><span class='PDMOper'>(</span><span class='PDMStr'>'"'</span><span class='PDMOper'>+</span><span class='PDMVar'>m</span><span class='PDMOper'>.</span><span class='PDMVar'>lc_Git</span><span class='PDMOper'>+</span><span class='PDMStr'>'" '</span><span class='PDMOper'>+</span><span class='PDMVar'>m</span><span class='PDMOper'>.</span><span class='PDMVar'>tcParameters</span><span class='PDMOper'>,</span><span class='PDMVar'>m</span><span class='PDMOper'>.</span><span class='PDMVar'>lcPath</span><span class='PDMOper'>,</span><span class='PDMResF'>IIF</span><span class='PDMOper'>(</span><span class='PDMVar'>m</span><span class='PDMOper'>.</span><span class='PDMVar'>tlShow</span><span class='PDMOper'>,</span><span class='PDMStr'>'NOR'</span><span class='PDMOper'>,</span><span class='PDMStr'>'HID'</span><span class='PDMOper'>)</span><span class='PDMOper'>)</span>
-<span class='PDMCnt'>1776</span> <span class='PDMInd'>  </span> 
-<span class='PDMCnt'>1777</span> <span class='PDMInd'> 2</span>   <span class='PDMResK'>CASE</span> <span class='PDMVar'>m</span><span class='PDMOper'>.</span><span class='PDMVar'>tlIn_Shell</span> <span class='PDMOper'>AND</span> <span class='PDMResF'>TYPE</span><span class='PDMOper'>(</span><span class='PDMStr'>'_SCREEN.gcB2T_UseBash'</span><span class='PDMOper'>)</span><span class='PDMOper'>=</span><span class='PDMStr'>"C"</span> <span class='PDMOper'>AND</span> <span class='PDMVar'>_SCREEN</span><span class='PDMOper'>.</span><span class='PDMVar'>gcB2T_UseBash</span><span class='PDMOper'>==</span><span class='PDMStr'>"1"</span>
-<span class='PDMCnt'>1778</span> <span class='PDMInd'>  </span> <span class='PDMCom'>*command with bash</span>
-<span class='PDMCnt'>1779</span> <span class='PDMInd'> 3</span>    <span class='PDMVar'>llReturn</span> <span class='PDMOper'>=</span> <span class='PDMVar'>Run_ExtApp</span><span class='PDMOper'>(</span><span class='PDMStr'>'"'</span><span class='PDMOper'>+</span><span class='PDMResF'>FORCEPATH</span><span class='PDMOper'>(</span><span class='PDMStr'>'git-bash.exe'</span><span class='PDMOper'>,</span><span class='PDMResF'>JUSTPATH</span><span class='PDMOper'>(</span><span class='PDMResF'>JUSTPATH</span><span class='PDMOper'>(</span><span class='PDMVar'>m</span><span class='PDMOper'>.</span><span class='PDMVar'>lc_Git</span><span class='PDMOper'>)</span><span class='PDMOper'>)</span><span class='PDMOper'>)</span><span class='PDMOper'>+</span><span class='PDMStr'>'" '</span><span class='PDMOper'>+</span><span class='PDMOper'>;</span>
-<span class='PDMCnt'>1780</span> <span class='PDMInd'> 4</span>     <span class='PDMStr'>'-c "git '</span><span class='PDMOper'>+</span><span class='PDMResF'>CHRTRAN</span><span class='PDMOper'>(</span><span class='PDMVar'>m</span><span class='PDMOper'>.</span><span class='PDMVar'>tcParameters</span><span class='PDMOper'>,</span><span class='PDMStr'>'\'</span><span class='PDMOper'>,</span><span class='PDMStr'>'/'</span><span class='PDMOper'>)</span><span class='PDMOper'>+</span><span class='PDMStr'>'"'</span><span class='PDMOper'>,</span><span class='PDMOper'>;</span>
-<span class='PDMCnt'>1781</span> <span class='PDMInd'> 4</span>     <span class='PDMVar'>m</span><span class='PDMOper'>.</span><span class='PDMVar'>lcPath</span><span class='PDMOper'>,</span><span class='PDMResF'>IIF</span><span class='PDMOper'>(</span><span class='PDMVar'>m</span><span class='PDMOper'>.</span><span class='PDMVar'>tlShow</span><span class='PDMOper'>,</span><span class='PDMStr'>'NOR'</span><span class='PDMOper'>,</span><span class='PDMStr'>'HID'</span><span class='PDMOper'>)</span><span class='PDMOper'>)</span>
-<span class='PDMCnt'>1782</span> <span class='PDMInd'>  </span> 
-<span class='PDMCnt'>1783</span> <span class='PDMInd'> 2</span>   <span class='PDMResK'>CASE</span> <span class='PDMVar'>m</span><span class='PDMOper'>.</span><span class='PDMVar'>tlIn_Shell</span>
-<span class='PDMCnt'>1784</span> <span class='PDMInd'>  </span> <span class='PDMCom'>*command with cmd</span>
-<span class='PDMCnt'>1785</span> <span class='PDMInd'> 3</span>    <span class='PDMVar'>llReturn</span> <span class='PDMOper'>=</span> <span class='PDMVar'>Run_ExtApp</span><span class='PDMOper'>(</span><span class='PDMStr'>'cmd /c "'</span><span class='PDMOper'>+</span><span class='PDMVar'>m</span><span class='PDMOper'>.</span><span class='PDMVar'>lc_Git</span><span class='PDMOper'>+</span><span class='PDMStr'>'" '</span><span class='PDMOper'>+</span><span class='PDMVar'>m</span><span class='PDMOper'>.</span><span class='PDMVar'>tcParameters</span><span class='PDMOper'>,</span><span class='PDMVar'>m</span><span class='PDMOper'>.</span><span class='PDMVar'>lcPath</span><span class='PDMOper'>,</span><span class='PDMResF'>IIF</span><span class='PDMOper'>(</span><span class='PDMVar'>m</span><span class='PDMOper'>.</span><span class='PDMVar'>tlShow</span><span class='PDMOper'>,</span><span class='PDMStr'>'NOR'</span><span class='PDMOper'>,</span><span class='PDMStr'>'HID'</span><span class='PDMOper'>)</span><span class='PDMOper'>)</span>
-<span class='PDMCnt'>1786</span> <span class='PDMInd'> 2</span>   <span class='PDMResK'>OTHERWISE</span>
-<span class='PDMCnt'>1787</span> <span class='PDMInd'> 1</span>  <span class='PDMResK'>ENDCASE</span>
-<span class='PDMCnt'>1788</span> <span class='PDMInd'>  </span> 
-<span class='PDMCnt'>1789</span> <span class='PDMInd'>  </span> <span class='PDMCom'>*!*    /Changed by: SF 17.9.2015</span>
-<span class='PDMCnt'>1790</span> <span class='PDMInd'>  </span> 
-<span class='PDMCnt'>1791</span> <span class='PDMInd'> 1</span>  <span class='PDMResK'>RETURN</span> <span class='PDMVar'>m</span><span class='PDMOper'>.</span><span class='PDMVar'>llReturn</span>
-<span class='PDMCnt'>1792</span> <span class='PDMInd'>  </span> </pre>
+<pre class="PDMCODE PDMNor" ><span class='PDMCnt'>2050</span> <span class='PDMInd'> 1</span>  <span class='PDMResK'>LPARAMETERS</span><span class='PDMOper'>;</span>
+<span class='PDMCnt'>2051</span> <span class='PDMInd'> 2</span>   <span class='PDMVar'>tcParameters</span><span class='PDMOper'>,</span><span class='PDMOper'>;</span>
+<span class='PDMCnt'>2052</span> <span class='PDMInd'> 2</span>   <span class='PDMVar'>tcLaunchPath</span><span class='PDMOper'>,</span><span class='PDMOper'>;</span>
+<span class='PDMCnt'>2053</span> <span class='PDMInd'> 2</span>   <span class='PDMVar'>tlShow</span><span class='PDMOper'>,</span><span class='PDMOper'>;</span>
+<span class='PDMCnt'>2054</span> <span class='PDMInd'> 2</span>   <span class='PDMVar'>tlIn_Shell</span><span class='PDMOper'>,</span><span class='PDMOper'>;</span>
+<span class='PDMCnt'>2055</span> <span class='PDMInd'> 2</span>   <span class='PDMVar'>tlComplex</span><span class='PDMOper'>,</span><span class='PDMOper'>;</span>
+<span class='PDMCnt'>2056</span> <span class='PDMInd'> 2</span>   <span class='PDMVar'>tnExitCode</span>
+<span class='PDMCnt'>2057</span> <span class='PDMInd'>  </span> 
+<span class='PDMCnt'>2058</span> <span class='PDMInd'>  </span> 
+<span class='PDMCnt'>2106</span> <span class='PDMInd'>  </span> 
+<span class='PDMCnt'>2107</span> <span class='PDMInd'>  </span> <span class='PDMCom'>*!*    Changed by: SF 25.9.2019</span>
+<span class='PDMCnt'>2108</span> <span class='PDMInd'>  </span> 
+<span class='PDMCnt'>2113</span> <span class='PDMInd'>  </span> <span class='PDMOper'>*</span><span class='PDMOper'>!</span><span class='PDMOper'>*</span>    <span class='PDMVar'>Changed</span> <span class='PDMResK'>by</span>: <span class='PDMVar'>SF</span> <span class='PDMLit'>28</span><span class='PDMOper'>.</span><span class='PDMLit'>05</span><span class='PDMOper'>.</span><span class='PDMLit'>2020</span>
+<span class='PDMCnt'>2114</span> <span class='PDMInd'>  </span> 
+<span class='PDMCnt'>2119</span> <span class='PDMInd'>  </span> 
+<span class='PDMCnt'>2120</span> <span class='PDMInd'>  </span> <span class='PDMOper'>*</span><span class='PDMOper'>!</span><span class='PDMOper'>*</span>    <span class='PDMVar'>SF</span> <span class='PDMVar'>Changed</span> <span class='PDMResK'>by</span>: <span class='PDMVar'>SF</span> <span class='PDMLit'>11</span><span class='PDMOper'>.</span><span class='PDMLit'>2</span><span class='PDMOper'>.</span><span class='PDMLit'>2021</span>
+<span class='PDMCnt'>2121</span> <span class='PDMInd'>  </span> 
+<span class='PDMCnt'>2127</span> <span class='PDMInd'>  </span> 
+<span class='PDMCnt'>2128</span> <span class='PDMInd'>  </span> 
+<span class='PDMCnt'>2129</span> <span class='PDMInd'> 1</span>  <span class='PDMResK'>LOCAL</span><span class='PDMOper'>;</span>
+<span class='PDMCnt'>2130</span> <span class='PDMInd'> 2</span>   <span class='PDMVar'>lc_Git</span>    <span class='PDMResK'>AS</span> <span class='PDMResK'>CHARACTER</span><span class='PDMOper'>,</span><span class='PDMOper'>;</span>
+<span class='PDMCnt'>2131</span> <span class='PDMInd'> 2</span>   <span class='PDMVar'>lcCommand</span> <span class='PDMResK'>AS</span> <span class='PDMResK'>CHARACTER</span><span class='PDMOper'>,</span><span class='PDMOper'>;</span>
+<span class='PDMCnt'>2132</span> <span class='PDMInd'> 2</span>   <span class='PDMVar'>llReturn</span>  <span class='PDMResK'>AS</span> <span class='PDMVar'>BOOLEAN</span><span class='PDMOper'>,</span><span class='PDMOper'>;</span>
+<span class='PDMCnt'>2133</span> <span class='PDMInd'> 2</span>   <span class='PDMVar'>llIs64</span>    <span class='PDMResK'>AS</span> <span class='PDMVar'>BOOLEAN</span><span class='PDMOper'>,</span><span class='PDMOper'>;</span>
+<span class='PDMCnt'>2134</span> <span class='PDMInd'> 2</span>   <span class='PDMVar'>llInBash</span>  <span class='PDMResK'>AS</span> <span class='PDMVar'>BOOLEAN</span>
+<span class='PDMCnt'>2135</span> <span class='PDMInd'>  </span> 
+<span class='PDMCnt'>2136</span> <span class='PDMInd'>  </span> <span class='PDMCom'>*!*    Changed by: SF 17.9.2015</span>
+<span class='PDMCnt'>2137</span> <span class='PDMInd'>  </span> 
+<span class='PDMCnt'>2142</span> <span class='PDMInd'>  </span> 
+<span class='PDMCnt'>2143</span> <span class='PDMInd'> 1</span>  <span class='PDMVar'>llInBash</span> <span class='PDMOper'>=</span> <span class='PDMResF'>TYPE</span><span class='PDMOper'>(</span><span class='PDMStr'>'_SCREEN.gcB2T_UseBash'</span><span class='PDMOper'>)</span><span class='PDMOper'>=</span><span class='PDMStr'>"C"</span> <span class='PDMOper'>AND</span> <span class='PDMVar'>_SCREEN</span><span class='PDMOper'>.</span><span class='PDMVar'>gcB2T_UseBash</span><span class='PDMOper'>==</span><span class='PDMStr'>"1"</span>
+<span class='PDMCnt'>2144</span> <span class='PDMInd'>  </span> 
+<span class='PDMCnt'>2145</span> <span class='PDMInd'> 1</span>  <span class='PDMVar'>tnExitCode</span> <span class='PDMOper'>=</span> <span class='PDMLit'>0</span>
+<span class='PDMCnt'>2146</span> <span class='PDMInd'>  </span> <span class='PDMCom'>*rund cmd to perform piping data</span>
+<span class='PDMCnt'>2147</span> <span class='PDMInd'> 1</span>  <span class='PDMResK'>DO</span> <span class='PDMResK'>CASE</span>
+<span class='PDMCnt'>2148</span> <span class='PDMInd'> 2</span>   <span class='PDMResK'>CASE</span> <span class='PDMOper'>!</span><span class='PDMVar'>Get_git_Path</span><span class='PDMOper'>(</span><span class='PDMOper'>@</span><span class='PDMVar'>lc_Git</span><span class='PDMOper'>,</span><span class='PDMOper'>@</span><span class='PDMVar'>llIs64</span><span class='PDMOper'>)</span>
+<span class='PDMCnt'>2149</span> <span class='PDMInd'>  </span> <span class='PDMCom'>*error, no git, not gitted</span>
+<span class='PDMCnt'>2150</span> <span class='PDMInd'> 2</span>   <span class='PDMResK'>CASE</span> <span class='PDMOper'>!</span><span class='PDMVar'>m</span><span class='PDMOper'>.</span><span class='PDMVar'>llIs64</span> <span class='PDMOper'>AND</span> <span class='PDMOper'>!</span><span class='PDMVar'>m</span><span class='PDMOper'>.</span><span class='PDMVar'>tlIn_Shell</span> <span class='PDMOper'>AND</span> <span class='PDMVar'>m</span><span class='PDMOper'>.</span><span class='PDMVar'>tlComplex</span>
+<span class='PDMCnt'>2151</span> <span class='PDMInd'>  </span> <span class='PDMCom'>*not if 64bit git</span>
+<span class='PDMCnt'>2152</span> <span class='PDMInd'>  </span> <span class='PDMCom'>*should run without shell, but command is to complex, for example a pipe</span>
+<span class='PDMCnt'>2153</span> <span class='PDMInd'>  </span> 
+<span class='PDMCnt'>2154</span> <span class='PDMInd'>  </span> <span class='PDMCom'>* might be removed if we figure out how to run 64bit git</span>
+<span class='PDMCnt'>2155</span> <span class='PDMInd'>  </span> <span class='PDMCom'>* what seems the problem for complex at all</span>
+<span class='PDMCnt'>2156</span> <span class='PDMInd'> 3</span>    <span class='PDMVar'>lcCommand</span> <span class='PDMOper'>=</span> <span class='PDMOper'>;</span>
+<span class='PDMCnt'>2157</span> <span class='PDMInd'> 4</span>     <span class='PDMStr'>'"'</span><span class='PDMOper'>+</span><span class='PDMResF'>FORCEPATH</span><span class='PDMOper'>(</span><span class='PDMStr'>'bash.exe'</span><span class='PDMOper'>,</span><span class='PDMResF'>FORCEPATH</span><span class='PDMOper'>(</span><span class='PDMStr'>'bin'</span><span class='PDMOper'>,</span><span class='PDMResF'>JUSTPATH</span><span class='PDMOper'>(</span><span class='PDMResF'>JUSTPATH</span><span class='PDMOper'>(</span><span class='PDMVar'>lc_Git</span><span class='PDMOper'>)</span><span class='PDMOper'>)</span><span class='PDMOper'>)</span><span class='PDMOper'>)</span><span class='PDMOper'>+</span><span class='PDMStr'>'" --login -i '</span><span class='PDMOper'>+</span><span class='PDMOper'>;</span>
+<span class='PDMCnt'>2158</span> <span class='PDMInd'> 4</span>     <span class='PDMStr'>'-c "git '</span><span class='PDMOper'>+</span><span class='PDMResF'>CHRTRAN</span><span class='PDMOper'>(</span><span class='PDMVar'>m</span><span class='PDMOper'>.</span><span class='PDMVar'>tcParameters</span><span class='PDMOper'>,</span><span class='PDMStr'>'\'</span><span class='PDMOper'>,</span><span class='PDMStr'>'/'</span><span class='PDMOper'>)</span><span class='PDMOper'>+</span><span class='PDMStr'>'"'</span>
+<span class='PDMCnt'>2159</span> <span class='PDMInd'>  </span> 
+<span class='PDMCnt'>2160</span> <span class='PDMInd'> 2</span>   <span class='PDMResK'>CASE</span> <span class='PDMOper'>!</span><span class='PDMVar'>m</span><span class='PDMOper'>.</span><span class='PDMVar'>llIs64</span> <span class='PDMOper'>AND</span> <span class='PDMOper'>!</span><span class='PDMVar'>m</span><span class='PDMOper'>.</span><span class='PDMVar'>tlIn_Shell</span>
+<span class='PDMCnt'>2161</span> <span class='PDMInd'>  </span> <span class='PDMCom'>*not if 64bit git</span>
+<span class='PDMCnt'>2162</span> <span class='PDMInd'>  </span> <span class='PDMCom'>*just command</span>
+<span class='PDMCnt'>2163</span> <span class='PDMInd'> 3</span>    <span class='PDMVar'>lcCommand</span> <span class='PDMOper'>=</span> <span class='PDMStr'>'"'</span><span class='PDMOper'>+</span><span class='PDMVar'>m</span><span class='PDMOper'>.</span><span class='PDMVar'>lc_Git</span><span class='PDMOper'>+</span><span class='PDMStr'>'" '</span><span class='PDMOper'>+</span><span class='PDMVar'>m</span><span class='PDMOper'>.</span><span class='PDMVar'>tcParameters</span>
+<span class='PDMCnt'>2164</span> <span class='PDMInd'>  </span> 
+<span class='PDMCnt'>2165</span> <span class='PDMInd'> 2</span>   <span class='PDMResK'>CASE</span> <span class='PDMVar'>m</span><span class='PDMOper'>.</span><span class='PDMVar'>tlIn_Shell</span> <span class='PDMOper'>AND</span> <span class='PDMVar'>m</span><span class='PDMOper'>.</span><span class='PDMVar'>llInBash</span>
+<span class='PDMCnt'>2166</span> <span class='PDMInd'>  </span> <span class='PDMCom'>*command with bash</span>
+<span class='PDMCnt'>2167</span> <span class='PDMInd'> 3</span>    <span class='PDMVar'>lcCommand</span> <span class='PDMOper'>=</span> <span class='PDMOper'>;</span>
+<span class='PDMCnt'>2168</span> <span class='PDMInd'> 4</span>     <span class='PDMStr'>'"'</span><span class='PDMOper'>+</span><span class='PDMResF'>FORCEPATH</span><span class='PDMOper'>(</span><span class='PDMStr'>'git-bash.exe'</span><span class='PDMOper'>,</span><span class='PDMResF'>JUSTPATH</span><span class='PDMOper'>(</span><span class='PDMResF'>JUSTPATH</span><span class='PDMOper'>(</span><span class='PDMVar'>m</span><span class='PDMOper'>.</span><span class='PDMVar'>lc_Git</span><span class='PDMOper'>)</span><span class='PDMOper'>)</span><span class='PDMOper'>)</span><span class='PDMOper'>+</span><span class='PDMStr'>'" '</span><span class='PDMOper'>+</span><span class='PDMOper'>;</span>
+<span class='PDMCnt'>2169</span> <span class='PDMInd'> 4</span>     <span class='PDMStr'>'-c "git '</span><span class='PDMOper'>+</span><span class='PDMResF'>CHRTRAN</span><span class='PDMOper'>(</span><span class='PDMVar'>m</span><span class='PDMOper'>.</span><span class='PDMVar'>tcParameters</span><span class='PDMOper'>,</span><span class='PDMStr'>'\'</span><span class='PDMOper'>,</span><span class='PDMStr'>'/'</span><span class='PDMOper'>)</span><span class='PDMOper'>+</span><span class='PDMStr'>'"'</span>
+<span class='PDMCnt'>2170</span> <span class='PDMInd'>  </span> 
+<span class='PDMCnt'>2171</span> <span class='PDMInd'> 2</span>   <span class='PDMResK'>CASE</span> <span class='PDMVar'>m</span><span class='PDMOper'>.</span><span class='PDMVar'>tlIn_Shell</span>
+<span class='PDMCnt'>2172</span> <span class='PDMInd'>  </span> <span class='PDMCom'>*command with cmd</span>
+<span class='PDMCnt'>2173</span> <span class='PDMInd'> 3</span>    <span class='PDMVar'>lcCommand</span> <span class='PDMOper'>=</span> <span class='PDMStr'>'cmd /c ""'</span><span class='PDMOper'>+</span><span class='PDMVar'>m</span><span class='PDMOper'>.</span><span class='PDMVar'>lc_Git</span><span class='PDMOper'>+</span><span class='PDMStr'>'" '</span><span class='PDMOper'>+</span><span class='PDMVar'>m</span><span class='PDMOper'>.</span><span class='PDMVar'>tcParameters</span><span class='PDMOper'>+</span><span class='PDMStr'>'"'</span>
+<span class='PDMCnt'>2174</span> <span class='PDMInd'>  </span> 
+<span class='PDMCnt'>2175</span> <span class='PDMInd'> 2</span>   <span class='PDMResK'>OTHERWISE</span>
+<span class='PDMCnt'>2176</span> <span class='PDMInd'>  </span> <span class='PDMCom'>*64bit, not handled better, falls back to cmd</span>
+<span class='PDMCnt'>2177</span> <span class='PDMInd'> 3</span>    <span class='PDMVar'>lcCommand</span> <span class='PDMOper'>=</span> <span class='PDMStr'>'cmd /c ""'</span><span class='PDMOper'>+</span><span class='PDMVar'>m</span><span class='PDMOper'>.</span><span class='PDMVar'>lc_Git</span><span class='PDMOper'>+</span><span class='PDMStr'>'" '</span><span class='PDMOper'>+</span><span class='PDMResF'>CHRTRAN</span><span class='PDMOper'>(</span><span class='PDMVar'>m</span><span class='PDMOper'>.</span><span class='PDMVar'>tcParameters</span><span class='PDMOper'>,</span><span class='PDMStr'>'/'</span><span class='PDMOper'>,</span><span class='PDMStr'>'\'</span><span class='PDMOper'>)</span><span class='PDMOper'>+</span><span class='PDMStr'>'"'</span>
+<span class='PDMCnt'>2178</span> <span class='PDMInd'> 1</span>  <span class='PDMResK'>ENDCASE</span>
+<span class='PDMCnt'>2179</span> <span class='PDMInd'>  </span> 
+<span class='PDMCnt'>2180</span> <span class='PDMInd'> 1</span>  <span class='PDMResK'>IF</span> <span class='PDMOper'>!</span><span class='PDMResF'>EMPTY</span><span class='PDMOper'>(</span><span class='PDMVar'>m</span><span class='PDMOper'>.</span><span class='PDMVar'>lcCommand</span><span class='PDMOper'>)</span> <span class='PDMResK'>THEN</span>
+<span class='PDMCnt'>2181</span> <span class='PDMInd'>  </span> 
+<span class='PDMCnt'>2182</span> <span class='PDMInd'> 2</span>   <span class='PDMResK'>DO</span> <span class='PDMResK'>CASE</span>
+<span class='PDMCnt'>2183</span> <span class='PDMInd'> 3</span>    <span class='PDMResK'>CASE</span> <span class='PDMResF'>EMPTY</span><span class='PDMOper'>(</span><span class='PDMVar'>m</span><span class='PDMOper'>.</span><span class='PDMVar'>tcLaunchPath</span><span class='PDMOper'>)</span>
+<span class='PDMCnt'>2184</span> <span class='PDMInd'> 4</span>     <span class='PDMVar'>tcLaunchPath</span> <span class='PDMOper'>=</span> <span class='PDMResF'>JUSTPATH</span><span class='PDMOper'>(</span><span class='PDMResF'>FULLPATH</span><span class='PDMOper'>(</span><span class='PDMResF'>CURDIR</span><span class='PDMOper'>(</span><span class='PDMOper'>)</span><span class='PDMOper'>)</span><span class='PDMOper'>)</span>
+<span class='PDMCnt'>2185</span> <span class='PDMInd'> 3</span>    <span class='PDMResK'>OTHERWISE</span>
+<span class='PDMCnt'>2186</span> <span class='PDMInd'> 4</span>     <span class='PDMVar'>tcLaunchPath</span> <span class='PDMOper'>=</span> <span class='PDMResF'>JUSTPATH</span><span class='PDMOper'>(</span><span class='PDMResF'>ADDBS</span><span class='PDMOper'>(</span><span class='PDMVar'>m</span><span class='PDMOper'>.</span><span class='PDMVar'>tcLaunchPath</span><span class='PDMOper'>)</span><span class='PDMOper'>)</span>
+<span class='PDMCnt'>2187</span> <span class='PDMInd'> 2</span>   <span class='PDMResK'>ENDCASE</span>
+<span class='PDMCnt'>2188</span> <span class='PDMInd'>  </span> 
+<span class='PDMCnt'>2189</span> <span class='PDMInd'> 2</span>   <span class='PDMVar'>llReturn</span> <span class='PDMOper'>=</span> <span class='PDMVar'>Run_ExtApp</span><span class='PDMOper'>(</span><span class='PDMVar'>m</span><span class='PDMOper'>.</span><span class='PDMVar'>lcCommand</span><span class='PDMOper'>,</span><span class='PDMVar'>m</span><span class='PDMOper'>.</span><span class='PDMVar'>tcLaunchPath</span><span class='PDMOper'>,</span><span class='PDMOper'>;</span>
+<span class='PDMCnt'>2190</span> <span class='PDMInd'> 3</span>    <span class='PDMResF'>IIF</span><span class='PDMOper'>(</span><span class='PDMVar'>m</span><span class='PDMOper'>.</span><span class='PDMVar'>tlShow</span><span class='PDMOper'>,</span><span class='PDMStr'>'NOR'</span><span class='PDMOper'>,</span><span class='PDMStr'>'HID'</span><span class='PDMOper'>)</span><span class='PDMOper'>,</span><span class='PDMOper'>@</span><span class='PDMVar'>tnExitCode</span><span class='PDMOper'>)</span>
+<span class='PDMCnt'>2191</span> <span class='PDMInd'>  </span> 
+<span class='PDMCnt'>2192</span> <span class='PDMInd'> 1</span>  <span class='PDMResK'>ENDIF</span> <span class='PDMCom'>&amp;&amp;!EMPTY(m.lcCommand)</span>
+<span class='PDMCnt'>2193</span> <span class='PDMInd'>  </span> 
+<span class='PDMCnt'>2194</span> <span class='PDMInd'>  </span> <span class='PDMCom'>*!*    /Changed by: SF 17.9.2015</span>
+<span class='PDMCnt'>2195</span> <span class='PDMInd'>  </span> 
+<span class='PDMCnt'>2196</span> <span class='PDMInd'> 1</span>  <span class='PDMResK'>RETURN</span> <span class='PDMVar'>m</span><span class='PDMOper'>.</span><span class='PDMVar'>llReturn</span>
+<span class='PDMCnt'>2197</span> <span class='PDMInd'>  </span> </pre>
  <!-- Code End -->
   </div>
  </div>
@@ -288,12 +419,16 @@ Changed by: SF<br />
 <div class="diaxp_mfoot"> <div class="PDM_AB_CopyRight"><!-- Footer Begin -->
   <hr />
   <div class="PDM_AB_Body">
-<i>&copy; 25.9.2019 Lutz Scheffler Software Ingenieurb&uuml;ro</i>
+
+	<img src="../../repository/vfpxbanner_small.png" alt="VFPX logo"/><br/>
+	<p>This project is part of <a href="https://vfpx.github.io/"  title="Skip to VFPX" target="_blank">VFPX</a>.</p>
+	<p><i>&copy; 25.9.2019 Lutz Scheffler Software Ingenieurb&uuml;ro</i></p>
+	
   </div><!-- Body End -->
  </div><!-- Footer End -->
 </div>
 <script language="JavaScript" type="text/javascript">
-lo=document.getElementById("TX_SP_P18");
+lo=document.getElementById("TX_SP_P19");
 lo.XType="SourceCode";
 lo.Dir="../../imgs/";
 

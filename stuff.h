@@ -27,3 +27,4 @@
 #DEFINE True								.T.
 #DEFINE False								.F.
 #DEFINE NIL									.NULL.
+#DEFINE dcB2T_Verno							"2.0.0"

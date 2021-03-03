@@ -1,11 +1,12 @@
+#INCLUDE STUFF.h
 LPARAMETERS;
  tv01,tv02,tv03,tv04,tv05,tv06,tv07,tv08,;
  tv09,tv10,tv11,tv12,tv13,tv14,tv15,tv16,;
  tv17,tv18,tv19,tv20,tv21,tv22,tv23,tv24
 
 LOCAL;
-loConverter
- 
+ loConverter
+
 Construct_Objects()
 IF _SCREEN.frmB2T_Envelop.cusB2T.Get_Converter(,@loConverter,.T.) THEN
  SwitchErrorHandler(.F.)
@@ -24,14 +25,19 @@ ENDIF &&_SCREEN.frmB2T_Envelop.cusB2T.Get_Converter(@lcStorage,@loConverter,.T.)
 * <a href="https://github.com/fdbozzo/foxbin2prg">FoxBin2Prg</a> for IDE purposes.
 *</p>
 *</remarks>
-*!*	<copyright><i>&copy; 25.09.2019 Lutz Scheffler Software Ingenieurbüro</i></copyright>
+*!*
+*!*	<copyright>
+*!*	<img src="../../repository/vfpxbanner_small.png" alt="VFPX logo"/><br/>
+*!*	<p>This project is part of <a href="https://vfpx.github.io/"  title="Skip to VFPX" target="_blank">VFPX</a>.</p>
+*!*	<p><i>&copy; 25.09.2019 Lutz Scheffler Software Ingenieurbüro</i></p>
+*!*	</copyright>
 *!*	</pdm>
 
 SwitchErrorHandler(.T.)
 HelpMsg(0)
 SwitchErrorHandler(.F.)
 ?Is_git()
-?getbranch()
+?GetBranch()
 FUNCTION Pjx2Commit	&&Create a commit to git.
  LPARAMETERS;
   tlAll
@@ -44,7 +50,11 @@ FUNCTION Pjx2Commit	&&Create a commit to git.
 *!*	</params>
 *!*	<retval type="Boolean">True if successfull.</retval>
 *!*	<remarks>This calls FoxBin2PRG to process active project or all projects in the path. And runs a git commit.</remarks>
-*!*	<copyright><i>&copy; 05.6.2015 Lutz Scheffler Software Ingenieurbüro</i></copyright>
+*!*	<copyright>
+*!*	<img src="../../repository/vfpxbanner_small.png" alt="VFPX logo"/><br/>
+*!*	<p>This project is part of <a href="https://vfpx.github.io/"  title="Skip to VFPX" target="_blank">VFPX</a>.</p>
+*!*	<p><i>&copy; 05.6.2015 Lutz Scheffler Software Ingenieurbüro</i></p>
+*!*	</copyright>
 *!*	</pdm>
 
 *!*	<pdm>
@@ -86,6 +96,9 @@ FUNCTION Pjx2Commit	&&Create a commit to git.
  ENDIF &&!PEMSTATUS(_SCREEN,"gcB2T_GitPjx",5)
 
  SwitchErrorHandler(.F.)
+*DO Convert_Pjx IN (_SCREEN.gcB2T_App) WITH .F.,2,0
+*DO Pjx2Commit IN (_SCREEN.gcB2T_App) WITH .T.
+* IF Convert_Pjx(.F.,IIF(m.tlAll,3,1),ICASE(m.tlAll,0,_SCREEN.gcB2T_GitPjx="1",4,3)) THEN
  IF Convert_Pjx(.F.,IIF(m.tlAll,3,1),ICASE(m.tlAll,0,_SCREEN.gcB2T_GitPjx="1",4,3)) THEN
   SwitchErrorHandler(.T.)
   _SCREEN.ADDPROPERTY('gcOld_Path',FULLPATH(CURDIR()))
@@ -102,7 +115,8 @@ FUNCTION Pjx2Commit	&&Create a commit to git.
    LOCAL;
     lnSec       AS NUMBER,;
     lnErrorCode AS NUMBER,;
-    llSuccess   AS BOOLEAN
+    llSuccess   AS BOOLEAN,;
+    llIs64      AS BOOLEAN
 
    LOCAL;
     lcBat    AS CHARACTER,;
@@ -110,26 +124,28 @@ FUNCTION Pjx2Commit	&&Create a commit to git.
     lcCommit AS CHARACTER,;
     lc_Git   AS CHARACTER
 
-   lcPath = ADDBS(FULLPATH(CURDIR()))
-   IF TYPE('_SCREEN.gcB2T_UseBash')="C" AND _SCREEN.gcB2T_UseBash=="1" AND Get_git_Path(@lc_Git) THEN
+   Get_git_Path(@lc_Git,@llIs64)
 
-    llSuccess = Run_git('add -A',.F.,.F.,.F.)
-*    llSuccess = m.llSuccess AND Run_git('status --porcelain>git_x.tmp',.F.,.F.,.T.)
-    = m.llSuccess AND Run_git('diff --cached --exit-code',.F.,.F.,.F.,@lnErrorCode)
+   lcPath = ADDBS(FULLPATH(CURDIR()))
+   IF !m.llIs64 AND (TYPE('_SCREEN.gcB2T_UseBash')="C" AND _SCREEN.gcB2T_UseBash=="1") THEN
+
+    llSuccess = Run_git('add -A',,.F.,.F.,.F.)
+*    llSuccess = m.llSuccess AND Run_git('status --porcelain>git_x.tmp',,.F.,.F.,.T.)
+    = m.llSuccess AND Run_git('diff --cached --exit-code',,.F.,.F.,.F.,@lnErrorCode)
     llSuccess = m.llSuccess AND m.lnErrorCode=1  &&lnErrorCode -> files staged but not commited
-   ELSE  &&TYPE('_SCREEN.gcB2T_UseBash')="C" AND _SCREEN.gcB2T_UseBash=="1" AND Get_git_Path(@lc_Git)
+   ELSE  &&!m.llIs64 AND (TYPE('_SCREEN.gcB2T_UseBash')="C" AND _SCREEN.gcB2T_UseBash=="1")
 
     TEXT TO lcBat NOSHOW TEXTMERGE
 "<<m.lc_Git>>" add -A
 "<<m.lc_Git>>" status --porcelain>git_x.tmp
     ENDTEXT &&lcBat
     STRTOFILE(m.lcBat,'git_x.bat')
-    llSuccess = Run_ExtApp('cmd /c "'+m.lcPath+'git_x.bat"',m.lcPath,'HID')
+    llSuccess = Run_ExtApp('cmd /c "'+m.lcPath+'git_x.bat"',JUSTPATH(m.lcPath),'HID')
 
     llSuccess = m.llSuccess AND FILE('git_x.tmp') AND LEN(FILETOSTR('git_x.tmp'))>0
 
     DELETE FILE git_x.*
-   ENDIF &&TYPE('_SCREEN.gcB2T_UseBash')="C" AND _SCREEN.gcB2T_UseBash=="1" AND Get_git_Path(@lc_Git)
+   ENDIF &&!m.llIs64 AND (TYPE('_SCREEN.gcB2T_UseBash')="C" AND _SCREEN.gcB2T_UseBash=="1")
 
    IF m.llSuccess THEN
 *!*	Changed by: SF 17.9.2015
@@ -138,16 +154,17 @@ FUNCTION Pjx2Commit	&&Create a commit to git.
 *!*	run git w/o CMD
 *!*	</change>
 *!*	</pdm>
+
     IF TYPE('_SCREEN.gcB2T_Commit')="C" AND _SCREEN.gcB2T_Commit=="1" THEN
      lcCommit = CHRTRAN(TTOC(DATETIME(),3),'T',' ')
-     llSuccess = Run_git('commit -m "'+m.lcCommit+'" -m "auto-commit by RunB2T.app"',.F.,.F.,.F.)
+     llSuccess = Run_git('commit -m "'+m.lcCommit+'" -m "auto-commit by RunB2T.app"',,.F.,.F.,.F.)
      IF m.llSuccess THEN
       ??' - auto commit '+m.lcCommit
      ELSE  &&m.llSuccess
       ?' commit failed'
      ENDIF &&m.llSuccess
     ELSE  &&TYPE('_SCREEN.gcB2T_Commit')="C" AND _SCREEN.gcB2T_Commit=="1"
-     Run_git('commit',.T.,.T.,.F.)
+     Run_git('commit',,.T.,.T.,.F.)
     ENDIF &&TYPE('_SCREEN.gcB2T_Commit')="C" AND _SCREEN.gcB2T_Commit=="1"
 *!*	/Changed by: SF 17.9.2015
    ELSE  &&m.llSuccess
@@ -156,7 +173,7 @@ FUNCTION Pjx2Commit	&&Create a commit to git.
 *!*	/Changed by: SF 4.6.2015
 
   ELSE  &&Is_git()
-   =MESSAGEBOX('Run "git init" to enable git.',0,'',10000)
+   =MESSAGEBOX('Run "git init" to enable git.',0,'Bin2Text v'+dcB2T_Verno,10000)
   ENDIF &&Is_git()
 
   CD (_SCREEN.gcOld_Path)
@@ -177,7 +194,11 @@ FUNCTION Inter_Active &&Run settings mask.
 *!*	<detail></detail>
 *!*	</params>
 *!*	<remarks>To configure this program.</remarks>
-*!*	<copyright><i>&copy; 14.4.2015 Lutz Scheffler Software Ingenieurbüro</i></copyright>
+*!*	<copyright>
+*!*	<img src="../../repository/vfpxbanner_small.png" alt="VFPX logo"/><br/>
+*!*	<p>This project is part of <a href="https://vfpx.github.io/"  title="Skip to VFPX" target="_blank">VFPX</a>.</p>
+*!*	<p><i>&copy; 14.4.2015 Lutz Scheffler Software Ingenieurbüro</i></p>
+*!*	</copyright>
 *!*	</pdm>
 
  IF PCOUNT()=1 THEN
@@ -203,6 +224,9 @@ FUNCTION Inter_Active &&Run settings mask.
  SwitchErrorHandler(.F.)
 ENDFUNC &&Inter_Active
 
+*DO Convert_Pjx IN (_SCREEN.gcB2T_App) WITH .F.,2,0
+*DO Pjx2Commit IN (_SCREEN.gcB2T_App) WITH .T.
+* IF Convert_Pjx(.F.,IIF(m.tlAll,3,1),ICASE(m.tlAll,0,_SCREEN.gcB2T_GitPjx="1",4,3)) THEN
 FUNCTION Convert_Pjx &&Runs FoxBin2Prg for multiple projects.
  LPARAMETERS;
   tlToBin,;
@@ -220,10 +244,10 @@ FUNCTION Convert_Pjx &&Runs FoxBin2Prg for multiple projects.
 *!*	<detail>
 *<dl>
 * <dt>0</dt><dd>Use <expr>GETFILE()</expr> to define the file. Input is a text file if <pdmpara num="1"/>.</dd>
-* <dt>1</dt><dd>Active project.</dd>
-* <dt>2</dt><dd>All projects open in IDE</dd>
-* <dt>3</dt><dd>All projects in home path.</dd>
-* <dt>4</dt><dd>All projects in home path, with subdirs.</dd>
+* <dt>1</dt><dd>Just the active project.</dd>
+* <dt>2</dt><dd>All projects open in IDE. Include list of Additional Files from Settings interface.</dd>
+* <dt>3</dt><dd>All projects in home path. Include list of Additional Files from Settings interface.</dd>
+* <dt>4</dt><dd>All projects in home path, with subdirs. Include list of Additional Files from Settings interface.</dd>
 *</dl>
 *</detail>
 *!*	</params>
@@ -240,7 +264,14 @@ FUNCTION Convert_Pjx &&Runs FoxBin2Prg for multiple projects.
 *</detail>
 *!*	<retval type="Boolean">True if successfull.</retval>
 *!*	</params>
-*!*	<copyright><i>&copy; 12.6.2015 Lutz Scheffler Software Ingenieurbüro</i></copyright>
+*!*	<remarks>
+*<p>For <pdmpar num="2" /> in 2,3,4 the list of Additional Files will not be processed, if there is no project found.</p>
+*</remarks>
+*!*	<copyright>
+*!*	<img src="../../repository/vfpxbanner_small.png" alt="VFPX logo"/><br/>
+*!*	<p>This project is part of <a href="https://vfpx.github.io/"  title="Skip to VFPX" target="_blank">VFPX</a>.</p>
+*!*	<p><i>&copy; 02.03.2021 Lutz Scheffler Software Ingenieurbüro</i></p>
+*!*	</copyright>
 
 *!*	<change date="{^2015-05-12,09:56:00}">Changed by: SF<br />
 *!*	New value for parameter <pdmpara num="3" /> "4"
@@ -311,7 +342,7 @@ FUNCTION Convert_Pjx &&Runs FoxBin2Prg for multiple projects.
  CLEAR
 
  IF m.tlToBin THEN
-  IF MESSAGEBOX('Create Binary?',4+32+256,'FoxBin2Text',10000)#6 THEN
+  IF MESSAGEBOX('Create Binary?',4+32+256,'Bin2Text v'+dcB2T_Verno,10000)#6 THEN
    ?'Stopped by user'
    SwitchErrorHandler(.F.)
    RETURN .F.
@@ -387,7 +418,7 @@ FUNCTION Convert_Pjx &&Runs FoxBin2Prg for multiple projects.
 
    IF m.tlToBin AND !UPPER(JUSTEXT(m.lcProj))==m.lcSourceExt THEN
 *   IF m.tlToBin AND !UPPER(JUSTEXT(m.lcProj)==m.lcSourceExt) THEN
-    MESSAGEBOX("File is not a valid text representation of a project in this folder")
+    MESSAGEBOX("File is not a valid text representation of a project in this folder",0,'Bin2Text v'+dcB2T_Verno)
     SwitchErrorHandler(.F.)
     RETURN .F.
    ENDIF &&m.tlToBin AND !UPPER(JUSTEXT(m.lcProj))==m.lcSourceExt
@@ -522,7 +553,7 @@ FUNCTION Convert_Pjx &&Runs FoxBin2Prg for multiple projects.
 
    _SCREEN.ADDPROPERTY('gaFiles(1,2)')
 
-   ScanDir(m.lcPath,m.tlToBin,m.loConverter)
+   ScanDir(1,m.lcPath,m.tlToBin,m.loConverter)
 
    loConverter = .NULL.
    Destruct_Objects()
@@ -631,12 +662,26 @@ FUNCTION Convert_Pjx &&Runs FoxBin2Prg for multiple projects.
   ENDIF &&m.lnProjs=0
  ENDIF &&m.tnMode=3
 
+*!*	Changed  by: SF 28.2.2021
+*!*	<pdm>
+*!*	<change date="{^2021-02-28,21:02:00}">Changed  by: SF<br />
+*!*	Add List of files stored with settings.
+*!*	</change>
+*!*	</pdm>
+
+ IF INLIST(m.tnProjects,2,3,4) THEN
+  lvMode = m.lvMode+'-IncludeList'
+ ENDIF &&INLIST(m.tnProjects,2,3,4)
+
+*!*	/Changed  by: SF 28.2.2021
+
+
 
 *just to keep data over CLEAR ALL
  _SCREEN.ADDPROPERTY('gcOld_Path',m.lcOldPath)
- _SCREEN.ADDPROPERTY('gvMode',lvMode)
+ _SCREEN.ADDPROPERTY('gvMode',m.lvMode)
  _SCREEN.ADDPROPERTY('glToBin',m.tlToBin)
- _SCREEN.ADDPROPERTY('glCheckAll',llCheckAll)
+ _SCREEN.ADDPROPERTY('glCheckAll',m.llCheckAll)
 
 *to remove Classlibs so we can recreate
  CLEAR ALL
@@ -717,7 +762,7 @@ FUNCTION Convert_Pjx &&Runs FoxBin2Prg for multiple projects.
 *!*	Output of current git branch
 *!*	</change>
 *!*	</pdm>
- lcProj = getbranch()
+ lcProj = GetBranch()
  IF !EMPTY(m.lcProj) THEN
   ?'On branch '+m.lcProj
  ENDIF &&!EMPTY(m.lcProj)
@@ -750,7 +795,7 @@ FUNCTION Convert_File  	&&Runs FoxBin2Prg for a single file or vcx/class.
 *<p>FoxBin2Prg will run in appropriate mode.</p>
 *</detail>
 *!*	</params>
-*!*	<retval type="Boolean">Returns succcess of operation.</retval>
+*!*	<retval type="Boolean">Returns success of operation.</retval>
 *!*	<remarks>
 *<p>Runs a pickup for a file and transforms it.
 *Will always transform, neither the file is changed or not.</p>
@@ -764,7 +809,11 @@ FUNCTION Convert_File  	&&Runs FoxBin2Prg for a single file or vcx/class.
 *!*	</seealso>
 *!*	<appliesto toref="0" toalso="0" />
 *!*	</comment>
-*!*	<copyright><i>&copy; 22.3.2017 Lutz Scheffler Software Ingenieurbüro</i></copyright>
+*!*	<copyright>
+*!*	<img src="../../repository/vfpxbanner_small.png" alt="VFPX logo"/><br/>
+*!*	<p>This project is part of <a href="https://vfpx.github.io/"  title="Skip to VFPX" target="_blank">VFPX</a>.</p>
+*!*	<p><i>&copy; 22.3.2017 Lutz Scheffler Software Ingenieurbüro</i></p>
+*!*	</copyright>
 *!*	</pdm>
 
  IF _VFP.STARTMODE#0 THEN
@@ -791,6 +840,7 @@ FUNCTION Convert_File  	&&Runs FoxBin2Prg for a single file or vcx/class.
  SwitchErrorHandler(.T.)
 
  LOCAL;
+  lcPath AS STRING,;
   lcFileTypes,;
   lcFile,;
   lcSourceExt,;
@@ -914,12 +964,12 @@ FUNCTION Convert_File  	&&Runs FoxBin2Prg for a single file or vcx/class.
    ENDIF &&!FILE(_SCREEN.gaProjects(1,1))
 
    IF m.llReturn THEN
-    IF MESSAGEBOX('Create Binary?',4+32+256,'FoxBin2Text',10000)#6 THEN
+    IF MESSAGEBOX('Create Binary?',4+32+256,'Bin2Text v'+dcB2T_Verno,10000)#6 THEN
      ?'Stopped by user'
      llReturn = .F.
-    ELSE &&MESSAGEBOX('Create Binary?',4+32+256,'FoxBin2Text',10000)#6
+    ELSE &&MESSAGEBOX('Create Binary?',4+32+256,'Bin2Text v'+dcB2T_Verno,10000)#6
      ?'Process to binary'
-    ENDIF &&MESSAGEBOX('Create Binary?',4+32+256,'FoxBin2Text',10000)#6
+    ENDIF &&MESSAGEBOX('Create Binary?',4+32+256,'Bin2Text v'+dcB2T_Verno,10000)#6
    ENDIF &&m.llReturn
 
    IF m.llReturn THEN
@@ -1030,6 +1080,163 @@ FUNCTION Convert_File  	&&Runs FoxBin2Prg for a single file or vcx/class.
  RETURN m.llReturn
 ENDFUNC &&Convert_File
 
+FUNCTION Convert_Directory  	&&Runs FoxBin2Prg for a single directory and it's sub directories.
+ LPARAMETERS;
+  tlToBin,;
+  tcDirectory
+*!*	<pdm>
+*!*	<descr>Runs FoxBin2Prg for a directory.</descr>
+*!*	<params name="tlToBin" type="Boolean" byref="0" dir="" inb="0" outb="0">
+*!*	<short>Direction of operation.</short>
+*!*	<detail>
+*<p>If true, create binaries from the text files corresponding <pdmpara num="2" />.</p>
+*<p>If false create text files.(Default)</p>
+*</detail>
+*!*	<params name="tcDirectory" type="Boolean" byref="0" dir="" inb="1" outb="1">
+*!*	<short>Directories.</short>
+*!*	<detail />
+*!*	</params>
+*!*	<retval type="Boolean">Returns success of operation.</retval>
+*!*	<remarks>
+*<p>Runs a pickup for a directory and transforms the files in it.
+*Will always transform, neither the file is changed or not.</p>
+*the files will be processed according to the setting of the config <i>foxbin2prg.cfg</i> file</p>
+*</remarks>
+*!*	<comment>
+*!*	<example></example>
+*!*	<seealso>
+*!*	 <see loca="" class="" pem=""></see>
+*!*	</seealso>
+*!*	<appliesto toref="0" toalso="0" />
+*!*	</comment>
+*!*	<copyright>
+*!*	<img src="../../repository/vfpxbanner_small.png" alt="VFPX logo"/><br/>
+*!*	<p>This project is part of <a href="https://vfpx.github.io/"  title="Skip to VFPX" target="_blank">VFPX</a>.</p>
+*!*	<p><i>&copy; 12.02.2021 Lutz Scheffler Software Ingenieurbüro</i></p>
+*!*	</copyright>
+*!*	</pdm>
+
+ IF _VFP.STARTMODE#0 THEN
+  HelpMsg(2)
+  RETURN .F.
+ ENDIF &&F_VFP.StartMode#0
+
+ LOCAL;
+  lcOldExact
+
+ lcOldExact = SET("Exact")
+ SET EXACT ON
+ IF VARTYPE(m.tlToBin)='C';
+   AND INLIST(LOWER(m.tlToBin),'?','/?','-?','h','/h','-h','help','/help','-help') THEN
+
+  HelpMsg(12)
+
+  SET EXACT &lcOldExact
+  RETURN .F.
+ ENDIF &&VARTYPE(m.tlToBin)='C' AND INLIST(LOWER(m.tlToBin),'?','/?','-?','h','/h','-h','help','/help','-help')
+
+ SET EXACT &lcOldExact
+
+ SwitchErrorHandler(.T.)
+ LOCAL;
+  lcPath AS STRING,;
+  lcFileTypes,;
+  lcFile,;
+  lcSourceExt,;
+  lvTemp,;
+  llReturn    AS BOOLEAN,;
+  loConverter AS OBJECT,;
+  loInfo      AS OBJECT
+
+ Construct_Objects()
+ IF _SCREEN.frmB2T_Envelop.cusB2T.Get_Converter(,@loConverter,.T.) THEN
+  Destruct_Objects()
+  SwitchErrorHandler(.F.)
+  ?"Error"
+  RETURN .F.
+ ENDIF &&_SCREEN.frmB2T_Envelop.cusB2T.Get_Converter(,@loConverter,.T.)
+
+ lcPath = FULLPATH(CURDIR())
+
+ _SCREEN.ADDPROPERTY('glToBin',m.tlToBin)
+ _SCREEN.ADDPROPERTY('glWithSub',m.tlWithSub)
+ _SCREEN.ADDPROPERTY('gaFiles(1,2)')
+
+ IF EMPTY(m.tcDirectory) OR !DIRECTORY(m.tcDirectory) THEN
+  _SCREEN.gaFiles(1,1) = JUSTPATH(GETDIR(m.lcPath,'','',1+64))
+ ELSE  &&EMPTY(m.tcDirectory) OR !DIRECTORY(m.tcDirectory)
+  _SCREEN.gaFiles(1,1) = JUSTPATH(ADDBS(m.tcDirectory))
+ ENDIF &&EMPTY(m.tcDirectory) OR !DIRECTORY(m.tcDirectory)
+
+ llReturn = .T.
+
+ IF m.llReturn THEN
+  IF m.tlToBin THEN
+   IF MESSAGEBOX('Create Binary?',4+32+256,'Bin2Text v'+dcB2T_Verno,10000)#6 THEN
+    ?'Stopped by user'
+    llReturn = .F.
+   ELSE &&MESSAGEBOX('Create Binary?',4+32+256,'Bin2Text v'+dcB2T_Verno,10000)#6
+    ?'Process to binary - no storage operation'
+   ENDIF &&MESSAGEBOX('Create Binary?',4+32+256,'Bin2Text v'+dcB2T_Verno,10000)#6
+  ELSE  &&m.tlToBin
+   ?'Process to text - no storage operation'
+  ENDIF &&m.tlToBin
+ ENDIF &&m.llReturn
+
+ IF m.llReturn AND EMPTY(_SCREEN.gaFiles(1,1)) THEN
+*Nothing selected, GetDir cancled
+*No Message
+  llReturn = .F.
+ ENDIF &&m.llReturn AND EMPTY(_SCREEN.gaFiles(1,1))
+
+* loInfo      = m.loConverter.Get_DirSettings(JUSTPATH(_SCREEN.gaFiles(1,1)))
+ Destruct_Objects()
+
+ IF m.llReturn THEN
+  CLEAR ALL
+
+*process Transformation
+  Construct_Objects()
+
+  LOCAL;
+   llReturn,;
+   loConverter AS OBJECT,;
+   loInfo      AS OBJECT
+
+  llReturn = .T.
+
+  IF _SCREEN.frmB2T_Envelop.cusB2T.Get_Converter(,@loConverter,.T.) THEN
+   Destruct_Objects()
+   SwitchErrorHandler(.F.)
+   ?"Error"
+   llReturn = .F.
+  ENDIF &&_SCREEN.frmB2T_Envelop.cusB2T.Get_Converter(,@loConverter,.T.)
+
+  IF m.llReturn THEN
+
+   LOCAL ARRAY;
+    laFiles(ALEN(_SCREEN.gaFiles,1),1)
+
+   ACOPY(_SCREEN.gaFiles,laFiles)
+
+   llReturn = m.llReturn AND _SCREEN.frmB2T_Envelop.cusB2T.Process_Dir_Bin2Text(@laFiles,_SCREEN.glToBin)
+
+   loInfo = .NULL.
+
+  ENDIF &&m.llReturn
+
+  Destruct_Objects()
+ ENDIF &&m.llReturn
+
+********
+ REMOVEPROPERTY(_SCREEN,'gaFiles')
+ REMOVEPROPERTY(_SCREEN,'glWithSub')
+ REMOVEPROPERTY(_SCREEN,'glToBin')
+
+ SwitchErrorHandler(.F.)
+ RETURN m.llReturn
+ENDFUNC &&Convert_Directory
+
 FUNCTION Convert_Array	&&Runs FoxBin2Prg for multiple files.
  LPARAMETERS;
   tlToBin,;
@@ -1067,7 +1274,11 @@ FUNCTION Convert_Array	&&Runs FoxBin2Prg for multiple files.
 * like <i>Delete obsolete files</i> might delete text files without warning.
 *</note>
 *</remarks>
-*!*	<copyright><i>&copy; 23.3.2017 Lutz Scheffler Software Ingenieurbüro</i></copyright>
+*!*	<copyright>
+*!*	<img src="../../repository/vfpxbanner_small.png" alt="VFPX logo"/><br/>
+*!*	<p>This project is part of <a href="https://vfpx.github.io/"  title="Skip to VFPX" target="_blank">VFPX</a>.</p>
+*!*	<p><i>&copy; 23.3.2017 Lutz Scheffler Software Ingenieurbüro</i></p>
+*!*	</copyright>
 *!*	</pdm>
 
  EXTERNAL ARRAY;
@@ -1143,9 +1354,15 @@ FUNCTION InitMenu	&&Starts the IDE menu.
 *<p>The VFP search path will be altered to keep the path to the application.</p>
 *<p>Places menu into <expr>_SYSMENU</expr>.</p>
 *</remarks>
-*!*	<copyright><i>&copy; 14.4.2015 Lutz Scheffler Software Ingenieurbüro</i></copyright>
+*!*	<copyright>
+*!*	<img src="../../repository/vfpxbanner_small.png" alt="VFPX logo"/><br/>
+*!*	<p>This project is part of <a href="https://vfpx.github.io/"  title="Skip to VFPX" target="_blank">VFPX</a>.</p>
+*!*	<p><i>&copy; 14.4.2015 Lutz Scheffler Software Ingenieurbüro</i></p>
+*!*	</copyright>
 *!*	</pdm>
 
+ LOCAL;
+  lcOldExact	AS STRING
  IF _VFP.STARTMODE#0 THEN
   HelpMsg(6)
   RETURN .F.
@@ -1186,6 +1403,7 @@ FUNCTION InitMenu	&&Starts the IDE menu.
  SwitchErrorHandler(.T.)
 
  LOCAL;
+  lcProc AS CHARACTER,;
   lcFile AS CHARACTER,;
   lcMenu AS CHARACTER,;
   lcPath AS CHARACTER,;
@@ -1210,16 +1428,21 @@ FUNCTION InitMenu	&&Starts the IDE menu.
    lcFile = SYS(16,m.lnLoop)
    DO WHILE LEN(m.lcFile)>0
     lnLoop = m.lnLoop+1
-    IF UPPER(STREXTRACT(m.lcFile,' ',' ',1))=="INITMENU";
-      OR UPPER(JUSTFNAME(STREXTRACT(m.lcFile,' ',' ',2,2)))=="BIN2TEXT.APP" THEN
+    lcProc = STREXTRACT(m.lcFile,' ',' ',1)
+    lcFile = STREXTRACT(m.lcFile,' ',' ',2,2)
 
-     lcPath = UPPER(JUSTPATH(STREXTRACT(m.lcFile,' ',' ',2,2)))
-*     lcMenu = FORCEPATH("Bin2Text.mpx",ADDBS(m.lcPath))
+    IF UPPER(m.lcProc)=="INITMENU";
+      OR UPPER(JUSTFNAME(m.lcFile))=="BIN2TEXT.APP" THEN
+
+     ADDPROPERTY(_SCREEN,'gcB2T_App',m.lcFile)
+
+     lcPath = UPPER(JUSTPATH(m.lcFile))
+
      lcMenu = "Bin2Text.mpr"
      IF LEN(SET("Path"))#0 THEN
 *check VFP path to figure out if we are within
       FOR lnLoop = 1 TO ALINES(laDirs,SET("Path"),';')
-       IF m.lcPath==UPPER(laDirs(m.lnLoop)) THEN
+       IF m.lcPath==UPPER(m.laDirs(m.lnLoop)) THEN
         lcPath = ""
         EXIT
        ENDIF &&m.lcPath==UPPER(laDirs(m.lnLoop))
@@ -1234,7 +1457,7 @@ FUNCTION InitMenu	&&Starts the IDE menu.
      ENDIF &&!EMPTY(m.lcPath)
 
      EXIT
-    ENDIF &&UPPER(STREXTRACT(m.lcFile,' ',' ',1))=="INITMENU" OR UPPER(JUSTFNAME(STREXTRACT(m.lcFile,' ',' ',2,1) ...
+    ENDIF &&UPPER(m.lcProc)=="INITMENU" OR UPPER(JUSTFNAME(m.lcFile))=="BIN2TEXT.APP"
 
     lcFile = SYS(16,m.lnLoop)
    ENDDO &&LEN(m.lcFile)>0
@@ -1271,7 +1494,11 @@ PROCEDURE git_bash		&&run bash
 *!*	</seealso>
 *!*	<appliesto toref="0" toalso="0" />
 *!*	</comment>
-*!*	<copyright><i>&copy; 14.3.2016 Lutz Scheffler Software Ingenieurbüro</i></copyright>
+*!*	<copyright>
+*!*	<img src="../../repository/vfpxbanner_small.png" alt="VFPX logo"/><br/>
+*!*	<p>This project is part of <a href="https://vfpx.github.io/"  title="Skip to VFPX" target="_blank">VFPX</a>.</p>
+*!*	<p><i>&copy; 14.3.2016 Lutz Scheffler Software Ingenieurbüro</i></p>
+*!*	</copyright>
 *!*	</pdm>
 
 *!*	Changed by: SF 14.3.2016
@@ -1283,14 +1510,15 @@ PROCEDURE git_bash		&&run bash
 *!*	</pdm>
 
  LOCAL;
-  lc_Git AS CHARACTER
+  lc_Git AS CHARACTER,;
+  llIs64 AS BOOLEAN
 
- IF Get_git_Path(@lc_Git) THEN
+ IF Get_git_Path(@lc_Git,@llIs64) THEN
   LOCAL;
    lcOldPath AS CHARACTER,;
    lcPath    AS CHARACTER
 
-  lcOldPath = FULLPATH(CURDIR())
+  lcOldPath = JUSTPATH(FULLPATH(CURDIR()))
   lcPath    = GetBaseDir()
 
   CD (m.lcPath)
@@ -1314,7 +1542,7 @@ PROCEDURE git_bash		&&run bash
   CD (m.lcOldPath)
 
 *!*	/Changed by: SF 5.1.2016
- ENDIF &&Get_git_Path(@lc_Git)
+ ENDIF &&Get_git_Path(@lc_Git,@llIs64)
 
 *!*	/Changed by: SF 14.3.2016
 ENDPROC &&git_bash
@@ -1331,7 +1559,11 @@ PROCEDURE git_gitk &&run gitk
 *!*	</seealso>
 *!*	<appliesto toref="0" toalso="0" />
 *!*	</comment>
-*!*	<copyright><i>&copy; 15.9.2015 Lutz Scheffler Software Ingenieurbüro</i></copyright>
+*!*	<copyright>
+*!*	<img src="../../repository/vfpxbanner_small.png" alt="VFPX logo"/><br/>
+*!*	<p>This project is part of <a href="https://vfpx.github.io/"  title="Skip to VFPX" target="_blank">VFPX</a>.</p>
+*!*	<p><i>&copy; 15.9.2015 Lutz Scheffler Software Ingenieurbüro</i></p>
+*!*	</copyright>
 *!*	</pdm>
 
 *!*	changed by SF 25.9.2019
@@ -1344,7 +1576,7 @@ PROCEDURE git_gitk &&run gitk
  LOCAL;
   lcPath AS CHARACTER
 
- lcPath = ADDBS(FULLPATH(CURDIR()))
+ lcPath = JUSTPATH(FULLPATH(CURDIR()))
 
  IF Is_git() THEN
   llReturn = Run_ExtApp('"'+_SCREEN.gcB2T_GUI+'" ',m.lcPath,'NOR',,.T.)
@@ -1363,7 +1595,11 @@ FUNCTION Construct_Objects	&&Internal. Create FoxBin2PRG instance
 
 *!*	<pdm>
 *!*	<descr>Instantiate an instance of the business object of this application.</descr>
-*!*	<copyright><i>&copy; 14.4.2015 Lutz Scheffler Software Ingenieurbüro</i></copyright>
+*!*	<copyright>
+*!*	<img src="../../repository/vfpxbanner_small.png" alt="VFPX logo"/><br/>
+*!*	<p>This project is part of <a href="https://vfpx.github.io/"  title="Skip to VFPX" target="_blank">VFPX</a>.</p>
+*!*	<p><i>&copy; 14.4.2015 Lutz Scheffler Software Ingenieurbüro</i></p>
+*!*	</copyright>
 *!*	</pdm>
 
  IF PEMSTATUS(_SCREEN,'frmB2T_Envelop',5) AND !ISNULL(_SCREEN.frmB2T_Envelop) THEN
@@ -1382,7 +1618,11 @@ FUNCTION Destruct_Objects	&&Internal. Removes FoxBin2PRG instance
 
 *!*	<pdm>
 *!*	<descr>Remove an instance of the business object of this application.</descr>
-*!*	<copyright><i>&copy; 14.4.2015 Lutz Scheffler Software Ingenieurbüro</i></copyright>
+*!*	<copyright>
+*!*	<img src="../../repository/vfpxbanner_small.png" alt="VFPX logo"/><br/>
+*!*	<p>This project is part of <a href="https://vfpx.github.io/"  title="Skip to VFPX" target="_blank">VFPX</a>.</p>
+*!*	<p><i>&copy; 14.4.2015 Lutz Scheffler Software Ingenieurbüro</i></p>
+*!*	</copyright>
 *!*	</pdm>
 
  IF !PEMSTATUS(_SCREEN,'frmB2T_Envelop',5) THEN
@@ -1422,7 +1662,11 @@ FUNCTION Is_git		&&Internal. Check if a directory is under git control
 *!*	</seealso>
 *!*	<appliesto toref="0" toalso="0" />
 *!*	</comment>
-*!*	<copyright><i>&copy; 12.6.2015 Lutz Scheffler Software Ingenieurbüro</i></copyright>
+*!*	<copyright>
+*!*	<img src="../../repository/vfpxbanner_small.png" alt="VFPX logo"/><br/>
+*!*	<p>This project is part of <a href="https://vfpx.github.io/"  title="Skip to VFPX" target="_blank">VFPX</a>.</p>
+*!*	<p><i>&copy; 12.6.2015 Lutz Scheffler Software Ingenieurbüro</i></p>
+*!*	</copyright>
 *!*	</pdm>
  LOCAL;
   llIs_git AS BOOLEAN
@@ -1445,11 +1689,15 @@ PROCEDURE Print_ActiveBranch
 *!*	</seealso>
 *!*	<appliesto toref="0" toalso="0" />
 *!*	</comment>
-*!*	<copyright><i>&copy; 8.11.2017 Lutz Scheffler Software Ingenieurbüro</i></copyright>
+*!*	<copyright>
+*!*	<img src="../../repository/vfpxbanner_small.png" alt="VFPX logo"/><br/>
+*!*	<p>This project is part of <a href="https://vfpx.github.io/"  title="Skip to VFPX" target="_blank">VFPX</a>.</p>
+*!*	<p><i>&copy; 8.11.2017 Lutz Scheffler Software Ingenieurbüro</i></p>
+*!*	</copyright>
 *!*	</pdm>
 
  IF Is_git() THEN
-  ?'On branch '+getbranch()
+  ?'On branch '+GetBranch()
  ENDIF &&Is_Git()
 ENDPROC &&Print_ActiveBranch
 
@@ -1470,14 +1718,25 @@ FUNCTION GetBaseDir		&&Internal. Return base directory
 *!*	</seealso>
 *!*	<appliesto toref="0" toalso="0" />
 *!*	</comment>
-*!*	<copyright><i>&copy; 12..201 Lutz Scheffler Software Ingenieurbüro</i></copyright>
+*!*	<copyright>
+*!*	<img src="../../repository/vfpxbanner_small.png" alt="VFPX logo"/><br/>
+*!*	<p>This project is part of <a href="https://vfpx.github.io/"  title="Skip to VFPX" target="_blank">VFPX</a>.</p>
+*!*	<p><i>&copy; 12..201 Lutz Scheffler Software Ingenieurbüro</i></p>
+*!*	</copyright>
+*!*	</pdm>
+
+*!*	SF Changed by 12.2.2021
+*!*	<pdm>
+*!*	<change date="{^2021-02-12,08:27:00}">SF Changed by<br />
+*!*	Removed trailing backslash, confused Run_ExtApp
+*!*	</change>
 *!*	</pdm>
 
  LOCAL;
   lcReturn AS CHARACTER
 
- lcReturn = IIF(_VFP.PROJECTS.COUNT>0,JUSTPATH(_VFP.ACTIVEPROJECT.NAME),FULLPATH(CURDIR()))
- lcReturn = ADDBS(EVL(GetGitBaseDir(),m.lcReturn))
+ lcReturn = JUSTPATH(IIF(_VFP.PROJECTS.COUNT>0,_VFP.ACTIVEPROJECT.NAME,FULLPATH(CURDIR())))
+ lcReturn = EVL(GetGitBaseDir(),m.lcReturn)
 
  RETURN m.lcReturn
 ENDFUNC &&GetBaseDir
@@ -1501,34 +1760,54 @@ FUNCTION GetGitBaseDir		&&Internal. Return git root directory
 *!*	</seealso>
 *!*	<appliesto toref="0" toalso="0" />
 *!*	</comment>
-*!*	<copyright><i>&copy; 16.6.2015 Lutz Scheffler Software Ingenieurbüro</i></copyright>
+*!*	<copyright>
+*!*	<img src="../../repository/vfpxbanner_small.png" alt="VFPX logo"/><br/>
+*!*	<p>This project is part of <a href="https://vfpx.github.io/"  title="Skip to VFPX" target="_blank">VFPX</a>.</p>
+*!*	<p><i>&copy; 16.6.2015 Lutz Scheffler Software Ingenieurbüro</i></p>
+*!*	</copyright>
 *!*	</pdm>
 
  LOCAL;
   lcTemp   AS CHARACTER,;
   lc_Git   AS CHARACTER,;
-  lcReturn AS CHARACTER
+  lcReturn AS CHARACTER,;
+  llIs64   AS BOOLEAN
 
  lcReturn = ''
 
- IF VARTYPE(m.tcPath)#'C' THEN
-  tcPath = FULLPATH(CURDIR())
- ENDIF &&VARTYPE(m.tcPath)#'C'
+ DO CASE
+  CASE VARTYPE(m.tcPath)#'C' OR EMPTY(m.tcPath)
+   tcPath = JUSTPATH(FULLPATH(CURDIR()))
+  CASE EMPTY(m.tcPath)
+   tcPath = JUSTPATH(FULLPATH(CURDIR()))
+  OTHERWISE
+   tcPath = JUSTPATH(ADDBS(m.tcPath))
+ ENDCASE
 
+ lcTemp = FORCEPATH('git_x.tmp',m.tcPath)
 
- IF Get_git_Path(@lc_Git) THEN
+ IF Run_git('rev-parse --show-toplevel>git_x.tmp',m.tcPath,.F.,.F.) THEN
 
-  lcTemp = FORCEPATH('git_x.tmp',m.tcPath)
+  IF FILE(m.lcTemp) THEN
+   lcReturn = CHRTRAN(FILETOSTR(m.lcTemp),'/'+0h0d0a,'\')
+  ELSE &&FILE(m.lcTemp)
 
-  IF Run_ExtApp('cmd /c "'+m.lc_Git+'" rev-parse --show-toplevel>git_x.tmp',m.tcPath,'HID') THEN
-   IF FILE(m.lcTemp) THEN
-    lcReturn = CHRTRAN(FILETOSTR(m.lcTemp),'/'+0h0d0a,'\')
-   ENDIF &&FILE(m.lcTemp)
-  ENDIF &&Run_ExtApp('cmd /c "'+_SCREEN.gcB2T_git+'" rev-parse --show-toplevel>git_x.tmp',m.tcPath,'HID')
+   IF Get_git_Path(@lc_Git,@llIs64) THEN
 
-  DELETE FILE &lcTemp
+    lcTemp = FORCEPATH('git_x.tmp',m.tcPath)
+    IF Run_ExtApp('cmd /c ""'+m.lc_Git+'" rev-parse --show-toplevel>git_x.tmp'+'"',m.tcPath,'HID') THEN
+     IF FILE(m.lcTemp) THEN
+      lcReturn = CHRTRAN(FILETOSTR(m.lcTemp),'/'+0h0d0a,'\')
+     ENDIF &&FILE(m.lcTemp)
+    ENDIF &&Run_ExtApp('cmd /c ""'+m.lc_Git+'" rev-parse --show-toplevel>git_x.tmp'+'"',m.tcPath,'HID')
+   ENDIF &&Get_git_Path(@lc_Git,@llIs64)
 
- ENDIF &&Get_git_Path(@lc_Git)
+  ENDIF &&FILE(m.lcTemp)
+ ENDIF &&Run_git('rev-parse --show-toplevel>git_x.tmp',m.tcPath,.F.,.F.)
+
+ DELETE FILE &lcTemp
+
+* ENDIF &&Get_git_Path(@lc_Git,@llIs64)
 
  RETURN m.lcReturn
 ENDFUNC &&GetGitBaseDir
@@ -1536,13 +1815,18 @@ ENDFUNC &&GetGitBaseDir
 
 FUNCTION Get_git_Path &&Internal. Get installation status of git and path to binaries.
  LPARAMETERS;
-  tc_git
+  tc_git,;
+  tlIs64
 
 *!*	<pdm>
 *!*	<descr>Get installation status of git and paht to git binaries.</descr>
 *!*	<params name="tc_git" type="Character" byref="1" dir="out" inb="0" outb="0">
 *!*	<short>Path to git.exe.</short>
 *!*	<detail>Includes git.exe</detail>
+*!*	</params>
+*!*	<params name="tlIs64" type="Character" byref="1" dir="out" inb="1" outb="1">
+*!*	<short>Is 64bit git installed.</short>
+*!*	<detail>Checks if 64bit is installed. 64bit needs different calling then 32bit, because VFP is 32bit.</detail>
 *!*	</params>
 *!*	<retval type="Boolean">Path found</retval>
 *!*	<remarks>Checks <i>HKLM\software\Microsoft\Windows\CurrentVersion\Uninstall\Git_is1\</i>
@@ -1554,10 +1838,24 @@ FUNCTION Get_git_Path &&Internal. Get installation status of git and path to bin
 *!*	</seealso>
 *!*	<appliesto toref="0" toalso="0" />
 *!*	</comment>
-*!*	<copyright><i>&copy; 14.9.2015 Lutz Scheffler Software Ingenieurbüro</i></copyright>
+*!*	<copyright>
+*!*	<img src="../../repository/vfpxbanner_small.png" alt="VFPX logo"/><br/>
+*!*	<p>This project is part of <a href="https://vfpx.github.io/"  title="Skip to VFPX" target="_blank">VFPX</a>.</p>
+*!*	<p><i>&copy; 11.2.2021 Lutz Scheffler Software Ingenieurbüro</i></p>
+*!*	</copyright>
+*!*	</pdm>
+
+*!*	SF Changed by 11.2.2021
+*!*	<pdm>
+*!*	<change date="{^2021-02-11,12:55:00}">SF Changed by<br />
+*!*	Added code to determine 64 or 32 bit git,<br />
+*!*	Find git on per-user-install<br />
+*!*	Removed obolete place to look for git.<br />
+*!*	</change>
 *!*	</pdm>
 
  #DEFINE ERROR_SUCCESS		0	&& OK
+ #DEFINE HKEY_CURRENT_USER           -2147483647  && BITSET(0,31)+1
  #DEFINE HKEY_LOCAL_MACHINE          -2147483646  && BITSET(0,31)+2
 
  #DEFINE KEY_WOW64_64KEY 0x0100
@@ -1569,6 +1867,8 @@ FUNCTION Get_git_Path &&Internal. Get installation status of git and path to bin
  IF PEMSTATUS(_SCREEN,'gcB2T_git',5) THEN
 *read from storage or set
   tc_git = _SCREEN.gcB2T_git
+  tlIs64 = _SCREEN.glB2T_git64
+
  ELSE  &&PEMSTATUS(_SCREEN,'gcB2T_git',5)
 *try to read registry
   DECLARE INTEGER RegOpenKeyEx IN advapi32;
@@ -1585,6 +1885,7 @@ FUNCTION Get_git_Path &&Internal. Get installation status of git and path to bin
    lcReg    AS CHARACTER
 
   LOCAL;
+   lnNode,;
    lnKey,;
    lnSubKey,;
    lpdwReserved,;
@@ -1601,32 +1902,63 @@ FUNCTION Get_git_Path &&Internal. Get installation status of git and path to bin
 *!*	</pdm>
 
   LOCAL ARRAY;
-   laRegs(3,2)
+   laRegs(3,4)
+* Col 1, Node
+* Col 2, Key
+* Col 3, Value
+* Col 4, Boolean, 64 bit oder Value um dies zu ermitteln
 
-  laRegs(1,1) = "SOFTWARE\Microsoft\Windows\CurrentVersion\Uninstall\Git_is1\"
-  laRegs(1,2) = 'InstallLocation'
-  laRegs(2,1) = "SOFTWARE\GitForWindows\"
-  laRegs(2,2) = 'InstallPath'
-  laRegs(3,1) = "SOFTWARE\WOW6432Node\GitForWindows\"
-  laRegs(3,2) = 'InstallPath'
-
+  laRegs(1,1) = HKEY_LOCAL_MACHINE
+  laRegs(1,2) = "SOFTWARE\GitForWindows\"	&&64
+  laRegs(1,3) = 'InstallPath'
+  laRegs(1,4) = .T.
+  laRegs(2,1) = HKEY_LOCAL_MACHINE
+  laRegs(2,2) = "SOFTWARE\WOW6432Node\GitForWindows\"		&&32
+  laRegs(2,3) = 'InstallPath'
+  laRegs(2,4) = .F.
+  laRegs(3,1) = HKEY_CURRENT_USER
+  laRegs(3,2) = "SOFTWARE\GitForWindows\"		&&32/64
+  laRegs(3,3) = 'InstallPath'
+  laRegs(3,4) = 'LibexecPath'
+* Wert kann zwischen 64 und 32 bit unterscheiden
+* 64 LibexecPath:  %LOCALAPPDATA%\Programs\Git\mingw64\libexec\Git-core
+* 32 LibexecPath:  %LOCALAPPDATA%\\Programs\Git\mingw32\libexec\Git-core
 
   FOR lnKey = 1 TO ALEN(laRegs,1)
    tc_git = ''
+   tlIs64 = .F.
+
    STORE 0              TO lpdwReserved,lpdwType
    STORE SPACE(256)     TO lpbData
    STORE LEN(m.lpbData) TO lpcbData
    lnSubKey = 0
-   lcReg = laRegs(m.lnKey,1)
-   lnErrCode = RegOpenKeyEx(HKEY_LOCAL_MACHINE,m.lcReg,0,KEY_READ+KEY_WOW64_64KEY,@lnSubKey)
+   lnNode = laRegs(m.lnKey,1)
+   lcReg  = laRegs(m.lnKey,2)
+   lnErrCode = RegOpenKeyEx(m.lnNode,m.lcReg,0,KEY_READ+KEY_WOW64_64KEY,@lnSubKey)
    IF m.lnErrCode=ERROR_SUCCESS THEN
 *ReadKey
-    m.lnErrCode=RegQueryValueEx(m.lnSubKey,laRegs(m.lnKey,2),;
+    m.lnErrCode=RegQueryValueEx(m.lnSubKey,laRegs(m.lnKey,3),;
      m.lpdwReserved,@lpdwType,@lpbData,@lpcbData)
 
 * Check for error
     IF m.lnErrCode=ERROR_SUCCESS THEN
      tc_git = ADDBS(LEFT(m.lpbData,m.lpcbData-1))+'cmd\git.exe'
+
+     IF VARTYPE(laRegs(m.lnKey,4))='L' THEN
+      tlIs64 = laRegs(m.lnKey,4)
+     ELSE  &&VARTYPE(laRegs(m.lnKey,4))='L'
+      STORE 0              TO lpdwReserved,lpdwType
+      STORE SPACE(256)     TO lpbData
+      STORE LEN(m.lpbData) TO lpcbData
+*     ReadKey
+      m.lnErrCode=RegQueryValueEx(m.lnSubKey,laRegs(m.lnKey,4),;
+       m.lpdwReserved,@lpdwType,@lpbData,@lpcbData)
+
+      IF m.lnErrCode=ERROR_SUCCESS THEN
+       tlIs64 = '\mingw64\'$LEFT(m.lpbData,m.lpcbData-1)
+      ENDIF &&m.lnErrCode=ERROR_SUCCESS
+*     /ReadKey
+     ENDIF &&VARTYPE(laRegs(m.lnKey,4))='L'
     ENDIF &&m.lnErrCode=ERROR_SUCCESS
 */ReadKey
 
@@ -1640,10 +1972,10 @@ FUNCTION Get_git_Path &&Internal. Get installation status of git and path to bin
    ENDIF &&FILE(m.tc_git)
   ENDFOR &&lnKey
 
-  lcReg = "SOFTWARE\Microsoft\Windows\CurrentVersion\Uninstall\Git_is1\"
 *!*	/Changed by: SF 1.12.2015
 
   _SCREEN.ADDPROPERTY('gcB2T_git',IIF(FILE(m.tc_git),m.tc_git,''))
+  _SCREEN.ADDPROPERTY('glB2T_git64',m.tlIs64)
 
  ENDIF &&PEMSTATUS(_SCREEN,'gcB2T_git',5)
 
@@ -1659,7 +1991,7 @@ ENDFUNC &&Get_git_Path
 *!*	</change>
 *!*	</pdm>
 
-PROCEDURE getbranch		&&Internal. Return active git branch
+PROCEDURE GetBranch		&&Internal. Return active git branch
 
 *!*	<pdm>
 *!*	<descr>Output of current git branch</descr>
@@ -1672,7 +2004,11 @@ PROCEDURE getbranch		&&Internal. Return active git branch
 *!*	</seealso>
 *!*	<appliesto toref="0" toalso="0" />
 *!*	</comment>
-*!*	<copyright><i>&copy; 4.6.2015 Lutz Scheffler Software Ingenieurbüro</i></copyright>
+*!*	<copyright>
+*!*	<img src="../../repository/vfpxbanner_small.png" alt="VFPX logo"/><br/>
+*!*	<p>This project is part of <a href="https://vfpx.github.io/"  title="Skip to VFPX" target="_blank">VFPX</a>.</p>
+*!*	<p><i>&copy; 4.6.2015 Lutz Scheffler Software Ingenieurbüro</i></p>
+*!*	</copyright>
 *!*	</pdm>
 
  LOCAL;
@@ -1682,11 +2018,14 @@ PROCEDURE getbranch		&&Internal. Return active git branch
  lcRet = ''
  IF Is_git() THEN
 *schlägt irgendwie mit bash fehl, daher erstmal wieder cmd
-  IF Run_git('rev-parse --abbrev-ref HEAD>git_x.tmp',.F.,.T.,.T.) THEN
-*!*	  IF Run_git('rev-parse --abbrev-ref HEAD>git_x.tmp',.F.,.F.,.T.) THEN
-*!*	DEBUG
-*!*	suspend
-*!*	  IF Run_git('rev-parse --abbrev-ref HEAD',.F.,.F.,.T.) THEN
+  IF Run_git('rev-parse --abbrev-ref HEAD>git_x.tmp',,.F.,.F.,.T.) THEN
+
+*!*	 LPARAMETERS;
+*!*	  tcParameters,;
+*!*	  tlShow,;
+*!*	  tlIn_Shell,;
+*!*	  tlComplex,;
+*!*	  tnExitCode
 
    lnSec = SECONDS()
 
@@ -1694,7 +2033,7 @@ PROCEDURE getbranch		&&Internal. Return active git branch
     lcRet = CHRTRAN(FILETOSTR('git_x.tmp'),0h0d0a,'')
     DELETE FILE git_x.tmp
    ENDIF &&FILE('git_x.tmp')
-  ENDIF &&Run_git('rev-parse --abbrev-ref HEAD>git_x.tmp',.F.,.F.,.T.)
+  ENDIF &&Run_git('rev-parse --abbrev-ref HEAD>git_x.tmp',,.F.,.F.,.T.)
  ENDIF &&Is_git()
 
  RETURN m.lcRet
@@ -1711,6 +2050,7 @@ ENDPROC &&GetBranch
 FUNCTION Run_git		&&Internal. Run a git root command
  LPARAMETERS;
   tcParameters,;
+  tcLaunchPath,;
   tlShow,;
   tlIn_Shell,;
   tlComplex,;
@@ -1719,7 +2059,11 @@ FUNCTION Run_git		&&Internal. Run a git root command
 *!*	<pdm>
 *!*	<descr>Run git program</descr>
 *!*	<params name="tcParameters" type="Character" byref="0" dir="" inb="0" outb="0">
-*!*	<short><parameters for git/short>
+*!*	<short>parameters for git</short>
+*!*	<detail></detail>
+*!*	</params>
+*!*	<params name="tcLaunchPath" type="Character" byref="0" dir="" inb="0" outb="0">
+*!*	<short>Launch path</short>
 *!*	<detail></detail>
 *!*	</params>
 *!*	<params name="tlShow" type="Boolean" byref="0" dir="" inb="1" outb="0">
@@ -1736,7 +2080,7 @@ FUNCTION Run_git		&&Internal. Run a git root command
 *!*	<params name="tlComplex" type="Boolean" byref="0" dir="" inb="1" outb="0">
 *!*	<short>Does not run as a single command,/short>
 *!*	<detail>
-*!*	<p>Only if <pdmpara num="3" /> is false.</p>
+*!*	<p>Only if <pdmpara num="4" /> is false.</p>
 *!*	<p>A rather complex command, like a pipe.</p>
 *!*	</detail>
 *!*	</params>
@@ -1754,7 +2098,11 @@ FUNCTION Run_git		&&Internal. Run a git root command
 *!*	</seealso>
 *!*	<appliesto toref="0" toalso="0" />
 *!*	</comment>
-*!*	<copyright><i>&copy; 25.9.2019 Lutz Scheffler Software Ingenieurbüro</i></copyright>
+*!*	<copyright>
+*!*	<img src="../../repository/vfpxbanner_small.png" alt="VFPX logo"/><br/>
+*!*	<p>This project is part of <a href="https://vfpx.github.io/"  title="Skip to VFPX" target="_blank">VFPX</a>.</p>
+*!*	<p><i>&copy; 25.9.2019 Lutz Scheffler Software Ingenieurbüro</i></p>
+*!*	</copyright>
 *!*	</pdm>
 
 *!*	Changed by: SF 25.9.2019
@@ -1770,13 +2118,22 @@ FUNCTION Run_git		&&Internal. Run a git root command
 *!*	</change>
 *!*	</pdm>
 
+*!*	SF Changed by: SF 11.2.2021
+*!*	<pdm>
+*!*	<change date="{^2021-02-11,15:52:00}">Changed by: SF<br />
+*!*	New Parameter, Launchpath.<br/>
+*!*	Changed strategy to call, check for 64bit git
+*!*	</change>
+*!*	</pdm>
+
 
  LOCAL;
-  lcPath   AS CHARACTER,;
-  lc_Git   AS CHARACTER,;
-  llReturn AS BOOLEAN
+  lc_Git    AS CHARACTER,;
+  lcCommand AS CHARACTER,;
+  llReturn  AS BOOLEAN,;
+  llIs64    AS BOOLEAN,;
+  llInBash  AS BOOLEAN
 
- lcPath = JUSTPATH(FULLPATH(CURDIR()))
 *!*	Changed by: SF 17.9.2015
 *!*	<pdm>
 *!*	<change date="{^2015-09-17,04:43:00}">Changed by: SF<br />
@@ -1784,31 +2141,56 @@ FUNCTION Run_git		&&Internal. Run a git root command
 *!*	</change>
 *!*	</pdm>
 
+ llInBash = TYPE('_SCREEN.gcB2T_UseBash')="C" AND _SCREEN.gcB2T_UseBash=="1"
+
  tnExitCode = 0
 *rund cmd to perform piping data
  DO CASE
-  CASE !Get_git_Path(@lc_Git)
+  CASE !Get_git_Path(@lc_Git,@llIs64)
 *error, no git, not gitted
-  CASE !m.tlIn_Shell AND m.tlComplex
+  CASE !m.llIs64 AND !m.tlIn_Shell AND m.tlComplex
+*not if 64bit git
 *should run without shell, but command is to complex, for example a pipe
-   llReturn = Run_ExtApp('"'+FORCEPATH('bash.exe',FORCEPATH('bin',JUSTPATH(JUSTPATH(lc_Git))))+'" --login -i '+;
-    '-c "git '+CHRTRAN(m.tcParameters,'\','/')+'"',;
-    m.lcPath,IIF(m.tlShow,'NOR','HID'),@tnExitCode)
-  CASE !m.tlIn_Shell
-*just command
-   llReturn = Run_ExtApp('"'+m.lc_Git+'" '+m.tcParameters,m.lcPath,IIF(m.tlShow,'NOR','HID'),@tnExitCode)
 
-  CASE m.tlIn_Shell AND TYPE('_SCREEN.gcB2T_UseBash')="C" AND _SCREEN.gcB2T_UseBash=="1"
+* might be removed if we figure out how to run 64bit git
+* what seems the problem for complex at all
+   lcCommand = ;
+    '"'+FORCEPATH('bash.exe',FORCEPATH('bin',JUSTPATH(JUSTPATH(lc_Git))))+'" --login -i '+;
+    '-c "git '+CHRTRAN(m.tcParameters,'\','/')+'"'
+
+  CASE !m.llIs64 AND !m.tlIn_Shell
+*not if 64bit git
+*just command
+   lcCommand = '"'+m.lc_Git+'" '+m.tcParameters
+
+  CASE m.tlIn_Shell AND m.llInBash
 *command with bash
-   llReturn = Run_ExtApp('"'+FORCEPATH('git-bash.exe',JUSTPATH(JUSTPATH(m.lc_Git)))+'" '+;
-    '-c "git '+CHRTRAN(m.tcParameters,'\','/')+'"',;
-    m.lcPath,IIF(m.tlShow,'NOR','HID'),@tnExitCode)
+   lcCommand = ;
+    '"'+FORCEPATH('git-bash.exe',JUSTPATH(JUSTPATH(m.lc_Git)))+'" '+;
+    '-c "git '+CHRTRAN(m.tcParameters,'\','/')+'"'
 
   CASE m.tlIn_Shell
 *command with cmd
-   llReturn = Run_ExtApp('cmd /c "'+m.lc_Git+'" '+m.tcParameters,m.lcPath,IIF(m.tlShow,'NOR','HID'),@tnExitCode)
+   lcCommand = 'cmd /c ""'+m.lc_Git+'" '+m.tcParameters+'"'
+
   OTHERWISE
+*64bit, not handled better, falls back to cmd
+   lcCommand = 'cmd /c ""'+m.lc_Git+'" '+CHRTRAN(m.tcParameters,'/','\')+'"'
  ENDCASE
+
+ IF !EMPTY(m.lcCommand) THEN
+
+  DO CASE
+   CASE EMPTY(m.tcLaunchPath)
+    tcLaunchPath = JUSTPATH(FULLPATH(CURDIR()))
+   OTHERWISE
+    tcLaunchPath = JUSTPATH(ADDBS(m.tcLaunchPath))
+  ENDCASE
+
+  llReturn = Run_ExtApp(m.lcCommand,m.tcLaunchPath,;
+   IIF(m.tlShow,'NOR','HID'),@tnExitCode)
+
+ ENDIF &&!EMPTY(m.lcCommand)
 
 *!*	/Changed by: SF 17.9.2015
 
@@ -1862,7 +2244,18 @@ FUNCTION Run_ExtApp		&&Internal. Run external app
 *!*	</seealso>
 *!*	<appliesto toref="0" toalso="0" />
 *!*	</comment>
-*!*	<copyright><i>&copy; 12.6.2015 Lutz Scheffler Software Ingenieurbüro</i></copyright>
+*!*	<copyright>
+*!*	<img src="../../repository/vfpxbanner_small.png" alt="VFPX logo"/><br/>
+*!*	<p>This project is part of <a href="https://vfpx.github.io/"  title="Skip to VFPX" target="_blank">VFPX</a>.</p>
+*!*	<p><i>&copy; 12.6.2015 Lutz Scheffler Software Ingenieurbüro</i></p>
+*!*	</copyright>
+*!*	</pdm>
+
+*!*	SF Changed by 11.2.2021
+*!*	<pdm>
+*!*	<change date="{^2021-02-11,15:35:00}">SF Changed by<br />
+*!*	Error handling for error in API_Run init, Messagebox
+*!*	</change>
 *!*	</pdm>
 
  LOCAL;
@@ -1876,17 +2269,23 @@ FUNCTION Run_ExtApp		&&Internal. Run external app
  tnExitCode = -1
 
  IF VARTYPE(m.loAPI)='O' AND !ISNULL(m.loAPI) THEN
-  IF m.tlNoWait THEN
-   IF m.loAPI.LaunchApp() THEN
-    tnExitCode = NVL(m.loAPI.CheckProcessExitCode(),-1)
-   ENDIF &&m.loAPI.LaunchApp()
-  ELSE  &&m.tlNoWait
-   IF m.loAPI.LaunchAppAndWait() THEN
+  IF EMPTY(m.loAPI.icErrorMessage) THEN
+   IF m.tlNoWait THEN
+    IF m.loAPI.LaunchApp() THEN
+     tnExitCode = NVL(m.loAPI.CheckProcessExitCode(),-1)
+    ENDIF &&m.loAPI.LaunchApp()
+   ELSE  &&m.tlNoWait
+    IF m.loAPI.LaunchAppAndWait() THEN
 *    tnExitCode = NVL(m.loAPI.CheckProcessExitCode(),-1)
-    tnExitCode = m.loAPI.CheckProcessExitCode()
-    tnExitCode = NVL(m.tnExitCode,-1)
-   ENDIF &&m.loAPI.LaunchAppAndWait()
-  ENDIF &&m.tlNoWait
+     tnExitCode = m.loAPI.CheckProcessExitCode()
+     tnExitCode = NVL(m.tnExitCode,-1)
+    ENDIF &&m.loAPI.LaunchAppAndWait()
+   ENDIF &&m.tlNoWait
+  ENDIF &&EMPTY(m.loAPI.icErrorMessage)
+
+  IF !EMPTY(m.loAPI.icErrorMessage) THEN
+   MESSAGEBOX(m.loAPI.icErrorMessage,0,'API Run / Bin2Text v'+dcB2T_Verno)
+  ENDIF &&!EMPTY(m.loAPI.icErrorMessage)
  ENDIF &&VARTYPE(m.loAPI)='O' AND !ISNULL(m.loAPI)
 
  loAPI = .NULL.
@@ -1913,7 +2312,9 @@ FUNCTION HelpMsg	&&Internal. Display help message for external functions
   [DO Convert_Array IN RunB2T.prg]+" [OF Bin2Text.app]"+0h0d0a+;
   [ IDE Interface für FoxBin2Prg, für ein Datei Array]+0h0D0A0D0A+;
   [DO Convert_File IN RunB2T.prg]+" [OF Bin2Text.app]"+0h0d0a+;
-  [ IDE Interface für FoxBin2Prg, für eine wählbare Datei oder Klasse.]
+  [ IDE Interface für FoxBin2Prg, für eine wählbare Datei oder Klasse.]+0h0D0A0D0A+;
+  [DO Convert_Directory IN RunB2T.prg]+" [OF Bin2Text.app]"+0h0d0a+;
+  [ IDE Interface für FoxBin2Prg, für ein Verzeichnis.]
 
  #DEFINE dcText_DE_H01;
   "DO Convert_Pjx IN Bin2Text.app [[/?]|[lToBin[,nProjects[,nMode]]"+0h0d0a+;
@@ -2006,6 +2407,19 @@ FUNCTION HelpMsg	&&Internal. Display help message for external functions
   [  lSingleClass  Bestimme eine Klasse zum Transformieren.]+0h0d0a+;
   [Führt ein CLEAR ALL aus.]
 
+
+ #DEFINE dcText_DE_H12;
+  "DO Convert_Directory IN Bin2Text.app [/?]|[lToBin[,tlWithSub]]"+0h0d0a+;
+  [ IDE interface für FoxBin2Prg, um ein Verzeichnis zu transformieren.]+0h0d0a+;
+  [ Parameter:]+0h0d0a+;
+  [  /?            Zeigt diesen Hilfstext]+0h0d0a+;
+  [  lToBin        Wenn wahr werden die Biärdateien erzeugt,]+0h0d0a+;
+  [                sonst werden Textdateien erzeugt.(Default)]+0h0d0a+;
+  [                Optional in FoxBin2PRG Stil]+0h0d0a+;
+  [  tlWithSub     Inklusive Unterverzeichnisse.]+0h0d0a+;
+  [Führt ein CLEAR ALL aus.]
+
+
 ************************************************
  #DEFINE dcText_EN_H00;
   [Run:]+0h0d0a+;
@@ -2019,9 +2433,11 @@ FUNCTION HelpMsg	&&Internal. Display help message for external functions
   [DO InitMenu IN RunB2T.prg]+0h0d0a+;
   [ Run menu]+0h0D0A0D0A+;
   [DO Convert_Array IN Bin2Text.app]+0h0d0a+;
-  [ IDE interface for FoxBin2Prg, to be used with an array of files.]+;
+  [ IDE interface for FoxBin2Prg, to be used with an array of files.]+0h0D0A0D0A+;
   [DO Convert_File IN RunB2T.prg]+" [OF Bin2Text.app]"+0h0d0a+;
-  [ IDE interface for FoxBin2Prg, pick a file or class to convert.]
+  [ IDE interface for FoxBin2Prg, pick a file or class to convert.]+0h0D0A0D0A+;
+  [DO Convert_Directory IN RunB2T.prg]+" [OF Bin2Text.app]"+0h0d0a+;
+  [ IDE interface for FoxBin2Prg, pick a directory to convert.]
 
  #DEFINE dcText_EN_H01;
   "DO Convert_Pjx IN Bin2Text.app [/?]|[lToBin[,nProjects[,nMode]]"+0h0d0a+;
@@ -2112,7 +2528,18 @@ FUNCTION HelpMsg	&&Internal. Display help message for external functions
   [  lToBin        If true, create binaries,]+0h0d0a+;
   [                if false create text files.(Default)]+0h0d0a+;
   [                Optional in FoxBin2PRG style]+0h0d0a+;
-  [  lSingleClass  Select a class to  transform.]+0h0d0a+;
+  [  lSingleClass  Select a class to transform.]+0h0d0a+;
+  [This will use CLEAR ALL!]
+
+ #DEFINE dcText_EN_H12;
+  "DO Convert_Directory IN Bin2Text.app [/?]|[lToBin[,tlWithSub]]"+0h0d0a+;
+  [ IDE interface for FoxBin2Prg, pick a directory transform.]+0h0d0a+;
+  [ Parameter:]+0h0d0a+;
+  [  /?            This help message]+0h0d0a+;
+  [  lToBin        If true, create binaries,]+0h0d0a+;
+  [                if false create text files.(Default)]+0h0d0a+;
+  [                Optional in FoxBin2PRG style]+0h0d0a+;
+  [  tlWithSub     Include subdirectoris.]+0h0d0a+;
   [This will use CLEAR ALL!]
 
  LPARAMETERS;
@@ -2124,7 +2551,11 @@ FUNCTION HelpMsg	&&Internal. Display help message for external functions
 *!*	<short>Help number.</short>
 *!*	<detail></detail>
 *!*	</params>
-*!*	<copyright><i>&copy; 14.4.2015 Lutz Scheffler Software Ingenieurbüro</i></copyright>
+*!*	<copyright>
+*!*	<img src="../../repository/vfpxbanner_small.png" alt="VFPX logo"/><br/>
+*!*	<p>This project is part of <a href="https://vfpx.github.io/"  title="Skip to VFPX" target="_blank">VFPX</a>.</p>
+*!*	<p><i>&copy; 14.4.2015 Lutz Scheffler Software Ingenieurbüro</i></p>
+*!*	</copyright>
 *!*	</pdm>
 
  _SCREEN.SHOW()
@@ -2157,12 +2588,15 @@ FUNCTION HelpMsg	&&Internal. Display help message for external functions
    lcOut = dcText_EN_H10
   CASE m.tnHelp=11
    lcOut = dcText_EN_H11
+  CASE m.tnHelp=12
+   lcOut = dcText_EN_H12
   OTHERWISE
    lcOut = dcText_EN_H00
  ENDCASE
 
  lnMemo = SET("Memowidth")
  SET MEMOWIDTH TO 80
+ ?'Bin2Text v'+dcB2T_Verno FONT "Courier",12
  ?m.lcOut FONT "Courier"
  SET MEMOWIDTH TO (m.lnMemo)
 ENDFUNC &&HelpMsg
@@ -2182,17 +2616,22 @@ PROCEDURE CatchError		&&Error handler
 *!*	<short>See <pdmpara num="1"/>.</short>
 *!*	<detail></detail>
 *!*	</params>
-*!*	<copyright><i>&copy; 19.4.2015 Lutz Scheffler Software Ingenieurbüro</i></copyright>
+*!*	<copyright>
+*!*	<img src="../../repository/vfpxbanner_small.png" alt="VFPX logo"/><br/>
+*!*	<p>This project is part of <a href="https://vfpx.github.io/"  title="Skip to VFPX" target="_blank">VFPX</a>.</p>
+*!*	<p><i>&copy; 19.4.2015 Lutz Scheffler Software Ingenieurbüro</i></p>
+*!*	</copyright>
 *!*	</pdm>
 
  LOCAL ARRAY;
   laError(1,7)
 
  AERROR(laError)
- MESSAGEBOX('Error:'+PADL(laError(1,1),5)+', '+laError(1,2)+0h0d0a+;
+ MESSAGEBOX('Ooops, works not as expected.'+0h0d0a0d0a+;
+ 'Error:'+PADL(laError(1,1),5)+', '+laError(1,2)+0h0d0a+;
   'Code block: '+m.tcProgram+0h0d0a+;
   'Code line: '+PADL(m.tnLineNo,7),;
-  64,'Ooops, works not as expected.')
+  64,'Bin2Text v'+dcB2T_Verno)
  SwitchErrorHandler()
  DEBUG
  SUSPEND
@@ -2220,7 +2659,11 @@ PROCEDURE SwitchErrorHandler		&&Toggle error handler
 *!*	</seealso>
 *!*	<appliesto toref="0" toalso="0" />
 *!*	</comment>
-*!*	<copyright><i>&copy; 19.4.2015 Lutz Scheffler Software Ingenieurbüro</i></copyright>
+*!*	<copyright>
+*!*	<img src="../../repository/vfpxbanner_small.png" alt="VFPX logo"/><br/>
+*!*	<p>This project is part of <a href="https://vfpx.github.io/"  title="Skip to VFPX" target="_blank">VFPX</a>.</p>
+*!*	<p><i>&copy; 19.4.2015 Lutz Scheffler Software Ingenieurbüro</i></p>
+*!*	</copyright>
 *!*	</pdm>
 
  DO CASE
@@ -2238,14 +2681,84 @@ PROCEDURE SwitchErrorHandler		&&Toggle error handler
  ENDCASE
 ENDPROC &&SwitchErrorHandler
 
+PROCEDURE Compare_VerNo	  &&Internal. Compare version number
+ LPARAMETERS ;
+  tcVerNo1,;
+  tcVerNo2
+  
+*!*	<pdm>
+*!*	<descr>Compare Version numbers</descr>
+*!*	<params name="tcVerNo1" type="Character" byref="0" dir="" inb="0" outb="0">
+*!*	<short>Version number 1 in form nnnnn[.nnnnn[.nnnnn ... ]]]</short>
+*!*	<detail>1 to 4 groups. Max 4 digits per group. Trailing groups will be ignored.</detail>
+*!*	</params>
+*!*	<params name="tcVerNo2" type="Character" byref="0" dir="" inb="0" outb="0">
+*!*	<short>Version number 2 in form nnnn[.nnnn[.nnnn ... ]]]</short>
+*!*	<detail>1 to 4 groups. Max 4 digits per group. Trailing groups will be ignored.</detail>
+*!*	</params>
+*!*	<comment>
+*!*	<retval type="Number">
+*!*	<dl>
+*!*	 <dt>0</dt>
+*!*	 <dd><expr>m.tcVerNo1=m.tcVerNo2</expr></dd>
+*!*	 </dl><dt>1</dt>
+*!*	 <dd><expr>m.tcVerNo1>m.tcVerNo2</expr></dd>
+*!*	 </dl><dt>2</dt>
+*!*	 <dd><expr>m.tcVerNo1<m.tcVerNo2</expr></dd>
+*!*	</dl>
+*!*	</retval>
+*!*	<remarks></remarks>
+*!*	<example></example>
+*!*	<seealso>
+*!*	 <see loca="" class="" pem=""></see>
+*!*	</seealso>
+*!*	<appliesto toref="0" toalso="0" />
+*!*	</comment>
+*!*	<copyright>
+*!*	<img src="../../repository/vfpxbanner_small.png" alt="VFPX logo"/><br/>
+*!*	<p>This project is part of <a href="https://vfpx.github.io/"  title="Skip to VFPX" target="_blank">VFPX</a>.</p>
+*!*	<p><i>&copy; 3.3.2021 Lutz Scheffler Software Ingenieurbüro</i></p>
+*!*	</copyright>
+*!*	</pdm> 
+
+ LOCAL;
+  lnPos	  AS NUMBER,;
+  lnVerNo1 AS NUMBER,;
+  lnVerNo2 AS NUMBER
+
+ lnVerNo1 = 0
+ lnVerNo2 = 0
+
+ FOR lnPos = 0 TO MIN(OCCURS('.',m.tcVerNo1),OCCURS('.',m.tcVerNo2),4)
+  lnVerNo1 = m.lnVerNo1*10^4+VAL(GETWORDNUM(m.tcVerNo1,m.lnPos+1,'.'))
+  lnVerNo2 = m.lnVerNo2*10^4+VAL(GETWORDNUM(m.tcVerNo2,m.lnPos+1,'.'))
+ ENDFOR &&lnPos
+
+ DO CASE
+  CASE m.lnVerNo1=m.lnVerNo2
+   RETURN 0
+  CASE m.lnVerNo1>m.lnVerNo2
+   RETURN 1
+  OTHERWISE
+   RETURN 2
+ ENDCASE
+ENDPROC &&Compare_VerNo
+
 PROCEDURE ScanDir		&&Internal. Recursivly scan directories
  LPARAMETERS;
+  tnAction,;
   tcDir,;
   tlToBin,;
   toConverter
 
 *!*	<pdm>
 *!*	<descr>Scan a directory recursive.</descr>
+*!*	<params name="tnAction" type="Number" byref="0" dir="" inb="0" outb="0">
+*!*	<short>Action for Directory</short>
+*!*	<detail>
+*1 scan for pjx
+*</detail>
+*!*	</params>
 *!*	<params name="tcDir" type="Character" byref="0" dir="" inb="0" outb="0">
 *!*	<short>Directory to scan</short>
 *!*	<detail></detail>
@@ -2267,7 +2780,11 @@ PROCEDURE ScanDir		&&Internal. Recursivly scan directories
 *!*	</seealso>
 *!*	<appliesto toref="0" toalso="0" />
 *!*	</comment>
-*!*	<copyright><i>&copy; 15.6.2015 Lutz Scheffler Software Ingenieurbüro</i></copyright>
+*!*	<copyright>
+*!*	<img src="../../repository/vfpxbanner_small.png" alt="VFPX logo"/><br/>
+*!*	<p>This project is part of <a href="https://vfpx.github.io/"  title="Skip to VFPX" target="_blank">VFPX</a>.</p>
+*!*	<p><i>&copy; 14.2.2021 Lutz Scheffler Software Ingenieurbüro</i></p>
+*!*	</copyright>
 *!*	</pdm>
 
  LOCAL;
@@ -2285,11 +2802,17 @@ PROCEDURE ScanDir		&&Internal. Recursivly scan directories
   ENDIF &&INLIST(laDir(m.lnLoop1,1),'.','..')
   ScanDir(ADDBS(ADDBS(m.tcDir)+laDir(m.lnLoop1,1)),m.tlToBin,m.toConverter)
  ENDFOR &&lnLoop1
- Dir_Action(m.tcDir,m.tlToBin,m.toConverter)
+ DO CASE
+  CASE m.tnAction=1
+   Dir_Action_PJX(m.tcDir,m.tlToBin,m.toConverter)
+
+  OTHERWISE
+   ?"error"
+ ENDCASE
  CD (m.lcOldDir)
 ENDPROC &&ScanDir
 
-PROCEDURE Dir_Action		&&Internal. Parse a directory for projcets (binary or text)
+PROCEDURE Dir_Action_PJX		&&Internal. Parse a directory for projects (binary or text)
  LPARAMETERS;
   tcDir,;
   tlToBin,;
@@ -2306,7 +2829,7 @@ PROCEDURE Dir_Action		&&Internal. Parse a directory for projcets (binary or text
 *!*	<detail></detail>
 *!*	</params>
 *!*	<params name="toConverter" type="Object" byref="0" dir="" inb="0" outb="0">
-*!*	<short>FoxBin2Text object to firure out settings of a given directory.</short>
+*!*	<short>FoxBin2Text object to figure out settings of a given directory.</short>
 *!*	<detail></detail>
 *!*	</params>
 *!*	<comment>
@@ -2318,7 +2841,11 @@ PROCEDURE Dir_Action		&&Internal. Parse a directory for projcets (binary or text
 *!*	</seealso>
 *!*	<appliesto toref="0" toalso="0" />
 *!*	</comment>
-*!*	<copyright><i>&copy; 15.6.2015 Lutz Scheffler Software Ingenieurbüro</i></copyright>
+*!*	<copyright>
+*!*	<img src="../../repository/vfpxbanner_small.png" alt="VFPX logo"/><br/>
+*!*	<p>This project is part of <a href="https://vfpx.github.io/"  title="Skip to VFPX" target="_blank">VFPX</a>.</p>
+*!*	<p><i>&copy; 15.6.2015 Lutz Scheffler Software Ingenieurbüro</i></p>
+*!*	</copyright>
 *!*	</pdm>
 
  LOCAL;
@@ -2356,4 +2883,4 @@ PROCEDURE Dir_Action		&&Internal. Parse a directory for projcets (binary or text
   ENDFOR &&lnProjs
  ENDIF &&m.lnProjs>0
 
-ENDPROC &&Dir_Action
+ENDPROC &&Dir_Action_PJX
