@@ -23,17 +23,15 @@
 <body>
  <h1>Bin 2 Text extension</h1>
  <p>
-  This document describes the <a href="https://github.com/lscheffler/bin2text" target="_blank">Bin 2 Text</a> extension
-  for <a href="https://github.com/fdbozzo/foxbin2prg" target="_blank">FoxBin2Prg</a> by Fernando D. Bozzo.
+  This document describes the <a href="https://github.com/lscheffler/bin2text"  title="Bin2Text at github" target="_blank">Bin 2 Text</a> extension
+  for <a href="https://github.com/fdbozzo/foxbin2prg" title="FoxBin2Prg at github" target="_blank">FoxBin2Prg</a> by Fernando D. Bozzo.
  </p>
  <p>
-  A <a href="https://github.com/lscheffler/foxbin2prg" target="_blank">fork</a> with some fixes and added functions is available too.
+  A <a href="https://github.com/lscheffler/foxbin2prg" title="fork at github" target="_blank">fork</a> with added functions is available too.
+  It also covers newer <a href="https://github.com/lscheffler/foxbin2prg/blob/fork_mod/Documentacion/github/FoxBin2prg.md" title="FoxBin2Prg documentation at github" target="_blank">documentation</a>.
  </p>
  <p>
-  The fork is mandatory, if tables with .NULL. values must be processed.
- </p>
- <p>
-  Documentation of the project is done with <a href="http://gorila.netlab.cz/pdm.html" target="_blank">Project Documenting Machine</a> by Martina Jindrová using the AB-plugins by myself.
+  Documentation of the project is done with <a href="http://gorila.netlab.cz/pdm.html" title="PDM"  target="_blank">Project Documenting Machine</a> by Martina Jindrová using the AB-plugins by myself.
  </p>
  <p>
   Contents:
@@ -56,9 +54,9 @@
   I come up with a bit more, it will work as a simple menu for pjx transfers too.
  </p>
  <p>
- 	FoxBin2Prg does a great job in transfering the VFP binary sources into text files.
+ 	FoxBin2Prg does a great job in transfering the VFP binary sources into text files.<br/>
 	Since <em>git</em> is used a bit bit different then the common SCM (it's to tricky to decribe with my english),
-	a need of very fast atomic transfers from Bin to Text comes up.
+	a need of very fast atomic transfers from Bin to Text comes up.<br/>
  	My first idea was to transfer single binaries from VFP project manager, but the context menu extension works not as expected.<br/>
    <em>If somebody knows how to figure out what particular node was right clicked on project manager, let me know, I will set this thing up to work from there too.</em>
  </p>
@@ -107,12 +105,12 @@
  </p>
  <hr /><h2><a name="howto">How to get it to work</a></h2>
  <ol>
-  <li>You need <a href="https://github.com/fdbozzo/foxbin2prg" target="_blank">FoxBin2Prg</a> at least version 1.19.42</li>
-  <li>I recommend this <a href="https://github.com/lscheffler/foxbin2prg" target="_blank">fork</a>, version 1.20.nn</li>
+  <li>You need <a href="https://github.com/fdbozzo/foxbin2prg" title="FoxBin2Prg at github" target="_blank">FoxBin2Prg</a> at least version 1.19.42</li>
+  <li>I recommend this <a href="https://github.com/lscheffler/foxbin2prg" title="fork at github" target="_blank">fork</a>, version 1.21.02</li>
   <li>
 		<p>
 			<strong>Note:</strong> Bin2Text depends on a lot of settings by FoxBin2Prg.
-			See <a href="https://github.com/lscheffler/foxbin2prg" title="FoxBin2Prg Internals">FoxBin2Prg Internals</a>.
+			See <a href="https://github.com/lscheffler/foxbin2prg/blob/fork_mod/Documentacion/github/FoxBin2Prg_Internals.md" title="FoxBin2Prg Internals" target="_blank">FoxBin2Prg Internals</a>.
 		</p>
 		<p>
 			For example, if a certain type of binary will be processed,
@@ -121,17 +119,17 @@
   </li>
   <li>
   	<p>
-  		If you like to have it interacting with <em>git</em>, you need <a href="http://git-scm.com/download/win" target="_blank">git for windows</a>.
+  		If you like to have it interacting with <em>git</em>, you need <a href="http://git-scm.com/download/win" title="git setup" target="_blank">git for windows</a>.
   	</p>
   	<p>
   		The programm is tested with <em>git for windows</em> version 2.30.1.windows.1 (2021-02-08) 32 and 64bit.
-  		See <a href="https://github.com/lscheffler/bin2text">Bin 2 Text Extension</a> for latest <em>git</em> version supported.
+  		See <a href="https://github.com/lscheffler/bin2text" title="Bin 2 Text at github" target="_blank">Bin 2 Text Extension</a> for latest <em>git</em> version supported.
   		<ul>
   			<li>The <em>git</em> commands must be working in windows command line and bash.</li>
   			<li>The base directory must be a <em>git controled</em> directory.</li>
   			<li>
   				You should understand <em>git</em>.
-  				I strongly recommend to read the first three chapters of <a href="https://git-scm.com/book/en/v2" target="_blank">Pro git</a> at least.
+  				I strongly recommend to read the first three chapters of <a href="https://git-scm.com/book/en/v2" title="git Documentation" target="_blank"">Pro git</a> at least.
   			</li>
   			<li>
   				Any other operation with <em>git</em> might be done with any tool.
@@ -139,8 +137,8 @@
   			</li>
   			<li>
   				Some deeper ideas of the use of <em>git</em> with VFP are found in the documentation of
-  				my <a href="https://github.com/lscheffler/foxbin2prg" target="_blank">fork</a> of FoxBin2Prg.
-  				See <a href="https://github.com/lscheffler/foxbin2prg" title="Use with git">Use with git</a>.
+  				my <a href="https://github.com/lscheffler/foxbin2prg" title="fork at github" target="_blank">fork</a> of FoxBin2Prg.
+  				See <a href="https://github.com/lscheffler/foxbin2prg/blob/fork_mod/Documentacion/github/FoxBin2Prg_git.md" title="Use with git" target="_blank">Use with git</a>.
   			</li>
 
   		</ul>

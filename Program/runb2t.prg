@@ -784,16 +784,17 @@ FUNCTION Convert_File  	&&Runs FoxBin2Prg for a single file or vcx/class.
 *!*	<params name="tlToBin" type="Boolean" byref="0" dir="" inb="0" outb="0">
 *!*	<short>Direction of operation.</short>
 *!*	<detail>
-*<p>If true, create binaries from the text files corresponding <pdmpara num="2" />.</p>
-*<p>If false create text files.(Default)</p>
-*</detail>
+*!*	<p>If true, create binaries from the text files corresponding <pdmpara num="2" />.</p>
+*!*	<p>If false create text files.(Default)</p>
+*!*	</detail>
+*!*	</params>
 *!*	<params name="tlSingleClass" type="Boolean" byref="0" dir="" inb="0" outb="0">
 *!*	<short>Mode of file pickup, allows processing of single classes.</short>
 *!*	<detail>
-*<p>If true, pick up a single class via <expr>AGETCLASS()</expr>.</p>
-*<p>If false, any source file.(Default)</p>
-*<p>FoxBin2Prg will run in appropriate mode.</p>
-*</detail>
+*!*	<p>If true, pick up a single class via <expr>AGETCLASS()</expr>.</p>
+*!*	<p>If false, any source file.(Default)</p>
+*!*	<p>FoxBin2Prg will run in appropriate mode.</p>
+*!*	</detail>
 *!*	</params>
 *!*	<retval type="Boolean">Returns success of operation.</retval>
 *!*	<remarks>
@@ -1089,19 +1090,20 @@ FUNCTION Convert_Directory  	&&Runs FoxBin2Prg for a single directory and it's s
 *!*	<params name="tlToBin" type="Boolean" byref="0" dir="" inb="0" outb="0">
 *!*	<short>Direction of operation.</short>
 *!*	<detail>
-*<p>If true, create binaries from the text files corresponding <pdmpara num="2" />.</p>
-*<p>If false create text files.(Default)</p>
-*</detail>
+*!*	<p>If true, create binaries from the text files corresponding <pdmpara num="2" />.</p>
+*!*	<p>If false create text files.(Default)</p>
+*!*	</detail>
+*!*	</params>
 *!*	<params name="tcDirectory" type="Boolean" byref="0" dir="" inb="1" outb="1">
 *!*	<short>Directories.</short>
 *!*	<detail />
 *!*	</params>
 *!*	<retval type="Boolean">Returns success of operation.</retval>
 *!*	<remarks>
-*<p>Runs a pickup for a directory and transforms the files in it.
-*Will always transform, neither the file is changed or not.</p>
-*the files will be processed according to the setting of the config <i>foxbin2prg.cfg</i> file</p>
-*</remarks>
+*!*	<p>Runs a pickup for a directory and transforms the files in it.
+*!*	Will always transform, neither the file is changed or not.</p>
+*!*	the files will be processed according to the setting of the config <i>foxbin2prg.cfg</i> file</p>
+*!*	</remarks>
 *!*	<comment>
 *!*	<example></example>
 *!*	<seealso>
@@ -1485,9 +1487,9 @@ ENDFUNC &&InitMenu
 PROCEDURE git_bash		&&run bash
 *!*	<pdm>
 *!*	<descr>Run <i>git bash</i> for current project in git based irectory.</descr>
-*!*	<comment>
 *!*	<remarks>This is experimental. <i>git bash</i> works not as expected.</remarks>
 *!*	<retval type=""></retval>
+*!*	<comment>
 *!*	<example></example>
 *!*	<seealso>
 *!*	 <see loca="" class="" pem=""></see>
@@ -1679,7 +1681,7 @@ ENDFUNC &&Is_Git
 
 PROCEDURE Print_ActiveBranch
 *!*	<pdm>
-*!*	<!-- <descr>Print the active branch to _SCREEN</descr> -->
+*!*	<descr>Print the active branch to _SCREEN</descr>
 *!*	<comment>
 *!*	<retval type=""></retval>
 *!*	<remarks></remarks>
@@ -2696,17 +2698,17 @@ PROCEDURE Compare_VerNo	  &&Internal. Compare version number
 *!*	<short>Version number 2 in form nnnn[.nnnn[.nnnn ... ]]]</short>
 *!*	<detail>1 to 4 groups. Max 4 digits per group. Trailing groups will be ignored.</detail>
 *!*	</params>
-*!*	<comment>
 *!*	<retval type="Number">
 *!*	<dl>
 *!*	 <dt>0</dt>
-*!*	 <dd><expr>m.tcVerNo1=m.tcVerNo2</expr></dd>
-*!*	 </dl><dt>1</dt>
-*!*	 <dd><expr>m.tcVerNo1>m.tcVerNo2</expr></dd>
-*!*	 </dl><dt>2</dt>
-*!*	 <dd><expr>m.tcVerNo1<m.tcVerNo2</expr></dd>
+*!*	 <dd><expr>tcVerNo1 = tcVerNo2</expr></dd>
+*!*	 <dt>1</dt>
+*!*	 <dd><expr>tcVerNo1 > tcVerNo2</expr></dd>
+*!*	 <dt>2</dt>
+*!*	 <dd><expr>tcVerNo1 < tcVerNo2</expr></dd>
 *!*	</dl>
 *!*	</retval>
+*!*	<comment>
 *!*	<remarks></remarks>
 *!*	<example></example>
 *!*	<seealso>

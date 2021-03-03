@@ -16,14 +16,14 @@
 <body>
 <div class="diaxp_mhead">GetBaseDir Function</div>
 <div class="diaxp_mbody">
-<!-- Created with _diamp_pdm_ab by Agnes Beste    02.03.2021 21:06 -->
+<!-- Created with _diamp_pdm_ab by Agnes Beste    03.03.2021 18:15 -->
  <div class="PDM_AB_Descr"><!-- Descr Begin -->
 Returns the git root directory of a given directory.
  </div><!-- Descr End -->
 
  <div class="DIAMP_PDM_AB_Syntax"><!-- Syntax Begin -->
   <div class="SColor">
-   <div class="RetVal"><a href="#_5ZS198BLH">RetVal</a>&nbsp;</div>   <div class="RetValEq">=</div>   <div class="PEM">
+   <div class="RetVal"><a href="#_5ZT134AME">RetVal</a>&nbsp;</div>   <div class="RetValEq">=</div>   <div class="PEM">
     GetBaseDir
    </div>
    <div class="Para">
@@ -36,7 +36,7 @@ Returns the git root directory of a given directory.
  <div class="DIAMP_PDM_AB_RetVal"><!-- Returns Begin -->
   <div>
    <span class="PDM_AB_Head">
-    <a id="_5ZS198BLH" name="_5ZS198BLH">
+    <a id="_5ZT134AME" name="_5ZT134AME">
      Return value
     </a>
    </span> <span class="RetVal_Ttype">Character</span>
@@ -68,25 +68,25 @@ SF Changed by<br />
  </div><!-- Changes End -->
 
 
-<!-- /Created with _diamp_pdm_ab by Agnes Beste    02.03.2021 21:06 -->
+<!-- /Created with _diamp_pdm_ab by Agnes Beste    03.03.2021 18:15 -->
 
  <div class="SC">
   <img onclick="ExpandSC('SP_P15',-1);" class="imgEC" src="../../imgs/dotab.gif" alt="Expand/Collapse source code of procedure GetBaseDir" id="IMG_SP_P15" />
   <span onclick="ExpandSC('SP_P15',-1);" class="SCCaption"><a name="pm.getbasedir">Source Code</a></span>
   <div ondblclick="ExpandSC('SP_P15',-1);" class="SCE" style="display: none;" id="TX_SP_P15">
 <!-- Code Begin -->
-<pre class="PDMCODE PDMNor" ><span class='PDMCnt'>1705</span> <span class='PDMInd'>  </span> 
-<span class='PDMCnt'>1726</span> <span class='PDMInd'>  </span> 
-<span class='PDMCnt'>1727</span> <span class='PDMInd'>  </span> <span class='PDMCom'>*!*    SF Changed by 12.2.2021</span>
-<span class='PDMCnt'>1728</span> <span class='PDMInd'>  </span> 
-<span class='PDMCnt'>1733</span> <span class='PDMInd'>  </span> 
-<span class='PDMCnt'>1734</span> <span class='PDMInd'> 1</span>  <span class='PDMResK'>LOCAL</span><span class='PDMOper'>;</span>
-<span class='PDMCnt'>1735</span> <span class='PDMInd'> 2</span>   <span class='PDMVar'>lcReturn</span> <span class='PDMResK'>AS</span> <span class='PDMResK'>CHARACTER</span>
+<pre class="PDMCODE PDMNor" ><span class='PDMCnt'>1708</span> <span class='PDMInd'>  </span> 
+<span class='PDMCnt'>1729</span> <span class='PDMInd'>  </span> 
+<span class='PDMCnt'>1730</span> <span class='PDMInd'>  </span> <span class='PDMCom'>*!*    SF Changed by 12.2.2021</span>
+<span class='PDMCnt'>1731</span> <span class='PDMInd'>  </span> 
 <span class='PDMCnt'>1736</span> <span class='PDMInd'>  </span> 
-<span class='PDMCnt'>1737</span> <span class='PDMInd'> 1</span>  <span class='PDMVar'>lcReturn</span> <span class='PDMOper'>=</span> <span class='PDMResF'>JUSTPATH</span><span class='PDMOper'>(</span><span class='PDMResF'>IIF</span><span class='PDMOper'>(</span><span class='PDMVar'>_VFP</span><span class='PDMOper'>.</span><span class='PDMVar'>PROJECTS</span><span class='PDMOper'>.</span><span class='PDMResP'>COUNT</span><span class='PDMOper'>&gt;</span><span class='PDMLit'>0</span><span class='PDMOper'>,</span><span class='PDMVar'>_VFP</span><span class='PDMOper'>.</span><span class='PDMVar'>ACTIVEPROJECT</span><span class='PDMOper'>.</span><span class='PDMResP'>NAME</span><span class='PDMOper'>,</span><span class='PDMResF'>FULLPATH</span><span class='PDMOper'>(</span><span class='PDMResF'>CURDIR</span><span class='PDMOper'>(</span><span class='PDMOper'>)</span><span class='PDMOper'>)</span><span class='PDMOper'>)</span><span class='PDMOper'>)</span>
-<span class='PDMCnt'>1738</span> <span class='PDMInd'> 1</span>  <span class='PDMVar'>lcReturn</span> <span class='PDMOper'>=</span> <span class='PDMResF'>EVL</span><span class='PDMOper'>(</span><span class='PDMVar'>GetGitBaseDir</span><span class='PDMOper'>(</span><span class='PDMOper'>)</span><span class='PDMOper'>,</span><span class='PDMVar'>m</span><span class='PDMOper'>.</span><span class='PDMVar'>lcReturn</span><span class='PDMOper'>)</span>
+<span class='PDMCnt'>1737</span> <span class='PDMInd'> 1</span>  <span class='PDMResK'>LOCAL</span><span class='PDMOper'>;</span>
+<span class='PDMCnt'>1738</span> <span class='PDMInd'> 2</span>   <span class='PDMVar'>lcReturn</span> <span class='PDMResK'>AS</span> <span class='PDMResK'>CHARACTER</span>
 <span class='PDMCnt'>1739</span> <span class='PDMInd'>  </span> 
-<span class='PDMCnt'>1740</span> <span class='PDMInd'> 1</span>  <span class='PDMResK'>RETURN</span> <span class='PDMVar'>m</span><span class='PDMOper'>.</span><span class='PDMVar'>lcReturn</span></pre>
+<span class='PDMCnt'>1740</span> <span class='PDMInd'> 1</span>  <span class='PDMVar'>lcReturn</span> <span class='PDMOper'>=</span> <span class='PDMResF'>JUSTPATH</span><span class='PDMOper'>(</span><span class='PDMResF'>IIF</span><span class='PDMOper'>(</span><span class='PDMVar'>_VFP</span><span class='PDMOper'>.</span><span class='PDMVar'>PROJECTS</span><span class='PDMOper'>.</span><span class='PDMResP'>COUNT</span><span class='PDMOper'>&gt;</span><span class='PDMLit'>0</span><span class='PDMOper'>,</span><span class='PDMVar'>_VFP</span><span class='PDMOper'>.</span><span class='PDMVar'>ACTIVEPROJECT</span><span class='PDMOper'>.</span><span class='PDMResP'>NAME</span><span class='PDMOper'>,</span><span class='PDMResF'>FULLPATH</span><span class='PDMOper'>(</span><span class='PDMResF'>CURDIR</span><span class='PDMOper'>(</span><span class='PDMOper'>)</span><span class='PDMOper'>)</span><span class='PDMOper'>)</span><span class='PDMOper'>)</span>
+<span class='PDMCnt'>1741</span> <span class='PDMInd'> 1</span>  <span class='PDMVar'>lcReturn</span> <span class='PDMOper'>=</span> <span class='PDMResF'>EVL</span><span class='PDMOper'>(</span><span class='PDMVar'>GetGitBaseDir</span><span class='PDMOper'>(</span><span class='PDMOper'>)</span><span class='PDMOper'>,</span><span class='PDMVar'>m</span><span class='PDMOper'>.</span><span class='PDMVar'>lcReturn</span><span class='PDMOper'>)</span>
+<span class='PDMCnt'>1742</span> <span class='PDMInd'>  </span> 
+<span class='PDMCnt'>1743</span> <span class='PDMInd'> 1</span>  <span class='PDMResK'>RETURN</span> <span class='PDMVar'>m</span><span class='PDMOper'>.</span><span class='PDMVar'>lcReturn</span></pre>
  <!-- Code End -->
   </div>
  </div>

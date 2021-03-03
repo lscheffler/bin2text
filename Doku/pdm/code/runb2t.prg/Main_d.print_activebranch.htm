@@ -16,7 +16,11 @@
 <body>
 <div class="diaxp_mhead">Print_ActiveBranch Procedure</div>
 <div class="diaxp_mbody">
-<!-- Created with _diamp_pdm_ab by Agnes Beste    02.03.2021 21:06 -->
+<!-- Created with _diamp_pdm_ab by Agnes Beste    03.03.2021 18:15 -->
+ <div class="PDM_AB_Descr"><!-- Descr Begin -->
+Print the active branch to _SCREEN
+ </div><!-- Descr End -->
+
  <div class="DIAMP_PDM_AB_Syntax"><!-- Syntax Begin -->
   <div class="SColor">
    <div class="PEM">
@@ -30,18 +34,18 @@
  </div><!-- Syntax End -->
 
 
-<!-- /Created with _diamp_pdm_ab by Agnes Beste    02.03.2021 21:06 -->
+<!-- /Created with _diamp_pdm_ab by Agnes Beste    03.03.2021 18:15 -->
 
  <div class="SC">
   <img onclick="ExpandSC('SP_P14',-1);" class="imgEC" src="../../imgs/dotab.gif" alt="Expand/Collapse source code of procedure Print_ActiveBranch" id="IMG_SP_P14" />
   <span onclick="ExpandSC('SP_P14',-1);" class="SCCaption"><a name="pm.print_activebranch">Source Code</a></span>
   <div ondblclick="ExpandSC('SP_P14',-1);" class="SCE" style="display: none;" id="TX_SP_P14">
 <!-- Code Begin -->
-<pre class="PDMCODE PDMNor" ><span class='PDMCnt'>1680</span> <span class='PDMInd'>  </span> 
-<span class='PDMCnt'>1697</span> <span class='PDMInd'>  </span> 
-<span class='PDMCnt'>1698</span> <span class='PDMInd'> 1</span>  <span class='PDMResK'>IF</span> <span class='PDMVar'>Is_git</span><span class='PDMOper'>(</span><span class='PDMOper'>)</span> <span class='PDMResK'>THEN</span>
-<span class='PDMCnt'>1699</span> <span class='PDMInd'> 2</span>   <span class='PDMOper'>?</span><span class='PDMStr'>'On branch '</span><span class='PDMOper'>+</span><span class='PDMVar'>GetBranch</span><span class='PDMOper'>(</span><span class='PDMOper'>)</span>
-<span class='PDMCnt'>1700</span> <span class='PDMInd'> 1</span>  <span class='PDMResK'>ENDIF</span> <span class='PDMCom'>&amp;&amp;Is_Git()</span></pre>
+<pre class="PDMCODE PDMNor" ><span class='PDMCnt'>1683</span> <span class='PDMInd'>  </span> 
+<span class='PDMCnt'>1700</span> <span class='PDMInd'>  </span> 
+<span class='PDMCnt'>1701</span> <span class='PDMInd'> 1</span>  <span class='PDMResK'>IF</span> <span class='PDMVar'>Is_git</span><span class='PDMOper'>(</span><span class='PDMOper'>)</span> <span class='PDMResK'>THEN</span>
+<span class='PDMCnt'>1702</span> <span class='PDMInd'> 2</span>   <span class='PDMOper'>?</span><span class='PDMStr'>'On branch '</span><span class='PDMOper'>+</span><span class='PDMVar'>GetBranch</span><span class='PDMOper'>(</span><span class='PDMOper'>)</span>
+<span class='PDMCnt'>1703</span> <span class='PDMInd'> 1</span>  <span class='PDMResK'>ENDIF</span> <span class='PDMCom'>&amp;&amp;Is_Git()</span></pre>
  <!-- Code End -->
   </div>
  </div>

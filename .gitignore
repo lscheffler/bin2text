@@ -19,7 +19,7 @@
 
 #programms
 !*.prg
-!*.fpw
+!*.fpwa
 
 #header
 !*.h
@@ -78,5 +78,12 @@ include/projsub.h
 default/
 temp/
 tmp/
+/*.dbf
+/*.cdx
+/*.fpt
+
+!*.dbc
+!*.dc[tx]
 
 bin2txt.*
+bin2txt.
