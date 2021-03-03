@@ -18,7 +18,7 @@
 !*.cur
 
 #programms
-!*.prg
+!/*.prg
 !*.fpwa
 
 #header
@@ -85,5 +85,5 @@ tmp/
 !*.dbc
 !*.dc[tx]
 
-bin2txt.*
-bin2txt.
+/Bin2Text.prg
+Bin2Txt.*
