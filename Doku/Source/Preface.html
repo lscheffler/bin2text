@@ -85,7 +85,7 @@
  </p>
  <p>
  	It is not designed to <em>push</em> or <em>pull remotes</em> or does the <em>rebase</em>.
- 	The good news is that <em>git</em> will run, if properly installed, from VFP's IDE.
+ 	The good news is that <em>git</em> will run, if properly installed, from VFP's IDE:
  </p>
  <span class="example">RUN "git commit -a"</span>
  <p>
@@ -145,12 +145,30 @@
   	</p>
   </li>
   <li>
+  	Clone or dowenload this repositiory.
+  </li>
+  <li>
   	<p>
-  		Compile the Bin2Text.pjx that ships with this documentation to Bin2Text.app.
+  		<strong>This repository does not ship binary sources.</strong> The sense is to work without, isn't it?<br/>
+  		The idea is to create the binaries from the text files.<br/>
+  		Open a Foxpro IDE, CD into the repo. Run<br/>
+ 	</p>
+  	<p>
+  		<code>
+  			DO FOXBIN2PRG.PRG WITH "bin2text.pj2", "*"
+  		</code>
+ 	</p>
+  	<p>
+  		Check for the paths.
+ 	</p>
+  </li>
+  <li>
+  	<p>
+  		Compile the Bin2Text.pjx to Bin2Text.app.
   	</p>
   	<p>
-  		<strong>ImPortant note:</strong> If you use VFPA and VFP9, make shure to compile the app to VFP9.
-  		It will run on both versions. This is not true if compiled under VFPA.
+  		<strong>Important note:</strong> If you use VFPA and VFP9, make shure to compile the APP to VFP9.<br/>
+  		Compiled under VFP 9 it will run on both versions. This is not true if compiled under VFPA.
  	</p>
   </li>
   <li>

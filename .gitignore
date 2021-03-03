@@ -69,7 +69,6 @@ include/projsub.h
 
 #exclude github
 !*.md
-!/bin2text.app
 !/content/**/*.gif
 !/content/**/*.png
 !/content/**/*.jpg
