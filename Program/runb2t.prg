@@ -2499,7 +2499,7 @@ FUNCTION HelpMsg	&&Internal. Display help message for external functions
   [ IDE Interface für FoxBin2Prg, für ein Verzeichnis.]
 
  #DEFINE dcText_DE_H01;
-  "DO Convert_Pjx IN Bin2Text.app [[/?]|[lText2Bin[,nProjects[,nMode]]"+0h0d0a+;
+  "DO Convert_Pjx IN Bin2Text.app [[/?]|[lText2Bin[,nProjects[,nMode[,cFile]]]"+0h0d0a+;
   [ IDE Interface für FoxBin2Prg]+0h0d0a+;
   [ Parameter:]+0h0d0a+;
   [  /?        Zeigt diesen Hilfstext]+0h0d0a+;
@@ -2516,6 +2516,7 @@ FUNCTION HelpMsg	&&Internal. Display help message for external functions
   [            0 Quell-  und Projekdateien (Default)]+0h0d0a+;
   [            1 nur Quelldateien (VCX, FRX, ...)]+0h0d0a+;
   [            2 nur Projekdateien (PJX)]+0h0d0a+;
+  [  cFile     Datei, für die die Methode gerufen wird.]+0h0d0a+;
   [Alle Projekte werden temporär geschlossen.]+0h0d0a+;
   [Führt ein CLEAR ALL aus]
 
@@ -2579,7 +2580,7 @@ FUNCTION HelpMsg	&&Internal. Display help message for external functions
   [Nur aus der IDE starten.]
 
  #DEFINE dcText_DE_H11;
-  "DO Convert_File IN Bin2Text.app [/?]|[lText2Bin[,lSingleClass]]"+0h0d0a+;
+  "DO Convert_File IN Bin2Text.app [/?]|[lText2Bin[,lSingleClass[,cFile][,cClass]]]]"+0h0d0a+;
   [ IDE interface für FoxBin2Prg, um eine wählbare Datei zu transformieren.]+0h0d0a+;
   [ Parameter:]+0h0d0a+;
   [  /?            Zeigt diesen Hilfstext]+0h0d0a+;
@@ -2587,6 +2588,8 @@ FUNCTION HelpMsg	&&Internal. Display help message for external functions
   [                sonst werden Textdateien erzeugt.(Default)]+0h0d0a+;
   [                Optional in FoxBin2PRG Stil]+0h0d0a+;
   [  lSingleClass  Bestimme eine Klasse zum Transformieren.]+0h0d0a+;
+  [  cFile         Datei, für die die Methode gerufen wird.]+0h0d0a+;
+  [  cClass        Klasse, für lSingleClass .]+0h0d0a+;
   [Führt ein CLEAR ALL aus.]
 
 
@@ -2622,7 +2625,7 @@ FUNCTION HelpMsg	&&Internal. Display help message for external functions
   [ IDE interface for FoxBin2Prg, pick a directory to convert.]
 
  #DEFINE dcText_EN_H01;
-  "DO Convert_Pjx IN Bin2Text.app [/?]|[lText2Bin[,nProjects[,nMode]]"+0h0d0a+;
+  "DO Convert_Pjx IN Bin2Text.app [/?]|[lText2Bin[,nProjects[,nMode[,cFile]]]]"+0h0d0a+;
   [ IDE interface for FoxBin2Prg, to be used with menu]+0h0d0a+;
   [ Parameter:]+0h0d0a+;
   [  /?        This help message]+0h0d0a+;
@@ -2639,6 +2642,7 @@ FUNCTION HelpMsg	&&Internal. Display help message for external functions
   [            0 source-  and project files (Default)]+0h0d0a+;
   [            1 source files only (VCX, FRX, ...)]+0h0d0a+;
   [            2 project files only (PJX)]+0h0d0a+;
+  [  cFile     File that method should run for.]+0h0d0a+;
   [All projects will be closed temporary.]+0h0d0a+;
   [This will use CLEAR ALL!]
 
@@ -2703,7 +2707,7 @@ FUNCTION HelpMsg	&&Internal. Display help message for external functions
 
 
  #DEFINE dcText_EN_H11;
-  "DO Convert_File IN Bin2Text.app [/?]|[lText2Bin[,lSingleClass]]"+0h0d0a+;
+  "DO Convert_File IN Bin2Text.app [/?]|[lText2Bin[,lSingleClass[,cFile][,cClass]]]]"+0h0d0a+;
   [ IDE interface for FoxBin2Prg, pick a file or class to transform.]+0h0d0a+;
   [ Parameter:]+0h0d0a+;
   [  /?            This help message]+0h0d0a+;
@@ -2711,6 +2715,8 @@ FUNCTION HelpMsg	&&Internal. Display help message for external functions
   [                if false create text files.(Default)]+0h0d0a+;
   [                Optional in FoxBin2PRG style]+0h0d0a+;
   [  lSingleClass  Select a class to transform.]+0h0d0a+;
+  [  cFile         File that method should run for.]+0h0d0a+;
+  [  cClass        Class of cFile for lSingleClass.]+0h0d0a+;
   [This will use CLEAR ALL!]
 
  #DEFINE dcText_EN_H12;
