@@ -36,6 +36,9 @@ ENDIF &&_SCREEN.frmB2T_Envelop.cusB2T.Get_Converter(@lcStorage,@loConverter,.T.)
 SwitchErrorHandler(.T.)
 HelpMsg(0)
 SwitchErrorHandler(.F.)
+?Is_git()
+?GetBranch()
+
 
 FUNCTION Pjx2Commit	&&Create a commit to git.
  LPARAMETERS;
@@ -95,6 +98,9 @@ FUNCTION Pjx2Commit	&&Create a commit to git.
  ENDIF &&!PEMSTATUS(_SCREEN,"gcB2T_GitPjx",5)
 
  SwitchErrorHandler(.F.)
+*DO Convert_Pjx IN (_SCREEN.gcB2T_App) WITH .F.,2,0
+*DO Pjx2Commit IN (_SCREEN.gcB2T_App) WITH .T.
+* IF Convert_Pjx(.F.,IIF(m.tlAll,3,1),ICASE(m.tlAll,0,_SCREEN.gcB2T_GitPjx="1",4,3)) THEN
  IF Convert_Pjx(.F.,IIF(m.tlAll,3,1),ICASE(m.tlAll,0,_SCREEN.gcB2T_GitPjx="1",4,3)) THEN
   SwitchErrorHandler(.T.)
   _SCREEN.ADDPROPERTY('gcOld_Path',FULLPATH(CURDIR()))
@@ -125,7 +131,13 @@ FUNCTION Pjx2Commit	&&Create a commit to git.
    lcPath = ADDBS(FULLPATH(CURDIR()))
    IF !m.llIs64 AND (TYPE('_SCREEN.gcB2T_UseBash')="C" AND _SCREEN.gcB2T_UseBash=="1") THEN
 
+    llSuccess = Run_git('add -A',,.F.,.F.,.F.)
+*    llSuccess = m.llSuccess AND Run_git('status --porcelain>git_x.tmp',,.F.,.F.,.T.)
+    = m.llSuccess AND Run_git('diff --cached --exit-code',,.F.,.F.,.F.,@lnErrorCode)
+    llSuccess = m.llSuccess AND m.lnErrorCode=1  &&lnErrorCode -> files staged but not commited
+   ELSE  &&!m.llIs64 AND (TYPE('_SCREEN.gcB2T_UseBash')="C" AND _SCREEN.gcB2T_UseBash=="1")
 
+    TEXT TO m.lcBat NOSHOW TEXTMERGE
 "<<m.lc_Git>>" add -A
 "<<m.lc_Git>>" status --porcelain>git_x.tmp
     ENDTEXT &&lcBat
@@ -157,6 +169,8 @@ FUNCTION Pjx2Commit	&&Create a commit to git.
      Run_git('commit',,.T.,.T.,.F.)
     ENDIF &&TYPE('_SCREEN.gcB2T_Commit')="C" AND _SCREEN.gcB2T_Commit=="1"
 *!*	/Changed by: SF 17.9.2015
+   ELSE  &&m.llSuccess
+    ??' - nothing to commit'
    ENDIF &&m.llSuccess
 *!*	/Changed by: SF 4.6.2015
 
@@ -789,6 +803,7 @@ FUNCTION Convert_Pjx &&Runs FoxBin2Prg for multiple projects.
 *!*	Output of current git branch
 *!*	</change>
 *!*	</pdm>
+ lcProj = GetBranch()
  IF !EMPTY(m.lcProj) THEN
   ?'On branch '+m.lcProj
  ENDIF &&!EMPTY(m.lcProj)
@@ -2158,12 +2173,13 @@ ENDFUNC &&Get_git_Path
 *!*	</change>
 *!*	</pdm>
 
+PROCEDURE GetBranch		&&Internal. Return active git branch
 
 *!*	<pdm>
 *!*	<descr>Output of current git branch</descr>
 *!*	<retval type="Character">Branch, empty if no git active</retval>
 *!*	<comment>
-*!*	<remarks>Also adds active branch to caption.</remarks>
+*!*	<remarks></remarks>
 *!*	<example></example>
 *!*	<seealso>
 *!*	 <see loca="" class="" pem=""></see>
@@ -2179,19 +2195,12 @@ ENDFUNC &&Get_git_Path
 
  LOCAL;
   lcRet AS CHARACTER,;
-  lcCap AS CHARACTER
+  lnSec AS NUMBER
 
  lcRet = ''
  IF Is_git() THEN
 *schlägt irgendwie mit bash fehl, daher erstmal wieder cmd
   IF Run_git('rev-parse --abbrev-ref HEAD>git_x.tmp',,.F.,.F.,.T.) THEN
-
-*!*	 LPARAMETERS;
-*!*	  tcParameters,;
-*!*	  tlShow,;
-*!*	  tlIn_Shell,;
-*!*	  tlComplex,;
-*!*	  tnExitCode
 
    lnSec = SECONDS()
 
