@@ -16,14 +16,14 @@
 <body>
 <div class="diaxp_mhead">GetBranch Procedure</div>
 <div class="diaxp_mbody">
-<!-- Created with _diamp_pdm_ab by Agnes Beste    03.03.2021 18:15 -->
+<!-- Created with _diamp_pdm_ab by Agnes Beste    06.03.2021 13:26 -->
  <div class="PDM_AB_Descr"><!-- Descr Begin -->
 Output of current git branch
  </div><!-- Descr End -->
 
  <div class="DIAMP_PDM_AB_Syntax"><!-- Syntax Begin -->
   <div class="SColor">
-   <div class="RetVal"><a href="#_5ZT134AOB">RetVal</a>&nbsp;</div>   <div class="RetValEq">=</div>   <div class="PEM">
+   <div class="RetVal"><a href="#_5ZW0ST1BG">RetVal</a>&nbsp;</div>   <div class="RetValEq">=</div>   <div class="PEM">
     GetBranch
    </div>
    <div class="Para">
@@ -36,7 +36,7 @@ Output of current git branch
  <div class="DIAMP_PDM_AB_RetVal"><!-- Returns Begin -->
   <div>
    <span class="PDM_AB_Head">
-    <a id="_5ZT134AOB" name="_5ZT134AOB">
+    <a id="_5ZW0ST1BG" name="_5ZW0ST1BG">
      Return value
     </a>
    </span> <span class="RetVal_Ttype">Character</span>
@@ -47,42 +47,42 @@ Branch, empty if no git active
  </div><!-- Returns End -->
 
 
-<!-- /Created with _diamp_pdm_ab by Agnes Beste    03.03.2021 18:15 -->
+<!-- /Created with _diamp_pdm_ab by Agnes Beste    06.03.2021 13:26 -->
 
  <div class="SC">
   <img onclick="ExpandSC('SP_P18',-1);" class="imgEC" src="../../imgs/dotab.gif" alt="Expand/Collapse source code of procedure GetBranch" id="IMG_SP_P18" />
   <span onclick="ExpandSC('SP_P18',-1);" class="SCCaption"><a name="pm.getbranch">Source Code</a></span>
   <div ondblclick="ExpandSC('SP_P18',-1);" class="SCE" style="display: none;" id="TX_SP_P18">
 <!-- Code Begin -->
-<pre class="PDMCODE PDMNor" ><span class='PDMCnt'>1997</span> <span class='PDMInd'>  </span> 
-<span class='PDMCnt'>1998</span> <span class='PDMInd'>  </span> 
-<span class='PDMCnt'>2015</span> <span class='PDMInd'>  </span> 
-<span class='PDMCnt'>2016</span> <span class='PDMInd'> 1</span>  <span class='PDMResK'>LOCAL</span><span class='PDMOper'>;</span>
-<span class='PDMCnt'>2017</span> <span class='PDMInd'> 2</span>   <span class='PDMVar'>lcRet</span> <span class='PDMResK'>AS</span> <span class='PDMResK'>CHARACTER</span><span class='PDMOper'>,</span><span class='PDMOper'>;</span>
-<span class='PDMCnt'>2018</span> <span class='PDMInd'> 2</span>   <span class='PDMVar'>lnSec</span> <span class='PDMResK'>AS</span> <span class='PDMResK'>NUMBER</span>
-<span class='PDMCnt'>2019</span> <span class='PDMInd'>  </span> 
-<span class='PDMCnt'>2020</span> <span class='PDMInd'> 1</span>  <span class='PDMVar'>lcRet</span> <span class='PDMOper'>=</span> <span class='PDMStr'>''</span>
-<span class='PDMCnt'>2021</span> <span class='PDMInd'> 1</span>  <span class='PDMResK'>IF</span> <span class='PDMVar'>Is_git</span><span class='PDMOper'>(</span><span class='PDMOper'>)</span> <span class='PDMResK'>THEN</span>
-<span class='PDMCnt'>2022</span> <span class='PDMInd'>  </span> <span class='PDMCom'>*schlägt irgendwie mit bash fehl, daher erstmal wieder cmd</span>
-<span class='PDMCnt'>2023</span> <span class='PDMInd'> 2</span>   <span class='PDMResK'>IF</span> <span class='PDMVar'>Run_git</span><span class='PDMOper'>(</span><span class='PDMStr'>'rev-parse --abbrev-ref HEAD&gt;git_x.tmp'</span><span class='PDMOper'>,</span><span class='PDMOper'>,</span><span class='PDMLit'>.F.</span><span class='PDMOper'>,</span><span class='PDMLit'>.F.</span><span class='PDMOper'>,</span><span class='PDMLit'>.T.</span><span class='PDMOper'>)</span> <span class='PDMResK'>THEN</span>
-<span class='PDMCnt'>2024</span> <span class='PDMInd'>  </span> 
-<span class='PDMCnt'>2025</span> <span class='PDMInd'>  </span> <span class='PDMCom'>*!*     LPARAMETERS;</span>
-<span class='PDMCnt'>2026</span> <span class='PDMInd'>  </span> <span class='PDMCom'>*!*      tcParameters,;</span>
-<span class='PDMCnt'>2027</span> <span class='PDMInd'>  </span> <span class='PDMCom'>*!*      tlShow,;</span>
-<span class='PDMCnt'>2028</span> <span class='PDMInd'>  </span> <span class='PDMCom'>*!*      tlIn_Shell,;</span>
-<span class='PDMCnt'>2029</span> <span class='PDMInd'>  </span> <span class='PDMCom'>*!*      tlComplex,;</span>
-<span class='PDMCnt'>2030</span> <span class='PDMInd'>  </span> <span class='PDMCom'>*!*      tnExitCode</span>
-<span class='PDMCnt'>2031</span> <span class='PDMInd'>  </span> 
-<span class='PDMCnt'>2032</span> <span class='PDMInd'> 3</span>    <span class='PDMVar'>lnSec</span> <span class='PDMOper'>=</span> <span class='PDMResF'>SECONDS</span><span class='PDMOper'>(</span><span class='PDMOper'>)</span>
-<span class='PDMCnt'>2033</span> <span class='PDMInd'>  </span> 
-<span class='PDMCnt'>2034</span> <span class='PDMInd'> 3</span>    <span class='PDMResK'>IF</span> <span class='PDMResF'>FILE</span><span class='PDMOper'>(</span><span class='PDMStr'>'git_x.tmp'</span><span class='PDMOper'>)</span> <span class='PDMResK'>THEN</span>
-<span class='PDMCnt'>2035</span> <span class='PDMInd'> 4</span>     <span class='PDMVar'>lcRet</span> <span class='PDMOper'>=</span> <span class='PDMResF'>CHRTRAN</span><span class='PDMOper'>(</span><span class='PDMResF'>FILETOSTR</span><span class='PDMOper'>(</span><span class='PDMStr'>'git_x.tmp'</span><span class='PDMOper'>)</span><span class='PDMOper'>,</span><span class='PDMVar'>0h0d0a</span><span class='PDMOper'>,</span><span class='PDMStr'>''</span><span class='PDMOper'>)</span>
-<span class='PDMCnt'>2036</span> <span class='PDMInd'> 4</span>     <span class='PDMResK'>DELETE</span> <span class='PDMResK'>FILE</span> <span class='PDMVar'>git_x</span><span class='PDMOper'>.</span><span class='PDMVar'>tmp</span>
-<span class='PDMCnt'>2037</span> <span class='PDMInd'> 3</span>    <span class='PDMResK'>ENDIF</span> <span class='PDMCom'>&amp;&amp;FILE('git_x.tmp')</span>
-<span class='PDMCnt'>2038</span> <span class='PDMInd'> 2</span>   <span class='PDMResK'>ENDIF</span> <span class='PDMCom'>&amp;&amp;Run_git('rev-parse --abbrev-ref HEAD&gt;git_x.tmp',,.F.,.F.,.T.)</span>
-<span class='PDMCnt'>2039</span> <span class='PDMInd'> 1</span>  <span class='PDMResK'>ENDIF</span> <span class='PDMCom'>&amp;&amp;Is_git()</span>
-<span class='PDMCnt'>2040</span> <span class='PDMInd'>  </span> 
-<span class='PDMCnt'>2041</span> <span class='PDMInd'> 1</span>  <span class='PDMResK'>RETURN</span> <span class='PDMVar'>m</span><span class='PDMOper'>.</span><span class='PDMVar'>lcRet</span></pre>
+<pre class="PDMCODE PDMNor" ><span class='PDMCnt'>2142</span> <span class='PDMInd'>  </span> 
+<span class='PDMCnt'>2143</span> <span class='PDMInd'>  </span> 
+<span class='PDMCnt'>2160</span> <span class='PDMInd'>  </span> 
+<span class='PDMCnt'>2161</span> <span class='PDMInd'> 1</span>  <span class='PDMResK'>LOCAL</span><span class='PDMOper'>;</span>
+<span class='PDMCnt'>2162</span> <span class='PDMInd'> 2</span>   <span class='PDMVar'>lcRet</span> <span class='PDMResK'>AS</span> <span class='PDMResK'>CHARACTER</span><span class='PDMOper'>,</span><span class='PDMOper'>;</span>
+<span class='PDMCnt'>2163</span> <span class='PDMInd'> 2</span>   <span class='PDMVar'>lnSec</span> <span class='PDMResK'>AS</span> <span class='PDMResK'>NUMBER</span>
+<span class='PDMCnt'>2164</span> <span class='PDMInd'>  </span> 
+<span class='PDMCnt'>2165</span> <span class='PDMInd'> 1</span>  <span class='PDMVar'>lcRet</span> <span class='PDMOper'>=</span> <span class='PDMStr'>''</span>
+<span class='PDMCnt'>2166</span> <span class='PDMInd'> 1</span>  <span class='PDMResK'>IF</span> <span class='PDMVar'>Is_git</span><span class='PDMOper'>(</span><span class='PDMOper'>)</span> <span class='PDMResK'>THEN</span>
+<span class='PDMCnt'>2167</span> <span class='PDMInd'>  </span> <span class='PDMCom'>*schlägt irgendwie mit bash fehl, daher erstmal wieder cmd</span>
+<span class='PDMCnt'>2168</span> <span class='PDMInd'> 2</span>   <span class='PDMResK'>IF</span> <span class='PDMVar'>Run_git</span><span class='PDMOper'>(</span><span class='PDMStr'>'rev-parse --abbrev-ref HEAD&gt;git_x.tmp'</span><span class='PDMOper'>,</span><span class='PDMOper'>,</span><span class='PDMLit'>.F.</span><span class='PDMOper'>,</span><span class='PDMLit'>.F.</span><span class='PDMOper'>,</span><span class='PDMLit'>.T.</span><span class='PDMOper'>)</span> <span class='PDMResK'>THEN</span>
+<span class='PDMCnt'>2169</span> <span class='PDMInd'>  </span> 
+<span class='PDMCnt'>2170</span> <span class='PDMInd'>  </span> <span class='PDMCom'>*!*     LPARAMETERS;</span>
+<span class='PDMCnt'>2171</span> <span class='PDMInd'>  </span> <span class='PDMCom'>*!*      tcParameters,;</span>
+<span class='PDMCnt'>2172</span> <span class='PDMInd'>  </span> <span class='PDMCom'>*!*      tlShow,;</span>
+<span class='PDMCnt'>2173</span> <span class='PDMInd'>  </span> <span class='PDMCom'>*!*      tlIn_Shell,;</span>
+<span class='PDMCnt'>2174</span> <span class='PDMInd'>  </span> <span class='PDMCom'>*!*      tlComplex,;</span>
+<span class='PDMCnt'>2175</span> <span class='PDMInd'>  </span> <span class='PDMCom'>*!*      tnExitCode</span>
+<span class='PDMCnt'>2176</span> <span class='PDMInd'>  </span> 
+<span class='PDMCnt'>2177</span> <span class='PDMInd'> 3</span>    <span class='PDMVar'>lnSec</span> <span class='PDMOper'>=</span> <span class='PDMResF'>SECONDS</span><span class='PDMOper'>(</span><span class='PDMOper'>)</span>
+<span class='PDMCnt'>2178</span> <span class='PDMInd'>  </span> 
+<span class='PDMCnt'>2179</span> <span class='PDMInd'> 3</span>    <span class='PDMResK'>IF</span> <span class='PDMResF'>FILE</span><span class='PDMOper'>(</span><span class='PDMStr'>'git_x.tmp'</span><span class='PDMOper'>)</span> <span class='PDMResK'>THEN</span>
+<span class='PDMCnt'>2180</span> <span class='PDMInd'> 4</span>     <span class='PDMVar'>lcRet</span> <span class='PDMOper'>=</span> <span class='PDMResF'>CHRTRAN</span><span class='PDMOper'>(</span><span class='PDMResF'>FILETOSTR</span><span class='PDMOper'>(</span><span class='PDMStr'>'git_x.tmp'</span><span class='PDMOper'>)</span><span class='PDMOper'>,</span><span class='PDMVar'>0h0d0a</span><span class='PDMOper'>,</span><span class='PDMStr'>''</span><span class='PDMOper'>)</span>
+<span class='PDMCnt'>2181</span> <span class='PDMInd'> 4</span>     <span class='PDMResK'>DELETE</span> <span class='PDMResK'>FILE</span> <span class='PDMVar'>git_x</span><span class='PDMOper'>.</span><span class='PDMVar'>tmp</span>
+<span class='PDMCnt'>2182</span> <span class='PDMInd'> 3</span>    <span class='PDMResK'>ENDIF</span> <span class='PDMCom'>&amp;&amp;FILE('git_x.tmp')</span>
+<span class='PDMCnt'>2183</span> <span class='PDMInd'> 2</span>   <span class='PDMResK'>ENDIF</span> <span class='PDMCom'>&amp;&amp;Run_git('rev-parse --abbrev-ref HEAD&gt;git_x.tmp',,.F.,.F.,.T.)</span>
+<span class='PDMCnt'>2184</span> <span class='PDMInd'> 1</span>  <span class='PDMResK'>ENDIF</span> <span class='PDMCom'>&amp;&amp;Is_git()</span>
+<span class='PDMCnt'>2185</span> <span class='PDMInd'>  </span> 
+<span class='PDMCnt'>2186</span> <span class='PDMInd'> 1</span>  <span class='PDMResK'>RETURN</span> <span class='PDMVar'>m</span><span class='PDMOper'>.</span><span class='PDMVar'>lcRet</span></pre>
  <!-- Code End -->
   </div>
  </div>

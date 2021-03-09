@@ -17,6 +17,15 @@
     FONT-FAMILY: &quot;Monospace&quot;,&quot;Courier New&quot;;
     BACKGROUND-COLOR: #eeeeee
   }
+   <!--
+   Span.Alert
+   {
+    color: blue;
+    FONT-SIZE: 10pt;
+    WIDTH: auto;
+    FONT-FAMILY: &quot;Monospace&quot;,&quot;Courier New&quot;;
+    BACKGROUND-COLOR: Chartreuse
+  }
    -->
   </style>
 </head>
@@ -25,10 +34,6 @@
  <p>
   This document describes the <a href="https://github.com/lscheffler/bin2text"  title="Bin2Text at github" target="_blank">Bin 2 Text</a> extension
   for <a href="https://github.com/fdbozzo/foxbin2prg" title="FoxBin2Prg at github" target="_blank">FoxBin2Prg</a> by Fernando D. Bozzo.
- </p>
- <p>
-  A <a href="https://github.com/lscheffler/foxbin2prg" title="fork at github" target="_blank">fork</a> with added functions is available too.
-  It also covers newer <a href="https://github.com/lscheffler/foxbin2prg/blob/fork_mod/Documentacion/github/FoxBin2prg.md" title="FoxBin2Prg documentation at github" target="_blank">documentation</a>.
  </p>
  <p>
   Documentation of the project is done with <a href="http://gorila.netlab.cz/pdm.html" title="PDM"  target="_blank">Project Documenting Machine</a> by Martina Jindrová using the AB-plugins by myself.
@@ -105,8 +110,7 @@
  </p>
  <hr /><h2><a name="howto">How to get it to work</a></h2>
  <ol>
-  <li>You need <a href="https://github.com/fdbozzo/foxbin2prg" title="FoxBin2Prg at github" target="_blank">FoxBin2Prg</a> at least version 1.19.42</li>
-  <li>I recommend this <a href="https://github.com/lscheffler/foxbin2prg" title="fork at github" target="_blank">fork</a>, version 1.21.02</li>
+  <li>You need <a href="https://github.com/fdbozzo/foxbin2prg" title="FoxBin2Prg at github" target="_blank">FoxBin2Prg</a> at least version 1.19.57</li>
   <li>
 		<p>
 			<strong>Note:</strong> Bin2Text depends on a lot of settings by FoxBin2Prg.
@@ -115,6 +119,18 @@
 		<p>
 			For example, if a certain type of binary will be processed,
 			depends on the settings to FoxBin2Prg in the FoxBin2Prg.cfg file.
+		</p>
+		<p>
+			Exception is to be made for <strong>RedirectClassType</strong>, <strong>ClassPerFileCheck</strong> and <strong>RedirectClassPerFileToMain</strong>.
+			These will be overwritten by Bin2Text.
+		</p>
+		<p>
+			While not forced, <strong>UseClassPerFile</strong> should be turned on.
+			The idea is a <em>class-per-file</em> atomic commit.
+			<span class="Alert">Also the <em>run-for-changes-only</em> logic does not work for UseClassPerFile: 0 yet.</span>
+		</p>
+		<p>
+			Also note that, as normal for FoxBin2Prg, <strong>UseClassPerFile</strong> is nothing to be changed freely.
 		</p>
   </li>
   <li>

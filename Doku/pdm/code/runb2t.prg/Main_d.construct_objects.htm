@@ -16,7 +16,7 @@
 <body>
 <div class="diaxp_mhead">Construct_Objects Function</div>
 <div class="diaxp_mbody">
-<!-- Created with _diamp_pdm_ab by Agnes Beste    03.03.2021 18:15 -->
+<!-- Created with _diamp_pdm_ab by Agnes Beste    06.03.2021 13:26 -->
  <div class="PDM_AB_Descr"><!-- Descr Begin -->
 Instantiate an instance of the business object of this application.
  </div><!-- Descr End -->
@@ -34,26 +34,26 @@ Instantiate an instance of the business object of this application.
  </div><!-- Syntax End -->
 
 
-<!-- /Created with _diamp_pdm_ab by Agnes Beste    03.03.2021 18:15 -->
+<!-- /Created with _diamp_pdm_ab by Agnes Beste    06.03.2021 13:26 -->
 
  <div class="SC">
   <img onclick="ExpandSC('SP_P11',-1);" class="imgEC" src="../../imgs/dotab.gif" alt="Expand/Collapse source code of procedure Construct_Objects" id="IMG_SP_P11" />
   <span onclick="ExpandSC('SP_P11',-1);" class="SCCaption"><a name="pm.construct_objects">Source Code</a></span>
   <div ondblclick="ExpandSC('SP_P11',-1);" class="SCE" style="display: none;" id="TX_SP_P11">
 <!-- Code Begin -->
-<pre class="PDMCODE PDMNor" ><span class='PDMCnt'>1597</span> <span class='PDMInd'>  </span> 
-<span class='PDMCnt'>1598</span> <span class='PDMInd'>  </span> 
-<span class='PDMCnt'>1606</span> <span class='PDMInd'>  </span> 
-<span class='PDMCnt'>1607</span> <span class='PDMInd'> 1</span>  <span class='PDMResK'>IF</span> <span class='PDMResF'>PEMSTATUS</span><span class='PDMOper'>(</span><span class='PDMVar'>_SCREEN</span><span class='PDMOper'>,</span><span class='PDMStr'>'frmB2T_Envelop'</span><span class='PDMOper'>,</span><span class='PDMLit'>5</span><span class='PDMOper'>)</span> <span class='PDMOper'>AND</span> <span class='PDMOper'>!</span><span class='PDMResF'>ISNULL</span><span class='PDMOper'>(</span><span class='PDMVar'>_SCREEN</span><span class='PDMOper'>.</span><span class='PDMVar'>frmB2T_Envelop</span><span class='PDMOper'>)</span> <span class='PDMResK'>THEN</span>
-<span class='PDMCnt'>1608</span> <span class='PDMInd'> 2</span>   <span class='PDMResK'>RETURN</span>
-<span class='PDMCnt'>1609</span> <span class='PDMInd'> 1</span>  <span class='PDMResK'>ENDIF</span> <span class='PDMCom'>&amp;&amp;PEMSTATUS(_SCREEN,'frmB2T_Envelop',5) AND !ISNULL(_SCREEN.frmB2T_Envelop)</span>
-<span class='PDMCnt'>1610</span> <span class='PDMInd'>  </span> 
-<span class='PDMCnt'>1611</span> <span class='PDMInd'>  </span> <span class='PDMCom'>*runnning</span>
-<span class='PDMCnt'>1612</span> <span class='PDMInd'> 1</span>  <span class='PDMVar'>lcx</span> <span class='PDMOper'>=</span> <span class='PDMStr'>'Bin_2_Text.vcx'</span>
-<span class='PDMCnt'>1613</span> <span class='PDMInd'>  </span> 
-<span class='PDMCnt'>1614</span> <span class='PDMInd'>  </span> <span class='PDMCom'>* _SCREEN.ADDPROPERTY('sesB2T_Envelop',NEWOBJECT('form'))</span>
-<span class='PDMCnt'>1615</span> <span class='PDMInd'> 1</span>  <span class='PDMVar'>_SCREEN</span><span class='PDMOper'>.</span><span class='PDMResM'>ADDPROPERTY</span><span class='PDMOper'>(</span><span class='PDMStr'>'frmB2T_Envelop'</span><span class='PDMOper'>,</span><span class='PDMResM'>NEWOBJECT</span><span class='PDMOper'>(</span><span class='PDMStr'>'frmInterface'</span><span class='PDMOper'>,</span><span class='PDMVar'>lcx</span><span class='PDMOper'>,</span><span class='PDMStr'>''</span><span class='PDMOper'>)</span><span class='PDMOper'>)</span>
-<span class='PDMCnt'>1616</span> <span class='PDMInd'> 1</span>  <span class='PDMResK'>RETURN</span></pre>
+<pre class="PDMCODE PDMNor" ><span class='PDMCnt'>1742</span> <span class='PDMInd'>  </span> 
+<span class='PDMCnt'>1743</span> <span class='PDMInd'>  </span> 
+<span class='PDMCnt'>1751</span> <span class='PDMInd'>  </span> 
+<span class='PDMCnt'>1752</span> <span class='PDMInd'> 1</span>  <span class='PDMResK'>IF</span> <span class='PDMResF'>PEMSTATUS</span><span class='PDMOper'>(</span><span class='PDMVar'>_SCREEN</span><span class='PDMOper'>,</span><span class='PDMStr'>'frmB2T_Envelop'</span><span class='PDMOper'>,</span><span class='PDMLit'>5</span><span class='PDMOper'>)</span> <span class='PDMOper'>AND</span> <span class='PDMOper'>!</span><span class='PDMResF'>ISNULL</span><span class='PDMOper'>(</span><span class='PDMVar'>_SCREEN</span><span class='PDMOper'>.</span><span class='PDMVar'>frmB2T_Envelop</span><span class='PDMOper'>)</span> <span class='PDMResK'>THEN</span>
+<span class='PDMCnt'>1753</span> <span class='PDMInd'> 2</span>   <span class='PDMResK'>RETURN</span>
+<span class='PDMCnt'>1754</span> <span class='PDMInd'> 1</span>  <span class='PDMResK'>ENDIF</span> <span class='PDMCom'>&amp;&amp;PEMSTATUS(_SCREEN,'frmB2T_Envelop',5) AND !ISNULL(_SCREEN.frmB2T_Envelop)</span>
+<span class='PDMCnt'>1755</span> <span class='PDMInd'>  </span> 
+<span class='PDMCnt'>1756</span> <span class='PDMInd'>  </span> <span class='PDMCom'>*runnning</span>
+<span class='PDMCnt'>1757</span> <span class='PDMInd'> 1</span>  <span class='PDMVar'>lcx</span> <span class='PDMOper'>=</span> <span class='PDMStr'>'Bin_2_Text.vcx'</span>
+<span class='PDMCnt'>1758</span> <span class='PDMInd'>  </span> 
+<span class='PDMCnt'>1759</span> <span class='PDMInd'>  </span> <span class='PDMCom'>* _SCREEN.ADDPROPERTY('sesB2T_Envelop',NEWOBJECT('form'))</span>
+<span class='PDMCnt'>1760</span> <span class='PDMInd'> 1</span>  <span class='PDMVar'>_SCREEN</span><span class='PDMOper'>.</span><span class='PDMResM'>ADDPROPERTY</span><span class='PDMOper'>(</span><span class='PDMStr'>'frmB2T_Envelop'</span><span class='PDMOper'>,</span><span class='PDMResM'>NEWOBJECT</span><span class='PDMOper'>(</span><span class='PDMStr'>'frmInterface'</span><span class='PDMOper'>,</span><span class='PDMVar'>m</span><span class='PDMOper'>.</span><span class='PDMVar'>lcx</span><span class='PDMOper'>,</span><span class='PDMStr'>''</span><span class='PDMOper'>)</span><span class='PDMOper'>)</span>
+<span class='PDMCnt'>1761</span> <span class='PDMInd'> 1</span>  <span class='PDMResK'>RETURN</span></pre>
  <!-- Code End -->
   </div>
  </div>

@@ -16,19 +16,19 @@
 <body>
 <div class="diaxp_mhead">Compare_VerNo Procedure</div>
 <div class="diaxp_mbody">
-<!-- Created with _diamp_pdm_ab by Agnes Beste    03.03.2021 18:15 -->
+<!-- Created with _diamp_pdm_ab by Agnes Beste    06.03.2021 13:26 -->
  <div class="PDM_AB_Descr"><!-- Descr Begin -->
 Compare Version numbers
  </div><!-- Descr End -->
 
  <div class="DIAMP_PDM_AB_Syntax"><!-- Syntax Begin -->
   <div class="SColor">
-   <div class="RetVal"><a href="#_5ZT134ASR">RetVal</a>&nbsp;</div>   <div class="RetValEq">=</div>   <div class="PEM">
+   <div class="RetVal"><a href="#_5ZW0ST1FX">RetVal</a>&nbsp;</div>   <div class="RetValEq">=</div>   <div class="PEM">
     Compare_VerNo
    </div>
    <div class="Para">
-    (<a href="#_5ZT134ASS">tcVerNo1</a>
-     <wbr />,<a href="#_5ZT134AST">tcVerNo2</a>)
+    (<a href="#_5ZW0ST1FY">tcVerNo1</a>
+     <wbr />,<a href="#_5ZW0ST1FZ">tcVerNo2</a>)
    </div>
    <div style="clear: both"></div>
   </div><!-- Colour End -->
@@ -40,7 +40,7 @@ Compare Version numbers
   </span>
   <dl class="DIAMP_PDM_AB_Params_List">
    <dt class="dt_">
-    <a class="DIAMP_PDM_AB_Params_ParaName" id="_5ZT134ASS" name="_5ZT134ASS">
+    <a class="DIAMP_PDM_AB_Params_ParaName" id="_5ZW0ST1FY" name="_5ZW0ST1FY">
      <span class="PDMEXPR PDMNor" ><span class='PDMVar'>tcVerNo1</span></span>
 
     </a>
@@ -70,7 +70,7 @@ Compare Version numbers
     </span>
    </dd>
    <dt class="dt_">
-    <a class="DIAMP_PDM_AB_Params_ParaName" id="_5ZT134AST" name="_5ZT134AST">
+    <a class="DIAMP_PDM_AB_Params_ParaName" id="_5ZW0ST1FZ" name="_5ZW0ST1FZ">
      <span class="PDMEXPR PDMNor" ><span class='PDMVar'>tcVerNo2</span></span>
 
     </a>
@@ -105,7 +105,7 @@ Compare Version numbers
  <div class="DIAMP_PDM_AB_RetVal"><!-- Returns Begin -->
   <div>
    <span class="PDM_AB_Head">
-    <a id="_5ZT134ASR" name="_5ZT134ASR">
+    <a id="_5ZW0ST1FX" name="_5ZW0ST1FX">
      Return value
     </a>
    </span> <span class="RetVal_Ttype">Number</span>
@@ -128,40 +128,40 @@ Compare Version numbers
  </div><!-- Returns End -->
 
 
-<!-- /Created with _diamp_pdm_ab by Agnes Beste    03.03.2021 18:15 -->
+<!-- /Created with _diamp_pdm_ab by Agnes Beste    06.03.2021 13:26 -->
 
  <div class="SC">
   <img onclick="ExpandSC('SP_P24',-1);" class="imgEC" src="../../imgs/dotab.gif" alt="Expand/Collapse source code of procedure Compare_VerNo" id="IMG_SP_P24" />
   <span onclick="ExpandSC('SP_P24',-1);" class="SCCaption"><a name="pm.compare_verno">Source Code</a></span>
   <div ondblclick="ExpandSC('SP_P24',-1);" class="SCE" style="display: none;" id="TX_SP_P24">
 <!-- Code Begin -->
-<pre class="PDMCODE PDMNor" ><span class='PDMCnt'>2687</span> <span class='PDMInd'> 1</span>  <span class='PDMResK'>LPARAMETERS</span> <span class='PDMOper'>;</span>
-<span class='PDMCnt'>2688</span> <span class='PDMInd'> 2</span>   <span class='PDMVar'>tcVerNo1</span><span class='PDMOper'>,</span><span class='PDMOper'>;</span>
-<span class='PDMCnt'>2689</span> <span class='PDMInd'> 2</span>   <span class='PDMVar'>tcVerNo2</span>
-<span class='PDMCnt'>2690</span> <span class='PDMInd'>  </span> 
-<span class='PDMCnt'>2691</span> <span class='PDMInd'>  </span> 
-<span class='PDMCnt'>2725</span> <span class='PDMInd'>  </span> 
-<span class='PDMCnt'>2726</span> <span class='PDMInd'> 1</span>  <span class='PDMResK'>LOCAL</span><span class='PDMOper'>;</span>
-<span class='PDMCnt'>2727</span> <span class='PDMInd'> 2</span>   <span class='PDMVar'>lnPos</span>      <span class='PDMResK'>AS</span> <span class='PDMResK'>NUMBER</span><span class='PDMOper'>,</span><span class='PDMOper'>;</span>
-<span class='PDMCnt'>2728</span> <span class='PDMInd'> 2</span>   <span class='PDMVar'>lnVerNo1</span> <span class='PDMResK'>AS</span> <span class='PDMResK'>NUMBER</span><span class='PDMOper'>,</span><span class='PDMOper'>;</span>
-<span class='PDMCnt'>2729</span> <span class='PDMInd'> 2</span>   <span class='PDMVar'>lnVerNo2</span> <span class='PDMResK'>AS</span> <span class='PDMResK'>NUMBER</span>
-<span class='PDMCnt'>2730</span> <span class='PDMInd'>  </span> 
-<span class='PDMCnt'>2731</span> <span class='PDMInd'> 1</span>  <span class='PDMVar'>lnVerNo1</span> <span class='PDMOper'>=</span> <span class='PDMLit'>0</span>
-<span class='PDMCnt'>2732</span> <span class='PDMInd'> 1</span>  <span class='PDMVar'>lnVerNo2</span> <span class='PDMOper'>=</span> <span class='PDMLit'>0</span>
-<span class='PDMCnt'>2733</span> <span class='PDMInd'>  </span> 
-<span class='PDMCnt'>2734</span> <span class='PDMInd'> 1</span>  <span class='PDMResK'>FOR</span> <span class='PDMVar'>lnPos</span> <span class='PDMOper'>=</span> <span class='PDMLit'>0</span> <span class='PDMResK'>TO</span> <span class='PDMResF'>MIN</span><span class='PDMOper'>(</span><span class='PDMResF'>OCCURS</span><span class='PDMOper'>(</span><span class='PDMStr'>'.'</span><span class='PDMOper'>,</span><span class='PDMVar'>m</span><span class='PDMOper'>.</span><span class='PDMVar'>tcVerNo1</span><span class='PDMOper'>)</span><span class='PDMOper'>,</span><span class='PDMResF'>OCCURS</span><span class='PDMOper'>(</span><span class='PDMStr'>'.'</span><span class='PDMOper'>,</span><span class='PDMVar'>m</span><span class='PDMOper'>.</span><span class='PDMVar'>tcVerNo2</span><span class='PDMOper'>)</span><span class='PDMOper'>,</span><span class='PDMLit'>4</span><span class='PDMOper'>)</span>
-<span class='PDMCnt'>2735</span> <span class='PDMInd'> 2</span>   <span class='PDMVar'>lnVerNo1</span> <span class='PDMOper'>=</span> <span class='PDMVar'>m</span><span class='PDMOper'>.</span><span class='PDMVar'>lnVerNo1</span><span class='PDMOper'>*</span><span class='PDMLit'>10</span><span class='PDMOper'>^</span><span class='PDMLit'>4</span><span class='PDMOper'>+</span><span class='PDMResF'>VAL</span><span class='PDMOper'>(</span><span class='PDMResF'>GETWORDNUM</span><span class='PDMOper'>(</span><span class='PDMVar'>m</span><span class='PDMOper'>.</span><span class='PDMVar'>tcVerNo1</span><span class='PDMOper'>,</span><span class='PDMVar'>m</span><span class='PDMOper'>.</span><span class='PDMVar'>lnPos</span><span class='PDMOper'>+</span><span class='PDMLit'>1</span><span class='PDMOper'>,</span><span class='PDMStr'>'.'</span><span class='PDMOper'>)</span><span class='PDMOper'>)</span>
-<span class='PDMCnt'>2736</span> <span class='PDMInd'> 2</span>   <span class='PDMVar'>lnVerNo2</span> <span class='PDMOper'>=</span> <span class='PDMVar'>m</span><span class='PDMOper'>.</span><span class='PDMVar'>lnVerNo2</span><span class='PDMOper'>*</span><span class='PDMLit'>10</span><span class='PDMOper'>^</span><span class='PDMLit'>4</span><span class='PDMOper'>+</span><span class='PDMResF'>VAL</span><span class='PDMOper'>(</span><span class='PDMResF'>GETWORDNUM</span><span class='PDMOper'>(</span><span class='PDMVar'>m</span><span class='PDMOper'>.</span><span class='PDMVar'>tcVerNo2</span><span class='PDMOper'>,</span><span class='PDMVar'>m</span><span class='PDMOper'>.</span><span class='PDMVar'>lnPos</span><span class='PDMOper'>+</span><span class='PDMLit'>1</span><span class='PDMOper'>,</span><span class='PDMStr'>'.'</span><span class='PDMOper'>)</span><span class='PDMOper'>)</span>
-<span class='PDMCnt'>2737</span> <span class='PDMInd'> 1</span>  <span class='PDMResK'>ENDFOR</span> <span class='PDMCom'>&amp;&amp;lnPos</span>
-<span class='PDMCnt'>2738</span> <span class='PDMInd'>  </span> 
-<span class='PDMCnt'>2739</span> <span class='PDMInd'> 1</span>  <span class='PDMResK'>DO</span> <span class='PDMResK'>CASE</span>
-<span class='PDMCnt'>2740</span> <span class='PDMInd'> 2</span>   <span class='PDMResK'>CASE</span> <span class='PDMVar'>m</span><span class='PDMOper'>.</span><span class='PDMVar'>lnVerNo1</span><span class='PDMOper'>=</span><span class='PDMVar'>m</span><span class='PDMOper'>.</span><span class='PDMVar'>lnVerNo2</span>
-<span class='PDMCnt'>2741</span> <span class='PDMInd'> 3</span>    <span class='PDMResK'>RETURN</span> <span class='PDMLit'>0</span>
-<span class='PDMCnt'>2742</span> <span class='PDMInd'> 2</span>   <span class='PDMResK'>CASE</span> <span class='PDMVar'>m</span><span class='PDMOper'>.</span><span class='PDMVar'>lnVerNo1</span><span class='PDMOper'>&gt;</span><span class='PDMVar'>m</span><span class='PDMOper'>.</span><span class='PDMVar'>lnVerNo2</span>
-<span class='PDMCnt'>2743</span> <span class='PDMInd'> 3</span>    <span class='PDMResK'>RETURN</span> <span class='PDMLit'>1</span>
-<span class='PDMCnt'>2744</span> <span class='PDMInd'> 2</span>   <span class='PDMResK'>OTHERWISE</span>
-<span class='PDMCnt'>2745</span> <span class='PDMInd'> 3</span>    <span class='PDMResK'>RETURN</span> <span class='PDMLit'>2</span>
-<span class='PDMCnt'>2746</span> <span class='PDMInd'> 1</span>  <span class='PDMResK'>ENDCASE</span></pre>
+<pre class="PDMCODE PDMNor" ><span class='PDMCnt'>2832</span> <span class='PDMInd'> 1</span>  <span class='PDMResK'>LPARAMETERS</span> <span class='PDMOper'>;</span>
+<span class='PDMCnt'>2833</span> <span class='PDMInd'> 2</span>   <span class='PDMVar'>tcVerNo1</span><span class='PDMOper'>,</span><span class='PDMOper'>;</span>
+<span class='PDMCnt'>2834</span> <span class='PDMInd'> 2</span>   <span class='PDMVar'>tcVerNo2</span>
+<span class='PDMCnt'>2835</span> <span class='PDMInd'>  </span> 
+<span class='PDMCnt'>2836</span> <span class='PDMInd'>  </span> 
+<span class='PDMCnt'>2870</span> <span class='PDMInd'>  </span> 
+<span class='PDMCnt'>2871</span> <span class='PDMInd'> 1</span>  <span class='PDMResK'>LOCAL</span><span class='PDMOper'>;</span>
+<span class='PDMCnt'>2872</span> <span class='PDMInd'> 2</span>   <span class='PDMVar'>lnPos</span>      <span class='PDMResK'>AS</span> <span class='PDMResK'>NUMBER</span><span class='PDMOper'>,</span><span class='PDMOper'>;</span>
+<span class='PDMCnt'>2873</span> <span class='PDMInd'> 2</span>   <span class='PDMVar'>lnVerNo1</span> <span class='PDMResK'>AS</span> <span class='PDMResK'>NUMBER</span><span class='PDMOper'>,</span><span class='PDMOper'>;</span>
+<span class='PDMCnt'>2874</span> <span class='PDMInd'> 2</span>   <span class='PDMVar'>lnVerNo2</span> <span class='PDMResK'>AS</span> <span class='PDMResK'>NUMBER</span>
+<span class='PDMCnt'>2875</span> <span class='PDMInd'>  </span> 
+<span class='PDMCnt'>2876</span> <span class='PDMInd'> 1</span>  <span class='PDMVar'>lnVerNo1</span> <span class='PDMOper'>=</span> <span class='PDMLit'>0</span>
+<span class='PDMCnt'>2877</span> <span class='PDMInd'> 1</span>  <span class='PDMVar'>lnVerNo2</span> <span class='PDMOper'>=</span> <span class='PDMLit'>0</span>
+<span class='PDMCnt'>2878</span> <span class='PDMInd'>  </span> 
+<span class='PDMCnt'>2879</span> <span class='PDMInd'> 1</span>  <span class='PDMResK'>FOR</span> <span class='PDMVar'>lnPos</span> <span class='PDMOper'>=</span> <span class='PDMLit'>0</span> <span class='PDMResK'>TO</span> <span class='PDMResF'>MIN</span><span class='PDMOper'>(</span><span class='PDMResF'>OCCURS</span><span class='PDMOper'>(</span><span class='PDMStr'>'.'</span><span class='PDMOper'>,</span><span class='PDMVar'>m</span><span class='PDMOper'>.</span><span class='PDMVar'>tcVerNo1</span><span class='PDMOper'>)</span><span class='PDMOper'>,</span><span class='PDMResF'>OCCURS</span><span class='PDMOper'>(</span><span class='PDMStr'>'.'</span><span class='PDMOper'>,</span><span class='PDMVar'>m</span><span class='PDMOper'>.</span><span class='PDMVar'>tcVerNo2</span><span class='PDMOper'>)</span><span class='PDMOper'>,</span><span class='PDMLit'>4</span><span class='PDMOper'>)</span>
+<span class='PDMCnt'>2880</span> <span class='PDMInd'> 2</span>   <span class='PDMVar'>lnVerNo1</span> <span class='PDMOper'>=</span> <span class='PDMVar'>m</span><span class='PDMOper'>.</span><span class='PDMVar'>lnVerNo1</span><span class='PDMOper'>*</span><span class='PDMLit'>10</span><span class='PDMOper'>^</span><span class='PDMLit'>4</span><span class='PDMOper'>+</span><span class='PDMResF'>VAL</span><span class='PDMOper'>(</span><span class='PDMResF'>GETWORDNUM</span><span class='PDMOper'>(</span><span class='PDMVar'>m</span><span class='PDMOper'>.</span><span class='PDMVar'>tcVerNo1</span><span class='PDMOper'>,</span><span class='PDMVar'>m</span><span class='PDMOper'>.</span><span class='PDMVar'>lnPos</span><span class='PDMOper'>+</span><span class='PDMLit'>1</span><span class='PDMOper'>,</span><span class='PDMStr'>'.'</span><span class='PDMOper'>)</span><span class='PDMOper'>)</span>
+<span class='PDMCnt'>2881</span> <span class='PDMInd'> 2</span>   <span class='PDMVar'>lnVerNo2</span> <span class='PDMOper'>=</span> <span class='PDMVar'>m</span><span class='PDMOper'>.</span><span class='PDMVar'>lnVerNo2</span><span class='PDMOper'>*</span><span class='PDMLit'>10</span><span class='PDMOper'>^</span><span class='PDMLit'>4</span><span class='PDMOper'>+</span><span class='PDMResF'>VAL</span><span class='PDMOper'>(</span><span class='PDMResF'>GETWORDNUM</span><span class='PDMOper'>(</span><span class='PDMVar'>m</span><span class='PDMOper'>.</span><span class='PDMVar'>tcVerNo2</span><span class='PDMOper'>,</span><span class='PDMVar'>m</span><span class='PDMOper'>.</span><span class='PDMVar'>lnPos</span><span class='PDMOper'>+</span><span class='PDMLit'>1</span><span class='PDMOper'>,</span><span class='PDMStr'>'.'</span><span class='PDMOper'>)</span><span class='PDMOper'>)</span>
+<span class='PDMCnt'>2882</span> <span class='PDMInd'> 1</span>  <span class='PDMResK'>ENDFOR</span> <span class='PDMCom'>&amp;&amp;lnPos</span>
+<span class='PDMCnt'>2883</span> <span class='PDMInd'>  </span> 
+<span class='PDMCnt'>2884</span> <span class='PDMInd'> 1</span>  <span class='PDMResK'>DO</span> <span class='PDMVar'>CASE</span>
+<span class='PDMCnt'>2885</span> <span class='PDMInd'> 2</span>   <span class='PDMResK'>CASE</span> <span class='PDMVar'>m</span><span class='PDMOper'>.</span><span class='PDMVar'>lnVerNo1</span><span class='PDMOper'>=</span><span class='PDMVar'>m</span><span class='PDMOper'>.</span><span class='PDMVar'>lnVerNo2</span>
+<span class='PDMCnt'>2886</span> <span class='PDMInd'> 3</span>    <span class='PDMResK'>RETURN</span> <span class='PDMLit'>0</span>
+<span class='PDMCnt'>2887</span> <span class='PDMInd'> 2</span>   <span class='PDMResK'>CASE</span> <span class='PDMVar'>m</span><span class='PDMOper'>.</span><span class='PDMVar'>lnVerNo1</span><span class='PDMOper'>&gt;</span><span class='PDMVar'>m</span><span class='PDMOper'>.</span><span class='PDMVar'>lnVerNo2</span>
+<span class='PDMCnt'>2888</span> <span class='PDMInd'> 3</span>    <span class='PDMResK'>RETURN</span> <span class='PDMLit'>1</span>
+<span class='PDMCnt'>2889</span> <span class='PDMInd'> 2</span>   <span class='PDMResK'>OTHERWISE</span>
+<span class='PDMCnt'>2890</span> <span class='PDMInd'> 3</span>    <span class='PDMResK'>RETURN</span> <span class='PDMLit'>2</span>
+<span class='PDMCnt'>2891</span> <span class='PDMInd'> 1</span>  <span class='PDMResK'>ENDCASE</span></pre>
  <!-- Code End -->
   </div>
  </div>

@@ -16,19 +16,19 @@
 <body>
 <div class="diaxp_mhead">Get_git_Path Function</div>
 <div class="diaxp_mbody">
-<!-- Created with _diamp_pdm_ab by Agnes Beste    03.03.2021 18:15 -->
+<!-- Created with _diamp_pdm_ab by Agnes Beste    06.03.2021 13:26 -->
  <div class="PDM_AB_Descr"><!-- Descr Begin -->
 Get installation status of git and paht to git binaries.
  </div><!-- Descr End -->
 
  <div class="DIAMP_PDM_AB_Syntax"><!-- Syntax Begin -->
   <div class="SColor">
-   <div class="RetVal"><a href="#_5ZT134ANX">RetVal</a>&nbsp;</div>   <div class="RetValEq">=</div>   <div class="PEM">
+   <div class="RetVal"><a href="#_5ZW0ST1B1">RetVal</a>&nbsp;</div>   <div class="RetValEq">=</div>   <div class="PEM">
     Get_git_Path
    </div>
    <div class="Para">
-    (@<a href="#_5ZT134ANY">tc_git</a>
-     [<wbr />,@<a href="#_5ZT134ANZ">tlIs64</a>])
+    (@<a href="#_5ZW0ST1B2">tc_git</a>
+     [<wbr />,@<a href="#_5ZW0ST1B3">tlIs64</a>])
    </div>
    <div style="clear: both"></div>
   </div><!-- Colour End -->
@@ -40,7 +40,7 @@ Get installation status of git and paht to git binaries.
   </span>
   <dl class="DIAMP_PDM_AB_Params_List">
    <dt class="dt_">
-    <a class="DIAMP_PDM_AB_Params_ParaName" id="_5ZT134ANY" name="_5ZT134ANY">
+    <a class="DIAMP_PDM_AB_Params_ParaName" id="_5ZW0ST1B2" name="_5ZW0ST1B2">
      <span class="PDMEXPR PDMNor" ><span class='PDMVar'>tc_git</span></span>
 
     </a>
@@ -74,7 +74,7 @@ Includes git.exe
     </span>
    </dd>
    <dt class="dt_">
-    <a class="DIAMP_PDM_AB_Params_ParaName" id="_5ZT134ANZ" name="_5ZT134ANZ">
+    <a class="DIAMP_PDM_AB_Params_ParaName" id="_5ZW0ST1B3" name="_5ZW0ST1B3">
      <span class="PDMEXPR PDMNor" ><span class='PDMVar'>tlIs64</span></span>
 
     </a>
@@ -117,7 +117,7 @@ Checks if 64bit is installed. 64bit needs different calling then 32bit, because 
  <div class="DIAMP_PDM_AB_RetVal"><!-- Returns Begin -->
   <div>
    <span class="PDM_AB_Head">
-    <a id="_5ZT134ANX" name="_5ZT134ANX">
+    <a id="_5ZW0ST1B1" name="_5ZW0ST1B1">
      Return value
     </a>
    </span> <span class="RetVal_Ttype">Boolean</span>
@@ -164,146 +164,146 @@ SF Changed by<br />
  </div><!-- Changes End -->
 
 
-<!-- /Created with _diamp_pdm_ab by Agnes Beste    03.03.2021 18:15 -->
+<!-- /Created with _diamp_pdm_ab by Agnes Beste    06.03.2021 13:26 -->
 
  <div class="SC">
   <img onclick="ExpandSC('SP_P17',-1);" class="imgEC" src="../../imgs/dotab.gif" alt="Expand/Collapse source code of procedure Get_git_Path" id="IMG_SP_P17" />
   <span onclick="ExpandSC('SP_P17',-1);" class="SCCaption"><a name="pm.get_git_path">Source Code</a></span>
   <div ondblclick="ExpandSC('SP_P17',-1);" class="SCE" style="display: none;" id="TX_SP_P17">
 <!-- Code Begin -->
-<pre class="PDMCODE PDMNor" ><span class='PDMCnt'>1819</span> <span class='PDMInd'> 1</span>  <span class='PDMResK'>LPARAMETERS</span><span class='PDMOper'>;</span>
-<span class='PDMCnt'>1820</span> <span class='PDMInd'> 2</span>   <span class='PDMVar'>tc_git</span><span class='PDMOper'>,</span><span class='PDMOper'>;</span>
-<span class='PDMCnt'>1821</span> <span class='PDMInd'> 2</span>   <span class='PDMVar'>tlIs64</span>
-<span class='PDMCnt'>1822</span> <span class='PDMInd'>  </span> 
-<span class='PDMCnt'>1823</span> <span class='PDMInd'>  </span> 
-<span class='PDMCnt'>1849</span> <span class='PDMInd'>  </span> 
-<span class='PDMCnt'>1850</span> <span class='PDMInd'>  </span> <span class='PDMCom'>*!*    SF Changed by 11.2.2021</span>
-<span class='PDMCnt'>1851</span> <span class='PDMInd'>  </span> 
-<span class='PDMCnt'>1858</span> <span class='PDMInd'>  </span> 
-<span class='PDMCnt'>1859</span> <span class='PDMInd'> 1</span>  <span class='PDMOper'>#</span><span class='PDMResK'>DEFINE</span> <span class='PDMVar'>ERROR_SUCCESS</span>        <span class='PDMLit'>0</span>    <span class='PDMCom'>&amp;&amp; OK</span>
-<span class='PDMCnt'>1860</span> <span class='PDMInd'> 1</span>  <span class='PDMOper'>#</span><span class='PDMResK'>DEFINE</span> <span class='PDMVar'>HKEY_CURRENT_USER</span>           <span class='PDMOper'>-</span><span class='PDMLit'>2147483647</span>  <span class='PDMCom'>&amp;&amp; BITSET(0,31)+1</span>
-<span class='PDMCnt'>1861</span> <span class='PDMInd'> 1</span>  <span class='PDMOper'>#</span><span class='PDMResK'>DEFINE</span> <span class='PDMVar'>HKEY_LOCAL_MACHINE</span>          <span class='PDMOper'>-</span><span class='PDMLit'>2147483646</span>  <span class='PDMCom'>&amp;&amp; BITSET(0,31)+2</span>
-<span class='PDMCnt'>1862</span> <span class='PDMInd'>  </span> 
-<span class='PDMCnt'>1863</span> <span class='PDMInd'> 1</span>  <span class='PDMOper'>#</span><span class='PDMResK'>DEFINE</span> <span class='PDMVar'>KEY_WOW64_64KEY</span> <span class='PDMLit'>0x0100</span>
-<span class='PDMCnt'>1864</span> <span class='PDMInd'> 1</span>  <span class='PDMOper'>#</span><span class='PDMResK'>DEFINE</span> <span class='PDMVar'>KEY_READ</span> <span class='PDMLit'>0x20019</span>
-<span class='PDMCnt'>1865</span> <span class='PDMInd'>  </span> 
-<span class='PDMCnt'>1866</span> <span class='PDMInd'> 1</span>  <span class='PDMResK'>LOCAL</span><span class='PDMOper'>;</span>
-<span class='PDMCnt'>1867</span> <span class='PDMInd'> 2</span>   <span class='PDMVar'>llReturn</span> <span class='PDMResK'>AS</span> <span class='PDMVar'>BOOLEAN</span>
-<span class='PDMCnt'>1868</span> <span class='PDMInd'>  </span> 
-<span class='PDMCnt'>1869</span> <span class='PDMInd'> 1</span>  <span class='PDMResK'>IF</span> <span class='PDMResF'>PEMSTATUS</span><span class='PDMOper'>(</span><span class='PDMVar'>_SCREEN</span><span class='PDMOper'>,</span><span class='PDMStr'>'gcB2T_git'</span><span class='PDMOper'>,</span><span class='PDMLit'>5</span><span class='PDMOper'>)</span> <span class='PDMResK'>THEN</span>
-<span class='PDMCnt'>1870</span> <span class='PDMInd'>  </span> <span class='PDMCom'>*read from storage or set</span>
-<span class='PDMCnt'>1871</span> <span class='PDMInd'> 2</span>   <span class='PDMVar'>tc_git</span> <span class='PDMOper'>=</span> <span class='PDMVar'>_SCREEN</span><span class='PDMOper'>.</span><span class='PDMVar'>gcB2T_git</span>
-<span class='PDMCnt'>1872</span> <span class='PDMInd'> 2</span>   <span class='PDMVar'>tlIs64</span> <span class='PDMOper'>=</span> <span class='PDMVar'>_SCREEN</span><span class='PDMOper'>.</span><span class='PDMVar'>glB2T_git64</span>
-<span class='PDMCnt'>1873</span> <span class='PDMInd'>  </span> 
-<span class='PDMCnt'>1874</span> <span class='PDMInd'> 1</span>  <span class='PDMResK'>ELSE</span>  <span class='PDMCom'>&amp;&amp;PEMSTATUS(_SCREEN,'gcB2T_git',5)</span>
-<span class='PDMCnt'>1875</span> <span class='PDMInd'>  </span> <span class='PDMCom'>*try to read registry</span>
-<span class='PDMCnt'>1876</span> <span class='PDMInd'> 2</span>   <span class='PDMResK'>DECLARE</span> <span class='PDMResK'>INTEGER</span> <span class='PDMVar'><a href="http://www.news2news.com/vfp/?search=RegOpenKeyEx&x=7&y=5" target="blank">RegOpenKeyEx</a></span> <span class='PDMResK'>IN</span> <span class='PDMVar'>advapi32</span><span class='PDMOper'>;</span>
-<span class='PDMCnt'>1877</span> <span class='PDMInd'> 3</span>    <span class='PDMResK'>INTEGER</span> <span class='PDMVar'>nHKey</span><span class='PDMOper'>,</span> <span class='PDMResK'>STRING</span> <span class='PDMVar'>cSubKey</span><span class='PDMOper'>,</span> <span class='PDMResK'>INTEGER</span> <span class='PDMVar'>ulOptions</span><span class='PDMOper'>,</span> <span class='PDMResK'>INTEGER</span> <span class='PDMVar'>samDesired</span><span class='PDMOper'>,</span> <span class='PDMResK'>INTEGER</span> <span class='PDMOper'>@</span><span class='PDMVar'>nResult</span>
-<span class='PDMCnt'>1878</span> <span class='PDMInd'>  </span> 
-<span class='PDMCnt'>1879</span> <span class='PDMInd'> 2</span>   <span class='PDMResK'>DECLARE</span> <span class='PDMResK'>INTEGER</span> <span class='PDMVar'><a href="http://www.news2news.com/vfp/?search=RegCloseKey&x=7&y=5" target="blank">RegCloseKey</a></span> <span class='PDMResK'>IN</span> <span class='PDMVar'>Win32API</span> <span class='PDMOper'>;</span>
-<span class='PDMCnt'>1880</span> <span class='PDMInd'> 3</span>    <span class='PDMResK'>INTEGER</span> <span class='PDMVar'>nHKey</span>
-<span class='PDMCnt'>1881</span> <span class='PDMInd'>  </span> 
-<span class='PDMCnt'>1882</span> <span class='PDMInd'> 2</span>   <span class='PDMResK'>DECLARE</span> <span class='PDMResK'>INTEGER</span> <span class='PDMVar'><a href="http://www.news2news.com/vfp/?search=RegQueryValueEx&x=7&y=5" target="blank">RegQueryValueEx</a></span> <span class='PDMResK'>IN</span> <span class='PDMVar'>Win32API</span> <span class='PDMOper'>;</span>
-<span class='PDMCnt'>1883</span> <span class='PDMInd'> 3</span>    <span class='PDMResK'>INTEGER</span> <span class='PDMVar'>nHKey</span><span class='PDMOper'>,</span> <span class='PDMResK'>STRING</span> <span class='PDMVar'>lpszValueName</span><span class='PDMOper'>,</span> <span class='PDMResK'>INTEGER</span> <span class='PDMVar'>dwReserved</span><span class='PDMOper'>,</span><span class='PDMOper'>;</span>
-<span class='PDMCnt'>1884</span> <span class='PDMInd'> 3</span>    <span class='PDMResK'>INTEGER</span> <span class='PDMOper'>@</span><span class='PDMVar'>lpdwType</span><span class='PDMOper'>,</span> <span class='PDMResK'>STRING</span> <span class='PDMOper'>@</span><span class='PDMVar'>lpbData</span><span class='PDMOper'>,</span> <span class='PDMResK'>INTEGER</span> <span class='PDMOper'>@</span><span class='PDMVar'>lpcbData</span>
-<span class='PDMCnt'>1885</span> <span class='PDMInd'>  </span> 
-<span class='PDMCnt'>1886</span> <span class='PDMInd'> 2</span>   <span class='PDMResK'>LOCAL</span><span class='PDMOper'>;</span>
-<span class='PDMCnt'>1887</span> <span class='PDMInd'> 3</span>    <span class='PDMVar'>lcReg</span>    <span class='PDMResK'>AS</span> <span class='PDMResK'>CHARACTER</span>
-<span class='PDMCnt'>1888</span> <span class='PDMInd'>  </span> 
-<span class='PDMCnt'>1889</span> <span class='PDMInd'> 2</span>   <span class='PDMResK'>LOCAL</span><span class='PDMOper'>;</span>
-<span class='PDMCnt'>1890</span> <span class='PDMInd'> 3</span>    <span class='PDMVar'>lnNode</span><span class='PDMOper'>,</span><span class='PDMOper'>;</span>
-<span class='PDMCnt'>1891</span> <span class='PDMInd'> 3</span>    <span class='PDMVar'>lnKey</span><span class='PDMOper'>,</span><span class='PDMOper'>;</span>
-<span class='PDMCnt'>1892</span> <span class='PDMInd'> 3</span>    <span class='PDMVar'>lnSubKey</span><span class='PDMOper'>,</span><span class='PDMOper'>;</span>
-<span class='PDMCnt'>1893</span> <span class='PDMInd'> 3</span>    <span class='PDMVar'>lpdwReserved</span><span class='PDMOper'>,</span><span class='PDMOper'>;</span>
-<span class='PDMCnt'>1894</span> <span class='PDMInd'> 3</span>    <span class='PDMVar'>lpdwType</span><span class='PDMOper'>,</span><span class='PDMOper'>;</span>
-<span class='PDMCnt'>1895</span> <span class='PDMInd'> 3</span>    <span class='PDMVar'>lpbData</span><span class='PDMOper'>,</span><span class='PDMOper'>;</span>
-<span class='PDMCnt'>1896</span> <span class='PDMInd'> 3</span>    <span class='PDMVar'>lpcbData</span><span class='PDMOper'>,</span><span class='PDMOper'>;</span>
-<span class='PDMCnt'>1897</span> <span class='PDMInd'> 3</span>    <span class='PDMVar'>lnErrCode</span> <span class='PDMResK'>AS</span> <span class='PDMResK'>INTEGER</span>
-<span class='PDMCnt'>1898</span> <span class='PDMInd'>  </span> 
-<span class='PDMCnt'>1899</span> <span class='PDMInd'>  </span> <span class='PDMCom'>*!*    Changed by: SF 1.12.2015</span>
-<span class='PDMCnt'>1900</span> <span class='PDMInd'>  </span> 
-<span class='PDMCnt'>1905</span> <span class='PDMInd'>  </span> 
-<span class='PDMCnt'>1906</span> <span class='PDMInd'> 2</span>   <span class='PDMResK'>LOCAL</span> <span class='PDMResK'>ARRAY</span><span class='PDMOper'>;</span>
-<span class='PDMCnt'>1907</span> <span class='PDMInd'> 3</span>    <span class='PDMVar'>laRegs</span><span class='PDMOper'>(</span><span class='PDMLit'>3</span><span class='PDMOper'>,</span><span class='PDMLit'>4</span><span class='PDMOper'>)</span>
-<span class='PDMCnt'>1908</span> <span class='PDMInd'>  </span> <span class='PDMCom'>* Col 1, Node</span>
-<span class='PDMCnt'>1909</span> <span class='PDMInd'>  </span> <span class='PDMCom'>* Col 2, Key</span>
-<span class='PDMCnt'>1910</span> <span class='PDMInd'>  </span> <span class='PDMCom'>* Col 3, Value</span>
-<span class='PDMCnt'>1911</span> <span class='PDMInd'>  </span> <span class='PDMCom'>* Col 4, Boolean, 64 bit oder Value um dies zu ermitteln</span>
-<span class='PDMCnt'>1912</span> <span class='PDMInd'>  </span> 
-<span class='PDMCnt'>1913</span> <span class='PDMInd'> 2</span>   <span class='PDMVar'>laRegs</span><span class='PDMOper'>(</span><span class='PDMLit'>1</span><span class='PDMOper'>,</span><span class='PDMLit'>1</span><span class='PDMOper'>)</span> <span class='PDMOper'>=</span> <span class='PDMVar'>HKEY_LOCAL_MACHINE</span>
-<span class='PDMCnt'>1914</span> <span class='PDMInd'> 2</span>   <span class='PDMVar'>laRegs</span><span class='PDMOper'>(</span><span class='PDMLit'>1</span><span class='PDMOper'>,</span><span class='PDMLit'>2</span><span class='PDMOper'>)</span> <span class='PDMOper'>=</span> <span class='PDMStr'>"SOFTWARE\GitForWindows\"</span>    <span class='PDMCom'>&amp;&amp;64</span>
-<span class='PDMCnt'>1915</span> <span class='PDMInd'> 2</span>   <span class='PDMVar'>laRegs</span><span class='PDMOper'>(</span><span class='PDMLit'>1</span><span class='PDMOper'>,</span><span class='PDMLit'>3</span><span class='PDMOper'>)</span> <span class='PDMOper'>=</span> <span class='PDMStr'>'InstallPath'</span>
-<span class='PDMCnt'>1916</span> <span class='PDMInd'> 2</span>   <span class='PDMVar'>laRegs</span><span class='PDMOper'>(</span><span class='PDMLit'>1</span><span class='PDMOper'>,</span><span class='PDMLit'>4</span><span class='PDMOper'>)</span> <span class='PDMOper'>=</span> <span class='PDMLit'>.T.</span>
-<span class='PDMCnt'>1917</span> <span class='PDMInd'> 2</span>   <span class='PDMVar'>laRegs</span><span class='PDMOper'>(</span><span class='PDMLit'>2</span><span class='PDMOper'>,</span><span class='PDMLit'>1</span><span class='PDMOper'>)</span> <span class='PDMOper'>=</span> <span class='PDMVar'>HKEY_LOCAL_MACHINE</span>
-<span class='PDMCnt'>1918</span> <span class='PDMInd'> 2</span>   <span class='PDMVar'>laRegs</span><span class='PDMOper'>(</span><span class='PDMLit'>2</span><span class='PDMOper'>,</span><span class='PDMLit'>2</span><span class='PDMOper'>)</span> <span class='PDMOper'>=</span> <span class='PDMStr'>"SOFTWARE\WOW6432Node\GitForWindows\"</span>        <span class='PDMCom'>&amp;&amp;32</span>
-<span class='PDMCnt'>1919</span> <span class='PDMInd'> 2</span>   <span class='PDMVar'>laRegs</span><span class='PDMOper'>(</span><span class='PDMLit'>2</span><span class='PDMOper'>,</span><span class='PDMLit'>3</span><span class='PDMOper'>)</span> <span class='PDMOper'>=</span> <span class='PDMStr'>'InstallPath'</span>
-<span class='PDMCnt'>1920</span> <span class='PDMInd'> 2</span>   <span class='PDMVar'>laRegs</span><span class='PDMOper'>(</span><span class='PDMLit'>2</span><span class='PDMOper'>,</span><span class='PDMLit'>4</span><span class='PDMOper'>)</span> <span class='PDMOper'>=</span> <span class='PDMLit'>.F.</span>
-<span class='PDMCnt'>1921</span> <span class='PDMInd'> 2</span>   <span class='PDMVar'>laRegs</span><span class='PDMOper'>(</span><span class='PDMLit'>3</span><span class='PDMOper'>,</span><span class='PDMLit'>1</span><span class='PDMOper'>)</span> <span class='PDMOper'>=</span> <span class='PDMVar'>HKEY_CURRENT_USER</span>
-<span class='PDMCnt'>1922</span> <span class='PDMInd'> 2</span>   <span class='PDMVar'>laRegs</span><span class='PDMOper'>(</span><span class='PDMLit'>3</span><span class='PDMOper'>,</span><span class='PDMLit'>2</span><span class='PDMOper'>)</span> <span class='PDMOper'>=</span> <span class='PDMStr'>"SOFTWARE\GitForWindows\"</span>        <span class='PDMCom'>&amp;&amp;32/64</span>
-<span class='PDMCnt'>1923</span> <span class='PDMInd'> 2</span>   <span class='PDMVar'>laRegs</span><span class='PDMOper'>(</span><span class='PDMLit'>3</span><span class='PDMOper'>,</span><span class='PDMLit'>3</span><span class='PDMOper'>)</span> <span class='PDMOper'>=</span> <span class='PDMStr'>'InstallPath'</span>
-<span class='PDMCnt'>1924</span> <span class='PDMInd'> 2</span>   <span class='PDMVar'>laRegs</span><span class='PDMOper'>(</span><span class='PDMLit'>3</span><span class='PDMOper'>,</span><span class='PDMLit'>4</span><span class='PDMOper'>)</span> <span class='PDMOper'>=</span> <span class='PDMStr'>'LibexecPath'</span>
-<span class='PDMCnt'>1925</span> <span class='PDMInd'>  </span> <span class='PDMOper'>*</span> <span class='PDMVar'>Wert</span> <span class='PDMVar'>kann</span> <span class='PDMVar'>zwischen</span> <span class='PDMLit'>64</span> <span class='PDMVar'>und</span> <span class='PDMLit'>32</span> <span class='PDMVar'>bit</span> <span class='PDMVar'>unterscheiden</span>
-<span class='PDMCnt'>1926</span> <span class='PDMInd'>  </span> <span class='PDMCom'>* 64 LibexecPath:  %LOCALAPPDATA%\Programs\Git\mingw64\libexec\Git-core</span>
-<span class='PDMCnt'>1927</span> <span class='PDMInd'>  </span> <span class='PDMCom'>* 32 LibexecPath:  %LOCALAPPDATA%\\Programs\Git\mingw32\libexec\Git-core</span>
-<span class='PDMCnt'>1928</span> <span class='PDMInd'>  </span> 
-<span class='PDMCnt'>1929</span> <span class='PDMInd'> 2</span>   <span class='PDMResK'>FOR</span> <span class='PDMVar'>lnKey</span> <span class='PDMOper'>=</span> <span class='PDMLit'>1</span> <span class='PDMResK'>TO</span> <span class='PDMResF'>ALEN</span><span class='PDMOper'>(</span><span class='PDMVar'>laRegs</span><span class='PDMOper'>,</span><span class='PDMLit'>1</span><span class='PDMOper'>)</span>
-<span class='PDMCnt'>1930</span> <span class='PDMInd'> 3</span>    <span class='PDMVar'>tc_git</span> <span class='PDMOper'>=</span> <span class='PDMStr'>''</span>
-<span class='PDMCnt'>1931</span> <span class='PDMInd'> 3</span>    <span class='PDMVar'>tlIs64</span> <span class='PDMOper'>=</span> <span class='PDMLit'>.F.</span>
-<span class='PDMCnt'>1932</span> <span class='PDMInd'>  </span> 
-<span class='PDMCnt'>1933</span> <span class='PDMInd'> 3</span>    <span class='PDMResK'>STORE</span> <span class='PDMLit'>0</span>              <span class='PDMResK'>TO</span> <span class='PDMVar'>lpdwReserved</span><span class='PDMOper'>,</span><span class='PDMVar'>lpdwType</span>
-<span class='PDMCnt'>1934</span> <span class='PDMInd'> 3</span>    <span class='PDMResK'>STORE</span> <span class='PDMResF'>SPACE</span><span class='PDMOper'>(</span><span class='PDMLit'>256</span><span class='PDMOper'>)</span>     <span class='PDMResK'>TO</span> <span class='PDMVar'>lpbData</span>
-<span class='PDMCnt'>1935</span> <span class='PDMInd'> 3</span>    <span class='PDMResK'>STORE</span> <span class='PDMResF'>LEN</span><span class='PDMOper'>(</span><span class='PDMVar'>m</span><span class='PDMOper'>.</span><span class='PDMVar'>lpbData</span><span class='PDMOper'>)</span> <span class='PDMResK'>TO</span> <span class='PDMVar'>lpcbData</span>
-<span class='PDMCnt'>1936</span> <span class='PDMInd'> 3</span>    <span class='PDMVar'>lnSubKey</span> <span class='PDMOper'>=</span> <span class='PDMLit'>0</span>
-<span class='PDMCnt'>1937</span> <span class='PDMInd'> 3</span>    <span class='PDMVar'>lnNode</span> <span class='PDMOper'>=</span> <span class='PDMVar'>laRegs</span><span class='PDMOper'>(</span><span class='PDMVar'>m</span><span class='PDMOper'>.</span><span class='PDMVar'>lnKey</span><span class='PDMOper'>,</span><span class='PDMLit'>1</span><span class='PDMOper'>)</span>
-<span class='PDMCnt'>1938</span> <span class='PDMInd'> 3</span>    <span class='PDMVar'>lcReg</span>  <span class='PDMOper'>=</span> <span class='PDMVar'>laRegs</span><span class='PDMOper'>(</span><span class='PDMVar'>m</span><span class='PDMOper'>.</span><span class='PDMVar'>lnKey</span><span class='PDMOper'>,</span><span class='PDMLit'>2</span><span class='PDMOper'>)</span>
-<span class='PDMCnt'>1939</span> <span class='PDMInd'> 3</span>    <span class='PDMVar'>lnErrCode</span> <span class='PDMOper'>=</span> <span class='PDMVar'>RegOpenKeyEx</span><span class='PDMOper'>(</span><span class='PDMVar'>m</span><span class='PDMOper'>.</span><span class='PDMVar'>lnNode</span><span class='PDMOper'>,</span><span class='PDMVar'>m</span><span class='PDMOper'>.</span><span class='PDMVar'>lcReg</span><span class='PDMOper'>,</span><span class='PDMLit'>0</span><span class='PDMOper'>,</span><span class='PDMVar'>KEY_READ</span><span class='PDMOper'>+</span><span class='PDMVar'>KEY_WOW64_64KEY</span><span class='PDMOper'>,</span><span class='PDMOper'>@</span><span class='PDMVar'>lnSubKey</span><span class='PDMOper'>)</span>
-<span class='PDMCnt'>1940</span> <span class='PDMInd'> 3</span>    <span class='PDMResK'>IF</span> <span class='PDMVar'>m</span><span class='PDMOper'>.</span><span class='PDMVar'>lnErrCode</span><span class='PDMOper'>=</span><span class='PDMVar'>ERROR_SUCCESS</span> <span class='PDMResK'>THEN</span>
-<span class='PDMCnt'>1941</span> <span class='PDMInd'>  </span> <span class='PDMCom'>*ReadKey</span>
-<span class='PDMCnt'>1942</span> <span class='PDMInd'> 4</span>     <span class='PDMVar'>m</span><span class='PDMOper'>.</span><span class='PDMVar'>lnErrCode</span><span class='PDMOper'>=</span><span class='PDMVar'>RegQueryValueEx</span><span class='PDMOper'>(</span><span class='PDMVar'>m</span><span class='PDMOper'>.</span><span class='PDMVar'>lnSubKey</span><span class='PDMOper'>,</span><span class='PDMVar'>laRegs</span><span class='PDMOper'>(</span><span class='PDMVar'>m</span><span class='PDMOper'>.</span><span class='PDMVar'>lnKey</span><span class='PDMOper'>,</span><span class='PDMLit'>3</span><span class='PDMOper'>)</span><span class='PDMOper'>,</span><span class='PDMOper'>;</span>
-<span class='PDMCnt'>1943</span> <span class='PDMInd'> 5</span>      <span class='PDMVar'>m</span><span class='PDMOper'>.</span><span class='PDMVar'>lpdwReserved</span><span class='PDMOper'>,</span><span class='PDMOper'>@</span><span class='PDMVar'>lpdwType</span><span class='PDMOper'>,</span><span class='PDMOper'>@</span><span class='PDMVar'>lpbData</span><span class='PDMOper'>,</span><span class='PDMOper'>@</span><span class='PDMVar'>lpcbData</span><span class='PDMOper'>)</span>
-<span class='PDMCnt'>1944</span> <span class='PDMInd'>  </span> 
-<span class='PDMCnt'>1945</span> <span class='PDMInd'>  </span> <span class='PDMCom'>* Check for error</span>
-<span class='PDMCnt'>1946</span> <span class='PDMInd'> 4</span>     <span class='PDMResK'>IF</span> <span class='PDMVar'>m</span><span class='PDMOper'>.</span><span class='PDMVar'>lnErrCode</span><span class='PDMOper'>=</span><span class='PDMVar'>ERROR_SUCCESS</span> <span class='PDMResK'>THEN</span>
-<span class='PDMCnt'>1947</span> <span class='PDMInd'> 5</span>      <span class='PDMVar'>tc_git</span> <span class='PDMOper'>=</span> <span class='PDMResF'>ADDBS</span><span class='PDMOper'>(</span><span class='PDMResF'>LEFT</span><span class='PDMOper'>(</span><span class='PDMVar'>m</span><span class='PDMOper'>.</span><span class='PDMVar'>lpbData</span><span class='PDMOper'>,</span><span class='PDMVar'>m</span><span class='PDMOper'>.</span><span class='PDMVar'>lpcbData</span><span class='PDMOper'>-</span><span class='PDMLit'>1</span><span class='PDMOper'>)</span><span class='PDMOper'>)</span><span class='PDMOper'>+</span><span class='PDMStr'>'cmd\git.exe'</span>
-<span class='PDMCnt'>1948</span> <span class='PDMInd'>  </span> 
-<span class='PDMCnt'>1949</span> <span class='PDMInd'> 5</span>      <span class='PDMResK'>IF</span> <span class='PDMResF'>VARTYPE</span><span class='PDMOper'>(</span><span class='PDMVar'>laRegs</span><span class='PDMOper'>(</span><span class='PDMVar'>m</span><span class='PDMOper'>.</span><span class='PDMVar'>lnKey</span><span class='PDMOper'>,</span><span class='PDMLit'>4</span><span class='PDMOper'>)</span><span class='PDMOper'>)</span><span class='PDMOper'>=</span><span class='PDMStr'>'L'</span> <span class='PDMResK'>THEN</span>
-<span class='PDMCnt'>1950</span> <span class='PDMInd'> 6</span>       <span class='PDMVar'>tlIs64</span> <span class='PDMOper'>=</span> <span class='PDMVar'>laRegs</span><span class='PDMOper'>(</span><span class='PDMVar'>m</span><span class='PDMOper'>.</span><span class='PDMVar'>lnKey</span><span class='PDMOper'>,</span><span class='PDMLit'>4</span><span class='PDMOper'>)</span>
-<span class='PDMCnt'>1951</span> <span class='PDMInd'> 5</span>      <span class='PDMResK'>ELSE</span>  <span class='PDMCom'>&amp;&amp;VARTYPE(laRegs(m.lnKey,4))='L'</span>
-<span class='PDMCnt'>1952</span> <span class='PDMInd'> 6</span>       <span class='PDMResK'>STORE</span> <span class='PDMLit'>0</span>              <span class='PDMResK'>TO</span> <span class='PDMVar'>lpdwReserved</span><span class='PDMOper'>,</span><span class='PDMVar'>lpdwType</span>
-<span class='PDMCnt'>1953</span> <span class='PDMInd'> 6</span>       <span class='PDMResK'>STORE</span> <span class='PDMResF'>SPACE</span><span class='PDMOper'>(</span><span class='PDMLit'>256</span><span class='PDMOper'>)</span>     <span class='PDMResK'>TO</span> <span class='PDMVar'>lpbData</span>
-<span class='PDMCnt'>1954</span> <span class='PDMInd'> 6</span>       <span class='PDMResK'>STORE</span> <span class='PDMResF'>LEN</span><span class='PDMOper'>(</span><span class='PDMVar'>m</span><span class='PDMOper'>.</span><span class='PDMVar'>lpbData</span><span class='PDMOper'>)</span> <span class='PDMResK'>TO</span> <span class='PDMVar'>lpcbData</span>
-<span class='PDMCnt'>1955</span> <span class='PDMInd'>  </span> <span class='PDMCom'>*     ReadKey</span>
-<span class='PDMCnt'>1956</span> <span class='PDMInd'> 6</span>       <span class='PDMVar'>m</span><span class='PDMOper'>.</span><span class='PDMVar'>lnErrCode</span><span class='PDMOper'>=</span><span class='PDMVar'>RegQueryValueEx</span><span class='PDMOper'>(</span><span class='PDMVar'>m</span><span class='PDMOper'>.</span><span class='PDMVar'>lnSubKey</span><span class='PDMOper'>,</span><span class='PDMVar'>laRegs</span><span class='PDMOper'>(</span><span class='PDMVar'>m</span><span class='PDMOper'>.</span><span class='PDMVar'>lnKey</span><span class='PDMOper'>,</span><span class='PDMLit'>4</span><span class='PDMOper'>)</span><span class='PDMOper'>,</span><span class='PDMOper'>;</span>
-<span class='PDMCnt'>1957</span> <span class='PDMInd'> 7</span>        <span class='PDMVar'>m</span><span class='PDMOper'>.</span><span class='PDMVar'>lpdwReserved</span><span class='PDMOper'>,</span><span class='PDMOper'>@</span><span class='PDMVar'>lpdwType</span><span class='PDMOper'>,</span><span class='PDMOper'>@</span><span class='PDMVar'>lpbData</span><span class='PDMOper'>,</span><span class='PDMOper'>@</span><span class='PDMVar'>lpcbData</span><span class='PDMOper'>)</span>
-<span class='PDMCnt'>1958</span> <span class='PDMInd'>  </span> 
-<span class='PDMCnt'>1959</span> <span class='PDMInd'> 6</span>       <span class='PDMResK'>IF</span> <span class='PDMVar'>m</span><span class='PDMOper'>.</span><span class='PDMVar'>lnErrCode</span><span class='PDMOper'>=</span><span class='PDMVar'>ERROR_SUCCESS</span> <span class='PDMResK'>THEN</span>
-<span class='PDMCnt'>1960</span> <span class='PDMInd'> 7</span>        <span class='PDMVar'>tlIs64</span> <span class='PDMOper'>=</span> <span class='PDMStr'>'\mingw64\'</span><span class='PDMOper'>$</span><span class='PDMResF'>LEFT</span><span class='PDMOper'>(</span><span class='PDMVar'>m</span><span class='PDMOper'>.</span><span class='PDMVar'>lpbData</span><span class='PDMOper'>,</span><span class='PDMVar'>m</span><span class='PDMOper'>.</span><span class='PDMVar'>lpcbData</span><span class='PDMOper'>-</span><span class='PDMLit'>1</span><span class='PDMOper'>)</span>
-<span class='PDMCnt'>1961</span> <span class='PDMInd'> 6</span>       <span class='PDMResK'>ENDIF</span> <span class='PDMCom'>&amp;&amp;m.lnErrCode=ERROR_SUCCESS</span>
-<span class='PDMCnt'>1962</span> <span class='PDMInd'>  </span> <span class='PDMCom'>*     /ReadKey</span>
-<span class='PDMCnt'>1963</span> <span class='PDMInd'> 5</span>      <span class='PDMResK'>ENDIF</span> <span class='PDMCom'>&amp;&amp;VARTYPE(laRegs(m.lnKey,4))='L'</span>
-<span class='PDMCnt'>1964</span> <span class='PDMInd'> 4</span>     <span class='PDMResK'>ENDIF</span> <span class='PDMCom'>&amp;&amp;m.lnErrCode=ERROR_SUCCESS</span>
-<span class='PDMCnt'>1965</span> <span class='PDMInd'>  </span> <span class='PDMCom'>*/ReadKey</span>
-<span class='PDMCnt'>1966</span> <span class='PDMInd'>  </span> 
-<span class='PDMCnt'>1967</span> <span class='PDMInd'>  </span> <span class='PDMCom'>*CloseKey</span>
-<span class='PDMCnt'>1968</span> <span class='PDMInd'> 4</span>     <span class='PDMOper'>=</span><span class='PDMVar'>RegCloseKey</span><span class='PDMOper'>(</span><span class='PDMVar'>m</span><span class='PDMOper'>.</span><span class='PDMVar'>lnSubKey</span><span class='PDMOper'>)</span>
-<span class='PDMCnt'>1969</span> <span class='PDMInd'> 4</span>     <span class='PDMVar'>lnSubKey</span> <span class='PDMOper'>=</span> <span class='PDMLit'>0</span>
-<span class='PDMCnt'>1970</span> <span class='PDMInd'>  </span> <span class='PDMCom'>*/CloseKey</span>
-<span class='PDMCnt'>1971</span> <span class='PDMInd'> 3</span>    <span class='PDMResK'>ENDIF</span> <span class='PDMCom'>&amp;&amp;m.lnErrCode=ERROR_SUCCESS</span>
-<span class='PDMCnt'>1972</span> <span class='PDMInd'> 3</span>    <span class='PDMResK'>IF</span> <span class='PDMResF'>FILE</span><span class='PDMOper'>(</span><span class='PDMVar'>m</span><span class='PDMOper'>.</span><span class='PDMVar'>tc_git</span><span class='PDMOper'>)</span> <span class='PDMResK'>THEN</span>
-<span class='PDMCnt'>1973</span> <span class='PDMInd'> 4</span>     <span class='PDMResK'>EXIT</span>
-<span class='PDMCnt'>1974</span> <span class='PDMInd'> 3</span>    <span class='PDMResK'>ENDIF</span> <span class='PDMCom'>&amp;&amp;FILE(m.tc_git)</span>
-<span class='PDMCnt'>1975</span> <span class='PDMInd'> 2</span>   <span class='PDMResK'>ENDFOR</span> <span class='PDMCom'>&amp;&amp;lnKey</span>
-<span class='PDMCnt'>1976</span> <span class='PDMInd'>  </span> 
-<span class='PDMCnt'>1977</span> <span class='PDMInd'>  </span> <span class='PDMCom'>*!*    /Changed by: SF 1.12.2015</span>
-<span class='PDMCnt'>1978</span> <span class='PDMInd'>  </span> 
-<span class='PDMCnt'>1979</span> <span class='PDMInd'> 2</span>   <span class='PDMVar'>_SCREEN</span><span class='PDMOper'>.</span><span class='PDMResM'>ADDPROPERTY</span><span class='PDMOper'>(</span><span class='PDMStr'>'gcB2T_git'</span><span class='PDMOper'>,</span><span class='PDMResF'>IIF</span><span class='PDMOper'>(</span><span class='PDMResF'>FILE</span><span class='PDMOper'>(</span><span class='PDMVar'>m</span><span class='PDMOper'>.</span><span class='PDMVar'>tc_git</span><span class='PDMOper'>)</span><span class='PDMOper'>,</span><span class='PDMVar'>m</span><span class='PDMOper'>.</span><span class='PDMVar'>tc_git</span><span class='PDMOper'>,</span><span class='PDMStr'>''</span><span class='PDMOper'>)</span><span class='PDMOper'>)</span>
-<span class='PDMCnt'>1980</span> <span class='PDMInd'> 2</span>   <span class='PDMVar'>_SCREEN</span><span class='PDMOper'>.</span><span class='PDMResM'>ADDPROPERTY</span><span class='PDMOper'>(</span><span class='PDMStr'>'glB2T_git64'</span><span class='PDMOper'>,</span><span class='PDMVar'>m</span><span class='PDMOper'>.</span><span class='PDMVar'>tlIs64</span><span class='PDMOper'>)</span>
-<span class='PDMCnt'>1981</span> <span class='PDMInd'>  </span> 
-<span class='PDMCnt'>1982</span> <span class='PDMInd'> 1</span>  <span class='PDMResK'>ENDIF</span> <span class='PDMCom'>&amp;&amp;PEMSTATUS(_SCREEN,'gcB2T_git',5)</span>
-<span class='PDMCnt'>1983</span> <span class='PDMInd'>  </span> 
-<span class='PDMCnt'>1984</span> <span class='PDMInd'> 1</span>  <span class='PDMVar'>llReturn</span> <span class='PDMOper'>=</span> <span class='PDMResF'>FILE</span><span class='PDMOper'>(</span><span class='PDMVar'>m</span><span class='PDMOper'>.</span><span class='PDMVar'>tc_git</span><span class='PDMOper'>)</span>
-<span class='PDMCnt'>1985</span> <span class='PDMInd'>  </span> 
-<span class='PDMCnt'>1986</span> <span class='PDMInd'> 1</span>  <span class='PDMResK'>RETURN</span> <span class='PDMVar'>m</span><span class='PDMOper'>.</span><span class='PDMVar'>llReturn</span></pre>
+<pre class="PDMCODE PDMNor" ><span class='PDMCnt'>1964</span> <span class='PDMInd'> 1</span>  <span class='PDMResK'>LPARAMETERS</span><span class='PDMOper'>;</span>
+<span class='PDMCnt'>1965</span> <span class='PDMInd'> 2</span>   <span class='PDMVar'>tc_git</span><span class='PDMOper'>,</span><span class='PDMOper'>;</span>
+<span class='PDMCnt'>1966</span> <span class='PDMInd'> 2</span>   <span class='PDMVar'>tlIs64</span>
+<span class='PDMCnt'>1967</span> <span class='PDMInd'>  </span> 
+<span class='PDMCnt'>1968</span> <span class='PDMInd'>  </span> 
+<span class='PDMCnt'>1994</span> <span class='PDMInd'>  </span> 
+<span class='PDMCnt'>1995</span> <span class='PDMInd'>  </span> <span class='PDMCom'>*!*    SF Changed by 11.2.2021</span>
+<span class='PDMCnt'>1996</span> <span class='PDMInd'>  </span> 
+<span class='PDMCnt'>2003</span> <span class='PDMInd'>  </span> 
+<span class='PDMCnt'>2004</span> <span class='PDMInd'> 1</span>  <span class='PDMOper'>#</span><span class='PDMResK'>DEFINE</span> <span class='PDMVar'>ERROR_SUCCESS</span>        <span class='PDMLit'>0</span>    <span class='PDMCom'>&amp;&amp; OK</span>
+<span class='PDMCnt'>2005</span> <span class='PDMInd'> 1</span>  <span class='PDMOper'>#</span><span class='PDMResK'>DEFINE</span> <span class='PDMVar'>HKEY_CURRENT_USER</span>           <span class='PDMOper'>-</span><span class='PDMLit'>2147483647</span>  <span class='PDMCom'>&amp;&amp; BITSET(0,31)+1</span>
+<span class='PDMCnt'>2006</span> <span class='PDMInd'> 1</span>  <span class='PDMOper'>#</span><span class='PDMResK'>DEFINE</span> <span class='PDMVar'>HKEY_LOCAL_MACHINE</span>          <span class='PDMOper'>-</span><span class='PDMLit'>2147483646</span>  <span class='PDMCom'>&amp;&amp; BITSET(0,31)+2</span>
+<span class='PDMCnt'>2007</span> <span class='PDMInd'>  </span> 
+<span class='PDMCnt'>2008</span> <span class='PDMInd'> 1</span>  <span class='PDMOper'>#</span><span class='PDMResK'>DEFINE</span> <span class='PDMVar'>KEY_WOW64_64KEY</span> <span class='PDMLit'>0x0100</span>
+<span class='PDMCnt'>2009</span> <span class='PDMInd'> 1</span>  <span class='PDMOper'>#</span><span class='PDMResK'>DEFINE</span> <span class='PDMVar'>KEY_READ</span> <span class='PDMLit'>0x20019</span>
+<span class='PDMCnt'>2010</span> <span class='PDMInd'>  </span> 
+<span class='PDMCnt'>2011</span> <span class='PDMInd'> 1</span>  <span class='PDMResK'>LOCAL</span><span class='PDMOper'>;</span>
+<span class='PDMCnt'>2012</span> <span class='PDMInd'> 2</span>   <span class='PDMVar'>llReturn</span> <span class='PDMResK'>AS</span> <span class='PDMVar'>BOOLEAN</span>
+<span class='PDMCnt'>2013</span> <span class='PDMInd'>  </span> 
+<span class='PDMCnt'>2014</span> <span class='PDMInd'> 1</span>  <span class='PDMResK'>IF</span> <span class='PDMResF'>PEMSTATUS</span><span class='PDMOper'>(</span><span class='PDMVar'>_SCREEN</span><span class='PDMOper'>,</span><span class='PDMStr'>'gcB2T_git'</span><span class='PDMOper'>,</span><span class='PDMLit'>5</span><span class='PDMOper'>)</span> <span class='PDMResK'>THEN</span>
+<span class='PDMCnt'>2015</span> <span class='PDMInd'>  </span> <span class='PDMCom'>*read from storage or set</span>
+<span class='PDMCnt'>2016</span> <span class='PDMInd'> 2</span>   <span class='PDMVar'>tc_git</span> <span class='PDMOper'>=</span> <span class='PDMVar'>_SCREEN</span><span class='PDMOper'>.</span><span class='PDMVar'>gcB2T_git</span>
+<span class='PDMCnt'>2017</span> <span class='PDMInd'> 2</span>   <span class='PDMVar'>tlIs64</span> <span class='PDMOper'>=</span> <span class='PDMVar'>_SCREEN</span><span class='PDMOper'>.</span><span class='PDMVar'>glB2T_git64</span>
+<span class='PDMCnt'>2018</span> <span class='PDMInd'>  </span> 
+<span class='PDMCnt'>2019</span> <span class='PDMInd'> 1</span>  <span class='PDMResK'>ELSE</span>  <span class='PDMCom'>&amp;&amp;PEMSTATUS(_SCREEN,'gcB2T_git',5)</span>
+<span class='PDMCnt'>2020</span> <span class='PDMInd'>  </span> <span class='PDMCom'>*try to read registry</span>
+<span class='PDMCnt'>2021</span> <span class='PDMInd'> 2</span>   <span class='PDMResK'>DECLARE</span> <span class='PDMResK'>INTEGER</span> <span class='PDMVar'><a href="http://www.news2news.com/vfp/?search=RegOpenKeyEx&x=7&y=5" target="blank">RegOpenKeyEx</a></span> <span class='PDMResK'>IN</span> <span class='PDMVar'>advapi32</span><span class='PDMOper'>;</span>
+<span class='PDMCnt'>2022</span> <span class='PDMInd'> 3</span>    <span class='PDMResK'>INTEGER</span> <span class='PDMVar'>nHKey</span><span class='PDMOper'>,</span> <span class='PDMResK'>STRING</span> <span class='PDMVar'>cSubKey</span><span class='PDMOper'>,</span> <span class='PDMResK'>INTEGER</span> <span class='PDMVar'>ulOptions</span><span class='PDMOper'>,</span> <span class='PDMResK'>INTEGER</span> <span class='PDMVar'>samDesired</span><span class='PDMOper'>,</span> <span class='PDMResK'>INTEGER</span> <span class='PDMOper'>@</span><span class='PDMVar'>nResult</span>
+<span class='PDMCnt'>2023</span> <span class='PDMInd'>  </span> 
+<span class='PDMCnt'>2024</span> <span class='PDMInd'> 2</span>   <span class='PDMResK'>DECLARE</span> <span class='PDMResK'>INTEGER</span> <span class='PDMVar'><a href="http://www.news2news.com/vfp/?search=RegCloseKey&x=7&y=5" target="blank">RegCloseKey</a></span> <span class='PDMResK'>IN</span> <span class='PDMVar'>Win32API</span> <span class='PDMOper'>;</span>
+<span class='PDMCnt'>2025</span> <span class='PDMInd'> 3</span>    <span class='PDMResK'>INTEGER</span> <span class='PDMVar'>nHKey</span>
+<span class='PDMCnt'>2026</span> <span class='PDMInd'>  </span> 
+<span class='PDMCnt'>2027</span> <span class='PDMInd'> 2</span>   <span class='PDMResK'>DECLARE</span> <span class='PDMResK'>INTEGER</span> <span class='PDMVar'><a href="http://www.news2news.com/vfp/?search=RegQueryValueEx&x=7&y=5" target="blank">RegQueryValueEx</a></span> <span class='PDMResK'>IN</span> <span class='PDMVar'>Win32API</span> <span class='PDMOper'>;</span>
+<span class='PDMCnt'>2028</span> <span class='PDMInd'> 3</span>    <span class='PDMResK'>INTEGER</span> <span class='PDMVar'>nHKey</span><span class='PDMOper'>,</span> <span class='PDMResK'>STRING</span> <span class='PDMVar'>lpszValueName</span><span class='PDMOper'>,</span> <span class='PDMResK'>INTEGER</span> <span class='PDMVar'>dwReserved</span><span class='PDMOper'>,</span><span class='PDMOper'>;</span>
+<span class='PDMCnt'>2029</span> <span class='PDMInd'> 3</span>    <span class='PDMResK'>INTEGER</span> <span class='PDMOper'>@</span><span class='PDMVar'>lpdwType</span><span class='PDMOper'>,</span> <span class='PDMResK'>STRING</span> <span class='PDMOper'>@</span><span class='PDMVar'>lpbData</span><span class='PDMOper'>,</span> <span class='PDMResK'>INTEGER</span> <span class='PDMOper'>@</span><span class='PDMVar'>lpcbData</span>
+<span class='PDMCnt'>2030</span> <span class='PDMInd'>  </span> 
+<span class='PDMCnt'>2031</span> <span class='PDMInd'> 2</span>   <span class='PDMResK'>LOCAL</span><span class='PDMOper'>;</span>
+<span class='PDMCnt'>2032</span> <span class='PDMInd'> 3</span>    <span class='PDMVar'>lcReg</span>    <span class='PDMResK'>AS</span> <span class='PDMResK'>CHARACTER</span>
+<span class='PDMCnt'>2033</span> <span class='PDMInd'>  </span> 
+<span class='PDMCnt'>2034</span> <span class='PDMInd'> 2</span>   <span class='PDMResK'>LOCAL</span><span class='PDMOper'>;</span>
+<span class='PDMCnt'>2035</span> <span class='PDMInd'> 3</span>    <span class='PDMVar'>lnNode</span><span class='PDMOper'>,</span><span class='PDMOper'>;</span>
+<span class='PDMCnt'>2036</span> <span class='PDMInd'> 3</span>    <span class='PDMVar'>lnKey</span><span class='PDMOper'>,</span><span class='PDMOper'>;</span>
+<span class='PDMCnt'>2037</span> <span class='PDMInd'> 3</span>    <span class='PDMVar'>lnSubKey</span><span class='PDMOper'>,</span><span class='PDMOper'>;</span>
+<span class='PDMCnt'>2038</span> <span class='PDMInd'> 3</span>    <span class='PDMVar'>lpdwReserved</span><span class='PDMOper'>,</span><span class='PDMOper'>;</span>
+<span class='PDMCnt'>2039</span> <span class='PDMInd'> 3</span>    <span class='PDMVar'>lpdwType</span><span class='PDMOper'>,</span><span class='PDMOper'>;</span>
+<span class='PDMCnt'>2040</span> <span class='PDMInd'> 3</span>    <span class='PDMVar'>lpbData</span><span class='PDMOper'>,</span><span class='PDMOper'>;</span>
+<span class='PDMCnt'>2041</span> <span class='PDMInd'> 3</span>    <span class='PDMVar'>lpcbData</span><span class='PDMOper'>,</span><span class='PDMOper'>;</span>
+<span class='PDMCnt'>2042</span> <span class='PDMInd'> 3</span>    <span class='PDMVar'>lnErrCode</span> <span class='PDMResK'>AS</span> <span class='PDMResK'>INTEGER</span>
+<span class='PDMCnt'>2043</span> <span class='PDMInd'>  </span> 
+<span class='PDMCnt'>2044</span> <span class='PDMInd'>  </span> <span class='PDMCom'>*!*    Changed by: SF 1.12.2015</span>
+<span class='PDMCnt'>2045</span> <span class='PDMInd'>  </span> 
+<span class='PDMCnt'>2050</span> <span class='PDMInd'>  </span> 
+<span class='PDMCnt'>2051</span> <span class='PDMInd'> 2</span>   <span class='PDMResK'>LOCAL</span> <span class='PDMResK'>ARRAY</span><span class='PDMOper'>;</span>
+<span class='PDMCnt'>2052</span> <span class='PDMInd'> 3</span>    <span class='PDMVar'>laRegs</span><span class='PDMOper'>(</span><span class='PDMLit'>3</span><span class='PDMOper'>,</span><span class='PDMLit'>4</span><span class='PDMOper'>)</span>
+<span class='PDMCnt'>2053</span> <span class='PDMInd'>  </span> <span class='PDMCom'>* Col 1, Node</span>
+<span class='PDMCnt'>2054</span> <span class='PDMInd'>  </span> <span class='PDMCom'>* Col 2, Key</span>
+<span class='PDMCnt'>2055</span> <span class='PDMInd'>  </span> <span class='PDMCom'>* Col 3, Value</span>
+<span class='PDMCnt'>2056</span> <span class='PDMInd'>  </span> <span class='PDMCom'>* Col 4, Boolean, 64 bit oder Value um dies zu ermitteln</span>
+<span class='PDMCnt'>2057</span> <span class='PDMInd'>  </span> 
+<span class='PDMCnt'>2058</span> <span class='PDMInd'> 2</span>   <span class='PDMVar'>laRegs</span><span class='PDMOper'>(</span><span class='PDMLit'>1</span><span class='PDMOper'>,</span><span class='PDMLit'>1</span><span class='PDMOper'>)</span> <span class='PDMOper'>=</span> <span class='PDMVar'>HKEY_LOCAL_MACHINE</span>
+<span class='PDMCnt'>2059</span> <span class='PDMInd'> 2</span>   <span class='PDMVar'>laRegs</span><span class='PDMOper'>(</span><span class='PDMLit'>1</span><span class='PDMOper'>,</span><span class='PDMLit'>2</span><span class='PDMOper'>)</span> <span class='PDMOper'>=</span> <span class='PDMStr'>"SOFTWARE\GitForWindows\"</span>    <span class='PDMCom'>&amp;&amp;64</span>
+<span class='PDMCnt'>2060</span> <span class='PDMInd'> 2</span>   <span class='PDMVar'>laRegs</span><span class='PDMOper'>(</span><span class='PDMLit'>1</span><span class='PDMOper'>,</span><span class='PDMLit'>3</span><span class='PDMOper'>)</span> <span class='PDMOper'>=</span> <span class='PDMStr'>'InstallPath'</span>
+<span class='PDMCnt'>2061</span> <span class='PDMInd'> 2</span>   <span class='PDMVar'>laRegs</span><span class='PDMOper'>(</span><span class='PDMLit'>1</span><span class='PDMOper'>,</span><span class='PDMLit'>4</span><span class='PDMOper'>)</span> <span class='PDMOper'>=</span> <span class='PDMLit'>.T.</span>
+<span class='PDMCnt'>2062</span> <span class='PDMInd'> 2</span>   <span class='PDMVar'>laRegs</span><span class='PDMOper'>(</span><span class='PDMLit'>2</span><span class='PDMOper'>,</span><span class='PDMLit'>1</span><span class='PDMOper'>)</span> <span class='PDMOper'>=</span> <span class='PDMVar'>HKEY_LOCAL_MACHINE</span>
+<span class='PDMCnt'>2063</span> <span class='PDMInd'> 2</span>   <span class='PDMVar'>laRegs</span><span class='PDMOper'>(</span><span class='PDMLit'>2</span><span class='PDMOper'>,</span><span class='PDMLit'>2</span><span class='PDMOper'>)</span> <span class='PDMOper'>=</span> <span class='PDMStr'>"SOFTWARE\WOW6432Node\GitForWindows\"</span>        <span class='PDMCom'>&amp;&amp;32</span>
+<span class='PDMCnt'>2064</span> <span class='PDMInd'> 2</span>   <span class='PDMVar'>laRegs</span><span class='PDMOper'>(</span><span class='PDMLit'>2</span><span class='PDMOper'>,</span><span class='PDMLit'>3</span><span class='PDMOper'>)</span> <span class='PDMOper'>=</span> <span class='PDMStr'>'InstallPath'</span>
+<span class='PDMCnt'>2065</span> <span class='PDMInd'> 2</span>   <span class='PDMVar'>laRegs</span><span class='PDMOper'>(</span><span class='PDMLit'>2</span><span class='PDMOper'>,</span><span class='PDMLit'>4</span><span class='PDMOper'>)</span> <span class='PDMOper'>=</span> <span class='PDMLit'>.F.</span>
+<span class='PDMCnt'>2066</span> <span class='PDMInd'> 2</span>   <span class='PDMVar'>laRegs</span><span class='PDMOper'>(</span><span class='PDMLit'>3</span><span class='PDMOper'>,</span><span class='PDMLit'>1</span><span class='PDMOper'>)</span> <span class='PDMOper'>=</span> <span class='PDMVar'>HKEY_CURRENT_USER</span>
+<span class='PDMCnt'>2067</span> <span class='PDMInd'> 2</span>   <span class='PDMVar'>laRegs</span><span class='PDMOper'>(</span><span class='PDMLit'>3</span><span class='PDMOper'>,</span><span class='PDMLit'>2</span><span class='PDMOper'>)</span> <span class='PDMOper'>=</span> <span class='PDMStr'>"SOFTWARE\GitForWindows\"</span>        <span class='PDMCom'>&amp;&amp;32/64</span>
+<span class='PDMCnt'>2068</span> <span class='PDMInd'> 2</span>   <span class='PDMVar'>laRegs</span><span class='PDMOper'>(</span><span class='PDMLit'>3</span><span class='PDMOper'>,</span><span class='PDMLit'>3</span><span class='PDMOper'>)</span> <span class='PDMOper'>=</span> <span class='PDMStr'>'InstallPath'</span>
+<span class='PDMCnt'>2069</span> <span class='PDMInd'> 2</span>   <span class='PDMVar'>laRegs</span><span class='PDMOper'>(</span><span class='PDMLit'>3</span><span class='PDMOper'>,</span><span class='PDMLit'>4</span><span class='PDMOper'>)</span> <span class='PDMOper'>=</span> <span class='PDMStr'>'LibexecPath'</span>
+<span class='PDMCnt'>2070</span> <span class='PDMInd'>  </span> <span class='PDMOper'>*</span> <span class='PDMVar'>Wert</span> <span class='PDMVar'>kann</span> <span class='PDMVar'>zwischen</span> <span class='PDMLit'>64</span> <span class='PDMVar'>und</span> <span class='PDMLit'>32</span> <span class='PDMVar'>bit</span> <span class='PDMVar'>unterscheiden</span>
+<span class='PDMCnt'>2071</span> <span class='PDMInd'>  </span> <span class='PDMCom'>* 64 LibexecPath:  %LOCALAPPDATA%\Programs\Git\mingw64\libexec\Git-core</span>
+<span class='PDMCnt'>2072</span> <span class='PDMInd'>  </span> <span class='PDMCom'>* 32 LibexecPath:  %LOCALAPPDATA%\\Programs\Git\mingw32\libexec\Git-core</span>
+<span class='PDMCnt'>2073</span> <span class='PDMInd'>  </span> 
+<span class='PDMCnt'>2074</span> <span class='PDMInd'> 2</span>   <span class='PDMResK'>FOR</span> <span class='PDMVar'>lnKey</span> <span class='PDMOper'>=</span> <span class='PDMLit'>1</span> <span class='PDMResK'>TO</span> <span class='PDMResF'>ALEN</span><span class='PDMOper'>(</span><span class='PDMVar'>m</span><span class='PDMOper'>.</span><span class='PDMVar'>laRegs</span><span class='PDMOper'>,</span><span class='PDMLit'>1</span><span class='PDMOper'>)</span>
+<span class='PDMCnt'>2075</span> <span class='PDMInd'> 3</span>    <span class='PDMVar'>tc_git</span> <span class='PDMOper'>=</span> <span class='PDMStr'>''</span>
+<span class='PDMCnt'>2076</span> <span class='PDMInd'> 3</span>    <span class='PDMVar'>tlIs64</span> <span class='PDMOper'>=</span> <span class='PDMLit'>.F.</span>
+<span class='PDMCnt'>2077</span> <span class='PDMInd'>  </span> 
+<span class='PDMCnt'>2078</span> <span class='PDMInd'> 3</span>    <span class='PDMResK'>STORE</span> <span class='PDMLit'>0</span>              <span class='PDMResK'>TO</span> <span class='PDMVar'>m</span><span class='PDMOper'>.</span><span class='PDMVar'>lpdwReserved</span><span class='PDMOper'>,</span><span class='PDMVar'>m</span><span class='PDMOper'>.</span><span class='PDMVar'>lpdwType</span>
+<span class='PDMCnt'>2079</span> <span class='PDMInd'> 3</span>    <span class='PDMResK'>STORE</span> <span class='PDMResF'>SPACE</span><span class='PDMOper'>(</span><span class='PDMLit'>256</span><span class='PDMOper'>)</span>     <span class='PDMResK'>TO</span> <span class='PDMVar'>m</span><span class='PDMOper'>.</span><span class='PDMVar'>lpbData</span>
+<span class='PDMCnt'>2080</span> <span class='PDMInd'> 3</span>    <span class='PDMResK'>STORE</span> <span class='PDMResF'>LEN</span><span class='PDMOper'>(</span><span class='PDMVar'>m</span><span class='PDMOper'>.</span><span class='PDMVar'>lpbData</span><span class='PDMOper'>)</span> <span class='PDMResK'>TO</span> <span class='PDMVar'>m</span><span class='PDMOper'>.</span><span class='PDMVar'>lpcbData</span>
+<span class='PDMCnt'>2081</span> <span class='PDMInd'> 3</span>    <span class='PDMVar'>lnSubKey</span>     <span class='PDMOper'>=</span> <span class='PDMLit'>0</span>
+<span class='PDMCnt'>2082</span> <span class='PDMInd'> 3</span>    <span class='PDMVar'>lnNode</span>     <span class='PDMOper'>=</span> <span class='PDMVar'>m</span><span class='PDMOper'>.</span><span class='PDMVar'>laRegs</span><span class='PDMOper'>(</span><span class='PDMVar'>m</span><span class='PDMOper'>.</span><span class='PDMVar'>lnKey</span><span class='PDMOper'>,</span><span class='PDMLit'>1</span><span class='PDMOper'>)</span>
+<span class='PDMCnt'>2083</span> <span class='PDMInd'> 3</span>    <span class='PDMVar'>lcReg</span>     <span class='PDMOper'>=</span> <span class='PDMVar'>m</span><span class='PDMOper'>.</span><span class='PDMVar'>laRegs</span><span class='PDMOper'>(</span><span class='PDMVar'>m</span><span class='PDMOper'>.</span><span class='PDMVar'>lnKey</span><span class='PDMOper'>,</span><span class='PDMLit'>2</span><span class='PDMOper'>)</span>
+<span class='PDMCnt'>2084</span> <span class='PDMInd'> 3</span>    <span class='PDMVar'>lnErrCode</span> <span class='PDMOper'>=</span> <span class='PDMVar'>RegOpenKeyEx</span><span class='PDMOper'>(</span><span class='PDMVar'>m</span><span class='PDMOper'>.</span><span class='PDMVar'>lnNode</span><span class='PDMOper'>,</span><span class='PDMVar'>m</span><span class='PDMOper'>.</span><span class='PDMVar'>lcReg</span><span class='PDMOper'>,</span><span class='PDMLit'>0</span><span class='PDMOper'>,</span><span class='PDMVar'>KEY_READ</span><span class='PDMOper'>+</span><span class='PDMVar'>KEY_WOW64_64KEY</span><span class='PDMOper'>,</span><span class='PDMOper'>@</span><span class='PDMVar'>lnSubKey</span><span class='PDMOper'>)</span>
+<span class='PDMCnt'>2085</span> <span class='PDMInd'> 3</span>    <span class='PDMResK'>IF</span> <span class='PDMVar'>m</span><span class='PDMOper'>.</span><span class='PDMVar'>lnErrCode</span><span class='PDMOper'>=</span><span class='PDMVar'>ERROR_SUCCESS</span> <span class='PDMResK'>THEN</span>
+<span class='PDMCnt'>2086</span> <span class='PDMInd'>  </span> <span class='PDMCom'>*ReadKey</span>
+<span class='PDMCnt'>2087</span> <span class='PDMInd'> 4</span>     <span class='PDMVar'>lnErrCode</span><span class='PDMOper'>=</span><span class='PDMVar'>RegQueryValueEx</span><span class='PDMOper'>(</span><span class='PDMVar'>m</span><span class='PDMOper'>.</span><span class='PDMVar'>lnSubKey</span><span class='PDMOper'>,</span><span class='PDMVar'>m</span><span class='PDMOper'>.</span><span class='PDMVar'>laRegs</span><span class='PDMOper'>(</span><span class='PDMVar'>m</span><span class='PDMOper'>.</span><span class='PDMVar'>lnKey</span><span class='PDMOper'>,</span><span class='PDMLit'>3</span><span class='PDMOper'>)</span><span class='PDMOper'>,</span><span class='PDMOper'>;</span>
+<span class='PDMCnt'>2088</span> <span class='PDMInd'> 6</span>       <span class='PDMVar'>m</span><span class='PDMOper'>.</span><span class='PDMVar'>lpdwReserved</span><span class='PDMOper'>,</span><span class='PDMOper'>@</span><span class='PDMVar'>lpdwType</span><span class='PDMOper'>,</span><span class='PDMOper'>@</span><span class='PDMVar'>lpbData</span><span class='PDMOper'>,</span><span class='PDMOper'>@</span><span class='PDMVar'>lpcbData</span><span class='PDMOper'>)</span>
+<span class='PDMCnt'>2089</span> <span class='PDMInd'>  </span> 
+<span class='PDMCnt'>2090</span> <span class='PDMInd'>  </span> <span class='PDMCom'>* Check for error</span>
+<span class='PDMCnt'>2091</span> <span class='PDMInd'> 4</span>     <span class='PDMResK'>IF</span> <span class='PDMVar'>m</span><span class='PDMOper'>.</span><span class='PDMVar'>lnErrCode</span><span class='PDMOper'>=</span><span class='PDMVar'>ERROR_SUCCESS</span> <span class='PDMResK'>THEN</span>
+<span class='PDMCnt'>2092</span> <span class='PDMInd'> 5</span>      <span class='PDMVar'>tc_git</span> <span class='PDMOper'>=</span> <span class='PDMResF'>ADDBS</span><span class='PDMOper'>(</span><span class='PDMResF'>LEFT</span><span class='PDMOper'>(</span><span class='PDMVar'>m</span><span class='PDMOper'>.</span><span class='PDMVar'>lpbData</span><span class='PDMOper'>,</span><span class='PDMVar'>m</span><span class='PDMOper'>.</span><span class='PDMVar'>lpcbData</span><span class='PDMOper'>-</span><span class='PDMLit'>1</span><span class='PDMOper'>)</span><span class='PDMOper'>)</span><span class='PDMOper'>+</span><span class='PDMStr'>'cmd\git.exe'</span>
+<span class='PDMCnt'>2093</span> <span class='PDMInd'>  </span> 
+<span class='PDMCnt'>2094</span> <span class='PDMInd'> 5</span>      <span class='PDMResK'>IF</span> <span class='PDMResF'>VARTYPE</span><span class='PDMOper'>(</span><span class='PDMVar'>m</span><span class='PDMOper'>.</span><span class='PDMVar'>laRegs</span><span class='PDMOper'>(</span><span class='PDMVar'>m</span><span class='PDMOper'>.</span><span class='PDMVar'>lnKey</span><span class='PDMOper'>,</span><span class='PDMLit'>4</span><span class='PDMOper'>)</span><span class='PDMOper'>)</span><span class='PDMOper'>=</span><span class='PDMStr'>'L'</span> <span class='PDMResK'>THEN</span>
+<span class='PDMCnt'>2095</span> <span class='PDMInd'> 6</span>       <span class='PDMVar'>tlIs64</span> <span class='PDMOper'>=</span> <span class='PDMVar'>m</span><span class='PDMOper'>.</span><span class='PDMVar'>laRegs</span><span class='PDMOper'>(</span><span class='PDMVar'>m</span><span class='PDMOper'>.</span><span class='PDMVar'>lnKey</span><span class='PDMOper'>,</span><span class='PDMLit'>4</span><span class='PDMOper'>)</span>
+<span class='PDMCnt'>2096</span> <span class='PDMInd'> 5</span>      <span class='PDMResK'>ELSE</span>  <span class='PDMCom'>&amp;&amp;VARTYPE(laRegs(m.lnKey,4))='L'</span>
+<span class='PDMCnt'>2097</span> <span class='PDMInd'> 6</span>       <span class='PDMResK'>STORE</span> <span class='PDMLit'>0</span>              <span class='PDMResK'>TO</span> <span class='PDMVar'>m</span><span class='PDMOper'>.</span><span class='PDMVar'>lpdwReserved</span><span class='PDMOper'>,</span><span class='PDMVar'>m</span><span class='PDMOper'>.</span><span class='PDMVar'>lpdwType</span>
+<span class='PDMCnt'>2098</span> <span class='PDMInd'> 6</span>       <span class='PDMResK'>STORE</span> <span class='PDMResF'>SPACE</span><span class='PDMOper'>(</span><span class='PDMLit'>256</span><span class='PDMOper'>)</span>     <span class='PDMResK'>TO</span> <span class='PDMVar'>m</span><span class='PDMOper'>.</span><span class='PDMVar'>lpbData</span>
+<span class='PDMCnt'>2099</span> <span class='PDMInd'> 6</span>       <span class='PDMResK'>STORE</span> <span class='PDMResF'>LEN</span><span class='PDMOper'>(</span><span class='PDMVar'>m</span><span class='PDMOper'>.</span><span class='PDMVar'>lpbData</span><span class='PDMOper'>)</span> <span class='PDMResK'>TO</span> <span class='PDMVar'>m</span><span class='PDMOper'>.</span><span class='PDMVar'>lpcbData</span>
+<span class='PDMCnt'>2100</span> <span class='PDMInd'>  </span> <span class='PDMCom'>*     ReadKey</span>
+<span class='PDMCnt'>2101</span> <span class='PDMInd'> 6</span>       <span class='PDMVar'>lnErrCode</span><span class='PDMOper'>=</span><span class='PDMVar'>RegQueryValueEx</span><span class='PDMOper'>(</span><span class='PDMVar'>m</span><span class='PDMOper'>.</span><span class='PDMVar'>lnSubKey</span><span class='PDMOper'>,</span><span class='PDMVar'>m</span><span class='PDMOper'>.</span><span class='PDMVar'>laRegs</span><span class='PDMOper'>(</span><span class='PDMVar'>m</span><span class='PDMOper'>.</span><span class='PDMVar'>lnKey</span><span class='PDMOper'>,</span><span class='PDMLit'>4</span><span class='PDMOper'>)</span><span class='PDMOper'>,</span><span class='PDMOper'>;</span>
+<span class='PDMCnt'>2102</span> <span class='PDMInd'> 8</span>         <span class='PDMVar'>m</span><span class='PDMOper'>.</span><span class='PDMVar'>lpdwReserved</span><span class='PDMOper'>,</span><span class='PDMOper'>@</span><span class='PDMVar'>lpdwType</span><span class='PDMOper'>,</span><span class='PDMOper'>@</span><span class='PDMVar'>lpbData</span><span class='PDMOper'>,</span><span class='PDMOper'>@</span><span class='PDMVar'>lpcbData</span><span class='PDMOper'>)</span>
+<span class='PDMCnt'>2103</span> <span class='PDMInd'>  </span> 
+<span class='PDMCnt'>2104</span> <span class='PDMInd'> 6</span>       <span class='PDMResK'>IF</span> <span class='PDMVar'>m</span><span class='PDMOper'>.</span><span class='PDMVar'>lnErrCode</span><span class='PDMOper'>=</span><span class='PDMVar'>ERROR_SUCCESS</span> <span class='PDMResK'>THEN</span>
+<span class='PDMCnt'>2105</span> <span class='PDMInd'> 7</span>        <span class='PDMVar'>tlIs64</span> <span class='PDMOper'>=</span> <span class='PDMStr'>'\mingw64\'</span><span class='PDMOper'>$</span><span class='PDMResF'>LEFT</span><span class='PDMOper'>(</span><span class='PDMVar'>m</span><span class='PDMOper'>.</span><span class='PDMVar'>lpbData</span><span class='PDMOper'>,</span><span class='PDMVar'>m</span><span class='PDMOper'>.</span><span class='PDMVar'>lpcbData</span><span class='PDMOper'>-</span><span class='PDMLit'>1</span><span class='PDMOper'>)</span>
+<span class='PDMCnt'>2106</span> <span class='PDMInd'> 6</span>       <span class='PDMResK'>ENDIF</span> <span class='PDMCom'>&amp;&amp;m.lnErrCode=ERROR_SUCCESS</span>
+<span class='PDMCnt'>2107</span> <span class='PDMInd'>  </span> <span class='PDMCom'>*     /ReadKey</span>
+<span class='PDMCnt'>2108</span> <span class='PDMInd'> 5</span>      <span class='PDMResK'>ENDIF</span> <span class='PDMCom'>&amp;&amp;VARTYPE(laRegs(m.lnKey,4))='L'</span>
+<span class='PDMCnt'>2109</span> <span class='PDMInd'> 4</span>     <span class='PDMResK'>ENDIF</span> <span class='PDMCom'>&amp;&amp;m.lnErrCode=ERROR_SUCCESS</span>
+<span class='PDMCnt'>2110</span> <span class='PDMInd'>  </span> <span class='PDMCom'>*/ReadKey</span>
+<span class='PDMCnt'>2111</span> <span class='PDMInd'>  </span> 
+<span class='PDMCnt'>2112</span> <span class='PDMInd'>  </span> <span class='PDMCom'>*CloseKey</span>
+<span class='PDMCnt'>2113</span> <span class='PDMInd'> 4</span>     <span class='PDMOper'>=</span><span class='PDMVar'>RegCloseKey</span><span class='PDMOper'>(</span><span class='PDMVar'>m</span><span class='PDMOper'>.</span><span class='PDMVar'>lnSubKey</span><span class='PDMOper'>)</span>
+<span class='PDMCnt'>2114</span> <span class='PDMInd'> 4</span>     <span class='PDMVar'>lnSubKey</span> <span class='PDMOper'>=</span> <span class='PDMLit'>0</span>
+<span class='PDMCnt'>2115</span> <span class='PDMInd'>  </span> <span class='PDMCom'>*/CloseKey</span>
+<span class='PDMCnt'>2116</span> <span class='PDMInd'> 3</span>    <span class='PDMResK'>ENDIF</span> <span class='PDMCom'>&amp;&amp;m.lnErrCode=ERROR_SUCCESS</span>
+<span class='PDMCnt'>2117</span> <span class='PDMInd'> 3</span>    <span class='PDMResK'>IF</span> <span class='PDMResF'>FILE</span><span class='PDMOper'>(</span><span class='PDMVar'>m</span><span class='PDMOper'>.</span><span class='PDMVar'>tc_git</span><span class='PDMOper'>)</span> <span class='PDMResK'>THEN</span>
+<span class='PDMCnt'>2118</span> <span class='PDMInd'> 4</span>     <span class='PDMResK'>EXIT</span>
+<span class='PDMCnt'>2119</span> <span class='PDMInd'> 3</span>    <span class='PDMResK'>ENDIF</span> <span class='PDMCom'>&amp;&amp;FILE(m.tc_git)</span>
+<span class='PDMCnt'>2120</span> <span class='PDMInd'> 2</span>   <span class='PDMResK'>ENDFOR</span> <span class='PDMCom'>&amp;&amp;lnKey</span>
+<span class='PDMCnt'>2121</span> <span class='PDMInd'>  </span> 
+<span class='PDMCnt'>2122</span> <span class='PDMInd'>  </span> <span class='PDMCom'>*!*    /Changed by: SF 1.12.2015</span>
+<span class='PDMCnt'>2123</span> <span class='PDMInd'>  </span> 
+<span class='PDMCnt'>2124</span> <span class='PDMInd'> 2</span>   <span class='PDMVar'>_SCREEN</span><span class='PDMOper'>.</span><span class='PDMResM'>ADDPROPERTY</span><span class='PDMOper'>(</span><span class='PDMStr'>'gcB2T_git'</span><span class='PDMOper'>,</span><span class='PDMResF'>IIF</span><span class='PDMOper'>(</span><span class='PDMResF'>FILE</span><span class='PDMOper'>(</span><span class='PDMVar'>m</span><span class='PDMOper'>.</span><span class='PDMVar'>tc_git</span><span class='PDMOper'>)</span><span class='PDMOper'>,</span><span class='PDMVar'>m</span><span class='PDMOper'>.</span><span class='PDMVar'>tc_git</span><span class='PDMOper'>,</span><span class='PDMStr'>''</span><span class='PDMOper'>)</span><span class='PDMOper'>)</span>
+<span class='PDMCnt'>2125</span> <span class='PDMInd'> 2</span>   <span class='PDMVar'>_SCREEN</span><span class='PDMOper'>.</span><span class='PDMResM'>ADDPROPERTY</span><span class='PDMOper'>(</span><span class='PDMStr'>'glB2T_git64'</span><span class='PDMOper'>,</span><span class='PDMVar'>m</span><span class='PDMOper'>.</span><span class='PDMVar'>tlIs64</span><span class='PDMOper'>)</span>
+<span class='PDMCnt'>2126</span> <span class='PDMInd'>  </span> 
+<span class='PDMCnt'>2127</span> <span class='PDMInd'> 1</span>  <span class='PDMResK'>ENDIF</span> <span class='PDMCom'>&amp;&amp;PEMSTATUS(_SCREEN,'gcB2T_git',5)</span>
+<span class='PDMCnt'>2128</span> <span class='PDMInd'>  </span> 
+<span class='PDMCnt'>2129</span> <span class='PDMInd'> 1</span>  <span class='PDMVar'>llReturn</span> <span class='PDMOper'>=</span> <span class='PDMResF'>FILE</span><span class='PDMOper'>(</span><span class='PDMVar'>m</span><span class='PDMOper'>.</span><span class='PDMVar'>tc_git</span><span class='PDMOper'>)</span>
+<span class='PDMCnt'>2130</span> <span class='PDMInd'>  </span> 
+<span class='PDMCnt'>2131</span> <span class='PDMInd'> 1</span>  <span class='PDMResK'>RETURN</span> <span class='PDMVar'>m</span><span class='PDMOper'>.</span><span class='PDMVar'>llReturn</span></pre>
  <!-- Code End -->
   </div>
  </div>

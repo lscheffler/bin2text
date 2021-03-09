@@ -16,18 +16,18 @@
 <body>
 <div class="diaxp_mhead">Pjx2Commit Function</div>
 <div class="diaxp_mbody">
-<!-- Created with _diamp_pdm_ab by Agnes Beste    03.03.2021 18:15 -->
+<!-- Created with _diamp_pdm_ab by Agnes Beste    06.03.2021 13:26 -->
  <div class="PDM_AB_Descr"><!-- Descr Begin -->
 Create a commit to git.
  </div><!-- Descr End -->
 
  <div class="DIAMP_PDM_AB_Syntax"><!-- Syntax Begin -->
   <div class="SColor">
-   <div class="RetVal"><a href="#_5ZT134ABZ">RetVal</a>&nbsp;</div>   <div class="RetValEq">=</div>   <div class="PEM">
+   <div class="RetVal"><a href="#_5ZW0ST0Y5">RetVal</a>&nbsp;</div>   <div class="RetValEq">=</div>   <div class="PEM">
     Pjx2Commit
    </div>
    <div class="Para">
-    ([<a href="#_5ZT134AC0">tlAll</a>])
+    ([<a href="#_5ZW0ST0Y6">tlAll</a>])
    </div>
    <div style="clear: both"></div>
   </div><!-- Colour End -->
@@ -39,7 +39,7 @@ Create a commit to git.
   </span>
   <dl class="DIAMP_PDM_AB_Params_List">
    <dt class="dt_">
-    <a class="DIAMP_PDM_AB_Params_ParaName" id="_5ZT134AC0" name="_5ZT134AC0">
+    <a class="DIAMP_PDM_AB_Params_ParaName" id="_5ZW0ST0Y6" name="_5ZW0ST0Y6">
      <span class="PDMEXPR PDMNor" ><span class='PDMVar'>tlAll</span></span>
 
     </a>
@@ -75,7 +75,7 @@ Create a commit to git.
  <div class="DIAMP_PDM_AB_RetVal"><!-- Returns Begin -->
   <div>
    <span class="PDM_AB_Head">
-    <a id="_5ZT134ABZ" name="_5ZT134ABZ">
+    <a id="_5ZW0ST0Y5" name="_5ZW0ST0Y5">
      Return value
     </a>
    </span> <span class="RetVal_Ttype">Boolean</span>
@@ -111,7 +111,7 @@ This calls FoxBin2PRG to process active project or all projects in the path. And
     04.06.2015 11:19
    </span><br />
 Changed by: SF<br />
-	New parameter <a class="DIAMP_PDM_AB_Para_Link" href="#_5ZT134AC0">tlAll</a>
+	New parameter <a class="DIAMP_PDM_AB_Para_Link" href="#_5ZW0ST0Y6">tlAll</a>
 	
   </div>
   <div class="PDM_AB_Body">
@@ -143,7 +143,7 @@ Changed by: SF<br />
  </div><!-- Changes End -->
 
 
-<!-- /Created with _diamp_pdm_ab by Agnes Beste    03.03.2021 18:15 -->
+<!-- /Created with _diamp_pdm_ab by Agnes Beste    06.03.2021 13:26 -->
 
  <div class="SC">
   <img onclick="ExpandSC('SP_P2',-1);" class="imgEC" src="../../imgs/dotab.gif" alt="Expand/Collapse source code of procedure Pjx2Commit" id="IMG_SP_P2" />
@@ -219,7 +219,7 @@ Changed by: SF<br />
 <span class='PDMCnt'> 135</span> <span class='PDMInd'> 4</span>     <span class='PDMVar'>llSuccess</span> <span class='PDMOper'>=</span> <span class='PDMVar'>m</span><span class='PDMOper'>.</span><span class='PDMVar'>llSuccess</span> <span class='PDMOper'>AND</span> <span class='PDMVar'>m</span><span class='PDMOper'>.</span><span class='PDMVar'>lnErrorCode</span><span class='PDMOper'>=</span><span class='PDMLit'>1</span>  <span class='PDMCom'>&amp;&amp;lnErrorCode -&gt; files staged but not commited</span>
 <span class='PDMCnt'> 136</span> <span class='PDMInd'> 3</span>    <span class='PDMResK'>ELSE</span>  <span class='PDMCom'>&amp;&amp;!m.llIs64 AND (TYPE('_SCREEN.gcB2T_UseBash')="C" AND _SCREEN.gcB2T_UseBash=="1")</span>
 <span class='PDMCnt'> 137</span> <span class='PDMInd'>  </span> 
-<span class='PDMCnt'> 138</span> <span class='PDMInd'> 4</span>     <span class='PDMResK'>TEXT</span> <span class='PDMResK'>TO</span> <span class='PDMVar'>lcBat</span> <span class='PDMResK'>NOSHOW</span> <span class='PDMResK'>TEXTMERGE</span>
+<span class='PDMCnt'> 138</span> <span class='PDMInd'> 4</span>     <span class='PDMResK'>TEXT</span> <span class='PDMResK'>TO</span> <span class='PDMVar'>m</span><span class='PDMOper'>.</span><span class='PDMVar'>lcBat</span> <span class='PDMResK'>NOSHOW</span> <span class='PDMResK'>TEXTMERGE</span>
 <span class='PDMCnt'> 139</span> <span class='PDMInd'>  </span> <span class='PDMStr'>"&lt;&lt;m.lc_Git&gt;&gt;"</span> <span class='PDMResK'>add</span> <span class='PDMOper'>-</span><span class='PDMVar'>A</span>
 <span class='PDMCnt'> 140</span> <span class='PDMInd'>  </span> <span class='PDMStr'>"&lt;&lt;m.lc_Git&gt;&gt;"</span> <span class='PDMResK'>status</span> <span class='PDMOper'>-</span><span class='PDMOper'>-</span><span class='PDMVar'>porcelain</span><span class='PDMOper'>&gt;</span><span class='PDMVar'>git_x</span><span class='PDMOper'>.</span><span class='PDMVar'>tmp</span>
 <span class='PDMCnt'> 141</span> <span class='PDMInd'> 4</span>     <span class='PDMResK'>ENDTEXT</span> <span class='PDMCom'>&amp;&amp;lcBat</span>
@@ -236,12 +236,12 @@ Changed by: SF<br />
 <span class='PDMCnt'> 152</span> <span class='PDMInd'>  </span> 
 <span class='PDMCnt'> 157</span> <span class='PDMInd'>  </span> 
 <span class='PDMCnt'> 158</span> <span class='PDMInd'> 4</span>     <span class='PDMResK'>IF</span> <span class='PDMResF'>TYPE</span><span class='PDMOper'>(</span><span class='PDMStr'>'_SCREEN.gcB2T_Commit'</span><span class='PDMOper'>)</span><span class='PDMOper'>=</span><span class='PDMStr'>"C"</span> <span class='PDMOper'>AND</span> <span class='PDMVar'>_SCREEN</span><span class='PDMOper'>.</span><span class='PDMVar'>gcB2T_Commit</span><span class='PDMOper'>==</span><span class='PDMStr'>"1"</span> <span class='PDMResK'>THEN</span>
-<span class='PDMCnt'> 159</span> <span class='PDMInd'> 5</span>      <span class='PDMVar'>lcCommit</span> <span class='PDMOper'>=</span> <span class='PDMResF'>CHRTRAN</span><span class='PDMOper'>(</span><span class='PDMResF'>TTOC</span><span class='PDMOper'>(</span><span class='PDMResF'>DATETIME</span><span class='PDMOper'>(</span><span class='PDMOper'>)</span><span class='PDMOper'>,</span><span class='PDMLit'>3</span><span class='PDMOper'>)</span><span class='PDMOper'>,</span><span class='PDMStr'>'T'</span><span class='PDMOper'>,</span><span class='PDMStr'>' '</span><span class='PDMOper'>)</span>
+<span class='PDMCnt'> 159</span> <span class='PDMInd'> 5</span>      <span class='PDMVar'>lcCommit</span>  <span class='PDMOper'>=</span> <span class='PDMResF'>CHRTRAN</span><span class='PDMOper'>(</span><span class='PDMResF'>TTOC</span><span class='PDMOper'>(</span><span class='PDMResF'>DATETIME</span><span class='PDMOper'>(</span><span class='PDMOper'>)</span><span class='PDMOper'>,</span><span class='PDMLit'>3</span><span class='PDMOper'>)</span><span class='PDMOper'>,</span><span class='PDMStr'>'T'</span><span class='PDMOper'>,</span><span class='PDMStr'>' '</span><span class='PDMOper'>)</span>
 <span class='PDMCnt'> 160</span> <span class='PDMInd'> 5</span>      <span class='PDMVar'>llSuccess</span> <span class='PDMOper'>=</span> <span class='PDMVar'>Run_git</span><span class='PDMOper'>(</span><span class='PDMStr'>'commit -m "'</span><span class='PDMOper'>+</span><span class='PDMVar'>m</span><span class='PDMOper'>.</span><span class='PDMVar'>lcCommit</span><span class='PDMOper'>+</span><span class='PDMStr'>'" -m "auto-commit by RunB2T.app"'</span><span class='PDMOper'>,</span><span class='PDMOper'>,</span><span class='PDMLit'>.F.</span><span class='PDMOper'>,</span><span class='PDMLit'>.F.</span><span class='PDMOper'>,</span><span class='PDMLit'>.F.</span><span class='PDMOper'>)</span>
 <span class='PDMCnt'> 161</span> <span class='PDMInd'> 5</span>      <span class='PDMResK'>IF</span> <span class='PDMVar'>m</span><span class='PDMOper'>.</span><span class='PDMVar'>llSuccess</span> <span class='PDMResK'>THEN</span>
 <span class='PDMCnt'> 162</span> <span class='PDMInd'> 6</span>       <span class='PDMOper'>??</span><span class='PDMStr'>' - auto commit '</span><span class='PDMOper'>+</span><span class='PDMVar'>m</span><span class='PDMOper'>.</span><span class='PDMVar'>lcCommit</span>
 <span class='PDMCnt'> 163</span> <span class='PDMInd'> 5</span>      <span class='PDMResK'>ELSE</span>  <span class='PDMCom'>&amp;&amp;m.llSuccess</span>
-<span class='PDMCnt'> 164</span> <span class='PDMInd'> 6</span>       <span class='PDMOper'>?</span><span class='PDMStr'>' commit failed'</span>
+<span class='PDMCnt'> 164</span> <span class='PDMInd'> 6</span>       <span class='PDMOper'>?</span><span class='PDMStr'>' commit failed'</span> <span class='PDMResK'>FONT</span> <span class='PDMStr'>''</span> <span class='PDMResP'>STYLE</span> <span class='PDMStr'>'B'</span>
 <span class='PDMCnt'> 165</span> <span class='PDMInd'> 5</span>      <span class='PDMResK'>ENDIF</span> <span class='PDMCom'>&amp;&amp;m.llSuccess</span>
 <span class='PDMCnt'> 166</span> <span class='PDMInd'> 4</span>     <span class='PDMResK'>ELSE</span>  <span class='PDMCom'>&amp;&amp;TYPE('_SCREEN.gcB2T_Commit')="C" AND _SCREEN.gcB2T_Commit=="1"</span>
 <span class='PDMCnt'> 167</span> <span class='PDMInd'> 5</span>      <span class='PDMVar'>Run_git</span><span class='PDMOper'>(</span><span class='PDMStr'>'commit'</span><span class='PDMOper'>,</span><span class='PDMOper'>,</span><span class='PDMLit'>.T.</span><span class='PDMOper'>,</span><span class='PDMLit'>.T.</span><span class='PDMOper'>,</span><span class='PDMLit'>.F.</span><span class='PDMOper'>)</span>

@@ -16,18 +16,18 @@
 <body>
 <div class="diaxp_mhead">GetGitBaseDir Function</div>
 <div class="diaxp_mbody">
-<!-- Created with _diamp_pdm_ab by Agnes Beste    03.03.2021 18:15 -->
+<!-- Created with _diamp_pdm_ab by Agnes Beste    06.03.2021 13:26 -->
  <div class="PDM_AB_Descr"><!-- Descr Begin -->
 Returns the git root directory of a given directory.
  </div><!-- Descr End -->
 
  <div class="DIAMP_PDM_AB_Syntax"><!-- Syntax Begin -->
   <div class="SColor">
-   <div class="RetVal"><a href="#_5ZT134AMW">RetVal</a>&nbsp;</div>   <div class="RetValEq">=</div>   <div class="PEM">
+   <div class="RetVal"><a href="#_5ZW0ST1A0">RetVal</a>&nbsp;</div>   <div class="RetValEq">=</div>   <div class="PEM">
     GetGitBaseDir
    </div>
    <div class="Para">
-    ([<a href="#_5ZT134AMX">tcPath</a>])
+    ([<a href="#_5ZW0ST1A1">tcPath</a>])
    </div>
    <div style="clear: both"></div>
   </div><!-- Colour End -->
@@ -39,7 +39,7 @@ Returns the git root directory of a given directory.
   </span>
   <dl class="DIAMP_PDM_AB_Params_List">
    <dt class="dt_">
-    <a class="DIAMP_PDM_AB_Params_ParaName" id="_5ZT134AMX" name="_5ZT134AMX">
+    <a class="DIAMP_PDM_AB_Params_ParaName" id="_5ZW0ST1A1" name="_5ZW0ST1A1">
      <span class="PDMEXPR PDMNor" ><span class='PDMVar'>tcPath</span></span>
 
     </a>
@@ -79,72 +79,72 @@ Default is <span class="PDMEXPR PDMNor" ><span class='PDMResF'>FULLPATH</span><s
  <div class="DIAMP_PDM_AB_RetVal"><!-- Returns Begin -->
   <div>
    <span class="PDM_AB_Head">
-    <a id="_5ZT134AMW" name="_5ZT134AMW">
+    <a id="_5ZW0ST1A0" name="_5ZW0ST1A0">
      Return value
     </a>
    </span> <span class="RetVal_Ttype">Character</span>
   </div>
   <div class="PDM_AB_Body">
-Root directory of <a class="DIAMP_PDM_AB_Para_Link" href="#_5ZT134AMX">tcPath</a>. Empty if <a class="DIAMP_PDM_AB_Para_Link" href="#_5ZT134AMX">tcPath</a> is not under git control.
+Root directory of <a class="DIAMP_PDM_AB_Para_Link" href="#_5ZW0ST1A1">tcPath</a>. Empty if <a class="DIAMP_PDM_AB_Para_Link" href="#_5ZW0ST1A1">tcPath</a> is not under git control.
   </div>
  </div><!-- Returns End -->
 
 
-<!-- /Created with _diamp_pdm_ab by Agnes Beste    03.03.2021 18:15 -->
+<!-- /Created with _diamp_pdm_ab by Agnes Beste    06.03.2021 13:26 -->
 
  <div class="SC">
   <img onclick="ExpandSC('SP_P16',-1);" class="imgEC" src="../../imgs/dotab.gif" alt="Expand/Collapse source code of procedure GetGitBaseDir" id="IMG_SP_P16" />
   <span onclick="ExpandSC('SP_P16',-1);" class="SCCaption"><a name="pm.getgitbasedir">Source Code</a></span>
   <div ondblclick="ExpandSC('SP_P16',-1);" class="SCE" style="display: none;" id="TX_SP_P16">
 <!-- Code Begin -->
-<pre class="PDMCODE PDMNor" ><span class='PDMCnt'>1747</span> <span class='PDMInd'> 1</span>  <span class='PDMResK'>LPARAMETERS</span><span class='PDMOper'>;</span>
-<span class='PDMCnt'>1748</span> <span class='PDMInd'> 2</span>   <span class='PDMVar'>tcPath</span>
-<span class='PDMCnt'>1749</span> <span class='PDMInd'>  </span> 
-<span class='PDMCnt'>1750</span> <span class='PDMInd'>  </span> 
-<span class='PDMCnt'>1771</span> <span class='PDMInd'>  </span> 
-<span class='PDMCnt'>1772</span> <span class='PDMInd'> 1</span>  <span class='PDMResK'>LOCAL</span><span class='PDMOper'>;</span>
-<span class='PDMCnt'>1773</span> <span class='PDMInd'> 2</span>   <span class='PDMVar'>lcTemp</span>   <span class='PDMResK'>AS</span> <span class='PDMResK'>CHARACTER</span><span class='PDMOper'>,</span><span class='PDMOper'>;</span>
-<span class='PDMCnt'>1774</span> <span class='PDMInd'> 2</span>   <span class='PDMVar'>lc_Git</span>   <span class='PDMResK'>AS</span> <span class='PDMResK'>CHARACTER</span><span class='PDMOper'>,</span><span class='PDMOper'>;</span>
-<span class='PDMCnt'>1775</span> <span class='PDMInd'> 2</span>   <span class='PDMVar'>lcReturn</span> <span class='PDMResK'>AS</span> <span class='PDMResK'>CHARACTER</span><span class='PDMOper'>,</span><span class='PDMOper'>;</span>
-<span class='PDMCnt'>1776</span> <span class='PDMInd'> 2</span>   <span class='PDMVar'>llIs64</span>   <span class='PDMResK'>AS</span> <span class='PDMVar'>BOOLEAN</span>
-<span class='PDMCnt'>1777</span> <span class='PDMInd'>  </span> 
-<span class='PDMCnt'>1778</span> <span class='PDMInd'> 1</span>  <span class='PDMVar'>lcReturn</span> <span class='PDMOper'>=</span> <span class='PDMStr'>''</span>
-<span class='PDMCnt'>1779</span> <span class='PDMInd'>  </span> 
-<span class='PDMCnt'>1780</span> <span class='PDMInd'> 1</span>  <span class='PDMResK'>DO</span> <span class='PDMResK'>CASE</span>
-<span class='PDMCnt'>1781</span> <span class='PDMInd'> 2</span>   <span class='PDMResK'>CASE</span> <span class='PDMResF'>VARTYPE</span><span class='PDMOper'>(</span><span class='PDMVar'>m</span><span class='PDMOper'>.</span><span class='PDMVar'>tcPath</span><span class='PDMOper'>)</span><span class='PDMOper'>#</span><span class='PDMStr'>'C'</span> <span class='PDMOper'>OR</span> <span class='PDMResF'>EMPTY</span><span class='PDMOper'>(</span><span class='PDMVar'>m</span><span class='PDMOper'>.</span><span class='PDMVar'>tcPath</span><span class='PDMOper'>)</span>
-<span class='PDMCnt'>1782</span> <span class='PDMInd'> 3</span>    <span class='PDMVar'>tcPath</span> <span class='PDMOper'>=</span> <span class='PDMResF'>JUSTPATH</span><span class='PDMOper'>(</span><span class='PDMResF'>FULLPATH</span><span class='PDMOper'>(</span><span class='PDMResF'>CURDIR</span><span class='PDMOper'>(</span><span class='PDMOper'>)</span><span class='PDMOper'>)</span><span class='PDMOper'>)</span>
-<span class='PDMCnt'>1783</span> <span class='PDMInd'> 2</span>   <span class='PDMResK'>CASE</span> <span class='PDMResF'>EMPTY</span><span class='PDMOper'>(</span><span class='PDMVar'>m</span><span class='PDMOper'>.</span><span class='PDMVar'>tcPath</span><span class='PDMOper'>)</span>
-<span class='PDMCnt'>1784</span> <span class='PDMInd'> 3</span>    <span class='PDMVar'>tcPath</span> <span class='PDMOper'>=</span> <span class='PDMResF'>JUSTPATH</span><span class='PDMOper'>(</span><span class='PDMResF'>FULLPATH</span><span class='PDMOper'>(</span><span class='PDMResF'>CURDIR</span><span class='PDMOper'>(</span><span class='PDMOper'>)</span><span class='PDMOper'>)</span><span class='PDMOper'>)</span>
-<span class='PDMCnt'>1785</span> <span class='PDMInd'> 2</span>   <span class='PDMResK'>OTHERWISE</span>
-<span class='PDMCnt'>1786</span> <span class='PDMInd'> 3</span>    <span class='PDMVar'>tcPath</span> <span class='PDMOper'>=</span> <span class='PDMResF'>JUSTPATH</span><span class='PDMOper'>(</span><span class='PDMResF'>ADDBS</span><span class='PDMOper'>(</span><span class='PDMVar'>m</span><span class='PDMOper'>.</span><span class='PDMVar'>tcPath</span><span class='PDMOper'>)</span><span class='PDMOper'>)</span>
-<span class='PDMCnt'>1787</span> <span class='PDMInd'> 1</span>  <span class='PDMResK'>ENDCASE</span>
-<span class='PDMCnt'>1788</span> <span class='PDMInd'>  </span> 
-<span class='PDMCnt'>1789</span> <span class='PDMInd'> 1</span>  <span class='PDMVar'>lcTemp</span> <span class='PDMOper'>=</span> <span class='PDMResF'>FORCEPATH</span><span class='PDMOper'>(</span><span class='PDMStr'>'git_x.tmp'</span><span class='PDMOper'>,</span><span class='PDMVar'>m</span><span class='PDMOper'>.</span><span class='PDMVar'>tcPath</span><span class='PDMOper'>)</span>
-<span class='PDMCnt'>1790</span> <span class='PDMInd'>  </span> 
-<span class='PDMCnt'>1791</span> <span class='PDMInd'> 1</span>  <span class='PDMResK'>IF</span> <span class='PDMVar'>Run_git</span><span class='PDMOper'>(</span><span class='PDMStr'>'rev-parse --show-toplevel&gt;git_x.tmp'</span><span class='PDMOper'>,</span><span class='PDMVar'>m</span><span class='PDMOper'>.</span><span class='PDMVar'>tcPath</span><span class='PDMOper'>,</span><span class='PDMLit'>.F.</span><span class='PDMOper'>,</span><span class='PDMLit'>.F.</span><span class='PDMOper'>)</span> <span class='PDMResK'>THEN</span>
-<span class='PDMCnt'>1792</span> <span class='PDMInd'>  </span> 
-<span class='PDMCnt'>1793</span> <span class='PDMInd'> 2</span>   <span class='PDMResK'>IF</span> <span class='PDMResF'>FILE</span><span class='PDMOper'>(</span><span class='PDMVar'>m</span><span class='PDMOper'>.</span><span class='PDMVar'>lcTemp</span><span class='PDMOper'>)</span> <span class='PDMResK'>THEN</span>
-<span class='PDMCnt'>1794</span> <span class='PDMInd'> 3</span>    <span class='PDMVar'>lcReturn</span> <span class='PDMOper'>=</span> <span class='PDMResF'>CHRTRAN</span><span class='PDMOper'>(</span><span class='PDMResF'>FILETOSTR</span><span class='PDMOper'>(</span><span class='PDMVar'>m</span><span class='PDMOper'>.</span><span class='PDMVar'>lcTemp</span><span class='PDMOper'>)</span><span class='PDMOper'>,</span><span class='PDMStr'>'/'</span><span class='PDMOper'>+</span><span class='PDMVar'>0h0d0a</span><span class='PDMOper'>,</span><span class='PDMStr'>'\'</span><span class='PDMOper'>)</span>
-<span class='PDMCnt'>1795</span> <span class='PDMInd'> 2</span>   <span class='PDMResK'>ELSE</span> <span class='PDMCom'>&amp;&amp;FILE(m.lcTemp)</span>
-<span class='PDMCnt'>1796</span> <span class='PDMInd'>  </span> 
-<span class='PDMCnt'>1797</span> <span class='PDMInd'> 3</span>    <span class='PDMResK'>IF</span> <span class='PDMVar'>Get_git_Path</span><span class='PDMOper'>(</span><span class='PDMOper'>@</span><span class='PDMVar'>lc_Git</span><span class='PDMOper'>,</span><span class='PDMOper'>@</span><span class='PDMVar'>llIs64</span><span class='PDMOper'>)</span> <span class='PDMResK'>THEN</span>
-<span class='PDMCnt'>1798</span> <span class='PDMInd'>  </span> 
-<span class='PDMCnt'>1799</span> <span class='PDMInd'> 4</span>     <span class='PDMVar'>lcTemp</span> <span class='PDMOper'>=</span> <span class='PDMResF'>FORCEPATH</span><span class='PDMOper'>(</span><span class='PDMStr'>'git_x.tmp'</span><span class='PDMOper'>,</span><span class='PDMVar'>m</span><span class='PDMOper'>.</span><span class='PDMVar'>tcPath</span><span class='PDMOper'>)</span>
-<span class='PDMCnt'>1800</span> <span class='PDMInd'> 4</span>     <span class='PDMResK'>IF</span> <span class='PDMVar'>Run_ExtApp</span><span class='PDMOper'>(</span><span class='PDMStr'>'cmd /c ""'</span><span class='PDMOper'>+</span><span class='PDMVar'>m</span><span class='PDMOper'>.</span><span class='PDMVar'>lc_Git</span><span class='PDMOper'>+</span><span class='PDMStr'>'" rev-parse --show-toplevel&gt;git_x.tmp'</span><span class='PDMOper'>+</span><span class='PDMStr'>'"'</span><span class='PDMOper'>,</span><span class='PDMVar'>m</span><span class='PDMOper'>.</span><span class='PDMVar'>tcPath</span><span class='PDMOper'>,</span><span class='PDMStr'>'HID'</span><span class='PDMOper'>)</span> <span class='PDMResK'>THEN</span>
-<span class='PDMCnt'>1801</span> <span class='PDMInd'> 5</span>      <span class='PDMResK'>IF</span> <span class='PDMResF'>FILE</span><span class='PDMOper'>(</span><span class='PDMVar'>m</span><span class='PDMOper'>.</span><span class='PDMVar'>lcTemp</span><span class='PDMOper'>)</span> <span class='PDMResK'>THEN</span>
-<span class='PDMCnt'>1802</span> <span class='PDMInd'> 6</span>       <span class='PDMVar'>lcReturn</span> <span class='PDMOper'>=</span> <span class='PDMResF'>CHRTRAN</span><span class='PDMOper'>(</span><span class='PDMResF'>FILETOSTR</span><span class='PDMOper'>(</span><span class='PDMVar'>m</span><span class='PDMOper'>.</span><span class='PDMVar'>lcTemp</span><span class='PDMOper'>)</span><span class='PDMOper'>,</span><span class='PDMStr'>'/'</span><span class='PDMOper'>+</span><span class='PDMVar'>0h0d0a</span><span class='PDMOper'>,</span><span class='PDMStr'>'\'</span><span class='PDMOper'>)</span>
-<span class='PDMCnt'>1803</span> <span class='PDMInd'> 5</span>      <span class='PDMResK'>ENDIF</span> <span class='PDMCom'>&amp;&amp;FILE(m.lcTemp)</span>
-<span class='PDMCnt'>1804</span> <span class='PDMInd'> 4</span>     <span class='PDMResK'>ENDIF</span> <span class='PDMCom'>&amp;&amp;Run_ExtApp('cmd /c ""'+m.lc_Git+'" rev-parse --show-toplevel&gt;git_x.tmp'+'"',m.tcPath,'HID')</span>
-<span class='PDMCnt'>1805</span> <span class='PDMInd'> 3</span>    <span class='PDMResK'>ENDIF</span> <span class='PDMCom'>&amp;&amp;Get_git_Path(@lc_Git,@llIs64)</span>
-<span class='PDMCnt'>1806</span> <span class='PDMInd'>  </span> 
-<span class='PDMCnt'>1807</span> <span class='PDMInd'> 2</span>   <span class='PDMResK'>ENDIF</span> <span class='PDMCom'>&amp;&amp;FILE(m.lcTemp)</span>
-<span class='PDMCnt'>1808</span> <span class='PDMInd'> 1</span>  <span class='PDMResK'>ENDIF</span> <span class='PDMCom'>&amp;&amp;Run_git('rev-parse --show-toplevel&gt;git_x.tmp',m.tcPath,.F.,.F.)</span>
-<span class='PDMCnt'>1809</span> <span class='PDMInd'>  </span> 
-<span class='PDMCnt'>1810</span> <span class='PDMInd'> 1</span>  <span class='PDMResK'>DELETE</span> <span class='PDMResK'>FILE</span> <span class='PDMOper'>&amp;</span><span class='PDMVar'>lcTemp</span>
-<span class='PDMCnt'>1811</span> <span class='PDMInd'>  </span> 
-<span class='PDMCnt'>1812</span> <span class='PDMInd'>  </span> <span class='PDMCom'>* ENDIF &amp;&amp;Get_git_Path(@lc_Git,@llIs64)</span>
-<span class='PDMCnt'>1813</span> <span class='PDMInd'>  </span> 
-<span class='PDMCnt'>1814</span> <span class='PDMInd'> 1</span>  <span class='PDMResK'>RETURN</span> <span class='PDMVar'>m</span><span class='PDMOper'>.</span><span class='PDMVar'>lcReturn</span></pre>
+<pre class="PDMCODE PDMNor" ><span class='PDMCnt'>1892</span> <span class='PDMInd'> 1</span>  <span class='PDMResK'>LPARAMETERS</span><span class='PDMOper'>;</span>
+<span class='PDMCnt'>1893</span> <span class='PDMInd'> 2</span>   <span class='PDMVar'>tcPath</span>
+<span class='PDMCnt'>1894</span> <span class='PDMInd'>  </span> 
+<span class='PDMCnt'>1895</span> <span class='PDMInd'>  </span> 
+<span class='PDMCnt'>1916</span> <span class='PDMInd'>  </span> 
+<span class='PDMCnt'>1917</span> <span class='PDMInd'> 1</span>  <span class='PDMResK'>LOCAL</span><span class='PDMOper'>;</span>
+<span class='PDMCnt'>1918</span> <span class='PDMInd'> 2</span>   <span class='PDMVar'>lcTemp</span>   <span class='PDMResK'>AS</span> <span class='PDMResK'>CHARACTER</span><span class='PDMOper'>,</span><span class='PDMOper'>;</span>
+<span class='PDMCnt'>1919</span> <span class='PDMInd'> 2</span>   <span class='PDMVar'>lc_Git</span>   <span class='PDMResK'>AS</span> <span class='PDMResK'>CHARACTER</span><span class='PDMOper'>,</span><span class='PDMOper'>;</span>
+<span class='PDMCnt'>1920</span> <span class='PDMInd'> 2</span>   <span class='PDMVar'>lcReturn</span> <span class='PDMResK'>AS</span> <span class='PDMResK'>CHARACTER</span><span class='PDMOper'>,</span><span class='PDMOper'>;</span>
+<span class='PDMCnt'>1921</span> <span class='PDMInd'> 2</span>   <span class='PDMVar'>llIs64</span>   <span class='PDMResK'>AS</span> <span class='PDMVar'>BOOLEAN</span>
+<span class='PDMCnt'>1922</span> <span class='PDMInd'>  </span> 
+<span class='PDMCnt'>1923</span> <span class='PDMInd'> 1</span>  <span class='PDMVar'>lcReturn</span> <span class='PDMOper'>=</span> <span class='PDMStr'>''</span>
+<span class='PDMCnt'>1924</span> <span class='PDMInd'>  </span> 
+<span class='PDMCnt'>1925</span> <span class='PDMInd'> 1</span>  <span class='PDMResK'>DO</span> <span class='PDMResK'>CASE</span>
+<span class='PDMCnt'>1926</span> <span class='PDMInd'> 2</span>   <span class='PDMResK'>CASE</span> <span class='PDMResF'>VARTYPE</span><span class='PDMOper'>(</span><span class='PDMVar'>m</span><span class='PDMOper'>.</span><span class='PDMVar'>tcPath</span><span class='PDMOper'>)</span><span class='PDMOper'>#</span><span class='PDMStr'>'C'</span> <span class='PDMOper'>OR</span> <span class='PDMResF'>EMPTY</span><span class='PDMOper'>(</span><span class='PDMVar'>m</span><span class='PDMOper'>.</span><span class='PDMVar'>tcPath</span><span class='PDMOper'>)</span>
+<span class='PDMCnt'>1927</span> <span class='PDMInd'> 3</span>    <span class='PDMVar'>tcPath</span> <span class='PDMOper'>=</span> <span class='PDMResF'>JUSTPATH</span><span class='PDMOper'>(</span><span class='PDMResF'>FULLPATH</span><span class='PDMOper'>(</span><span class='PDMResF'>CURDIR</span><span class='PDMOper'>(</span><span class='PDMOper'>)</span><span class='PDMOper'>)</span><span class='PDMOper'>)</span>
+<span class='PDMCnt'>1928</span> <span class='PDMInd'> 2</span>   <span class='PDMResK'>CASE</span> <span class='PDMResF'>EMPTY</span><span class='PDMOper'>(</span><span class='PDMVar'>m</span><span class='PDMOper'>.</span><span class='PDMVar'>tcPath</span><span class='PDMOper'>)</span>
+<span class='PDMCnt'>1929</span> <span class='PDMInd'> 3</span>    <span class='PDMVar'>tcPath</span> <span class='PDMOper'>=</span> <span class='PDMResF'>JUSTPATH</span><span class='PDMOper'>(</span><span class='PDMResF'>FULLPATH</span><span class='PDMOper'>(</span><span class='PDMResF'>CURDIR</span><span class='PDMOper'>(</span><span class='PDMOper'>)</span><span class='PDMOper'>)</span><span class='PDMOper'>)</span>
+<span class='PDMCnt'>1930</span> <span class='PDMInd'> 2</span>   <span class='PDMResK'>OTHERWISE</span>
+<span class='PDMCnt'>1931</span> <span class='PDMInd'> 3</span>    <span class='PDMVar'>tcPath</span> <span class='PDMOper'>=</span> <span class='PDMResF'>JUSTPATH</span><span class='PDMOper'>(</span><span class='PDMResF'>ADDBS</span><span class='PDMOper'>(</span><span class='PDMVar'>m</span><span class='PDMOper'>.</span><span class='PDMVar'>tcPath</span><span class='PDMOper'>)</span><span class='PDMOper'>)</span>
+<span class='PDMCnt'>1932</span> <span class='PDMInd'> 1</span>  <span class='PDMResK'>ENDCASE</span>
+<span class='PDMCnt'>1933</span> <span class='PDMInd'>  </span> 
+<span class='PDMCnt'>1934</span> <span class='PDMInd'> 1</span>  <span class='PDMVar'>lcTemp</span> <span class='PDMOper'>=</span> <span class='PDMResF'>FORCEPATH</span><span class='PDMOper'>(</span><span class='PDMStr'>'git_x.tmp'</span><span class='PDMOper'>,</span><span class='PDMVar'>m</span><span class='PDMOper'>.</span><span class='PDMVar'>tcPath</span><span class='PDMOper'>)</span>
+<span class='PDMCnt'>1935</span> <span class='PDMInd'>  </span> 
+<span class='PDMCnt'>1936</span> <span class='PDMInd'> 1</span>  <span class='PDMResK'>IF</span> <span class='PDMVar'>Run_git</span><span class='PDMOper'>(</span><span class='PDMStr'>'rev-parse --show-toplevel&gt;git_x.tmp'</span><span class='PDMOper'>,</span><span class='PDMVar'>m</span><span class='PDMOper'>.</span><span class='PDMVar'>tcPath</span><span class='PDMOper'>,</span><span class='PDMLit'>.F.</span><span class='PDMOper'>,</span><span class='PDMLit'>.F.</span><span class='PDMOper'>)</span> <span class='PDMResK'>THEN</span>
+<span class='PDMCnt'>1937</span> <span class='PDMInd'>  </span> 
+<span class='PDMCnt'>1938</span> <span class='PDMInd'> 2</span>   <span class='PDMResK'>IF</span> <span class='PDMResF'>FILE</span><span class='PDMOper'>(</span><span class='PDMVar'>m</span><span class='PDMOper'>.</span><span class='PDMVar'>lcTemp</span><span class='PDMOper'>)</span> <span class='PDMResK'>THEN</span>
+<span class='PDMCnt'>1939</span> <span class='PDMInd'> 3</span>    <span class='PDMVar'>lcReturn</span> <span class='PDMOper'>=</span> <span class='PDMResF'>CHRTRAN</span><span class='PDMOper'>(</span><span class='PDMResF'>FILETOSTR</span><span class='PDMOper'>(</span><span class='PDMVar'>m</span><span class='PDMOper'>.</span><span class='PDMVar'>lcTemp</span><span class='PDMOper'>)</span><span class='PDMOper'>,</span><span class='PDMStr'>'/'</span><span class='PDMOper'>+</span><span class='PDMVar'>0h0d0a</span><span class='PDMOper'>,</span><span class='PDMStr'>'\'</span><span class='PDMOper'>)</span>
+<span class='PDMCnt'>1940</span> <span class='PDMInd'> 2</span>   <span class='PDMResK'>ELSE</span> <span class='PDMCom'>&amp;&amp;FILE(m.lcTemp)</span>
+<span class='PDMCnt'>1941</span> <span class='PDMInd'>  </span> 
+<span class='PDMCnt'>1942</span> <span class='PDMInd'> 3</span>    <span class='PDMResK'>IF</span> <span class='PDMVar'>Get_git_Path</span><span class='PDMOper'>(</span><span class='PDMOper'>@</span><span class='PDMVar'>lc_Git</span><span class='PDMOper'>,</span><span class='PDMOper'>@</span><span class='PDMVar'>llIs64</span><span class='PDMOper'>)</span> <span class='PDMResK'>THEN</span>
+<span class='PDMCnt'>1943</span> <span class='PDMInd'>  </span> 
+<span class='PDMCnt'>1944</span> <span class='PDMInd'> 4</span>     <span class='PDMVar'>lcTemp</span> <span class='PDMOper'>=</span> <span class='PDMResF'>FORCEPATH</span><span class='PDMOper'>(</span><span class='PDMStr'>'git_x.tmp'</span><span class='PDMOper'>,</span><span class='PDMVar'>m</span><span class='PDMOper'>.</span><span class='PDMVar'>tcPath</span><span class='PDMOper'>)</span>
+<span class='PDMCnt'>1945</span> <span class='PDMInd'> 4</span>     <span class='PDMResK'>IF</span> <span class='PDMVar'>Run_ExtApp</span><span class='PDMOper'>(</span><span class='PDMStr'>'cmd /c ""'</span><span class='PDMOper'>+</span><span class='PDMVar'>m</span><span class='PDMOper'>.</span><span class='PDMVar'>lc_Git</span><span class='PDMOper'>+</span><span class='PDMStr'>'" rev-parse --show-toplevel&gt;git_x.tmp'</span><span class='PDMOper'>+</span><span class='PDMStr'>'"'</span><span class='PDMOper'>,</span><span class='PDMVar'>m</span><span class='PDMOper'>.</span><span class='PDMVar'>tcPath</span><span class='PDMOper'>,</span><span class='PDMStr'>'HID'</span><span class='PDMOper'>)</span> <span class='PDMResK'>THEN</span>
+<span class='PDMCnt'>1946</span> <span class='PDMInd'> 5</span>      <span class='PDMResK'>IF</span> <span class='PDMResF'>FILE</span><span class='PDMOper'>(</span><span class='PDMVar'>m</span><span class='PDMOper'>.</span><span class='PDMVar'>lcTemp</span><span class='PDMOper'>)</span> <span class='PDMResK'>THEN</span>
+<span class='PDMCnt'>1947</span> <span class='PDMInd'> 6</span>       <span class='PDMVar'>lcReturn</span> <span class='PDMOper'>=</span> <span class='PDMResF'>CHRTRAN</span><span class='PDMOper'>(</span><span class='PDMResF'>FILETOSTR</span><span class='PDMOper'>(</span><span class='PDMVar'>m</span><span class='PDMOper'>.</span><span class='PDMVar'>lcTemp</span><span class='PDMOper'>)</span><span class='PDMOper'>,</span><span class='PDMStr'>'/'</span><span class='PDMOper'>+</span><span class='PDMVar'>0h0d0a</span><span class='PDMOper'>,</span><span class='PDMStr'>'\'</span><span class='PDMOper'>)</span>
+<span class='PDMCnt'>1948</span> <span class='PDMInd'> 5</span>      <span class='PDMResK'>ENDIF</span> <span class='PDMCom'>&amp;&amp;FILE(m.lcTemp)</span>
+<span class='PDMCnt'>1949</span> <span class='PDMInd'> 4</span>     <span class='PDMResK'>ENDIF</span> <span class='PDMCom'>&amp;&amp;Run_ExtApp('cmd /c ""'+m.lc_Git+'" rev-parse --show-toplevel&gt;git_x.tmp'+'"',m.tcPath,'HID')</span>
+<span class='PDMCnt'>1950</span> <span class='PDMInd'> 3</span>    <span class='PDMResK'>ENDIF</span> <span class='PDMCom'>&amp;&amp;Get_git_Path(@lc_Git,@llIs64)</span>
+<span class='PDMCnt'>1951</span> <span class='PDMInd'>  </span> 
+<span class='PDMCnt'>1952</span> <span class='PDMInd'> 2</span>   <span class='PDMResK'>ENDIF</span> <span class='PDMCom'>&amp;&amp;FILE(m.lcTemp)</span>
+<span class='PDMCnt'>1953</span> <span class='PDMInd'> 1</span>  <span class='PDMResK'>ENDIF</span> <span class='PDMCom'>&amp;&amp;Run_git('rev-parse --show-toplevel&gt;git_x.tmp',m.tcPath,.F.,.F.)</span>
+<span class='PDMCnt'>1954</span> <span class='PDMInd'>  </span> 
+<span class='PDMCnt'>1955</span> <span class='PDMInd'> 1</span>  <span class='PDMResK'>DELETE</span> <span class='PDMResK'>FILE</span> <span class='PDMOper'>&amp;</span><span class='PDMVar'>lcTemp</span>
+<span class='PDMCnt'>1956</span> <span class='PDMInd'>  </span> 
+<span class='PDMCnt'>1957</span> <span class='PDMInd'>  </span> <span class='PDMCom'>* ENDIF &amp;&amp;Get_git_Path(@lc_Git,@llIs64)</span>
+<span class='PDMCnt'>1958</span> <span class='PDMInd'>  </span> 
+<span class='PDMCnt'>1959</span> <span class='PDMInd'> 1</span>  <span class='PDMResK'>RETURN</span> <span class='PDMVar'>m</span><span class='PDMOper'>.</span><span class='PDMVar'>lcReturn</span></pre>
  <!-- Code End -->
   </div>
  </div>
