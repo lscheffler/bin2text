@@ -16,7 +16,7 @@
 <body>
 <div class="diaxp_mhead">CatchError Procedure</div>
 <div class="diaxp_mbody">
-<!-- Created with _diamp_pdm_ab by Agnes Beste    25.09.2019 20:00 -->
+<!-- Created with _diamp_pdm_ab by Agnes Beste    06.03.2021 13:26 -->
  <div class="PDM_AB_Descr"><!-- Descr Begin -->
 Error Display. Cancel.
  </div><!-- Descr End -->
@@ -27,8 +27,8 @@ Error Display. Cancel.
     CatchError
    </div>
    <div class="Para">
-    (<a href="#_5L516VEF6">tcProgram</a>
-     <wbr />,<a href="#_5L516VEF7">lnLineNo</a>)
+    (<a href="#_5ZW0ST1F9">tcProgram</a>
+     <wbr />,<a href="#_5ZW0ST1FA">lnLineNo</a>)
    </div>
    <div style="clear: both"></div>
   </div><!-- Colour End -->
@@ -40,7 +40,7 @@ Error Display. Cancel.
   </span>
   <dl class="DIAMP_PDM_AB_Params_List">
    <dt class="dt_">
-    <a class="DIAMP_PDM_AB_Params_ParaName" id="_5L516VEF6" name="_5L516VEF6">
+    <a class="DIAMP_PDM_AB_Params_ParaName" id="_5ZW0ST1F9" name="_5ZW0ST1F9">
      <span class="PDMEXPR PDMNor" ><span class='PDMVar'>tcProgram</span></span>
 
     </a>
@@ -67,14 +67,14 @@ Error Display. Cancel.
     </table>
    </dd>
    <dt class="dt_">
-    <a class="DIAMP_PDM_AB_Params_ParaName" id="_5L516VEF7" name="_5L516VEF7">
+    <a class="DIAMP_PDM_AB_Params_ParaName" id="_5ZW0ST1FA" name="_5ZW0ST1FA">
      <span class="PDMEXPR PDMNor" ><span class='PDMVar'>lnLineNo</span></span>
 
     </a>
    </dt>
    <dd class="dd_">
     <span class="Params_Short">
-     See <a class="DIAMP_PDM_AB_Para_Link" href="#_5L516VEF6">tcProgram</a>.
+     See <a class="DIAMP_PDM_AB_Para_Link" href="#_5ZW0ST1F9">tcProgram</a>.
     </span>
     <table class="Params_Info">
      <colgroup>
@@ -93,33 +93,34 @@ Error Display. Cancel.
  </div><!-- Parameters End -->
 
 
-<!-- /Created with _diamp_pdm_ab by Agnes Beste    25.09.2019 20:00 -->
+<!-- /Created with _diamp_pdm_ab by Agnes Beste    06.03.2021 13:26 -->
 
  <div class="SC">
-  <img onclick="ExpandSC('SP_P21',-1);" class="imgEC" src="../../imgs/dotab.gif" alt="Expand/Collapse source code of procedure CatchError" id="IMG_SP_P21" />
-  <span onclick="ExpandSC('SP_P21',-1);" class="SCCaption"><a name="pm.catcherror">Source Code</a></span>
-  <div ondblclick="ExpandSC('SP_P21',-1);" class="SCE" style="display: none;" id="TX_SP_P21">
+  <img onclick="ExpandSC('SP_P22',-1);" class="imgEC" src="../../imgs/dotab.gif" alt="Expand/Collapse source code of procedure CatchError" id="IMG_SP_P22" />
+  <span onclick="ExpandSC('SP_P22',-1);" class="SCCaption"><a name="pm.catcherror">Source Code</a></span>
+  <div ondblclick="ExpandSC('SP_P22',-1);" class="SCE" style="display: none;" id="TX_SP_P22">
 <!-- Code Begin -->
-<pre class="PDMCODE PDMNor" ><span class='PDMCnt'>2146</span> <span class='PDMInd'> 1</span>  <span class='PDMResK'>LPARAMETERS</span><span class='PDMOper'>;</span>
-<span class='PDMCnt'>2147</span> <span class='PDMInd'> 2</span>   <span class='PDMVar'>tcProgram</span><span class='PDMOper'>,</span><span class='PDMOper'>;</span>
-<span class='PDMCnt'>2148</span> <span class='PDMInd'> 2</span>   <span class='PDMVar'>tnLineNo</span>
-<span class='PDMCnt'>2149</span> <span class='PDMInd'>  </span> 
-<span class='PDMCnt'>2150</span> <span class='PDMInd'>  </span> 
-<span class='PDMCnt'>2162</span> <span class='PDMInd'>  </span> 
-<span class='PDMCnt'>2163</span> <span class='PDMInd'> 1</span>  <span class='PDMResK'>LOCAL</span> <span class='PDMResK'>ARRAY</span><span class='PDMOper'>;</span>
-<span class='PDMCnt'>2164</span> <span class='PDMInd'> 2</span>   <span class='PDMVar'>laError</span><span class='PDMOper'>(</span><span class='PDMLit'>1</span><span class='PDMOper'>,</span><span class='PDMLit'>7</span><span class='PDMOper'>)</span>
-<span class='PDMCnt'>2165</span> <span class='PDMInd'>  </span> 
-<span class='PDMCnt'>2166</span> <span class='PDMInd'> 1</span>  <span class='PDMResF'>AERROR</span><span class='PDMOper'>(</span><span class='PDMVar'>laError</span><span class='PDMOper'>)</span>
-<span class='PDMCnt'>2167</span> <span class='PDMInd'> 1</span>  <span class='PDMResF'>MESSAGEBOX</span><span class='PDMOper'>(</span><span class='PDMStr'>'Error:'</span><span class='PDMOper'>+</span><span class='PDMResF'>PADL</span><span class='PDMOper'>(</span><span class='PDMVar'>laError</span><span class='PDMOper'>(</span><span class='PDMLit'>1</span><span class='PDMOper'>,</span><span class='PDMLit'>1</span><span class='PDMOper'>)</span><span class='PDMOper'>,</span><span class='PDMLit'>5</span><span class='PDMOper'>)</span><span class='PDMOper'>+</span><span class='PDMStr'>', '</span><span class='PDMOper'>+</span><span class='PDMVar'>laError</span><span class='PDMOper'>(</span><span class='PDMLit'>1</span><span class='PDMOper'>,</span><span class='PDMLit'>2</span><span class='PDMOper'>)</span><span class='PDMOper'>+</span><span class='PDMVar'>0h0d0a</span><span class='PDMOper'>+</span><span class='PDMOper'>;</span>
-<span class='PDMCnt'>2168</span> <span class='PDMInd'> 2</span>   <span class='PDMStr'>'Code block: '</span><span class='PDMOper'>+</span><span class='PDMVar'>m</span><span class='PDMOper'>.</span><span class='PDMVar'>tcProgram</span><span class='PDMOper'>+</span><span class='PDMVar'>0h0d0a</span><span class='PDMOper'>+</span><span class='PDMOper'>;</span>
-<span class='PDMCnt'>2169</span> <span class='PDMInd'> 2</span>   <span class='PDMStr'>'Code line: '</span><span class='PDMOper'>+</span><span class='PDMResF'>PADL</span><span class='PDMOper'>(</span><span class='PDMVar'>m</span><span class='PDMOper'>.</span><span class='PDMVar'>tnLineNo</span><span class='PDMOper'>,</span><span class='PDMLit'>7</span><span class='PDMOper'>)</span><span class='PDMOper'>,</span><span class='PDMOper'>;</span>
-<span class='PDMCnt'>2170</span> <span class='PDMInd'> 2</span>   <span class='PDMLit'>64</span><span class='PDMOper'>,</span><span class='PDMStr'>'Ooops, works not as expected.'</span><span class='PDMOper'>)</span>
-<span class='PDMCnt'>2171</span> <span class='PDMInd'> 1</span>  <span class='PDMVar'>SwitchErrorHandler</span><span class='PDMOper'>(</span><span class='PDMOper'>)</span>
-<span class='PDMCnt'>2172</span> <span class='PDMInd'> 1</span>  <span class='PDMResK'>DEBUG</span>
-<span class='PDMCnt'>2173</span> <span class='PDMInd'> 1</span>  <span class='PDMResK'>SUSPEND</span>
-<span class='PDMCnt'>2174</span> <span class='PDMInd'> 1</span>  <span class='PDMResK'>RETRY</span>
-<span class='PDMCnt'>2175</span> <span class='PDMInd'> 1</span>  <span class='PDMResK'>CLEAR</span> <span class='PDMResK'>ALL</span>
-<span class='PDMCnt'>2176</span> <span class='PDMInd'> 1</span>  <span class='PDMResK'>CANCEL</span></pre>
+<pre class="PDMCODE PDMNor" ><span class='PDMCnt'>2752</span> <span class='PDMInd'> 1</span>  <span class='PDMResK'>LPARAMETERS</span><span class='PDMOper'>;</span>
+<span class='PDMCnt'>2753</span> <span class='PDMInd'> 2</span>   <span class='PDMVar'>tcProgram</span><span class='PDMOper'>,</span><span class='PDMOper'>;</span>
+<span class='PDMCnt'>2754</span> <span class='PDMInd'> 2</span>   <span class='PDMVar'>tnLineNo</span>
+<span class='PDMCnt'>2755</span> <span class='PDMInd'>  </span> 
+<span class='PDMCnt'>2756</span> <span class='PDMInd'>  </span> 
+<span class='PDMCnt'>2772</span> <span class='PDMInd'>  </span> 
+<span class='PDMCnt'>2773</span> <span class='PDMInd'> 1</span>  <span class='PDMResK'>LOCAL</span> <span class='PDMResK'>ARRAY</span><span class='PDMOper'>;</span>
+<span class='PDMCnt'>2774</span> <span class='PDMInd'> 2</span>   <span class='PDMVar'>laError</span><span class='PDMOper'>(</span><span class='PDMLit'>1</span><span class='PDMOper'>,</span><span class='PDMLit'>7</span><span class='PDMOper'>)</span>
+<span class='PDMCnt'>2775</span> <span class='PDMInd'>  </span> 
+<span class='PDMCnt'>2776</span> <span class='PDMInd'> 1</span>  <span class='PDMResF'>AERROR</span><span class='PDMOper'>(</span><span class='PDMVar'>laError</span><span class='PDMOper'>)</span>
+<span class='PDMCnt'>2777</span> <span class='PDMInd'> 1</span>  <span class='PDMResF'>MESSAGEBOX</span><span class='PDMOper'>(</span><span class='PDMStr'>'Ooops, works not as expected.'</span><span class='PDMOper'>+</span><span class='PDMVar'>0h0D0A0D0A</span><span class='PDMOper'>+</span><span class='PDMOper'>;</span>
+<span class='PDMCnt'>2778</span> <span class='PDMInd'> 3</span>    <span class='PDMStr'>'Error:'</span><span class='PDMOper'>+</span><span class='PDMResF'>PADL</span><span class='PDMOper'>(</span><span class='PDMVar'>m</span><span class='PDMOper'>.</span><span class='PDMVar'>laError</span><span class='PDMOper'>(</span><span class='PDMLit'>1</span><span class='PDMOper'>,</span><span class='PDMLit'>1</span><span class='PDMOper'>)</span><span class='PDMOper'>,</span><span class='PDMLit'>5</span><span class='PDMOper'>)</span><span class='PDMOper'>+</span><span class='PDMStr'>', '</span><span class='PDMOper'>+</span><span class='PDMVar'>m</span><span class='PDMOper'>.</span><span class='PDMVar'>laError</span><span class='PDMOper'>(</span><span class='PDMLit'>1</span><span class='PDMOper'>,</span><span class='PDMLit'>2</span><span class='PDMOper'>)</span><span class='PDMOper'>+</span><span class='PDMVar'>0h0d0a</span><span class='PDMOper'>+</span><span class='PDMOper'>;</span>
+<span class='PDMCnt'>2779</span> <span class='PDMInd'> 3</span>    <span class='PDMStr'>'Code block: '</span><span class='PDMOper'>+</span><span class='PDMVar'>m</span><span class='PDMOper'>.</span><span class='PDMVar'>tcProgram</span><span class='PDMOper'>+</span><span class='PDMVar'>0h0d0a</span><span class='PDMOper'>+</span><span class='PDMOper'>;</span>
+<span class='PDMCnt'>2780</span> <span class='PDMInd'> 3</span>    <span class='PDMStr'>'Code line: '</span><span class='PDMOper'>+</span><span class='PDMResF'>PADL</span><span class='PDMOper'>(</span><span class='PDMVar'>m</span><span class='PDMOper'>.</span><span class='PDMVar'>tnLineNo</span><span class='PDMOper'>,</span><span class='PDMLit'>7</span><span class='PDMOper'>)</span><span class='PDMOper'>,</span><span class='PDMOper'>;</span>
+<span class='PDMCnt'>2781</span> <span class='PDMInd'> 3</span>    <span class='PDMLit'>64</span><span class='PDMOper'>,</span><span class='PDMStr'>'Bin2Text v'</span><span class='PDMOper'>+</span><span class='PDMVar'>dcB2T_Verno</span><span class='PDMOper'>)</span>
+<span class='PDMCnt'>2782</span> <span class='PDMInd'> 1</span>  <span class='PDMVar'>SwitchErrorHandler</span><span class='PDMOper'>(</span><span class='PDMOper'>)</span>
+<span class='PDMCnt'>2783</span> <span class='PDMInd'> 1</span>  <span class='PDMResK'>DEBUG</span>
+<span class='PDMCnt'>2784</span> <span class='PDMInd'> 1</span>  <span class='PDMResK'>SUSPEND</span>
+<span class='PDMCnt'>2785</span> <span class='PDMInd'> 1</span>  <span class='PDMResK'>RETRY</span>
+<span class='PDMCnt'>2786</span> <span class='PDMInd'> 1</span>  <span class='PDMResK'>CLEAR</span> <span class='PDMResK'>ALL</span>
+<span class='PDMCnt'>2787</span> <span class='PDMInd'> 1</span>  <span class='PDMResK'>CANCEL</span></pre>
  <!-- Code End -->
   </div>
  </div>
@@ -127,12 +128,16 @@ Error Display. Cancel.
 <div class="diaxp_mfoot"> <div class="PDM_AB_CopyRight"><!-- Footer Begin -->
   <hr />
   <div class="PDM_AB_Body">
-<i>&copy; 19.4.2015 Lutz Scheffler Software Ingenieurb&uuml;ro</i>
+
+	<img src="../../repository/vfpxbanner_small.png" alt="VFPX logo"/><br/>
+	<p>This project is part of <a href="https://vfpx.github.io/"  title="Skip to VFPX" target="_blank">VFPX</a>.</p>
+	<p><i>&copy; 19.4.2015 Lutz Scheffler Software Ingenieurb&uuml;ro</i></p>
+	
   </div><!-- Body End -->
  </div><!-- Footer End -->
 </div>
 <script language="JavaScript" type="text/javascript">
-lo=document.getElementById("TX_SP_P21");
+lo=document.getElementById("TX_SP_P22");
 lo.XType="SourceCode";
 lo.Dir="../../imgs/";
 

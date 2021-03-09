@@ -17,7 +17,7 @@ margin: 0px;
 
 .PDMCnt {font-family:"Monospace","Courier New";font-size:0.9em;font-weight:bold; color:#000000;}
 .PDMInd {font-family:"Monospace","Courier New";font-size:0.9em;font-weight:bold; color:#000000;}
-.PDMCom {font-family:"Monospace","Courier New";font-size:0.9em; font-weight:bold; font-style:italic; color:#008000;}
+.PDMCom {font-family:"Monospace","Courier New";font-size:0.9em; font-weight:bold; font-style:italic; color:#008000; background-color:#FFFFFF;}
 .PDMRes {font-family:"Monospace","Courier New";font-size:0.9em; font-weight:bold; color:#000080;}
 .PDMResK {font-family:"Monospace","Courier New";font-size:0.9em; font-weight:bold; color:#000080;}
 .PDMResF {font-family:"Monospace","Courier New";font-size:0.9em; font-weight:bold; color:#000080;}

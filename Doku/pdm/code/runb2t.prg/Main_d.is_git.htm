@@ -16,18 +16,18 @@
 <body>
 <div class="diaxp_mhead">Is_git Function</div>
 <div class="diaxp_mbody">
-<!-- Created with _diamp_pdm_ab by Agnes Beste    25.09.2019 20:00 -->
+<!-- Created with _diamp_pdm_ab by Agnes Beste    06.03.2021 13:26 -->
  <div class="PDM_AB_Descr"><!-- Descr Begin -->
 Return if a directory is und git control.
  </div><!-- Descr End -->
 
  <div class="DIAMP_PDM_AB_Syntax"><!-- Syntax Begin -->
   <div class="SColor">
-   <div class="RetVal"><a href="#_5L516VC3P">RetVal</a>&nbsp;</div>   <div class="RetValEq">=</div>   <div class="PEM">
+   <div class="RetVal"><a href="#_5ZW0ST192">RetVal</a>&nbsp;</div>   <div class="RetValEq">=</div>   <div class="PEM">
     Is_git
    </div>
    <div class="Para">
-    (<a href="#_5L516VC3Q">tcPath</a>)
+    (<a href="#_5ZW0ST193">tcPath</a>)
    </div>
    <div style="clear: both"></div>
   </div><!-- Colour End -->
@@ -39,7 +39,7 @@ Return if a directory is und git control.
   </span>
   <dl class="DIAMP_PDM_AB_Params_List">
    <dt class="dt_">
-    <a class="DIAMP_PDM_AB_Params_ParaName" id="_5L516VC3Q" name="_5L516VC3Q">
+    <a class="DIAMP_PDM_AB_Params_ParaName" id="_5ZW0ST193" name="_5ZW0ST193">
      <span class="PDMEXPR PDMNor" ><span class='PDMVar'>tcPath</span></span>
 
     </a>
@@ -71,35 +71,35 @@ Return if a directory is und git control.
  <div class="DIAMP_PDM_AB_RetVal"><!-- Returns Begin -->
   <div>
    <span class="PDM_AB_Head">
-    <a id="_5L516VC3P" name="_5L516VC3P">
+    <a id="_5ZW0ST192" name="_5ZW0ST192">
      Return value
     </a>
    </span> <span class="RetVal_Ttype">Boolean</span>
   </div>
   <div class="PDM_AB_Body">
-<a class="DIAMP_PDM_AB_Para_Link" href="#_5L516VC3Q">tcPath</a> is under git control.
+<a class="DIAMP_PDM_AB_Para_Link" href="#_5ZW0ST193">tcPath</a> is under git control.
   </div>
  </div><!-- Returns End -->
 
 
-<!-- /Created with _diamp_pdm_ab by Agnes Beste    25.09.2019 20:00 -->
+<!-- /Created with _diamp_pdm_ab by Agnes Beste    06.03.2021 13:26 -->
 
  <div class="SC">
-  <img onclick="ExpandSC('SP_P12',-1);" class="imgEC" src="../../imgs/dotab.gif" alt="Expand/Collapse source code of procedure Is_git" id="IMG_SP_P12" />
-  <span onclick="ExpandSC('SP_P12',-1);" class="SCCaption"><a name="pm.is_git">Source Code</a></span>
-  <div ondblclick="ExpandSC('SP_P12',-1);" class="SCE" style="display: none;" id="TX_SP_P12">
+  <img onclick="ExpandSC('SP_P13',-1);" class="imgEC" src="../../imgs/dotab.gif" alt="Expand/Collapse source code of procedure Is_git" id="IMG_SP_P13" />
+  <span onclick="ExpandSC('SP_P13',-1);" class="SCCaption"><a name="pm.is_git">Source Code</a></span>
+  <div ondblclick="ExpandSC('SP_P13',-1);" class="SCE" style="display: none;" id="TX_SP_P13">
 <!-- Code Begin -->
-<pre class="PDMCODE PDMNor" ><span class='PDMCnt'>1401</span> <span class='PDMInd'> 1</span>  <span class='PDMResK'>LPARAMETERS</span><span class='PDMOper'>;</span>
-<span class='PDMCnt'>1402</span> <span class='PDMInd'> 2</span>   <span class='PDMVar'>tcPath</span>
-<span class='PDMCnt'>1403</span> <span class='PDMInd'>  </span> 
-<span class='PDMCnt'>1404</span> <span class='PDMInd'>  </span> 
-<span class='PDMCnt'>1421</span> <span class='PDMInd'> 1</span>  <span class='PDMResK'>LOCAL</span><span class='PDMOper'>;</span>
-<span class='PDMCnt'>1422</span> <span class='PDMInd'> 2</span>   <span class='PDMVar'>llIs_git</span> <span class='PDMResK'>AS</span> <span class='PDMVar'>BOOLEAN</span>
-<span class='PDMCnt'>1423</span> <span class='PDMInd'>  </span> 
-<span class='PDMCnt'>1424</span> <span class='PDMInd'> 1</span>  <span class='PDMVar'>llIs_git</span> <span class='PDMOper'>=</span> <span class='PDMOper'>!</span><span class='PDMResF'>EMPTY</span><span class='PDMOper'>(</span><span class='PDMVar'>GetGitBaseDir</span><span class='PDMOper'>(</span><span class='PDMVar'>m</span><span class='PDMOper'>.</span><span class='PDMVar'>tcPath</span><span class='PDMOper'>)</span><span class='PDMOper'>)</span>
-<span class='PDMCnt'>1425</span> <span class='PDMInd'> 1</span>  <span class='PDMVar'>_SCREEN</span><span class='PDMOper'>.</span><span class='PDMResM'>ADDPROPERTY</span><span class='PDMOper'>(</span><span class='PDMStr'>'glB2T_gited'</span><span class='PDMOper'>,</span><span class='PDMVar'>m</span><span class='PDMOper'>.</span><span class='PDMVar'>llIs_git</span><span class='PDMOper'>)</span>
-<span class='PDMCnt'>1426</span> <span class='PDMInd'>  </span> 
-<span class='PDMCnt'>1427</span> <span class='PDMInd'> 1</span>  <span class='PDMResK'>RETURN</span> <span class='PDMVar'>m</span><span class='PDMOper'>.</span><span class='PDMVar'>llIs_git</span></pre>
+<pre class="PDMCODE PDMNor" ><span class='PDMCnt'>1794</span> <span class='PDMInd'> 1</span>  <span class='PDMResK'>LPARAMETERS</span><span class='PDMOper'>;</span>
+<span class='PDMCnt'>1795</span> <span class='PDMInd'> 2</span>   <span class='PDMVar'>tcPath</span>
+<span class='PDMCnt'>1796</span> <span class='PDMInd'>  </span> 
+<span class='PDMCnt'>1797</span> <span class='PDMInd'>  </span> 
+<span class='PDMCnt'>1818</span> <span class='PDMInd'> 1</span>  <span class='PDMResK'>LOCAL</span><span class='PDMOper'>;</span>
+<span class='PDMCnt'>1819</span> <span class='PDMInd'> 2</span>   <span class='PDMVar'>llIs_git</span> <span class='PDMResK'>AS</span> <span class='PDMVar'>BOOLEAN</span>
+<span class='PDMCnt'>1820</span> <span class='PDMInd'>  </span> 
+<span class='PDMCnt'>1821</span> <span class='PDMInd'> 1</span>  <span class='PDMVar'>llIs_git</span> <span class='PDMOper'>=</span> <span class='PDMOper'>!</span><span class='PDMResF'>EMPTY</span><span class='PDMOper'>(</span><span class='PDMVar'>GetGitBaseDir</span><span class='PDMOper'>(</span><span class='PDMVar'>m</span><span class='PDMOper'>.</span><span class='PDMVar'>tcPath</span><span class='PDMOper'>)</span><span class='PDMOper'>)</span>
+<span class='PDMCnt'>1822</span> <span class='PDMInd'> 1</span>  <span class='PDMVar'>_SCREEN</span><span class='PDMOper'>.</span><span class='PDMResM'>ADDPROPERTY</span><span class='PDMOper'>(</span><span class='PDMStr'>'glB2T_gited'</span><span class='PDMOper'>,</span><span class='PDMVar'>m</span><span class='PDMOper'>.</span><span class='PDMVar'>llIs_git</span><span class='PDMOper'>)</span>
+<span class='PDMCnt'>1823</span> <span class='PDMInd'>  </span> 
+<span class='PDMCnt'>1824</span> <span class='PDMInd'> 1</span>  <span class='PDMResK'>RETURN</span> <span class='PDMVar'>m</span><span class='PDMOper'>.</span><span class='PDMVar'>llIs_git</span></pre>
  <!-- Code End -->
   </div>
  </div>
@@ -107,12 +107,16 @@ Return if a directory is und git control.
 <div class="diaxp_mfoot"> <div class="PDM_AB_CopyRight"><!-- Footer Begin -->
   <hr />
   <div class="PDM_AB_Body">
-<i>&copy; 12.6.2015 Lutz Scheffler Software Ingenieurb&uuml;ro</i>
+
+	<img src="../../repository/vfpxbanner_small.png" alt="VFPX logo"/><br/>
+	<p>This project is part of <a href="https://vfpx.github.io/"  title="Skip to VFPX" target="_blank">VFPX</a>.</p>
+	<p><i>&copy; 12.6.2015 Lutz Scheffler Software Ingenieurb&uuml;ro</i></p>
+	
   </div><!-- Body End -->
  </div><!-- Footer End -->
 </div>
 <script language="JavaScript" type="text/javascript">
-lo=document.getElementById("TX_SP_P12");
+lo=document.getElementById("TX_SP_P13");
 lo.XType="SourceCode";
 lo.Dir="../../imgs/";
 

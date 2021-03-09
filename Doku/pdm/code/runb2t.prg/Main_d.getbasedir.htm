@@ -16,14 +16,14 @@
 <body>
 <div class="diaxp_mhead">GetBaseDir Function</div>
 <div class="diaxp_mbody">
-<!-- Created with _diamp_pdm_ab by Agnes Beste    25.09.2019 20:00 -->
+<!-- Created with _diamp_pdm_ab by Agnes Beste    06.03.2021 13:26 -->
  <div class="PDM_AB_Descr"><!-- Descr Begin -->
 Returns the git root directory of a given directory.
  </div><!-- Descr End -->
 
  <div class="DIAMP_PDM_AB_Syntax"><!-- Syntax Begin -->
   <div class="SColor">
-   <div class="RetVal"><a href="#_5L516VCFM">RetVal</a>&nbsp;</div>   <div class="RetValEq">=</div>   <div class="PEM">
+   <div class="RetVal"><a href="#_5ZW0ST19I">RetVal</a>&nbsp;</div>   <div class="RetValEq">=</div>   <div class="PEM">
     GetBaseDir
    </div>
    <div class="Para">
@@ -36,7 +36,7 @@ Returns the git root directory of a given directory.
  <div class="DIAMP_PDM_AB_RetVal"><!-- Returns Begin -->
   <div>
    <span class="PDM_AB_Head">
-    <a id="_5L516VCFM" name="_5L516VCFM">
+    <a id="_5ZW0ST19I" name="_5ZW0ST19I">
      Return value
     </a>
    </span> <span class="RetVal_Ttype">Character</span>
@@ -52,23 +52,41 @@ Returns the git root directory of a given directory.
   </div>
  </div><!-- Returns End -->
 
+ <div class="PDM_AB_Changes"><!-- Changes Begin -->
+  <hr />
+  <span class="PDM_AB_Head">
+   Changes
+  </span>
+  <div class="PDM_AB_Body">
+   <span class="Change_Time">
+    12.02.2021 08:27
+   </span><br />
+SF Changed by<br />
+	Removed trailing backslash, confused Run_ExtApp
+	
+  </div>
+ </div><!-- Changes End -->
 
-<!-- /Created with _diamp_pdm_ab by Agnes Beste    25.09.2019 20:00 -->
+
+<!-- /Created with _diamp_pdm_ab by Agnes Beste    06.03.2021 13:26 -->
 
  <div class="SC">
-  <img onclick="ExpandSC('SP_P14',-1);" class="imgEC" src="../../imgs/dotab.gif" alt="Expand/Collapse source code of procedure GetBaseDir" id="IMG_SP_P14" />
-  <span onclick="ExpandSC('SP_P14',-1);" class="SCCaption"><a name="pm.getbasedir">Source Code</a></span>
-  <div ondblclick="ExpandSC('SP_P14',-1);" class="SCE" style="display: none;" id="TX_SP_P14">
+  <img onclick="ExpandSC('SP_P15',-1);" class="imgEC" src="../../imgs/dotab.gif" alt="Expand/Collapse source code of procedure GetBaseDir" id="IMG_SP_P15" />
+  <span onclick="ExpandSC('SP_P15',-1);" class="SCCaption"><a name="pm.getbasedir">Source Code</a></span>
+  <div ondblclick="ExpandSC('SP_P15',-1);" class="SCE" style="display: none;" id="TX_SP_P15">
 <!-- Code Begin -->
-<pre class="PDMCODE PDMNor" ><span class='PDMCnt'>1452</span> <span class='PDMInd'>  </span> 
-<span class='PDMCnt'>1469</span> <span class='PDMInd'>  </span> 
-<span class='PDMCnt'>1470</span> <span class='PDMInd'> 1</span>  <span class='PDMResK'>LOCAL</span><span class='PDMOper'>;</span>
-<span class='PDMCnt'>1471</span> <span class='PDMInd'> 2</span>   <span class='PDMVar'>lcReturn</span> <span class='PDMResK'>AS</span> <span class='PDMResK'>CHARACTER</span>
-<span class='PDMCnt'>1472</span> <span class='PDMInd'>  </span> 
-<span class='PDMCnt'>1473</span> <span class='PDMInd'> 1</span>  <span class='PDMVar'>lcReturn</span> <span class='PDMOper'>=</span> <span class='PDMResF'>IIF</span><span class='PDMOper'>(</span><span class='PDMVar'>_VFP</span><span class='PDMOper'>.</span><span class='PDMVar'>PROJECTS</span><span class='PDMOper'>.</span><span class='PDMResP'>COUNT</span><span class='PDMOper'>&gt;</span><span class='PDMLit'>0</span><span class='PDMOper'>,</span><span class='PDMResF'>JUSTPATH</span><span class='PDMOper'>(</span><span class='PDMVar'>_VFP</span><span class='PDMOper'>.</span><span class='PDMVar'>ACTIVEPROJECT</span><span class='PDMOper'>.</span><span class='PDMResP'>NAME</span><span class='PDMOper'>)</span><span class='PDMOper'>,</span><span class='PDMResF'>FULLPATH</span><span class='PDMOper'>(</span><span class='PDMResF'>CURDIR</span><span class='PDMOper'>(</span><span class='PDMOper'>)</span><span class='PDMOper'>)</span><span class='PDMOper'>)</span>
-<span class='PDMCnt'>1474</span> <span class='PDMInd'> 1</span>  <span class='PDMVar'>lcReturn</span> <span class='PDMOper'>=</span> <span class='PDMResF'>ADDBS</span><span class='PDMOper'>(</span><span class='PDMResF'>EVL</span><span class='PDMOper'>(</span><span class='PDMVar'>GetGitBaseDir</span><span class='PDMOper'>(</span><span class='PDMOper'>)</span><span class='PDMOper'>,</span><span class='PDMVar'>m</span><span class='PDMOper'>.</span><span class='PDMVar'>lcReturn</span><span class='PDMOper'>)</span><span class='PDMOper'>)</span>
-<span class='PDMCnt'>1475</span> <span class='PDMInd'>  </span> 
-<span class='PDMCnt'>1476</span> <span class='PDMInd'> 1</span>  <span class='PDMResK'>RETURN</span> <span class='PDMVar'>m</span><span class='PDMOper'>.</span><span class='PDMVar'>lcReturn</span></pre>
+<pre class="PDMCODE PDMNor" ><span class='PDMCnt'>1853</span> <span class='PDMInd'>  </span> 
+<span class='PDMCnt'>1874</span> <span class='PDMInd'>  </span> 
+<span class='PDMCnt'>1875</span> <span class='PDMInd'>  </span> <span class='PDMCom'>*!*    SF Changed by 12.2.2021</span>
+<span class='PDMCnt'>1876</span> <span class='PDMInd'>  </span> 
+<span class='PDMCnt'>1881</span> <span class='PDMInd'>  </span> 
+<span class='PDMCnt'>1882</span> <span class='PDMInd'> 1</span>  <span class='PDMResK'>LOCAL</span><span class='PDMOper'>;</span>
+<span class='PDMCnt'>1883</span> <span class='PDMInd'> 2</span>   <span class='PDMVar'>lcReturn</span> <span class='PDMResK'>AS</span> <span class='PDMResK'>CHARACTER</span>
+<span class='PDMCnt'>1884</span> <span class='PDMInd'>  </span> 
+<span class='PDMCnt'>1885</span> <span class='PDMInd'> 1</span>  <span class='PDMVar'>lcReturn</span> <span class='PDMOper'>=</span> <span class='PDMResF'>JUSTPATH</span><span class='PDMOper'>(</span><span class='PDMResF'>IIF</span><span class='PDMOper'>(</span><span class='PDMVar'>_VFP</span><span class='PDMOper'>.</span><span class='PDMVar'>PROJECTS</span><span class='PDMOper'>.</span><span class='PDMResP'>COUNT</span><span class='PDMOper'>&gt;</span><span class='PDMLit'>0</span><span class='PDMOper'>,</span><span class='PDMVar'>_VFP</span><span class='PDMOper'>.</span><span class='PDMVar'>ACTIVEPROJECT</span><span class='PDMOper'>.</span><span class='PDMResP'>NAME</span><span class='PDMOper'>,</span><span class='PDMResF'>FULLPATH</span><span class='PDMOper'>(</span><span class='PDMResF'>CURDIR</span><span class='PDMOper'>(</span><span class='PDMOper'>)</span><span class='PDMOper'>)</span><span class='PDMOper'>)</span><span class='PDMOper'>)</span>
+<span class='PDMCnt'>1886</span> <span class='PDMInd'> 1</span>  <span class='PDMVar'>lcReturn</span> <span class='PDMOper'>=</span> <span class='PDMResF'>EVL</span><span class='PDMOper'>(</span><span class='PDMVar'>GetGitBaseDir</span><span class='PDMOper'>(</span><span class='PDMOper'>)</span><span class='PDMOper'>,</span><span class='PDMVar'>m</span><span class='PDMOper'>.</span><span class='PDMVar'>lcReturn</span><span class='PDMOper'>)</span>
+<span class='PDMCnt'>1887</span> <span class='PDMInd'>  </span> 
+<span class='PDMCnt'>1888</span> <span class='PDMInd'> 1</span>  <span class='PDMResK'>RETURN</span> <span class='PDMVar'>m</span><span class='PDMOper'>.</span><span class='PDMVar'>lcReturn</span></pre>
  <!-- Code End -->
   </div>
  </div>
@@ -76,12 +94,16 @@ Returns the git root directory of a given directory.
 <div class="diaxp_mfoot"> <div class="PDM_AB_CopyRight"><!-- Footer Begin -->
   <hr />
   <div class="PDM_AB_Body">
-<i>&copy; 12..201 Lutz Scheffler Software Ingenieurb&uuml;ro</i>
+
+	<img src="../../repository/vfpxbanner_small.png" alt="VFPX logo"/><br/>
+	<p>This project is part of <a href="https://vfpx.github.io/"  title="Skip to VFPX" target="_blank">VFPX</a>.</p>
+	<p><i>&copy; 12..201 Lutz Scheffler Software Ingenieurb&uuml;ro</i></p>
+	
   </div><!-- Body End -->
  </div><!-- Footer End -->
 </div>
 <script language="JavaScript" type="text/javascript">
-lo=document.getElementById("TX_SP_P14");
+lo=document.getElementById("TX_SP_P15");
 lo.XType="SourceCode";
 lo.Dir="../../imgs/";
 

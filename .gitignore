@@ -18,8 +18,8 @@
 !*.cur
 
 #programms
-!*.prg
-!*.fpw
+!/*.prg
+!*.fpwa
 
 #header
 !*.h
@@ -69,7 +69,6 @@ include/projsub.h
 
 #exclude github
 !*.md
-!/bin2text.app
 !/content/**/*.gif
 !/content/**/*.png
 !/content/**/*.jpg
@@ -78,5 +77,13 @@ include/projsub.h
 default/
 temp/
 tmp/
+/*.dbf
+/*.cdx
+/*.fpt
 
+!*.dbc
+!*.dc[tx]
+
+/Bin2Text.prg
+Bin2Txt.*
 bin2txt.*
