@@ -50,13 +50,22 @@
 !*.reg
 !/FoxBin2prg.cfg
 #Doku
-!/Doku/**/*.htm
-!/Doku/**/*.html
-!/Doku/**/*.js
-!/Doku/**/*.gif
-!/Doku/**/*.png
-!/Doku/**/*.css
+#!/docs/**/*.htm
+#!/docs/**/*.html
+#!/docs/**/*.js
+#!/docs/**/*.gif
+#!/docs/**/*.png
+#!/docs/**/*.css
+
+!/docs/*.htm*
+!/docs/*.js
+!/docs/*.gif
+!/docs/*.png
+!/docs/*.css
 !/Doku/*.pdm*
+!/Doku/Source/*.gif
+!/Doku/Source/*.png
+!/Doku/Source/*.htm*
 #/Doku/**/*.**.bak
 
 #exclude special
@@ -73,6 +82,12 @@ include/projsub.h
 !/content/**/*.png
 !/content/**/*.jpg
 
+#ThorUpdater
+!/ThorUpdater/*.prg
+!/ThorUpdater/*.zip
+!/ThorUpdater/*.txt
+!/ThorUpdater/*.ps1
+
 #nix von hier
 default/
 temp/
@@ -84,6 +99,9 @@ tmp/
 !*.dbc
 !*.dc[tx]
 
-/Bin2Text.prg
+/IDE_Bin2Text.prg
 Bin2Txt.*
 bin2txt.*
+
+#reinclude
+!/docs/classes/bin_2_text.vcx/*.*.htm*

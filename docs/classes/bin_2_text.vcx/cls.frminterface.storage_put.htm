@@ -1,0 +1,141 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="de" lang="de">
+<head>
+<title>Method storage_put of class frminterface</title>
+<meta content="text/html; charset=windows-1252" http-equiv="Content-Type" />
+<meta name="Generator" content="Project Documenting Machine" />
+<meta name="Version" content="1.3.1" />
+<link rel="stylesheet" href="../../css/foxw.css" type="text/css" />
+<link rel="stylesheet" href="../../css/sc.css" type="text/css" />
+<link rel="stylesheet" href="../../repository/diamp_pdm_ab.css" type="text/css" />
+<link rel="stylesheet" href="../../repository/pdm_ab.css" type="text/css" />
+<link rel="stylesheet" href="../../repository/pdm_ab_notes.css" type="text/css" />
+<script src="../../js/pdm.js" language="JavaScript" type="text/javascript"></script>
+<script src="../../repository/pdm_ab.js" language="JavaScript" type="text/javascript"></script>
+</head>
+<body>
+<div class="diaxp_mhead">storage_put Method</div>
+<div class="diaxp_mbody_class">
+
+<table class="clear_table">
+ <tbody>
+  <tr><td>Class: </td><td><a href="cls.frminterface.htm" title="Skip to class frminterface">frminterface</a></td></tr>
+  <tr><td>Description:</td><td>Get the values from the the surface objects and put to storage settings.</td></tr>
+ </tbody>
+</table>
+</div>
+<div class="diaxp_mbody">
+<!-- Created with _diamp_pdm_ab by Agnes Beste    06.03.2021 13:26 -->
+ <div class="PDM_AB_Descr"><!-- Descr Begin -->
+Stores changes to the settings object.
+ </div><!-- Descr End -->
+
+ <div class="DIAMP_PDM_AB_Syntax"><!-- Syntax Begin -->
+  <div class="SColor">
+   <div class="PEM">
+    Object.storage_put
+   </div>
+   <div class="Para">
+    (<a href="#_5ZW0SSZVF">toObject</a>)
+   </div>
+   <div style="clear: both"></div>
+  </div><!-- Colour End -->
+ </div><!-- Syntax End -->
+
+ <div class="DIAMP_PDM_AB_Params"><!-- Parameters Begin -->
+  <span class="PDM_AB_Head">
+   Parameter
+  </span>
+  <dl class="DIAMP_PDM_AB_Params_List">
+   <dt class="dt_">
+    <a class="DIAMP_PDM_AB_Params_ParaName" id="_5ZW0SSZVF" name="_5ZW0SSZVF">
+     <span class="PDMEXPR PDMNor" ><span class='PDMVar'>toObject</span></span>
+
+    </a>
+   </dt>
+   <dd class="dd_">
+    <span class="Params_Short">
+     Settings object.
+    </span>
+    <table class="Params_Info">
+     <colgroup>
+      <col class="ColumnValue" />
+      <col class="ColumnData" />
+     </colgroup>
+     <tbody>
+      <tr>
+       <td class="CellValue">Type</td>
+       <td class="CellData">COLLECTION</td>
+      </tr>
+      <tr>
+       <td class="CellValue">Direction</td>
+       <td class="CellData">Input</td>
+      </tr>
+     </tbody>
+    </table>
+   </dd>
+  </dl>
+ </div><!-- Parameters End -->
+
+
+<!-- /Created with _diamp_pdm_ab by Agnes Beste    06.03.2021 13:26 -->
+
+ <div class="SC">
+  <img onclick="ExpandSC('SP_5',-1);"class="imgEC" src="../../imgs/dotab.gif" alt="Expand/Collapse source code of procedure storage_put" id="IMG_SP_5" />
+  <span ondblclick="ExpandSC('SP_5',-1);" class="SCCaption"><a name="frminterface">Source Code</a></span>
+  <div ondblclick="ExpandSC('SP_5',-1);" class="SCE" style="display: none;" id="TX_SP_5">
+<!-- Code Begin -->
+<pre class="PDMCODE PDMNor" ><span class='PDMCnt'>  1</span> <span class='PDMInd'>  </span> <span class='PDMResK'>LPARAMETERS</span><span class='PDMOper'>;</span>
+<span class='PDMCnt'>  2</span> <span class='PDMInd'> 1</span>  <span class='PDMVar'>toObject</span> <span class='PDMResK'>AS</span> <span class='PDMResK'>COLLECTION</span>
+<span class='PDMCnt'>  3</span> <span class='PDMInd'>  </span> 
+<span class='PDMCnt'>  4</span> <span class='PDMInd'>  </span> 
+<span class='PDMCnt'> 12</span> <span class='PDMInd'>  </span> 
+<span class='PDMCnt'> 13</span> <span class='PDMInd'>  </span> <span class='PDMVar'>toObject</span><span class='PDMOper'>.</span><span class='PDMResM'>REMOVE</span><span class='PDMOper'>(</span><span class='PDMStr'>"gcB2T_Path"</span><span class='PDMOper'>)</span>
+<span class='PDMCnt'> 14</span> <span class='PDMInd'>  </span> <span class='PDMVar'>toObject</span><span class='PDMOper'>.</span><span class='PDMResK'>ADD</span><span class='PDMOper'>(</span><span class='PDMResK'>THIS</span><span class='PDMOper'>.</span><span class='PDMVar'>txtPath</span><span class='PDMOper'>.</span><span class='PDMResP'>VALUE</span><span class='PDMOper'>,</span><span class='PDMStr'>"gcB2T_Path"</span><span class='PDMOper'>)</span>
+<span class='PDMCnt'> 15</span> <span class='PDMInd'>  </span> 
+<span class='PDMCnt'> 16</span> <span class='PDMInd'>  </span> <span class='PDMVar'>toObject</span><span class='PDMOper'>.</span><span class='PDMResM'>REMOVE</span><span class='PDMOper'>(</span><span class='PDMStr'>"gcB2T_FB2T"</span><span class='PDMOper'>)</span>
+<span class='PDMCnt'> 17</span> <span class='PDMInd'>  </span> <span class='PDMVar'>toObject</span><span class='PDMOper'>.</span><span class='PDMResK'>ADD</span><span class='PDMOper'>(</span><span class='PDMResK'>THIS</span><span class='PDMOper'>.</span><span class='PDMVar'>txtMain</span><span class='PDMOper'>.</span><span class='PDMResP'>VALUE</span><span class='PDMOper'>,</span><span class='PDMStr'>"gcB2T_FB2T"</span><span class='PDMOper'>)</span>
+<span class='PDMCnt'> 18</span> <span class='PDMInd'>  </span> 
+<span class='PDMCnt'> 19</span> <span class='PDMInd'>  </span> <span class='PDMVar'>toObject</span><span class='PDMOper'>.</span><span class='PDMResM'>REMOVE</span><span class='PDMOper'>(</span><span class='PDMStr'>"gcB2T_GUI"</span><span class='PDMOper'>)</span>
+<span class='PDMCnt'> 20</span> <span class='PDMInd'>  </span> <span class='PDMVar'>toObject</span><span class='PDMOper'>.</span><span class='PDMResK'>ADD</span><span class='PDMOper'>(</span><span class='PDMResK'>THIS</span><span class='PDMOper'>.</span><span class='PDMVar'>txtGUI</span><span class='PDMOper'>.</span><span class='PDMResP'>VALUE</span><span class='PDMOper'>,</span><span class='PDMStr'>"gcB2T_GUI"</span><span class='PDMOper'>)</span>
+<span class='PDMCnt'> 21</span> <span class='PDMInd'>  </span> 
+<span class='PDMCnt'> 22</span> <span class='PDMInd'>  </span> <span class='PDMVar'>toObject</span><span class='PDMOper'>.</span><span class='PDMResM'>REMOVE</span><span class='PDMOper'>(</span><span class='PDMStr'>"gcB2T_DBC"</span><span class='PDMOper'>)</span>
+<span class='PDMCnt'> 23</span> <span class='PDMInd'>  </span> <span class='PDMVar'>toObject</span><span class='PDMOper'>.</span><span class='PDMResK'>ADD</span><span class='PDMOper'>(</span><span class='PDMResF'>IIF</span><span class='PDMOper'>(</span><span class='PDMResK'>THIS</span><span class='PDMOper'>.</span><span class='PDMVar'>chkAll</span><span class='PDMOper'>.</span><span class='PDMResP'>VALUE</span><span class='PDMOper'>,</span><span class='PDMStr'>"0"</span><span class='PDMOper'>,</span><span class='PDMStr'>"1"</span><span class='PDMOper'>)</span><span class='PDMOper'>,</span><span class='PDMStr'>"gcB2T_DBC"</span><span class='PDMOper'>)</span>
+<span class='PDMCnt'> 24</span> <span class='PDMInd'>  </span> 
+<span class='PDMCnt'> 25</span> <span class='PDMInd'>  </span> <span class='PDMVar'>toObject</span><span class='PDMOper'>.</span><span class='PDMResM'>REMOVE</span><span class='PDMOper'>(</span><span class='PDMStr'>"gcB2T_Opt"</span><span class='PDMOper'>)</span>
+<span class='PDMCnt'> 26</span> <span class='PDMInd'>  </span> <span class='PDMVar'>toObject</span><span class='PDMOper'>.</span><span class='PDMResK'>ADD</span><span class='PDMOper'>(</span><span class='PDMResF'>IIF</span><span class='PDMOper'>(</span><span class='PDMResK'>THIS</span><span class='PDMOper'>.</span><span class='PDMVar'>chkAll</span><span class='PDMOper'>.</span><span class='PDMResP'>VALUE</span><span class='PDMOper'>,</span><span class='PDMStr'>"0"</span><span class='PDMOper'>,</span><span class='PDMStr'>"1"</span><span class='PDMOper'>)</span><span class='PDMOper'>,</span><span class='PDMStr'>"gcB2T_Opt"</span><span class='PDMOper'>)</span>
+<span class='PDMCnt'> 27</span> <span class='PDMInd'>  </span> 
+<span class='PDMCnt'> 28</span> <span class='PDMInd'>  </span> <span class='PDMVar'>toObject</span><span class='PDMOper'>.</span><span class='PDMResM'>REMOVE</span><span class='PDMOper'>(</span><span class='PDMStr'>"gcB2T_Commit"</span><span class='PDMOper'>)</span>
+<span class='PDMCnt'> 29</span> <span class='PDMInd'>  </span> <span class='PDMVar'>toObject</span><span class='PDMOper'>.</span><span class='PDMResK'>ADD</span><span class='PDMOper'>(</span><span class='PDMResF'>IIF</span><span class='PDMOper'>(</span><span class='PDMResK'>THIS</span><span class='PDMOper'>.</span><span class='PDMVar'>chkAutoCommit</span><span class='PDMOper'>.</span><span class='PDMResP'>VALUE</span><span class='PDMOper'>,</span><span class='PDMStr'>"1"</span><span class='PDMOper'>,</span><span class='PDMStr'>"0"</span><span class='PDMOper'>)</span><span class='PDMOper'>,</span><span class='PDMStr'>"gcB2T_Commit"</span><span class='PDMOper'>)</span>
+<span class='PDMCnt'> 30</span> <span class='PDMInd'>  </span> 
+<span class='PDMCnt'> 31</span> <span class='PDMInd'>  </span> <span class='PDMVar'>toObject</span><span class='PDMOper'>.</span><span class='PDMResM'>REMOVE</span><span class='PDMOper'>(</span><span class='PDMStr'>"gcB2T_GitPjx"</span><span class='PDMOper'>)</span>
+<span class='PDMCnt'> 32</span> <span class='PDMInd'>  </span> <span class='PDMVar'>toObject</span><span class='PDMOper'>.</span><span class='PDMResK'>ADD</span><span class='PDMOper'>(</span><span class='PDMResF'>IIF</span><span class='PDMOper'>(</span><span class='PDMResK'>THIS</span><span class='PDMOper'>.</span><span class='PDMVar'>chkGit_PJX</span><span class='PDMOper'>.</span><span class='PDMResP'>VALUE</span><span class='PDMOper'>,</span><span class='PDMStr'>"1"</span><span class='PDMOper'>,</span><span class='PDMStr'>"0"</span><span class='PDMOper'>)</span><span class='PDMOper'>,</span><span class='PDMStr'>"gcB2T_GitPjx"</span><span class='PDMOper'>)</span>
+<span class='PDMCnt'> 33</span> <span class='PDMInd'>  </span> 
+<span class='PDMCnt'> 34</span> <span class='PDMInd'>  </span> <span class='PDMVar'>toObject</span><span class='PDMOper'>.</span><span class='PDMResM'>REMOVE</span><span class='PDMOper'>(</span><span class='PDMStr'>"gcB2T_Delete"</span><span class='PDMOper'>)</span>
+<span class='PDMCnt'> 35</span> <span class='PDMInd'>  </span> <span class='PDMVar'>toObject</span><span class='PDMOper'>.</span><span class='PDMResK'>ADD</span><span class='PDMOper'>(</span><span class='PDMResF'>IIF</span><span class='PDMOper'>(</span><span class='PDMResK'>THIS</span><span class='PDMOper'>.</span><span class='PDMVar'>chkDel</span><span class='PDMOper'>.</span><span class='PDMResP'>VALUE</span><span class='PDMOper'>,</span><span class='PDMStr'>"1"</span><span class='PDMOper'>,</span><span class='PDMStr'>"0"</span><span class='PDMOper'>)</span><span class='PDMOper'>,</span><span class='PDMStr'>"gcB2T_Delete"</span><span class='PDMOper'>)</span>
+<span class='PDMCnt'> 36</span> <span class='PDMInd'>  </span> 
+<span class='PDMCnt'> 37</span> <span class='PDMInd'>  </span> <span class='PDMVar'>toObject</span><span class='PDMOper'>.</span><span class='PDMResM'>REMOVE</span><span class='PDMOper'>(</span><span class='PDMStr'>"gcB2T_UseBash"</span><span class='PDMOper'>)</span>
+<span class='PDMCnt'> 38</span> <span class='PDMInd'>  </span> <span class='PDMVar'>toObject</span><span class='PDMOper'>.</span><span class='PDMResK'>ADD</span><span class='PDMOper'>(</span><span class='PDMResF'>IIF</span><span class='PDMOper'>(</span><span class='PDMResK'>THIS</span><span class='PDMOper'>.</span><span class='PDMVar'>chkUseBash</span><span class='PDMOper'>.</span><span class='PDMResP'>VALUE</span><span class='PDMOper'>,</span><span class='PDMStr'>"1"</span><span class='PDMOper'>,</span><span class='PDMStr'>"0"</span><span class='PDMOper'>)</span><span class='PDMOper'>,</span><span class='PDMStr'>"gcB2T_UseBash"</span><span class='PDMOper'>)</span>
+<span class='PDMCnt'> 39</span> <span class='PDMInd'>  </span> 
+<span class='PDMCnt'> 40</span> <span class='PDMInd'>  </span> <span class='PDMVar'>toObject</span><span class='PDMOper'>.</span><span class='PDMResK'>ADD</span><span class='PDMOper'>(</span><span class='PDMResK'>THIS</span><span class='PDMOper'>.</span><span class='PDMVar'>glSet</span><span class='PDMOper'>,</span><span class='PDMStr'>"glSet"</span><span class='PDMOper'>)</span>
+<span class='PDMCnt'> 41</span> <span class='PDMInd'>  </span> </pre>
+ <!-- Code End -->
+  </div>
+ </div>
+</div>
+<div class="diaxp_mfoot"> <div class="PDM_AB_CopyRight"><!-- Footer Begin -->
+  <hr />
+  <div class="PDM_AB_Body">
+<i>&copy; 14.4.2015 Lutz Scheffler Software Ingenieurb&uuml;ro</i>
+  </div><!-- Body End -->
+ </div><!-- Footer End -->
+</div>
+<script language="JavaScript" type="text/javascript">
+lo=document.getElementById("TX_SP_5");
+lo.XType="SourceCode";
+lo.Dir="../../imgs/";
+
+
+</script>
+</body>
+</html>

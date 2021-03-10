@@ -1,0 +1,62 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="de" lang="de">
+<head>
+<title>Method killproc of class api_apprun</title>
+<meta content="text/html; charset=windows-1252" http-equiv="Content-Type" />
+<meta name="Generator" content="Project Documenting Machine" />
+<meta name="Version" content="1.3.1" />
+<link rel="stylesheet" href="../../css/foxw.css" type="text/css" />
+<link rel="stylesheet" href="../../css/sc.css" type="text/css" />
+<link rel="stylesheet" href="../../repository/diamp_pdm_ab.css" type="text/css" />
+<link rel="stylesheet" href="../../repository/pdm_ab.css" type="text/css" />
+<link rel="stylesheet" href="../../repository/pdm_ab_notes.css" type="text/css" />
+<script src="../../js/pdm.js" language="JavaScript" type="text/javascript"></script>
+<script src="../../repository/pdm_ab.js" language="JavaScript" type="text/javascript"></script>
+</head>
+<body>
+<div class="diaxp_mhead">killproc Method</div>
+<div class="diaxp_mbody_class">
+
+<table class="clear_table">
+ <tbody>
+  <tr><td>Class: </td><td><a href="cls.api_apprun.htm" title="Skip to class api_apprun">api_apprun</a></td></tr>
+  <tr><td>Description:</td><td></td></tr>
+ </tbody>
+</table>
+</div>
+<div class="diaxp_mbody">
+ <div class="SC">
+  <img onclick="ExpandSC('SP_3',-1);"class="imgEC" src="../../imgs/dotab.gif" alt="Expand/Collapse source code of procedure killproc" id="IMG_SP_3" />
+  <span ondblclick="ExpandSC('SP_3',-1);" class="SCCaption"><a name="api_apprun">Source Code</a></span>
+  <div ondblclick="ExpandSC('SP_3',-1);" class="SCE" style="display: none;" id="TX_SP_3">
+<!-- Code Begin -->
+<pre class="PDMCODE PDMNor" ><span class='PDMCnt'>  1</span> <span class='PDMInd'>  </span> <span class='PDMResK'>LPARAMETER</span> <span class='PDMVar'>nProcessToKill</span>
+<span class='PDMCnt'>  2</span> <span class='PDMInd'>  </span> <span class='PDMResK'>IF</span> <span class='PDMResF'>TYPE</span><span class='PDMOper'>(</span><span class='PDMStr'>'nProcessToKill'</span><span class='PDMOper'>)</span> <span class='PDMOper'>#</span> <span class='PDMStr'>'N'</span>
+<span class='PDMCnt'>  3</span> <span class='PDMInd'> 1</span>     <span class='PDMVar'>nProcessToKill</span> <span class='PDMOper'>=</span> <span class='PDMResK'>This</span><span class='PDMOper'>.</span><span class='PDMVar'>inProcessHandle</span>
+<span class='PDMCnt'>  4</span> <span class='PDMInd'>  </span> <span class='PDMResK'>ENDIF</span>
+<span class='PDMCnt'>  5</span> <span class='PDMInd'>  </span> <span class='PDMResK'>DECLARE</span> <span class='PDMResK'>SHORT</span> <span class='PDMVar'><a href="http://www.news2news.com/vfp/?search=TerminateProcess&x=7&y=5" target="blank">TerminateProcess</a></span> <span class='PDMResK'>IN</span> <span class='PDMVar'>WIN32API</span> <span class='PDMResK'>AS</span> <span class='PDMVar'>KillProc</span> <span class='PDMOper'>;</span>
+<span class='PDMCnt'>  6</span> <span class='PDMInd'> 1</span>     <span class='PDMResK'>INTEGER</span> <span class='PDMVar'>hProcess</span><span class='PDMOper'>,</span> <span class='PDMOper'>;</span>
+<span class='PDMCnt'>  7</span> <span class='PDMInd'> 1</span>     <span class='PDMResK'>INTEGER</span> <span class='PDMVar'>uExitCode</span>
+<span class='PDMCnt'>  8</span> <span class='PDMInd'>  </span> <span class='PDMResK'>LOCAL</span> <span class='PDMVar'>nResult</span>
+<span class='PDMCnt'>  9</span> <span class='PDMInd'>  </span> <span class='PDMResK'>IF</span> <span class='PDMOper'>!</span> <span class='PDMResF'>ISNULL</span><span class='PDMOper'>(</span><span class='PDMVar'>nProcessToKill</span><span class='PDMOper'>)</span>
+<span class='PDMCnt'> 10</span> <span class='PDMInd'> 1</span>     <span class='PDMVar'>nResult</span> <span class='PDMOper'>=</span> <span class='PDMVar'>KillProc</span><span class='PDMOper'>(</span><span class='PDMVar'>nProcessToKill</span><span class='PDMOper'>,</span><span class='PDMLit'>0</span><span class='PDMOper'>)</span>
+<span class='PDMCnt'> 11</span> <span class='PDMInd'> 1</span>     <span class='PDMResK'>this</span><span class='PDMOper'>.</span><span class='PDMVar'>icErrorMessage</span> <span class='PDMOper'>=</span> <span class='PDMResF'>IIF</span><span class='PDMOper'>(</span><span class='PDMVar'>nResult</span> <span class='PDMOper'>=</span> <span class='PDMLit'>0</span><span class='PDMOper'>,</span> <span class='PDMStr'>'TerminateProcess() could not kill process handle requested'</span><span class='PDMOper'>,</span><span class='PDMStr'>''</span><span class='PDMOper'>)</span>
+<span class='PDMCnt'> 12</span> <span class='PDMInd'>  </span> <span class='PDMResK'>ELSE</span>
+<span class='PDMCnt'> 13</span> <span class='PDMInd'> 1</span>     <span class='PDMResK'>this</span><span class='PDMOper'>.</span><span class='PDMVar'>icErrorMessage</span> <span class='PDMOper'>=</span> <span class='PDMStr'>'NULL handle passed to KillProc()'</span>
+<span class='PDMCnt'> 14</span> <span class='PDMInd'> 1</span>     <span class='PDMVar'>nResult</span> <span class='PDMOper'>=</span> <span class='PDMLit'>0</span>
+<span class='PDMCnt'> 15</span> <span class='PDMInd'>  </span> <span class='PDMResK'>ENDIF</span>
+<span class='PDMCnt'> 16</span> <span class='PDMInd'>  </span> <span class='PDMResK'>RETURN</span> <span class='PDMOper'>(</span><span class='PDMVar'>nResult</span> <span class='PDMOper'>=</span> <span class='PDMLit'>1</span><span class='PDMOper'>)</span></pre>
+ <!-- Code End -->
+  </div>
+ </div>
+</div>
+<div class="diaxp_mfoot"></div>
+<script language="JavaScript" type="text/javascript">
+lo=document.getElementById("TX_SP_3");
+lo.XType="SourceCode";
+lo.Dir="../../imgs/";
+
+
+</script>
+</body>
+</html>

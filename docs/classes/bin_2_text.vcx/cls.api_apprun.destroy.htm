@@ -1,0 +1,59 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="de" lang="de">
+<head>
+<title>Method Destroy of class api_apprun</title>
+<meta content="text/html; charset=windows-1252" http-equiv="Content-Type" />
+<meta name="Generator" content="Project Documenting Machine" />
+<meta name="Version" content="1.3.1" />
+<link rel="stylesheet" href="../../css/foxw.css" type="text/css" />
+<link rel="stylesheet" href="../../css/sc.css" type="text/css" />
+<link rel="stylesheet" href="../../repository/diamp_pdm_ab.css" type="text/css" />
+<link rel="stylesheet" href="../../repository/pdm_ab.css" type="text/css" />
+<link rel="stylesheet" href="../../repository/pdm_ab_notes.css" type="text/css" />
+<script src="../../js/pdm.js" language="JavaScript" type="text/javascript"></script>
+<script src="../../repository/pdm_ab.js" language="JavaScript" type="text/javascript"></script>
+</head>
+<body>
+<div class="diaxp_mhead">Destroy Method</div>
+<div class="diaxp_mbody_class">
+
+<table class="clear_table">
+ <tbody>
+  <tr><td>Class: </td><td><a href="cls.api_apprun.htm" title="Skip to class api_apprun">api_apprun</a></td></tr>
+  <tr><td>Description:</td><td>Occurs when an object is released.</td></tr>
+ </tbody>
+</table>
+</div>
+<div class="diaxp_mbody">
+ <div class="SC">
+  <img onclick="ExpandSC('SP_3',-1);"class="imgEC" src="../../imgs/dotab.gif" alt="Expand/Collapse source code of procedure Destroy" id="IMG_SP_3" />
+  <span ondblclick="ExpandSC('SP_3',-1);" class="SCCaption"><a name="api_apprun">Source Code</a></span>
+  <div ondblclick="ExpandSC('SP_3',-1);" class="SCE" style="display: none;" id="TX_SP_3">
+<!-- Code Begin -->
+<pre class="PDMCODE PDMNor" ><span class='PDMCnt'>  1</span> <span class='PDMInd'>  </span> <span class='PDMResK'>WITH</span> <span class='PDMResK'>THIS</span>
+<span class='PDMCnt'>  2</span> <span class='PDMInd'> 1</span>     <span class='PDMResK'>IF</span> <span class='PDMResF'>TYPE</span><span class='PDMOper'>(</span><span class='PDMStr'>'.inThreadHandle'</span><span class='PDMOper'>)</span> <span class='PDMOper'>=</span> <span class='PDMStr'>'N'</span> <span class='PDMOper'>AND</span> <span class='PDMOper'>NOT</span> <span class='PDMResF'>ISNULL</span><span class='PDMOper'>(</span><span class='PDMOper'>.</span><span class='PDMVar'>inThreadHandle</span><span class='PDMOper'>)</span>
+<span class='PDMCnt'>  3</span> <span class='PDMInd'> 2</span>         <span class='PDMOper'>.</span><span class='PDMVar'>ReleaseHandle</span><span class='PDMOper'>(</span><span class='PDMOper'>.</span><span class='PDMVar'>inThreadHandle</span><span class='PDMOper'>)</span>
+<span class='PDMCnt'>  4</span> <span class='PDMInd'> 2</span>         <span class='PDMOper'>.</span><span class='PDMVar'>inThreadHandle</span> <span class='PDMOper'>=</span> <span class='PDMResK'>NULL</span>
+<span class='PDMCnt'>  5</span> <span class='PDMInd'> 1</span>     <span class='PDMResK'>ENDIF</span>
+<span class='PDMCnt'>  6</span> <span class='PDMInd'> 1</span>     <span class='PDMResK'>IF</span> <span class='PDMResF'>TYPE</span><span class='PDMOper'>(</span><span class='PDMStr'>'.inProcessHandle'</span><span class='PDMOper'>)</span> <span class='PDMOper'>=</span> <span class='PDMStr'>'N'</span> <span class='PDMOper'>AND</span> <span class='PDMOper'>NOT</span> <span class='PDMResF'>ISNULL</span><span class='PDMOper'>(</span><span class='PDMOper'>.</span><span class='PDMVar'>inProcessHandle</span><span class='PDMOper'>)</span>
+<span class='PDMCnt'>  7</span> <span class='PDMInd'> 2</span>         <span class='PDMOper'>.</span><span class='PDMVar'>ReleaseHandle</span><span class='PDMOper'>(</span><span class='PDMOper'>.</span><span class='PDMVar'>inProcessHandle</span><span class='PDMOper'>)</span>
+<span class='PDMCnt'>  8</span> <span class='PDMInd'> 2</span>         <span class='PDMOper'>.</span><span class='PDMVar'>inProcessHandle</span> <span class='PDMOper'>=</span> <span class='PDMResK'>NULL</span>
+<span class='PDMCnt'>  9</span> <span class='PDMInd'> 1</span>     <span class='PDMResK'>ENDIF</span>
+<span class='PDMCnt'> 10</span> <span class='PDMInd'>  </span> <span class='PDMResK'>ENDWITH</span>
+<span class='PDMCnt'> 11</span> <span class='PDMInd'>  </span> <span class='PDMResK'>CLEAR</span> <span class='PDMResK'>DLLS</span> <span class='PDMVar'>CheckExitCode</span><span class='PDMOper'>,</span> <span class='PDMVar'>KillProc</span><span class='PDMOper'>,</span> <span class='PDMVar'>CrPr</span><span class='PDMOper'>,</span> <span class='PDMVar'>GetCurrProc</span><span class='PDMOper'>,</span> <span class='PDMVar'>WaitInpIdle</span><span class='PDMOper'>,</span> <span class='PDMVar'>WaitOnAppExit</span><span class='PDMOper'>,</span> <span class='PDMVar'>CloseHand</span>
+<span class='PDMCnt'> 12</span> <span class='PDMInd'>  </span> <span class='PDMResF'>DODEFAULT</span><span class='PDMOper'>(</span><span class='PDMOper'>)</span>
+<span class='PDMCnt'> 13</span> <span class='PDMInd'>  </span> </pre>
+ <!-- Code End -->
+  </div>
+ </div>
+</div>
+<div class="diaxp_mfoot"></div>
+<script language="JavaScript" type="text/javascript">
+lo=document.getElementById("TX_SP_3");
+lo.XType="SourceCode";
+lo.Dir="../../imgs/";
+
+
+</script>
+</body>
+</html>

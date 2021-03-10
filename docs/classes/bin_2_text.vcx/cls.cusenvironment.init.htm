@@ -1,0 +1,84 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="de" lang="de">
+<head>
+<title>Method Init of class cusenvironment</title>
+<meta content="text/html; charset=windows-1252" http-equiv="Content-Type" />
+<meta name="Generator" content="Project Documenting Machine" />
+<meta name="Version" content="1.3.1" />
+<link rel="stylesheet" href="../../css/foxw.css" type="text/css" />
+<link rel="stylesheet" href="../../css/sc.css" type="text/css" />
+<link rel="stylesheet" href="../../repository/diamp_pdm_ab.css" type="text/css" />
+<link rel="stylesheet" href="../../repository/pdm_ab.css" type="text/css" />
+<link rel="stylesheet" href="../../repository/pdm_ab_notes.css" type="text/css" />
+<script src="../../js/pdm.js" language="JavaScript" type="text/javascript"></script>
+<script src="../../repository/pdm_ab.js" language="JavaScript" type="text/javascript"></script>
+</head>
+<body>
+<div class="diaxp_mhead">Init Method</div>
+<div class="diaxp_mbody_class">
+
+<table class="clear_table">
+ <tbody>
+  <tr><td>Class: </td><td><a href="cls.cusenvironment.htm" title="Skip to class cusenvironment">cusenvironment</a></td></tr>
+  <tr><td>Description:</td><td>Occurs when an object is created.</td></tr>
+ </tbody>
+</table>
+</div>
+<div class="diaxp_mbody">
+ <div class="SC">
+  <img onclick="ExpandSC('SP_4',-1);"class="imgEC" src="../../imgs/dotab.gif" alt="Expand/Collapse source code of procedure Init" id="IMG_SP_4" />
+  <span ondblclick="ExpandSC('SP_4',-1);" class="SCCaption"><a name="cusenvironment">Source Code</a></span>
+  <div ondblclick="ExpandSC('SP_4',-1);" class="SCE" style="display: none;" id="TX_SP_4">
+<!-- Code Begin -->
+<pre class="PDMCODE PDMNor" ><span class='PDMCnt'>   5</span> <span class='PDMInd'>  </span> <span class='PDMResK'>LPARAMETERS</span> <span class='PDMOper'>;</span>
+<span class='PDMCnt'>   1</span> <span class='PDMInd'>  </span>  <span class='PDMVar'>tlIsApplication</span><span class='PDMOper'>,</span><span class='PDMOper'>;</span>
+<span class='PDMCnt'>   2</span> <span class='PDMInd'> 1</span>  <span class='PDMVar'>tcStartPath</span><span class='PDMOper'>,</span><span class='PDMOper'>;</span>
+<span class='PDMCnt'>   3</span> <span class='PDMInd'> 1</span>  <span class='PDMVar'>tlNoSet</span>
+<span class='PDMCnt'>   4</span> <span class='PDMInd'> 1</span> 
+<span class='PDMCnt'>   5</span> <span class='PDMInd'>  </span> <span class='PDMResK'>WITH</span> <span class='PDMResK'>THIS</span>
+<span class='PDMCnt'>   6</span> <span class='PDMInd'>  </span>  <span class='PDMResK'>IF</span> <span class='PDMResF'>VARTYPE</span><span class='PDMOper'>(</span><span class='PDMVar'>m</span><span class='PDMOper'>.</span><span class='PDMVar'>tcStartPath</span><span class='PDMOper'>)</span><span class='PDMOper'>=</span><span class='PDMStr'>'C'</span> <span class='PDMOper'>AND</span> <span class='PDMResF'>DIRECTORY</span><span class='PDMOper'>(</span><span class='PDMVar'>m</span><span class='PDMOper'>.</span><span class='PDMVar'>tcStartPath</span><span class='PDMOper'>)</span> <span class='PDMResK'>THEN</span>
+<span class='PDMCnt'>   7</span> <span class='PDMInd'> 1</span>   <span class='PDMOper'>.</span><span class='PDMVar'>hcStartPath</span> <span class='PDMOper'>=</span> <span class='PDMResF'>ADDBS</span><span class='PDMOper'>(</span><span class='PDMVar'>m</span><span class='PDMOper'>.</span><span class='PDMVar'>tcStartPath</span><span class='PDMOper'>)</span>
+<span class='PDMCnt'>   8</span> <span class='PDMInd'> 2</span>  <span class='PDMResK'>ENDIF</span> <span class='PDMCom'>&amp;&amp;VARTYPE(m.tcStartPath ...</span>
+<span class='PDMCnt'>   9</span> <span class='PDMInd'> 1</span> 
+<span class='PDMCnt'>  10</span> <span class='PDMInd'>  </span> <span class='PDMCom'>*wenn die Klasse durch CREATEOBJECT oder ADDOBJECT gerufen wird</span>
+<span class='PDMCnt'>  11</span> <span class='PDMInd'>  </span> <span class='PDMCom'>*Wenn dabei tlIsApplication dann True.</span>
+<span class='PDMCnt'>  12</span> <span class='PDMInd'>  </span> <span class='PDMCom'>*False bekommen wir immer, wenn wir das Init durch ein Object im Container starten.</span>
+<span class='PDMCnt'>  13</span> <span class='PDMInd'>  </span> <span class='PDMCom'>*und dann soll THIS.glIsApplication auch schön so bleiben wie es ist</span>
+<span class='PDMCnt'>  14</span> <span class='PDMInd'>  </span>  <span class='PDMOper'>.</span><span class='PDMVar'>glIsApplication</span> <span class='PDMOper'>=</span> <span class='PDMResF'>IIF</span><span class='PDMOper'>(</span><span class='PDMResF'>TYPE</span><span class='PDMOper'>(</span><span class='PDMStr'>'tlIsApplication'</span><span class='PDMOper'>)</span><span class='PDMOper'>=</span><span class='PDMStr'>'L'</span> <span class='PDMOper'>AND</span> <span class='PDMVar'>m</span><span class='PDMOper'>.</span><span class='PDMVar'>tlIsApplication</span><span class='PDMOper'>,</span><span class='PDMVar'>True</span><span class='PDMOper'>,</span><span class='PDMOper'>.</span><span class='PDMVar'>glIsApplication</span><span class='PDMOper'>)</span>
+<span class='PDMCnt'>  15</span> <span class='PDMInd'> 1</span> 
+<span class='PDMCnt'>  16</span> <span class='PDMInd'>  </span> <span class='PDMCom'>*-- Einstellungen der SET- und ON-Befehle speichern</span>
+<span class='PDMCnt'>  17</span> <span class='PDMInd'>  </span> <span class='PDMCom'>*dies wird in Main.prg geschrieben, da dort schon die ersten Veränderungen vorgenommen werden.</span>
+<span class='PDMCnt'>  18</span> <span class='PDMInd'>  </span> <span class='PDMCom'>*der Hauptsinn liegt wohl im Wiederherstellen der Umgebung.</span>
+<span class='PDMCnt'>  19</span> <span class='PDMInd'>  </span> 
+<span class='PDMCnt'>  20</span> <span class='PDMInd'>  </span>  <span class='PDMOper'>.</span><span class='PDMVar'>Store_</span><span class='PDMOper'>(</span><span class='PDMResF'>IIF</span><span class='PDMOper'>(</span><span class='PDMOper'>.</span><span class='PDMVar'>glIsApplication</span><span class='PDMOper'>,</span><span class='PDMLit'>2</span><span class='PDMOper'>^</span><span class='PDMLit'>0</span><span class='PDMOper'>+</span><span class='PDMLit'>2</span><span class='PDMOper'>^</span><span class='PDMLit'>1</span><span class='PDMOper'>+</span><span class='PDMLit'>2</span><span class='PDMOper'>^</span><span class='PDMLit'>2</span><span class='PDMOper'>,</span><span class='PDMLit'>2</span><span class='PDMOper'>^</span><span class='PDMLit'>0</span><span class='PDMOper'>)</span><span class='PDMOper'>)</span>
+<span class='PDMCnt'>  21</span> <span class='PDMInd'> 1</span> 
+<span class='PDMCnt'>  22</span> <span class='PDMInd'>  </span>  <span class='PDMResK'>IF</span> <span class='PDMOper'>!</span><span class='PDMVar'>m</span><span class='PDMOper'>.</span><span class='PDMVar'>tlNoSet</span> <span class='PDMResK'>THEN</span>
+<span class='PDMCnt'>  23</span> <span class='PDMInd'> 1</span>   <span class='PDMOper'>.</span><span class='PDMVar'>Set_</span><span class='PDMOper'>(</span><span class='PDMLit'>2</span><span class='PDMOper'>^</span><span class='PDMLit'>0</span><span class='PDMOper'>)</span>
+<span class='PDMCnt'>  24</span> <span class='PDMInd'> 2</span>  <span class='PDMResK'>ENDIF</span> <span class='PDMCom'>&amp;&amp;!m.tlNoSet</span>
+<span class='PDMCnt'>  25</span> <span class='PDMInd'> 1</span> 
+<span class='PDMCnt'>  26</span> <span class='PDMInd'>  </span> <span class='PDMCom'>*!*     IF .glIsApplication THEN</span>
+<span class='PDMCnt'>  27</span> <span class='PDMInd'>  </span> <span class='PDMCom'>*!*      PUSH MENU _MSYSMENU</span>
+<span class='PDMCnt'>  28</span> <span class='PDMInd'>  </span> <span class='PDMCom'>*!*     ENDIF &amp;&amp;.glIsApplication</span>
+<span class='PDMCnt'>  29</span> <span class='PDMInd'>  </span> 
+<span class='PDMCnt'>  30</span> <span class='PDMInd'>  </span> <span class='PDMCom'>*!*     .Store_Private()</span>
+<span class='PDMCnt'>  31</span> <span class='PDMInd'>  </span> 
+<span class='PDMCnt'>  32</span> <span class='PDMInd'>  </span> <span class='PDMCom'>*!*     IF .glIsApplication THEN</span>
+<span class='PDMCnt'>  33</span> <span class='PDMInd'>  </span> <span class='PDMCom'>*!*      .Store_Global()</span>
+<span class='PDMCnt'>  34</span> <span class='PDMInd'>  </span> <span class='PDMCom'>*!*     ENDIF &amp;&amp;.glIsApplication</span>
+<span class='PDMCnt'>  35</span> <span class='PDMInd'>  </span> 
+<span class='PDMCnt'>  36</span> <span class='PDMInd'>  </span> <span class='PDMResK'>ENDWITH</span> <span class='PDMCom'>&amp;&amp;THIS</span>
+<span class='PDMCnt'>  37</span> <span class='PDMInd'>  </span> </pre>
+ <!-- Code End -->
+  </div>
+ </div>
+</div>
+<div class="diaxp_mfoot"></div>
+<script language="JavaScript" type="text/javascript">
+lo=document.getElementById("TX_SP_4");
+lo.XType="SourceCode";
+lo.Dir="../../imgs/";
+
+
+</script>
+</body>
+</html>

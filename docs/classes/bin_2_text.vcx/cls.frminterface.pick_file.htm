@@ -1,0 +1,72 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="de" lang="de">
+<head>
+<title>Method pick_file of class frminterface</title>
+<meta content="text/html; charset=windows-1252" http-equiv="Content-Type" />
+<meta name="Generator" content="Project Documenting Machine" />
+<meta name="Version" content="1.3.1" />
+<link rel="stylesheet" href="../../css/foxw.css" type="text/css" />
+<link rel="stylesheet" href="../../css/sc.css" type="text/css" />
+<link rel="stylesheet" href="../../repository/diamp_pdm_ab.css" type="text/css" />
+<link rel="stylesheet" href="../../repository/pdm_ab.css" type="text/css" />
+<link rel="stylesheet" href="../../repository/pdm_ab_notes.css" type="text/css" />
+<script src="../../js/pdm.js" language="JavaScript" type="text/javascript"></script>
+<script src="../../repository/pdm_ab.js" language="JavaScript" type="text/javascript"></script>
+</head>
+<body>
+<div class="diaxp_mhead">pick_file Method</div>
+<div class="diaxp_mbody_class">
+
+<table class="clear_table">
+ <tbody>
+  <tr><td>Class: </td><td><a href="cls.frminterface.htm" title="Skip to class frminterface">frminterface</a></td></tr>
+  <tr><td>Description:</td><td>Pick a file</td></tr>
+ </tbody>
+</table>
+</div>
+<div class="diaxp_mbody">
+ <div class="SC">
+  <img onclick="ExpandSC('SP_5',-1);"class="imgEC" src="../../imgs/dotab.gif" alt="Expand/Collapse source code of procedure pick_file" id="IMG_SP_5" />
+  <span ondblclick="ExpandSC('SP_5',-1);" class="SCCaption"><a name="frminterface">Source Code</a></span>
+  <div ondblclick="ExpandSC('SP_5',-1);" class="SCE" style="display: none;" id="TX_SP_5">
+<!-- Code Begin -->
+<pre class="PDMCODE PDMNor" ><span class='PDMCnt'>  1</span> <span class='PDMInd'>  </span> <span class='PDMResK'>IF</span> <span class='PDMResF'>USED</span><span class='PDMOper'>(</span><span class='PDMStr'>'curBin2Text'</span><span class='PDMOper'>)</span> <span class='PDMResK'>THEN</span>
+<span class='PDMCnt'>  2</span> <span class='PDMInd'> 1</span>  <span class='PDMResK'>LOCAL</span><span class='PDMOper'>;</span>
+<span class='PDMCnt'>  3</span> <span class='PDMInd'> 2</span>   <span class='PDMVar'>lOldcPath</span> <span class='PDMResK'>AS</span> <span class='PDMResK'>OBJECT</span><span class='PDMOper'>,</span><span class='PDMOper'>;</span>
+<span class='PDMCnt'>  4</span> <span class='PDMInd'> 2</span>   <span class='PDMVar'>lcPath</span>    <span class='PDMResK'>AS</span> <span class='PDMResK'>STRING</span>
+<span class='PDMCnt'>  5</span> <span class='PDMInd'>  </span> 
+<span class='PDMCnt'>  6</span> <span class='PDMInd'> 1</span>  <span class='PDMResK'>IF</span> <span class='PDMResF'>EOF</span><span class='PDMOper'>(</span><span class='PDMStr'>'curBin2Text'</span><span class='PDMOper'>)</span> <span class='PDMResK'>THEN</span>
+<span class='PDMCnt'>  7</span> <span class='PDMInd'> 2</span>   <span class='PDMResK'>THISFORM</span><span class='PDMOper'>.</span><span class='PDMVar'>New_File</span><span class='PDMOper'>(</span><span class='PDMLit'>.F.</span><span class='PDMOper'>)</span>
+<span class='PDMCnt'>  8</span> <span class='PDMInd'> 1</span>  <span class='PDMResK'>ENDIF</span> <span class='PDMCom'>&amp;&amp;EOF('curBin2Text')</span>
+<span class='PDMCnt'>  9</span> <span class='PDMInd'>  </span> 
+<span class='PDMCnt'> 10</span> <span class='PDMInd'> 1</span>  <span class='PDMVar'>lOldcPath</span> <span class='PDMOper'>=</span>  <span class='PDMResF'>FULLPATH</span><span class='PDMOper'>(</span><span class='PDMResF'>CURDIR</span><span class='PDMOper'>(</span><span class='PDMOper'>)</span><span class='PDMOper'>)</span>
+<span class='PDMCnt'> 11</span> <span class='PDMInd'> 1</span>  <span class='PDMVar'>lcPath</span>    <span class='PDMOper'>=</span> <span class='PDMResF'>JUSTPATH</span><span class='PDMOper'>(</span><span class='PDMVar'>curBin2Text</span><span class='PDMOper'>.</span><span class='PDMVar'>cFile</span><span class='PDMOper'>)</span>
+<span class='PDMCnt'> 12</span> <span class='PDMInd'>  </span> 
+<span class='PDMCnt'> 13</span> <span class='PDMInd'> 1</span>  <span class='PDMResK'>IF</span> <span class='PDMResF'>DIRECTORY</span><span class='PDMOper'>(</span><span class='PDMVar'>m</span><span class='PDMOper'>.</span><span class='PDMVar'>lcPath</span><span class='PDMOper'>)</span> <span class='PDMResK'>THEN</span>
+<span class='PDMCnt'> 14</span> <span class='PDMInd'> 2</span>   <span class='PDMResK'>CD</span> <span class='PDMOper'>(</span><span class='PDMVar'>m</span><span class='PDMOper'>.</span><span class='PDMVar'>lcPath</span><span class='PDMOper'>)</span>
+<span class='PDMCnt'> 15</span> <span class='PDMInd'> 1</span>  <span class='PDMResK'>ENDIF</span> <span class='PDMCom'>&amp;&amp;DIRECTORY(lcPath)</span>
+<span class='PDMCnt'> 16</span> <span class='PDMInd'>  </span> 
+<span class='PDMCnt'> 17</span> <span class='PDMInd'> 1</span>  <span class='PDMVar'>lcPath</span> <span class='PDMOper'>=</span> <span class='PDMResF'>GETFILE</span><span class='PDMOper'>(</span><span class='PDMStr'>'DBC;DBF, Table'</span><span class='PDMOper'>)</span>
+<span class='PDMCnt'> 18</span> <span class='PDMInd'> 1</span>  <span class='PDMResK'>IF</span> <span class='PDMOper'>!</span><span class='PDMResF'>EMPTY</span><span class='PDMOper'>(</span><span class='PDMVar'>m</span><span class='PDMOper'>.</span><span class='PDMVar'>lcPath</span><span class='PDMOper'>)</span> <span class='PDMOper'>AND</span> <span class='PDMResF'>FILE</span><span class='PDMOper'>(</span><span class='PDMVar'>m</span><span class='PDMOper'>.</span><span class='PDMVar'>lcPath</span><span class='PDMOper'>)</span> <span class='PDMResK'>THEN</span>
+<span class='PDMCnt'> 19</span> <span class='PDMInd'> 2</span>   <span class='PDMResK'>SELECT</span> <span class='PDMVar'>curBin2Text</span>
+<span class='PDMCnt'> 20</span> <span class='PDMInd'> 2</span>   <span class='PDMResK'>REPLACE</span><span class='PDMOper'>;</span>
+<span class='PDMCnt'> 21</span> <span class='PDMInd'> 3</span>    <span class='PDMVar'>cFile</span> <span class='PDMResK'>WITH</span> <span class='PDMVar'>m</span><span class='PDMOper'>.</span><span class='PDMVar'>lcPath</span>
+<span class='PDMCnt'> 22</span> <span class='PDMInd'> 1</span>  <span class='PDMResK'>ENDIF</span> <span class='PDMCom'>&amp;&amp;!EMPTY(lcPath) AND FILE(lcPath)</span>
+<span class='PDMCnt'> 23</span> <span class='PDMInd'>  </span> 
+<span class='PDMCnt'> 24</span> <span class='PDMInd'> 1</span>  <span class='PDMResK'>CD</span> <span class='PDMOper'>(</span><span class='PDMVar'>m</span><span class='PDMOper'>.</span><span class='PDMVar'>lOldcPath</span><span class='PDMOper'>)</span>
+<span class='PDMCnt'> 25</span> <span class='PDMInd'>  </span> <span class='PDMResK'>ENDIF</span> <span class='PDMCom'>&amp;&amp;USED('curBin2Text')</span>
+<span class='PDMCnt'> 26</span> <span class='PDMInd'>  </span> </pre>
+ <!-- Code End -->
+  </div>
+ </div>
+</div>
+<div class="diaxp_mfoot"></div>
+<script language="JavaScript" type="text/javascript">
+lo=document.getElementById("TX_SP_5");
+lo.XType="SourceCode";
+lo.Dir="../../imgs/";
+
+
+</script>
+</body>
+</html>

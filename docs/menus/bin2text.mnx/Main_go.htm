@@ -1,0 +1,51 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="de" lang="de">
+<head>
+<title>General options of menu BIN2TEXT</title>
+<meta content="text/html; charset=windows-1252" http-equiv="Content-Type" />
+<meta name="Generator" content="Project Documenting Machine" />
+<meta name="Version" content="1.3.1" />
+<link rel="stylesheet" href="../../css/foxw.css" type="text/css" />
+<link rel="stylesheet" href="../../css/sc.css" type="text/css" />
+<script src="../../js/pdm.js" language="JavaScript" type="text/javascript"></script>
+
+</head>
+<body style="">
+<h3>General Options</h3>
+<div><img class="imgYN" src="../../imgs/fn.gif" alt="Menu is not top level" /><span class="PropL">Top Level</span></div>
+<div>Location: Before<span class="PropL">_MWINDOW</span></div>
+<div>Color Scheme: <span class="PropL">Menu Bar</span></div>
+<div>Mark: <span class="PropL foxMark">&#0;</span></div>
+<p />
+<div class="SC" id="DIVX_0">
+ <div class="SCH" ondblclick="ExpandAllDIV('0',-1);">
+  <img class="imgEC" src="../../imgs/dotab.gif" id="IMGX_0" alt="Expand/Collapse all menu codes" />
+  <span class="TreeRow">Menu code</span>
+ </div>
+ <div class="SC">
+  <img onclick="ExpandSC('SP_1',-1);" class="imgEC" src="../../imgs/dotab.gif" alt="Expand/Collapse Setup" id="IMG_SP_1" />
+  <span ondblclick="ExpandSC('SP_1',-1);" class="SCCaption">Setup</span>
+  <div ondblclick="ExpandSC('SP_1',-1);" class="SCE" style="display: none;" id="TX_SP_1">
+<!-- Code Begin -->
+<pre class="PDMCODE PDMNor" ><span class='PDMResK'>IF</span> <span class='PDMOper'>!</span><span class='PDMResF'>PEMSTATUS</span><span class='PDMOper'>(</span><span class='PDMVar'>_SCREEN</span><span class='PDMOper'>,</span><span class='PDMStr'>'frmB2T_Envelop'</span><span class='PDMOper'>,</span><span class='PDMLit'>5</span><span class='PDMOper'>)</span> <span class='PDMOper'>OR</span> <span class='PDMResF'>ISNULL</span><span class='PDMOper'>(</span><span class='PDMVar'>_SCREEN</span><span class='PDMOper'>.</span><span class='PDMVar'>frmB2T_Envelop</span><span class='PDMOper'>)</span> <span class='PDMResK'>THEN</span>
+ <span class='PDMResF'>MESSAGEBOX</span><span class='PDMOper'>(</span><span class='PDMStr'>'Programm "Bin2Text.app" not found.'</span><span class='PDMOper'>)</span>
+<span class='PDMResK'>ENDIF</span> <span class='PDMCom'>&amp;&amp;!PEMSTATUS(_SCREEN,'frmB2T_Envelop',5) OR ISNULL(_SCREEN.frmB2T_Envelop)</span></pre>
+ <!-- Code End -->
+  </div>
+ </div>
+</div>
+<script language="JavaScript" type="text/javascript">
+var lo=document.getElementById("DIVX_0");
+lo.XType="Main";
+lo.Expanded=false;
+lo.Dir="../../imgs/";
+
+lo=document.getElementById("TX_SP_1");
+lo.XType="SourceCode";
+lo.Dir="../../imgs/";
+
+
+</script>
+
+</body>
+</html>

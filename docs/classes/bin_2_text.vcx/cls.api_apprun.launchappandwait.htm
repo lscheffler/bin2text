@@ -1,0 +1,87 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="de" lang="de">
+<head>
+<title>Method launchappandwait of class api_apprun</title>
+<meta content="text/html; charset=windows-1252" http-equiv="Content-Type" />
+<meta name="Generator" content="Project Documenting Machine" />
+<meta name="Version" content="1.3.1" />
+<link rel="stylesheet" href="../../css/foxw.css" type="text/css" />
+<link rel="stylesheet" href="../../css/sc.css" type="text/css" />
+<link rel="stylesheet" href="../../repository/diamp_pdm_ab.css" type="text/css" />
+<link rel="stylesheet" href="../../repository/pdm_ab.css" type="text/css" />
+<link rel="stylesheet" href="../../repository/pdm_ab_notes.css" type="text/css" />
+<script src="../../js/pdm.js" language="JavaScript" type="text/javascript"></script>
+<script src="../../repository/pdm_ab.js" language="JavaScript" type="text/javascript"></script>
+</head>
+<body>
+<div class="diaxp_mhead">launchappandwait Method</div>
+<div class="diaxp_mbody_class">
+
+<table class="clear_table">
+ <tbody>
+  <tr><td>Class: </td><td><a href="cls.api_apprun.htm" title="Skip to class api_apprun">api_apprun</a></td></tr>
+  <tr><td>Description:</td><td></td></tr>
+ </tbody>
+</table>
+</div>
+<div class="diaxp_mbody">
+ <div class="SC">
+  <img onclick="ExpandSC('SP_3',-1);"class="imgEC" src="../../imgs/dotab.gif" alt="Expand/Collapse source code of procedure launchappandwait" id="IMG_SP_3" />
+  <span ondblclick="ExpandSC('SP_3',-1);" class="SCCaption"><a name="api_apprun">Source Code</a></span>
+  <div ondblclick="ExpandSC('SP_3',-1);" class="SCE" style="display: none;" id="TX_SP_3">
+<!-- Code Begin -->
+<pre class="PDMCODE PDMNor" ><span class='PDMCnt'>  1</span> <span class='PDMInd'>  </span> <span class='PDMOper'>#</span><span class='PDMResK'>DEFINE</span> <span class='PDMVar'>cnINFINITE</span>         <span class='PDMLit'>0xFFFFFFFF</span>
+<span class='PDMCnt'>  2</span> <span class='PDMInd'>  </span> <span class='PDMOper'>#</span><span class='PDMResK'>DEFINE</span> <span class='PDMVar'>cnHalfASecond</span>    <span class='PDMLit'>500</span>    <span class='PDMCom'>&amp;&amp; milliseconds</span>
+<span class='PDMCnt'>  3</span> <span class='PDMInd'>  </span> <span class='PDMOper'>#</span><span class='PDMResK'>DEFINE</span> <span class='PDMVar'>cnTimedOut</span>        <span class='PDMLit'>258</span>    <span class='PDMCom'>&amp;&amp; 0x0102</span>
+<span class='PDMCnt'>  4</span> <span class='PDMInd'>  </span> <span class='PDMCom'>*    We need some API calls, declare here</span>
+<span class='PDMCnt'>  5</span> <span class='PDMInd'>  </span> <span class='PDMCom'>*    GetCurrentProcess returns the pseudohandle of the current process (ie VFP instance)</span>
+<span class='PDMCnt'>  6</span> <span class='PDMInd'>  </span> <span class='PDMResK'>DECLARE</span> <span class='PDMResK'>INTEGER</span> <span class='PDMVar'><a href="http://www.news2news.com/vfp/?search=GetCurrentProcess&x=7&y=5" target="blank">GetCurrentProcess</a></span> <span class='PDMResK'>IN</span> <span class='PDMVar'>WIN32API</span> <span class='PDMResK'>AS</span> <span class='PDMVar'>GetCurrProc</span>
+<span class='PDMCnt'>  7</span> <span class='PDMInd'>  </span> <span class='PDMCom'>*    WaitForIdleInput waits until the application is instantiated and at it's event loop</span>
+<span class='PDMCnt'>  8</span> <span class='PDMInd'>  </span> <span class='PDMResK'>DECLARE</span> <span class='PDMResK'>INTEGER</span> <span class='PDMVar'><a href="http://www.news2news.com/vfp/?search=WaitForInputIdle&x=7&y=5" target="blank">WaitForInputIdle</a></span> <span class='PDMResK'>IN</span> <span class='PDMVar'>WIN32API</span> <span class='PDMResK'>AS</span> <span class='PDMVar'>WaitInpIdle</span> <span class='PDMOper'>;</span>
+<span class='PDMCnt'>  9</span> <span class='PDMInd'> 1</span>     <span class='PDMResK'>INTEGER</span> <span class='PDMVar'>nProcessHandle</span><span class='PDMOper'>,</span> <span class='PDMOper'>;</span>
+<span class='PDMCnt'> 10</span> <span class='PDMInd'> 1</span>     <span class='PDMResK'>INTEGER</span> <span class='PDMVar'>nWaitForDuration</span>
+<span class='PDMCnt'> 11</span> <span class='PDMInd'>  </span> <span class='PDMOper'>*</span>    <span class='PDMVar'>WaitForSingleObject</span> <span class='PDMVar'>waits</span> <span class='PDMVar'>until</span> <span class='PDMVar'>the</span> <span class='PDMVar'>handle</span> <span class='PDMResK'>in</span> <span class='PDMVar'>parm</span> <span class='PDMLit'>1</span> <span class='PDMResK'>is</span> <span class='PDMVar'>signalled</span> <span class='PDMOper'>OR</span> <span class='PDMVar'>the</span> <span class='PDMResK'>timeout</span> <span class='PDMVar'>period</span> <span class='PDMVar'>expires</span>
+<span class='PDMCnt'> 12</span> <span class='PDMInd'>  </span> <span class='PDMResK'>DECLARE</span> <span class='PDMResK'>INTEGER</span> <span class='PDMVar'><a href="http://www.news2news.com/vfp/?search=WaitForSingleObject&x=7&y=5" target="blank">WaitForSingleObject</a></span> <span class='PDMResK'>IN</span> <span class='PDMVar'>WIN32API</span> <span class='PDMResK'>AS</span> <span class='PDMVar'>WaitOnAppExit</span> <span class='PDMOper'>;</span>
+<span class='PDMCnt'> 13</span> <span class='PDMInd'> 1</span>     <span class='PDMResK'>INTEGER</span> <span class='PDMVar'>hProcessHandle</span><span class='PDMOper'>,</span> <span class='PDMOper'>;</span>
+<span class='PDMCnt'> 14</span> <span class='PDMInd'> 1</span>     <span class='PDMResK'>INTEGER</span> <span class='PDMVar'>dwTimeOut</span>
+<span class='PDMCnt'> 15</span> <span class='PDMInd'>  </span> <span class='PDMOper'>*</span>    <span class='PDMResK'>Save</span> <span class='PDMVar'>the</span> <span class='PDMVar'>Process</span> <span class='PDMVar'>handle</span> <span class='PDMResK'>if</span> <span class='PDMResK'>any</span> <span class='PDMOper'>AND</span> <span class='PDMVar'>the</span> <span class='PDMVar'>result</span> <span class='PDMResK'>of</span> <span class='PDMVar'>LaunchApp</span>
+<span class='PDMCnt'> 16</span> <span class='PDMInd'>  </span> <span class='PDMCom'>*    Fire the app and save the process handle</span>
+<span class='PDMCnt'> 17</span> <span class='PDMInd'>  </span> <span class='PDMResK'>LOCAL</span> <span class='PDMVar'>uResult</span>
+<span class='PDMCnt'> 18</span> <span class='PDMInd'>  </span> <span class='PDMVar'>uResult</span> <span class='PDMOper'>=</span> <span class='PDMLit'>0</span>
+<span class='PDMCnt'> 19</span> <span class='PDMInd'>  </span> <span class='PDMResK'>WITH</span> <span class='PDMResK'>This</span>
+<span class='PDMCnt'> 20</span> <span class='PDMInd'> 1</span>     <span class='PDMOper'>.</span><span class='PDMVar'>icErrorMessage</span> <span class='PDMOper'>=</span> <span class='PDMStr'>''</span>
+<span class='PDMCnt'> 21</span> <span class='PDMInd'> 1</span>     <span class='PDMResK'>IF</span> <span class='PDMOper'>.</span><span class='PDMVar'>LaunchApp</span><span class='PDMOper'>(</span><span class='PDMOper'>)</span>
+<span class='PDMCnt'> 22</span> <span class='PDMInd'> 2</span>         <span class='PDMVar'>uResult</span> <span class='PDMOper'>=</span> <span class='PDMLit'>1</span>
+<span class='PDMCnt'> 23</span> <span class='PDMInd'> 2</span> <span class='PDMCom'>        *    It's been launched;  wait until we're idling along</span>
+<span class='PDMCnt'> 24</span> <span class='PDMInd'> 2</span>         <span class='PDMOper'>=</span><span class='PDMVar'>WaitInpIdle</span><span class='PDMOper'>(</span><span class='PDMVar'>GetCurrProc</span><span class='PDMOper'>(</span><span class='PDMOper'>)</span><span class='PDMOper'>,</span><span class='PDMVar'>cnINFINITE</span><span class='PDMOper'>)</span>
+<span class='PDMCnt'> 25</span> <span class='PDMInd'> 2</span> <span class='PDMCom'>        *    As long as the other process exists, wait for it</span>
+<span class='PDMCnt'> 26</span> <span class='PDMInd'> 2</span>         <span class='PDMResK'>DO</span> <span class='PDMResK'>WHILE</span> <span class='PDMVar'>WaitOnAppExit</span><span class='PDMOper'>(</span><span class='PDMOper'>.</span><span class='PDMVar'>inProcessHandle</span><span class='PDMOper'>,</span> <span class='PDMVar'>cnHalfASecond</span><span class='PDMOper'>)</span> <span class='PDMOper'>=</span> <span class='PDMVar'>cnTimedOut</span>
+<span class='PDMCnt'> 27</span> <span class='PDMInd'> 3</span> <span class='PDMCom'>            *    Give us an out in case the other app hangs - let</span>
+<span class='PDMCnt'> 28</span> <span class='PDMInd'> 3</span>             <span class='PDMResK'>IF</span> <span class='PDMResF'>INKEY</span><span class='PDMOper'>(</span><span class='PDMOper'>)</span> <span class='PDMOper'>=</span> <span class='PDMLit'>27</span>
+<span class='PDMCnt'> 29</span> <span class='PDMInd'> 4</span> <span class='PDMCom'>                *    Still running but we aren't waiting - return a -1 as a warning</span>
+<span class='PDMCnt'> 30</span> <span class='PDMInd'> 4</span>                 <span class='PDMOper'>.</span><span class='PDMVar'>icErrorMessage</span> <span class='PDMOper'>=</span> <span class='PDMStr'>'Process started but user did not wait on termination'</span>
+<span class='PDMCnt'> 31</span> <span class='PDMInd'> 4</span>                 <span class='PDMVar'>uResult</span> <span class='PDMOper'>=</span> <span class='PDMLit'>0</span>
+<span class='PDMCnt'> 32</span> <span class='PDMInd'> 4</span>                 <span class='PDMResK'>EXIT</span>
+<span class='PDMCnt'> 33</span> <span class='PDMInd'> 3</span>             <span class='PDMResK'>ENDIF</span>
+<span class='PDMCnt'> 34</span> <span class='PDMInd'> 2</span>         <span class='PDMResK'>ENDDO</span>
+<span class='PDMCnt'> 35</span> <span class='PDMInd'> 1</span>     <span class='PDMResK'>ELSE</span>
+<span class='PDMCnt'> 36</span> <span class='PDMInd'> 2</span> <span class='PDMCom'>        *    Return 0 to indicate failure</span>
+<span class='PDMCnt'> 37</span> <span class='PDMInd'> 2</span>         <span class='PDMVar'>uResult</span> <span class='PDMOper'>=</span> <span class='PDMLit'>0</span>
+<span class='PDMCnt'> 38</span> <span class='PDMInd'> 1</span>     <span class='PDMResK'>ENDIF</span>
+<span class='PDMCnt'> 39</span> <span class='PDMInd'>  </span> <span class='PDMResK'>ENDWITH</span>
+<span class='PDMCnt'> 40</span> <span class='PDMInd'>  </span> <span class='PDMResK'>RETURN</span> <span class='PDMOper'>(</span><span class='PDMVar'>uResult</span> <span class='PDMOper'>=</span> <span class='PDMLit'>1</span><span class='PDMOper'>)</span>
+<span class='PDMCnt'> 41</span> <span class='PDMInd'>  </span> </pre>
+ <!-- Code End -->
+  </div>
+ </div>
+</div>
+<div class="diaxp_mfoot"></div>
+<script language="JavaScript" type="text/javascript">
+lo=document.getElementById("TX_SP_3");
+lo.XType="SourceCode";
+lo.Dir="../../imgs/";
+
+
+</script>
+</body>
+</html>

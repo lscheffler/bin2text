@@ -1,0 +1,113 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="de" lang="de">
+<head>
+<title>Quick View of menu BIN2TEXT</title>
+<meta content="text/html; charset=windows-1252" http-equiv="Content-Type" />
+<meta name="Generator" content="Project Documenting Machine" />
+<meta name="Version" content="1.3.1" />
+<link rel="stylesheet" href="../../css/menu.css" type="text/css" />
+<link rel="stylesheet" href="../../css/foxw.css" type="text/css" />
+<script src="../../js/menu.js" language="JavaScript" type="text/javascript"></script>
+<script src="../../js/menua.js" language="JavaScript" type="text/javascript"></script>
+<script src="../../js/pdm.js" language="JavaScript" type="text/javascript"></script>
+<script language="JavaScript" type="text/javascript">
+paPads=[1];
+paPads[0]=["Pad_3","Pop_3"];
+
+paPopups=[5];
+paPopups[0]=["Pop_7"];
+paPopups[1]=["Pop_18"];
+paPopups[2]=["Pop_29"];
+paPopups[3]=["Pop_32"];
+paPopups[4]=["Pop_3"];
+
+paBarsP=[2];
+paBarsP[0]=["Bar_3_7","Pop_7"];
+paBarsP[1]=["Bar_3_18","Pop_18"];
+
+paBarsM=[0];
+
+paBarsI=[0];
+
+document.onmousedown=GMouseDown; // Global handler MouseDown 
+document.onmouseover=GMouseOver; // Global handler MouseOver 
+document.onmouseout =GMouseOut;  // Global handler MouseOut 
+document.onmousemove=GMouseMove; // Global handler MouseMove 
+pconBarClick="onBarClick"; // Name function for local capturing event onMouseClick on bar 
+pconPadClick="onBarClick"; // Name function for local capturing event onMouseClick on padu 
+piExpandFLPopup=1; // Always expand popup from pad 
+
+function onBarClick(loRef)
+   {
+   // loRef - Objekt baru/padu
+   var lcID=loRef.id
+   if (lcID.substring(4)=='0')
+      return;
+
+   if (loRef.className=="menuBar" || loRef.className=="menuSep")
+      {
+      var lii=lcID.lastIndexOf("_",lcID.length);
+      lcID='ID_'+lcID.substr(lii+1);
+      }
+   else
+      lcID='ID_'+lcID.substring(4);
+
+   Go_Object('F3','Main_dd.htm',lcID);
+   }
+
+</script>
+</head>
+<body>
+<div class="menu" id="Menu">
+ <div class="menuPad" id="Pad_3"><img name="HL" class="imgHL" /><span class="menuPad">FoxBin<span class="HotKey">2</span>Text</span></div>
+</div>
+
+<div class="menuPopup" id="Pop_7">
+ <div class="menuBar" id="Bar_7_9"><img name="HL" class="imgHL" /><span class="menuBar"><span class="HotKey">A</span>ctive</span></div>
+ <div class="menuBar" id="Bar_7_10"><img name="HL" class="imgHL" /><span class="menuBar"><span class="HotKey">I</span>DE</span></div>
+ <div class="menuBar" id="Bar_7_11"><img name="HL" class="imgHL" /><span class="menuBar"><span class="HotKey">P</span>ath</span></div>
+ <div class="menuBar" id="Bar_7_12"><img name="HL" class="imgHL" /><span class="menuBar"><span class="HotKey">G</span>et PJX</span></div>
+ <div class="menuBar" id="Bar_7_13"><img name="HL" class="imgHL" /><span class="menuBar">Get <span class="HotKey">F</span>ile</span></div>
+ <div class="menuBar" id="Bar_7_14"><img name="HL" class="imgHL" /><span class="menuBar">Get <span class="HotKey">C</span>lass</span></div>
+ <div class="menuBar" id="Bar_7_15"><img name="HL" class="imgHL" /><span class="menuBar">Path <span class="HotKey">r</span>ecursive</span></div>
+ <div name="Sep" class="menuSep" id="Bar_7_16"></div>
+ <div class="menuBar" id="Bar_7_17"><img name="HL" class="imgHL" /><span class="menuBar"><span class="HotKey">D</span>irectory</span></div>
+</div>
+
+<div class="menuPopup" id="Pop_18">
+ <div class="menuBar" id="Bar_18_20"><img name="HL" class="imgHL" /><span class="menuBar"><span class="HotKey">A</span>ctive</span></div>
+ <div class="menuBar" id="Bar_18_21"><img name="HL" class="imgHL" /><span class="menuBar"><span class="HotKey">I</span>DE</span></div>
+ <div class="menuBar" id="Bar_18_22"><img name="HL" class="imgHL" /><span class="menuBar"><span class="HotKey">P</span>ath</span></div>
+ <div class="menuBar" id="Bar_18_23"><img name="HL" class="imgHL" /><span class="menuBar"><span class="HotKey">G</span>et PJX</span></div>
+ <div class="menuBar" id="Bar_18_24"><img name="HL" class="imgHL" /><span class="menuBar">Get <span class="HotKey">F</span>ile</span></div>
+ <div class="menuBar" id="Bar_18_25"><img name="HL" class="imgHL" /><span class="menuBar">Get <span class="HotKey">C</span>lass</span></div>
+ <div class="menuBar" id="Bar_18_26"><img name="HL" class="imgHL" /><span class="menuBar">Path <span class="HotKey">r</span>ecursive</span></div>
+ <div name="Sep" class="menuSep" id="Bar_18_27"></div>
+ <div class="menuBar" id="Bar_18_28"><img name="HL" class="imgHL" /><span class="menuBar"><span class="HotKey">D</span>irectory</span></div>
+</div>
+
+<div class="menuPopup" id="Pop_29">
+</div>
+
+<div class="menuPopup" id="Pop_32">
+</div>
+
+<div class="menuPopup" id="Pop_3">
+ <div class="menuBar" id="Bar_3_5"><img name="HL" class="imgHL" /><span class="menuBar">git <span class="HotKey">c</span>ommit Active</span></div>
+ <div class="menuBar" id="Bar_3_6"><img name="HL" class="imgHL" /><span class="menuBar">git commit <span class="HotKey">A</span>ll</span></div>
+ <div class="menuBar" id="Bar_3_7"><img name="HL" class="imgHL" /><span class="menuBar"><span class="HotKey">B</span>in to Text</span><img name="Popup" class="imgPopup" /></div>
+ <div class="menuBar" id="Bar_3_18"><img name="HL" class="imgHL" /><span class="menuBar"><span class="HotKey">T</span>ext to Bin</span><img name="Popup" class="imgPopup" /></div>
+ <div name="Sep" class="menuSep" id="Bar_3_29"></div>
+ <div class="menuBar" id="Bar_3_31"><img name="HL" class="imgHL" /><span class="menuBar"><span class="HotKey">S</span>ettings</span></div>
+ <div name="Sep" class="menuSep" id="Bar_3_32"></div>
+ <div class="menuBar" id="Bar_3_34"><img name="HL" class="imgHL" /><span class="menuBar">GUI</span></div>
+ <div class="menuBar" id="Bar_3_35"><img name="HL" class="imgHL" /><span class="menuBar">git shell</span></div>
+</div>
+
+<script language="JavaScript" type="text/javascript">
+InitMenu(document.getElementById("Menu"));
+
+</script>
+
+</body>
+</html>

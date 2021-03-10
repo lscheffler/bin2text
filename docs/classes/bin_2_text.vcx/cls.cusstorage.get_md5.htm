@@ -1,0 +1,177 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="de" lang="de">
+<head>
+<title>Method get_md5 of class cusstorage</title>
+<meta content="text/html; charset=windows-1252" http-equiv="Content-Type" />
+<meta name="Generator" content="Project Documenting Machine" />
+<meta name="Version" content="1.3.1" />
+<link rel="stylesheet" href="../../css/foxw.css" type="text/css" />
+<link rel="stylesheet" href="../../css/sc.css" type="text/css" />
+<link rel="stylesheet" href="../../repository/diamp_pdm_ab.css" type="text/css" />
+<link rel="stylesheet" href="../../repository/pdm_ab.css" type="text/css" />
+<link rel="stylesheet" href="../../repository/pdm_ab_notes.css" type="text/css" />
+<script src="../../js/pdm.js" language="JavaScript" type="text/javascript"></script>
+<script src="../../repository/pdm_ab.js" language="JavaScript" type="text/javascript"></script>
+</head>
+<body>
+<div class="diaxp_mhead">get_md5 Method</div>
+<div class="diaxp_mbody_class">
+
+<table class="clear_table">
+ <tbody>
+  <tr><td>Class: </td><td><a href="cls.cusstorage.htm" title="Skip to class cusstorage">cusstorage</a></td></tr>
+  <tr><td>Description:</td><td></td></tr>
+ </tbody>
+</table>
+</div>
+<div class="diaxp_mbody">
+ <div class="SC">
+  <img onclick="ExpandSC('SP_40',-1);"class="imgEC" src="../../imgs/dotab.gif" alt="Expand/Collapse source code of procedure get_md5" id="IMG_SP_40" />
+  <span ondblclick="ExpandSC('SP_40',-1);" class="SCCaption"><a name="cusstorage">Source Code</a></span>
+  <div ondblclick="ExpandSC('SP_40',-1);" class="SCE" style="display: none;" id="TX_SP_40">
+<!-- Code Begin -->
+<pre class="PDMCODE PDMNor" ><span class='PDMCnt'>   1</span> <span class='PDMInd'>  </span> <span class='PDMOper'>#</span><span class='PDMResK'>IF</span> <span class='PDMLit'>.F.</span> <span class='PDMResK'>THEN</span>
+<span class='PDMCnt'>   2</span> <span class='PDMInd'> 1</span>  <span class='PDMOper'>#</span><span class='PDMResK'>include</span> <span class='PDMStr'>"C:\Program Files (x86)\Microsoft Visual FoxPro 9\ffc\wincrypt.h"</span>
+<span class='PDMCnt'>   3</span> <span class='PDMInd'>  </span> 
+<span class='PDMCnt'>   4</span> <span class='PDMInd'>  </span> <span class='PDMCom'>* This routine takes a string as input</span>
+<span class='PDMCnt'>   5</span> <span class='PDMInd'>  </span> <span class='PDMCom'>* and returns an MD5 hash value as a string.</span>
+<span class='PDMCnt'>   6</span> <span class='PDMInd'>  </span> <span class='PDMCom'>*</span>
+<span class='PDMCnt'>   7</span> <span class='PDMInd'>  </span> <span class='PDMCom'>* The calculation in implemented using the MS Crypto API and the RSA provider.</span>
+<span class='PDMCnt'>   8</span> <span class='PDMInd'> 1</span>  <span class='PDMResK'>LPARAMETERS</span><span class='PDMOper'>;</span>
+<span class='PDMCnt'>   9</span> <span class='PDMInd'> 2</span>   <span class='PDMVar'>tcData</span>
+<span class='PDMCnt'>  10</span> <span class='PDMInd'>  </span> 
+<span class='PDMCnt'>  11</span> <span class='PDMInd'> 1</span>  <span class='PDMResK'>LOCAL</span><span class='PDMOper'>;</span>
+<span class='PDMCnt'>  12</span> <span class='PDMInd'> 2</span>   <span class='PDMVar'>lnStatus</span><span class='PDMOper'>,</span><span class='PDMOper'>;</span>
+<span class='PDMCnt'>  13</span> <span class='PDMInd'> 2</span>   <span class='PDMVar'>lnErr</span><span class='PDMOper'>,</span><span class='PDMOper'>;</span>
+<span class='PDMCnt'>  14</span> <span class='PDMInd'> 2</span>   <span class='PDMVar'>lhProv</span><span class='PDMOper'>,</span><span class='PDMOper'>;</span>
+<span class='PDMCnt'>  15</span> <span class='PDMInd'> 2</span>   <span class='PDMVar'>lhHashObject</span><span class='PDMOper'>,</span><span class='PDMOper'>;</span>
+<span class='PDMCnt'>  16</span> <span class='PDMInd'> 2</span>   <span class='PDMVar'>lnDataSize</span><span class='PDMOper'>,</span><span class='PDMOper'>;</span>
+<span class='PDMCnt'>  17</span> <span class='PDMInd'> 2</span>   <span class='PDMVar'>lcHashValue</span><span class='PDMOper'>,</span><span class='PDMOper'>;</span>
+<span class='PDMCnt'>  18</span> <span class='PDMInd'> 2</span>   <span class='PDMVar'>lnHashSize</span>
+<span class='PDMCnt'>  19</span> <span class='PDMInd'>  </span> 
+<span class='PDMCnt'>  20</span> <span class='PDMInd'> 1</span>  <span class='PDMVar'>lhProv</span> <span class='PDMOper'>=</span> <span class='PDMLit'>0</span>
+<span class='PDMCnt'>  21</span> <span class='PDMInd'> 1</span>  <span class='PDMVar'>lhHashObject</span> <span class='PDMOper'>=</span> <span class='PDMLit'>0</span>
+<span class='PDMCnt'>  22</span> <span class='PDMInd'> 1</span>  <span class='PDMVar'>lnDataSize</span> <span class='PDMOper'>=</span> <span class='PDMResF'>LEN</span><span class='PDMOper'>(</span><span class='PDMVar'>tcData</span><span class='PDMOper'>)</span>
+<span class='PDMCnt'>  23</span> <span class='PDMInd'> 1</span>  <span class='PDMVar'>lcHashValue</span> <span class='PDMOper'>=</span> <span class='PDMResF'>REPLICATE</span><span class='PDMOper'>(</span><span class='PDMResF'>CHR</span><span class='PDMOper'>(</span><span class='PDMLit'>0</span><span class='PDMOper'>)</span><span class='PDMOper'>,</span> <span class='PDMLit'>16</span><span class='PDMOper'>)</span>
+<span class='PDMCnt'>  24</span> <span class='PDMInd'> 1</span>  <span class='PDMVar'>lnHashSize</span> <span class='PDMOper'>=</span> <span class='PDMResF'>LEN</span><span class='PDMOper'>(</span><span class='PDMVar'>lcHashValue</span><span class='PDMOper'>)</span>
+<span class='PDMCnt'>  25</span> <span class='PDMInd'>  </span> 
+<span class='PDMCnt'>  26</span> <span class='PDMInd'>  </span> 
+<span class='PDMCnt'>  27</span> <span class='PDMInd'> 1</span>  <span class='PDMResK'>TRY</span>
+<span class='PDMCnt'>  28</span> <span class='PDMInd'>  </span> 
+<span class='PDMCnt'>  29</span> <span class='PDMInd'> 3</span>    <span class='PDMResK'>DECLARE</span> <span class='PDMResK'>INTEGER</span> <span class='PDMVar'><a href="http://www.news2news.com/vfp/?search=GetLastError&x=7&y=5" target="blank">GetLastError</a></span> <span class='PDMOper'>;</span>
+<span class='PDMCnt'>  30</span> <span class='PDMInd'> 4</span>     <span class='PDMResK'>IN</span> <span class='PDMVar'>win32api</span> <span class='PDMResK'>AS</span> <span class='PDMVar'>GetLastError</span>
+<span class='PDMCnt'>  31</span> <span class='PDMInd'>  </span> 
+<span class='PDMCnt'>  32</span> <span class='PDMInd'> 3</span>    <span class='PDMResK'>DECLARE</span> <span class='PDMResK'>INTEGER</span> <span class='PDMVar'><a href="http://www.news2news.com/vfp/?search=CryptAcquireContextA&x=7&y=5" target="blank">CryptAcquireContextA</a></span> <span class='PDMOper'>;</span>
+<span class='PDMCnt'>  33</span> <span class='PDMInd'> 4</span>     <span class='PDMResK'>IN</span> <span class='PDMVar'>WIN32API</span> <span class='PDMResK'>AS</span> <span class='PDMVar'>CryptAcquireContext</span> <span class='PDMOper'>;</span>
+<span class='PDMCnt'>  34</span> <span class='PDMInd'> 4</span>     <span class='PDMResK'>INTEGER</span> <span class='PDMOper'>@</span><span class='PDMVar'>lhProvHandle</span><span class='PDMOper'>,</span> <span class='PDMOper'>;</span>
+<span class='PDMCnt'>  35</span> <span class='PDMInd'> 4</span>     <span class='PDMResK'>STRING</span>  <span class='PDMVar'>cContainer</span><span class='PDMOper'>,</span> <span class='PDMOper'>;</span>
+<span class='PDMCnt'>  36</span> <span class='PDMInd'> 4</span>     <span class='PDMResK'>STRING</span>  <span class='PDMVar'>cProvider</span><span class='PDMOper'>,</span> <span class='PDMOper'>;</span>
+<span class='PDMCnt'>  37</span> <span class='PDMInd'> 4</span>     <span class='PDMResK'>INTEGER</span> <span class='PDMVar'>nProvType</span><span class='PDMOper'>,</span> <span class='PDMOper'>;</span>
+<span class='PDMCnt'>  38</span> <span class='PDMInd'> 4</span>     <span class='PDMResK'>INTEGER</span> <span class='PDMVar'>nFlags</span>
+<span class='PDMCnt'>  39</span> <span class='PDMInd'>  </span> 
+<span class='PDMCnt'>  40</span> <span class='PDMInd'>  </span> <span class='PDMOper'>*</span> <span class='PDMResE'>load</span> <span class='PDMVar'>a</span> <span class='PDMVar'>crypto</span> <span class='PDMVar'>provider</span>
+<span class='PDMCnt'>  41</span> <span class='PDMInd'> 3</span>    <span class='PDMVar'>lnStatus</span> <span class='PDMOper'>=</span> <span class='PDMVar'>CryptAcquireContext</span><span class='PDMOper'>(</span><span class='PDMOper'>@</span><span class='PDMVar'>lhProv</span><span class='PDMOper'>,</span> <span class='PDMLit'>0</span><span class='PDMOper'>,</span> <span class='PDMLit'>0</span><span class='PDMOper'>,</span> <span class='PDMVar'>dnPROV_RSA_FULL</span><span class='PDMOper'>,</span> <span class='PDMVar'>dnCRYPT_VERIFYCONTEXT</span><span class='PDMOper'>)</span>
+<span class='PDMCnt'>  42</span> <span class='PDMInd'> 3</span>    <span class='PDMResK'>IF</span> <span class='PDMVar'>lnStatus</span> <span class='PDMOper'>=</span> <span class='PDMLit'>0</span>
+<span class='PDMCnt'>  43</span> <span class='PDMInd'> 4</span>     <span class='PDMResK'>THROW</span> <span class='PDMVar'>GetLastError</span><span class='PDMOper'>(</span><span class='PDMOper'>)</span>
+<span class='PDMCnt'>  44</span> <span class='PDMInd'> 3</span>    <span class='PDMResK'>ENDIF</span>
+<span class='PDMCnt'>  45</span> <span class='PDMInd'>  </span> 
+<span class='PDMCnt'>  46</span> <span class='PDMInd'> 3</span>    <span class='PDMResK'>DECLARE</span> <span class='PDMResK'>INTEGER</span> <span class='PDMVar'><a href="http://www.news2news.com/vfp/?search=CryptCreateHash&x=7&y=5" target="blank">CryptCreateHash</a></span> <span class='PDMOper'>;</span>
+<span class='PDMCnt'>  47</span> <span class='PDMInd'> 4</span>     <span class='PDMResK'>IN</span> <span class='PDMVar'>WIN32API</span> <span class='PDMResK'>AS</span> <span class='PDMVar'>CryptCreateHash</span> <span class='PDMOper'>;</span>
+<span class='PDMCnt'>  48</span> <span class='PDMInd'> 4</span>     <span class='PDMResK'>INTEGER</span> <span class='PDMVar'>hProviderHandle</span><span class='PDMOper'>,</span> <span class='PDMOper'>;</span>
+<span class='PDMCnt'>  49</span> <span class='PDMInd'> 4</span>     <span class='PDMResK'>INTEGER</span> <span class='PDMVar'>nALG_ID</span><span class='PDMOper'>,</span> <span class='PDMOper'>;</span>
+<span class='PDMCnt'>  50</span> <span class='PDMInd'> 4</span>     <span class='PDMResK'>INTEGER</span> <span class='PDMVar'>hKeyhandle</span><span class='PDMOper'>,</span> <span class='PDMOper'>;</span>
+<span class='PDMCnt'>  51</span> <span class='PDMInd'> 4</span>     <span class='PDMResK'>INTEGER</span> <span class='PDMVar'>nFlags</span><span class='PDMOper'>,</span> <span class='PDMOper'>;</span>
+<span class='PDMCnt'>  52</span> <span class='PDMInd'> 4</span>     <span class='PDMResK'>INTEGER</span> <span class='PDMOper'>@</span><span class='PDMVar'>hCryptHashHandle</span>
+<span class='PDMCnt'>  53</span> <span class='PDMInd'>  </span> 
+<span class='PDMCnt'>  54</span> <span class='PDMInd'>  </span> <span class='PDMOper'>*</span> <span class='PDMResK'>create</span> <span class='PDMVar'>a</span> <span class='PDMVar'>hash</span> <span class='PDMResK'>object</span> <span class='PDMVar'>that</span> <span class='PDMVar'>uses</span> <span class='PDMVar'>MD5</span> <span class='PDMVar'>algorithm</span>
+<span class='PDMCnt'>  55</span> <span class='PDMInd'> 3</span>    <span class='PDMVar'>lnStatus</span> <span class='PDMOper'>=</span> <span class='PDMVar'>CryptCreateHash</span><span class='PDMOper'>(</span><span class='PDMVar'>lhProv</span><span class='PDMOper'>,</span> <span class='PDMVar'>dnCALG_MD5</span><span class='PDMOper'>,</span> <span class='PDMLit'>0</span><span class='PDMOper'>,</span> <span class='PDMLit'>0</span><span class='PDMOper'>,</span> <span class='PDMOper'>@</span><span class='PDMVar'>lhHashObject</span><span class='PDMOper'>)</span>
+<span class='PDMCnt'>  56</span> <span class='PDMInd'> 3</span>    <span class='PDMResK'>IF</span> <span class='PDMVar'>lnStatus</span> <span class='PDMOper'>=</span> <span class='PDMLit'>0</span>
+<span class='PDMCnt'>  57</span> <span class='PDMInd'> 4</span>     <span class='PDMResK'>THROW</span> <span class='PDMVar'>GetLastError</span><span class='PDMOper'>(</span><span class='PDMOper'>)</span>
+<span class='PDMCnt'>  58</span> <span class='PDMInd'> 3</span>    <span class='PDMResK'>ENDIF</span>
+<span class='PDMCnt'>  59</span> <span class='PDMInd'>  </span> 
+<span class='PDMCnt'>  60</span> <span class='PDMInd'>  </span> 
+<span class='PDMCnt'>  61</span> <span class='PDMInd'> 3</span>    <span class='PDMResK'>DECLARE</span> <span class='PDMResK'>INTEGER</span> <span class='PDMVar'><a href="http://www.news2news.com/vfp/?search=CryptHashData&x=7&y=5" target="blank">CryptHashData</a></span> <span class='PDMOper'>;</span>
+<span class='PDMCnt'>  62</span> <span class='PDMInd'> 4</span>     <span class='PDMResK'>IN</span> <span class='PDMVar'>WIN32API</span> <span class='PDMResK'>AS</span> <span class='PDMVar'>CryptHashData</span> <span class='PDMOper'>;</span>
+<span class='PDMCnt'>  63</span> <span class='PDMInd'> 4</span>     <span class='PDMResK'>INTEGER</span> <span class='PDMVar'>hHashHandle</span><span class='PDMOper'>,</span> <span class='PDMOper'>;</span>
+<span class='PDMCnt'>  64</span> <span class='PDMInd'> 4</span>     <span class='PDMResK'>STRING</span>  <span class='PDMOper'>@</span><span class='PDMVar'>cData</span><span class='PDMOper'>,</span> <span class='PDMOper'>;</span>
+<span class='PDMCnt'>  65</span> <span class='PDMInd'> 4</span>     <span class='PDMResK'>INTEGER</span> <span class='PDMVar'>nDataLen</span><span class='PDMOper'>,</span> <span class='PDMOper'>;</span>
+<span class='PDMCnt'>  66</span> <span class='PDMInd'> 4</span>     <span class='PDMResK'>INTEGER</span> <span class='PDMVar'>nFlags</span>
+<span class='PDMCnt'>  67</span> <span class='PDMInd'>  </span> 
+<span class='PDMCnt'>  68</span> <span class='PDMInd'>  </span> <span class='PDMOper'>*</span> <span class='PDMResK'>add</span> <span class='PDMVar'>the</span> <span class='PDMResK'>input</span> <span class='PDMResK'>data</span> <span class='PDMResK'>to</span> <span class='PDMVar'>the</span> <span class='PDMVar'>hash</span> <span class='PDMResK'>object</span>
+<span class='PDMCnt'>  69</span> <span class='PDMInd'> 3</span>    <span class='PDMVar'>lnStatus</span> <span class='PDMOper'>=</span> <span class='PDMVar'>CryptHashData</span><span class='PDMOper'>(</span><span class='PDMVar'>lhHashObject</span><span class='PDMOper'>,</span> <span class='PDMVar'>tcData</span><span class='PDMOper'>,</span> <span class='PDMVar'>lnDataSize</span><span class='PDMOper'>,</span> <span class='PDMLit'>0</span><span class='PDMOper'>)</span>
+<span class='PDMCnt'>  70</span> <span class='PDMInd'> 3</span>    <span class='PDMResK'>IF</span> <span class='PDMVar'>lnStatus</span> <span class='PDMOper'>=</span> <span class='PDMLit'>0</span>
+<span class='PDMCnt'>  71</span> <span class='PDMInd'> 4</span>     <span class='PDMResK'>THROW</span> <span class='PDMVar'>GetLastError</span><span class='PDMOper'>(</span><span class='PDMOper'>)</span>
+<span class='PDMCnt'>  72</span> <span class='PDMInd'> 3</span>    <span class='PDMResK'>ENDIF</span>
+<span class='PDMCnt'>  73</span> <span class='PDMInd'>  </span> 
+<span class='PDMCnt'>  74</span> <span class='PDMInd'>  </span> 
+<span class='PDMCnt'>  75</span> <span class='PDMInd'> 3</span>    <span class='PDMResK'>DECLARE</span> <span class='PDMResK'>INTEGER</span> <span class='PDMVar'><a href="http://www.news2news.com/vfp/?search=CryptGetHashParam&x=7&y=5" target="blank">CryptGetHashParam</a></span> <span class='PDMOper'>;</span>
+<span class='PDMCnt'>  76</span> <span class='PDMInd'> 4</span>     <span class='PDMResK'>IN</span> <span class='PDMVar'>WIN32API</span> <span class='PDMResK'>AS</span> <span class='PDMVar'>CryptGetHashParam</span> <span class='PDMOper'>;</span>
+<span class='PDMCnt'>  77</span> <span class='PDMInd'> 4</span>     <span class='PDMResK'>INTEGER</span> <span class='PDMVar'>hHashHandle</span><span class='PDMOper'>,</span> <span class='PDMOper'>;</span>
+<span class='PDMCnt'>  78</span> <span class='PDMInd'> 4</span>     <span class='PDMResK'>INTEGER</span> <span class='PDMVar'>nParam</span><span class='PDMOper'>,</span> <span class='PDMOper'>;</span>
+<span class='PDMCnt'>  79</span> <span class='PDMInd'> 4</span>     <span class='PDMResK'>STRING</span>  <span class='PDMOper'>@</span><span class='PDMVar'>cHashValue</span><span class='PDMOper'>,</span> <span class='PDMOper'>;</span>
+<span class='PDMCnt'>  80</span> <span class='PDMInd'> 4</span>     <span class='PDMResK'>INTEGER</span> <span class='PDMOper'>@</span><span class='PDMVar'>nHashSize</span><span class='PDMOper'>,</span> <span class='PDMOper'>;</span>
+<span class='PDMCnt'>  81</span> <span class='PDMInd'> 4</span>     <span class='PDMResK'>INTEGER</span> <span class='PDMVar'>nFlags</span>
+<span class='PDMCnt'>  82</span> <span class='PDMInd'>  </span> 
+<span class='PDMCnt'>  83</span> <span class='PDMInd'>  </span> <span class='PDMOper'>*</span> <span class='PDMVar'>retrieve</span> <span class='PDMVar'>the</span> <span class='PDMVar'>hash</span> <span class='PDMResK'>value</span><span class='PDMOper'>,</span> <span class='PDMResK'>if</span> <span class='PDMVar'>caller</span> <span class='PDMVar'>did</span> <span class='PDMOper'>NOT</span> <span class='PDMVar'>provide</span> <span class='PDMVar'>enough</span> <span class='PDMVar'>storage</span> <span class='PDMOper'>(</span><span class='PDMLit'>16</span> <span class='PDMVar'>bytes</span> <span class='PDMResK'>for</span> <span class='PDMVar'>MD5</span><span class='PDMOper'>)</span>
+<span class='PDMCnt'>  84</span> <span class='PDMInd'>  </span> <span class='PDMCom'>* this will fail with dnERROR_MORE_DATA and lnHashSize will contain needed storage size</span>
+<span class='PDMCnt'>  85</span> <span class='PDMInd'> 3</span>    <span class='PDMVar'>lnStatus</span> <span class='PDMOper'>=</span> <span class='PDMVar'>CryptGetHashParam</span><span class='PDMOper'>(</span><span class='PDMVar'>lhHashObject</span><span class='PDMOper'>,</span> <span class='PDMVar'>dnHP_HASHVAL</span><span class='PDMOper'>,</span> <span class='PDMOper'>@</span><span class='PDMVar'>lcHashValue</span><span class='PDMOper'>,</span> <span class='PDMOper'>@</span><span class='PDMVar'>lnHashSize</span><span class='PDMOper'>,</span> <span class='PDMLit'>0</span><span class='PDMOper'>)</span>
+<span class='PDMCnt'>  86</span> <span class='PDMInd'> 3</span>    <span class='PDMResK'>IF</span> <span class='PDMVar'>lnStatus</span> <span class='PDMOper'>=</span> <span class='PDMLit'>0</span>
+<span class='PDMCnt'>  87</span> <span class='PDMInd'> 4</span>     <span class='PDMResK'>THROW</span> <span class='PDMVar'>GetLastError</span><span class='PDMOper'>(</span><span class='PDMOper'>)</span>
+<span class='PDMCnt'>  88</span> <span class='PDMInd'> 3</span>    <span class='PDMResK'>ENDIF</span>
+<span class='PDMCnt'>  89</span> <span class='PDMInd'>  </span> 
+<span class='PDMCnt'>  90</span> <span class='PDMInd'>  </span> 
+<span class='PDMCnt'>  91</span> <span class='PDMInd'> 3</span>    <span class='PDMResK'>DECLARE</span> <span class='PDMResK'>INTEGER</span> <span class='PDMVar'><a href="http://www.news2news.com/vfp/?search=CryptDestroyHash&x=7&y=5" target="blank">CryptDestroyHash</a></span> <span class='PDMOper'>;</span>
+<span class='PDMCnt'>  92</span> <span class='PDMInd'> 4</span>     <span class='PDMResK'>IN</span> <span class='PDMVar'>WIN32API</span> <span class='PDMResK'>AS</span> <span class='PDMVar'>CryptDestroyHash</span><span class='PDMOper'>;</span>
+<span class='PDMCnt'>  93</span> <span class='PDMInd'> 4</span>     <span class='PDMResK'>INTEGER</span> <span class='PDMVar'>hKeyHandle</span>
+<span class='PDMCnt'>  94</span> <span class='PDMInd'>  </span> 
+<span class='PDMCnt'>  95</span> <span class='PDMInd'>  </span> <span class='PDMOper'>*</span> <span class='PDMResK'>free</span> <span class='PDMVar'>the</span> <span class='PDMVar'>hash</span> <span class='PDMResK'>object</span>
+<span class='PDMCnt'>  96</span> <span class='PDMInd'> 3</span>    <span class='PDMVar'>lnStatus</span> <span class='PDMOper'>=</span> <span class='PDMVar'>CryptDestroyHash</span><span class='PDMOper'>(</span><span class='PDMVar'>lhHashObject</span><span class='PDMOper'>)</span>
+<span class='PDMCnt'>  97</span> <span class='PDMInd'> 3</span>    <span class='PDMResK'>IF</span> <span class='PDMVar'>lnStatus</span> <span class='PDMOper'>=</span> <span class='PDMLit'>0</span>
+<span class='PDMCnt'>  98</span> <span class='PDMInd'> 4</span>     <span class='PDMResK'>THROW</span> <span class='PDMVar'>GetLastError</span><span class='PDMOper'>(</span><span class='PDMOper'>)</span>
+<span class='PDMCnt'>  99</span> <span class='PDMInd'> 3</span>    <span class='PDMResK'>ENDIF</span>
+<span class='PDMCnt'> 100</span> <span class='PDMInd'>  </span> 
+<span class='PDMCnt'> 101</span> <span class='PDMInd'>  </span> 
+<span class='PDMCnt'> 102</span> <span class='PDMInd'> 3</span>    <span class='PDMResK'>DECLARE</span> <span class='PDMResK'>INTEGER</span> <span class='PDMVar'><a href="http://www.news2news.com/vfp/?search=CryptReleaseContext&x=7&y=5" target="blank">CryptReleaseContext</a></span> <span class='PDMOper'>;</span>
+<span class='PDMCnt'> 103</span> <span class='PDMInd'> 4</span>     <span class='PDMResK'>IN</span> <span class='PDMVar'>WIN32API</span> <span class='PDMResK'>AS</span> <span class='PDMVar'>CryptReleaseContext</span> <span class='PDMOper'>;</span>
+<span class='PDMCnt'> 104</span> <span class='PDMInd'> 4</span>     <span class='PDMResK'>INTEGER</span> <span class='PDMVar'>hProvHandle</span><span class='PDMOper'>,</span> <span class='PDMOper'>;</span>
+<span class='PDMCnt'> 105</span> <span class='PDMInd'> 4</span>     <span class='PDMResK'>INTEGER</span> <span class='PDMVar'>nReserved</span>
+<span class='PDMCnt'> 106</span> <span class='PDMInd'>  </span> 
+<span class='PDMCnt'> 107</span> <span class='PDMInd'>  </span> <span class='PDMOper'>*</span> <span class='PDMResK'>release</span> <span class='PDMVar'>the</span> <span class='PDMVar'>crypto</span> <span class='PDMVar'>provider</span>
+<span class='PDMCnt'> 108</span> <span class='PDMInd'> 3</span>    <span class='PDMVar'>lnStatus</span> <span class='PDMOper'>=</span> <span class='PDMVar'>CryptReleaseContext</span><span class='PDMOper'>(</span><span class='PDMVar'>lhProv</span><span class='PDMOper'>,</span> <span class='PDMLit'>0</span><span class='PDMOper'>)</span>
+<span class='PDMCnt'> 109</span> <span class='PDMInd'> 3</span>    <span class='PDMResK'>IF</span> <span class='PDMVar'>lnStatus</span> <span class='PDMOper'>=</span> <span class='PDMLit'>0</span>
+<span class='PDMCnt'> 110</span> <span class='PDMInd'> 4</span>     <span class='PDMResK'>THROW</span> <span class='PDMVar'>GetLastError</span><span class='PDMOper'>(</span><span class='PDMOper'>)</span>
+<span class='PDMCnt'> 111</span> <span class='PDMInd'> 3</span>    <span class='PDMResK'>ENDIF</span>
+<span class='PDMCnt'> 112</span> <span class='PDMInd'>  </span> 
+<span class='PDMCnt'> 113</span> <span class='PDMInd'> 2</span>   <span class='PDMResK'>CATCH</span> <span class='PDMResK'>TO</span> <span class='PDMVar'>lnErr</span>
+<span class='PDMCnt'> 114</span> <span class='PDMInd'>  </span> 
+<span class='PDMCnt'> 115</span> <span class='PDMInd'>  </span> <span class='PDMCom'>* clean up the hash object and release provider</span>
+<span class='PDMCnt'> 116</span> <span class='PDMInd'> 3</span>    <span class='PDMResK'>IF</span> <span class='PDMVar'>lhHashObject</span> <span class='PDMOper'>!</span><span class='PDMOper'>=</span> <span class='PDMLit'>0</span>
+<span class='PDMCnt'> 117</span> <span class='PDMInd'> 4</span>     <span class='PDMVar'>CryptDestroyHash</span><span class='PDMOper'>(</span><span class='PDMVar'>lhHashObject</span><span class='PDMOper'>)</span>
+<span class='PDMCnt'> 118</span> <span class='PDMInd'> 3</span>    <span class='PDMResK'>ENDIF</span>
+<span class='PDMCnt'> 119</span> <span class='PDMInd'>  </span> 
+<span class='PDMCnt'> 120</span> <span class='PDMInd'>  </span> 
+<span class='PDMCnt'> 121</span> <span class='PDMInd'> 3</span>    <span class='PDMResK'>IF</span> <span class='PDMVar'>lhProv</span> <span class='PDMOper'>!</span><span class='PDMOper'>=</span> <span class='PDMLit'>0</span>
+<span class='PDMCnt'> 122</span> <span class='PDMInd'> 4</span>     <span class='PDMVar'>CryptReleaseContext</span><span class='PDMOper'>(</span><span class='PDMVar'>lhProv</span><span class='PDMOper'>,</span> <span class='PDMLit'>0</span><span class='PDMOper'>)</span>
+<span class='PDMCnt'> 123</span> <span class='PDMInd'> 3</span>    <span class='PDMResK'>ENDIF</span>
+<span class='PDMCnt'> 124</span> <span class='PDMInd'>  </span> 
+<span class='PDMCnt'> 125</span> <span class='PDMInd'> 3</span>    <span class='PDMResF'>ERROR</span><span class='PDMOper'>(</span><span class='PDMStr'>"HashMD5 Failed"</span><span class='PDMOper'>)</span>
+<span class='PDMCnt'> 126</span> <span class='PDMInd'>  </span> 
+<span class='PDMCnt'> 127</span> <span class='PDMInd'> 1</span>  <span class='PDMResK'>ENDTRY</span>
+<span class='PDMCnt'> 128</span> <span class='PDMInd'>  </span> 
+<span class='PDMCnt'> 129</span> <span class='PDMInd'> 1</span>  <span class='PDMResK'>RETURN</span> <span class='PDMVar'>lcHashValue</span>
+<span class='PDMCnt'> 130</span> <span class='PDMInd'>  </span> <span class='PDMOper'>#</span><span class='PDMResK'>ENDIF</span> <span class='PDMCom'>&amp;&amp;.F.</span>
+<span class='PDMCnt'> 131</span> <span class='PDMInd'>  </span> </pre>
+ <!-- Code End -->
+  </div>
+ </div>
+</div>
+<div class="diaxp_mfoot"></div>
+<script language="JavaScript" type="text/javascript">
+lo=document.getElementById("TX_SP_40");
+lo.XType="SourceCode";
+lo.Dir="../../imgs/";
+
+
+</script>
+</body>
+</html>
