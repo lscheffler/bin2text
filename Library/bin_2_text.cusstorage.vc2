@@ -1293,8 +1293,10 @@ DEFINE CLASS cusstorage AS custom 		&& The stuff that does the work.
 		 llProcess     AS BOOLEAN,;
 		 llExpandDBC   AS BOOLEAN,;
 		 llPJXOpen     AS BOOLEAN,;
+		 llPJXUsed    AS BOOLEAN,;
 		 lvTime        AS VARIANT,;
 		 loProject     AS PROJECT,;
+		 loException   As Exception,;
 		 loSett        AS OBJECT,;
 		 loExtraFiles  AS OBJECT,;
 		 loConverter   AS "c_foxbin2prg" OF "E:\x\Helper\ThirdParty\VFPX\FoxBin2PRG\FOXBIN2PRG.PRG"
@@ -1544,11 +1546,29 @@ DEFINE CLASS cusstorage AS custom 		&& The stuff that does the work.
 		
 		  IF FILE(m.lcFile) AND UPPER(JUSTEXT(m.lcFile))=='PJX' THEN
 		   llPJXOpen = .F.
+		
+		   TRY
+		*Was zu testen ist
+		     _VFP.PROJECTS.ITEM(m.lcFile)
+		     llPJXOpen = .T.
+		
+		    CATCH TO loException WHEN m.loException.ERRORNO=1429
+		* Abzufangender Fehler
+		     llPJXOpen = .F.
+		    CATCH TO loException
+		* andere Fehler, Standardhandler rufen
+		     THROW
+		     FINALLY
+		     llPJXUsed = .F.
+		   ENDTRY
+		
 		* parse out DBC
 		   IF m.llExpandDBC THEN
-		    MODIFY PROJECT (m.lcFile) NOWAIT NOSHOW NOPROJECTHOOK
+		    IF !m.llPJXOpen AND !m.llPJXUsed THEN
+		     MODIFY PROJECT (m.lcFile) NOWAIT NOSHOW NOPROJECTHOOK
+		     llPJXUsed = .T.
+		    ENDIF &&!m.llPJXOpen AND !m.llPJXUsed
 		    loProject = _VFP.PROJECTS(JUSTFNAME(m.lcFile))
-		    llPJXOpen = .T.
 		
 		    lnTable = 0
 		
@@ -1580,11 +1600,11 @@ DEFINE CLASS cusstorage AS custom 		&& The stuff that does the work.
 		
 		   IF m.laFiles(m.lnFile,4)=1 THEN
 		
-		    IF !m.llPJXOpen THEN
+		    IF !m.llPJXOpen AND !m.llPJXUsed THEN
 		     MODIFY PROJECT (m.lcFile) NOWAIT NOSHOW NOPROJECTHOOK
-		     loProject = _VFP.PROJECTS(JUSTFNAME(m.lcFile))
-		     llPJXOpen = .T.
-		    ENDIF &&!m.llPJXOpen
+		     llPJXUsed = .T.
+		    ENDIF &&!m.llPJXOpen AND !m.llPJXUsed
+		    loProject = _VFP.PROJECTS(JUSTFNAME(m.lcFile))
 		
 		    lcFile = ALLTRIM(m.loProject.PROJECTHOOKLIBRARY)
 		
@@ -1600,10 +1620,11 @@ DEFINE CLASS cusstorage AS custom 		&& The stuff that does the work.
 		    ENDIF &&!EMPTY(m.lcFile)
 		   ENDIF &&laFiles(m.lnFile,4)=1
 		
-		   IF m.llPJXOpen THEN
-		    m.loProject.CLOSE
-		    llPJXOpen = .F.
-		   ENDIF &&m.llPJXOpen
+		   IF m.llPJXUsed THEN
+		    loProject.CLOSE
+		    loProject = .NULL.
+		    llPJXUsed = .F.
+		   ENDIF &&m.llPJXUsed
 		
 		  ENDIF &&FILE(m.lcFile) AND UPPER(JUSTEXT(m.lcFile))=='PJX'
 		 ENDFOR &&m.lnFile
@@ -1709,7 +1730,7 @@ DEFINE CLASS cusstorage AS custom 		&& The stuff that does the work.
 		* parse out DBC
 		       IF m.llExpandDBC THEN
 		        USE (m.lcFile) ALIAS curPJX IN SELECT('curPJX')
-		        llPJXOpen = .T.
+		        llPJXUsed = .T.
 		
 		        SELECT;
 		         Cur1.NAME AS cFile;
@@ -1746,10 +1767,10 @@ DEFINE CLASS cusstorage AS custom 		&& The stuff that does the work.
 		* /parse out DBC
 		
 		       IF m.laFiles(m.lnFile,4)>1 THEN
-		        IF !m.llPJXOpen THEN
+		        IF !m.llPJXUsed THEN
 		         USE (m.lcFile) ALIAS curPJX IN SELECT('curPJX')
-		         llPJXOpen = .T.
-		        ENDIF &&!m.llPJXOpen
+		         llPJXUsed = .T.
+		        ENDIF &&!m.llPJXUsed
 		
 		        SELECT;
 		         Cur1.NAME AS cFile;
@@ -1776,11 +1797,11 @@ DEFINE CLASS cusstorage AS custom 		&& The stuff that does the work.
 		        ENDIF &&!EMPTY(m.lcFile)
 		       ENDIF &&m.laFiles(m.lnFile,4)>1
 		
-		       IF m.llPJXOpen THEN
+		       IF m.llPJXUsed THEN
 		        USE IN curPJX
 		        USE IN curW
-		        llPJXOpen = .F.
-		       ENDIF &&m.llPJXOpen
+		        llPJXUsed = .F.
+		       ENDIF &&m.llPJXUsed
 		      ENDIF &&FILE(m.lcFile) AND UPPER(JUSTEXT(m.lcFile))=='PJX'
 		
 		*/search for project hooks
@@ -1927,8 +1948,8 @@ DEFINE CLASS cusstorage AS custom 		&& The stuff that does the work.
 		       DELETE FILE &lcFile
 		     ENDCASE
 		*sfx todo SQL
-			 REPLACE;
-			  iDirty WITH -2
+		     REPLACE;
+		      iDirty WITH -2
 		    ENDSCAN &&iDirty=-1
 		   ENDIF &&_SCREEN.gcB2T_Delete=="1"
 		*!*	/Changed by: SF 4.6.2015
