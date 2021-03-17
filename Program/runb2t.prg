@@ -98,10 +98,10 @@ FUNCTION Pjx2Commit	&&Create a commit to git.
  ENDIF &&!PEMSTATUS(_SCREEN,"gcB2T_GitPjx",5)
 
  SwitchErrorHandler(.F.)
-*DO Convert_Pjx IN (_SCREEN.gcB2T_App) WITH .F.,2,0
+*DO Convert_Pjx_2Bin IN (_SCREEN.gcB2T_App) WITH .F.,2,0
 *DO Pjx2Commit IN (_SCREEN.gcB2T_App) WITH .T.
-* IF Convert_Pjx(.F.,IIF(m.tlAll,3,1),ICASE(m.tlAll,0,_SCREEN.gcB2T_GitPjx="1",4,3)) THEN
- IF Convert_Pjx(.F.,IIF(m.tlAll,3,1),ICASE(m.tlAll,0,_SCREEN.gcB2T_GitPjx="1",4,3)) THEN
+* IF Convert_Pjx_2Bin(.F.,IIF(m.tlAll,3,1),ICASE(m.tlAll,0,_SCREEN.gcB2T_GitPjx="1",4,3)) THEN
+ IF Convert_Pjx_2Bin(.F.,IIF(m.tlAll,3,1),ICASE(m.tlAll,0,_SCREEN.gcB2T_GitPjx="1",4,3)) THEN
   SwitchErrorHandler(.T.)
   _SCREEN.ADDPROPERTY('gcOld_Path',FULLPATH(CURDIR()))
   CD (JUSTPATH(_SCREEN.gcB2T_Path))
@@ -182,7 +182,7 @@ FUNCTION Pjx2Commit	&&Create a commit to git.
   REMOVEPROPERTY(_SCREEN,'gcOld_Path')
   SwitchErrorHandler(.F.)
 
- ENDIF &&Convert_Pjx(.F.,IIF(m.tlAll,3,1),ICASE(m.tlAll,0,_SCREEN.gcB2T_GitPjx="1",4,3))
+ ENDIF &&Convert_Pjx_2Bin(.F.,IIF(m.tlAll,3,1),ICASE(m.tlAll,0,_SCREEN.gcB2T_GitPjx="1",4,3))
 ENDFUNC &&Pjx2Commit
 
 FUNCTION Inter_Active &&Run settings mask.
@@ -226,27 +226,22 @@ FUNCTION Inter_Active &&Run settings mask.
  SwitchErrorHandler(.F.)
 ENDFUNC &&Inter_Active
 
-*DO Convert_Pjx IN (_SCREEN.gcB2T_App) WITH .F.,2,0
+*DO Convert_Pjx_2Bin IN (_SCREEN.gcB2T_App) WITH .F.,2,0
 *DO Pjx2Commit IN (_SCREEN.gcB2T_App) WITH .T.
-* IF Convert_Pjx(.F.,IIF(m.tlAll,3,1),ICASE(m.tlAll,0,_SCREEN.gcB2T_GitPjx="1",4,3)) THEN
-FUNCTION Convert_Pjx &&Runs FoxBin2Prg for multiple projects.
+* IF Convert_Pjx_2Bin(.F.,IIF(m.tlAll,3,1),ICASE(m.tlAll,0,_SCREEN.gcB2T_GitPjx="1",4,3)) THEN
+FUNCTION Convert_Pjx_2Bin &&Runs FoxBin2Prg for multiple projects to create binary projects.
  LPARAMETERS;
-  tlText2Bin,;
   tnProjects,;
   tnMode,;
   tcFile
 
 *!*	<pdm>
-*!*	<descr>Runs FoxBin2Prg for multiple projects.</descr>
-*!*	<params name="tlText2Bin" type="Boolean" byref="0" dir="" inb="0" outb="0">
-*!*	<short>Direction of operation.</short>
-*!*	<detail>If true, create binaries for the projects defined by <pdmpara num="2" />.</detail>
-*!*	</params>
+*!*	<descr>Runs FoxBin2Prg for multiple projects to create project-binary.</descr>
 *!*	<params name="tnProjects" type="Numeric" byref="0" dir="" inb="0" outb="0">
 *!*	<short>Defines what project to be processed</short>
 *!*	<detail>
 *!*	<dl>
-*!*	 <dt>0</dt><dd>Use <expr>GETFILE()</expr> to define the file. Input is a text file if <pdmpara num="1"/>.</dd>
+*!*	 <dt>0</dt><dd>Use <expr>GETFILE()</expr> to define the file.</dd>
 *!*	 <dt>1</dt><dd>Just the active project.</dd>
 *!*	 <dt>2</dt><dd>All projects open in IDE. Include list of Additional Files from Settings interface.</dd>
 *!*	 <dt>3</dt><dd>All projects in home path. Include list of Additional Files from Settings interface.</dd>
@@ -269,8 +264,8 @@ FUNCTION Convert_Pjx &&Runs FoxBin2Prg for multiple projects.
 *!*	<params name="tcFile" type="Numeric" byref="0" dir="In" inb="1" outb="0">
 *!*	<short>Project to process.</short>
 *!*	<detail>
-*!*	<p>For <pdmpara num="2" />=0 only. Will be ignored for other values.
-*!*	Depending on <pdmpara num="1" />, extension might be <em>PJX</em> or <em>PJX</em> and <em>PJ2</em>.
+*!*	<p>For <pdmpara num="1" />=0 only. Will be ignored for other values.
+*!*	Extension might be <em>PJX</em> or <em>PJX</em> and <em>PJ2</em>.
 *!*	</p>
 *!*	</detail>
 *!*	</params>
@@ -286,11 +281,11 @@ FUNCTION Convert_Pjx &&Runs FoxBin2Prg for multiple projects.
 *!*	</copyright>
 
 *!*	<change date="{^2015-05-12,09:56:00}">Changed by: SF<br />
-*!*	New value for parameter <pdmpara num="3" /> "4"
+*!*	New value for parameter <pdmpara num="2" /> "4"
 *!*	</change>
 *!*	</pdm>
 *!*	<change date="{^2015-06-12,15:56:00}">Changed by: SF<br />
-*!*	New value for parameter <pdmpara num="2" /> "4"
+*!*	New value for parameter <pdmpara num="1" /> "4"
 *!*	</change>
 *!*	</pdm>
 *!*	Changed by: SF 6.3.2021
@@ -304,29 +299,29 @@ FUNCTION Convert_Pjx &&Runs FoxBin2Prg for multiple projects.
   lcOldExact  AS CHARACTER
 
  DO CASE
-  CASE VARTYPE(m.tlText2Bin)#'L'
-   tlText2Bin = '?'
-  CASE VARTYPE(m.tnProjects)#'N'
+  CASE VARTYPE(m.tnProjects)='L' AND !m.tnProjects
    tnProjects = 0
+  CASE VARTYPE(m.tnProjects)#'N'
+   tnProjects = '?'
   CASE !BETWEEN(m.tnProjects,0,4)
-   tlText2Bin = '?'
+   tnProjects = '?'
   CASE VARTYPE(m.tnMode)#'N'
    tnProjects = 0
   CASE !BETWEEN(m.tnMode,0,4)
-   tlText2Bin = '?'
+   tnProjects = '?'
   OTHERWISE
  ENDCASE
 
  lcOldExact = SET("Exact")
  SET EXACT ON
- IF VARTYPE(m.tlText2Bin)='C';
-   AND INLIST(LOWER(m.tlText2Bin),'?','/?','-?','h','/h','-h','help','/help','-help') THEN
+ IF VARTYPE(m.tnProjects)='C';
+   AND INLIST(LOWER(m.tnProjects),'?','/?','-?','h','/h','-h','help','/help','-help') THEN
 
   HelpMsg(1)
 
   SET EXACT &lcOldExact
   RETURN .F.
- ENDIF &&VARTYPE(m.tlText2Bin)='C' AND INLIST(LOWER(m.tlText2Bin),'?','/?','-?','h','/h','-h','help','/help','-help')
+ ENDIF &&VARTYPE(m.tnProjects)='C' AND INLIST(LOWER(m.tnProjects),'?','/?','-?','h','/h','-h','help','/help','-help')
 
  SET EXACT &lcOldExact
 
@@ -346,7 +341,6 @@ FUNCTION Convert_Pjx &&Runs FoxBin2Prg for multiple projects.
   lnProj      AS NUMBER,;
   lnProjs     AS NUMBER,;
   llPath      AS BOOLEAN,;
-  llCheckAll  AS BOOLEAN,;
   lvMode      AS VARIANT,;
   loProject   AS PROJECT
 
@@ -358,28 +352,21 @@ FUNCTION Convert_Pjx &&Runs FoxBin2Prg for multiple projects.
 
  CLEAR
 
- IF m.tlText2Bin THEN
-  IF MESSAGEBOX('Create Binary?',4+32+256,'Bin2Text v'+dcB2T_Verno,10000)#6 THEN
-   ?'Stopped by user' FONT '' STYLE 'B'
-   SwitchErrorHandler(.F.)
-   RETURN .F.
-  ENDIF &&MESSAGEBOX('Create Binary?',4+32+256,'FoxBin2Text',10000)#6
-  ?'Process to binary'
- ELSE  &&m.tlText2Bin
-
-  ?'Process to text'
- ENDIF &&m.tlText2Bin
+ IF MESSAGEBOX('Create Binary?',4+32+256,'Bin2Text v'+dcB2T_Verno,10000)#6 THEN
+  ?'Stopped by user' FONT '' STYLE 'B'
+  SwitchErrorHandler(.F.)
+  RETURN .F.
+ ENDIF &&MESSAGEBOX('Create Binary?',4+32+256,'FoxBin2Text',10000)#6
+ ?'Process to binary'
 
  laProjects	= .NULL.
  laFiles	= .NULL.
 
  lcOldPath = FULLPATH(CURDIR())
 
- llCheckAll = !m.tlText2Bin
  DO CASE
   CASE m.tnProjects=0
 *Getfile
-   llCheckAll = .F.
 
    LOCAL;
     lcSourceExt    AS CHARACTER,;
@@ -392,49 +379,39 @@ FUNCTION Convert_Pjx &&Runs FoxBin2Prg for multiple projects.
     RETURN .F.
    ENDIF &&_SCREEN.frmB2T_Envelop.cusB2T.Get_Converter(,@loConverter,.T.)
 
-   IF PCOUNT()=4 THEN
+   IF PCOUNT()=3 THEN
     IF VARTYPE(m.tcFile)='C' AND FILE(m.tcFile) THEN
      loFB2T_Setting = m.loConverter.Get_DirSettings(JUSTPATH(m.tcFile))
 
-     DO CASE
-      CASE !m.tlText2Bin AND UPPER(JUSTEXT(m.tcFile))=="PJX"
-* only PJX allowed here
-       lcProj = m.tcFile
-
-      CASE  m.tlText2Bin AND UPPER(JUSTEXT(m.tcFile))==m.loFB2T_Setting.c_PJ2
+     IF UPPER(JUSTEXT(m.tcFile))==m.loFB2T_Setting.c_PJ2 THEN
 * only PJX-text-file allowed here
-       lcProj = m.tcFile
+      lcProj = m.tcFile
 
-      OTHERWISE
+     ELSE  &&UPPER(JUSTEXT(m.tcFile))==m.loFB2T_Setting.c_PJ2
 * fail
-       ?'File of this type is not supported for this opperation.' FONT '' STYLE 'B'
-       RETURN .F.
+      ?'File of this type is not supported for this opperation.' FONT '' STYLE 'B'
+      RETURN .F.
+     ENDIF &&UPPER(JUSTEXT(m.tcFile))==m.loFB2T_Setting.c_PJ2
 
-     ENDCASE
+    ELSE  &&VARTYPE(m.tcFile)='C' AND FILE(m.tcFile)
+     ?'Error in parameter tcFile' FONT '' STYLE 'B'
+     RETURN .F.
+
     ENDIF &&VARTYPE(m.tcFile)='C' AND FILE(m.tcFile)
-
-   ELSE  &&PCOUNT()=4
-    ?'Error in parameter m.tcFile' FONT '' STYLE 'B'
-    RETURN .F.
-
-   ENDIF &&PCOUNT()=4
+   ENDIF &&PCOUNT()=3
 
    IF EMPTY(m.lcProj) THEN
     lcPath = JUSTPATH(_SCREEN.gcB2T_Path)
     CD (m.lcPath)
 
-    IF m.tlText2Bin THEN
 *Just guess
-     loFB2T_Setting	= m.loConverter.Get_DirSettings(m.lcPath)
-     lcSourceExt	= UPPER(m.loFB2T_Setting.c_PJ2)
-    ELSE  &&m.tlText2Bin
-     lcSourceExt = "PJX"
-    ENDIF &&m.tlText2Bin
+    loFB2T_Setting	= m.loConverter.Get_DirSettings(m.lcPath)
+    lcSourceExt	= UPPER(m.loFB2T_Setting.c_PJ2)
 
     lcProj = GETFILE(m.lcSourceExt)
    ENDIF &&EMPTY(m.lcProj)
 
-   IF !EMPTY(m.lcProj) AND m.tlText2Bin THEN
+   IF !EMPTY(m.lcProj) THEN
     lcPath = JUSTPATH(m.lcProj)
 
 *get local text extension for project
@@ -445,7 +422,7 @@ FUNCTION Convert_Pjx &&Runs FoxBin2Prg for multiple projects.
     loFB2T_Setting = .NULL.
     loConverter	   = .NULL.
     Destruct_Objects()
-   ENDIF &&!EMPTY(m.lcProj) AND m.tlText2Bin
+   ENDIF &&!EMPTY(m.lcProj)
 
    IF ISBLANK(m.lcProj) THEN
     CD (m.lcOldPath)
@@ -461,12 +438,12 @@ FUNCTION Convert_Pjx &&Runs FoxBin2Prg for multiple projects.
 *!*	</change>
 *!*	</pdm>
 
-   IF m.tlText2Bin AND !UPPER(JUSTEXT(m.lcProj))==m.lcSourceExt THEN
-*   IF m.tlText2Bin AND !UPPER(JUSTEXT(m.lcProj)==m.lcSourceExt) THEN
+   IF !UPPER(JUSTEXT(m.lcProj))==m.lcSourceExt THEN
     MESSAGEBOX("File is not a valid text representation of a project in this folder",0,'Bin2Text v'+dcB2T_Verno)
     SwitchErrorHandler(.F.)
     RETURN .F.
-   ENDIF &&m.tlText2Bin AND !UPPER(JUSTEXT(m.lcProj))==m.lcSourceExt
+
+   ENDIF &&!UPPER(JUSTEXT(m.lcProj))==m.lcSourceExt
 
 *!*	/Changed by: SF 11.6.2015
 
@@ -482,7 +459,6 @@ FUNCTION Convert_Pjx &&Runs FoxBin2Prg for multiple projects.
 *  &&m.tnProjects=0
   CASE m.tnProjects=1
 *active project
-   llCheckAll = .F.
 
    IF _VFP.PROJECTS.COUNT=0 THEN
     CD (m.lcOldPath)
@@ -503,7 +479,6 @@ FUNCTION Convert_Pjx &&Runs FoxBin2Prg for multiple projects.
 *  &&m.tnProjects=1
   CASE m.tnProjects=2
 *open projects
-   llCheckAll = .F.
 
    lnProjs = _VFP.PROJECTS.COUNT
    IF m.lnProjs=0 THEN
@@ -529,16 +504,6 @@ FUNCTION Convert_Pjx &&Runs FoxBin2Prg for multiple projects.
 *  &&m.tnProjects=2
   CASE m.tnProjects=3
 *path
-*!*	Changed by: SF 15.9.2015
-*!*	<pdm>
-*!*	<change date="{^2015-09-15,10:45:00}">Changed by: SF<br />
-*!*	Do not delete obsolete libraries etc on <b>all</b> run. This runs only base dir.
-*!*	Hidden projects in subdirectories storing extra stuff might exist.
-*!*	</change>
-*!*	</pdm>
-   llCheckAll = .F.
-*!*	/Changed by: SF 15.9.2015
-
    LOCAL;
     lcSourceExt AS CHARACTER,;
     loConverter AS OBJECT
@@ -553,14 +518,9 @@ FUNCTION Convert_Pjx &&Runs FoxBin2Prg for multiple projects.
 
    CD (m.lcPath)
 
-   IF m.tlText2Bin THEN
 *get local text extension for project
-    loFB2T_Setting = m.loConverter.Get_DirSettings(m.lcPath)
-    lcSourceExt	   = m.loFB2T_Setting.c_PJ2
-
-   ELSE  &&m.tlText2Bin
-    lcSourceExt = "PJX"
-   ENDIF &&m.tlText2Bin
+   loFB2T_Setting = m.loConverter.Get_DirSettings(m.lcPath)
+   lcSourceExt	   = m.loFB2T_Setting.c_PJ2
 
    loConverter = .NULL.
    Destruct_Objects()
@@ -600,7 +560,7 @@ FUNCTION Convert_Pjx &&Runs FoxBin2Prg for multiple projects.
 
    _SCREEN.ADDPROPERTY('gaFiles(1,3)')
 
-   ScanDir(1,m.lcPath,m.tlText2Bin,m.loConverter)
+   ScanDir(1,m.lcPath,.T.,m.loConverter)
 
    loConverter = .NULL.
    Destruct_Objects()
@@ -622,24 +582,27 @@ FUNCTION Convert_Pjx &&Runs FoxBin2Prg for multiple projects.
   CASE m.tnMode=0
    lvMode     = "*"
    ??', generate projects and files of list'
+
   CASE m.tnMode=1
-   llCheckAll = .F.
    lvMode	  = "*-"
    ??', generate files list'
+
   CASE m.tnMode=2
-   llCheckAll = .F.
    lvMode	  = ""
    ??', generate projects'
+
   CASE m.tnMode=3
-   llCheckAll = .F.
    lvMode	  = "*-"
    ??', generate files list'
+
   CASE m.tnMode=4
    lvMode     = "*"
    ??', generate projects and files of list'
+
   OTHERWISE
    lvMode     = "*"
    ??', generate projects and files of list'
+
  ENDCASE
 
 *close all the projects in the IDE / from StorePjx
@@ -726,7 +689,6 @@ FUNCTION Convert_Pjx &&Runs FoxBin2Prg for multiple projects.
  _SCREEN.ADDPROPERTY('gcOld_Path',m.lcOldPath)
  _SCREEN.ADDPROPERTY('gvMode',m.lvMode)
  _SCREEN.ADDPROPERTY('glText2Bin',m.tlText2Bin)
- _SCREEN.ADDPROPERTY('glCheckAll',m.llCheckAll)
 
 *to remove Classlibs so we can recreate
  CLEAR ALL
@@ -740,15 +702,13 @@ FUNCTION Convert_Pjx &&Runs FoxBin2Prg for multiple projects.
 *process Transformation
  Construct_Objects()
 
- _SCREEN.frmB2T_Envelop.cusB2T.Process_Bin2Text(@laFiles,_SCREEN.glText2Bin,_SCREEN.gvMode,_SCREEN.glCheckAll AND _SCREEN.gcB2T_Delete=="1")
+ _SCREEN.frmB2T_Envelop.cusB2T.Process_Bin2Txt(@laFiles,_SCREEN.gvMode,.F.)
  Destruct_Objects()
 
  CLEAR ALL
 
 */Move
  REMOVEPROPERTY(_SCREEN,'gvMode')
- REMOVEPROPERTY(_SCREEN,'glText2Bin')
- REMOVEPROPERTY(_SCREEN,'glCheckAll')
 
 
 *Move
@@ -817,7 +777,7 @@ FUNCTION Convert_Pjx &&Runs FoxBin2Prg for multiple projects.
  REMOVEPROPERTY(_SCREEN,'gcOld_Path')
 
  SwitchErrorHandler(.F.)
-ENDFUNC &&Convert_Pjx
+ENDFUNC &&Convert_Pjx_2Bin
 
 FUNCTION Convert_File  	&&Runs FoxBin2Prg for a single file or vcx/class.
  LPARAMETERS;
@@ -846,7 +806,7 @@ FUNCTION Convert_File  	&&Runs FoxBin2Prg for a single file or vcx/class.
 *!*	<params name="tcFile" type="Numeric" byref="0" dir="In" inb="1" outb="0">
 *!*	<short>File to process.</short>
 *!*	<detail>
-*!*	<p>Any file except project, what must be processed with <see pem="Convert_Pjx" />.</p>
+*!*	<p>Any file except project, what must be processed with <see pem="Convert_Pjx_2Bin" /> or  <see pem="Convert_Pjx_2Txt" />.</p>
 *!*	<p>Depending on <pdmpara num="1" />, input might be <em>Binary</em> or <em>Binary</em> and <em>Text</em>.</p>
 *!*	<p>If <pdmpara num="2" />, in combination with <pdmpara num="4" />.</p>
 *!*	<p>Does not accept class in form library::class.</p>
@@ -950,18 +910,18 @@ FUNCTION Convert_File  	&&Runs FoxBin2Prg for a single file or vcx/class.
  ENDIF &&m.tlText2Bin
 
  llReturn = .T.
- 
+
  IF PCOUNT()>2 AND VARTYPE(m.tcFile)='C' THEN
   IF 0h00$m.tcFile THEN
    IF m.tcFile=0h00 THEN
     tcFile = SUBSTR(m.tcFile,2)
    ENDIF &&m.tcFile=0h00
- 
+
    _SCREEN.gaFiles(1,3) = SUBSTR(m.tcFile,AT(0h00,m.tcFile))
    tcFile               = SUBSTR(m.tcFile,1,AT(0h00,m.tcFile)-1)
- 
+
   ENDIF &&0h00$m.tcFile
-  
+
   IF IsFile(m.tcFile) THEN
    tcFile = FULLPATH(m.tcFile)
    lcPath = JUSTPATH(m.tcFile)
@@ -1256,7 +1216,7 @@ FUNCTION Convert_File  	&&Runs FoxBin2Prg for a single file or vcx/class.
   ENDIF &&_SCREEN.glInfo
 ******
 
-  llReturn = m.llReturn AND _SCREEN.frmB2T_Envelop.cusB2T.Process_Bin2Text(@laFiles,_SCREEN.glText2Bin,"",.F.,.T.,m.loFB2T_Setting)
+  llReturn = m.llReturn AND _SCREEN.frmB2T_Envelop.cusB2T.Process_Bin2Txt(@laFiles,_SCREEN.glText2Bin,"",.F.,.T.,m.loFB2T_Setting)
 
   loFB2T_Setting = .NULL.
 
@@ -1522,7 +1482,7 @@ FUNCTION Convert_Array	&&Runs FoxBin2Prg for multiple files.
  SwitchErrorHandler(.T.)
 *process Transformation
  Construct_Objects()
- _SCREEN.frmB2T_Envelop.cusB2T.Process_Bin2Text(@taFiles,m.tlText2Bin,m.tcMode)
+ _SCREEN.frmB2T_Envelop.cusB2T.Process_Bin2Txt(@taFiles,m.tlText2Bin,m.tcMode)
  Destruct_Objects()
  SwitchErrorHandler(.F.)
 
@@ -2494,7 +2454,9 @@ FUNCTION HelpMsg	&&Internal. Display help message for external functions
 
  #DEFINE dcText_DE_H00;
   [Run:]+0h0d0a+;
-  [DO Convert_Pjx IN RunB2T.prg]+" [OF Bin2Text.app]"+0h0d0a+;
+  [DO Convert_Pjx_2Bin IN RunB2T.prg]+" [OF Bin2Text.app]"+0h0d0a+;
+  [ IDE Interface für FoxBin2Prg]+0h0D0A0D0A+;
+  [DO Convert_Pjx_2BTxt IN RunB2T.prg]+" [OF Bin2Text.app]"+0h0d0a+;
   [ IDE Interface für FoxBin2Prg]+0h0D0A0D0A+;
   [DO Pjx2Commit IN RunB2T.prg]+" [OF Bin2Text.app]"+0h0d0a+;
   [ Wandle alle Dateien aller PJX im Verzeichnis nach Text]+0h0d0a+;
@@ -2511,13 +2473,31 @@ FUNCTION HelpMsg	&&Internal. Display help message for external functions
   [ IDE Interface für FoxBin2Prg, für ein Verzeichnis.]
 
  #DEFINE dcText_DE_H01;
-  "DO Convert_Pjx IN Bin2Text.app [[/?]|[lText2Bin[,nProjects[,nMode[,cFile]]]"+0h0d0a+;
-  [ IDE Interface für FoxBin2Prg]+0h0d0a+;
+  "DO Convert_Pjx_2Bin IN Bin2Text.app [[/?]|[nProjects[,nMode[,cFile]]]"+0h0d0a+;
+  [ IDE Interface für FoxBin2Prg, erzeugt Projekt-Binärddatei]+0h0d0a+;
   [ Parameter:]+0h0d0a+;
   [  /?        Zeigt diesen Hilfstext]+0h0d0a+;
-  [  lText2Bin Wenn wahr werden die Biärdateien erzeugt,]+0h0d0a+;
-  [            sonst werden Textdateien erzeugt.(Default)]+0h0d0a+;
-  [  nProjects Legt fest, welche Prokjekte werden einbezogen werden.]+0h0d0a+;
+  [  nProjects Legt fest, welche Prokjekte einbezogen werden.]+0h0d0a+;
+  [            0 Datei bestimmen (Default)]+0h0d0a+;
+  [            1 aktives Projekt]+0h0d0a+;
+  [            2 alle in der IDE aktiven Proejkte]+0h0d0a+;
+  [            3 alle im Defaultpfad gefunden Projekte]+0h0d0a+;
+  [  nMode     Legt fest, welcher Teil des Projektes gewandelt werden soll.]+0h0d0a+;
+  [            die Quelldateien (VCX, FRX, ...) oder]+0h0d0a+;
+  [            die Projekdateien (PJX)]+0h0d0a+;
+  [            0 Quell-  und Projekdateien (Default)]+0h0d0a+;
+  [            1 nur Quelldateien (VCX, FRX, ...)]+0h0d0a+;
+  [            2 nur Projekdateien (PJX)]+0h0d0a+;
+  [  cFile     Datei, für die die Methode gerufen wird.]+0h0d0a+;
+  [Alle Projekte werden temporär geschlossen.]+0h0d0a+;
+  [Führt ein CLEAR ALL aus]
+
+ #DEFINE dcText_DE_H01_txt;
+  "DO Convert_Pjx_2Txt IN Bin2Text.app [[/?]|[nProjects[,nMode[,cFile]]]"+0h0d0a+;
+  [ IDE Interface für FoxBin2Prg, erzeugt Textdatei für Projekt]+0h0d0a+;
+  [ Parameter:]+0h0d0a+;
+  [  /?        Zeigt diesen Hilfstext]+0h0d0a+;
+  [  nProjects Legt fest, welche Prokjekte einbezogen werden.]+0h0d0a+;
   [            0 Datei bestimmen (Default)]+0h0d0a+;
   [            1 aktives Projekt]+0h0d0a+;
   [            2 alle in der IDE aktiven Proejkte]+0h0d0a+;
@@ -2533,7 +2513,11 @@ FUNCTION HelpMsg	&&Internal. Display help message for external functions
   [Führt ein CLEAR ALL aus]
 
  #DEFINE dcText_DE_H02;
-  "DO Convert_Pjx IN Bin2Text.app [/?]|[lText2Bin[,nProjects[,nMode]]]"+0h0d0a+;
+  "DO Convert_Pjx_2Bin IN Bin2Text.app [/?]|[nProjects[,nMode[,cFile]]]"+0h0d0a+;
+  [Nur aus der IDE starten.]
+
+ #DEFINE dcText_DE_H02_txt;
+  "DO Convert_Pjx_2Txt IN Bin2Text.app [/?]|[nProjects[,nMode[,cFile]]]"+0h0d0a+;
   [Nur aus der IDE starten.]
 
  #DEFINE dcText_DE_H03;
@@ -2620,7 +2604,9 @@ FUNCTION HelpMsg	&&Internal. Display help message for external functions
 ************************************************
  #DEFINE dcText_EN_H00;
   [Run:]+0h0d0a+;
-  [DO Convert_Pjx IN Bin2Text.app]+0h0d0a+;
+  [DO Convert_Pjx_2Bin IN Bin2Text.app]+0h0d0a+;
+  [ IDE interface for FoxBin2Prg, to be used with menu]+0h0D0A0D0A+;
+  [DO Convert_Pjx_2Txt IN Bin2Text.app]+0h0d0a+;
   [ IDE interface for FoxBin2Prg, to be used with menu]+0h0D0A0D0A+;
   [DO Pjx2Commit IN Bin2Text.app]+0h0d0a+;
   [ Process all containied in all PJX in Folder to text]+0h0d0a+;
@@ -2637,12 +2623,30 @@ FUNCTION HelpMsg	&&Internal. Display help message for external functions
   [ IDE interface for FoxBin2Prg, pick a directory to convert.]
 
  #DEFINE dcText_EN_H01;
-  "DO Convert_Pjx IN Bin2Text.app [/?]|[lText2Bin[,nProjects[,nMode[,cFile]]]]"+0h0d0a+;
-  [ IDE interface for FoxBin2Prg, to be used with menu]+0h0d0a+;
+  "DO Convert_Pjx_2Bin IN Bin2Text.app [/?]|[nProjects[,nMode[,cFile]]]"+0h0d0a+;
+  [ IDE interface for FoxBin2Prg;create project-binary, to be used with menu]+0h0d0a+;
   [ Parameter:]+0h0d0a+;
   [  /?        This help message]+0h0d0a+;
-  [  lText2Bin    If true, create binaries,]+0h0d0a+;
-  [            if false create text files.(Default)]+0h0d0a+;
+  [  nProjects Define which project to include.]+0h0d0a+;
+  [            0 Select file interactive (Default)]+0h0d0a+;
+  [            1 active project in IDE]+0h0d0a+;
+  [            2 all projects open in IDE]+0h0d0a+;
+  [            3 all projects in active path]+0h0d0a+;
+  [  nMode     Mode of operation. Part of project to process]+0h0d0a+;
+  [            source files (VCX, FRX, ...) or]+0h0d0a+;
+  [            project files( (PJX)]+0h0d0a+;
+  [            0 source-  and project files (Default)]+0h0d0a+;
+  [            1 source files only (VCX, FRX, ...)]+0h0d0a+;
+  [            2 project files only (PJX)]+0h0d0a+;
+  [  cFile     File that method should run for.]+0h0d0a+;
+  [All projects will be closed temporary.]+0h0d0a+;
+  [This will use CLEAR ALL!]
+
+ #DEFINE dcText_EN_H01_txt;
+  "DO Convert_Pjx_2Txt IN Bin2Text.app [/?]|[nProjects[,nMode[,cFile]]]"+0h0d0a+;
+  [ IDE interface for FoxBin2Prg; create text from project, to be used with menu]+0h0d0a+;
+  [ Parameter:]+0h0d0a+;
+  [  /?        This help message]+0h0d0a+;
   [  nProjects Define which project to include.]+0h0d0a+;
   [            0 Select file interactive (Default)]+0h0d0a+;
   [            1 active project in IDE]+0h0d0a+;
@@ -2659,7 +2663,11 @@ FUNCTION HelpMsg	&&Internal. Display help message for external functions
   [This will use CLEAR ALL!]
 
  #DEFINE dcText_EN_H02;
-  "DO Convert_Pjx IN Bin2Text.app [/?]|[lText2Bin[,nProjects[,nMode]]]"+0h0D0A0D0A+;
+  "DO Convert_Pjx_2Bin IN Bin2Text.app [/?]|[nProjects[,nMode[,cFile]]]"+0h0D0A0D0A+;
+  [Run from IDE only.]
+
+ #DEFINE dcText_EN_H02_txt;
+  "DO Convert_Pjx_2Txt IN Bin2Text.app [/?]|[nProjects[,nMode[,cFile]]]"+0h0D0A0D0A+;
   [Run from IDE only.]
 
  #DEFINE dcText_EN_H03;
@@ -3114,7 +3122,7 @@ PROCEDURE Dir_Action_PJX		&&Internal. Parse a directory for projects (binary or 
   FOR lnProj = 1 TO m.lnProjs
    _SCREEN.gaFiles(m.lnFiles+m.lnProj,1) = FORCEPATH(FORCEEXT(m.laFiles(m.lnProj,1),"PJX"),m.tcDir)
    _SCREEN.gaFiles(m.lnFiles+m.lnProj,3) = ""
-   
+
   ENDFOR &&lnProjs
  ENDIF &&m.lnProjs>0
 
