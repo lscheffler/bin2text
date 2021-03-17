@@ -403,7 +403,7 @@
   <h3><a name="Convert_File_2Bin">Convert_File_2Bin</a></h3>
    <span class="example">DO Convert_File IN Bin2Text.app WITH [/?]|[lSingleClass[,cFiles[,cLClass]]</span>
    <p>
-   	This is what all other menus item are calling.
+   	This is what all other menus item are calling to process to binary.
    </p>
    <p>
    	See <a href="../code/runb2t.prg/Main_d.convert_file_2bin.htm" title="Skip to procedure Convert_File_2Bin">Convert_File_2Bin</a>
@@ -411,7 +411,7 @@
   <h3><a name="Convert_File_2Txt">Convert_File_2Txt</a></h3>
    <span class="example">DO Convert_File_2Txt IN Bin2Text.app WITH [/?]|[lSingleClass[,cFiles[,cLClass]]</span>
    <p>
-   	This is what all other menus item are calling.
+   	This is what all other menus item are calling processing to text.
    </p>
    <p>
    	See <a href="../code/runb2t.prg/Main_d.convert_file_2txt.htm" title="Skip to procedure Convert_File_2Txt">Convert_File_2Txt</a>
@@ -422,7 +422,7 @@
    	Runs FoxBin2Prg for a single directory and it's sub directories to create binaries.
    </p>
    <p>
-   	This is what menus Directory items are calling.
+   	This is what menus Directory items are calling processing to binary.
    </p>
    <p>
    	See <a href="../code/runb2t.prg/Main_d.convert_directory_2bin.htm" title="Skip to procedure Convert_Directory_2Bin">Convert_Directory_2Bin</a>
@@ -433,7 +433,7 @@
    	Runs FoxBin2Prg for a single directory and it's sub directories to create text files.
    </p>
    <p>
-   	This is what menus Directory items are calling.
+   	This is what menus Directory items are calling processing to text.
    </p>
    <p>
    	See <a href="../code/runb2t.prg/Main_d.convert_directory_2txt.htm" title="Skip to procedure Convert_Directory_2Txt">Convert_Directory_2Txt</a>
@@ -441,18 +441,31 @@
  <hr /><h2><a name="evenmore">And more</a></h2>
    <p>
  	There is one interface that offers a way to process any group of files, more complex then one can express with the FoxBin2Prg interface.
-  <h3><a name="Convert_Array">Convert_Array</a></h3>
+  <h3><a name="Convert_Array_2Bin">Convert_Array_2Bin</a></h3>
   </p>
-   <span class="example">DO Convert_Array IN Bin2Text.app WITH [/?]|lToBin,cMode,@aFiles</span>
+   <span class="example">DO Convert_Array_2Bin IN Bin2Text.app WITH [/?]|cMode,@aFiles</span>
    <p>
-   	This will process a file list.
+   	This will process a file list to binary.
    </p>
    <p>
    	If binaries run with this are not in a project known to Convert_Pjx_2Bin,
    	text files related might be deleted with the <em>delete obsolete files</em> process.
    </p>
    <p>
-   	See <a href="../code/runb2t.prg/Main_d.convert_array.htm" title="Skip to procedure Convert_Array">Convert_Array</a>
+   	See <a href="../code/runb2t.prg/Main_d.convert_array_2bin.htm" title="Skip to procedure Convert_Array_2Bin">Convert_Array_2Bin</a>
+   </p>
+  <h3><a name="Convert_Array_2Txt">Convert_Array_2Txt</a></h3>
+  </p>
+   <span class="example">DO Convert_Array_2Txt IN Bin2Text.app WITH [/?]|cMode,@aFiles</span>
+   <p>
+   	This will process a file list to text.
+   </p>
+   <p>
+   	If binaries run with this are not in a project known to Convert_Pjx_2Bin,
+   	text files related might be deleted with the <em>delete obsolete files</em> process.
+   </p>
+   <p>
+   	See <a href="../code/runb2t.prg/Main_d.convert_array_2txt.htm" title="Skip to procedure Convert_Array_2Txt">Convert_Array_2Txt</a>
    </p>
   <h3><a name="Table">Storage table</a></h3>
    <p>

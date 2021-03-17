@@ -2112,7 +2112,7 @@ FUNCTION Convert_Directory_2Bin  	&&Runs FoxBin2Prg for a single directory and i
 *!*	<copyright>
 *!*	<img src="../../repository/vfpxbanner_small.png" alt="VFPX logo"/><br/>
 *!*	<p>This project is part of <a href="https://vfpx.github.io/"  title="Skip to VFPX" target="_blank">VFPX</a>.</p>
-*!*	<p><i>&copy; 12.02.2021 Lutz Scheffler Software Ingenieurbüro</i></p>
+*!*	<p><i>&copy; 17.02.2021 Lutz Scheffler Software Ingenieurbüro</i></p>
 *!*	</copyright>
 *!*	</pdm>
 
@@ -2251,7 +2251,7 @@ FUNCTION Convert_Directory_2Txt  	&&Runs FoxBin2Prg for a single directory and i
 *!*	<copyright>
 *!*	<img src="../../repository/vfpxbanner_small.png" alt="VFPX logo"/><br/>
 *!*	<p>This project is part of <a href="https://vfpx.github.io/"  title="Skip to VFPX" target="_blank">VFPX</a>.</p>
-*!*	<p><i>&copy; 12.02.2021 Lutz Scheffler Software Ingenieurbüro</i></p>
+*!*	<p><i>&copy; 17.02.2021 Lutz Scheffler Software Ingenieurbüro</i></p>
 *!*	</copyright>
 *!*	</pdm>
 
@@ -2359,21 +2359,13 @@ FUNCTION Convert_Directory_2Txt  	&&Runs FoxBin2Prg for a single directory and i
  RETURN m.llReturn
 ENDFUNC &&Convert_Directory_2Txt
 
-FUNCTION Convert_Array	&&Runs FoxBin2Prg for multiple files.
+FUNCTION Convert_Array_2Bin	&&Runs FoxBin2Prg for multiple files to binary.
  LPARAMETERS;
-  tlText2Bin,;
   tcMode,;
   taFiles
 
 *!*	<pdm>
-*!*	<descr>Runs FoxBin2Prg for multiple files.</descr>
-*!*	<params name="tlText2Bin" type="Boolean" byref="0" dir="" inb="0" outb="0">
-*!*	<short>Direction of operation.</short>
-*!*	<detail>
-*<p>If true, create binaries from the text files corespondening <pdmpara num="3" />.</p>
-*<p>If false create text files.(Default)</p>
-*</detail>
-*!*	</params>
+*!*	<descr>Runs FoxBin2Prg for multiple files to binary.</descr>
 *!*	<params name="tcMode" type="Character" byref="0" dir="" inb="1" outb="0">
 *!*	<short>Mode for pjx files.</short>
 *!*	<detail>Pjx ("*","*-","") parameters as used by FoxBin2Prg.</detail>
@@ -2381,25 +2373,26 @@ FUNCTION Convert_Array	&&Runs FoxBin2Prg for multiple files.
 *!*	<params name="taFiles" type="Array" byref="1" dir="" inb="0" outb="0">
 *!*	<short>Array with files</short>
 *!*	<detail>
-* <p>One column, full qualified filename of binary. or text.
-* If <pdmpara num="1" /> is <expr>false</expr>, the column can declare a class in form <i>File<b>::Class</b></i>
-* as used by FoxBin2Prg for libraries.</p>
-* <p>Optional second column, if first column is a project, projecthook.</p>
+*!*	 <p>First column, full qualified filename of binary. or text.
+*!*	 The column can declare a class in form <i>File<b>::Class</b></i>
+*!*	 as used by FoxBin2Prg for libraries.</p>
+*!*	 <p>Second column, if first column is a project, projecthook.</p>
+*!*	 <p>Third column, empty string.</p>
 *</detail>
 *!*	</params>
 *!*	<retval type="Boolean">True if successfull.</retval>
 *!*	<remarks>
-*<p>Transfers a bunch of files</p>
-*<p>Processes binaries. If <pdmpara num="1"/> the source files will be determined be the code.</p>
-*<note id="E" title="Warning">
-* Note that the files processed will be cached by the normal process of this programm. A operation that raises deletion
-* like <i>Delete obsolete files</i> might delete text files without warning.
-*</note>
-*</remarks>
+*!*	<p>Transfers a bunch of files</p>
+*!*	<p>Processes binaries. The source files will be determined be the code.</p>
+*!*	<note id="E" title="Warning">
+*!*	 Note that the files processed will be cached by the normal process of this programm. A operation that raises deletion
+*!*	 like <i>Delete obsolete files</i> might delete text files without warning.
+*!*	</note>
+*!*	</remarks>
 *!*	<copyright>
 *!*	<img src="../../repository/vfpxbanner_small.png" alt="VFPX logo"/><br/>
 *!*	<p>This project is part of <a href="https://vfpx.github.io/"  title="Skip to VFPX" target="_blank">VFPX</a>.</p>
-*!*	<p><i>&copy; 23.3.2017 Lutz Scheffler Software Ingenieurbüro</i></p>
+*!*	<p><i>&copy; 18.3.2021 Lutz Scheffler Software Ingenieurbüro</i></p>
 *!*	</copyright>
 *!*	</pdm>
 
@@ -2411,48 +2404,129 @@ FUNCTION Convert_Array	&&Runs FoxBin2Prg for multiple files.
   CASE _VFP.STARTMODE#0
    HelpMsg(10)
    RETURN .F.
-  CASE PCOUNT()<3
-   tlText2Bin = '?'
-  CASE VARTYPE(m.tlText2Bin)#'L'
-   tlText2Bin = '?'
+  CASE PCOUNT()<2
+   tcMode = '?'
   CASE VARTYPE(m.tcMode)#'C'
-   tlText2Bin = '?'
+   tcMode = '?'
   CASE TYPE('ALEN(taFiles)')#'N'
-   tlText2Bin = '?'
+   tcMode = '?'
+  CASE ALEN(taFiles,2)<3
+   tcMode = '?'
   OTHERWISE
    LOCAL;
     lnLoop
 
    FOR lnLoop = 1 TO ALEN(m.taFiles)
-    IF !TYPE(m.taFiles(m.lnLoop,1))='C' THEN
-     tlText2Bin = '?'
+    IF !TYPE(m.taFiles(m.lnLoop,1))='C';
+      OR !TYPE(m.taFiles(m.lnLoop,3))='C';
+      OR !TYPE(m.taFiles(m.lnLoop,2))='C';
+      OR ISNULL(m.taFiles(m.lnLoop,2)) THEN
+     tcMode = '?'
      EXIT
-    ENDIF &&!TYPE(taFiles(m.lnLoop,1))='C'
+
+    ENDIF &&!TYPE(m.taFiles(m.lnLoop,1))='C' OR !TYPE(m.taFiles(m.lnLoop,3))='C' OR !TYPE(m.taFiles(m.lnLoop,2))='C ...
    ENDFOR &&lnLoop
-   IF !VARTYPE(m.tlText2Bin)='C' AND ALEN(m.taFiles,2)>1 THEN
-    FOR lnLoop = 1 TO ALEN(m.taFiles)
-     IF !TYPE(m.taFiles(m.lnLoop,2))='C' OR ISNULL(m.taFiles(m.lnLoop,2)) THEN
-      tlText2Bin = '?'
-      EXIT
-     ENDIF &&!TYPE(taFiles(m.lnLoop,2))='C' OR ISNULL(taFiles(m.lnLoop,2))
-    ENDFOR &&lnLoop
-   ENDIF &&!VARTYPE(m.tlText2Bin)='C' AND ALEN(taFiles,2)>1
+
  ENDCASE
 
- IF VARTYPE(m.tlText2Bin)='C';
-   AND INLIST(LOWER(m.tlText2Bin),'?','/?','-?','h','/h','-h','help','/help','-help') THEN
+ IF VARTYPE(m.tcMode)='C';
+   AND INLIST(LOWER(m.tcMode),'?','/?','-?','h','/h','-h','help','/help','-help') THEN
   HelpMsg(1)
   RETURN .F.
- ENDIF &&VARTYPE(m.tlText2Bin)='C' AND INLIST(LOWER(m.tlText2Bin),'?','/?','-?','h','/h','-h','help','/help','-help')
+ ENDIF &&VARTYPE(m.tcMode)='C' AND INLIST(LOWER(m.tcMode),'?','/?','-?','h','/h','-h','help','/help','-help')
 
  SwitchErrorHandler(.T.)
 *process Transformation
  Construct_Objects()
- _SCREEN.frmB2T_Envelop.cusB2T.Process_Bin2Txt(@taFiles,m.tlText2Bin,m.tcMode)
+ _SCREEN.frmB2T_Envelop.cusB2T.Process_Txt2Bin(@taFiles,m.tcMode)
  Destruct_Objects()
  SwitchErrorHandler(.F.)
 
-ENDFUNC &&Convert_Array
+ENDFUNC &&Convert_Array_2Bin
+
+FUNCTION Convert_Array_2Txt	&&Runs FoxBin2Prg for multiple files to text.
+ LPARAMETERS;
+  tcMode,;
+  taFiles
+
+*!*	<pdm>
+*!*	<descr>Runs FoxBin2Prg for multiple files to text.</descr>
+*!*	<params name="tcMode" type="Character" byref="0" dir="" inb="1" outb="0">
+*!*	<short>Mode for pjx files.</short>
+*!*	<detail>Pjx ("*","*-","") parameters as used by FoxBin2Prg.</detail>
+*!*	</params>
+*!*	<params name="taFiles" type="Array" byref="1" dir="" inb="0" outb="0">
+*!*	<short>Array with files</short>
+*!*	<detail>
+*!*	 <p>First column, full qualified filename of binary. or text.
+*!*	 <p>Second column, if first column is a project, projecthook.</p>
+*!*	 <p>Third column, if first column is a table, a CHR(0) delimited list of index files, starting with CHR(0).</p>
+*!*	</detail>
+*!*	</params>
+*!*	<retval type="Boolean">True if successfull.</retval>
+*!*	<remarks>
+*!*	<p>Transfers a bunch of files</p>
+*!*	<p>Processes binaries.</p>
+*!*	<note id="E" title="Warning">
+*!*	 Note that the files processed will be cached by the normal process of this programm. A operation that raises deletion
+*!*	 like <i>Delete obsolete files</i> might delete text files without warning.
+*!*	</note>
+*!*	</remarks>
+*!*	<copyright>
+*!*	<img src="../../repository/vfpxbanner_small.png" alt="VFPX logo"/><br/>
+*!*	<p>This project is part of <a href="https://vfpx.github.io/"  title="Skip to VFPX" target="_blank">VFPX</a>.</p>
+*!*	<p><i>&copy; 17.3.2021 Lutz Scheffler Software Ingenieurbüro</i></p>
+*!*	</copyright>
+*!*	</pdm>
+
+ EXTERNAL ARRAY;
+  taFiles
+
+*check parameters
+
+ DO CASE
+  CASE _VFP.STARTMODE#0
+   HelpMsg(10)
+   RETURN .F.
+  CASE PCOUNT()<2
+   tcMode = '?'
+  CASE VARTYPE(m.tcMode)#'C'
+   tcMode = '?'
+  CASE TYPE('ALEN(taFiles)')#'N'
+   tcMode = '?'
+  CASE ALEN(taFiles,2)<3
+   tcMode = '?'
+  OTHERWISE
+   LOCAL;
+    lnLoop
+
+   FOR lnLoop = 1 TO ALEN(m.taFiles)
+    IF !TYPE(m.taFiles(m.lnLoop,1))='C';
+      OR !TYPE(m.taFiles(m.lnLoop,3))='C';
+      OR !TYPE(m.taFiles(m.lnLoop,2))='C';
+      OR ISNULL(m.taFiles(m.lnLoop,2)) THEN
+     tcMode = '?'
+     EXIT
+
+    ENDIF &&!TYPE(m.taFiles(m.lnLoop,1))='C' OR !TYPE(m.taFiles(m.lnLoop,3))='C' OR !TYPE(m.taFiles(m.lnLoop,2))='C ...
+   ENDFOR &&lnLoop
+
+ ENDCASE
+
+ IF VARTYPE(m.tcMode)='C';
+   AND INLIST(LOWER(m.tcMode),'?','/?','-?','h','/h','-h','help','/help','-help') THEN
+  HelpMsg(1)
+  RETURN .F.
+ ENDIF &&VARTYPE(m.tcMode)='C' AND INLIST(LOWER(m.tcMode),'?','/?','-?','h','/h','-h','help','/help','-help')
+
+ SwitchErrorHandler(.T.)
+*process Transformation
+ Construct_Objects()
+ _SCREEN.frmB2T_Envelop.cusB2T.Process_Bin2Txt(@taFiles,m.tcMode)
+ Destruct_Objects()
+ SwitchErrorHandler(.F.)
+
+ENDFUNC &&Convert_Array_2Txt
 
 FUNCTION InitMenu	&&Starts the IDE menu.
  LPARAMETERS;
