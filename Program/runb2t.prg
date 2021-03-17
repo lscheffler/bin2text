@@ -241,7 +241,7 @@ FUNCTION Convert_Pjx_2Bin &&Runs FoxBin2Prg for multiple projects to create bina
 *!*	<short>Defines what project to be processed</short>
 *!*	<detail>
 *!*	<dl>
-*!*	 <dt>0</dt><dd>Use <expr>GETFILE()</expr> to define the file.</dd>
+*!*	 <dt>0</dt><dd>Use <expr>GETFILE()</expr> to define the file. Input is a text text or binary file.</dd>
 *!*	 <dt>1</dt><dd>Just the active project.</dd>
 *!*	 <dt>2</dt><dd>All projects open in IDE. Include list of Additional Files from Settings interface.</dd>
 *!*	 <dt>3</dt><dd>All projects in home path. Include list of Additional Files from Settings interface.</dd>
@@ -272,7 +272,7 @@ FUNCTION Convert_Pjx_2Bin &&Runs FoxBin2Prg for multiple projects to create bina
 *!*	<retval type="Boolean">True if successfull.</retval>
 *!*	<remarks>
 *!*	<p>For <pdmpar num="2" /> in 2,3,4 the list of Additional Files will not be processed, if there is no project found.</p>
-*!*	<p>For project ony. Other files see <see pem="Convert_File" />.</p>
+*!*	<p>For project ony. Other files see <see pem="Convert_File_2Bin" />.</p>
 *!*	</remarks>
 *!*	<copyright>
 *!*	<img src="../../repository/vfpxbanner_small.png" alt="VFPX logo"/><br/>
@@ -688,7 +688,6 @@ FUNCTION Convert_Pjx_2Bin &&Runs FoxBin2Prg for multiple projects to create bina
 *just to keep data over CLEAR ALL
  _SCREEN.ADDPROPERTY('gcOld_Path',m.lcOldPath)
  _SCREEN.ADDPROPERTY('gvMode',m.lvMode)
- _SCREEN.ADDPROPERTY('glText2Bin',m.tlText2Bin)
 
 *to remove Classlibs so we can recreate
  CLEAR ALL
@@ -779,7 +778,533 @@ FUNCTION Convert_Pjx_2Bin &&Runs FoxBin2Prg for multiple projects to create bina
  SwitchErrorHandler(.F.)
 ENDFUNC &&Convert_Pjx_2Bin
 
-FUNCTION Convert_File  	&&Runs FoxBin2Prg for a single file or vcx/class.
+FUNCTION Convert_Pjx_2Txt &&Runs FoxBin2Prg for multiple projects to create text projects.
+ LPARAMETERS;
+  tlText2Bin,;
+  tnProjects,;
+  tnMode,;
+  tcFile
+
+*!*	<pdm>
+*!*	<descr>Runs FoxBin2Prg for multiple projects to create text files.</descr>
+*!*	<params name="tnProjects" type="Numeric" byref="0" dir="" inb="0" outb="0">
+*!*	<short>Defines what project to be processed</short>
+*!*	<detail>
+*!*	<dl>
+*!*	 <dt>0</dt><dd>Use <expr>GETFILE()</expr> to define the file. Input is a text binary file.</dd>
+*!*	 <dt>1</dt><dd>Just the active project.</dd>
+*!*	 <dt>2</dt><dd>All projects open in IDE. Include list of Additional Files from Settings interface.</dd>
+*!*	 <dt>3</dt><dd>All projects in home path. Include list of Additional Files from Settings interface.</dd>
+*!*	 <dt>4</dt><dd>All projects in home path, with subdirs. Include list of Additional Files from Settings interface.</dd>
+*!*	</dl>
+*!*	</detail>
+*!*	</params>
+*!*	<params name="tnMode" type="Numeric" byref="0" dir="" inb="0" outb="0">
+*!*	<short>Defines FoxBinToPrg mode of operation of pjx files.</short>
+*!*	<detail>
+*!*	<dl>
+*!*	 <dt>0</dt><dd>Use <expr>"*"</expr> Convert files of project, project file and projecthook if defined.</dd>
+*!*	 <dt>1</dt><dd>Use <expr>"*-"</expr> Convert files of project and projecthook (if defined).</dd>
+*!*	 <dt>2</dt><dd>Use <expr>""</expr> Convert project file.</dd>
+*!*	 <dt>3</dt><dd>Use <expr>"*-"</expr> Convert files of project, do not process projecthook (if defined). Keep project open</dd>
+*!*	 <dt>4</dt><dd>Use <expr>"*"</expr> Convert files of project, project file, do not process projecthook (if defined).</dd>
+*!*	</dl>
+*!*	</detail>
+*!*	</params>
+*!*	<params name="tcFile" type="Numeric" byref="0" dir="In" inb="1" outb="0">
+*!*	<short>Project to process.</short>
+*!*	<detail>
+*!*	<p>For <pdmpara num="1" />=0 only. Will be ignored for other values.
+*!*	Extension is <em>PJX</em>.
+*!*	</p>
+*!*	</detail>
+*!*	</params>
+*!*	<retval type="Boolean">True if successfull.</retval>
+*!*	<remarks>
+*!*	<p>For <pdmpar num="2" /> in 2,3,4 the list of Additional Files will not be processed, if there is no project found.</p>
+*!*	<p>For project ony. Other files see <see pem="Convert_File_2Txt" />.</p>
+*!*	</remarks>
+*!*	<copyright>
+*!*	<img src="../../repository/vfpxbanner_small.png" alt="VFPX logo"/><br/>
+*!*	<p>This project is part of <a href="https://vfpx.github.io/"  title="Skip to VFPX" target="_blank">VFPX</a>.</p>
+*!*	<p><i>&copy; 06.03.2021 Lutz Scheffler Software Ingenieurbüro</i></p>
+*!*	</copyright>
+
+*!*	<change date="{^2015-05-12,09:56:00}">Changed by: SF<br />
+*!*	New value for parameter <pdmpara num="2" /> "4"
+*!*	</change>
+*!*	</pdm>
+*!*	<change date="{^2015-06-12,15:56:00}">Changed by: SF<br />
+*!*	New value for parameter <pdmpara num="1" /> "4"
+*!*	</change>
+*!*	</pdm>
+*!*	Changed by: SF 6.3.2021
+*!*	<pdm>
+*!*	<change date="{^2021-03-06,08:18:00}">Changed by: SF<br />
+*!*	New parameter tcFile
+*!*	</change>
+*!*	</pdm>
+
+ LOCAL;
+  lcOldExact  AS CHARACTER
+
+ DO CASE
+  CASE VARTYPE(m.tnProjects)='L' AND !m.tnProjects
+   tnProjects = 0
+  CASE VARTYPE(m.tnProjects)#'N'
+   tnProjects = '?'
+  CASE !BETWEEN(m.tnProjects,0,4)
+   tnProjects = '?'
+  CASE VARTYPE(m.tnMode)#'N'
+   tnProjects = 0
+  CASE !BETWEEN(m.tnMode,0,4)
+   tnProjects = '?'
+  OTHERWISE
+ ENDCASE
+
+ lcOldExact = SET("Exact")
+ SET EXACT ON
+ IF VARTYPE(m.tnProjects)='C';
+   AND INLIST(LOWER(m.tnProjects),'?','/?','-?','h','/h','-h','help','/help','-help') THEN
+
+  HelpMsg(1)
+
+  SET EXACT &lcOldExact
+  RETURN .F.
+ ENDIF &&VARTYPE(m.tnProjects)='C' AND INLIST(LOWER(m.tnProjects),'?','/?','-?','h','/h','-h','help','/help','-help')
+
+ SET EXACT &lcOldExact
+
+ IF _VFP.STARTMODE#0 THEN
+  HelpMsg(2)
+  RETURN .F.
+ ENDIF &&F_VFP.StartMode#0
+
+ SwitchErrorHandler(.T.)
+ RELEASE;
+  m.lcOldExact
+
+ LOCAL;
+  lcProj      AS CHARACTER,;
+  lcPath      AS CHARACTER,;
+  lcOldPath   AS CHARACTER,;
+  lnProj      AS NUMBER,;
+  lnProjs     AS NUMBER,;
+  llPath      AS BOOLEAN,;
+  llCheckAll  AS BOOLEAN,;
+  lvMode      AS VARIANT,;
+  loProject   AS PROJECT
+
+ lnProjs = 1
+
+ LOCAL ARRAY;
+  laProjects(m.lnProjs,3),;
+  laFiles(1,2)
+
+ CLEAR
+
+ ?'Process to text'
+
+ laProjects	= .NULL.
+ laFiles	= .NULL.
+
+ lcOldPath = FULLPATH(CURDIR())
+
+ llCheckAll = .T.
+ DO CASE
+  CASE m.tnProjects=0
+*Getfile
+   llCheckAll = .F.
+
+   LOCAL;
+    lcSourceExt    AS CHARACTER,;
+    loConverter    AS OBJECT,;
+    loFB2T_Setting AS OBJECT
+
+   Construct_Objects()
+   IF _SCREEN.frmB2T_Envelop.cusB2T.Get_Converter(,@loConverter,.T.) THEN
+    SwitchErrorHandler(.F.)
+    RETURN .F.
+   ENDIF &&_SCREEN.frmB2T_Envelop.cusB2T.Get_Converter(,@loConverter,.T.)
+
+   IF PCOUNT()=3 THEN
+    IF VARTYPE(m.tcFile)='C' AND FILE(m.tcFile) THEN
+     loFB2T_Setting = m.loConverter.Get_DirSettings(JUSTPATH(m.tcFile))
+
+     IF UPPER(JUSTEXT(m.tcFile))=="PJX" THEN
+* only PJX allowed here
+      lcProj = m.tcFile
+
+     ELSE  &&UPPER(JUSTEXT(m.tcFile))=="PJX"
+* fail
+      ?'File of this type is not supported for this opperation.' FONT '' STYLE 'B'
+      RETURN .F.
+
+     ENDIF &&UPPER(JUSTEXT(m.tcFile))=="PJX"
+    ELSE  &&VARTYPE(m.tcFile)='C' AND FILE(m.tcFile)
+     ?'Error in parameter m.tcFile' FONT '' STYLE 'B'
+     RETURN .F.
+
+    ENDIF &&VARTYPE(m.tcFile)='C' AND FILE(m.tcFile)
+   ENDIF &&PCOUNT()=3
+
+   IF EMPTY(m.lcProj) THEN
+    lcPath = JUSTPATH(_SCREEN.gcB2T_Path)
+    CD (m.lcPath)
+
+    lcSourceExt = "PJX"
+
+    lcProj = GETFILE(m.lcSourceExt)
+   ENDIF &&EMPTY(m.lcProj)
+
+   IF ISBLANK(m.lcProj) THEN
+    CD (m.lcOldPath)
+    ?'No project found.' FONT '' STYLE 'B'
+    SwitchErrorHandler(.F.)
+    RETURN .F.
+   ENDIF &&!EMPTY(m.lcProj) AND ISBLANK(m.lcProj)
+
+   lnProjs = 1
+   _SCREEN.ADDPROPERTY('gaFiles(1,3)')
+   _SCREEN.gaFiles(1,1)	= FORCEEXT(m.lcProj,'PJX')
+   _SCREEN.gaFiles(1,2)	= ICASE(m.tnMode=3,"",m.tnMode=4,"",.NULL.)
+   _SCREEN.gaFiles(1,3)	= ""
+
+   lcPath = JUSTPATH(m.lcProj)
+   CD (m.lcPath)
+
+*  &&m.tnProjects=0
+  CASE m.tnProjects=1
+*active project
+   llCheckAll = .F.
+
+   IF _VFP.PROJECTS.COUNT=0 THEN
+    CD (m.lcOldPath)
+    ?'No project found.' FONT '' STYLE 'B'
+    SwitchErrorHandler(.F.)
+    RETURN .F.
+   ENDIF &&_VFP.PROJECTS.COUNT=0
+
+   lnProjs = 1
+   _SCREEN.ADDPROPERTY('gaFiles(1,3)')
+   _SCREEN.gaFiles(1,1)	= _VFP.ACTIVEPROJECT.NAME
+   _SCREEN.gaFiles(1,2)	= ICASE(m.tnMode=3,"",m.tnMode=4,"",_VFP.ACTIVEPROJECT.PROJECTHOOKLIBRARY)
+   _SCREEN.gaFiles(1,3)	= ""
+
+   lcPath = JUSTPATH(_VFP.ACTIVEPROJECT.NAME)
+   CD (m.lcPath)
+
+*  &&m.tnProjects=1
+  CASE m.tnProjects=2
+*open projects
+   llCheckAll = .F.
+
+   lnProjs = _VFP.PROJECTS.COUNT
+   IF m.lnProjs=0 THEN
+    CD (m.lcOldPath)
+    ?'No project found.' FONT '' STYLE 'B'
+    SwitchErrorHandler(.F.)
+    RETURN .F.
+   ENDIF &&m.lnProjs=0
+
+   _SCREEN.ADDPROPERTY('gaFiles('+TRIM(PADR(m.lnProjs,11))+',3)')
+
+   lcPath = JUSTPATH(_VFP.ACTIVEPROJECT.NAME)
+   CD (m.lcPath)
+
+   lnProj     = 0
+   FOR EACH m.loProject IN _VFP.PROJECTS FOXOBJECT
+    lnProj						= m.lnProj+1
+    _SCREEN.gaFiles(m.lnProj,1)	= m.loProject.NAME
+    _SCREEN.gaFiles(m.lnProj,2)	= ICASE(m.tnMode=3,"",m.tnMode=4,"",m.loProject.PROJECTHOOKLIBRARY)
+    _SCREEN.gaFiles(m.lnProj,3)	= ""
+   ENDFOR &&loProject
+
+*  &&m.tnProjects=2
+  CASE m.tnProjects=3
+*path
+*!*	Changed by: SF 15.9.2015
+*!*	<pdm>
+*!*	<change date="{^2015-09-15,10:45:00}">Changed by: SF<br />
+*!*	Do not delete obsolete libraries etc on <b>all</b> run. This runs only base dir.
+*!*	Hidden projects in subdirectories storing extra stuff might exist.
+*!*	</change>
+*!*	</pdm>
+   llCheckAll = .F.
+*!*	/Changed by: SF 15.9.2015
+
+   LOCAL;
+    lcSourceExt AS CHARACTER,;
+    loConverter AS OBJECT
+
+   Construct_Objects()
+   IF _SCREEN.frmB2T_Envelop.cusB2T.Get_Converter(,@loConverter,.T.) THEN
+    SwitchErrorHandler(.F.)
+    RETURN .F.
+   ENDIF &&_SCREEN.frmB2T_Envelop.cusB2T.Get_Converter(,@loConverter,.T.)
+
+   lcPath = JUSTPATH(_SCREEN.gcB2T_Path)
+
+   CD (m.lcPath)
+
+   lcSourceExt = "PJX"
+
+   loConverter = .NULL.
+   Destruct_Objects()
+
+   lnProjs = ADIR(laFiles,'*.'+m.lcSourceExt,'HS')
+
+   IF m.lnProjs=0 THEN
+    CD (m.lcOldPath)
+    ?'No project found.' FONT '' STYLE 'B'
+    SwitchErrorHandler(.F.)
+    RETURN .F.
+   ENDIF &&m.lnProjs=0
+
+   _SCREEN.ADDPROPERTY('gaFiles('+TRIM(PADR(m.lnProjs,11))+',3)')
+
+   FOR lnProj = 1 TO m.lnProjs
+    _SCREEN.gaFiles(m.lnProj,1)	= FORCEPATH(FORCEEXT(m.laFiles(m.lnProj,1),"PJX"),m.lcPath)
+    _SCREEN.gaFiles(m.lnProj,2)	= ICASE(m.tnMode=3,"",m.tnMode=4,"",.NULL.)
+    _SCREEN.gaFiles(m.lnProj,3)	= ""
+   ENDFOR &&lnProjs
+*  &&m.tnProjects=3
+  CASE m.tnProjects=4
+*path, recursive
+   LOCAL;
+    lcSourceExt AS CHARACTER,;
+    loConverter AS OBJECT
+
+   Construct_Objects()
+   IF _SCREEN.frmB2T_Envelop.cusB2T.Get_Converter(,@loConverter,.T.) THEN
+    SwitchErrorHandler(.F.)
+    RETURN .F.
+   ENDIF &&_SCREEN.frmB2T_Envelop.cusB2T.Get_Converter(,@loConverter,.T.)
+
+   lcPath = JUSTPATH(_SCREEN.gcB2T_Path)
+
+   CD (m.lcPath)
+
+   _SCREEN.ADDPROPERTY('gaFiles(1,3)')
+
+   ScanDir(1,m.lcPath,.F.,m.loConverter)
+
+   loConverter = .NULL.
+   Destruct_Objects()
+
+   lnProjs = IIF(EMPTY(_SCREEN.gaFiles),0,ALEN(_SCREEN.gaFiles,1))
+
+   FOR lnProj = 1 TO m.lnProjs
+    _SCREEN.gaFiles(m.lnProj,2) = ICASE(m.tnMode=3,"",m.tnMode=4,"",.NULL.)
+   ENDFOR &&lnProjs
+*  &&m.tnProjects=4
+  OTHERWISE
+   CD (m.lcOldPath)
+   ?'Parameter not defined.'
+   SwitchErrorHandler(.F.)
+   RETURN .F.
+ ENDCASE
+
+ DO CASE
+  CASE m.tnMode=0
+   lvMode     = "*"
+   ??', generate projects and files of list'
+  CASE m.tnMode=1
+   llCheckAll = .F.
+   lvMode	  = "*-"
+   ??', generate files list'
+  CASE m.tnMode=2
+   llCheckAll = .F.
+   lvMode	  = ""
+   ??', generate projects'
+  CASE m.tnMode=3
+   llCheckAll = .F.
+   lvMode	  = "*-"
+   ??', generate files list'
+  CASE m.tnMode=4
+   lvMode     = "*"
+   ??', generate projects and files of list'
+  OTHERWISE
+   lvMode     = "*"
+   ??', generate projects and files of list'
+ ENDCASE
+
+*close all the projects in the IDE / from StorePjx
+*just to keep data over CLEAR ALL
+ _SCREEN.ADDPROPERTY('gaProjects(1,2)')
+
+ IF m.tnMode=3 THEN
+*keep projects open, (do not parse hooks)
+  _SCREEN.gaProjects = .NULL.
+ ELSE  &&m.tnMode=3
+  lnProjs = _VFP.PROJECTS.COUNT
+
+  IF m.lnProjs=0 THEN
+*nothing to do
+   _SCREEN.gaProjects = .NULL.
+   FOR lnProj = 1 TO m.lnProjs
+    _SCREEN.gaFiles(m.lnProj,2) = "" && "no hook defined" -> no hook processed :)
+   ENDFOR &&lnProjs
+  ELSE  &&m.lnProjs=0
+   DIMENSION;
+    _SCREEN.gaProjects(m.lnProjs,2)
+
+*!*	Changed by SF 12.5.2015
+*!*	<pdm>
+*!*	<change date="{^2015-05-12,11:36:00}">Changed by SF<br />
+*!*	Make <expr>ACTIVEPROJECT</expr> active after reopen
+*!*	</change>
+*!*	</pdm>
+
+*Active on top, to make it active on reopen
+   lnProj						  = 1
+   loProject					  = _VFP.ACTIVEPROJECT
+   _SCREEN.gaProjects(m.lnProj,1) = m.loProject.NAME
+*SF internal
+   _SCREEN.gaProjects(m.lnProj,2) = VARTYPE(m.loProject.PROJECTHOOK)='O';
+    AND !ISNULL(m.loProject.PROJECTHOOK);
+    AND PEMSTATUS(m.loProject.PROJECTHOOK,'glCompileAll',5);
+    AND m.loProject.PROJECTHOOK.glCompileAll
+*/SF internal
+   m.loProject.CLOSE
+
+*   lnProj = 0
+
+*!*	/Changed by SF 12.5.2015
+
+   FOR EACH m.loProject IN _VFP.PROJECTS FOXOBJECT
+*!*	Changed by: SF 7.12.2017
+*!*	<pdm>
+*!*	<change date="{^2017-12-07,14:10:00}">Changed by: SF<br />
+*!*	Active project should not be added twice
+*!*	</change>
+*!*	</pdm>
+
+    IF _SCREEN.gaProjects(1,1)==m.loProject.NAME THEN
+     LOOP
+    ENDIF &&_SCREEN.gaProjects(1,1)==m.loProject.NAME
+    lnProj						   = m.lnProj+1
+    _SCREEN.gaProjects(m.lnProj,1) = m.loProject.NAME
+*SF internal
+    _SCREEN.gaProjects(m.lnProj,2) = VARTYPE(m.loProject.PROJECTHOOK)='O';
+     AND !ISNULL(m.loProject.PROJECTHOOK);
+     AND PEMSTATUS(m.loProject.PROJECTHOOK,'glCompileAll',5);
+     AND m.loProject.PROJECTHOOK.glCompileAll
+*/SF internal
+    m.loProject.CLOSE
+   ENDFOR &&loProject
+  ENDIF &&m.lnProjs=0
+ ENDIF &&m.tnMode=3
+
+*!*	Changed  by: SF 28.2.2021
+*!*	<pdm>
+*!*	<change date="{^2021-02-28,21:02:00}">Changed  by: SF<br />
+*!*	Add List of files stored with settings.
+*!*	</change>
+*!*	</pdm>
+
+ IF INLIST(m.tnProjects,2,3,4) THEN
+  lvMode = m.lvMode+'-IncludeList'
+ ENDIF &&INLIST(m.tnProjects,2,3,4)
+
+*!*	/Changed  by: SF 28.2.2021
+
+*just to keep data over CLEAR ALL
+ _SCREEN.ADDPROPERTY('gcOld_Path',m.lcOldPath)
+ _SCREEN.ADDPROPERTY('gvMode',m.lvMode)
+ _SCREEN.ADDPROPERTY('glCheckAll',m.llCheckAll)
+
+*to remove Classlibs so we can recreate
+ CLEAR ALL
+
+ LOCAL ARRAY;
+  laFiles(1,1)
+
+ ACOPY(_SCREEN.gaFiles,m.laFiles)	&& will autoresize laFiles
+ REMOVEPROPERTY(_SCREEN,'gaFiles')
+
+*process Transformation
+ Construct_Objects()
+
+ _SCREEN.frmB2T_Envelop.cusB2T.Process_Txt2Bin(@laFiles,_SCREEN.gvMode,_SCREEN.glCheckAll AND _SCREEN.gcB2T_Delete=="1")
+ Destruct_Objects()
+
+ CLEAR ALL
+
+*/Move
+ REMOVEPROPERTY(_SCREEN,'gvMode')
+ REMOVEPROPERTY(_SCREEN,'glCheckAll')
+
+
+*Move
+ LOCAL;
+  lcProj      AS CHARACTER,;
+  lcSourceExt AS CHARACTER,;
+  lnProj      AS NUMBER,;
+  lnProjs     AS NUMBER,;
+  lnReturn    AS NUMBER,;
+  llNotFound  AS BOOLEAN,;
+  loProject   AS PROJECT
+
+ IF !ISNULL(_SCREEN.gaProjects(1,1)) THEN
+
+*/process Transformation
+
+*reopen  all the projects in the IDE / from ReStorePjx
+  lnProjs = ALEN(_SCREEN.gaProjects,1)
+  FOR lnProj = m.lnProjs TO 1 STEP -1
+   lcProj = _SCREEN.gaProjects(m.lnProj,1)
+   IF !FILE(m.lcProj) THEN
+    LOOP
+   ENDIF &&!FILE(m.lcProj)
+
+   llNotFound = .T.
+   FOR EACH m.loProject IN _VFP.PROJECTS FOXOBJECT
+    IF UPPER(JUSTSTEM(m.loProject.NAME))==m.lcProj THEN
+     llNotFound = .F.
+     EXIT
+    ENDIF &&UPPER(JUSTSTEM(m.loProject.NAME))==m.lcProj
+   ENDFOR &&loProject
+
+   IF m.llNotFound THEN
+    MODIFY PROJECT (m.lcProj) NOWAIT SAVE
+    loProject		  = _VFP.ACTIVEPROJECT
+    loProject.VISIBLE = .F.
+    loProject.VISIBLE = .T.
+*SF internal
+    IF VARTYPE(m.loProject.PROJECTHOOK)='O';
+      AND !ISNULL(m.loProject.PROJECTHOOK);
+      AND PEMSTATUS(m.loProject.PROJECTHOOK,'glCompileAll',5) THEN
+     loProject.PROJECTHOOK.glCompileAll = _SCREEN.gaProjects(m.lnProj,2)
+    ENDIF &&VARTYPE(m.loProject.PROJECTHOOK)='O' AND !ISNULL(m.loProject.PROJECTHOOK) AND PEMSTATUS(m.loProject. ...
+*/SF internal
+   ENDIF &&m.llNotFound
+  ENDFOR &&lnProj
+ ENDIF &&!ISNULL(_SCREEN.gaProjects(1,1))
+
+ REMOVEPROPERTY(_SCREEN,'gaProjects')
+
+ CLEAR ALL
+
+*!*	Changed by: SF 5.6.2015
+*!*	<pdm>
+*!*	<change date="{^2015-06-05,11:14:00}">Changed by: SF<br />
+*!*	Output of current git branch
+*!*	</change>
+*!*	</pdm>
+ lcProj = GetBranch()
+ IF !EMPTY(m.lcProj) THEN
+  ?'On branch '+m.lcProj
+ ENDIF &&!EMPTY(m.lcProj)
+*!*	/Changed by: SF 5.6.2015
+
+ CD (_SCREEN.gcOld_Path)
+ REMOVEPROPERTY(_SCREEN,'gcOld_Path')
+
+ SwitchErrorHandler(.F.)
+ENDFUNC &&Convert_Pjx_2Txt
+
+FUNCTION Convert_File_2Bin  	&&Runs FoxBin2Prg for a single file or vcx/class to create binary files.
  LPARAMETERS;
   tlText2Bin,;
   tlSingleClass,;
@@ -1236,7 +1761,7 @@ FUNCTION Convert_File  	&&Runs FoxBin2Prg for a single file or vcx/class.
  SwitchErrorHandler(.F.)
 
  RETURN m.llReturn
-ENDFUNC &&Convert_File
+ENDFUNC &&Convert_File_2Bin
 
 FUNCTION Convert_Directory  	&&Runs FoxBin2Prg for a single directory and it's sub directories.
  LPARAMETERS;
@@ -2467,7 +2992,9 @@ FUNCTION HelpMsg	&&Internal. Display help message for external functions
   [ Starte Menü]+0h0D0A0D0A+;
   [DO Convert_Array IN RunB2T.prg]+" [OF Bin2Text.app]"+0h0d0a+;
   [ IDE Interface für FoxBin2Prg, für ein Datei Array]+0h0D0A0D0A+;
-  [DO Convert_File IN RunB2T.prg]+" [OF Bin2Text.app]"+0h0d0a+;
+  [DO Convert_File_2Bin IN RunB2T.prg]+" [OF Bin2Text.app]"+0h0d0a+;
+  [ IDE Interface für FoxBin2Prg, für eine wählbare Datei oder Klasse.]+0h0D0A0D0A+;
+  [DO Convert_File_2Txt IN RunB2T.prg]+" [OF Bin2Text.app]"+0h0d0a+;
   [ IDE Interface für FoxBin2Prg, für eine wählbare Datei oder Klasse.]+0h0D0A0D0A+;
   [DO Convert_Directory IN RunB2T.prg]+" [OF Bin2Text.app]"+0h0d0a+;
   [ IDE Interface für FoxBin2Prg, für ein Verzeichnis.]
@@ -2576,18 +3103,24 @@ FUNCTION HelpMsg	&&Internal. Display help message for external functions
   [Nur aus der IDE starten.]
 
  #DEFINE dcText_DE_H11;
-  "DO Convert_File IN Bin2Text.app [/?]|[lText2Bin[,lSingleClass[,cFile][,cClass]]]]"+0h0d0a+;
-  [ IDE interface für FoxBin2Prg, um eine wählbare Datei zu transformieren.]+0h0d0a+;
+  "DO Convert_File_2Bin IN Bin2Text.app [/?]|[lSingleClass[,cFile|,cFile,cClass]]"+0h0d0a+;
+  [ IDE interface für FoxBin2Prg, um eine wählbare Datei nachn Binär zu transformieren.]+0h0d0a+;
   [ Parameter:]+0h0d0a+;
   [  /?            Zeigt diesen Hilfstext]+0h0d0a+;
-  [  lText2Bin     Wenn wahr werden die Biärdateien erzeugt,]+0h0d0a+;
-  [                sonst werden Textdateien erzeugt.(Default)]+0h0d0a+;
-  [                Optional in FoxBin2PRG Stil]+0h0d0a+;
   [  lSingleClass  Bestimme eine Klasse zum Transformieren.]+0h0d0a+;
   [  cFile         Datei, für die die Methode gerufen wird.]+0h0d0a+;
   [  cClass        Klasse, für lSingleClass .]+0h0d0a+;
   [Führt ein CLEAR ALL aus.]
 
+ #DEFINE dcText_DE_H11_Txt;
+  "DO Convert_File_2Txt IN Bin2Text.app [/?]|[lSingleClass[,cFile|,cFile,cClass]]"+0h0d0a+;
+  [ IDE interface für FoxBin2Prg, um eine wählbare Datei nach text zu transformieren.]+0h0d0a+;
+  [ Parameter:]+0h0d0a+;
+  [  /?            Zeigt diesen Hilfstext]+0h0d0a+;
+  [  lSingleClass  Bestimme eine Klasse zum Transformieren.]+0h0d0a+;
+  [  cFile         Datei, für die die Methode gerufen wird.]+0h0d0a+;
+  [  cClass        Klasse, für lSingleClass .]+0h0d0a+;
+  [Führt ein CLEAR ALL aus.]
 
  #DEFINE dcText_DE_H12;
   "DO Convert_Directory IN Bin2Text.app [/?]|[lText2Bin[,tlWithSub]]"+0h0d0a+;
@@ -2617,7 +3150,9 @@ FUNCTION HelpMsg	&&Internal. Display help message for external functions
   [ Run menu]+0h0D0A0D0A+;
   [DO Convert_Array IN Bin2Text.app]+0h0d0a+;
   [ IDE interface for FoxBin2Prg, to be used with an array of files.]+0h0D0A0D0A+;
-  [DO Convert_File IN RunB2T.prg]+" [OF Bin2Text.app]"+0h0d0a+;
+  [DO Convert_File_2Bin IN RunB2T.prg]+" [OF Bin2Text.app]"+0h0d0a+;
+  [ IDE interface for FoxBin2Prg, pick a file or class to convert.]+0h0D0A0D0A+;
+  [DO Convert_File_2Txt IN RunB2T.prg]+" [OF Bin2Text.app]"+0h0d0a+;
   [ IDE interface for FoxBin2Prg, pick a file or class to convert.]+0h0D0A0D0A+;
   [DO Convert_Directory IN RunB2T.prg]+" [OF Bin2Text.app]"+0h0d0a+;
   [ IDE interface for FoxBin2Prg, pick a directory to convert.]
@@ -2725,15 +3260,21 @@ FUNCTION HelpMsg	&&Internal. Display help message for external functions
   "DO Convert_Array IN Bin2Text.app [/?]|lText2Bin,cMode,@aFiles"+0h0D0A0D0A+;
   [Run from IDE only.]
 
-
  #DEFINE dcText_EN_H11;
-  "DO Convert_File IN Bin2Text.app [/?]|[lText2Bin[,lSingleClass[,cFile][,cClass]]]]"+0h0d0a+;
-  [ IDE interface for FoxBin2Prg, pick a file or class to transform.]+0h0d0a+;
+  "DO Convert_File_2Bin IN Bin2Text.app [/?]|[lSingleClass[,cFile|,cFile,cClass]]"+0h0d0a+;
+  [ IDE interface for FoxBin2Prg, pick a file or class to transform to binary.]+0h0d0a+;
   [ Parameter:]+0h0d0a+;
   [  /?            This help message]+0h0d0a+;
-  [  lText2Bin     If true, create binaries,]+0h0d0a+;
-  [                if false create text files.(Default)]+0h0d0a+;
-  [                Optional in FoxBin2PRG style]+0h0d0a+;
+  [  lSingleClass  Select a class to transform.]+0h0d0a+;
+  [  cFile         File that method should run for.]+0h0d0a+;
+  [  cClass        Class of cFile for lSingleClass.]+0h0d0a+;
+  [This will use CLEAR ALL!]
+
+ #DEFINE dcText_EN_H11_txt;
+  "DO Convert_File_2Txt IN Bin2Text.app [/?]|[lSingleClass[,cFile|,cFile,cClass]]"+0h0d0a+;
+  [ IDE interface for FoxBin2Prg, pick a file or class to transform to text.]+0h0d0a+;
+  [ Parameter:]+0h0d0a+;
+  [  /?            This help message]+0h0d0a+;
   [  lSingleClass  Select a class to transform.]+0h0d0a+;
   [  cFile         File that method should run for.]+0h0d0a+;
   [  cClass        Class of cFile for lSingleClass.]+0h0d0a+;
