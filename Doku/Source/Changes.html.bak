@@ -33,12 +33,6 @@
   </thead>
   <tbody>
   <tr>
-   <td>CDX</td>
-   <td>
-   	<p>Changes to tags will force processing whole DBF.</p>
-   </td>
-  </tr>
-  <tr>
    <td>DBF per DBC</td>
    <td>
    	<p>Option to process the table files of a database.</p>

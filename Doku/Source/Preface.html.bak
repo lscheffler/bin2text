@@ -101,6 +101,7 @@
  	<ul>
  		<li>
  			<strong>Store the last state of an binary item (file, class of library ..), and process to text only if changed.</strong>
+ 			<span class="Alert">The <em>run-for-changes-only</em> logic does not work for UseClassPerFile: 0 yet. Use value 1 or 2, ar convert all files all the time (setting of Bin2Text) </span>
  		</li>
  		<li>Include projecthook library in the list of files to process.</li>
  		<li>Run all projects in a row, so that FoxBin2Prg will process files shared only one time.</li>

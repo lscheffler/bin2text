@@ -25,20 +25,20 @@
 </table>
 </div>
 <div class="diaxp_mbody">
-<!-- Created with _diamp_pdm_ab by Agnes Beste    06.03.2021 13:26 -->
+<!-- Created with _diamp_pdm_ab by Agnes Beste    16.03.2021 14:45 -->
  <div class="PDM_AB_Descr"><!-- Descr Begin -->
 Create converter object and open storage table
  </div><!-- Descr End -->
 
  <div class="DIAMP_PDM_AB_Syntax"><!-- Syntax Begin -->
   <div class="SColor">
-   <div class="RetVal"><a href="#_5ZW0ST00Z">RetVal</a>&nbsp;</div>   <div class="RetValEq">=</div>   <div class="PEM">
+   <div class="RetVal"><a href="#_6060VMYW2">RetVal</a>&nbsp;</div>   <div class="RetValEq">=</div>   <div class="PEM">
     Object.get_converter
    </div>
    <div class="Para">
-    (@<a href="#_5ZW0ST010">tcStorage</a>
-     <wbr />,@<a href="#_5ZW0ST011">toConverter</a>
-     [<wbr />,<a href="#_5ZW0ST012">tlCloseTable</a>])
+    (@<a href="#_6060VMYW3">tcStorage</a>
+     <wbr />,@<a href="#_6060VMYW4">toConverter</a>
+     [<wbr />,<a href="#_6060VMYW5">tlCloseTable</a>])
    </div>
    <div style="clear: both"></div>
   </div><!-- Colour End -->
@@ -50,7 +50,7 @@ Create converter object and open storage table
   </span>
   <dl class="DIAMP_PDM_AB_Params_List">
    <dt class="dt_">
-    <a class="DIAMP_PDM_AB_Params_ParaName" id="_5ZW0ST010" name="_5ZW0ST010">
+    <a class="DIAMP_PDM_AB_Params_ParaName" id="_6060VMYW3" name="_6060VMYW3">
      <span class="PDMEXPR PDMNor" ><span class='PDMVar'>tcStorage</span></span>
 
     </a>
@@ -81,11 +81,11 @@ Create converter object and open storage table
     </table>
     <span class="Params_Detail">
 <span class="PDMEXPR PDMNor" ><span class='PDMOper'>.</span><span class='PDMResK'>NULL</span><span class='PDMOper'>.</span></span>
- if not found or closed by <a class="DIAMP_PDM_AB_Para_Link" href="#_5ZW0ST012">tlCloseTable</a>. 
+ if not found or closed by <a class="DIAMP_PDM_AB_Para_Link" href="#_6060VMYW5">tlCloseTable</a>. 
     </span>
    </dd>
    <dt class="dt_">
-    <a class="DIAMP_PDM_AB_Params_ParaName" id="_5ZW0ST011" name="_5ZW0ST011">
+    <a class="DIAMP_PDM_AB_Params_ParaName" id="_6060VMYW4" name="_6060VMYW4">
      <span class="PDMEXPR PDMNor" ><span class='PDMVar'>toConverter</span></span>
 
     </a>
@@ -120,7 +120,7 @@ Create converter object and open storage table
     </span>
    </dd>
    <dt class="dt_">
-    <a class="DIAMP_PDM_AB_Params_ParaName" id="_5ZW0ST012" name="_5ZW0ST012">
+    <a class="DIAMP_PDM_AB_Params_ParaName" id="_6060VMYW5" name="_6060VMYW5">
      <span class="PDMEXPR PDMNor" ><span class='PDMVar'>tlCloseTable</span></span>
 
     </a>
@@ -156,7 +156,7 @@ Create converter object and open storage table
  <div class="DIAMP_PDM_AB_RetVal"><!-- Returns Begin -->
   <div>
    <span class="PDM_AB_Head">
-    <a id="_5ZW0ST00Z" name="_5ZW0ST00Z">
+    <a id="_6060VMYW2" name="_6060VMYW2">
      Return value
     </a>
    </span> <span class="RetVal_Ttype">Boolean</span>
@@ -167,7 +167,7 @@ Error
  </div><!-- Returns End -->
 
 
-<!-- /Created with _diamp_pdm_ab by Agnes Beste    06.03.2021 13:26 -->
+<!-- /Created with _diamp_pdm_ab by Agnes Beste    16.03.2021 14:45 -->
 
  <div class="SC">
   <img onclick="ExpandSC('SP_40',-1);"class="imgEC" src="../../imgs/dotab.gif" alt="Expand/Collapse source code of procedure get_converter" id="IMG_SP_40" />
@@ -206,7 +206,7 @@ Error
 <span class='PDMCnt'>  50</span> <span class='PDMInd'>  </span> <span class='PDMResK'>ENDIF</span> <span class='PDMCom'>&amp;&amp;m.llOk</span>
 <span class='PDMCnt'>  51</span> <span class='PDMInd'>  </span> 
 <span class='PDMCnt'>  52</span> <span class='PDMInd'>  </span> <span class='PDMResK'>IF</span> <span class='PDMVar'>m</span><span class='PDMOper'>.</span><span class='PDMVar'>llOk</span> <span class='PDMResK'>THEN</span>
-<span class='PDMCnt'>  53</span> <span class='PDMInd'> 1</span>  <span class='PDMVar'>lnResult</span> <span class='PDMOper'>=</span> <span class='PDMVar'>Compare_Verno</span><span class='PDMOper'>(</span><span class='PDMVar'>m</span><span class='PDMOper'>.</span><span class='PDMVar'>toConverter</span><span class='PDMOper'>.</span><span class='PDMVar'>c_FB2PRG_VERSION_REAL</span><span class='PDMOper'>,</span><span class='PDMVar'>dcFB2P_Verno_Min</span><span class='PDMOper'>)</span>
+<span class='PDMCnt'>  53</span> <span class='PDMInd'> 1</span>  <span class='PDMVar'>lnResult</span> <span class='PDMOper'>=</span> <span class='PDMVar'>Compare_Verno</span><span class='PDMOper'>(</span><span class='PDMVar'>dcFB2P_Verno_Min</span><span class='PDMOper'>,</span><span class='PDMVar'>m</span><span class='PDMOper'>.</span><span class='PDMVar'>toConverter</span><span class='PDMOper'>.</span><span class='PDMVar'>c_FB2PRG_VERSION_REAL</span><span class='PDMOper'>)</span>
 <span class='PDMCnt'>  54</span> <span class='PDMInd'>  </span> 
 <span class='PDMCnt'>  55</span> <span class='PDMInd'> 1</span>  <span class='PDMResK'>DO</span> <span class='PDMResK'>CASE</span>
 <span class='PDMCnt'>  56</span> <span class='PDMInd'>  </span> 

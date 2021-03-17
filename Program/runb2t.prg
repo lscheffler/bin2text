@@ -471,9 +471,10 @@ FUNCTION Convert_Pjx &&Runs FoxBin2Prg for multiple projects.
 *!*	/Changed by: SF 11.6.2015
 
    lnProjs = 1
-   _SCREEN.ADDPROPERTY('gaFiles(1,2)')
+   _SCREEN.ADDPROPERTY('gaFiles(1,3)')
    _SCREEN.gaFiles(1,1)	= FORCEEXT(m.lcProj,'PJX')
    _SCREEN.gaFiles(1,2)	= ICASE(m.tnMode=3,"",m.tnMode=4,"",.NULL.)
+   _SCREEN.gaFiles(1,3)	= ""
 
    lcPath = JUSTPATH(m.lcProj)
    CD (m.lcPath)
@@ -491,9 +492,10 @@ FUNCTION Convert_Pjx &&Runs FoxBin2Prg for multiple projects.
    ENDIF &&_VFP.PROJECTS.COUNT=0
 
    lnProjs = 1
-   _SCREEN.ADDPROPERTY('gaFiles(1,2)')
+   _SCREEN.ADDPROPERTY('gaFiles(1,3)')
    _SCREEN.gaFiles(1,1)	= _VFP.ACTIVEPROJECT.NAME
    _SCREEN.gaFiles(1,2)	= ICASE(m.tnMode=3,"",m.tnMode=4,"",_VFP.ACTIVEPROJECT.PROJECTHOOKLIBRARY)
+   _SCREEN.gaFiles(1,3)	= ""
 
    lcPath = JUSTPATH(_VFP.ACTIVEPROJECT.NAME)
    CD (m.lcPath)
@@ -511,7 +513,7 @@ FUNCTION Convert_Pjx &&Runs FoxBin2Prg for multiple projects.
     RETURN .F.
    ENDIF &&m.lnProjs=0
 
-   _SCREEN.ADDPROPERTY('gaFiles('+TRIM(PADR(m.lnProjs,11))+',2)')
+   _SCREEN.ADDPROPERTY('gaFiles('+TRIM(PADR(m.lnProjs,11))+',3)')
 
    lcPath = JUSTPATH(_VFP.ACTIVEPROJECT.NAME)
    CD (m.lcPath)
@@ -521,6 +523,7 @@ FUNCTION Convert_Pjx &&Runs FoxBin2Prg for multiple projects.
     lnProj						= m.lnProj+1
     _SCREEN.gaFiles(m.lnProj,1)	= m.loProject.NAME
     _SCREEN.gaFiles(m.lnProj,2)	= ICASE(m.tnMode=3,"",m.tnMode=4,"",m.loProject.PROJECTHOOKLIBRARY)
+    _SCREEN.gaFiles(m.lnProj,3)	= ""
    ENDFOR &&loProject
 
 *  &&m.tnProjects=2
@@ -571,11 +574,12 @@ FUNCTION Convert_Pjx &&Runs FoxBin2Prg for multiple projects.
     RETURN .F.
    ENDIF &&m.lnProjs=0
 
-   _SCREEN.ADDPROPERTY('gaFiles('+TRIM(PADR(m.lnProjs,11))+',2)')
+   _SCREEN.ADDPROPERTY('gaFiles('+TRIM(PADR(m.lnProjs,11))+',3)')
 
    FOR lnProj = 1 TO m.lnProjs
     _SCREEN.gaFiles(m.lnProj,1)	= FORCEPATH(FORCEEXT(m.laFiles(m.lnProj,1),"PJX"),m.lcPath)
     _SCREEN.gaFiles(m.lnProj,2)	= ICASE(m.tnMode=3,"",m.tnMode=4,"",.NULL.)
+    _SCREEN.gaFiles(m.lnProj,3)	= ""
    ENDFOR &&lnProjs
 *  &&m.tnProjects=3
   CASE m.tnProjects=4
@@ -594,7 +598,7 @@ FUNCTION Convert_Pjx &&Runs FoxBin2Prg for multiple projects.
 
    CD (m.lcPath)
 
-   _SCREEN.ADDPROPERTY('gaFiles(1,2)')
+   _SCREEN.ADDPROPERTY('gaFiles(1,3)')
 
    ScanDir(1,m.lcPath,m.tlText2Bin,m.loConverter)
 
@@ -730,7 +734,7 @@ FUNCTION Convert_Pjx &&Runs FoxBin2Prg for multiple projects.
  LOCAL ARRAY;
   laFiles(1,1)
 
- ACOPY(_SCREEN.gaFiles,m.laFiles)
+ ACOPY(_SCREEN.gaFiles,m.laFiles)	&& will autoresize laFiles
  REMOVEPROPERTY(_SCREEN,'gaFiles')
 
 *process Transformation
@@ -929,7 +933,7 @@ FUNCTION Convert_File  	&&Runs FoxBin2Prg for a single file or vcx/class.
  _SCREEN.ADDPROPERTY('gcOld_Path',m.lcPath)
 
  _SCREEN.ADDPROPERTY('glText2Bin',m.tlText2Bin)
- _SCREEN.ADDPROPERTY('gaProjects(1,3)')
+ _SCREEN.ADDPROPERTY('gaFiles(1,3)')
  _SCREEN.ADDPROPERTY('gcSource',"")
  _SCREEN.ADDPROPERTY('gcTarget',"")
  _SCREEN.ADDPROPERTY('gcClass',"")
@@ -937,7 +941,7 @@ FUNCTION Convert_File  	&&Runs FoxBin2Prg for a single file or vcx/class.
  _SCREEN.ADDPROPERTY('glInfo',.F.)
 
  STORE "" TO;
-  _SCREEN.gaProjects
+  _SCREEN.gaFiles
 
  IF m.tlText2Bin THEN
   lvTemp = "Convert To Bin"
@@ -946,8 +950,18 @@ FUNCTION Convert_File  	&&Runs FoxBin2Prg for a single file or vcx/class.
  ENDIF &&m.tlText2Bin
 
  llReturn = .T.
-
+ 
  IF PCOUNT()>2 AND VARTYPE(m.tcFile)='C' THEN
+  IF 0h00$m.tcFile THEN
+   IF m.tcFile=0h00 THEN
+    tcFile = SUBSTR(m.tcFile,2)
+   ENDIF &&m.tcFile=0h00
+ 
+   _SCREEN.gaFiles(1,3) = SUBSTR(m.tcFile,AT(0h00,m.tcFile))
+   tcFile               = SUBSTR(m.tcFile,1,AT(0h00,m.tcFile)-1)
+ 
+  ENDIF &&0h00$m.tcFile
+  
   IF IsFile(m.tcFile) THEN
    tcFile = FULLPATH(m.tcFile)
    lcPath = JUSTPATH(m.tcFile)
@@ -995,8 +1009,8 @@ FUNCTION Convert_File  	&&Runs FoxBin2Prg for a single file or vcx/class.
     AND VARTYPE(m.tcFile)='C';
     AND VARTYPE(m.tcClass)='C'
 *Class and Library as Parameter
-   _SCREEN.gaProjects(1,1) = m.tcFile
-   _SCREEN.gaProjects(1,2) = m.tcClass
+   _SCREEN.gaFiles(1,1) = m.tcFile
+   _SCREEN.gaFiles(1,2) = m.tcClass
 
   CASE m.tlSingleClass AND PCOUNT()>2
    ?'Error in parameter' FONT '' STYLE 'B'
@@ -1004,39 +1018,41 @@ FUNCTION Convert_File  	&&Runs FoxBin2Prg for a single file or vcx/class.
 
   CASE m.tlSingleClass
 *no input file here, we need class and file
-   AGETCLASS(_SCREEN.gaProjects)	&&AGETCLASS(_SCREEN.gaProjects,'','',m.lvTemp) fails
+   AGETCLASS(_SCREEN.gaFiles)	&&AGETCLASS(_SCREEN.gaFiles,'','',m.lvTemp) fails
 
    DIMENSION;
-    _SCREEN.gaProjects(1,3)
+    _SCREEN.gaFiles(1,3)
+   _SCREEN.gaFiles(1,3) = ""
 
   CASE VARTYPE(m.tcFile)='C'
-   _SCREEN.gaProjects(1,1) = m.tcFile
+   _SCREEN.gaFiles(1,1) = m.tcFile
 
   CASE PCOUNT()>2
    ?'Error in parameter m.tcFile' FONT '' STYLE 'B'
    llReturn = .F.
 
   OTHERWISE
-   _SCREEN.gaProjects(1,1) = GETFILE(m.lcFileTypes,'','',0,m.lvTemp)
+   _SCREEN.gaFiles(1,1) = GETFILE(m.lcFileTypes,'','',0,m.lvTemp)
+   _SCREEN.gaFiles(1,3) = ""
 
  ENDCASE
 
- IF m.llReturn AND EMPTY(_SCREEN.gaProjects(1,1)) THEN
+ IF m.llReturn AND EMPTY(_SCREEN.gaFiles(1,1)) THEN
 *Nothing selected, GetFile cancled
 *No Message
   llReturn = .F.
- ENDIF &&m.llReturn AND EMPTY(_SCREEN.gaProjects(1,1))
+ ENDIF &&m.llReturn AND EMPTY(_SCREEN.gaFiles(1,1))
 
- loFB2T_Setting = m.loConverter.Get_DirSettings(JUSTPATH(_SCREEN.gaProjects(1,1)))
+ loFB2T_Setting = m.loConverter.Get_DirSettings(JUSTPATH(_SCREEN.gaFiles(1,1)))
 
- IF m.llReturn AND INLIST(UPPER(JUSTEXT(_SCREEN.gaProjects(1,1))),'PJX',m.loFB2T_Setting.c_PJ2) THEN
+ IF m.llReturn AND INLIST(UPPER(JUSTEXT(_SCREEN.gaFiles(1,1))),'PJX',m.loFB2T_Setting.c_PJ2) THEN
 *no project here
-  ?JUSTEXT(_SCREEN.gaProjects(1,1))+' file not allowed here.' FONT '' STYLE 'B'
+  ?JUSTEXT(_SCREEN.gaFiles(1,1))+' file not allowed here.' FONT '' STYLE 'B'
   llReturn = .F.
- ENDIF &&m.llReturn AND INLIST(UPPER(JUSTEXT(_SCREEN.gaProjects(1,1))),'PJX',m.loFB2T_Setting.c_PJ2)
+ ENDIF &&m.llReturn AND INLIST(UPPER(JUSTEXT(_SCREEN.gaFiles(1,1))),'PJX',m.loFB2T_Setting.c_PJ2)
 
  IF m.llReturn THEN
-  lcSourceExt = UPPER(JUSTEXT(_SCREEN.gaProjects(1,1)))
+  lcSourceExt = UPPER(JUSTEXT(_SCREEN.gaFiles(1,1)))
 
 *if binary file is send, gather text file extension
   DO CASE
@@ -1050,15 +1066,13 @@ FUNCTION Convert_File  	&&Runs FoxBin2Prg for a single file or vcx/class.
 *processing vcx at whole, not splitable due to setting
     ?"Processing whole library due to FoxBin2Prg config." FONT '' STYLE 'B'
     tlSingleClass			= False
-    _SCREEN.gaProjects(1,2)	= False
-    _SCREEN.gaProjects(1,3)	= False
+    _SCREEN.gaFiles(1,2)	= False
     lcSourceExt				= IIF(m.tlText2Bin,m.loFB2T_Setting.c_VC2,m.lcSourceExt)
 
    CASE m.lcSourceExt=="VCX" AND m.loFB2T_Setting.n_UseClassPerFile=1
 *processing class per vcx, splitted like lib.class.vc2
-    _SCREEN.gaProjects(1,3)	= _SCREEN.gaProjects(1,1)
     lcSourceExt				= IIF(m.tlText2Bin,;
-     _SCREEN.gaProjects(1,2)+'.'+m.loFB2T_Setting.c_VC2,;
+     _SCREEN.gaFiles(1,2)+'.'+m.loFB2T_Setting.c_VC2,;
      m.lcSourceExt)
 
    CASE m.lcSourceExt=="VCX" AND m.loFB2T_Setting.n_UseClassPerFile=2
@@ -1070,14 +1084,13 @@ FUNCTION Convert_File  	&&Runs FoxBin2Prg for a single file or vcx/class.
      lnFound AS NUMBER
 
     laVCX(1,1) = ''
-    AVCXCLASSES(laVCX,_SCREEN.gaProjects(1,1))
-    lnFound = ASCAN(m.laVCX,_SCREEN.gaProjects(1,2),1,-1,1,15)
+    AVCXCLASSES(laVCX,_SCREEN.gaFiles(1,1))
+    lnFound = ASCAN(m.laVCX,_SCREEN.gaFiles(1,2),1,-1,1,15)
     IF EMPTY(m.lnFound) THEN
      llReturn = .F.
     ELSE &&EMPTY(m.lnFound)
-     _SCREEN.gaProjects(1,3) = _SCREEN.gaProjects(1,1)
      lcSourceExt			 = IIF(m.tlText2Bin,;
-      m.laVCX(m.lnFound,2)+'.'+_SCREEN.gaProjects(1,2)+'.'+m.loFB2T_Setting.c_VC2,;
+      m.laVCX(m.lnFound,2)+'.'+_SCREEN.gaFiles(1,2)+'.'+m.loFB2T_Setting.c_VC2,;
       m.lcSourceExt)
     ENDIF &&EMPTY(m.lnFound)
 
@@ -1133,12 +1146,12 @@ FUNCTION Convert_File  	&&Runs FoxBin2Prg for a single file or vcx/class.
  ENDIF &&m.llReturn
 
  IF m.llReturn THEN
-  _SCREEN.gaProjects(1,1) = FORCEEXT(_SCREEN.gaProjects(1,1),m.lcSourceExt)
+  _SCREEN.gaFiles(1,1) = FORCEEXT(_SCREEN.gaFiles(1,1),m.lcSourceExt)
 
-  IF !FILE(_SCREEN.gaProjects(1,1)) THEN
-   ?'File '+_SCREEN.gaProjects(1,1)+' not found.' FONT '' STYLE 'B'
+  IF !FILE(_SCREEN.gaFiles(1,1)) THEN
+   ?'File '+_SCREEN.gaFiles(1,1)+' not found.' FONT '' STYLE 'B'
    llReturn = .F.
-  ENDIF &&!FILE(_SCREEN.gaProjects(1,1))
+  ENDIF &&!FILE(_SCREEN.gaFiles(1,1))
 
  ENDIF &&m.llReturn
 
@@ -1169,16 +1182,16 @@ FUNCTION Convert_File  	&&Runs FoxBin2Prg for a single file or vcx/class.
 *check if we pick a single class
 *this is, the file should contain the classlib
 *if the filename is different to classlib file, it's a single class
-    lvTemp		  = JUSTSTEM(LOWER(STREXTRACT(FILETOSTR(_SCREEN.gaProjects(1,1)),'SourceFile="','"',1)))
-    tlSingleClass = !EMPTY(STRTRAN(LOWER(JUSTSTEM(_SCREEN.gaProjects(1,1))),m.lvTemp,''))
+    lvTemp		  = JUSTSTEM(LOWER(STREXTRACT(FILETOSTR(_SCREEN.gaFiles(1,1)),'SourceFile="','"',1)))
+    tlSingleClass = !EMPTY(STRTRAN(LOWER(JUSTSTEM(_SCREEN.gaFiles(1,1))),m.lvTemp,''))
 
 *!*	    IF m.tlSingleClass THEN
 *!*	*now we need to work around
 *!*	*see if we have a config file on files directory
 *!*	*first we figure out the classes name
 
-*!*	     lvTemp = JUSTEXT(JUSTSTEM(_SCREEN.gaProjects(1,1)))
-*!*	     _SCREEN.gaProjects(1,1) = FORCEEXT(FORCEPATH(JUSTSTEM(JUSTSTEM(_SCREEN.gaProjects(1,1))),JUSTPATH(_SCREEN.gaProjects(1,1))),m.lcSourceExt)+;
+*!*	     lvTemp = JUSTEXT(JUSTSTEM(_SCREEN.gaFiles(1,1)))
+*!*	     _SCREEN.gaFiles(1,1) = FORCEEXT(FORCEPATH(JUSTSTEM(JUSTSTEM(_SCREEN.gaFiles(1,1))),JUSTPATH(_SCREEN.gaFiles(1,1))),m.lcSourceExt)+;
 *!*	      '::'+m.lvTemp+'::import'
 
 *!*	    ENDIF &&m.tlSingleClass
@@ -1189,7 +1202,7 @@ FUNCTION Convert_File  	&&Runs FoxBin2Prg for a single file or vcx/class.
   ELSE &&m.tlText2Bin
 
    IF m.tlSingleClass THEN
-    _SCREEN.gaProjects(1,1) = _SCREEN.gaProjects(1,1)+'::'+_SCREEN.gaProjects(1,2)+'::export'
+    _SCREEN.gaFiles(1,1) = _SCREEN.gaFiles(1,1)+'::'+_SCREEN.gaFiles(1,2)+'::export'
     ?'Process to text'
    ENDIF &&m.tlSingleClass
   ENDIF &&m.tlText2Bin
@@ -1212,7 +1225,7 @@ FUNCTION Convert_File  	&&Runs FoxBin2Prg for a single file or vcx/class.
   LOCAL ARRAY;
    laFiles(1,1)
 
-  ACOPY(_SCREEN.gaProjects,m.laFiles)
+  ACOPY(_SCREEN.gaFiles,m.laFiles)
 
   LOCAL;
    llReturn,;
@@ -1229,7 +1242,7 @@ FUNCTION Convert_File  	&&Runs FoxBin2Prg for a single file or vcx/class.
     ?"Error"
     llReturn = .F.
    ENDIF &&_SCREEN.frmB2T_Envelop.cusB2T.Get_Converter(,@loConverter,.T.)
-   loFB2T_Setting = m.loConverter.Get_DirSettings(JUSTPATH(_SCREEN.gaProjects(1,1)))
+   loFB2T_Setting = m.loConverter.Get_DirSettings(JUSTPATH(m.laFiles(1,1)))
 
    IF m.llReturn THEN
 * nue Technik mit redirect2
@@ -1255,7 +1268,7 @@ FUNCTION Convert_File  	&&Runs FoxBin2Prg for a single file or vcx/class.
  REMOVEPROPERTY(_SCREEN,'glSingleClass')
  REMOVEPROPERTY(_SCREEN,'gcSource')
  REMOVEPROPERTY(_SCREEN,'gcTarget')
- REMOVEPROPERTY(_SCREEN,'gaProjects')
+ REMOVEPROPERTY(_SCREEN,'gaFiles')
  REMOVEPROPERTY(_SCREEN,'glText2Bin')
  REMOVEPROPERTY(_SCREEN,'glInfo')
  REMOVEPROPERTY(_SCREEN,'gcOld_Path')
@@ -1346,13 +1359,14 @@ FUNCTION Convert_Directory  	&&Runs FoxBin2Prg for a single directory and it's s
 
  _SCREEN.ADDPROPERTY('glText2Bin',m.tlText2Bin)
  _SCREEN.ADDPROPERTY('glWithSub',m.tlWithSub)
- _SCREEN.ADDPROPERTY('gaFiles(1,2)')
+ _SCREEN.ADDPROPERTY('gaFiles(1,3)')
 
  IF EMPTY(m.tcDirectory) OR !DIRECTORY(m.tcDirectory) THEN
   _SCREEN.gaFiles(1,1) = JUSTPATH(GETDIR(m.lcPath,'','',1+64))
  ELSE  &&EMPTY(m.tcDirectory) OR !DIRECTORY(m.tcDirectory)
   _SCREEN.gaFiles(1,1) = JUSTPATH(ADDBS(m.tcDirectory))
  ENDIF &&EMPTY(m.tcDirectory) OR !DIRECTORY(m.tcDirectory)
+ _SCREEN.gaFiles(1,3)	= ""
 
  llReturn = .T.
 
@@ -1399,9 +1413,9 @@ FUNCTION Convert_Directory  	&&Runs FoxBin2Prg for a single directory and it's s
   IF m.llReturn THEN
 
    LOCAL ARRAY;
-    laFiles(ALEN(_SCREEN.gaFiles,1),1)
+    laFiles(1,1)
 
-   ACOPY(_SCREEN.gaFiles,m.laFiles)
+   ACOPY(_SCREEN.gaFiles,m.laFiles)	&& will autoresize laFiles
 
    llReturn = m.llReturn AND _SCREEN.frmB2T_Envelop.cusB2T.Process_Dir_Bin2Text(@laFiles,_SCREEN.glText2Bin)
 
@@ -3095,10 +3109,12 @@ PROCEDURE Dir_Action_PJX		&&Internal. Parse a directory for projects (binary or 
   lnFiles = IIF(EMPTY(_SCREEN.gaFiles),0,ALEN(_SCREEN.gaFiles,1))
 
   DIMENSION;
-   _SCREEN.gaFiles(m.lnFiles+m.lnProjs,2)
+   _SCREEN.gaFiles(m.lnFiles+m.lnProjs,3)
 
   FOR lnProj = 1 TO m.lnProjs
    _SCREEN.gaFiles(m.lnFiles+m.lnProj,1) = FORCEPATH(FORCEEXT(m.laFiles(m.lnProj,1),"PJX"),m.tcDir)
+   _SCREEN.gaFiles(m.lnFiles+m.lnProj,3) = ""
+   
   ENDFOR &&lnProjs
  ENDIF &&m.lnProjs>0
 

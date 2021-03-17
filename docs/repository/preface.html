@@ -99,6 +99,9 @@
  <p>
  	The code does additional to FoxBin2Prg:
  	<ul>
+ 		<li>
+ 			<strong>Store the last state of an binary item (file, class of library ..), and process to text only if changed.</strong>
+ 		</li>
  		<li>Include projecthook library in the list of files to process.</li>
  		<li>Run all projects in a row, so that FoxBin2Prg will process files shared only one time.</li>
  		<li>Optionaly process only files changed, comparing files checksum and, if possible, down to class level circumventing problems with vcx/scx compiling.</li>
@@ -121,12 +124,12 @@
 			depends on the settings to FoxBin2Prg in the FoxBin2Prg.cfg file.
 		</p>
 		<p>
-			Exception is to be made for <strong>ClassPerFileCheck</strong> and  <strong>RedirectClassPerFileToMain</strong>. These will be ignored by Bin2Text.
+			Exception is to be made for <strong>RedirectClassType</strong>, <strong>ClassPerFileCheck</strong> and <strong>RedirectClassPerFileToMain</strong>.
+			These will be overwritten by Bin2Text.
 		</p>
 		<p>
 			While not forced, <strong>UseClassPerFile</strong> should be turned on.
 			The idea is a <em>class-per-file</em> atomic commit.
-			<span class="Alert">Also the <em>run-for-changes-only</em> logic does not work for UseClassPerFile: 0 yet.</span>
 		</p>
 		<p>
 			Also note that, as normal for FoxBin2Prg, <strong>UseClassPerFile</strong> is nothing to be changed freely.
@@ -160,7 +163,7 @@
   	</p>
   </li>
   <li>
-  	Clone or dowenload this repositiory.
+  	Clone or download this repositiory.
   </li>
   <li>
   	<p>
@@ -371,7 +374,7 @@
    	See <a href="../code/runb2t.prg/Main_d.inter_active.htm" title="Skip to procedure Inter_Active">Inter_Active</a>
    </p>
   <h3><a name="PJX2Commit">PJX2Commit</a></h3>
-   <span class="example">DO PJX2Commit IN Bin2Text.app</span>
+   <span class="example">DO PJX2Commit IN Bin2Text.app WITH [[/?]|[lAll]</span>
    <p>
    	Convert the files of the active project / all projects to text and run <em>git commit</em>.
    </p>
@@ -382,18 +385,23 @@
    	See <a href="../code/runb2t.prg/Main_d.pjx2commit.htm" title="Skip to procedure Pjx2Commit">Pjx2Commit</a>
    </p>
   <h3><a name="Convert_Pjx">Convert_Pjx</a></h3>
-   <span class="example">DO Convert_Pjx IN Bin2Text.app [[/?]|[lToBin[,nProjects[,nMode]]</span>
+   <span class="example">DO Convert_Pjx IN Bin2Text.app WITH [[/?]|[lToBin[,nProjects[,nMode[,cFile]]]]</span>
    <p>
    	Calls the pjx processing feature.
    </p>
    <p>
+   	See <a href="../code/runb2t.prg/Main_d.convert_pjx.htm" title="Skip to procedure Convert_Pjx">Convert_Pjx</a>
+   </p>
+  <h3><a name="Convert_File">Convert_File</a></h3>
+   <span class="example">DO Convert_File IN Bin2Text.app WITH [[/?]|[lToBin[,lSingleClass[,cFiles[,cLClass]]]]</span>
+   <p>
    	This is what all other menus item are calling.
    </p>
    <p>
-   	See <a href="../code/runb2t.prg/Main_d.convert_pjx.htm" title="Skip to procedure Convert_Pjx">Convert_Pjx</a>
+   	See <a href="../code/runb2t.prg/Main_d.convert_file.htm" title="Skip to procedure Convert_File">Convert_File</a>
    </p>
   <h3><a name="Convert_Directory">Convert_Directory</a></h3>
-   <span class="example">DO Convert_Directory IN Bin2Text.app [[/?]|[lToBin[,cDirectory]]</span>
+   <span class="example">DO Convert_Directory IN Bin2Text.app WITH [[/?]|[lToBin[,cDirectory]]</span>
    <p>
    	Runs FoxBin2Prg for a single directory and it's sub directories.
    </p>
@@ -408,7 +416,7 @@
  	There is one interface that offers a way to process any group of files, more complex then one can express with the FoxBin2Prg interface.
   <h3><a name="Convert_Array">Convert_Array</a></h3>
   </p>
-   <span class="example">DO Convert_Array IN Bin2Text.app [/?]|lToBin,cMode,@aFiles</span>
+   <span class="example">DO Convert_Array IN Bin2Text.app WITH [/?]|lToBin,cMode,@aFiles</span>
    <p>
    	This will process a file list.
    </p>
