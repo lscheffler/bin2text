@@ -42,37 +42,37 @@ ON PAD _000000001 OF _MSYSMENU ACTIVATE POPUP FoxBin2Tex
 		DEFINE BAR 1 OF Bin2Text PROMPT "\<Active" ;
 			SKIP FOR _VFP.PROJECTS.COUNT=0 ;
 			MESSAGE "Bin2Text on active project"
-		ON SELECTION BAR 1 OF Bin2Text DO Convert_Pjx IN (_SCREEN.gcB2T_App) WITH .F.,1,0
+		ON SELECTION BAR 1 OF Bin2Text DO Convert_Pjx_2Txt IN (_SCREEN.gcB2T_App) WITH 1,0
 
 		DEFINE BAR 2 OF Bin2Text PROMPT "\<IDE" ;
 			SKIP FOR _VFP.PROJECTS.COUNT=0 ;
 			MESSAGE "Bin2Text on projects open in IDE"
-		ON SELECTION BAR 2 OF Bin2Text DO Convert_Pjx IN (_SCREEN.gcB2T_App) WITH .F.,2,0
+		ON SELECTION BAR 2 OF Bin2Text DO Convert_Pjx_2Txt IN (_SCREEN.gcB2T_App) WITH 2,0
 
 		DEFINE BAR 3 OF Bin2Text PROMPT "\<Path" ;
 			MESSAGE "Bin2Text on projects in path"
-		ON SELECTION BAR 3 OF Bin2Text DO Convert_Pjx IN (_SCREEN.gcB2T_App) WITH .F.,3,0
+		ON SELECTION BAR 3 OF Bin2Text DO Convert_Pjx_2Txt IN (_SCREEN.gcB2T_App) WITH 3,0
 
 		DEFINE BAR 4 OF Bin2Text PROMPT "\<Get PJX" ;
 			MESSAGE "Bin2Text, pick up file"
-		ON SELECTION BAR 4 OF Bin2Text DO Convert_Pjx IN (_SCREEN.gcB2T_App) WITH .F.,0,0
+		ON SELECTION BAR 4 OF Bin2Text DO Convert_Pjx_2Txt IN (_SCREEN.gcB2T_App) WITH 0,0
 
 		DEFINE BAR 5 OF Bin2Text PROMPT "Get \<File"
-		ON SELECTION BAR 5 OF Bin2Text DO Convert_File IN (_SCREEN.gcB2T_App) WITH .F.,.F.
+		ON SELECTION BAR 5 OF Bin2Text DO Convert_File_2Txt IN (_SCREEN.gcB2T_App) WITH .F.
 
 		DEFINE BAR 6 OF Bin2Text PROMPT "Get \<Class"
-		ON SELECTION BAR 6 OF Bin2Text DO Convert_File IN (_SCREEN.gcB2T_App) WITH .F.,.T.
+		ON SELECTION BAR 6 OF Bin2Text DO Convert_File_2Txt IN (_SCREEN.gcB2T_App) WITH .T.
 
 		DEFINE BAR 7 OF Bin2Text PROMPT "Path \<recursive" ;
 			MESSAGE "Text2Bin on projects in path and all subdirectories"
-		ON SELECTION BAR 7 OF Bin2Text DO Convert_Pjx IN (_SCREEN.gcB2T_App) WITH .F.,4,0
+		ON SELECTION BAR 7 OF Bin2Text DO Convert_Pjx_2Txt IN (_SCREEN.gcB2T_App) WITH 4,0
 
 		DEFINE BAR 8 OF Bin2Text PROMPT "\-"
 		ON SELECTION BAR 8 OF Bin2Text
 
 		DEFINE BAR 9 OF Bin2Text PROMPT "\<Directory" ;
 			MESSAGE "Convert the files of a directoy according to config."
-		ON SELECTION BAR 9 OF Bin2Text DO Convert_Directory IN (_SCREEN.gcB2T_App) WITH .F.
+		ON SELECTION BAR 9 OF Bin2Text DO Convert_Directory_2Txt IN (_SCREEN.gcB2T_App)
 
 	DEFINE BAR 4 OF FoxBin2Tex PROMPT "\<Text to Bin" ;
 		MESSAGE "Text2Bin"
@@ -83,37 +83,37 @@ ON PAD _000000001 OF _MSYSMENU ACTIVATE POPUP FoxBin2Tex
 		DEFINE BAR 1 OF Text2Bin PROMPT "\<Active" ;
 			SKIP FOR _VFP.PROJECTS.COUNT=0 ;
 			MESSAGE "Text2Bin on active project"
-		ON SELECTION BAR 1 OF Text2Bin DO Convert_Pjx IN (_SCREEN.gcB2T_App) WITH .T.,1,0
+		ON SELECTION BAR 1 OF Text2Bin DO Convert_Pjx_2Bin IN (_SCREEN.gcB2T_App) WITH 1,0
 
 		DEFINE BAR 2 OF Text2Bin PROMPT "\<IDE" ;
 			SKIP FOR _VFP.PROJECTS.COUNT=0 ;
 			MESSAGE "Text2Bin on projects open in IDE"
-		ON SELECTION BAR 2 OF Text2Bin DO Convert_Pjx IN (_SCREEN.gcB2T_App) WITH .T.,2,0
+		ON SELECTION BAR 2 OF Text2Bin DO Convert_Pjx_2Bin IN (_SCREEN.gcB2T_App) WITH 2,0
 
 		DEFINE BAR 3 OF Text2Bin PROMPT "\<Path" ;
 			MESSAGE "Text2Bin on projects in path"
-		ON SELECTION BAR 3 OF Text2Bin DO Convert_Pjx IN (_SCREEN.gcB2T_App) WITH .T.,3,0
+		ON SELECTION BAR 3 OF Text2Bin DO Convert_Pjx_2Bin IN (_SCREEN.gcB2T_App) WITH 3,0
 
 		DEFINE BAR 4 OF Text2Bin PROMPT "\<Get PJX" ;
 			MESSAGE "Text2Bin pick a file"
-		ON SELECTION BAR 4 OF Text2Bin DO Convert_Pjx IN (_SCREEN.gcB2T_App) WITH .T.,0,0
+		ON SELECTION BAR 4 OF Text2Bin DO Convert_Pjx_2Bin IN (_SCREEN.gcB2T_App) WITH 0,0
 
 		DEFINE BAR 5 OF Text2Bin PROMPT "Get \<File"
-		ON SELECTION BAR 5 OF Text2Bin DO Convert_File IN (_SCREEN.gcB2T_App) WITH .T.,.F.
+		ON SELECTION BAR 5 OF Text2Bin DO Convert_File_2Bin IN (_SCREEN.gcB2T_App) WITH .F.
 
 		DEFINE BAR 6 OF Text2Bin PROMPT "Get \<Class"
-		ON SELECTION BAR 6 OF Text2Bin DO Convert_File IN (_SCREEN.gcB2T_App) WITH .T.,.T.
+		ON SELECTION BAR 6 OF Text2Bin DO Convert_File_2Bin IN (_SCREEN.gcB2T_App) WITH .T.
 
 		DEFINE BAR 7 OF Text2Bin PROMPT "Path \<recursive" ;
 			MESSAGE "Text2Bin on projects in path and all subdirectories"
-		ON SELECTION BAR 7 OF Text2Bin DO Convert_Pjx IN (_SCREEN.gcB2T_App) WITH .T.,4,0
+		ON SELECTION BAR 7 OF Text2Bin DO Convert_Pjx_2Bin IN (_SCREEN.gcB2T_App) WITH 4,0
 
 		DEFINE BAR 8 OF Text2Bin PROMPT "\-"
 		ON SELECTION BAR 8 OF Text2Bin
 
 		DEFINE BAR 9 OF Text2Bin PROMPT "\<Directory" ;
 			MESSAGE "Convert the files of a directoy according to config."
-		ON SELECTION BAR 9 OF Text2Bin DO Convert_Directory IN (_SCREEN.gcB2T_App) WITH .T.
+		ON SELECTION BAR 9 OF Text2Bin DO Convert_Directory_2Bin IN (_SCREEN.gcB2T_App)
 
 	DEFINE BAR 5 OF FoxBin2Tex PROMPT "\-"
 	ON BAR 5 OF FoxBin2Tex ACTIVATE POPUP NewItem

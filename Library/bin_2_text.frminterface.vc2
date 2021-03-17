@@ -648,26 +648,45 @@ DEFINE CLASS frminterface AS form 		&& Just to create an interface as well as a 
 
 	PROCEDURE storage_get		&& Get the storage settings and put the values of the surface objects.
 		LPARAMETERS;
-		 toObject AS COLLECTION
+		 toSettings AS COLLECTION
 		
 		*!*	<pdm>
 		*!*	<descr>Puts values of the settings object to visible objects.</descr>
-		*!*	<params name="toObject" type="COLLECTION" byref="0" dir="" inb="0" outb="0">
+		*!*	<params name="toSettings" type="COLLECTION" byref="0" dir="" inb="0" outb="0">
 		*!*	<short>Settings object.</short>
 		*!*	<detail></detail>
 		*!*	</params>
 		*!*	<copyright><i>&copy; 14.4.2015 Lutz Scheffler Software Ingenieurbüro</i></copyright>
 		*!*	</pdm>
+		LOCAL;
+		 loSetting AS EMPTY
 		
-		THIS.txtPath.VALUE       =  m.toObject.ITEM("gcB2T_Path")
-		THIS.txtMain.VALUE       =  m.toObject.ITEM("gcB2T_FB2T")
-		THIS.txtGUI.VALUE        =  m.toObject.ITEM("gcB2T_GUI")
-		THIS.chkDBC.VALUE        =  m.toObject.ITEM("gcB2T_DBC")=="1"
-		THIS.chkAll.VALUE        = !m.toObject.ITEM("gcB2T_Opt")=="1"
-		THIS.chkAutoCommit.VALUE =  m.toObject.ITEM("gcB2T_Commit")=="1"
-		THIS.chkGit_PJX.VALUE    =  m.toObject.ITEM("gcB2T_GitPjx")=="1"
-		THIS.chkDel.VALUE        =  m.toObject.ITEM("gcB2T_Delete")=="1"
-		THIS.chkUseBash.VALUE    =  m.toObject.ITEM("gcB2T_UseBash")=="1"
+		loSetting                =  m.toSettings.ITEM("gcB2T_Path")
+		THIS.txtPath.VALUE       =  m.loSetting.gcFile
+		
+		loSetting                =  m.toSettings.ITEM("gcB2T_FB2T")
+		THIS.txtMain.VALUE       =  m.loSetting.gcFile
+		
+		loSetting                =  m.toSettings.ITEM("gcB2T_GUI")
+		THIS.txtGUI.VALUE        =  m.loSetting.gcFile
+		
+		loSetting                =  m.toSettings.ITEM("gcB2T_DBC")
+		THIS.chkDBC.VALUE        =  m.loSetting.gcFile=="1"
+		
+		loSetting                =  m.toSettings.ITEM("gcB2T_Opt")
+		THIS.chkAll.VALUE        = !m.loSetting.gcFile=="1"
+		
+		loSetting                =  m.toSettings.ITEM("gcB2T_Commit")
+		THIS.chkAutoCommit.VALUE =  m.loSetting.gcFile=="1"
+		
+		loSetting                =  m.toSettings.ITEM("gcB2T_GitPjx")
+		THIS.chkGit_PJX.VALUE    =  m.loSetting.gcFile=="1"
+		
+		loSetting                =  m.toSettings.ITEM("gcB2T_Delete")
+		THIS.chkDel.VALUE        =  m.loSetting.gcFile=="1"
+		
+		loSetting                =  m.toSettings.ITEM("gcB2T_UseBash")
+		THIS.chkUseBash.VALUE    =  m.loSetting.gcFile=="1"
 		
 		THIS.ADDPROPERTY("glSet",.F.)
 		
@@ -684,45 +703,45 @@ DEFINE CLASS frminterface AS form 		&& Just to create an interface as well as a 
 
 	PROCEDURE storage_put		&& Get the values from the the surface objects and put to storage settings.
 		LPARAMETERS;
-		 toObject AS COLLECTION
+		 toSettings AS COLLECTION
 		
 		*!*	<pdm>
 		*!*	<descr>Stores changes to the settings object.</descr>
-		*!*	<params name="toObject" type="COLLECTION" byref="0" dir="" inb="0" outb="0">
+		*!*	<params name="toSettings" type="COLLECTION" byref="0" dir="" inb="0" outb="0">
 		*!*	<short>Settings object.</short>
 		*!*	<detail></detail>
 		*!*	</params>
 		*!*	<copyright><i>&copy; 14.4.2015 Lutz Scheffler Software Ingenieurbüro</i></copyright>
 		*!*	</pdm>
 		 
-		toObject.REMOVE("gcB2T_Path")
-		toObject.ADD(THIS.txtPath.VALUE,"gcB2T_Path")
+		loSetting        = m.toSettings.ITEM("gcB2T_Path")
+		loSetting.gcFile = THIS.txtPath.VALUE
 		
-		toObject.REMOVE("gcB2T_FB2T")
-		toObject.ADD(THIS.txtMain.VALUE,"gcB2T_FB2T")
+		loSetting        = m.toSettings.ITEM("gcB2T_FB2T")
+		loSetting.gcFile = THIS.txtMain.VALUE
 		
-		toObject.REMOVE("gcB2T_GUI")
-		toObject.ADD(THIS.txtGUI.VALUE,"gcB2T_GUI")
+		loSetting        = m.toSettings.ITEM("gcB2T_GUI")
+		loSetting.gcFile = THIS.txtGUI.VALUE
 		
-		toObject.REMOVE("gcB2T_DBC")
-		toObject.ADD(IIF(THIS.chkAll.VALUE,"0","1"),"gcB2T_DBC")
+		loSetting        = m.toSettings.ITEM("gcB2T_DBC")
+		loSetting.gcFile = IIF(THIS.chkDBC.VALUE,"0","1")
 		
-		toObject.REMOVE("gcB2T_Opt")
-		toObject.ADD(IIF(THIS.chkAll.VALUE,"0","1"),"gcB2T_Opt")
+		loSetting        = m.toSettings.ITEM("gcB2T_Opt")
+		loSetting.gcFile = IIF(THIS.chkAll.VALUE,"0","1")
 		
-		toObject.REMOVE("gcB2T_Commit")
-		toObject.ADD(IIF(THIS.chkAutoCommit.VALUE,"1","0"),"gcB2T_Commit")
+		loSetting        = m.toSettings.ITEM("gcB2T_Commit")
+		loSetting.gcFile = IIF(THIS.chkAutoCommit.VALUE,"1","0")
 		
-		toObject.REMOVE("gcB2T_GitPjx")
-		toObject.ADD(IIF(THIS.chkGit_PJX.VALUE,"1","0"),"gcB2T_GitPjx")
+		loSetting        = m.toSettings.ITEM("gcB2T_GitPjx")
+		loSetting.gcFile = IIF(THIS.chkGit_PJX.VALUE,"1","0")
 		
-		toObject.REMOVE("gcB2T_Delete")
-		toObject.ADD(IIF(THIS.chkDel.VALUE,"1","0"),"gcB2T_Delete")
+		loSetting        = m.toSettings.ITEM("gcB2T_Delete")
+		loSetting.gcFile = IIF(THIS.chkDel.VALUE,"1","0")
 		
-		toObject.REMOVE("gcB2T_UseBash")
-		toObject.ADD(IIF(THIS.chkUseBash.VALUE,"1","0"),"gcB2T_UseBash")
+		loSetting        = m.toSettings.ITEM("gcB2T_UseBash")
+		loSetting.gcFile = IIF(THIS.chkUseBash.VALUE,"1","0")
 		
-		toObject.ADD(THIS.glSet,"glSet")
+		toSettings.ADD(THIS.glSet,"glSet")
 		
 	ENDPROC
 
@@ -806,11 +825,6 @@ DEFINE CLASS frminterface AS form 		&& Just to create an interface as well as a 
 
 	PROCEDURE cmdPick.Click
 		THISFORM.Pick_File()
-		
-	ENDPROC
-
-	PROCEDURE lblGit_All.Click
-		SET STEP ON
 		
 	ENDPROC
 

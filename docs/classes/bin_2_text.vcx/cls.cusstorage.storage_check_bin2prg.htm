@@ -25,7 +25,7 @@
 </table>
 </div>
 <div class="diaxp_mbody">
-<!-- Created with _diamp_pdm_ab by Agnes Beste    16.03.2021 14:45 -->
+<!-- Created with _diamp_pdm_ab by Agnes Beste    17.03.2021 15:42 -->
  <div class="PDM_AB_Descr"><!-- Descr Begin -->
 Check if FoxBin2PRG is found, locate.
  </div><!-- Descr End -->
@@ -36,8 +36,8 @@ Check if FoxBin2PRG is found, locate.
     Object.storage_check_bin2prg
    </div>
    <div class="Para">
-    (@<a href="#_6060VMZ7H">toSetting</a>
-     <wbr />,@<a href="#_6060VMZ7I">tlError</a>)
+    (@<a href="#_6070XOM8B">toSettings</a>
+     <wbr />,@<a href="#_6070XOM8C">tlError</a>)
    </div>
    <div style="clear: both"></div>
   </div><!-- Colour End -->
@@ -49,8 +49,8 @@ Check if FoxBin2PRG is found, locate.
   </span>
   <dl class="DIAMP_PDM_AB_Params_List">
    <dt class="dt_">
-    <a class="DIAMP_PDM_AB_Params_ParaName" id="_6060VMZ7H" name="_6060VMZ7H">
-     <span class="PDMEXPR PDMNor" ><span class='PDMVar'>toSetting</span></span>
+    <a class="DIAMP_PDM_AB_Params_ParaName" id="_6070XOM8B" name="_6070XOM8B">
+     <span class="PDMEXPR PDMNor" ><span class='PDMVar'>toSettings</span></span>
 
     </a>
    </dt>
@@ -83,7 +83,7 @@ Object with settings.
     </span>
    </dd>
    <dt class="dt_">
-    <a class="DIAMP_PDM_AB_Params_ParaName" id="_6060VMZ7I" name="_6060VMZ7I">
+    <a class="DIAMP_PDM_AB_Params_ParaName" id="_6070XOM8C" name="_6070XOM8C">
      <span class="PDMEXPR PDMNor" ><span class='PDMVar'>tlError</span></span>
 
     </a>
@@ -117,7 +117,7 @@ Object with settings.
  </div><!-- Parameters End -->
 
 
-<!-- /Created with _diamp_pdm_ab by Agnes Beste    16.03.2021 14:45 -->
+<!-- /Created with _diamp_pdm_ab by Agnes Beste    17.03.2021 15:42 -->
 
  <div class="SC">
   <img onclick="ExpandSC('SP_40',-1);"class="imgEC" src="../../imgs/dotab.gif" alt="Expand/Collapse source code of procedure storage_check_bin2prg" id="IMG_SP_40" />
@@ -125,85 +125,92 @@ Object with settings.
   <div ondblclick="ExpandSC('SP_40',-1);" class="SCE" style="display: none;" id="TX_SP_40">
 <!-- Code Begin -->
 <pre class="PDMCODE PDMNor" ><span class='PDMCnt'>   1</span> <span class='PDMInd'>  </span> <span class='PDMResK'>LPARAMETERS</span><span class='PDMOper'>;</span>
-<span class='PDMCnt'>   2</span> <span class='PDMInd'> 1</span>  <span class='PDMVar'>toSetting</span> <span class='PDMResK'>AS</span> <span class='PDMResK'>COLLECTION</span><span class='PDMOper'>,</span><span class='PDMOper'>;</span>
+<span class='PDMCnt'>   2</span> <span class='PDMInd'> 1</span>  <span class='PDMVar'>toSettings</span> <span class='PDMResK'>AS</span> <span class='PDMResK'>COLLECTION</span><span class='PDMOper'>,</span><span class='PDMOper'>;</span>
 <span class='PDMCnt'>   3</span> <span class='PDMInd'> 1</span>  <span class='PDMVar'>tlError</span>
 <span class='PDMCnt'>   4</span> <span class='PDMInd'>  </span> 
 <span class='PDMCnt'>   5</span> <span class='PDMInd'>  </span> 
 <span class='PDMCnt'>  30</span> <span class='PDMInd'>  </span> 
 <span class='PDMCnt'>  31</span> <span class='PDMInd'>  </span> <span class='PDMResK'>LOCAL</span><span class='PDMOper'>;</span>
-<span class='PDMCnt'>  32</span> <span class='PDMInd'> 1</span>  <span class='PDMVar'>lcFile</span>   <span class='PDMResK'>AS</span> <span class='PDMResK'>CHARACTER</span><span class='PDMOper'>,</span><span class='PDMOper'>;</span>
-<span class='PDMCnt'>  33</span> <span class='PDMInd'> 1</span>  <span class='PDMVar'>lnLoop</span>   <span class='PDMResK'>AS</span> <span class='PDMResK'>INTEGER</span><span class='PDMOper'>,</span><span class='PDMOper'>;</span>
-<span class='PDMCnt'>  34</span> <span class='PDMInd'> 1</span>  <span class='PDMVar'>llSearch</span> <span class='PDMResK'>AS</span> <span class='PDMVar'>BOOLEAN</span>
-<span class='PDMCnt'>  35</span> <span class='PDMInd'>  </span> 
-<span class='PDMCnt'>  36</span> <span class='PDMInd'>  </span> <span class='PDMVar'>llSearch</span> <span class='PDMOper'>=</span> <span class='PDMVar'>False</span>
-<span class='PDMCnt'>  37</span> <span class='PDMInd'>  </span> <span class='PDMResK'>IF</span> <span class='PDMOper'>!</span><span class='PDMResF'>PEMSTATUS</span><span class='PDMOper'>(</span><span class='PDMVar'>_SCREEN</span><span class='PDMOper'>,</span><span class='PDMStr'>"gcB2T_FB2T"</span><span class='PDMOper'>,</span><span class='PDMLit'>5</span><span class='PDMOper'>)</span> <span class='PDMResK'>THEN</span>
-<span class='PDMCnt'>  38</span> <span class='PDMInd'> 1</span>  <span class='PDMVar'>llSearch</span> <span class='PDMOper'>=</span> <span class='PDMVar'>True</span>
-<span class='PDMCnt'>  39</span> <span class='PDMInd'>  </span> <span class='PDMResK'>ENDIF</span> <span class='PDMCom'>&amp;&amp;!PEMSTATUS(_SCREEN,"gcB2T_FB2T",5)</span>
-<span class='PDMCnt'>  40</span> <span class='PDMInd'>  </span> 
-<span class='PDMCnt'>  41</span> <span class='PDMInd'>  </span> <span class='PDMResK'>IF</span> <span class='PDMOper'>!</span><span class='PDMVar'>m</span><span class='PDMOper'>.</span><span class='PDMVar'>llSearch</span> <span class='PDMOper'>AND</span> <span class='PDMOper'>!</span><span class='PDMResF'>FILE</span><span class='PDMOper'>(</span><span class='PDMVar'>_SCREEN</span><span class='PDMOper'>.</span><span class='PDMVar'>gcB2T_FB2T</span><span class='PDMOper'>)</span> <span class='PDMResK'>THEN</span>
-<span class='PDMCnt'>  42</span> <span class='PDMInd'> 1</span>  <span class='PDMVar'>llSearch</span> <span class='PDMOper'>=</span> <span class='PDMVar'>True</span>
-<span class='PDMCnt'>  43</span> <span class='PDMInd'> 1</span>  <span class='PDMResF'>MESSAGEBOX</span><span class='PDMOper'>(</span><span class='PDMStr'>'FoxBin2PRG not found in'</span><span class='PDMOper'>+</span><span class='PDMVar'>0h0D0A</span><span class='PDMOper'>+</span><span class='PDMOper'>;</span>
-<span class='PDMCnt'>  44</span> <span class='PDMInd'> 2</span>   <span class='PDMStr'>'"'</span><span class='PDMOper'>+</span><span class='PDMVar'>_SCREEN</span><span class='PDMOper'>.</span><span class='PDMVar'>gcB2T_FB2T</span><span class='PDMOper'>+</span><span class='PDMStr'>'"'</span><span class='PDMOper'>,</span><span class='PDMLit'>0</span><span class='PDMOper'>,</span><span class='PDMStr'>'Bin2Text v'</span><span class='PDMOper'>+</span><span class='PDMVar'>dcB2T_Verno</span><span class='PDMOper'>)</span>
-<span class='PDMCnt'>  45</span> <span class='PDMInd'>  </span> <span class='PDMResK'>ENDIF</span> <span class='PDMCom'>&amp;&amp;!m.llSearch AND !FILE(_SCREEN.gcB2T_FB2T)</span>
-<span class='PDMCnt'>  46</span> <span class='PDMInd'>  </span> <span class='PDMResK'>IF</span> <span class='PDMVar'>m</span><span class='PDMOper'>.</span><span class='PDMVar'>llSearch</span> <span class='PDMResK'>THEN</span>
-<span class='PDMCnt'>  47</span> <span class='PDMInd'> 1</span>  <span class='PDMVar'>lcFile</span> <span class='PDMOper'>=</span> <span class='PDMStr'>''</span>
-<span class='PDMCnt'>  48</span> <span class='PDMInd'>  </span> 
-<span class='PDMCnt'>  49</span> <span class='PDMInd'> 1</span>  <span class='PDMResK'>IF</span> <span class='PDMResF'>FILE</span><span class='PDMOper'>(</span><span class='PDMStr'>"FoxBin2PRG.prg"</span><span class='PDMOper'>)</span> <span class='PDMResK'>THEN</span>
-<span class='PDMCnt'>  50</span> <span class='PDMInd'> 2</span>   <span class='PDMVar'>lcFile</span> <span class='PDMOper'>=</span> <span class='PDMResF'>FULLPATH</span><span class='PDMOper'>(</span><span class='PDMStr'>"FoxBin2PRG.prg"</span><span class='PDMOper'>)</span>
-<span class='PDMCnt'>  51</span> <span class='PDMInd'> 1</span>  <span class='PDMResK'>ELSE</span>  <span class='PDMCom'>&amp;&amp;FILE("FoxBin2PRG.prg")</span>
-<span class='PDMCnt'>  52</span> <span class='PDMInd'> 2</span>   <span class='PDMVar'>lnLoop</span> <span class='PDMOper'>=</span> <span class='PDMLit'>1</span>
-<span class='PDMCnt'>  53</span> <span class='PDMInd'> 2</span>   <span class='PDMVar'>lcFile</span> <span class='PDMOper'>=</span> <span class='PDMResF'>SYS</span><span class='PDMOper'>(</span><span class='PDMLit'>16</span><span class='PDMOper'>,</span><span class='PDMVar'>m</span><span class='PDMOper'>.</span><span class='PDMVar'>lnLoop</span><span class='PDMOper'>)</span>
-<span class='PDMCnt'>  54</span> <span class='PDMInd'>  </span> 
-<span class='PDMCnt'>  55</span> <span class='PDMInd'> 2</span>   <span class='PDMResK'>DO</span> <span class='PDMResK'>WHILE</span> <span class='PDMResF'>LEN</span><span class='PDMOper'>(</span><span class='PDMVar'>m</span><span class='PDMOper'>.</span><span class='PDMVar'>lcFile</span><span class='PDMOper'>)</span><span class='PDMOper'>&gt;</span><span class='PDMLit'>0</span>
-<span class='PDMCnt'>  56</span> <span class='PDMInd'>  </span> 
-<span class='PDMCnt'>  57</span> <span class='PDMInd'> 3</span>    <span class='PDMResK'>IF</span> <span class='PDMResF'>UPPER</span><span class='PDMOper'>(</span><span class='PDMResF'>JUSTEXT</span><span class='PDMOper'>(</span><span class='PDMVar'>m</span><span class='PDMOper'>.</span><span class='PDMVar'>lcFile</span><span class='PDMOper'>)</span><span class='PDMOper'>)</span> <span class='PDMOper'>=</span> <span class='PDMStr'>"APP"</span> <span class='PDMResK'>THEN</span>
-<span class='PDMCnt'>  58</span> <span class='PDMInd'> 4</span>     <span class='PDMResK'>IF</span> <span class='PDMVar'>lcFile</span><span class='PDMOper'>=</span><span class='PDMStr'>"PROCEDURE "</span> <span class='PDMResK'>THEN</span>
-<span class='PDMCnt'>  59</span> <span class='PDMInd'> 5</span>      <span class='PDMVar'>lcFile</span> <span class='PDMOper'>=</span> <span class='PDMResF'>ADDBS</span><span class='PDMOper'>(</span><span class='PDMResF'>JUSTPATH</span><span class='PDMOper'>(</span><span class='PDMVar'>STREXTRACT</span><span class='PDMOper'>(</span><span class='PDMVar'>m</span><span class='PDMOper'>.</span><span class='PDMVar'>lcFile</span><span class='PDMOper'>,</span><span class='PDMStr'>' '</span><span class='PDMOper'>,</span><span class='PDMStr'>' '</span><span class='PDMOper'>,</span><span class='PDMLit'>2</span><span class='PDMOper'>,</span><span class='PDMLit'>2</span><span class='PDMOper'>)</span><span class='PDMOper'>)</span><span class='PDMOper'>)</span>
-<span class='PDMCnt'>  60</span> <span class='PDMInd'> 4</span>     <span class='PDMResK'>ELSE</span>  <span class='PDMCom'>&amp;&amp;m.lcFile="PROCEDURE "</span>
-<span class='PDMCnt'>  61</span> <span class='PDMInd'> 5</span>      <span class='PDMVar'>lcFile</span> <span class='PDMOper'>=</span> <span class='PDMResF'>JUSTPATH</span><span class='PDMOper'>(</span><span class='PDMVar'>m</span><span class='PDMOper'>.</span><span class='PDMVar'>lcFile</span><span class='PDMOper'>)</span>
-<span class='PDMCnt'>  62</span> <span class='PDMInd'> 4</span>     <span class='PDMResK'>ENDIF</span> <span class='PDMCom'>&amp;&amp;m.lcFile="PROCEDURE "</span>
-<span class='PDMCnt'>  63</span> <span class='PDMInd'> 4</span>     <span class='PDMResK'>EXIT</span>
-<span class='PDMCnt'>  64</span> <span class='PDMInd'> 3</span>    <span class='PDMResK'>ENDIF</span> <span class='PDMCom'>&amp;&amp;UPPER(JUSTEXT(m.lcFile)) = "APP"</span>
-<span class='PDMCnt'>  65</span> <span class='PDMInd'>  </span> 
-<span class='PDMCnt'>  66</span> <span class='PDMInd'> 3</span>    <span class='PDMResK'>IF</span> <span class='PDMResF'>UPPER</span><span class='PDMOper'>(</span><span class='PDMVar'>STREXTRACT</span><span class='PDMOper'>(</span><span class='PDMVar'>m</span><span class='PDMOper'>.</span><span class='PDMVar'>lcFile</span><span class='PDMOper'>,</span><span class='PDMStr'>' '</span><span class='PDMOper'>,</span><span class='PDMStr'>' '</span><span class='PDMOper'>,</span><span class='PDMLit'>1</span><span class='PDMOper'>)</span><span class='PDMOper'>)</span><span class='PDMOper'>==</span><span class='PDMStr'>"BIN2PRG"</span><span class='PDMOper'>;</span>
-<span class='PDMCnt'>  67</span> <span class='PDMInd'> 5</span>      <span class='PDMOper'>OR</span> <span class='PDMResF'>UPPER</span><span class='PDMOper'>(</span><span class='PDMVar'>STREXTRACT</span><span class='PDMOper'>(</span><span class='PDMVar'>m</span><span class='PDMOper'>.</span><span class='PDMVar'>lcFile</span><span class='PDMOper'>,</span><span class='PDMStr'>' '</span><span class='PDMOper'>,</span><span class='PDMStr'>' '</span><span class='PDMOper'>,</span><span class='PDMLit'>1</span><span class='PDMOper'>)</span><span class='PDMOper'>)</span><span class='PDMOper'>==</span><span class='PDMStr'>"INTER_ACTIVE"</span> <span class='PDMResK'>THEN</span>
-<span class='PDMCnt'>  68</span> <span class='PDMInd'> 4</span>     <span class='PDMVar'>lcFile</span> <span class='PDMOper'>=</span> <span class='PDMResF'>ADDBS</span><span class='PDMOper'>(</span><span class='PDMResF'>JUSTPATH</span><span class='PDMOper'>(</span><span class='PDMVar'>STREXTRACT</span><span class='PDMOper'>(</span><span class='PDMVar'>m</span><span class='PDMOper'>.</span><span class='PDMVar'>lcFile</span><span class='PDMOper'>,</span><span class='PDMStr'>' '</span><span class='PDMOper'>,</span><span class='PDMStr'>' '</span><span class='PDMOper'>,</span><span class='PDMLit'>2</span><span class='PDMOper'>,</span><span class='PDMLit'>2</span><span class='PDMOper'>)</span><span class='PDMOper'>)</span><span class='PDMOper'>)</span>
-<span class='PDMCnt'>  69</span> <span class='PDMInd'> 4</span>     <span class='PDMResK'>EXIT</span>
-<span class='PDMCnt'>  70</span> <span class='PDMInd'> 3</span>    <span class='PDMResK'>ENDIF</span> <span class='PDMCom'>&amp;&amp;UPPER(STREXTRACT(m.lcFile,' ',' ',1))=="BIN2PRG" OR UPPER(STREXTRACT(m.lcFile,' ',' ',1))=="INTER_ACTIVE"</span>
-<span class='PDMCnt'>  71</span> <span class='PDMInd'> 3</span>    <span class='PDMVar'>lnLoop</span> <span class='PDMOper'>=</span> <span class='PDMVar'>m</span><span class='PDMOper'>.</span><span class='PDMVar'>lnLoop</span><span class='PDMOper'>+</span><span class='PDMLit'>1</span>
-<span class='PDMCnt'>  72</span> <span class='PDMInd'> 3</span>    <span class='PDMVar'>lcFile</span> <span class='PDMOper'>=</span> <span class='PDMResF'>SYS</span><span class='PDMOper'>(</span><span class='PDMLit'>16</span><span class='PDMOper'>,</span><span class='PDMVar'>m</span><span class='PDMOper'>.</span><span class='PDMVar'>lnLoop</span><span class='PDMOper'>)</span>
-<span class='PDMCnt'>  73</span> <span class='PDMInd'> 2</span>   <span class='PDMResK'>ENDDO</span> <span class='PDMCom'>&amp;&amp;LEN(m.lcFile)&gt;0</span>
-<span class='PDMCnt'>  74</span> <span class='PDMInd'>  </span> 
-<span class='PDMCnt'>  75</span> <span class='PDMInd'> 1</span>  <span class='PDMResK'>ENDIF</span> <span class='PDMCom'>&amp;&amp;FILE("FoxBin2PRG.prg")</span>
-<span class='PDMCnt'>  76</span> <span class='PDMInd'>  </span> 
-<span class='PDMCnt'>  77</span> <span class='PDMInd'>  </span> <span class='PDMCom'>*Try .. EndTry bei IntelliScript</span>
-<span class='PDMCnt'>  78</span> <span class='PDMInd'> 1</span>  <span class='PDMResK'>LOCAL</span><span class='PDMOper'>;</span>
-<span class='PDMCnt'>  79</span> <span class='PDMInd'> 2</span>   <span class='PDMVar'>loException</span> <span class='PDMResK'>AS</span> <span class='PDMResK'>EXCEPTION</span>
-<span class='PDMCnt'>  80</span> <span class='PDMInd'>  </span> 
-<span class='PDMCnt'>  81</span> <span class='PDMInd'> 1</span>  <span class='PDMVar'>lcFile</span> <span class='PDMOper'>=</span> <span class='PDMResF'>FORCEPATH</span><span class='PDMOper'>(</span><span class='PDMStr'>"FoxBin2PRG.prg"</span><span class='PDMOper'>,</span><span class='PDMVar'>m</span><span class='PDMOper'>.</span><span class='PDMVar'>lcFile</span><span class='PDMOper'>)</span>
-<span class='PDMCnt'>  82</span> <span class='PDMInd'> 1</span>  <span class='PDMResK'>TRY</span>
-<span class='PDMCnt'>  83</span> <span class='PDMInd'>  </span> <span class='PDMCom'>*Was zu testen ist</span>
-<span class='PDMCnt'>  84</span> <span class='PDMInd'> 3</span>    <span class='PDMVar'>lcFile</span> <span class='PDMOper'>=</span> <span class='PDMResF'>LOCFILE</span><span class='PDMOper'>(</span><span class='PDMVar'>m</span><span class='PDMOper'>.</span><span class='PDMVar'>lcFile</span><span class='PDMOper'>,</span><span class='PDMStr'>'prg'</span><span class='PDMOper'>)</span>
-<span class='PDMCnt'>  85</span> <span class='PDMInd'> 2</span>   <span class='PDMResK'>CATCH</span> <span class='PDMResK'>TO</span> <span class='PDMVar'>loException</span>
-<span class='PDMCnt'>  86</span> <span class='PDMInd'> 3</span>    <span class='PDMVar'>tlError</span> <span class='PDMOper'>=</span> <span class='PDMVar'>True</span>
-<span class='PDMCnt'>  87</span> <span class='PDMInd'> 2</span>   <span class='PDMResK'>FINALLY</span>
-<span class='PDMCnt'>  88</span> <span class='PDMInd'>  </span> <span class='PDMCom'>*</span>
-<span class='PDMCnt'>  89</span> <span class='PDMInd'> 1</span>  <span class='PDMResK'>ENDTRY</span>
-<span class='PDMCnt'>  90</span> <span class='PDMInd'>  </span> 
-<span class='PDMCnt'>  91</span> <span class='PDMInd'> 1</span>  <span class='PDMResK'>IF</span> <span class='PDMOper'>!</span><span class='PDMResF'>FILE</span><span class='PDMOper'>(</span><span class='PDMVar'>m</span><span class='PDMOper'>.</span><span class='PDMVar'>lcFile</span><span class='PDMOper'>)</span> <span class='PDMOper'>OR</span> <span class='PDMOper'>!</span><span class='PDMResF'>UPPER</span><span class='PDMOper'>(</span><span class='PDMResF'>JUSTFNAME</span><span class='PDMOper'>(</span><span class='PDMVar'>m</span><span class='PDMOper'>.</span><span class='PDMVar'>lcFile</span><span class='PDMOper'>)</span><span class='PDMOper'>)</span><span class='PDMOper'>=</span><span class='PDMStr'>"FOXBIN2PRG.PRG"</span> <span class='PDMResK'>THEN</span>
-<span class='PDMCnt'>  92</span> <span class='PDMInd'> 2</span>   <span class='PDMVar'>tlError</span> <span class='PDMOper'>=</span> <span class='PDMVar'>True</span>
-<span class='PDMCnt'>  93</span> <span class='PDMInd'> 2</span>   <span class='PDMVar'>lcFile</span>  <span class='PDMOper'>=</span> <span class='PDMStr'>''</span>
-<span class='PDMCnt'>  94</span> <span class='PDMInd'> 2</span>   <span class='PDMResF'>MESSAGEBOX</span><span class='PDMOper'>(</span><span class='PDMStr'>'FoxBin2PRG not found'</span><span class='PDMOper'>,</span><span class='PDMLit'>0</span><span class='PDMOper'>,</span><span class='PDMStr'>'Bin2Text v'</span><span class='PDMOper'>+</span><span class='PDMVar'>dcB2T_Verno</span><span class='PDMOper'>)</span>
-<span class='PDMCnt'>  95</span> <span class='PDMInd'> 1</span>  <span class='PDMResK'>ENDIF</span> <span class='PDMCom'>&amp;&amp;!FILE(m.lcFile) OR !UPPER(JUSTFNAME(m.lcFile))="FOXBIN2PRG.PRG"</span>
-<span class='PDMCnt'>  96</span> <span class='PDMInd'>  </span> 
-<span class='PDMCnt'>  97</span> <span class='PDMInd'> 1</span>  <span class='PDMResK'>IF</span> <span class='PDMVar'>toSetting</span><span class='PDMOper'>.</span><span class='PDMResM'>GETKEY</span><span class='PDMOper'>(</span><span class='PDMStr'>"gcB2T_FB2T"</span><span class='PDMOper'>)</span><span class='PDMOper'>&gt;</span><span class='PDMLit'>0</span> <span class='PDMResK'>THEN</span>
-<span class='PDMCnt'>  98</span> <span class='PDMInd'>  </span> <span class='PDMCom'>*File defined but not found</span>
-<span class='PDMCnt'>  99</span> <span class='PDMInd'> 2</span>   <span class='PDMVar'>toSetting</span><span class='PDMOper'>.</span><span class='PDMResM'>REMOVE</span><span class='PDMOper'>(</span><span class='PDMStr'>"gcB2T_FB2T"</span><span class='PDMOper'>)</span>
-<span class='PDMCnt'> 100</span> <span class='PDMInd'> 1</span>  <span class='PDMResK'>ENDIF</span> <span class='PDMCom'>&amp;&amp;toSetting.GetKey("gcB2T_FB2T")&gt;0</span>
-<span class='PDMCnt'> 101</span> <span class='PDMInd'> 1</span>  <span class='PDMVar'>toSetting</span><span class='PDMOper'>.</span><span class='PDMResK'>ADD</span><span class='PDMOper'>(</span><span class='PDMVar'>m</span><span class='PDMOper'>.</span><span class='PDMVar'>lcFile</span><span class='PDMOper'>,</span><span class='PDMStr'>"gcB2T_FB2T"</span><span class='PDMOper'>)</span>
-<span class='PDMCnt'> 102</span> <span class='PDMInd'>  </span> <span class='PDMResK'>ENDIF</span> <span class='PDMCom'>&amp;&amp;m.llSearch</span>
-<span class='PDMCnt'> 103</span> <span class='PDMInd'>  </span> <span class='PDMCom'>*/get FoxBin2Prg.prg</span>
-<span class='PDMCnt'> 104</span> <span class='PDMInd'>  </span> </pre>
+<span class='PDMCnt'>  32</span> <span class='PDMInd'> 1</span>  <span class='PDMVar'>lcFile</span>    <span class='PDMResK'>AS</span> <span class='PDMResK'>CHARACTER</span><span class='PDMOper'>,</span><span class='PDMOper'>;</span>
+<span class='PDMCnt'>  33</span> <span class='PDMInd'> 1</span>  <span class='PDMVar'>lnLoop</span>    <span class='PDMResK'>AS</span> <span class='PDMResK'>INTEGER</span><span class='PDMOper'>,</span><span class='PDMOper'>;</span>
+<span class='PDMCnt'>  34</span> <span class='PDMInd'> 1</span>  <span class='PDMVar'>llSearch</span>  <span class='PDMResK'>AS</span> <span class='PDMVar'>BOOLEAN</span><span class='PDMOper'>,</span><span class='PDMOper'>;</span>
+<span class='PDMCnt'>  35</span> <span class='PDMInd'> 1</span>  <span class='PDMVar'>loSetting</span> <span class='PDMResK'>AS</span> <span class='PDMResK'>EMPTY</span>
+<span class='PDMCnt'>  36</span> <span class='PDMInd'>  </span> 
+<span class='PDMCnt'>  37</span> <span class='PDMInd'>  </span> <span class='PDMVar'>llSearch</span> <span class='PDMOper'>=</span> <span class='PDMVar'>False</span>
+<span class='PDMCnt'>  38</span> <span class='PDMInd'>  </span> <span class='PDMResK'>IF</span> <span class='PDMOper'>!</span><span class='PDMResF'>PEMSTATUS</span><span class='PDMOper'>(</span><span class='PDMVar'>_SCREEN</span><span class='PDMOper'>,</span><span class='PDMStr'>"gcB2T_FB2T"</span><span class='PDMOper'>,</span><span class='PDMLit'>5</span><span class='PDMOper'>)</span> <span class='PDMResK'>THEN</span>
+<span class='PDMCnt'>  39</span> <span class='PDMInd'> 1</span>  <span class='PDMVar'>llSearch</span> <span class='PDMOper'>=</span> <span class='PDMVar'>True</span>
+<span class='PDMCnt'>  40</span> <span class='PDMInd'>  </span> <span class='PDMResK'>ENDIF</span> <span class='PDMCom'>&amp;&amp;!PEMSTATUS(_SCREEN,"gcB2T_FB2T",5)</span>
+<span class='PDMCnt'>  41</span> <span class='PDMInd'>  </span> 
+<span class='PDMCnt'>  42</span> <span class='PDMInd'>  </span> <span class='PDMResK'>IF</span> <span class='PDMOper'>!</span><span class='PDMVar'>m</span><span class='PDMOper'>.</span><span class='PDMVar'>llSearch</span> <span class='PDMOper'>AND</span> <span class='PDMOper'>!</span><span class='PDMResF'>FILE</span><span class='PDMOper'>(</span><span class='PDMVar'>_SCREEN</span><span class='PDMOper'>.</span><span class='PDMVar'>gcB2T_FB2T</span><span class='PDMOper'>)</span> <span class='PDMResK'>THEN</span>
+<span class='PDMCnt'>  43</span> <span class='PDMInd'> 1</span>  <span class='PDMVar'>llSearch</span> <span class='PDMOper'>=</span> <span class='PDMVar'>True</span>
+<span class='PDMCnt'>  44</span> <span class='PDMInd'> 1</span>  <span class='PDMResF'>MESSAGEBOX</span><span class='PDMOper'>(</span><span class='PDMStr'>'FoxBin2PRG not found in'</span><span class='PDMOper'>+</span><span class='PDMVar'>0h0D0A</span><span class='PDMOper'>+</span><span class='PDMOper'>;</span>
+<span class='PDMCnt'>  45</span> <span class='PDMInd'> 2</span>   <span class='PDMStr'>'"'</span><span class='PDMOper'>+</span><span class='PDMVar'>_SCREEN</span><span class='PDMOper'>.</span><span class='PDMVar'>gcB2T_FB2T</span><span class='PDMOper'>+</span><span class='PDMStr'>'"'</span><span class='PDMOper'>,</span><span class='PDMLit'>0</span><span class='PDMOper'>,</span><span class='PDMStr'>'Bin2Text v'</span><span class='PDMOper'>+</span><span class='PDMVar'>dcB2T_Verno</span><span class='PDMOper'>)</span>
+<span class='PDMCnt'>  46</span> <span class='PDMInd'>  </span> <span class='PDMResK'>ENDIF</span> <span class='PDMCom'>&amp;&amp;!m.llSearch AND !FILE(_SCREEN.gcB2T_FB2T)</span>
+<span class='PDMCnt'>  47</span> <span class='PDMInd'>  </span> <span class='PDMResK'>IF</span> <span class='PDMVar'>m</span><span class='PDMOper'>.</span><span class='PDMVar'>llSearch</span> <span class='PDMResK'>THEN</span>
+<span class='PDMCnt'>  48</span> <span class='PDMInd'> 1</span>  <span class='PDMVar'>lcFile</span> <span class='PDMOper'>=</span> <span class='PDMStr'>''</span>
+<span class='PDMCnt'>  49</span> <span class='PDMInd'>  </span> 
+<span class='PDMCnt'>  50</span> <span class='PDMInd'> 1</span>  <span class='PDMResK'>IF</span> <span class='PDMResF'>FILE</span><span class='PDMOper'>(</span><span class='PDMStr'>"FoxBin2PRG.prg"</span><span class='PDMOper'>)</span> <span class='PDMResK'>THEN</span>
+<span class='PDMCnt'>  51</span> <span class='PDMInd'> 2</span>   <span class='PDMVar'>lcFile</span> <span class='PDMOper'>=</span> <span class='PDMResF'>FULLPATH</span><span class='PDMOper'>(</span><span class='PDMStr'>"FoxBin2PRG.prg"</span><span class='PDMOper'>)</span>
+<span class='PDMCnt'>  52</span> <span class='PDMInd'> 1</span>  <span class='PDMResK'>ELSE</span>  <span class='PDMCom'>&amp;&amp;FILE("FoxBin2PRG.prg")</span>
+<span class='PDMCnt'>  53</span> <span class='PDMInd'> 2</span>   <span class='PDMVar'>lnLoop</span> <span class='PDMOper'>=</span> <span class='PDMLit'>1</span>
+<span class='PDMCnt'>  54</span> <span class='PDMInd'> 2</span>   <span class='PDMVar'>lcFile</span> <span class='PDMOper'>=</span> <span class='PDMResF'>SYS</span><span class='PDMOper'>(</span><span class='PDMLit'>16</span><span class='PDMOper'>,</span><span class='PDMVar'>m</span><span class='PDMOper'>.</span><span class='PDMVar'>lnLoop</span><span class='PDMOper'>)</span>
+<span class='PDMCnt'>  55</span> <span class='PDMInd'>  </span> 
+<span class='PDMCnt'>  56</span> <span class='PDMInd'> 2</span>   <span class='PDMResK'>DO</span> <span class='PDMResK'>WHILE</span> <span class='PDMResF'>LEN</span><span class='PDMOper'>(</span><span class='PDMVar'>m</span><span class='PDMOper'>.</span><span class='PDMVar'>lcFile</span><span class='PDMOper'>)</span><span class='PDMOper'>&gt;</span><span class='PDMLit'>0</span>
+<span class='PDMCnt'>  57</span> <span class='PDMInd'>  </span> 
+<span class='PDMCnt'>  58</span> <span class='PDMInd'> 3</span>    <span class='PDMResK'>IF</span> <span class='PDMResF'>UPPER</span><span class='PDMOper'>(</span><span class='PDMResF'>JUSTEXT</span><span class='PDMOper'>(</span><span class='PDMVar'>m</span><span class='PDMOper'>.</span><span class='PDMVar'>lcFile</span><span class='PDMOper'>)</span><span class='PDMOper'>)</span> <span class='PDMOper'>=</span> <span class='PDMStr'>"APP"</span> <span class='PDMResK'>THEN</span>
+<span class='PDMCnt'>  59</span> <span class='PDMInd'> 4</span>     <span class='PDMResK'>IF</span> <span class='PDMVar'>lcFile</span><span class='PDMOper'>=</span><span class='PDMStr'>"PROCEDURE "</span> <span class='PDMResK'>THEN</span>
+<span class='PDMCnt'>  60</span> <span class='PDMInd'> 5</span>      <span class='PDMVar'>lcFile</span> <span class='PDMOper'>=</span> <span class='PDMResF'>ADDBS</span><span class='PDMOper'>(</span><span class='PDMResF'>JUSTPATH</span><span class='PDMOper'>(</span><span class='PDMVar'>STREXTRACT</span><span class='PDMOper'>(</span><span class='PDMVar'>m</span><span class='PDMOper'>.</span><span class='PDMVar'>lcFile</span><span class='PDMOper'>,</span><span class='PDMStr'>' '</span><span class='PDMOper'>,</span><span class='PDMStr'>' '</span><span class='PDMOper'>,</span><span class='PDMLit'>2</span><span class='PDMOper'>,</span><span class='PDMLit'>2</span><span class='PDMOper'>)</span><span class='PDMOper'>)</span><span class='PDMOper'>)</span>
+<span class='PDMCnt'>  61</span> <span class='PDMInd'> 4</span>     <span class='PDMResK'>ELSE</span>  <span class='PDMCom'>&amp;&amp;m.lcFile="PROCEDURE "</span>
+<span class='PDMCnt'>  62</span> <span class='PDMInd'> 5</span>      <span class='PDMVar'>lcFile</span> <span class='PDMOper'>=</span> <span class='PDMResF'>JUSTPATH</span><span class='PDMOper'>(</span><span class='PDMVar'>m</span><span class='PDMOper'>.</span><span class='PDMVar'>lcFile</span><span class='PDMOper'>)</span>
+<span class='PDMCnt'>  63</span> <span class='PDMInd'> 4</span>     <span class='PDMResK'>ENDIF</span> <span class='PDMCom'>&amp;&amp;m.lcFile="PROCEDURE "</span>
+<span class='PDMCnt'>  64</span> <span class='PDMInd'> 4</span>     <span class='PDMResK'>EXIT</span>
+<span class='PDMCnt'>  65</span> <span class='PDMInd'> 3</span>    <span class='PDMResK'>ENDIF</span> <span class='PDMCom'>&amp;&amp;UPPER(JUSTEXT(m.lcFile)) = "APP"</span>
+<span class='PDMCnt'>  66</span> <span class='PDMInd'>  </span> 
+<span class='PDMCnt'>  67</span> <span class='PDMInd'> 3</span>    <span class='PDMResK'>IF</span> <span class='PDMResF'>UPPER</span><span class='PDMOper'>(</span><span class='PDMVar'>STREXTRACT</span><span class='PDMOper'>(</span><span class='PDMVar'>m</span><span class='PDMOper'>.</span><span class='PDMVar'>lcFile</span><span class='PDMOper'>,</span><span class='PDMStr'>' '</span><span class='PDMOper'>,</span><span class='PDMStr'>' '</span><span class='PDMOper'>,</span><span class='PDMLit'>1</span><span class='PDMOper'>)</span><span class='PDMOper'>)</span><span class='PDMOper'>==</span><span class='PDMStr'>"BIN2PRG"</span><span class='PDMOper'>;</span>
+<span class='PDMCnt'>  68</span> <span class='PDMInd'> 5</span>      <span class='PDMOper'>OR</span> <span class='PDMResF'>UPPER</span><span class='PDMOper'>(</span><span class='PDMVar'>STREXTRACT</span><span class='PDMOper'>(</span><span class='PDMVar'>m</span><span class='PDMOper'>.</span><span class='PDMVar'>lcFile</span><span class='PDMOper'>,</span><span class='PDMStr'>' '</span><span class='PDMOper'>,</span><span class='PDMStr'>' '</span><span class='PDMOper'>,</span><span class='PDMLit'>1</span><span class='PDMOper'>)</span><span class='PDMOper'>)</span><span class='PDMOper'>==</span><span class='PDMStr'>"INTER_ACTIVE"</span> <span class='PDMResK'>THEN</span>
+<span class='PDMCnt'>  69</span> <span class='PDMInd'> 4</span>     <span class='PDMVar'>lcFile</span> <span class='PDMOper'>=</span> <span class='PDMResF'>ADDBS</span><span class='PDMOper'>(</span><span class='PDMResF'>JUSTPATH</span><span class='PDMOper'>(</span><span class='PDMVar'>STREXTRACT</span><span class='PDMOper'>(</span><span class='PDMVar'>m</span><span class='PDMOper'>.</span><span class='PDMVar'>lcFile</span><span class='PDMOper'>,</span><span class='PDMStr'>' '</span><span class='PDMOper'>,</span><span class='PDMStr'>' '</span><span class='PDMOper'>,</span><span class='PDMLit'>2</span><span class='PDMOper'>,</span><span class='PDMLit'>2</span><span class='PDMOper'>)</span><span class='PDMOper'>)</span><span class='PDMOper'>)</span>
+<span class='PDMCnt'>  70</span> <span class='PDMInd'> 4</span>     <span class='PDMResK'>EXIT</span>
+<span class='PDMCnt'>  71</span> <span class='PDMInd'> 3</span>    <span class='PDMResK'>ENDIF</span> <span class='PDMCom'>&amp;&amp;UPPER(STREXTRACT(m.lcFile,' ',' ',1))=="BIN2PRG" OR UPPER(STREXTRACT(m.lcFile,' ',' ',1))=="INTER_ACTIVE"</span>
+<span class='PDMCnt'>  72</span> <span class='PDMInd'> 3</span>    <span class='PDMVar'>lnLoop</span> <span class='PDMOper'>=</span> <span class='PDMVar'>m</span><span class='PDMOper'>.</span><span class='PDMVar'>lnLoop</span><span class='PDMOper'>+</span><span class='PDMLit'>1</span>
+<span class='PDMCnt'>  73</span> <span class='PDMInd'> 3</span>    <span class='PDMVar'>lcFile</span> <span class='PDMOper'>=</span> <span class='PDMResF'>SYS</span><span class='PDMOper'>(</span><span class='PDMLit'>16</span><span class='PDMOper'>,</span><span class='PDMVar'>m</span><span class='PDMOper'>.</span><span class='PDMVar'>lnLoop</span><span class='PDMOper'>)</span>
+<span class='PDMCnt'>  74</span> <span class='PDMInd'> 2</span>   <span class='PDMResK'>ENDDO</span> <span class='PDMCom'>&amp;&amp;LEN(m.lcFile)&gt;0</span>
+<span class='PDMCnt'>  75</span> <span class='PDMInd'>  </span> 
+<span class='PDMCnt'>  76</span> <span class='PDMInd'> 1</span>  <span class='PDMResK'>ENDIF</span> <span class='PDMCom'>&amp;&amp;FILE("FoxBin2PRG.prg")</span>
+<span class='PDMCnt'>  77</span> <span class='PDMInd'>  </span> 
+<span class='PDMCnt'>  78</span> <span class='PDMInd'>  </span> <span class='PDMCom'>*Try .. EndTry bei IntelliScript</span>
+<span class='PDMCnt'>  79</span> <span class='PDMInd'> 1</span>  <span class='PDMResK'>LOCAL</span><span class='PDMOper'>;</span>
+<span class='PDMCnt'>  80</span> <span class='PDMInd'> 2</span>   <span class='PDMVar'>loException</span> <span class='PDMResK'>AS</span> <span class='PDMResK'>EXCEPTION</span>
+<span class='PDMCnt'>  81</span> <span class='PDMInd'>  </span> 
+<span class='PDMCnt'>  82</span> <span class='PDMInd'> 1</span>  <span class='PDMVar'>lcFile</span> <span class='PDMOper'>=</span> <span class='PDMResF'>FORCEPATH</span><span class='PDMOper'>(</span><span class='PDMStr'>"FoxBin2PRG.prg"</span><span class='PDMOper'>,</span><span class='PDMVar'>m</span><span class='PDMOper'>.</span><span class='PDMVar'>lcFile</span><span class='PDMOper'>)</span>
+<span class='PDMCnt'>  83</span> <span class='PDMInd'> 1</span>  <span class='PDMResK'>TRY</span>
+<span class='PDMCnt'>  84</span> <span class='PDMInd'>  </span> <span class='PDMCom'>*Was zu testen ist</span>
+<span class='PDMCnt'>  85</span> <span class='PDMInd'> 3</span>    <span class='PDMVar'>lcFile</span> <span class='PDMOper'>=</span> <span class='PDMResF'>LOCFILE</span><span class='PDMOper'>(</span><span class='PDMVar'>m</span><span class='PDMOper'>.</span><span class='PDMVar'>lcFile</span><span class='PDMOper'>,</span><span class='PDMStr'>'prg'</span><span class='PDMOper'>)</span>
+<span class='PDMCnt'>  86</span> <span class='PDMInd'> 2</span>   <span class='PDMResK'>CATCH</span> <span class='PDMResK'>TO</span> <span class='PDMVar'>loException</span>
+<span class='PDMCnt'>  87</span> <span class='PDMInd'> 3</span>    <span class='PDMVar'>tlError</span> <span class='PDMOper'>=</span> <span class='PDMVar'>True</span>
+<span class='PDMCnt'>  88</span> <span class='PDMInd'> 2</span>   <span class='PDMResK'>FINALLY</span>
+<span class='PDMCnt'>  89</span> <span class='PDMInd'>  </span> <span class='PDMCom'>*</span>
+<span class='PDMCnt'>  90</span> <span class='PDMInd'> 1</span>  <span class='PDMResK'>ENDTRY</span>
+<span class='PDMCnt'>  91</span> <span class='PDMInd'>  </span> 
+<span class='PDMCnt'>  92</span> <span class='PDMInd'> 1</span>  <span class='PDMResK'>IF</span> <span class='PDMOper'>!</span><span class='PDMResF'>FILE</span><span class='PDMOper'>(</span><span class='PDMVar'>m</span><span class='PDMOper'>.</span><span class='PDMVar'>lcFile</span><span class='PDMOper'>)</span> <span class='PDMOper'>OR</span> <span class='PDMOper'>!</span><span class='PDMResF'>UPPER</span><span class='PDMOper'>(</span><span class='PDMResF'>JUSTFNAME</span><span class='PDMOper'>(</span><span class='PDMVar'>m</span><span class='PDMOper'>.</span><span class='PDMVar'>lcFile</span><span class='PDMOper'>)</span><span class='PDMOper'>)</span><span class='PDMOper'>=</span><span class='PDMStr'>"FOXBIN2PRG.PRG"</span> <span class='PDMResK'>THEN</span>
+<span class='PDMCnt'>  93</span> <span class='PDMInd'> 2</span>   <span class='PDMVar'>tlError</span> <span class='PDMOper'>=</span> <span class='PDMVar'>True</span>
+<span class='PDMCnt'>  94</span> <span class='PDMInd'> 2</span>   <span class='PDMVar'>lcFile</span>  <span class='PDMOper'>=</span> <span class='PDMStr'>''</span>
+<span class='PDMCnt'>  95</span> <span class='PDMInd'> 2</span>   <span class='PDMResF'>MESSAGEBOX</span><span class='PDMOper'>(</span><span class='PDMStr'>'FoxBin2PRG not found'</span><span class='PDMOper'>,</span><span class='PDMLit'>0</span><span class='PDMOper'>,</span><span class='PDMStr'>'Bin2Text v'</span><span class='PDMOper'>+</span><span class='PDMVar'>dcB2T_Verno</span><span class='PDMOper'>)</span>
+<span class='PDMCnt'>  96</span> <span class='PDMInd'> 1</span>  <span class='PDMResK'>ENDIF</span> <span class='PDMCom'>&amp;&amp;!FILE(m.lcFile) OR !UPPER(JUSTFNAME(m.lcFile))="FOXBIN2PRG.PRG"</span>
+<span class='PDMCnt'>  97</span> <span class='PDMInd'>  </span> 
+<span class='PDMCnt'>  98</span> <span class='PDMInd'> 1</span>  <span class='PDMResK'>IF</span> <span class='PDMVar'>toSettings</span><span class='PDMOper'>.</span><span class='PDMResM'>GETKEY</span><span class='PDMOper'>(</span><span class='PDMStr'>"gcB2T_FB2T"</span><span class='PDMOper'>)</span><span class='PDMOper'>&gt;</span><span class='PDMLit'>0</span> <span class='PDMResK'>THEN</span>
+<span class='PDMCnt'>  99</span> <span class='PDMInd'>  </span> <span class='PDMCom'>*File defined but not found</span>
+<span class='PDMCnt'> 100</span> <span class='PDMInd'> 2</span>   <span class='PDMVar'>toSettings</span><span class='PDMOper'>.</span><span class='PDMResM'>REMOVE</span><span class='PDMOper'>(</span><span class='PDMStr'>"gcB2T_FB2T"</span><span class='PDMOper'>)</span>
+<span class='PDMCnt'> 101</span> <span class='PDMInd'> 1</span>  <span class='PDMResK'>ENDIF</span> <span class='PDMCom'>&amp;&amp;toSettings.GetKey("gcB2T_FB2T")&gt;0</span>
+<span class='PDMCnt'> 102</span> <span class='PDMInd'>  </span> 
+<span class='PDMCnt'> 103</span> <span class='PDMInd'> 1</span>  <span class='PDMVar'>loSetting</span> <span class='PDMOper'>=</span> <span class='PDMResF'>CREATEOBJECT</span><span class='PDMOper'>(</span><span class='PDMStr'>'EMPTY'</span><span class='PDMOper'>)</span>
+<span class='PDMCnt'> 104</span> <span class='PDMInd'> 1</span>  <span class='PDMResF'>ADDPROPERTY</span><span class='PDMOper'>(</span><span class='PDMVar'>loSetting</span><span class='PDMOper'>,</span><span class='PDMStr'>'gcFile'</span><span class='PDMOper'>,</span><span class='PDMResF'>TRIM</span><span class='PDMOper'>(</span><span class='PDMVar'>m</span><span class='PDMOper'>.</span><span class='PDMVar'>lcFile</span><span class='PDMOper'>)</span><span class='PDMOper'>)</span>
+<span class='PDMCnt'> 105</span> <span class='PDMInd'> 1</span>  <span class='PDMResF'>ADDPROPERTY</span><span class='PDMOper'>(</span><span class='PDMVar'>loSetting</span><span class='PDMOper'>,</span><span class='PDMStr'>'gcFile2'</span><span class='PDMOper'>,</span><span class='PDMStr'>""</span><span class='PDMOper'>)</span>
+<span class='PDMCnt'> 106</span> <span class='PDMInd'> 1</span>  <span class='PDMResF'>ADDPROPERTY</span><span class='PDMOper'>(</span><span class='PDMVar'>loSetting</span><span class='PDMOper'>,</span><span class='PDMStr'>'gcUniqueId'</span><span class='PDMOper'>,</span><span class='PDMStr'>"gcB2T_FB2T"</span><span class='PDMOper'>)</span>
+<span class='PDMCnt'> 107</span> <span class='PDMInd'> 1</span>  <span class='PDMVar'>toSettings</span><span class='PDMOper'>.</span><span class='PDMResK'>ADD</span><span class='PDMOper'>(</span><span class='PDMVar'>m</span><span class='PDMOper'>.</span><span class='PDMVar'>loSetting</span><span class='PDMOper'>,</span><span class='PDMVar'>m</span><span class='PDMOper'>.</span><span class='PDMVar'>loSetting</span><span class='PDMOper'>.</span><span class='PDMVar'>gcUniqueId</span><span class='PDMOper'>)</span>
+<span class='PDMCnt'> 108</span> <span class='PDMInd'>  </span> 
+<span class='PDMCnt'> 109</span> <span class='PDMInd'>  </span> <span class='PDMResK'>ENDIF</span> <span class='PDMCom'>&amp;&amp;m.llSearch</span>
+<span class='PDMCnt'> 110</span> <span class='PDMInd'>  </span> <span class='PDMCom'>*/get FoxBin2Prg.prg</span>
+<span class='PDMCnt'> 111</span> <span class='PDMInd'>  </span> </pre>
  <!-- Code End -->
   </div>
  </div>

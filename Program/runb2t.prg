@@ -701,7 +701,7 @@ FUNCTION Convert_Pjx_2Bin &&Runs FoxBin2Prg for multiple projects to create bina
 *process Transformation
  Construct_Objects()
 
- _SCREEN.frmB2T_Envelop.cusB2T.Process_Bin2Txt(@laFiles,_SCREEN.gvMode,.F.)
+ _SCREEN.frmB2T_Envelop.cusB2T.Process_Txt2Bin(@laFiles,_SCREEN.gvMode,.F.)
  Destruct_Objects()
 
  CLEAR ALL
@@ -1225,7 +1225,7 @@ FUNCTION Convert_Pjx_2Txt &&Runs FoxBin2Prg for multiple projects to create text
 *process Transformation
  Construct_Objects()
 
- _SCREEN.frmB2T_Envelop.cusB2T.Process_Txt2Bin(@laFiles,_SCREEN.gvMode,_SCREEN.glCheckAll AND _SCREEN.gcB2T_Delete=="1")
+ _SCREEN.frmB2T_Envelop.cusB2T.Process_Bin2Txt(@laFiles,_SCREEN.gvMode,_SCREEN.glCheckAll AND _SCREEN.gcB2T_Delete=="1")
  Destruct_Objects()
 
  CLEAR ALL
@@ -1354,7 +1354,7 @@ FUNCTION Convert_File_2Bin  	&&Runs FoxBin2Prg for a single file or vcx/class to
 *!*	<copyright>
 *!*	<img src="../../repository/vfpxbanner_small.png" alt="VFPX logo"/><br/>
 *!*	<p>This project is part of <a href="https://vfpx.github.io/"  title="Skip to VFPX" target="_blank">VFPX</a>.</p>
-*!*	<p><i>&copy; 17.3.2021 Lutz Scheffler Software Ingenieurbüro</i></p>
+*!*	<p><i>&copy; 17.03.2021 Lutz Scheffler Software Ingenieurbüro</i></p>
 *!*	</copyright>
 *!*	</pdm>
 
@@ -1703,7 +1703,7 @@ FUNCTION Convert_File_2Bin  	&&Runs FoxBin2Prg for a single file or vcx/class to
   ENDIF &&_SCREEN.glInfo
 ******
 
-  llReturn = m.llReturn AND _SCREEN.frmB2T_Envelop.cusB2T.Process_Bin2Txt(@laFiles,"",.F.,.T.,m.loFB2T_Setting)
+  llReturn = m.llReturn AND _SCREEN.frmB2T_Envelop.cusB2T.Process_Txt2Bin(@laFiles,"",.F.,.T.,m.loFB2T_Setting)
 
   loFB2T_Setting = .NULL.
 
@@ -1770,7 +1770,7 @@ FUNCTION Convert_File_2Txt  	&&Runs FoxBin2Prg for a single file or vcx/class to
 *!*	<copyright>
 *!*	<img src="../../repository/vfpxbanner_small.png" alt="VFPX logo"/><br/>
 *!*	<p>This project is part of <a href="https://vfpx.github.io/"  title="Skip to VFPX" target="_blank">VFPX</a>.</p>
-*!*	<p><i>&copy; 17.3.2021 Lutz Scheffler Software Ingenieurbüro</i></p>
+*!*	<p><i>&copy; 17.03.2021 Lutz Scheffler Software Ingenieurbüro</i></p>
 *!*	</copyright>
 *!*	</pdm>
 
@@ -1780,7 +1780,7 @@ FUNCTION Convert_File_2Txt  	&&Runs FoxBin2Prg for a single file or vcx/class to
 *!*	New parameters tcFile, tcClass
 *!*	</change>
 *!*	</pdm>
-
+SET STEP ON
  IF _VFP.STARTMODE#0 THEN
   HelpMsg(2)
   RETURN .F.
@@ -2065,7 +2065,7 @@ FUNCTION Convert_File_2Txt  	&&Runs FoxBin2Prg for a single file or vcx/class to
   ENDIF &&_SCREEN.glInfo
 ******
 
-  llReturn = m.llReturn AND _SCREEN.frmB2T_Envelop.cusB2T.Process_Txt2Bin(@laFiles,"",.F.,.T.,m.loFB2T_Setting)
+  llReturn = m.llReturn AND _SCREEN.frmB2T_Envelop.cusB2T.Process_Bin2Txt(@laFiles,"",.F.,.T.,m.loFB2T_Setting)
 
   loFB2T_Setting = .NULL.
 
@@ -2100,7 +2100,7 @@ FUNCTION Convert_Directory_2Bin  	&&Runs FoxBin2Prg for a single directory and i
 *!*	<remarks>
 *!*	<p>Runs a pickup for a directory and transforms the files in it.
 *!*	Will always transform, neither the file is changed or not.</p>
-*!*	the files will be processed according to the setting of the config <i>foxbin2prg.cfg</i> file</p>
+*!*	<p>The files will be processed according to the setting of the config <i>foxbin2prg.cfg</i> file</p>
 *!*	</remarks>
 *!*	<comment>
 *!*	<example></example>
@@ -2112,7 +2112,7 @@ FUNCTION Convert_Directory_2Bin  	&&Runs FoxBin2Prg for a single directory and i
 *!*	<copyright>
 *!*	<img src="../../repository/vfpxbanner_small.png" alt="VFPX logo"/><br/>
 *!*	<p>This project is part of <a href="https://vfpx.github.io/"  title="Skip to VFPX" target="_blank">VFPX</a>.</p>
-*!*	<p><i>&copy; 17.02.2021 Lutz Scheffler Software Ingenieurbüro</i></p>
+*!*	<p><i>&copy; 17.03.2021 Lutz Scheffler Software Ingenieurbüro</i></p>
 *!*	</copyright>
 *!*	</pdm>
 
@@ -2211,7 +2211,7 @@ FUNCTION Convert_Directory_2Bin  	&&Runs FoxBin2Prg for a single directory and i
 
    ACOPY(_SCREEN.gaFiles,m.laFiles)	&& will autoresize laFiles
 
-   llReturn = m.llReturn AND _SCREEN.frmB2T_Envelop.cusB2T.Process_Dir_Txt2Bin(@laFiles)
+   llReturn = m.llReturn AND _SCREEN.frmB2T_Envelop.cusB2T.Process_Txt2Bin_Dir(@laFiles)
 
   ENDIF &&m.llReturn
 
@@ -2239,7 +2239,7 @@ FUNCTION Convert_Directory_2Txt  	&&Runs FoxBin2Prg for a single directory and i
 *!*	<remarks>
 *!*	<p>Runs a pickup for a directory and transforms the files in it.
 *!*	Will always transform, neither the file is changed or not.</p>
-*!*	the files will be processed according to the setting of the config <i>foxbin2prg.cfg</i> file</p>
+*!*	<p>The files will be processed according to the setting of the config <i>foxbin2prg.cfg</i> file</p>
 *!*	</remarks>
 *!*	<comment>
 *!*	<example></example>
@@ -2251,7 +2251,7 @@ FUNCTION Convert_Directory_2Txt  	&&Runs FoxBin2Prg for a single directory and i
 *!*	<copyright>
 *!*	<img src="../../repository/vfpxbanner_small.png" alt="VFPX logo"/><br/>
 *!*	<p>This project is part of <a href="https://vfpx.github.io/"  title="Skip to VFPX" target="_blank">VFPX</a>.</p>
-*!*	<p><i>&copy; 17.02.2021 Lutz Scheffler Software Ingenieurbüro</i></p>
+*!*	<p><i>&copy; 17.03.2021 Lutz Scheffler Software Ingenieurbüro</i></p>
 *!*	</copyright>
 *!*	</pdm>
 
@@ -2345,7 +2345,7 @@ FUNCTION Convert_Directory_2Txt  	&&Runs FoxBin2Prg for a single directory and i
 
    ACOPY(_SCREEN.gaFiles,m.laFiles)	&& will autoresize laFiles
 
-   llReturn = m.llReturn AND _SCREEN.frmB2T_Envelop.cusB2T.Process_Dir_Bin2Txt(@laFiles)
+   llReturn = m.llReturn AND _SCREEN.frmB2T_Envelop.cusB2T.Process_Bin2Txt_Dir(@laFiles)
 
   ENDIF &&m.llReturn
 
@@ -2392,7 +2392,7 @@ FUNCTION Convert_Array_2Bin	&&Runs FoxBin2Prg for multiple files to binary.
 *!*	<copyright>
 *!*	<img src="../../repository/vfpxbanner_small.png" alt="VFPX logo"/><br/>
 *!*	<p>This project is part of <a href="https://vfpx.github.io/"  title="Skip to VFPX" target="_blank">VFPX</a>.</p>
-*!*	<p><i>&copy; 18.3.2021 Lutz Scheffler Software Ingenieurbüro</i></p>
+*!*	<p><i>&copy; 17.03.2021 Lutz Scheffler Software Ingenieurbüro</i></p>
 *!*	</copyright>
 *!*	</pdm>
 
@@ -2475,7 +2475,7 @@ FUNCTION Convert_Array_2Txt	&&Runs FoxBin2Prg for multiple files to text.
 *!*	<copyright>
 *!*	<img src="../../repository/vfpxbanner_small.png" alt="VFPX logo"/><br/>
 *!*	<p>This project is part of <a href="https://vfpx.github.io/"  title="Skip to VFPX" target="_blank">VFPX</a>.</p>
-*!*	<p><i>&copy; 17.3.2021 Lutz Scheffler Software Ingenieurbüro</i></p>
+*!*	<p><i>&copy; 17.03.2021 Lutz Scheffler Software Ingenieurbüro</i></p>
 *!*	</copyright>
 *!*	</pdm>
 
@@ -2678,7 +2678,7 @@ ENDFUNC &&InitMenu
 *!*	</change>
 *!*	</pdm>
 
-PROCEDURE git_bash		&&run bash
+FUNCTION git_bash		&&run bash
 *!*	<pdm>
 *!*	<descr>Run <i>git bash</i> for current project in git based irectory.</descr>
 *!*	<remarks>This is experimental. <i>git bash</i> works not as expected.</remarks>
@@ -2741,9 +2741,9 @@ PROCEDURE git_bash		&&run bash
  ENDIF &&Get_git_Path(@lc_Git,@llIs64)
 
 *!*	/Changed by: SF 14.3.2016
-ENDPROC &&git_bash
+ENDFUNC &&git_bash
 
-PROCEDURE git_gitk &&run gitk
+FUNCTION git_gitk &&run gitk
 *!*	<pdm>
 *!*	<descr>Run <i>gitk</i> for current directory.</descr>
 *!*	<remarks>GUI for <i>git</i> history.</remarks>
@@ -2777,7 +2777,7 @@ PROCEDURE git_gitk &&run gitk
  IF Is_git() THEN
   llReturn = Run_ExtApp('"'+_SCREEN.gcB2T_GUI+'" ',m.lcPath,'NOR',,.T.)
  ENDIF &&Is_git()
-ENDPROC &&git_gitk
+ENDFUNC &&git_gitk
 *!*	/Changed by: SF 15.9.2015
 
 *!*	Changed by SF 11.4.2015
@@ -2873,7 +2873,7 @@ FUNCTION Is_git		&&Internal. Check if a directory is under git control
  RETURN m.llIs_git
 ENDFUNC &&Is_Git
 
-PROCEDURE Print_ActiveBranch
+FUNCTION Print_ActiveBranch
 *!*	<pdm>
 *!*	<descr>Print the active branch to _SCREEN</descr>
 *!*	<comment>
@@ -2895,7 +2895,7 @@ PROCEDURE Print_ActiveBranch
  IF Is_git() THEN
   ?'On branch '+GetBranch()
  ENDIF &&Is_Git()
-ENDPROC &&Print_ActiveBranch
+ENDFUNC &&Print_ActiveBranch
 
 
 FUNCTION GetBaseDir		&&Internal. Return base directory
@@ -3187,7 +3187,7 @@ ENDFUNC &&Get_git_Path
 *!*	</change>
 *!*	</pdm>
 
-PROCEDURE GetBranch		&&Internal. Return active git branch
+FUNCTION GetBranch		&&Internal. Return active git branch
 
 *!*	<pdm>
 *!*	<descr>Output of current git branch</descr>
@@ -3231,7 +3231,7 @@ PROCEDURE GetBranch		&&Internal. Return active git branch
  ENDIF &&!EMPTY(m.lcRet)
 
  RETURN m.lcRet
-ENDPROC &&GetBranch
+ENDFUNC &&GetBranch
 *!*	/Geändert durch: SF 4.6.2015
 
 *!*	Changed by: SF 12.6.2015
@@ -3885,7 +3885,7 @@ FUNCTION HelpMsg	&&Internal. Display help message for external functions
  SET MEMOWIDTH TO (m.lnMemo)
 ENDFUNC &&HelpMsg
 
-PROCEDURE CatchError		&&Error handler
+FUNCTION CatchError		&&Error handler
  LPARAMETERS;
   tcProgram,;
   tnLineNo
@@ -3922,9 +3922,9 @@ PROCEDURE CatchError		&&Error handler
  RETRY
  CLEAR ALL
  CANCEL
-ENDPROC &&CatchError
+ENDFUNC &&CatchError
 
-PROCEDURE SwitchErrorHandler		&&Toggle error handler
+FUNCTION SwitchErrorHandler		&&Toggle error handler
  LPARAMETERS;
   tlOn
 
@@ -3963,9 +3963,9 @@ PROCEDURE SwitchErrorHandler		&&Toggle error handler
   OTHERWISE
    ON ERROR
  ENDCASE
-ENDPROC &&SwitchErrorHandler
+ENDFUNC &&SwitchErrorHandler
 
-PROCEDURE Compare_VerNo	  &&Internal. Compare version number
+FUNCTION Compare_VerNo	  &&Internal. Compare version number
  LPARAMETERS ;
   tcVerNo1,;
   tcVerNo2
@@ -4026,9 +4026,9 @@ PROCEDURE Compare_VerNo	  &&Internal. Compare version number
   OTHERWISE
    RETURN 2
  ENDCASE
-ENDPROC &&Compare_VerNo
+ENDFUNC &&Compare_VerNo
 
-PROCEDURE IsFile  &&Check if a single file exists on Deic vai ADIR (since FILE() sees stuff inside APP)
+FUNCTION IsFile  &&Check if a single file exists on Deic vai ADIR (since FILE() sees stuff inside APP)
  LPARAMETERS;
   tcFile
 
@@ -4059,9 +4059,9 @@ PROCEDURE IsFile  &&Check if a single file exists on Deic vai ADIR (since FILE()
 
  RETURN ADIR(laDir, m.tcFile)=1
 
-ENDPROC &&IsFile
+ENDFUNC &&IsFile
 
-PROCEDURE ScanDir		&&Internal. Recursivly scan directories
+FUNCTION ScanDir		&&Internal. Recursivly scan directories
  LPARAMETERS;
   tnAction,;
   tcDir,;
@@ -4127,9 +4127,9 @@ PROCEDURE ScanDir		&&Internal. Recursivly scan directories
    ?"error"
  ENDCASE
  CD (m.lcOldDir)
-ENDPROC &&ScanDir
+ENDFUNC &&ScanDir
 
-PROCEDURE Dir_Action_PJX		&&Internal. Parse a directory for projects (binary or text)
+FUNCTION Dir_Action_PJX		&&Internal. Parse a directory for projects (binary or text)
  LPARAMETERS;
   tcDir,;
   tlText2Bin,;
@@ -4202,4 +4202,4 @@ PROCEDURE Dir_Action_PJX		&&Internal. Parse a directory for projects (binary or 
   ENDFOR &&lnProjs
  ENDIF &&m.lnProjs>0
 
-ENDPROC &&Dir_Action_PJX
+ENDFUNC &&Dir_Action_PJX
