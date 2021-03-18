@@ -347,7 +347,7 @@ FUNCTION Convert_Pjx_2Bin &&Runs FoxBin2Prg for multiple projects to create bina
  lnProjs = 1
 
  LOCAL ARRAY;
-  laProjects(m.lnProjs,3),;
+  laProjects(m.lnProjs,2),;
   laFiles(1,2)
 
  CLEAR
@@ -448,10 +448,9 @@ FUNCTION Convert_Pjx_2Bin &&Runs FoxBin2Prg for multiple projects to create bina
 *!*	/Changed by: SF 11.6.2015
 
    lnProjs = 1
-   _SCREEN.ADDPROPERTY('gaFiles(1,3)')
+   _SCREEN.ADDPROPERTY('gaFiles(1,2)')
    _SCREEN.gaFiles(1,1)	= FORCEEXT(m.lcProj,'PJX')
    _SCREEN.gaFiles(1,2)	= ICASE(m.tnMode=3,"",m.tnMode=4,"",.NULL.)
-   _SCREEN.gaFiles(1,3)	= ""
 
    lcPath = JUSTPATH(m.lcProj)
    CD (m.lcPath)
@@ -468,10 +467,9 @@ FUNCTION Convert_Pjx_2Bin &&Runs FoxBin2Prg for multiple projects to create bina
    ENDIF &&_VFP.PROJECTS.COUNT=0
 
    lnProjs = 1
-   _SCREEN.ADDPROPERTY('gaFiles(1,3)')
+   _SCREEN.ADDPROPERTY('gaFiles(1,2)')
    _SCREEN.gaFiles(1,1)	= _VFP.ACTIVEPROJECT.NAME
    _SCREEN.gaFiles(1,2)	= ICASE(m.tnMode=3,"",m.tnMode=4,"",_VFP.ACTIVEPROJECT.PROJECTHOOKLIBRARY)
-   _SCREEN.gaFiles(1,3)	= ""
 
    lcPath = JUSTPATH(_VFP.ACTIVEPROJECT.NAME)
    CD (m.lcPath)
@@ -488,7 +486,7 @@ FUNCTION Convert_Pjx_2Bin &&Runs FoxBin2Prg for multiple projects to create bina
     RETURN .F.
    ENDIF &&m.lnProjs=0
 
-   _SCREEN.ADDPROPERTY('gaFiles('+TRIM(PADR(m.lnProjs,11))+',3)')
+   _SCREEN.ADDPROPERTY('gaFiles('+TRIM(PADR(m.lnProjs,11))+',2)')
 
    lcPath = JUSTPATH(_VFP.ACTIVEPROJECT.NAME)
    CD (m.lcPath)
@@ -498,7 +496,6 @@ FUNCTION Convert_Pjx_2Bin &&Runs FoxBin2Prg for multiple projects to create bina
     lnProj						= m.lnProj+1
     _SCREEN.gaFiles(m.lnProj,1)	= m.loProject.NAME
     _SCREEN.gaFiles(m.lnProj,2)	= ICASE(m.tnMode=3,"",m.tnMode=4,"",m.loProject.PROJECTHOOKLIBRARY)
-    _SCREEN.gaFiles(m.lnProj,3)	= ""
    ENDFOR &&loProject
 
 *  &&m.tnProjects=2
@@ -534,12 +531,11 @@ FUNCTION Convert_Pjx_2Bin &&Runs FoxBin2Prg for multiple projects to create bina
     RETURN .F.
    ENDIF &&m.lnProjs=0
 
-   _SCREEN.ADDPROPERTY('gaFiles('+TRIM(PADR(m.lnProjs,11))+',3)')
+   _SCREEN.ADDPROPERTY('gaFiles('+TRIM(PADR(m.lnProjs,11))+',2)')
 
    FOR lnProj = 1 TO m.lnProjs
     _SCREEN.gaFiles(m.lnProj,1)	= FORCEPATH(FORCEEXT(m.laFiles(m.lnProj,1),"PJX"),m.lcPath)
     _SCREEN.gaFiles(m.lnProj,2)	= ICASE(m.tnMode=3,"",m.tnMode=4,"",.NULL.)
-    _SCREEN.gaFiles(m.lnProj,3)	= ""
    ENDFOR &&lnProjs
 *  &&m.tnProjects=3
   CASE m.tnProjects=4
@@ -558,7 +554,7 @@ FUNCTION Convert_Pjx_2Bin &&Runs FoxBin2Prg for multiple projects to create bina
 
    CD (m.lcPath)
 
-   _SCREEN.ADDPROPERTY('gaFiles(1,3)')
+   _SCREEN.ADDPROPERTY('gaFiles(1,2)')
 
    ScanDir(1,m.lcPath,.T.,m.loConverter)
 
@@ -897,7 +893,7 @@ FUNCTION Convert_Pjx_2Txt &&Runs FoxBin2Prg for multiple projects to create text
  lnProjs = 1
 
  LOCAL ARRAY;
-  laProjects(m.lnProjs,3),;
+  laProjects(m.lnProjs,2),;
   laFiles(1,2)
 
  CLEAR
@@ -964,10 +960,9 @@ FUNCTION Convert_Pjx_2Txt &&Runs FoxBin2Prg for multiple projects to create text
    ENDIF &&!EMPTY(m.lcProj) AND ISBLANK(m.lcProj)
 
    lnProjs = 1
-   _SCREEN.ADDPROPERTY('gaFiles(1,3)')
+   _SCREEN.ADDPROPERTY('gaFiles(1,2)')
    _SCREEN.gaFiles(1,1)	= FORCEEXT(m.lcProj,'PJX')
    _SCREEN.gaFiles(1,2)	= ICASE(m.tnMode=3,"",m.tnMode=4,"",.NULL.)
-   _SCREEN.gaFiles(1,3)	= ""
 
    lcPath = JUSTPATH(m.lcProj)
    CD (m.lcPath)
@@ -985,10 +980,9 @@ FUNCTION Convert_Pjx_2Txt &&Runs FoxBin2Prg for multiple projects to create text
    ENDIF &&_VFP.PROJECTS.COUNT=0
 
    lnProjs = 1
-   _SCREEN.ADDPROPERTY('gaFiles(1,3)')
+   _SCREEN.ADDPROPERTY('gaFiles(1,2)')
    _SCREEN.gaFiles(1,1)	= _VFP.ACTIVEPROJECT.NAME
    _SCREEN.gaFiles(1,2)	= ICASE(m.tnMode=3,"",m.tnMode=4,"",_VFP.ACTIVEPROJECT.PROJECTHOOKLIBRARY)
-   _SCREEN.gaFiles(1,3)	= ""
 
    lcPath = JUSTPATH(_VFP.ACTIVEPROJECT.NAME)
    CD (m.lcPath)
@@ -1006,7 +1000,7 @@ FUNCTION Convert_Pjx_2Txt &&Runs FoxBin2Prg for multiple projects to create text
     RETURN .F.
    ENDIF &&m.lnProjs=0
 
-   _SCREEN.ADDPROPERTY('gaFiles('+TRIM(PADR(m.lnProjs,11))+',3)')
+   _SCREEN.ADDPROPERTY('gaFiles('+TRIM(PADR(m.lnProjs,11))+',2)')
 
    lcPath = JUSTPATH(_VFP.ACTIVEPROJECT.NAME)
    CD (m.lcPath)
@@ -1016,7 +1010,6 @@ FUNCTION Convert_Pjx_2Txt &&Runs FoxBin2Prg for multiple projects to create text
     lnProj						= m.lnProj+1
     _SCREEN.gaFiles(m.lnProj,1)	= m.loProject.NAME
     _SCREEN.gaFiles(m.lnProj,2)	= ICASE(m.tnMode=3,"",m.tnMode=4,"",m.loProject.PROJECTHOOKLIBRARY)
-    _SCREEN.gaFiles(m.lnProj,3)	= ""
    ENDFOR &&loProject
 
 *  &&m.tnProjects=2
@@ -1060,12 +1053,11 @@ FUNCTION Convert_Pjx_2Txt &&Runs FoxBin2Prg for multiple projects to create text
     RETURN .F.
    ENDIF &&m.lnProjs=0
 
-   _SCREEN.ADDPROPERTY('gaFiles('+TRIM(PADR(m.lnProjs,11))+',3)')
+   _SCREEN.ADDPROPERTY('gaFiles('+TRIM(PADR(m.lnProjs,11))+',2)')
 
    FOR lnProj = 1 TO m.lnProjs
     _SCREEN.gaFiles(m.lnProj,1)	= FORCEPATH(FORCEEXT(m.laFiles(m.lnProj,1),"PJX"),m.lcPath)
     _SCREEN.gaFiles(m.lnProj,2)	= ICASE(m.tnMode=3,"",m.tnMode=4,"",.NULL.)
-    _SCREEN.gaFiles(m.lnProj,3)	= ""
    ENDFOR &&lnProjs
 *  &&m.tnProjects=3
   CASE m.tnProjects=4
@@ -1084,7 +1076,7 @@ FUNCTION Convert_Pjx_2Txt &&Runs FoxBin2Prg for multiple projects to create text
 
    CD (m.lcPath)
 
-   _SCREEN.ADDPROPERTY('gaFiles(1,3)')
+   _SCREEN.ADDPROPERTY('gaFiles(1,2)')
 
    ScanDir(1,m.lcPath,.F.,m.loConverter)
 
@@ -1326,8 +1318,6 @@ FUNCTION Convert_File_2Bin  	&&Runs FoxBin2Prg for a single file or vcx/class to
 *!*	<p>Iput might be <em>Binary</em> or <em>Text</em>.</p>
 *!*	<p>If <pdmpara num="1" />, in combination with <pdmpara num="3" />.</p>
 *!*	<p>Does not accept class in form library::class.</p>
-*!*	<p>Using <expr>CHR(0)</expr> as delimiter, a number of extra index files may be added to a DBF file,
-*!*	using the form <expr>'Table.dbf'+0h00+'compound.cdx'+0h00+'standlone.idx'+ ..</expr>.</p>
 *!*	<p>Do not add the structural index file, it will autoprocessed.</p>
 *!*	</detail>
 *!*	</params>
@@ -1411,7 +1401,7 @@ FUNCTION Convert_File_2Bin  	&&Runs FoxBin2Prg for a single file or vcx/class to
 
  _SCREEN.ADDPROPERTY('gcOld_Path',m.lcPath)
 
- _SCREEN.ADDPROPERTY('gaFiles(1,3)')
+ _SCREEN.ADDPROPERTY('gaFiles(1,2)')
  _SCREEN.ADDPROPERTY('gcSource',"")
  _SCREEN.ADDPROPERTY('gcTarget',"")
  _SCREEN.ADDPROPERTY('gcClass',"")
@@ -1426,16 +1416,6 @@ FUNCTION Convert_File_2Bin  	&&Runs FoxBin2Prg for a single file or vcx/class to
  llReturn = .T.
 
  IF PCOUNT()>1 AND VARTYPE(m.tcFile)='C' THEN
-  IF 0h00$m.tcFile THEN
-   IF m.tcFile=0h00 THEN
-    tcFile = SUBSTR(m.tcFile,2)
-
-   ENDIF &&m.tcFile=0h00
-
-   ?'Extra files will be ignored' FONT '' STYLE 'B'
-   tcFile               = SUBSTR(m.tcFile,1,AT(0h00,m.tcFile)-1)
-
-  ENDIF &&0h00$m.tcFile
 
   IF IsFile(m.tcFile) THEN
    tcFile = FULLPATH(m.tcFile)
@@ -1494,8 +1474,7 @@ FUNCTION Convert_File_2Bin  	&&Runs FoxBin2Prg for a single file or vcx/class to
    AGETCLASS(_SCREEN.gaFiles)	&&AGETCLASS(_SCREEN.gaFiles,'','',m.lvTemp) fails
 
    DIMENSION;
-    _SCREEN.gaFiles(1,3)
-   _SCREEN.gaFiles(1,3) = ""
+    _SCREEN.gaFiles(1,2)
 
   CASE VARTYPE(m.tcFile)='C'
    _SCREEN.gaFiles(1,1) = m.tcFile
@@ -1506,7 +1485,6 @@ FUNCTION Convert_File_2Bin  	&&Runs FoxBin2Prg for a single file or vcx/class to
 
   OTHERWISE
    _SCREEN.gaFiles(1,1) = GETFILE(m.lcFileTypes,'','',0,m.lvTemp)
-   _SCREEN.gaFiles(1,3) = ""
 
  ENDCASE
 
@@ -1780,7 +1758,7 @@ FUNCTION Convert_File_2Txt  	&&Runs FoxBin2Prg for a single file or vcx/class to
 *!*	New parameters tcFile, tcClass
 *!*	</change>
 *!*	</pdm>
-SET STEP ON
+
  IF _VFP.STARTMODE#0 THEN
   HelpMsg(2)
   RETURN .F.
@@ -1827,7 +1805,7 @@ SET STEP ON
 
  _SCREEN.ADDPROPERTY('gcOld_Path',m.lcPath)
 
- _SCREEN.ADDPROPERTY('gaFiles(1,3)')
+ _SCREEN.ADDPROPERTY('gaFiles(1,2)')
  _SCREEN.ADDPROPERTY('gcSource',"")
  _SCREEN.ADDPROPERTY('gcTarget',"")
  _SCREEN.ADDPROPERTY('gcClass',"")
@@ -1842,16 +1820,6 @@ SET STEP ON
  llReturn = .T.
 
  IF PCOUNT()>1 AND VARTYPE(m.tcFile)='C' THEN
-  IF 0h00$m.tcFile THEN
-   IF m.tcFile=0h00 THEN
-    tcFile = SUBSTR(m.tcFile,2)
-   ENDIF &&m.tcFile=0h00
-
-   _SCREEN.gaFiles(1,3) = SUBSTR(m.tcFile,AT(0h00,m.tcFile))
-   tcFile               = SUBSTR(m.tcFile,1,AT(0h00,m.tcFile)-1)
-
-  ENDIF &&0h00$m.tcFile
-
   IF IsFile(m.tcFile) THEN
    tcFile = FULLPATH(m.tcFile)
    lcPath = JUSTPATH(m.tcFile)
@@ -1890,8 +1858,7 @@ SET STEP ON
    AGETCLASS(_SCREEN.gaFiles)	&&AGETCLASS(_SCREEN.gaFiles,'','',m.lvTemp) fails
 
    DIMENSION;
-    _SCREEN.gaFiles(1,3)
-   _SCREEN.gaFiles(1,3) = ""
+    _SCREEN.gaFiles(1,2)
 
   CASE VARTYPE(m.tcFile)='C'
    _SCREEN.gaFiles(1,1) = m.tcFile
@@ -1902,7 +1869,6 @@ SET STEP ON
 
   OTHERWISE
    _SCREEN.gaFiles(1,1) = GETFILE(m.lcFileTypes,'','',0,m.lvTemp)
-   _SCREEN.gaFiles(1,3) = ""
 
  ENDCASE
 
@@ -2064,7 +2030,7 @@ SET STEP ON
    ENDIF &&m.llReturn
   ENDIF &&_SCREEN.glInfo
 ******
-
+SET STEP ON 
   llReturn = m.llReturn AND _SCREEN.frmB2T_Envelop.cusB2T.Process_Bin2Txt(@laFiles,"",.F.,.T.,m.loFB2T_Setting)
 
   loFB2T_Setting = .NULL.
@@ -2157,14 +2123,13 @@ FUNCTION Convert_Directory_2Bin  	&&Runs FoxBin2Prg for a single directory and i
 
  lcPath = FULLPATH(CURDIR())
 
- _SCREEN.ADDPROPERTY('gaFiles(1,3)')
+ _SCREEN.ADDPROPERTY('gaFiles(1,2)')
 
  IF EMPTY(m.tcDirectory) OR !DIRECTORY(m.tcDirectory) THEN
   _SCREEN.gaFiles(1,1) = JUSTPATH(GETDIR(m.lcPath,'','',1+64))
  ELSE  &&EMPTY(m.tcDirectory) OR !DIRECTORY(m.tcDirectory)
   _SCREEN.gaFiles(1,1) = JUSTPATH(ADDBS(m.tcDirectory))
  ENDIF &&EMPTY(m.tcDirectory) OR !DIRECTORY(m.tcDirectory)
- _SCREEN.gaFiles(1,3)	= ""
 
  llReturn = .T.
 
@@ -2296,14 +2261,13 @@ FUNCTION Convert_Directory_2Txt  	&&Runs FoxBin2Prg for a single directory and i
 
  lcPath = FULLPATH(CURDIR())
 
- _SCREEN.ADDPROPERTY('gaFiles(1,3)')
+ _SCREEN.ADDPROPERTY('gaFiles(1,2)')
 
  IF EMPTY(m.tcDirectory) OR !DIRECTORY(m.tcDirectory) THEN
   _SCREEN.gaFiles(1,1) = JUSTPATH(GETDIR(m.lcPath,'','',1+64))
  ELSE  &&EMPTY(m.tcDirectory) OR !DIRECTORY(m.tcDirectory)
   _SCREEN.gaFiles(1,1) = JUSTPATH(ADDBS(m.tcDirectory))
  ENDIF &&EMPTY(m.tcDirectory) OR !DIRECTORY(m.tcDirectory)
- _SCREEN.gaFiles(1,3)	= ""
 
  llReturn = .T.
 
@@ -2418,13 +2382,12 @@ FUNCTION Convert_Array_2Bin	&&Runs FoxBin2Prg for multiple files to binary.
 
    FOR lnLoop = 1 TO ALEN(m.taFiles)
     IF !TYPE(m.taFiles(m.lnLoop,1))='C';
-      OR !TYPE(m.taFiles(m.lnLoop,3))='C';
       OR !TYPE(m.taFiles(m.lnLoop,2))='C';
       OR ISNULL(m.taFiles(m.lnLoop,2)) THEN
      tcMode = '?'
      EXIT
 
-    ENDIF &&!TYPE(m.taFiles(m.lnLoop,1))='C' OR !TYPE(m.taFiles(m.lnLoop,3))='C' OR !TYPE(m.taFiles(m.lnLoop,2))='C ...
+    ENDIF &&!TYPE(m.taFiles(m.lnLoop,1))='C' OR !TYPE(m.taFiles(m.lnLoop,2))='C' OR ISNULL(m.taFiles(m.lnLoop,2)) 
    ENDFOR &&lnLoop
 
  ENDCASE
@@ -2502,13 +2465,12 @@ FUNCTION Convert_Array_2Txt	&&Runs FoxBin2Prg for multiple files to text.
 
    FOR lnLoop = 1 TO ALEN(m.taFiles)
     IF !TYPE(m.taFiles(m.lnLoop,1))='C';
-      OR !TYPE(m.taFiles(m.lnLoop,3))='C';
       OR !TYPE(m.taFiles(m.lnLoop,2))='C';
       OR ISNULL(m.taFiles(m.lnLoop,2)) THEN
      tcMode = '?'
      EXIT
 
-    ENDIF &&!TYPE(m.taFiles(m.lnLoop,1))='C' OR !TYPE(m.taFiles(m.lnLoop,3))='C' OR !TYPE(m.taFiles(m.lnLoop,2))='C ...
+    ENDIF &&!TYPE(m.taFiles(m.lnLoop,1))='C' OR !TYPE(m.taFiles(m.lnLoop,2))='C' OR ISNULL(m.taFiles(m.lnLoop,2)) 
    ENDFOR &&lnLoop
 
  ENDCASE
@@ -4193,11 +4155,10 @@ FUNCTION Dir_Action_PJX		&&Internal. Parse a directory for projects (binary or t
   lnFiles = IIF(EMPTY(_SCREEN.gaFiles),0,ALEN(_SCREEN.gaFiles,1))
 
   DIMENSION;
-   _SCREEN.gaFiles(m.lnFiles+m.lnProjs,3)
+   _SCREEN.gaFiles(m.lnFiles+m.lnProjs,2)
 
   FOR lnProj = 1 TO m.lnProjs
    _SCREEN.gaFiles(m.lnFiles+m.lnProj,1) = FORCEPATH(FORCEEXT(m.laFiles(m.lnProj,1),"PJX"),m.tcDir)
-   _SCREEN.gaFiles(m.lnFiles+m.lnProj,3) = ""
 
   ENDFOR &&lnProjs
  ENDIF &&m.lnProjs>0
