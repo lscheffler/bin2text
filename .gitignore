@@ -86,6 +86,7 @@ Bin2Txt.*
 bin2txt.*
 
 #Doku
+!/.github/
 !/docs/**/*.*
 !Doku/*.pdm*
 !Doku/Source/*.gif
