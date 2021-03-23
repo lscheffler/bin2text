@@ -414,13 +414,7 @@ DEFINE CLASS cusstorage AS custom 		&& The stuff that does the work.
 		*!*	<dl>
 		*!*	 <dt>Column one</dt><dd>File to process.</dd>
 		*!*	 <dt>Column two</dt><dd>Second parameter of FoxBin2PRG's Execute</dd>
-		*!*	 <dt>Column three</dt>
-		*!*	 <dd>
-		*!*	  Additional files to process, non structural index-files for DBF.<br/>
-		*!*	  List of files, delimited by <expr>CHR(0)</expr>, starting with <expr>CHR(0)</expr>.<br/>
-		*!*	  Ignored if empty. <strong>Only used for DBF on Bin2Text.</strong>
-		*!*	 </dd>
-		*!*	 <dt>Column four</dt><dd>Include file of colum 1 in output to screen</dd>
+		*!*	 <dt>Column three</dt><dd>Include file of colum 1 in output to screen</dd>
 		*!*	</dl>
 		*!*	</detail>
 		*!*	</params>
@@ -444,7 +438,7 @@ DEFINE CLASS cusstorage AS custom 		&& The stuff that does the work.
 		*!*	<copyright>
 		*!*	<img src="../../repository/vfpxbanner_small.png" alt="VFPX logo"/><br/>
 		*!*	<p>This project is part of <a href="https://vfpx.github.io/"  title="Skip to VFPX" target="_blank">VFPX</a>.</p>
-		*!*	<p><i>&copy; 13.4.2017 Lutz Scheffler Software Ingenieurbüro</i></p>
+		*!*	<p><i>&copy; 18.03.2021 Lutz Scheffler Software Ingenieurbüro</i></p>
 		*!*	</copyright>
 		*!*	</pdm>
 		
@@ -493,7 +487,7 @@ DEFINE CLASS cusstorage AS custom 		&& The stuff that does the work.
 		  CASE !FILE(m.lcFile_Test) AND !DIRECTORY(m.lcFile_Test)
 		   ?JUSTFNAME(m.lcFile)+" - not found"
 		   LOOP
-		  CASE m.taFiles(m.lnFile,4)
+		  CASE m.taFiles(m.lnFile,3)
 		   ?JUSTFNAME(m.lcFile)
 		 ENDCASE
 		
@@ -503,9 +497,6 @@ DEFINE CLASS cusstorage AS custom 		&& The stuff that does the work.
 		 toConverter.l_ClassPerFileCheck		  = .F.
 		 toConverter.l_RedirectClassPerFileToMain = .T.
 		
-		 IF !EMPTY(m.taFiles(m.lnFile,3)) THEN
-		  lcFile = m.lcFile+m.taFiles(m.lnFile,3)
-		 ENDIF &&!EMPTY(m.taFiles(m.lnFile,3))
 		*!*	obj.execute(cInputFile [,cType [,cTextName [,lGenText [,cDontShowErrors [,cDebug;
 		*!*	 [,cDontShowProgress [,oModule [,oEx [,lRelanzarError [,cOriginalFileName;
 		*!*	 [,cRecompile [,cNoTimestamps [,cBackupLevels [,cClearUniqueID [,cOptimizeByFilestamp [,cCFG_File]]]]]]]]]]]]]]])
@@ -776,12 +767,15 @@ DEFINE CLASS cusstorage AS custom 		&& The stuff that does the work.
 		llOk = True
 		IF PEMSTATUS(_SCREEN,'gcB2T_Path',5) AND VARTYPE(_SCREEN.gcB2T_Path)='C' AND FILE(_SCREEN.gcB2T_Path) THEN
 		 tcStorage = THIS.Storage_Open(_SCREEN.gcB2T_Path)
+		
 		ELSE  &&PEMSTATUS(_SCREEN,'gcB2T_Path',5) AND VARTYPE(_SCREEN.gcB2T_Path)='C' AND FILE(_SCREEN.gcB2T_Path)
 		 tcStorage = THIS.Storage_Check(False)
-		 IF ISNULL(m.tcStorage) THEN
-		  llOk = False
-		 ENDIF &&ISNULL(m.tcStorage)
+		
 		ENDIF &&PEMSTATUS(_SCREEN,'gcB2T_Path',5) AND VARTYPE(_SCREEN.gcB2T_Path)='C' AND FILE(_SCREEN.gcB2T_Path)
+		
+		IF ISNULL(m.tcStorage) THEN
+		 llOk = False
+		ENDIF &&ISNULL(m.tcStorage)
 		
 		IF m.llOk THEN
 		 toConverter = NEWOBJECT("c_foxbin2prg",_SCREEN.gcB2T_FB2T)
@@ -905,7 +899,7 @@ DEFINE CLASS cusstorage AS custom 		&& The stuff that does the work.
 		 loSett       AS OBJECT
 		
 		LOCAL ARRAY;
-		 laDatabases(1,5),;
+		 laDatabases(1,4),;
 		 laTables(1)
 		
 		lnFiles	= ALEN(m.taSource,1)
@@ -1184,9 +1178,9 @@ DEFINE CLASS cusstorage AS custom 		&& The stuff that does the work.
 		*!*	  </dd>
 		*!*	 <dt>Column three</dt>
 		*!*	 <dd>
-		*!*	  Additional files to process, non structural index-files for DBF.<br/>
+		*!*	  Additional files to process, non structural index-files for DBF. 
 		*!*	  List of files, delimited by <expr>CHR(0)</expr>, starting with <expr>CHR(0)</expr>.<br/>
-		*!*	  Ignored if empty. <strong>Only used for DBF on Bin2Text.</strong>
+		*!*	  Ignored if empty.
 		*!*	 </dd>
 		*!*	</dl>
 		*!*	</detail>
@@ -1205,7 +1199,7 @@ DEFINE CLASS cusstorage AS custom 		&& The stuff that does the work.
 		*!*	<p>Controls if all files are transformed.</p>
 		*!*	<p>Only the files changed might be transformed.
 		*!*	This can override stored setting.</p>
-		*!*	<p>If True, the file will not be synched with the storage table./p>
+		*!*	<p>If True, the file will not be synched with the storage table.</p>
 		*!*	<p>If parameter is not passed, this default to the setting stored.</p>
 		*!*	</detail>
 		*!*	</params>
@@ -1339,7 +1333,6 @@ DEFINE CLASS cusstorage AS custom 		&& The stuff that does the work.
 		
 		   taFiles(m.lnFiles,1)	= m.loSetting.gcFile
 		   taFiles(m.lnFiles,2)	= m.lcMode
-		   taFiles(m.lnFiles,3)	= ""
 		  ENDIF &&EMPTY(ASCAN(m.taFiles,m.lcFile,1,-1,2,15))
 		
 		 ENDFOR &&loSetting
@@ -1349,7 +1342,7 @@ DEFINE CLASS cusstorage AS custom 		&& The stuff that does the work.
 		*!*	/Changed  by: SF 28.2.2021
 		
 		LOCAL ARRAY;
-		 laFiles(m.lnFiles,5),;
+		 laFiles(m.lnFiles,4),;
 		 laToConvert(1,4),;
 		 laDBC_Tables(1,4),;
 		 laDBCs(1,2)
@@ -1368,7 +1361,7 @@ DEFINE CLASS cusstorage AS custom 		&& The stuff that does the work.
 		THIS.Get_DBC_Tables(@laFiles,@laFiles,@laDBC_Tables,@lnTableFound,m.lcMode,.F.,m.loConverter)
 		
 		DIMENSION;
-		 m.laFiles(m.lnFiles,5)
+		 m.laFiles(m.lnFiles,4)
 		
 		laFiles     = NIL
 		* /Process Databases that are within the array
@@ -1421,7 +1414,7 @@ DEFINE CLASS cusstorage AS custom 		&& The stuff that does the work.
 		
 		  ELSE  &&m.lnFilesFound=0
 		   DIMENSION;
-		    m.laFiles(m.lnOffsets,5)
+		    m.laFiles(m.lnOffsets,4)
 		   LOOP
 		  ENDIF &&m.lnFilesFound=0
 		
@@ -1472,7 +1465,7 @@ DEFINE CLASS cusstorage AS custom 		&& The stuff that does the work.
 		*Hook, to text
 		   lnOffsets = m.lnOffsets+1
 		   DIMENSION;
-		    m.laFiles(m.lnOffsets,5)
+		    m.laFiles(m.lnOffsets,4)
 		
 		   laFiles(m.lnOffsets,1) = m.taFiles(m.lnFile,2)						&&Source File of transformation; Bin
 		   laFiles(m.lnOffsets,2) = m.lcMode									&&not a project file
@@ -1561,13 +1554,12 @@ DEFINE CLASS cusstorage AS custom 		&& The stuff that does the work.
 		   IF !EMPTY(m.lcFile) THEN
 		    lnOffsets = m.lnOffsets+1
 		    DIMENSION;
-		     m.laFiles(m.lnOffsets,5)
+		     m.laFiles(m.lnOffsets,4)
 		
 		    laFiles(m.lnOffsets,1)	= m.lcFile								&&Source File of transformation; Bin
 		    laFiles(m.lnOffsets,2)	= m.lcMode								&&not a project file
 		    laFiles(m.lnOffsets,3)	= m.lcFile								&&VFP Bin File
 		    laFiles(m.lnOffsets,4)	= 0										&&No Hook :)
-		    laFiles(m.lnOffsets,5)	= ""									&&no extra files
 		   ENDIF &&!EMPTY(m.lcFile)
 		  ENDIF &&laFiles(m.lnFile,4)=1
 		
@@ -1599,16 +1591,15 @@ DEFINE CLASS cusstorage AS custom 		&& The stuff that does the work.
 		* we have something to parse
 		* number of files to parse: m.lnOffsets ( this is m.lnFilesFound + Hooks) + m.lnTableFound
 		 DIMENSION;
-		  laToConvert(m.lnOffsets+m.lnTableFound,4),;
-		  laFiles(m.lnOffsets+m.lnTableFound,5)
+		  laToConvert(m.lnOffsets+m.lnTableFound,3),;
+		  laFiles(m.lnOffsets+m.lnTableFound,4)
 		
 		* files in parameters section
 		* must be shown, because they are processed or pre-processed
 		 FOR lnConvert = 1 TO m.lnFilesFound
 		  laToConvert(m.lnConvert,1) = m.laFiles(m.lnConvert,1)
 		  laToConvert(m.lnConvert,2) = m.laFiles(m.lnConvert,2)
-		  laToConvert(m.lnConvert,3) = ''
-		  laToConvert(m.lnConvert,4) = .T.
+		  laToConvert(m.lnConvert,3) = .T.
 		 ENDFOR &&lnConvert
 		* Hooks
 		* must be shown as only if we not pre-process
@@ -1616,8 +1607,7 @@ DEFINE CLASS cusstorage AS custom 		&& The stuff that does the work.
 		 FOR lnConvert = m.lnFilesFound+1 TO m.lnOffsets
 		  laToConvert(m.lnConvert,1) = m.laFiles(m.lnConvert,1)
 		  laToConvert(m.lnConvert,2) = m.laFiles(m.lnConvert,2)
-		  laToConvert(m.lnConvert,3) = ''
-		  laToConvert(m.lnConvert,4) = !m.llMaxiLoop
+		  laToConvert(m.lnConvert,3) = !m.llMaxiLoop
 		 ENDFOR &&lnConvert
 		
 		* Table of Databases (laDBC_Tables) figured out above
@@ -1634,8 +1624,7 @@ DEFINE CLASS cusstorage AS custom 		&& The stuff that does the work.
 		
 		  laToConvert(m.lnOffsets+m.lnConvert,1) = m.laDBC_Tables(m.lnConvert,1)
 		  laToConvert(m.lnOffsets+m.lnConvert,2) = m.laDBC_Tables(m.lnConvert,2)
-		  laToConvert(m.lnOffsets+m.lnConvert,3) = ''
-		  laToConvert(m.lnOffsets+m.lnConvert,4) = !m.llMaxiLoop
+		  laToConvert(m.lnOffsets+m.lnConvert,3) = !m.llMaxiLoop
 		 ENDFOR &&lnConvert
 		
 		 IF m.llMaxiLoop THEN
@@ -1676,14 +1665,13 @@ DEFINE CLASS cusstorage AS custom 		&& The stuff that does the work.
 		     CASE ISNULL(m.llProcess)
 		*need to process all files -> just let FoxBin2PRG do, faster.
 		      DIMENSION;
-		       m.laToConvert(ALEN(m.laFiles,1),4)
+		       m.laToConvert(ALEN(m.laFiles,1),3)
 		
 		* must be show, because they are processed
 		      FOR lnConvert = 1 TO ALEN(m.laFiles,1)
 		       laToConvert(m.lnConvert,1) = m.laFiles(m.lnConvert,1)
 		       laToConvert(m.lnConvert,2) = m.laFiles(m.lnConvert,2)
-		       laToConvert(m.lnConvert,3) = m.laFiles(m.lnConvert,5)
-		       laToConvert(m.lnConvert,4) = .T.
+		       laToConvert(m.lnConvert,3) = .T.
 		      ENDFOR &&lnConvert
 		
 		      ?'Processing:'
@@ -1698,14 +1686,14 @@ DEFINE CLASS cusstorage AS custom 		&& The stuff that does the work.
 		      FOR lnFile = 1 TO m.lnFiles
 		       laFiles2(m.lnFile,2) = m.lcMode
 		      ENDFOR &&lnFile
+		
 		      DIMENSION;
-		       m.laToConvert(ALEN(m.laFiles2,1),4)
+		       m.laToConvert(ALEN(m.laFiles2,1),3)
 		
 		      FOR lnConvert = 1 TO ALEN(m.laFiles2,1)
-		       laToConvert(m.lnConvert,1) = m.laFiles2(m.lnConvert,1)
-		       laToConvert(m.lnConvert,2) = m.laFiles2(m.lnConvert,2)
-		       laToConvert(m.lnConvert,3) = ''								&&die Frage ist, wie wir hier zu den extra Dateien kommen
-		       laToConvert(m.lnConvert,4) = .T.
+		       laToConvert(m.lnConvert,1) = m.laFiles2(m.lnConvert,1)					&& File
+		       laToConvert(m.lnConvert,2) = m.laFiles2(m.lnConvert,2)					&& Mode
+		       laToConvert(m.lnConvert,3) = .T.
 		      ENDFOR &&lnConvert
 		
 		      ?'Processing:'
@@ -1872,8 +1860,7 @@ DEFINE CLASS cusstorage AS custom 		&& The stuff that does the work.
 		   lnOffsets              = m.lnOffsets+1
 		   laFiles(m.lnOffsets,1) = m.taFiles(m.lnFile,1)
 		   laFiles(m.lnOffsets,2) = "BIN2PRG"
-		   laFiles(m.lnOffsets,3) = ''								&& hier immer ohne extra Index-Dateien, keine Angabe von extra Daten möglich
-		   laFiles(m.lnOffsets,4) = .T.
+		   laFiles(m.lnOffsets,3) = .T.
 		
 		 ENDCASE
 		ENDFOR &&lnfile
@@ -1931,9 +1918,7 @@ DEFINE CLASS cusstorage AS custom 		&& The stuff that does the work.
 		*!*	  </dd>
 		*!*	 <dt>Column three</dt>
 		*!*	 <dd>
-		*!*	  Additional files to process, non structural index-files for DBF.<br/>
-		*!*	  List of files, delimited by <expr>CHR(0)</expr>, starting with <expr>CHR(0)</expr>.<br/>
-		*!*	  Ignored if empty. <strong>Only used for DBF on Bin2Text.</strong>
+		*!*	  Empty, not used
 		*!*	 </dd>
 		*!*	</dl>
 		*!*	</detail>
@@ -1950,7 +1935,7 @@ DEFINE CLASS cusstorage AS custom 		&& The stuff that does the work.
 		*!*	<short>Convert all files.</short>
 		*!*	<detail>
 		*!*	<p>Controls if all files are transformed.</p>
-		*!*	<p>If True, the file will not be synched with the storage table./p>
+		*!*	<p>If True, the file will not be synched with the storage table.</p>
 		*!*	<p>If parameter is not passed, this default to the setting stored.</p>
 		*!*	</detail>
 		*!*	</params>
@@ -2081,7 +2066,6 @@ DEFINE CLASS cusstorage AS custom 		&& The stuff that does the work.
 		
 		   taFiles(m.lnFiles,1)	= m.loSetting.gcFile
 		   taFiles(m.lnFiles,2)	= m.lcMode
-		   taFiles(m.lnFiles,3)	= ""
 		  ENDIF &&EMPTY(ASCAN(m.taFiles,m.lcFile,1,-1,2,15))
 		
 		 ENDFOR &&loSetting
@@ -2091,7 +2075,7 @@ DEFINE CLASS cusstorage AS custom 		&& The stuff that does the work.
 		*!*	/Changed  by: SF 28.2.2021
 		
 		LOCAL ARRAY;
-		 laFiles(m.lnFiles,5),;
+		 laFiles(m.lnFiles,4),;
 		 laToConvert(1,4),;
 		 laDBC_Tables(1,4),;
 		 laDBCs(1,2)
@@ -2187,7 +2171,7 @@ DEFINE CLASS cusstorage AS custom 		&& The stuff that does the work.
 		
 		  ELSE  &&m.lnFilesFound=0
 		   DIMENSION;
-		    m.laFiles(m.lnOffsets,5)
+		    m.laFiles(m.lnOffsets,4)
 		   LOOP
 		  ENDIF &&m.lnFilesFound=0
 		
@@ -2247,16 +2231,15 @@ DEFINE CLASS cusstorage AS custom 		&& The stuff that does the work.
 		* we have something to parse
 		* number of files to parse: m.lnOffsets ( this is m.lnFilesFound + Hooks) + m.lnTableFound
 		 DIMENSION;
-		  laToConvert(m.lnOffsets+m.lnTableFound,4),;
-		  laFiles(m.lnOffsets+m.lnTableFound,5)
+		  laToConvert(m.lnOffsets+m.lnTableFound,3),;
+		  laFiles(m.lnOffsets+m.lnTableFound,4)
 		
 		* files in parameters section
 		* must be shown, because they are processed or pre-processed
 		 FOR lnConvert = 1 TO m.lnFilesFound
 		  laToConvert(m.lnConvert,1) = m.laFiles(m.lnConvert,1)
 		  laToConvert(m.lnConvert,2) = m.laFiles(m.lnConvert,2)
-		  laToConvert(m.lnConvert,3) = ''								&&hier immer leer
-		  laToConvert(m.lnConvert,4) = .T.
+		  laToConvert(m.lnConvert,3) = .T.
 		 ENDFOR &&lnConvert
 		* Hooks
 		* must be shown as only if we not pre-process
@@ -2264,8 +2247,7 @@ DEFINE CLASS cusstorage AS custom 		&& The stuff that does the work.
 		 FOR lnConvert = m.lnFilesFound+1 TO m.lnOffsets
 		  laToConvert(m.lnConvert,1) = m.laFiles(m.lnConvert,1)
 		  laToConvert(m.lnConvert,2) = m.laFiles(m.lnConvert,2)
-		  laToConvert(m.lnConvert,3) = ''								&&hier immer leer
-		  laToConvert(m.lnConvert,4) = .T.
+		  laToConvert(m.lnConvert,3) = .T.
 		 ENDFOR &&lnConvert
 		
 		* Table of Databases (laDBC_Tables) figured out above
@@ -2277,17 +2259,15 @@ DEFINE CLASS cusstorage AS custom 		&& The stuff that does the work.
 		 FOR lnConvert = 1 TO m.lnTableFound
 		  laFiles(m.lnOffsets+m.lnConvert,1) = m.laDBC_Tables(m.lnConvert,1)
 		  laFiles(m.lnOffsets+m.lnConvert,2) = m.laDBC_Tables(m.lnConvert,2)
-		  laFiles(m.lnOffsets+m.lnConvert,3) = m.laDBC_Tables(m.lnConvert,3)
-		  laFiles(m.lnOffsets+m.lnConvert,4) = m.laDBC_Tables(m.lnConvert,4)
+		  laFiles(m.lnOffsets+m.lnConvert,3) = m.laDBC_Tables(m.lnConvert,4)
 		
 		  laToConvert(m.lnOffsets+m.lnConvert,1) = m.laDBC_Tables(m.lnConvert,1)
 		  laToConvert(m.lnOffsets+m.lnConvert,2) = m.laDBC_Tables(m.lnConvert,2)
-		  laToConvert(m.lnOffsets+m.lnConvert,3) = ''								&&hier immer leer
-		  laToConvert(m.lnOffsets+m.lnConvert,4) = .T.
+		  laToConvert(m.lnOffsets+m.lnConvert,3) = .T.
 		 ENDFOR &&lnConvert
 		
 		  ?'Processing:'
-		 llFound = THIS.Convert(@laToConvert,.F.,m.loConverter,0,m.toFB2T_Setting)
+		 llFound = THIS.Convert(@laToConvert,.T.,m.loConverter,0,m.toFB2T_Setting)
 		ELSE  &&m.lnFilesFound>0
 		 llFound = False
 		ENDIF &&m.lnFilesFound>0
@@ -2384,7 +2364,7 @@ DEFINE CLASS cusstorage AS custom 		&& The stuff that does the work.
 		       IF !EMPTY(m.lcFile) THEN
 		        lnOffset = m.lnOffset+1
 		        DIMENSION;
-		         m.laFiles2(m.lnOffset,4)
+		         m.laFiles2(m.lnOffset,3)
 		
 		        loSett		 = THIS.oGet_Setting(JUSTPATH(m.lcFile),m.loConverter)
 		        lcSourceExt = m.loSett.c_VC2
@@ -2392,7 +2372,6 @@ DEFINE CLASS cusstorage AS custom 		&& The stuff that does the work.
 		        laFiles2(m.lnOffset,1)	= FORCEEXT(m.lcFile,m.lcSourceExt)			&& Source File of transformation; Bin
 		        laFiles2(m.lnOffset,2)	= m.lcMode									&& not a project file
 		        laFiles2(m.lnOffset,3)	= 0											&& has no hook
-		        laFiles2(m.lnOffset,4)	= ''										&& no additional files
 		       ENDIF &&!EMPTY(m.lcFile)
 		      ENDIF &&m.laFiles(m.lnFile,4)>1
 		
@@ -2419,15 +2398,14 @@ DEFINE CLASS cusstorage AS custom 		&& The stuff that does the work.
 		     ACTIVATE SCREEN
 		
 		     DIMENSION;
-		      m.laToConvert(m.lnOffset,4)
+		      m.laToConvert(m.lnOffset,3)
 		
 		* files in parameters section
 		* must be show, because they are processed
 		     FOR lnConvert = 1 TO m.lnOffset
 		      laToConvert(m.lnConvert,1) = m.laFiles2(m.lnConvert,1)
 		      laToConvert(m.lnConvert,2) = m.laFiles2(m.lnConvert,2)
-		      laToConvert(m.lnConvert,3) = ''								&&hier immer leer
-		      laToConvert(m.lnConvert,4) = .T.
+		      laToConvert(m.lnConvert,3) = .T.
 		     ENDFOR &&lnConvert
 		
 		     ?"Post processing Project-Hooks and Databases DBF's:"
@@ -2447,14 +2425,13 @@ DEFINE CLASS cusstorage AS custom 		&& The stuff that does the work.
 		     CASE ISNULL(m.llProcess)
 		*need to process all files -> just let FoxBin2PRG do, faster.
 		      DIMENSION;
-		       m.laToConvert(ALEN(m.laFiles,1),4)
+		       m.laToConvert(ALEN(m.laFiles,1),3)
 		
 		* must be show, because they are processed
 		      FOR lnConvert = 1 TO ALEN(m.laFiles,1)
 		       laToConvert(m.lnConvert,1) = m.laFiles(m.lnConvert,1)
 		       laToConvert(m.lnConvert,2) = m.laFiles(m.lnConvert,2)
-		       laToConvert(m.lnConvert,3) = ''								&&hier immer leer
-		       laToConvert(m.lnConvert,4) = .T.
+		       laToConvert(m.lnConvert,3) = .T.
 		      ENDFOR &&lnConvert
 		
 		      ?'Processing:'
@@ -2470,13 +2447,12 @@ DEFINE CLASS cusstorage AS custom 		&& The stuff that does the work.
 		       laFiles2(m.lnFile,2) = m.lcMode
 		      ENDFOR &&lnFile
 		      DIMENSION;
-		       m.laToConvert(ALEN(m.laFiles2,1),4)
+		       m.laToConvert(ALEN(m.laFiles2,1),3)
 		
 		      FOR lnConvert = 1 TO ALEN(m.laFiles2,1)
 		       laToConvert(m.lnConvert,1) = m.laFiles2(m.lnConvert,1)
 		       laToConvert(m.lnConvert,2) = m.laFiles2(m.lnConvert,2)
-		       laToConvert(m.lnConvert,3) = ''								&&hier immer leer
-		       laToConvert(m.lnConvert,4) = .T.
+		       laToConvert(m.lnConvert,3) = .T.
 		      ENDFOR &&lnConvert
 		
 		      ?'Processing:'
@@ -2566,7 +2542,7 @@ DEFINE CLASS cusstorage AS custom 		&& The stuff that does the work.
 		*!*	</pdm>
 		
 		  DIMENSION;
-		   m.laFiles2(1,5)
+		   m.laFiles2(1,4)
 		
 		  lnOffset = 0
 		
@@ -2579,15 +2555,14 @@ DEFINE CLASS cusstorage AS custom 		&& The stuff that does the work.
 		  IF m.lnOffset>0 THEN
 		   ACTIVATE SCREEN
 		   DIMENSION;
-		    m.laToConvert(m.lnOffset,4)
+		    m.laToConvert(m.lnOffset,3)
 		
 		* files in parameters section
 		* must be show, because they are processed
 		   FOR lnConvert = 1 TO m.lnOffset
 		    laToConvert(m.lnConvert,1) = m.laFiles2(m.lnConvert,1)
 		    laToConvert(m.lnConvert,2) = m.laFiles2(m.lnConvert,2)
-		    laToConvert(m.lnConvert,3) = ''								&&hier immer leer
-		    laToConvert(m.lnConvert,4) = .T.
+		    laToConvert(m.lnConvert,3) = .T.
 		   ENDFOR &&lnConvert
 		
 		   ?"Post processing Databases DBF's"
@@ -2674,7 +2649,7 @@ DEFINE CLASS cusstorage AS custom 		&& The stuff that does the work.
 		 lnCols
 		
 		LOCAL ARRAY;
-		 laFiles(m.lnFiles,4)
+		 laFiles(m.lnFiles,3)
 		
 		lnOffsets = 0
 		
@@ -2688,8 +2663,7 @@ DEFINE CLASS cusstorage AS custom 		&& The stuff that does the work.
 		   lnOffsets              = m.lnOffsets+1
 		   laFiles(m.lnOffsets,1) = m.taFiles(m.lnFile,1)
 		   laFiles(m.lnOffsets,2) = "PRG2BIN"
-		   laFiles(m.lnOffsets,3) = ''								&& hier immer ohne extra Index-Dateien, keine Angabe von extra Daten möglich
-		   laFiles(m.lnOffsets,4) = .T.
+		   laFiles(m.lnOffsets,3) = .T.
 		
 		 ENDCASE
 		ENDFOR &&lnfile
@@ -2782,7 +2756,6 @@ DEFINE CLASS cusstorage AS custom 		&& The stuff that does the work.
 		  IF !PEMSTATUS(_SCREEN,"gcB2T_Path",5) THEN
 		   loSetting = CREATEOBJECT('EMPTY')
 		   ADDPROPERTY(loSetting,'gcFile',TRIM(m.lcFile))
-		   ADDPROPERTY(loSetting,'gcFile2',"")
 		   ADDPROPERTY(loSetting,'gcUniqueId',"gcB2T_Path")
 		   loSettings.ADD(m.loSetting,m.loSetting.gcUniqueId)
 		
@@ -2796,7 +2769,6 @@ DEFINE CLASS cusstorage AS custom 		&& The stuff that does the work.
 		  IF !PEMSTATUS(_SCREEN,"gcB2T_GUI",5) THEN
 		   loSetting = CREATEOBJECT('EMPTY')
 		   ADDPROPERTY(loSetting,'gcFile',"gitk.exe")
-		   ADDPROPERTY(loSetting,'gcFile2',"")
 		   ADDPROPERTY(loSetting,'gcUniqueId',"gcB2T_GUI")
 		   loSettings.ADD(m.loSetting,m.loSetting.gcUniqueId)
 		
@@ -2807,7 +2779,6 @@ DEFINE CLASS cusstorage AS custom 		&& The stuff that does the work.
 		  IF !PEMSTATUS(_SCREEN,"gcB2T_Commit",5) THEN
 		   loSetting = CREATEOBJECT('EMPTY')
 		   ADDPROPERTY(loSetting,'gcFile',"0")
-		   ADDPROPERTY(loSetting,'gcFile2',"")
 		   ADDPROPERTY(loSetting,'gcUniqueId',"gcB2T_Commit")
 		   loSettings.ADD(m.loSetting,m.loSetting.gcUniqueId)
 		
@@ -2818,7 +2789,6 @@ DEFINE CLASS cusstorage AS custom 		&& The stuff that does the work.
 		  IF !PEMSTATUS(_SCREEN,"gcB2T_GitPjx",5) THEN
 		   loSetting = CREATEOBJECT('EMPTY')
 		   ADDPROPERTY(loSetting,'gcFile',"0")
-		   ADDPROPERTY(loSetting,'gcFile2',"")
 		   ADDPROPERTY(loSetting,'gcUniqueId',"gcB2T_GitPjx")
 		   loSettings.ADD(m.loSetting,m.loSetting.gcUniqueId)
 		
@@ -2829,7 +2799,6 @@ DEFINE CLASS cusstorage AS custom 		&& The stuff that does the work.
 		  IF !PEMSTATUS(_SCREEN,"gcB2T_DBC",5) THEN
 		   loSetting = CREATEOBJECT('EMPTY')
 		   ADDPROPERTY(loSetting,'gcFile',"0")
-		   ADDPROPERTY(loSetting,'gcFile2',"")
 		   ADDPROPERTY(loSetting,'gcUniqueId',"gcB2T_DBC")
 		   loSettings.ADD(m.loSetting,m.loSetting.gcUniqueId)
 		
@@ -2840,7 +2809,6 @@ DEFINE CLASS cusstorage AS custom 		&& The stuff that does the work.
 		  IF !PEMSTATUS(_SCREEN,"gcB2T_Opt",5) THEN
 		   loSetting = CREATEOBJECT('EMPTY')
 		   ADDPROPERTY(loSetting,'gcFile',"0")
-		   ADDPROPERTY(loSetting,'gcFile2',"")
 		   ADDPROPERTY(loSetting,'gcUniqueId',"gcB2T_Opt")
 		   loSettings.ADD(m.loSetting,m.loSetting.gcUniqueId)
 		
@@ -2851,7 +2819,6 @@ DEFINE CLASS cusstorage AS custom 		&& The stuff that does the work.
 		  IF !PEMSTATUS(_SCREEN,"gcB2T_Delete",5) THEN
 		   loSetting = CREATEOBJECT('EMPTY')
 		   ADDPROPERTY(loSetting,'gcFile',"0")
-		   ADDPROPERTY(loSetting,'gcFile2',"")
 		   ADDPROPERTY(loSetting,'gcUniqueId',"gcB2T_Delete")
 		   loSettings.ADD(m.loSetting,m.loSetting.gcUniqueId)
 		
@@ -2862,7 +2829,6 @@ DEFINE CLASS cusstorage AS custom 		&& The stuff that does the work.
 		  IF !PEMSTATUS(_SCREEN,"gcB2T_UseBash",5) THEN
 		   loSetting = CREATEOBJECT('EMPTY')
 		   ADDPROPERTY(loSetting,'gcFile',"0")
-		   ADDPROPERTY(loSetting,'gcFile2',"")
 		   ADDPROPERTY(loSetting,'gcUniqueId',"gcB2T_UseBash")
 		   loSettings.ADD(m.loSetting,m.loSetting.gcUniqueId)
 		
@@ -3007,7 +2973,6 @@ DEFINE CLASS cusstorage AS custom 		&& The stuff that does the work.
 		
 		 loSetting = CREATEOBJECT('EMPTY')
 		 ADDPROPERTY(loSetting,'gcFile',TRIM(m.lcFile))
-		 ADDPROPERTY(loSetting,'gcFile2',"")
 		 ADDPROPERTY(loSetting,'gcUniqueId',"gcB2T_FB2T")
 		 toSettings.ADD(m.loSetting,m.loSetting.gcUniqueId)
 		
@@ -3109,7 +3074,6 @@ DEFINE CLASS cusstorage AS custom 		&& The stuff that does the work.
 		
 		SELECT;
 		 Cur1.cFile,;
-		 Cur1.cFile2,;
 		 Cur1.cUniqueId;
 		 FROM (m.tcStorage) AS Cur1;
 		 INTO CURSOR curHelp;
@@ -3121,7 +3085,6 @@ DEFINE CLASS cusstorage AS custom 		&& The stuff that does the work.
 		SCAN
 		 loSetting = CREATEOBJECT('EMPTY')
 		 ADDPROPERTY(loSetting,'gcFile',TRIM(cFile))
-		 ADDPROPERTY(loSetting,'gcFile2',TRIM(cFile2))
 		 ADDPROPERTY(loSetting,'gcUniqueId',TRIM(cUniqueId))
 		
 		 toSettings.ADD(m.loSetting,m.loSetting.gcUniqueId)
@@ -3366,7 +3329,6 @@ DEFINE CLASS cusstorage AS custom 		&& The stuff that does the work.
 		   CREATE TABLE (m.tcFile)(;
 		    cType     c(1),;
 		    cFile     c(240),;
-		    cFile2    c(240),;
 		    cObjName  c(240),;
 		    cUniqueId c(16) NOCPTRANS,;
 		    iDirty    I,;
@@ -3380,7 +3342,6 @@ DEFINE CLASS cusstorage AS custom 		&& The stuff that does the work.
 		*X = Heart beat check
 		*S = Setting
 		*A = Additional files
-		*I = Additional index files (cFile) for tables (cFile2)
 		   INDEX ON cFile		TAG _cFile
 		   INDEX ON cObjName	TAG _cObj
 		   INDEX ON cUniqueId	TAG _cUni
@@ -3452,7 +3413,7 @@ DEFINE CLASS cusstorage AS custom 		&& The stuff that does the work.
 		
 		DO CASE
 		 CASE EMPTY(cUniqueId)
-		* we assume we are on the step from 1.x to 2.x
+		* we assume we are on the step to 1.x
 		  USE IN SELECT('Storage')
 		  USE (m.tcFile) ALIAS Storage IN SELECT('Storage') EXCLUSIVE
 		
@@ -3465,7 +3426,7 @@ DEFINE CLASS cusstorage AS custom 		&& The stuff that does the work.
 		   AND ATC('DBF',JUSTEXT(cFile))>0)
 		
 		  IF FOUND() THEN
-		*Version before 2.0.0
+		*Version before 1.0.0
 		   REPLACE;
 		    ALL;
 		    cType WITH ICASE(cType=='D','d',cType=='d','D',cType)
@@ -3476,14 +3437,11 @@ DEFINE CLASS cusstorage AS custom 		&& The stuff that does the work.
 		
 		  ENDIF &&FOUND()
 		
-		  ALTER TABLE (m.tcFile) ADD COLUMN cFile2 c(240)
-		
 		  USE IN SELECT('Storage')
 		  USE (m.tcFile) ALIAS Storage IN SELECT('Storage')
 		
 		 CASE m.lnResult=1
-		*table is of old version
-		*update added here ....
+		*table is of new version
 		  ?"Bin2Text"
 		  ?"Storage table is not fitting to this version. Expected: "+dcB2T_Verno+", found: "+cUniqueId
 		  ?'Table: '+DBF('Storage')
@@ -3492,7 +3450,8 @@ DEFINE CLASS cusstorage AS custom 		&& The stuff that does the work.
 		  RETURN NIL
 		
 		 CASE m.lnResult=2
-		*table is of new version
+		*table is of old version
+		*update added here ....
 		  ?"Bin2Text"
 		  ?"Storage table is not fitting to this version. Expected: "+dcB2T_Verno+", found: "+cUniqueId
 		  ?'Table: '+DBF('Storage')
@@ -3584,20 +3543,17 @@ DEFINE CLASS cusstorage AS custom 		&& The stuff that does the work.
 		LOCAL;
 		 lcKey     AS CHARACTER,;
 		 lcValue   AS CHARACTER,;
-		 lcValue2  AS CHARACTER,;
 		 loSetting AS EMPTY
 		
 		FOR EACH loSetting IN toSettings FOXOBJECT  
 		
 		 lcKey    = m.loSetting.gcUniqueId
 		 lcValue  = m.loSetting.gcFile
-		 lcValue2 = m.loSetting.gcFile2
 		
 		 _SCREEN.ADDPROPERTY(m.lcKey,m.lcValue)
 		
 		 UPDATE cur1 SET;
 		  cFile    = m.lcValue,;
-		  cFile2   = m.lcValue2,;
 		  iDirty   = 0,;
 		  tLastUse = DATETIME();
 		  FROM (m.tcStorage) AS cur1;
@@ -3606,9 +3562,9 @@ DEFINE CLASS cusstorage AS custom 		&& The stuff that does the work.
 		
 		 IF _TALLY=0 THEN
 		  INSERT INTO (m.tcStorage);
-		   (cType, cFile, cFile2, cUniqueId, iDirty, tLastUse);
+		   (cType, cFile, cUniqueId, iDirty, tLastUse);
 		   VALUES;
-		   (m.tcType, m.lcValue, m.lcValue2, m.lcKey, 0, DATETIME())
+		   (m.tcType, m.lcValue, m.lcKey, 0, DATETIME())
 		 ENDIF &&_TALLY=0
 		ENDFOR &&loSetting 
 		
@@ -4062,7 +4018,6 @@ DEFINE CLASS cusstorage AS custom 		&& The stuff that does the work.
 		  SELECT;
 		   m.tcType AS cType,;
 		   CAST(m.tcFile AS c(240)) AS cFile,;
-		   SPACE(240)    AS cFile2,;
 		   Cur2.cObjName,;
 		   Cur2.cUniqueId,;
 		   CAST(m.lnDirty AS I) AS iDirty,;

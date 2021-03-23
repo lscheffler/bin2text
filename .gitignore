@@ -57,7 +57,8 @@
 #!/docs/**/*.png
 #!/docs/**/*.css
 
-!/docs/*.htm*
+!/docs/*.htm
+!/docs/*.html
 !/docs/*.js
 !/docs/*.gif
 !/docs/*.png
@@ -65,7 +66,8 @@
 !/Doku/*.pdm*
 !/Doku/Source/*.gif
 !/Doku/Source/*.png
-!/Doku/Source/*.htm*
+!/Doku/Source/*.htm
+!/Doku/Source/*.html
 #/Doku/**/*.**.bak
 
 #exclude special

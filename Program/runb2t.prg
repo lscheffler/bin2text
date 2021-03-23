@@ -2030,7 +2030,7 @@ FUNCTION Convert_File_2Txt  	&&Runs FoxBin2Prg for a single file or vcx/class to
    ENDIF &&m.llReturn
   ENDIF &&_SCREEN.glInfo
 ******
-SET STEP ON 
+
   llReturn = m.llReturn AND _SCREEN.frmB2T_Envelop.cusB2T.Process_Bin2Txt(@laFiles,"",.F.,.T.,m.loFB2T_Setting)
 
   loFB2T_Setting = .NULL.

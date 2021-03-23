@@ -83,13 +83,14 @@ DEFINE CLASS frminterface AS form 		&& Just to create an interface as well as a 
 
 	ADD OBJECT 'chkAutoCommit' AS checkbox WITH ;
 		Alignment = 0, ;
+		Anchor = 4, ;
 		Caption = "", ;
 		Height = 17, ;
 		Left = 119, ;
 		Name = "chkAutoCommit", ;
-		TabIndex = 17, ;
+		TabIndex = 22, ;
 		ToolTipText = 'Commit with message "Timestamp" without message edit. ', ;
-		Top = 180, ;
+		Top = 460, ;
 		Width = 16
 		*< END OBJECT: BaseClass="checkbox" />
 
@@ -100,7 +101,7 @@ DEFINE CLASS frminterface AS form 		&& Just to create an interface as well as a 
 		Left = 119, ;
 		Name = "chkDBC", ;
 		TabIndex = 10, ;
-		ToolTipText = "Convert all files or only changed files. Only for Bin to Text.", ;
+		ToolTipText = "Convert tables of Datatbases.", ;
 		Top = 102, ;
 		Width = 16
 		*< END OBJECT: BaseClass="checkbox" />
@@ -119,25 +120,27 @@ DEFINE CLASS frminterface AS form 		&& Just to create an interface as well as a 
 
 	ADD OBJECT 'chkGit_PJX' AS checkbox WITH ;
 		Alignment = 0, ;
+		Anchor = 4, ;
 		Caption = "", ;
 		Height = 17, ;
 		Left = 119, ;
 		Name = "chkGit_PJX", ;
-		TabIndex = 22, ;
+		TabIndex = 27, ;
 		ToolTipText = "Include pjx and project hook into auto git commit run.", ;
-		Top = 228, ;
+		Top = 508, ;
 		Width = 16
 		*< END OBJECT: BaseClass="checkbox" />
 
 	ADD OBJECT 'chkUseBash' AS checkbox WITH ;
 		Alignment = 0, ;
+		Anchor = 4, ;
 		Caption = "", ;
 		Height = 17, ;
 		Left = 258, ;
 		Name = "chkUseBash", ;
-		TabIndex = 19, ;
+		TabIndex = 24, ;
 		ToolTipText = "Run bash as shell for git commands.", ;
-		Top = 180, ;
+		Top = 460, ;
 		Width = 16
 		*< END OBJECT: BaseClass="checkbox" />
 
@@ -159,8 +162,8 @@ DEFINE CLASS frminterface AS form 		&& Just to create an interface as well as a 
 		Height = 27, ;
 		Left = 94, ;
 		Name = "cmdDel", ;
-		TabIndex = 25, ;
-		Top = 277, ;
+		TabIndex = 17, ;
+		Top = 184, ;
 		Width = 84
 		*< END OBJECT: BaseClass="commandbutton" />
 
@@ -197,8 +200,8 @@ DEFINE CLASS frminterface AS form 		&& Just to create an interface as well as a 
 		Height = 27, ;
 		Left = 5, ;
 		Name = "cmdNew", ;
-		TabIndex = 24, ;
-		Top = 277, ;
+		TabIndex = 16, ;
+		Top = 184, ;
 		Width = 84
 		*< END OBJECT: BaseClass="commandbutton" />
 
@@ -221,8 +224,8 @@ DEFINE CLASS frminterface AS form 		&& Just to create an interface as well as a 
 		Height = 27, ;
 		Left = 183, ;
 		Name = "cmdPick", ;
-		TabIndex = 26, ;
-		Top = 277, ;
+		TabIndex = 18, ;
+		Top = 184, ;
 		Width = 27
 		*< END OBJECT: BaseClass="commandbutton" />
 
@@ -243,8 +246,8 @@ DEFINE CLASS frminterface AS form 		&& Just to create an interface as well as a 
 		Height = 214, ;
 		Left = 5, ;
 		Name = "grdList", ;
-		TabIndex = 27, ;
-		Top = 311, ;
+		TabIndex = 19, ;
+		Top = 218, ;
 		Width = 584
 		*< END OBJECT: BaseClass="grid" />
 
@@ -262,13 +265,14 @@ DEFINE CLASS frminterface AS form 		&& Just to create an interface as well as a 
 
 	ADD OBJECT 'lblAutoCommit' AS label WITH ;
 		Alignment = 1, ;
+		Anchor = 4, ;
 		Caption = "Auto commit", ;
 		Height = 17, ;
 		Left = 6, ;
 		Name = "lblAutoCommit", ;
-		TabIndex = 16, ;
+		TabIndex = 21, ;
 		ToolTipText = 'Commit with message "Timestamp" without message edit. ', ;
-		Top = 180, ;
+		Top = 460, ;
 		Width = 108
 		*< END OBJECT: BaseClass="label" />
 
@@ -298,52 +302,55 @@ DEFINE CLASS frminterface AS form 		&& Just to create an interface as well as a 
 
 	ADD OBJECT 'lblGit' AS label WITH ;
 		Alignment = 2, ;
+		Anchor = 4, ;
 		AutoSize = .T., ;
 		Caption = "  git  ", ;
 		FontBold = .T., ;
 		Height = 17, ;
 		Left = 286, ;
 		Name = "lblGit", ;
-		TabIndex = 15, ;
-		Top = 160, ;
+		TabIndex = 20, ;
+		Top = 440, ;
 		Width = 28
 		*< END OBJECT: BaseClass="label" />
 
 	ADD OBJECT 'lblGit_act' AS label WITH ;
 		Alignment = 2, ;
+		Anchor = 4, ;
 		AutoSize = .T., ;
 		Caption = "  git \<commit active (project)  ", ;
 		FontBold = .T., ;
 		Height = 17, ;
 		Left = 219, ;
 		Name = "lblGit_act", ;
-		TabIndex = 20, ;
-		Top = 209, ;
+		TabIndex = 25, ;
+		Top = 489, ;
 		Width = 162
 		*< END OBJECT: BaseClass="label" />
 
 	ADD OBJECT 'lblGit_All' AS label WITH ;
 		Alignment = 2, ;
 		AutoSize = .T., ;
-		Caption = "  git commit all (projects)", ;
+		Caption = "process all projects", ;
 		FontBold = .T., ;
 		Height = 17, ;
 		Left = 229, ;
 		Name = "lblGit_All", ;
-		TabIndex = 23, ;
-		Top = 253, ;
-		Width = 142
+		TabIndex = 15, ;
+		Top = 160, ;
+		Width = 115
 		*< END OBJECT: BaseClass="label" />
 
 	ADD OBJECT 'lblGit_PJX' AS label WITH ;
 		Alignment = 1, ;
+		Anchor = 4, ;
 		Caption = "Include pjx", ;
 		Height = 17, ;
 		Left = 14, ;
 		Name = "lblGit_PJX", ;
-		TabIndex = 21, ;
+		TabIndex = 26, ;
 		ToolTipText = "Include pjx and project hook into auto git commit run.", ;
-		Top = 228, ;
+		Top = 508, ;
 		Width = 100
 		*< END OBJECT: BaseClass="label" />
 
@@ -382,31 +389,34 @@ DEFINE CLASS frminterface AS form 		&& Just to create an interface as well as a 
 
 	ADD OBJECT 'lblUseBash' AS label WITH ;
 		Alignment = 1, ;
+		Anchor = 4, ;
 		Caption = "Bash", ;
 		Height = 17, ;
 		Left = 145, ;
 		Name = "lblUseBash", ;
-		TabIndex = 18, ;
+		TabIndex = 23, ;
 		ToolTipText = "Run bash as shell for git commands.", ;
-		Top = 180, ;
+		Top = 460, ;
 		Width = 108
 		*< END OBJECT: BaseClass="label" />
 
 	ADD OBJECT 'Shape1' AS shape WITH ;
+		Anchor = 4, ;
 		Height = 3, ;
 		Left = 5, ;
 		Name = "Shape1", ;
 		SpecialEffect = 0, ;
-		Top = 167, ;
+		Top = 447, ;
 		Width = 590
 		*< END OBJECT: BaseClass="shape" />
 
 	ADD OBJECT 'Shape2' AS shape WITH ;
+		Anchor = 4, ;
 		Height = 3, ;
 		Left = 5, ;
 		Name = "Shape2", ;
 		SpecialEffect = 0, ;
-		Top = 215, ;
+		Top = 495, ;
 		Width = 590
 		*< END OBJECT: BaseClass="shape" />
 
@@ -415,7 +425,7 @@ DEFINE CLASS frminterface AS form 		&& Just to create an interface as well as a 
 		Left = 5, ;
 		Name = "Shape3", ;
 		SpecialEffect = 0, ;
-		Top = 259, ;
+		Top = 166, ;
 		Width = 590
 		*< END OBJECT: BaseClass="shape" />
 
@@ -550,12 +560,24 @@ DEFINE CLASS frminterface AS form 		&& Just to create an interface as well as a 
 		LOCAL;
 		 lcBranch  AS STRING,;
 		 lnAnchor1 AS NUMBER,;
-		 lnAnchor2 AS NUMBER
+		 lnAnchor2 AS NUMBER,;
+		 lnAnchor3 AS NUMBER
 		
 		lcBranch = GetBranch()
 		THIS.CAPTION = 'Bin2Text v'+dcB2T_Verno+'  Bin <> Text'
+		
+		lnAnchor1 = THIS.grdList.ANCHOR
+		lnAnchor2 = THIS.cmdOK.ANCHOR
+		lnAnchor3 = THIS.cmdCancel.ANCHOR
+		
+		THIS.grdList.ANCHOR   = 0
+		THIS.cmdOK.ANCHOR     = 0
+		THIS.cmdCancel.ANCHOR = 0
+		
 		IF EMPTY(m.lcBranch) THEN
-		 THIS.lblGit.CAPTION = '  not gited  '
+		 THIS.lblGit_All.CAPTION = '  process all projects  '
+		 THIS.lblGit.CAPTION     = '  not gited  '
+		
 		 THIS.Shape1.VISIBLE = .T.
 		 THIS.lblGit.VISIBLE = .T.
 		
@@ -571,28 +593,15 @@ DEFINE CLASS frminterface AS form 		&& Just to create an interface as well as a 
 		 THIS.lblGit_PJX.VISIBLE = .F.
 		 THIS.chkGit_PJX.VISIBLE = .F.
 		
-		 THIS.Shape3.VISIBLE     = .F.
-		 THIS.lblGit_All.VISIBLE = .F.
-		 THIS.cmdNew.VISIBLE     = .F.
-		 THIS.cmdDel.VISIBLE     = .F.
-		 THIS.cmdPick.VISIBLE    = .F.
-		 THIS.grdList.VISIBLE    = .F.
-		
-		 lnAnchor1 = THIS.cmdOK.ANCHOR
-		 lnAnchor2 = THIS.cmdCancel.ANCHOR
-		
-		 THIS.cmdOK.ANCHOR     = 0
-		 THIS.cmdOK.TOP        = THIS.chkUseBash.TOP
-		 THIS.cmdCancel.ANCHOR = 0
-		 THIS.cmdCancel.TOP    = THIS.chkUseBash.TOP
+		 THIS.cmdOK.TOP        = THIS.Shape1.TOP
+		 THIS.cmdCancel.TOP    = THIS.Shape1.TOP
 		
 		 THIS.MINHEIGHT = THIS.cmdCancel.TOP+THIS.cmdCancel.HEIGHT+5
 		 THIS.HEIGHT    = THIS.MINHEIGHT
 		
-		 THIS.cmdOK.ANCHOR     = m.lnAnchor1
-		 THIS.cmdCancel.ANCHOR = m.lnAnchor2
 		ELSE  &&EMPTY(m.lcBranch)
-		 THIS.lblGit.CAPTION = '  git - on branch '+m.lcBranch+'  '
+		 THIS.lblGit_All.CAPTION = '  process / commit all projects  '
+		 THIS.lblGit.CAPTION     = '  git - on branch '+m.lcBranch+'  '
 		
 		 THIS.Shape1.VISIBLE = .T.
 		 THIS.lblGit.VISIBLE = .T.
@@ -618,6 +627,7 @@ DEFINE CLASS frminterface AS form 		&& Just to create an interface as well as a 
 		  THIS.grdList.VISIBLE    = .T.
 		
 		 ELSE  &&USED('curBin2Text')
+		
 		  THIS.Shape3.VISIBLE     = .F.
 		  THIS.lblGit_All.VISIBLE = .F.
 		  THIS.cmdNew.VISIBLE     = .F.
@@ -625,22 +635,18 @@ DEFINE CLASS frminterface AS form 		&& Just to create an interface as well as a 
 		  THIS.cmdPick.VISIBLE    = .F.
 		  THIS.grdList.VISIBLE    = .F.
 		
-		  lnAnchor1 = THIS.cmdOK.ANCHOR
-		  lnAnchor2 = THIS.cmdCancel.ANCHOR
-		
-		  THIS.cmdOK.ANCHOR     = 0
 		  THIS.cmdOK.TOP        = THIS.Shape3.TOP
-		  THIS.cmdCancel.ANCHOR = 0
 		  THIS.cmdCancel.TOP    = THIS.Shape3.TOP
 		
 		  THIS.MINHEIGHT = THIS.cmdCancel.TOP+THIS.cmdCancel.HEIGHT+5
 		  THIS.HEIGHT    = .MINHEIGHT
 		
-		  THIS.cmdOK.ANCHOR     = m.lnAnchor1
-		  THIS.cmdCancel.ANCHOR = m.lnAnchor2
-		
 		 ENDIF &&USED('curBin2Text')
 		ENDIF &&EMPTY(m.lcBranch)
+		
+		THIS.grdList.ANCHOR   = m.lnAnchor1
+		THIS.cmdOK.ANCHOR     = m.lnAnchor2
+		THIS.cmdCancel.ANCHOR = m.lnAnchor3
 		
 		RETURN DODEFAULT(@tnStyle)
 		

@@ -23,7 +23,7 @@
 <body>
  <h1>Change log</h1>
 
- <h2>Version 2.0.0</h2>
+ <h2>Version 1.0.0</h2>
  <p>Stable release.</p>
  <table border="1" cellspacing="0">
   <thead>
@@ -33,9 +33,14 @@
   </thead>
   <tbody>
   <tr>
-   <td>CDX</td>
+  	<td colspan="2">
+  		Enhancements
+	 </td>
+  </tr>
+  <tr>
+   <td>CDX / DBX</td>
    <td>
-   	<p>Changes to tags will force processing whole DBF.</p>
+   	<p>Changes to tags will force processing whole DBF / DBC.</p>
    </td>
   </tr>
   <tr>
@@ -48,7 +53,7 @@
    <td>Additional files</td>
    <td>
    	<p>
-   		For multi project operations (this means any project based operation not for active project), a list of files will be included.
+   		For multi project operations (this means any all-project based operation not for active project), a list of files will be included.
    	</p>
    	<p>
    		Intended to process databases outside the project.
@@ -81,63 +86,6 @@
    </td>
   </tr>
   <tr>
-  	<td colspan="2">
-  		Minor changes
-	 </td>
-  </tr>
-  <tr>
-   <td>Branch on caption</td>
-   <td>
-   	<p>GetBranch will write active branch to caption.</p>
-   </td>
-  </tr>
-  <tr>
-   <td>Text output</td>
-   <td>
-   	<p>Improved messages.</p>
-   </td>
-  </tr>
-  <tr>
-   <td>Documentation</td>
-   <td>
-   	<p>
-   		Included FoxBin2Prg <a href="https://github.com/lscheffler/foxbin2prg" target="_blank">fork</a>.
-   	</p>
-   	<p>
-   		Reworked to reflect changes.
-   	</p>
-   </td>
-  </tr>
-  <tr>
-  	<td colspan="2">
-  		Bug fixes
-	 </td>
-  </tr>
-  <tr>
-   <td>FoxBin2Prg config</td>
-   <td>
-   	Use the FoxBin2Prg setting of input files folder for processing.
-   </td>
-  </tr>
- </tbody>
-</table>
-
- <h2>Version 1.0.0</h2>
- <p>Stable release.</p>
- <table border="1" cellspacing="0">
-  <thead>
-   <tr>
-    <td>Item</td><td>Description</td>
-   </tr>
-  </thead>
-  <tbody>
-  <tr>
-   <td>bash for commit</td>
-   <td>
-   	<p>The commit menu item opens bash in a way that let it work like bash and not like cmd.</p>
-   </td>
-  </tr>
-  <tr>
    <td>Selecteble GUI</td>
    <td>
    	<p>The open GUI menu item could run any program.</p>
@@ -157,25 +105,78 @@
   </tr>
   <tr>
   	<td colspan="2">
+  		Bug fixes
+	 </td>
+  </tr>
+  <tr>
+   <td>FoxBin2Prg config</td>
+   <td>
+   	Use the FoxBin2Prg setting of input files folder for processing.
+   </td>
+  </tr>
+  <tr>
+  	<td colspan="2">
   		Minor changes
 	 </td>
   </tr>
   <tr>
-   <td>Documentation</td>
+   <td>Branch on caption</td>
    <td>
-   	<p>Link to VFPX to display latest version of <i>git</i> tested.</p>
+   	<p>GetBranch will write active branch to caption.</p>
    </td>
   </tr>
   <tr>
-   <td>Documentation</td>
+   <td>Text output</td>
    <td>
-   	<p>Links to github updated.</p>
+   	<p>Improved messages.</p>
    </td>
   </tr>
   <tr>
    <td>Active branch</td>
    <td>
    	<p>The branch active is printed on screen after many operations.</p>
+   </td>
+  </tr>
+  <tr>
+  	<td colspan="2">
+  		Documentation
+	 </td>
+  </tr>
+  <tr>
+   <td></td>
+   <td>
+   	<p>
+   	 Moved docu to better fit github standards.
+   	</p>
+   </td>
+  </tr>
+  <tr>
+   <td></td>
+   <td>
+   	<p>
+   	 Better integration into <a href="https://github.com/VFPX/Thor" title="Thor at github" target="_blank">Thor</a>.
+   	</p>
+   </td>
+  </tr>
+
+  <tr>
+   <td></td>
+   <td>
+   	<p>
+   		Reworked to reflect changes to <a href="https://github.com/fdbozzo/foxbin2prg" title="FoxBin2Prg at github" target="_blank">FoxBin2Prg</a>.
+   	</p>
+   </td>
+  </tr>
+  <tr>
+   <td></td>
+   <td>
+   	<p>Link to VFPX to display latest version of <i>git</i> tested.</p>
+   </td>
+  </tr>
+  <tr>
+   <td></td>
+   <td>
+   	<p>Links to github updated.</p>
    </td>
   </tr>
  </tbody>
