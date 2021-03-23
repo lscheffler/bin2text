@@ -1,0 +1,62 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="de" lang="de">
+<head>
+<title>Method set_ of class cusenvironment</title>
+<meta content="text/html; charset=windows-1252" http-equiv="Content-Type" />
+<meta name="Generator" content="Project Documenting Machine" />
+<meta name="Version" content="1.3.1" />
+<link rel="stylesheet" href="../../css/foxw.css" type="text/css" />
+<link rel="stylesheet" href="../../css/sc.css" type="text/css" />
+<link rel="stylesheet" href="../../repository/diamp_pdm_ab.css" type="text/css" />
+<link rel="stylesheet" href="../../repository/pdm_ab.css" type="text/css" />
+<link rel="stylesheet" href="../../repository/pdm_ab_notes.css" type="text/css" />
+<script src="../../js/pdm.js" language="JavaScript" type="text/javascript"></script>
+<script src="../../repository/pdm_ab.js" language="JavaScript" type="text/javascript"></script>
+</head>
+<body>
+<div class="diaxp_mhead">set_ Method</div>
+<div class="diaxp_mbody_class">
+
+<table class="clear_table">
+ <tbody>
+  <tr><td>Class: </td><td><a href="cls.cusenvironment.htm" title="Skip to class cusenvironment">cusenvironment</a></td></tr>
+  <tr><td>Description:</td><td>Stellt alle SET-Befehle ein.</td></tr>
+ </tbody>
+</table>
+</div>
+<div class="diaxp_mbody">
+ <div class="SC">
+  <img onclick="ExpandSC('SP_4',-1);"class="imgEC" src="../../imgs/dotab.gif" alt="Expand/Collapse source code of procedure set_" id="IMG_SP_4" />
+  <span ondblclick="ExpandSC('SP_4',-1);" class="SCCaption"><a name="cusenvironment">Source Code</a></span>
+  <div ondblclick="ExpandSC('SP_4',-1);" class="SCE" style="display: none;" id="TX_SP_4">
+<!-- Code Begin -->
+<pre class="PDMCODE PDMNor" ><span class='PDMCnt'>   1</span> <span class='PDMInd'>  </span> <span class='PDMResK'>LPARAMETERS</span><span class='PDMOper'>;</span>
+<span class='PDMCnt'>   2</span> <span class='PDMInd'> 1</span>  <span class='PDMVar'>tnSet</span>
+<span class='PDMCnt'>   3</span> <span class='PDMInd'>  </span> 
+<span class='PDMCnt'>   4</span> <span class='PDMInd'>  </span> <span class='PDMResK'>IF</span> <span class='PDMResF'>PCOUNT</span><span class='PDMOper'>(</span><span class='PDMOper'>)</span><span class='PDMOper'>=</span><span class='PDMLit'>0</span> <span class='PDMOper'>OR</span> <span class='PDMResF'>VARTYPE</span><span class='PDMOper'>(</span><span class='PDMVar'>tnSet</span><span class='PDMOper'>)</span><span class='PDMOper'>#</span><span class='PDMStr'>'N'</span> <span class='PDMResK'>THEN</span>
+<span class='PDMCnt'>   5</span> <span class='PDMInd'> 1</span>  <span class='PDMVar'>tnSet</span> <span class='PDMOper'>=</span> <span class='PDMLit'>2</span><span class='PDMOper'>^</span><span class='PDMLit'>0</span>
+<span class='PDMCnt'>   6</span> <span class='PDMInd'>  </span> <span class='PDMResK'>ENDIF</span> <span class='PDMCom'>&amp;&amp;PCOUNT()=0 OR VARTYPE(tnSet)#'N'</span>
+<span class='PDMCnt'>   7</span> <span class='PDMInd'>  </span> <span class='PDMCom'>*-- SET- und ON-Befehle einstellen</span>
+<span class='PDMCnt'>   8</span> <span class='PDMInd'>  </span> <span class='PDMResK'>WITH</span> <span class='PDMResK'>THIS</span>
+<span class='PDMCnt'>   9</span> <span class='PDMInd'> 1</span>  <span class='PDMResK'>IF</span> <span class='PDMResF'>BITAND</span><span class='PDMOper'>(</span><span class='PDMVar'>m</span><span class='PDMOper'>.</span><span class='PDMVar'>tnSet</span><span class='PDMOper'>,</span><span class='PDMLit'>2</span><span class='PDMOper'>^</span><span class='PDMLit'>0</span><span class='PDMOper'>)</span><span class='PDMOper'>=</span><span class='PDMLit'>2</span><span class='PDMOper'>^</span><span class='PDMLit'>0</span> <span class='PDMResK'>THEN</span>
+<span class='PDMCnt'>  10</span> <span class='PDMInd'> 2</span>   <span class='PDMOper'>.</span><span class='PDMVar'>Set_Private</span><span class='PDMOper'>(</span><span class='PDMOper'>)</span>
+<span class='PDMCnt'>  11</span> <span class='PDMInd'> 1</span>  <span class='PDMResK'>ENDIF</span> <span class='PDMCom'>&amp;&amp;BITAND(m.tnSet,2^0)=2^0</span>
+<span class='PDMCnt'>  12</span> <span class='PDMInd'> 1</span>  <span class='PDMResK'>IF</span> <span class='PDMResF'>BITAND</span><span class='PDMOper'>(</span><span class='PDMVar'>m</span><span class='PDMOper'>.</span><span class='PDMVar'>tnSet</span><span class='PDMOper'>,</span><span class='PDMLit'>2</span><span class='PDMOper'>^</span><span class='PDMLit'>1</span><span class='PDMOper'>)</span><span class='PDMOper'>=</span><span class='PDMLit'>2</span><span class='PDMOper'>^</span><span class='PDMLit'>1</span> <span class='PDMResK'>THEN</span>
+<span class='PDMCnt'>  13</span> <span class='PDMInd'> 2</span>   <span class='PDMOper'>.</span><span class='PDMVar'>Set_Global</span><span class='PDMOper'>(</span><span class='PDMOper'>)</span>
+<span class='PDMCnt'>  14</span> <span class='PDMInd'> 1</span>  <span class='PDMResK'>ENDIF</span> <span class='PDMCom'>&amp;&amp;BITAND(m.tnSet,2^1)=2^1</span>
+<span class='PDMCnt'>  15</span> <span class='PDMInd'>  </span> <span class='PDMResK'>ENDWITH</span> <span class='PDMCom'>&amp;&amp;THIS</span>
+<span class='PDMCnt'>  16</span> <span class='PDMInd'>  </span> </pre>
+ <!-- Code End -->
+  </div>
+ </div>
+</div>
+<div class="diaxp_mfoot"></div>
+<script language="JavaScript" type="text/javascript">
+lo=document.getElementById("TX_SP_4");
+lo.XType="SourceCode";
+lo.Dir="../../imgs/";
+
+
+</script>
+</body>
+</html>

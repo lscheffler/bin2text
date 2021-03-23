@@ -18,8 +18,8 @@
 !*.cur
 
 #programms
-!*.prg
-!*.fpw
+!/*.prg
+!*.fpwa
 
 #header
 !*.h
@@ -49,15 +49,6 @@
 #diverse
 !*.reg
 !/FoxBin2prg.cfg
-#Doku
-!/Doku/**/*.htm
-!/Doku/**/*.html
-!/Doku/**/*.js
-!/Doku/**/*.gif
-!/Doku/**/*.png
-!/Doku/**/*.css
-!/Doku/*.pdm*
-#/Doku/**/*.**.bak
 
 #exclude special
 foxuser_9.*
@@ -69,14 +60,39 @@ include/projsub.h
 
 #exclude github
 !*.md
-!/bin2text.app
 !/content/**/*.gif
 !/content/**/*.png
 !/content/**/*.jpg
+
+#ThorUpdater
+!/ThorUpdater/*.prg
+!/ThorUpdater/*.zip
+!/ThorUpdater/*.txt
+!/ThorUpdater/*.ps1
 
 #nix von hier
 default/
 temp/
 tmp/
+/*.dbf
+/*.cdx
+/*.fpt
 
+!*.dbc
+!*.dc[tx]
+
+/IDE_Bin2Text.prg
+Bin2Txt.*
 bin2txt.*
+
+#Doku
+!/docs/**/*.*
+!Doku/*.pdm*
+!Doku/Source/*.gif
+!Doku/Source/*.png
+!Doku/Source/*.htm
+!Doku/Source/*.html
+#/Doku/**/*.**.bak
+
+#reinclude
+!docs/classes/bin_2_text.vcx/*.*.htm*

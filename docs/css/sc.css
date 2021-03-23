@@ -1,0 +1,31 @@
+.PDMCODE {
+font-family: "Monospace","Courier New"; font-size:10pt;
+color:#000000;
+padding: 0.5em 0.5em 0.5em 0.5em;
+margin: 0px;
+}
+
+.PDMEXPR {
+font-family: "Monospace","Courier New"; font-size:10pt;
+color:#000000;
+border-color:#000000;
+border-width:1px;
+border-style:solid;
+padding:1px;
+margin: 0px;
+}
+
+.PDMCnt {font-family:"Monospace","Courier New";font-size:0.9em;font-weight:bold; color:#000000;}
+.PDMInd {font-family:"Monospace","Courier New";font-size:0.9em;font-weight:bold; color:#000000;}
+.PDMCom {font-family:"Monospace","Courier New";font-size:0.9em; font-weight:bold; font-style:italic; color:#008000; background-color:#FFFFFF;}
+.PDMRes {font-family:"Monospace","Courier New";font-size:0.9em; font-weight:bold; color:#000080;}
+.PDMResK {font-family:"Monospace","Courier New";font-size:0.9em; font-weight:bold; color:#000080;}
+.PDMResF {font-family:"Monospace","Courier New";font-size:0.9em; font-weight:bold; color:#000080;}
+.PDMResP {font-family:"Monospace","Courier New";font-size:0.9em; font-weight:bold; color:#000080;}
+.PDMResM {font-family:"Monospace","Courier New";font-size:0.9em; font-weight:bold; color:#000080;}
+.PDMResE {font-family:"Monospace","Courier New";font-size:0.9em; font-weight:bold; color:#000080;}
+.PDMVar {font-family:"Monospace","Courier New";font-size:0.9em; color:#0000FF;}
+.PDMStr {font-family:"Monospace","Courier New";font-size:0.9em; font-weight:bold; color:#FF0000;}
+.PDMLit {font-family:"Monospace","Courier New";font-size:0.9em; color:#FF0000;}
+.PDMNor {font-family:"Monospace","Courier New";font-size:0.9em; color:#FF00FF;}
+.PDMOper {font-family:"Monospace","Courier New";font-size:0.9em; font-weight:bold; color:#000000;}

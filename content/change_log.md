@@ -2,7 +2,30 @@
 ## Change log of Bin 2 Text Extension
 This page gives a brief overview of changes to the [Bin 2 Text Extension](https://github.com/lscheffler/bin2text).
 
-A complete list of changes is available on the offline documentation via **local folder** _Bin2Text\Doku\pdm\index.htm_.
+A complete list of changes is available on the offline documentation via **local folder** _docu/index.htm_.
+
+---
+### Version 1.0.0
+Stable release.
+* Changes to tags will force processing whole DBF / DBC.
+* Option to process the table files of a database.
+* For multi project operations (this means any all-project based operation not for active project), a list of files will be included.
+* Reworked settings form
+* Option to run all files of directories.
+* better distinction between 32bit and 64bit for calling git 
+* recognition of installation of _git for windows_ per user. (not in Program Files)
+* Selectable GUI, The open GUI menu item could run any program.
+* Improved shell, The shell used for _git-commit_ and to display shell could be selected between _bash_ and _cmd_
+* Better call for _git-commit_. Opens _git-commit_ editor window in correct shell.
+* FoxBin2Prg config, Use the FoxBin2Prg setting of input files folder for processing.
+* Branch on caption, GetBranch will write active branch to caption.
+* Text output, Improved messages.
+* Active branch, The branch active is printed on screen after many operations.
+* Moved docu to better fit github standards.
+* Better integration into [Thor](https://github.com/VFPX/Thor).
+* Reworked to reflect changes to [FoxBin2Prg](https://github.com/fdbozzo/foxbin2prg).
+* Link to VFPX to display latest version of _git_ tested.
+* Links to github updated.
 
 ---
 ### Version 0.13.2

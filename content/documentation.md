@@ -21,6 +21,6 @@ See [Bin 2 Text Change Log](change_log.md) for a short change list.
 
 ---
 ###  Documentation
-Help and documentation is in the **local folder** _Bin2Text\Doku\pdm\index.htm_.
+Help and documentation is in the **local folder** _docu/index.htm_.
 
 Basic information is on section _How to get it to work_.

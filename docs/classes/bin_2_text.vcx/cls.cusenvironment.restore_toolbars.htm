@@ -1,0 +1,98 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="de" lang="de">
+<head>
+<title>Method restore_toolbars of class cusenvironment</title>
+<meta content="text/html; charset=windows-1252" http-equiv="Content-Type" />
+<meta name="Generator" content="Project Documenting Machine" />
+<meta name="Version" content="1.3.1" />
+<link rel="stylesheet" href="../../css/foxw.css" type="text/css" />
+<link rel="stylesheet" href="../../css/sc.css" type="text/css" />
+<link rel="stylesheet" href="../../repository/diamp_pdm_ab.css" type="text/css" />
+<link rel="stylesheet" href="../../repository/pdm_ab.css" type="text/css" />
+<link rel="stylesheet" href="../../repository/pdm_ab_notes.css" type="text/css" />
+<script src="../../js/pdm.js" language="JavaScript" type="text/javascript"></script>
+<script src="../../repository/pdm_ab.js" language="JavaScript" type="text/javascript"></script>
+</head>
+<body>
+<div class="diaxp_mhead">restore_toolbars Method</div>
+<div class="diaxp_mbody_class">
+
+<table class="clear_table">
+ <tbody>
+  <tr><td>Class: </td><td><a href="cls.cusenvironment.htm" title="Skip to class cusenvironment">cusenvironment</a></td></tr>
+  <tr><td>Description:</td><td>Stellt die Standard-Toolbars wieder her.</td></tr>
+ </tbody>
+</table>
+</div>
+<div class="diaxp_mbody">
+ <div class="SC">
+  <img onclick="ExpandSC('SP_4',-1);"class="imgEC" src="../../imgs/dotab.gif" alt="Expand/Collapse source code of procedure restore_toolbars" id="IMG_SP_4" />
+  <span ondblclick="ExpandSC('SP_4',-1);" class="SCCaption"><a name="cusenvironment">Source Code</a></span>
+  <div ondblclick="ExpandSC('SP_4',-1);" class="SCE" style="display: none;" id="TX_SP_4">
+<!-- Code Begin -->
+<pre class="PDMCODE PDMNor" ><span class='PDMCnt'>   1</span> <span class='PDMInd'>  </span> <span class='PDMResK'>LPARAMETERS</span><span class='PDMOper'>;</span>
+<span class='PDMCnt'>   2</span> <span class='PDMInd'> 1</span>  <span class='PDMVar'>toObject</span>
+<span class='PDMCnt'>   3</span> <span class='PDMInd'>  </span> 
+<span class='PDMCnt'>   4</span> <span class='PDMInd'>  </span> <span class='PDMResK'>IF</span> <span class='PDMResP'>APPLICATION</span><span class='PDMOper'>.</span><span class='PDMVar'>STARTMODE</span><span class='PDMOper'>=</span><span class='PDMLit'>0</span> <span class='PDMResK'>THEN</span>
+<span class='PDMCnt'>   5</span> <span class='PDMInd'> 1</span>  <span class='PDMResK'>LOCAL</span><span class='PDMOper'>;</span>
+<span class='PDMCnt'>   6</span> <span class='PDMInd'> 2</span>   <span class='PDMVar'>lcKeyBrd</span> <span class='PDMResK'>AS</span> <span class='PDMResK'>CHARACTER</span><span class='PDMOper'>,</span><span class='PDMOper'>;</span>
+<span class='PDMCnt'>   7</span> <span class='PDMInd'> 2</span>   <span class='PDMVar'>lnToolBar</span> <span class='PDMResK'>AS</span> <span class='PDMResK'>INTEGER</span>
+<span class='PDMCnt'>   8</span> <span class='PDMInd'>  </span> 
+<span class='PDMCnt'>   9</span> <span class='PDMInd'> 1</span>  <span class='PDMResK'>WITH</span> <span class='PDMVar'>toObject</span>
+<span class='PDMCnt'>  10</span> <span class='PDMInd'>  </span> <span class='PDMCom'>*-- Zeigt alle Visual FoxPro-Symbolleisten an, die vorher verborgen wurden</span>
+<span class='PDMCnt'>  11</span> <span class='PDMInd'>  </span> 
+<span class='PDMCnt'>  12</span> <span class='PDMInd'> 2</span>   <span class='PDMVar'>lcKeyBrd</span> <span class='PDMOper'>=</span> <span class='PDMStr'>""</span>
+<span class='PDMCnt'>  13</span> <span class='PDMInd'>  </span> 
+<span class='PDMCnt'>  14</span> <span class='PDMInd'> 2</span>   <span class='PDMResK'>FOR</span> <span class='PDMVar'>lnToolBar</span> <span class='PDMOper'>=</span> <span class='PDMLit'>1</span> <span class='PDMResK'>TO</span> <span class='PDMLit'>12</span>
+<span class='PDMCnt'>  15</span> <span class='PDMInd'> 3</span>    <span class='PDMResK'>DO</span> <span class='PDMResK'>CASE</span>
+<span class='PDMCnt'>  16</span> <span class='PDMInd'> 4</span>     <span class='PDMResK'>CASE</span> <span class='PDMResF'>INLIST</span><span class='PDMOper'>(</span><span class='PDMOper'>.</span><span class='PDMVar'>gaToolBars</span><span class='PDMOper'>(</span><span class='PDMVar'>lnToolBar</span><span class='PDMOper'>,</span><span class='PDMLit'>1</span><span class='PDMOper'>)</span><span class='PDMOper'>,</span><span class='PDMVar'>dcTB_DEBUGGER_LOC</span><span class='PDMOper'>,</span><span class='PDMVar'>dcTB_DEBUGGER_LOC_UK</span><span class='PDMOper'>)</span><span class='PDMOper'>;</span>
+<span class='PDMCnt'>  17</span> <span class='PDMInd'> 6</span>       <span class='PDMOper'>AND</span> <span class='PDMOper'>!</span><span class='PDMOper'>(</span><span class='PDMResF'>WEXIST</span><span class='PDMOper'>(</span><span class='PDMStr'>'Visual FoxPro Debugger'</span><span class='PDMOper'>)</span><span class='PDMOper'>;</span>
+<span class='PDMCnt'>  18</span> <span class='PDMInd'> 6</span>       <span class='PDMOper'>OR</span> <span class='PDMResF'>WEXIST</span><span class='PDMOper'>(</span><span class='PDMStr'>'Trace'</span><span class='PDMOper'>)</span> <span class='PDMOper'>OR</span> <span class='PDMResF'>WEXIST</span><span class='PDMOper'>(</span><span class='PDMStr'>'Watch'</span><span class='PDMOper'>)</span> <span class='PDMOper'>OR</span> <span class='PDMResF'>WEXIST</span><span class='PDMOper'>(</span><span class='PDMStr'>'Locals'</span><span class='PDMOper'>)</span> <span class='PDMOper'>OR</span> <span class='PDMResF'>WEXIST</span><span class='PDMOper'>(</span><span class='PDMStr'>'Call Stack'</span><span class='PDMOper'>)</span> <span class='PDMOper'>OR</span> <span class='PDMResF'>WEXIST</span><span class='PDMOper'>(</span><span class='PDMStr'>'Debug Output'</span><span class='PDMOper'>)</span><span class='PDMOper'>)</span>
+<span class='PDMCnt'>  19</span> <span class='PDMInd'>  </span> <span class='PDMOper'>*</span><span class='PDMResK'>Debugger</span> <span class='PDMResK'>Toolbar</span><span class='PDMOper'>.</span> <span class='PDMVar'>Nur</span> <span class='PDMVar'>wenn</span> <span class='PDMVar'>der</span> <span class='PDMResK'>Debugger</span> <span class='PDMVar'>geöffnet</span> <span class='PDMVar'>ist</span>
+<span class='PDMCnt'>  20</span> <span class='PDMInd'> 5</span>      <span class='PDMVar'>lcKeyBrd</span> <span class='PDMOper'>=</span> <span class='PDMVar'>lcKeyBrd</span><span class='PDMOper'>+</span><span class='PDMOper'>.</span><span class='PDMVar'>gaToolBars</span><span class='PDMOper'>(</span><span class='PDMVar'>lnToolBar</span><span class='PDMOper'>,</span><span class='PDMLit'>3</span><span class='PDMOper'>)</span>
+<span class='PDMCnt'>  21</span> <span class='PDMInd'> 4</span>     <span class='PDMResK'>CASE</span> <span class='PDMOper'>.</span><span class='PDMVar'>gaToolBars</span><span class='PDMOper'>(</span><span class='PDMVar'>lnToolBar</span><span class='PDMOper'>,</span><span class='PDMLit'>4</span><span class='PDMOper'>)</span> <span class='PDMOper'>AND</span> <span class='PDMOper'>!</span><span class='PDMResF'>WEXIST</span><span class='PDMOper'>(</span><span class='PDMOper'>.</span><span class='PDMVar'>gaToolBars</span><span class='PDMOper'>(</span><span class='PDMVar'>lnToolBar</span><span class='PDMOper'>,</span><span class='PDMLit'>1</span><span class='PDMOper'>)</span><span class='PDMOper'>)</span>
+<span class='PDMCnt'>  22</span> <span class='PDMInd'> 5</span>      <span class='PDMVar'>lcKeyBrd</span> <span class='PDMOper'>=</span> <span class='PDMVar'>lcKeyBrd</span><span class='PDMOper'>+</span><span class='PDMStr'>" "</span><span class='PDMOper'>+</span><span class='PDMOper'>.</span><span class='PDMVar'>gaToolBars</span><span class='PDMOper'>(</span><span class='PDMVar'>lnToolBar</span><span class='PDMOper'>,</span><span class='PDMLit'>3</span><span class='PDMOper'>)</span>
+<span class='PDMCnt'>  23</span> <span class='PDMInd'> 4</span>     <span class='PDMResK'>CASE</span> <span class='PDMOper'>.</span><span class='PDMVar'>gaToolBars</span><span class='PDMOper'>(</span><span class='PDMVar'>lnToolBar</span><span class='PDMOper'>,</span><span class='PDMLit'>4</span><span class='PDMOper'>)</span> <span class='PDMOper'>AND</span> <span class='PDMOper'>.</span><span class='PDMVar'>gaToolBars</span><span class='PDMOper'>(</span><span class='PDMVar'>lnToolBar</span><span class='PDMOper'>,</span><span class='PDMLit'>5</span><span class='PDMOper'>)</span>
+<span class='PDMCnt'>  24</span> <span class='PDMInd'> 5</span>      <span class='PDMVar'>lcKeyBrd</span> <span class='PDMOper'>=</span> <span class='PDMVar'>lcKeyBrd</span><span class='PDMOper'>+</span><span class='PDMOper'>.</span><span class='PDMVar'>gaToolBars</span><span class='PDMOper'>(</span><span class='PDMVar'>lnToolBar</span><span class='PDMOper'>,</span><span class='PDMLit'>3</span><span class='PDMOper'>)</span>
+<span class='PDMCnt'>  25</span> <span class='PDMInd'> 5</span>      <span class='PDMResK'>ACTIVATE</span> <span class='PDMResK'>WINDOW</span> <span class='PDMOper'>(</span><span class='PDMOper'>.</span><span class='PDMVar'>gaToolBars</span><span class='PDMOper'>(</span><span class='PDMVar'>lnToolBar</span><span class='PDMOper'>,</span><span class='PDMLit'>1</span><span class='PDMOper'>)</span><span class='PDMOper'>)</span>
+<span class='PDMCnt'>  26</span> <span class='PDMInd'> 4</span>     <span class='PDMResK'>OTHERWISE</span>
+<span class='PDMCnt'>  27</span> <span class='PDMInd'> 5</span>      <span class='PDMVar'>lcKeyBrd</span> <span class='PDMOper'>=</span> <span class='PDMVar'>lcKeyBrd</span><span class='PDMOper'>+</span><span class='PDMOper'>.</span><span class='PDMVar'>gaToolBars</span><span class='PDMOper'>(</span><span class='PDMVar'>lnToolBar</span><span class='PDMOper'>,</span><span class='PDMLit'>3</span><span class='PDMOper'>)</span>
+<span class='PDMCnt'>  28</span> <span class='PDMInd'> 3</span>    <span class='PDMResK'>ENDCASE</span>
+<span class='PDMCnt'>  29</span> <span class='PDMInd'> 2</span>   <span class='PDMResK'>ENDFOR</span> <span class='PDMCom'>&amp;&amp;lnToolBar</span>
+<span class='PDMCnt'>  30</span> <span class='PDMInd'> 2</span>   <span class='PDMResK'>IF</span> <span class='PDMStr'>[ ]</span><span class='PDMOper'>$</span><span class='PDMVar'>lcKeyBrd</span> <span class='PDMResK'>THEN</span>
+<span class='PDMCnt'>  31</span> <span class='PDMInd'>  </span> <span class='PDMCom'>* lcKeyBrd = [{F10}]+"{PAUSE 2}"+[V]+"{PAUSE 5}"+[T]+lcKeyBrd+[{CTRL+W}]</span>
+<span class='PDMCnt'>  32</span> <span class='PDMInd'>  </span> 
+<span class='PDMCnt'>  33</span> <span class='PDMInd'> 3</span>    <span class='PDMVar'>oShell</span> <span class='PDMOper'>=</span> <span class='PDMResF'>CREATEOBJECT</span><span class='PDMOper'>(</span><span class='PDMStr'>"wscript.shell"</span><span class='PDMOper'>)</span>
+<span class='PDMCnt'>  34</span> <span class='PDMInd'> 3</span>    <span class='PDMVar'>oShell</span><span class='PDMOper'>.</span><span class='PDMVar'>SendKeys</span><span class='PDMOper'>(</span><span class='PDMStr'>"%"</span><span class='PDMOper'>)</span>
+<span class='PDMCnt'>  35</span> <span class='PDMInd'> 3</span>    <span class='PDMVar'>oShell</span><span class='PDMOper'>.</span><span class='PDMVar'>SendKeys</span><span class='PDMOper'>(</span><span class='PDMStr'>"vt"</span><span class='PDMOper'>)</span>
+<span class='PDMCnt'>  36</span> <span class='PDMInd'>  </span> <span class='PDMCom'>*WAIT WINDOW 'nun ists offen' TIMEOUT 5</span>
+<span class='PDMCnt'>  37</span> <span class='PDMInd'> 4</span>     <span class='PDMVar'>oShell</span><span class='PDMOper'>.</span><span class='PDMVar'>SendKeys</span><span class='PDMOper'>(</span><span class='PDMVar'>lcKeyBrd</span><span class='PDMOper'>)</span>
+<span class='PDMCnt'>  38</span> <span class='PDMInd'> 3</span>    <span class='PDMVar'>oShell</span><span class='PDMOper'>.</span><span class='PDMVar'>SendKeys</span><span class='PDMOper'>(</span><span class='PDMStr'>"^w"</span><span class='PDMOper'>)</span>
+<span class='PDMCnt'>  39</span> <span class='PDMInd'> 3</span>    <span class='PDMResK'>RELEASE</span> <span class='PDMVar'>oShell</span>
+<span class='PDMCnt'>  40</span> <span class='PDMInd'>  </span> 
+<span class='PDMCnt'>  41</span> <span class='PDMInd'>  </span> <span class='PDMCom'>* KEYBOARD lcKeyBrd CLEAR PLAIN</span>
+<span class='PDMCnt'>  42</span> <span class='PDMInd'> 3</span>    <span class='PDMResK'>DOEVENTS</span>
+<span class='PDMCnt'>  43</span> <span class='PDMInd'> 2</span>   <span class='PDMResK'>ENDIF</span> <span class='PDMCom'>&amp;&amp;"{SPACEBAR}"$lcKeyBrd</span>
+<span class='PDMCnt'>  44</span> <span class='PDMInd'>  </span> 
+<span class='PDMCnt'>  45</span> <span class='PDMInd'> 2</span>   <span class='PDMResK'>FOR</span> <span class='PDMVar'>lnToolBar</span> <span class='PDMOper'>=</span> <span class='PDMLit'>13</span> <span class='PDMResK'>TO</span> <span class='PDMResF'>ALEN</span><span class='PDMOper'>(</span><span class='PDMOper'>.</span><span class='PDMVar'>gaToolBars</span><span class='PDMOper'>,</span> <span class='PDMLit'>1</span><span class='PDMOper'>)</span>
+<span class='PDMCnt'>  46</span> <span class='PDMInd'> 3</span>    <span class='PDMResK'>IF</span> <span class='PDMOper'>.</span><span class='PDMVar'>gaToolBars</span><span class='PDMOper'>(</span><span class='PDMVar'>lnToolBar</span><span class='PDMOper'>,</span><span class='PDMLit'>4</span><span class='PDMOper'>)</span> <span class='PDMOper'>AND</span> <span class='PDMResF'>WEXIST</span><span class='PDMOper'>(</span><span class='PDMOper'>.</span><span class='PDMVar'>gaToolBars</span><span class='PDMOper'>(</span><span class='PDMVar'>lnToolBar</span><span class='PDMOper'>,</span><span class='PDMLit'>1</span><span class='PDMOper'>)</span><span class='PDMOper'>)</span> <span class='PDMResK'>THEN</span>
+<span class='PDMCnt'>  47</span> <span class='PDMInd'> 4</span>     <span class='PDMResK'>SHOW</span> <span class='PDMResK'>WINDOW</span> <span class='PDMOper'>(</span><span class='PDMOper'>.</span><span class='PDMVar'>gaToolBars</span><span class='PDMOper'>(</span><span class='PDMVar'>lnToolBar</span><span class='PDMOper'>,</span><span class='PDMLit'>1</span><span class='PDMOper'>)</span><span class='PDMOper'>)</span>
+<span class='PDMCnt'>  48</span> <span class='PDMInd'> 3</span>    <span class='PDMResK'>ENDIF</span> <span class='PDMCom'>&amp;&amp;.gaToolBars(lnToolBar,4) AND WEXIST(.gaToolBars(lnToolBar,1))</span>
+<span class='PDMCnt'>  49</span> <span class='PDMInd'> 2</span>   <span class='PDMResK'>ENDFOR</span> <span class='PDMCom'>&amp;&amp;lnToolBar</span>
+<span class='PDMCnt'>  50</span> <span class='PDMInd'> 1</span>  <span class='PDMResK'>ENDWITH</span> <span class='PDMCom'>&amp;&amp;toObject</span>
+<span class='PDMCnt'>  51</span> <span class='PDMInd'>  </span> <span class='PDMResK'>ENDIF</span> <span class='PDMCom'>&amp;&amp;APPLICATION.STARTMODE=0</span>
+<span class='PDMCnt'>  52</span> <span class='PDMInd'>  </span> </pre>
+ <!-- Code End -->
+  </div>
+ </div>
+</div>
+<div class="diaxp_mfoot"></div>
+<script language="JavaScript" type="text/javascript">
+lo=document.getElementById("TX_SP_4");
+lo.XType="SourceCode";
+lo.Dir="../../imgs/";
+
+
+</script>
+</body>
+</html>
