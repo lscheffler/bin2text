@@ -1,0 +1,306 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="de" lang="de">
+<head>
+<title>Procedure Run_ExtApp</title>
+<meta content="text/html; charset=windows-1252" http-equiv="Content-Type" />
+<meta name="Generator" content="Project Documenting Machine" />
+<meta name="Version" content="1.3.1" />
+<link rel="stylesheet" href="../../css/foxw.css" type="text/css" />
+<link rel="stylesheet" href="../../css/sc.css" type="text/css" />
+<link rel="stylesheet" href="../../repository/diamp_pdm_ab.css" type="text/css" />
+<link rel="stylesheet" href="../../repository/pdm_ab.css" type="text/css" />
+<link rel="stylesheet" href="../../repository/pdm_ab_notes.css" type="text/css" />
+<script src="../../js/pdm.js" language="JavaScript" type="text/javascript"></script>
+<script src="../../repository/pdm_ab.js" language="JavaScript" type="text/javascript"></script>
+</head>
+<body>
+<div class="diaxp_mhead">Run_ExtApp Function</div>
+<div class="diaxp_mbody">
+<!-- Created with _diamp_pdm_ab by Agnes Beste    23.03.2021 13:20 -->
+ <div class="PDM_AB_Descr"><!-- Descr Begin -->
+Run Ed Raus API_AppRun
+ </div><!-- Descr End -->
+
+ <div class="DIAMP_PDM_AB_Syntax"><!-- Syntax Begin -->
+  <div class="SColor">
+   <div class="RetVal"><a href="#_60D0SLVX6">RetVal</a>&nbsp;</div>   <div class="RetValEq">=</div>   <div class="PEM">
+    Run_ExtApp
+   </div>
+   <div class="Para">
+    (<a href="#_60D0SLVX7">tcCommandLine</a>
+     <wbr />,<a href="#_60D0SLVX8">tcLaunchDir</a>
+     <wbr />,<a href="#_60D0SLVX9">tcWindowMode</a>
+     [<wbr />,@<a href="#_60D0SLVXA">tnExitCode</a>
+     
+     [<wbr />,<a href="#_60D0SLVXB">tlNoWait</a>]])
+   </div>
+   <div style="clear: both"></div>
+  </div><!-- Colour End -->
+ </div><!-- Syntax End -->
+
+ <div class="DIAMP_PDM_AB_Params"><!-- Parameters Begin -->
+  <span class="PDM_AB_Head">
+   Parameter
+  </span>
+  <dl class="DIAMP_PDM_AB_Params_List">
+   <dt class="dt_">
+    <a class="DIAMP_PDM_AB_Params_ParaName" id="_60D0SLVX7" name="_60D0SLVX7">
+     <span class="PDMEXPR PDMNor" ><span class='PDMVar'>tcCommandLine</span></span>
+
+    </a>
+   </dt>
+   <dd class="dd_">
+    <span class="Params_Short">
+     Command to run
+    </span>
+    <table class="Params_Info">
+     <colgroup>
+      <col class="ColumnValue" />
+      <col class="ColumnData" />
+     </colgroup>
+     <tbody>
+      <tr>
+       <td class="CellValue">Type</td>
+       <td class="CellData">Variant</td>
+      </tr>
+      <tr>
+       <td class="CellValue">Direction</td>
+       <td class="CellData">Input</td>
+      </tr>
+     </tbody>
+    </table>
+   </dd>
+   <dt class="dt_">
+    <a class="DIAMP_PDM_AB_Params_ParaName" id="_60D0SLVX8" name="_60D0SLVX8">
+     <span class="PDMEXPR PDMNor" ><span class='PDMVar'>tcLaunchDir</span></span>
+
+    </a>
+   </dt>
+   <dd class="dd_">
+    <span class="Params_Short">
+     Path to run <a class="DIAMP_PDM_AB_Para_Link" href="#_60D0SLVX7">tcCommandLine</a> in.
+    </span>
+    <table class="Params_Info">
+     <colgroup>
+      <col class="ColumnValue" />
+      <col class="ColumnData" />
+     </colgroup>
+     <tbody>
+      <tr>
+       <td class="CellValue">Type</td>
+       <td class="CellData">Variant</td>
+      </tr>
+      <tr>
+       <td class="CellValue">Direction</td>
+       <td class="CellData">Input</td>
+      </tr>
+     </tbody>
+    </table>
+   </dd>
+   <dt class="dt_">
+    <a class="DIAMP_PDM_AB_Params_ParaName" id="_60D0SLVX9" name="_60D0SLVX9">
+     <span class="PDMEXPR PDMNor" ><span class='PDMVar'>tcWindowMode</span></span>
+
+    </a>
+   </dt>
+   <dd class="dd_">
+    <span class="Params_Short">
+     Window Start Mode
+    </span>
+    <table class="Params_Info">
+     <colgroup>
+      <col class="ColumnValue" />
+      <col class="ColumnData" />
+     </colgroup>
+     <tbody>
+      <tr>
+       <td class="CellValue">Type</td>
+       <td class="CellData">Variant</td>
+      </tr>
+      <tr>
+       <td class="CellValue">Direction</td>
+       <td class="CellData">Input</td>
+      </tr>
+     </tbody>
+    </table>
+    <span class="Params_Detail">
+Window Start Mode, one of (HID, NOR, MIN, MAX) or empty
+defaults to empty, the default for the executable is used
+    </span>
+   </dd>
+   <dt class="dt_">
+    <a class="DIAMP_PDM_AB_Params_ParaName" id="_60D0SLVXA" name="_60D0SLVXA">
+     <span class="PDMEXPR PDMNor" ><span class='PDMVar'>tnExitCode</span></span>
+
+    </a>
+   </dt>
+   <dd class="dd_">
+    <span class="Params_Short">
+     Exitcode of the app.
+    </span>
+    <table class="Params_Info">
+     <colgroup>
+      <col class="ColumnValue" />
+      <col class="ColumnData" />
+     </colgroup>
+     <tbody>
+      <tr>
+       <td class="CellValue">Type</td>
+       <td class="CellData">Variant</td>
+      </tr>
+      <tr>
+       <td class="CellValue">By reference</td>
+       <td class="CellData">&nbsp;</td>
+      </tr>
+      <tr>
+       <td class="CellValue">Direction</td>
+       <td class="CellData">out</td>
+      </tr>
+      <tr>
+       <td class="CellValue">Optional</td>
+      <td class="CellData">&nbsp;</td>
+      </tr>
+     </tbody>
+    </table>
+   </dd>
+   <dt class="dt_">
+    <a class="DIAMP_PDM_AB_Params_ParaName" id="_60D0SLVXB" name="_60D0SLVXB">
+     <span class="PDMEXPR PDMNor" ><span class='PDMVar'>tlNoWait</span></span>
+
+    </a>
+   </dt>
+   <dd class="dd_">
+    <span class="Params_Short">
+     Do not wait for external application.
+    </span>
+    <table class="Params_Info">
+     <colgroup>
+      <col class="ColumnValue" />
+      <col class="ColumnData" />
+     </colgroup>
+     <tbody>
+      <tr>
+       <td class="CellValue">Type</td>
+       <td class="CellData">Boolean</td>
+      </tr>
+      <tr>
+       <td class="CellValue">Direction</td>
+       <td class="CellData">out</td>
+      </tr>
+      <tr>
+       <td class="CellValue">Optional</td>
+      <td class="CellData">&nbsp;</td>
+      </tr>
+     </tbody>
+    </table>
+   </dd>
+  </dl>
+ </div><!-- Parameters End -->
+
+ <div class="DIAMP_PDM_AB_RetVal"><!-- Returns Begin -->
+  <div>
+   <span class="PDM_AB_Head">
+    <a id="_60D0SLVX6" name="_60D0SLVX6">
+     Return value
+    </a>
+   </span> <span class="RetVal_Ttype">Boolean</span>
+  </div>
+  <div class="PDM_AB_Body">
+Success (<a class="DIAMP_PDM_AB_Para_Link" href="#_60D0SLVXA">tnExitCode</a><span class="PDMEXPR PDMNor" ><span class='PDMOper'>=</span><span class='PDMLit'>0</span></span>
+)
+  </div>
+ </div><!-- Returns End -->
+
+ <div class="PDM_AB_Changes"><!-- Changes Begin -->
+  <hr />
+  <span class="PDM_AB_Head">
+   Changes
+  </span>
+  <div class="PDM_AB_Body">
+   <span class="Change_Time">
+    11.02.2021 15:35
+   </span><br />
+SF Changed by<br />
+	Error handling for error in API_Run init, Messagebox
+	
+  </div>
+ </div><!-- Changes End -->
+
+
+<!-- /Created with _diamp_pdm_ab by Agnes Beste    23.03.2021 13:20 -->
+
+ <div class="SC">
+  <img onclick="ExpandSC('SP_P24',-1);" class="imgEC" src="../../imgs/dotab.gif" alt="Expand/Collapse source code of procedure Run_ExtApp" id="IMG_SP_P24" />
+  <span onclick="ExpandSC('SP_P24',-1);" class="SCCaption"><a name="pm.run_extapp">Source Code</a></span>
+  <div ondblclick="ExpandSC('SP_P24',-1);" class="SCE" style="display: none;" id="TX_SP_P24">
+<!-- Code Begin -->
+<pre class="PDMCODE PDMNor" ><span class='PDMCnt'>3364</span> <span class='PDMInd'> 1</span>  <span class='PDMResK'>LPARAMETERS</span><span class='PDMOper'>;</span>
+<span class='PDMCnt'>3365</span> <span class='PDMInd'> 2</span>   <span class='PDMVar'>tcCommandLine</span><span class='PDMOper'>,</span><span class='PDMOper'>;</span>
+<span class='PDMCnt'>3366</span> <span class='PDMInd'> 2</span>   <span class='PDMVar'>tcLaunchDir</span><span class='PDMOper'>,</span><span class='PDMOper'>;</span>
+<span class='PDMCnt'>3367</span> <span class='PDMInd'> 2</span>   <span class='PDMVar'>tcWindowMode</span><span class='PDMOper'>,</span><span class='PDMOper'>;</span>
+<span class='PDMCnt'>3368</span> <span class='PDMInd'> 2</span>   <span class='PDMVar'>tnExitCode</span><span class='PDMOper'>,</span><span class='PDMOper'>;</span>
+<span class='PDMCnt'>3369</span> <span class='PDMInd'> 2</span>   <span class='PDMVar'>tlNoWait</span>
+<span class='PDMCnt'>3370</span> <span class='PDMInd'>  </span> 
+<span class='PDMCnt'>3371</span> <span class='PDMInd'>  </span> 
+<span class='PDMCnt'>3409</span> <span class='PDMInd'>  </span> 
+<span class='PDMCnt'>3410</span> <span class='PDMInd'>  </span> <span class='PDMCom'>*!*    SF Changed by 11.2.2021</span>
+<span class='PDMCnt'>3411</span> <span class='PDMInd'>  </span> 
+<span class='PDMCnt'>3416</span> <span class='PDMInd'>  </span> 
+<span class='PDMCnt'>3417</span> <span class='PDMInd'> 1</span>  <span class='PDMResK'>LOCAL</span><span class='PDMOper'>;</span>
+<span class='PDMCnt'>3418</span> <span class='PDMInd'> 2</span>   <span class='PDMVar'>lcVCX</span> <span class='PDMResK'>AS</span> <span class='PDMResK'>CHARACTER</span><span class='PDMOper'>,</span><span class='PDMOper'>;</span>
+<span class='PDMCnt'>3419</span> <span class='PDMInd'> 2</span>   <span class='PDMVar'>loAPI</span> <span class='PDMResK'>AS</span> <span class='PDMStr'>"API_AppRun"</span> <span class='PDMResK'>OF</span> <span class='PDMStr'>"..\..\BIN2TEXT\LIBRARY\BIN_2_TEXT.VCX"</span>
+<span class='PDMCnt'>3420</span> <span class='PDMInd'>  </span> 
+<span class='PDMCnt'>3421</span> <span class='PDMInd'>  </span> <span class='PDMCom'>*for testing purposes</span>
+<span class='PDMCnt'>3422</span> <span class='PDMInd'> 1</span>  <span class='PDMVar'>lcVCX</span> <span class='PDMOper'>=</span> <span class='PDMStr'>'e:\se\bin2text\library\Bin_2_Text.vcx'</span>
+<span class='PDMCnt'>3423</span> <span class='PDMInd'>  </span> <span class='PDMCom'>*runnning</span>
+<span class='PDMCnt'>3424</span> <span class='PDMInd'> 1</span>  <span class='PDMVar'>loAPI</span>        <span class='PDMOper'>=</span> <span class='PDMResM'>NEWOBJECT</span><span class='PDMOper'>(</span><span class='PDMStr'>'API_AppRun'</span><span class='PDMOper'>,</span><span class='PDMVar'>m</span><span class='PDMOper'>.</span><span class='PDMVar'>lcVCX</span><span class='PDMOper'>,</span><span class='PDMStr'>''</span><span class='PDMOper'>,</span><span class='PDMVar'>m</span><span class='PDMOper'>.</span><span class='PDMVar'>tcCommandLine</span><span class='PDMOper'>,</span><span class='PDMVar'>m</span><span class='PDMOper'>.</span><span class='PDMVar'>tcLaunchDir</span><span class='PDMOper'>,</span><span class='PDMVar'>m</span><span class='PDMOper'>.</span><span class='PDMVar'>tcWindowMode</span><span class='PDMOper'>)</span>
+<span class='PDMCnt'>3425</span> <span class='PDMInd'> 1</span>  <span class='PDMVar'>tnExitCode</span>    <span class='PDMOper'>=</span> <span class='PDMOper'>-</span><span class='PDMLit'>1</span>
+<span class='PDMCnt'>3426</span> <span class='PDMInd'>  </span> 
+<span class='PDMCnt'>3427</span> <span class='PDMInd'> 1</span>  <span class='PDMResK'>IF</span> <span class='PDMResF'>VARTYPE</span><span class='PDMOper'>(</span><span class='PDMVar'>m</span><span class='PDMOper'>.</span><span class='PDMVar'>loAPI</span><span class='PDMOper'>)</span><span class='PDMOper'>=</span><span class='PDMStr'>'O'</span> <span class='PDMOper'>AND</span> <span class='PDMOper'>!</span><span class='PDMResF'>ISNULL</span><span class='PDMOper'>(</span><span class='PDMVar'>m</span><span class='PDMOper'>.</span><span class='PDMVar'>loAPI</span><span class='PDMOper'>)</span> <span class='PDMResK'>THEN</span>
+<span class='PDMCnt'>3428</span> <span class='PDMInd'> 2</span>   <span class='PDMResK'>IF</span> <span class='PDMResF'>EMPTY</span><span class='PDMOper'>(</span><span class='PDMVar'>m</span><span class='PDMOper'>.</span><span class='PDMVar'>loAPI</span><span class='PDMOper'>.</span><span class='PDMVar'>icErrorMessage</span><span class='PDMOper'>)</span> <span class='PDMResK'>THEN</span>
+<span class='PDMCnt'>3429</span> <span class='PDMInd'> 3</span>    <span class='PDMResK'>IF</span> <span class='PDMVar'>m</span><span class='PDMOper'>.</span><span class='PDMVar'>tlNoWait</span> <span class='PDMResK'>THEN</span>
+<span class='PDMCnt'>3430</span> <span class='PDMInd'> 4</span>     <span class='PDMResK'>IF</span> <span class='PDMVar'>m</span><span class='PDMOper'>.</span><span class='PDMVar'>loAPI</span><span class='PDMOper'>.</span><span class='PDMVar'>LaunchApp</span><span class='PDMOper'>(</span><span class='PDMOper'>)</span> <span class='PDMResK'>THEN</span>
+<span class='PDMCnt'>3431</span> <span class='PDMInd'> 5</span>      <span class='PDMVar'>tnExitCode</span> <span class='PDMOper'>=</span> <span class='PDMResF'>NVL</span><span class='PDMOper'>(</span><span class='PDMVar'>m</span><span class='PDMOper'>.</span><span class='PDMVar'>loAPI</span><span class='PDMOper'>.</span><span class='PDMVar'>CheckProcessExitCode</span><span class='PDMOper'>(</span><span class='PDMOper'>)</span><span class='PDMOper'>,</span><span class='PDMOper'>-</span><span class='PDMLit'>1</span><span class='PDMOper'>)</span>
+<span class='PDMCnt'>3432</span> <span class='PDMInd'> 4</span>     <span class='PDMResK'>ENDIF</span> <span class='PDMCom'>&amp;&amp;m.loAPI.LaunchApp()</span>
+<span class='PDMCnt'>3433</span> <span class='PDMInd'> 3</span>    <span class='PDMResK'>ELSE</span>  <span class='PDMCom'>&amp;&amp;m.tlNoWait</span>
+<span class='PDMCnt'>3434</span> <span class='PDMInd'> 4</span>     <span class='PDMResK'>IF</span> <span class='PDMVar'>m</span><span class='PDMOper'>.</span><span class='PDMVar'>loAPI</span><span class='PDMOper'>.</span><span class='PDMVar'>LaunchAppAndWait</span><span class='PDMOper'>(</span><span class='PDMOper'>)</span> <span class='PDMResK'>THEN</span>
+<span class='PDMCnt'>3435</span> <span class='PDMInd'>  </span> <span class='PDMCom'>*    tnExitCode = NVL(m.loAPI.CheckProcessExitCode(),-1)</span>
+<span class='PDMCnt'>3436</span> <span class='PDMInd'> 5</span>      <span class='PDMVar'>tnExitCode</span>    <span class='PDMOper'>=</span> <span class='PDMVar'>m</span><span class='PDMOper'>.</span><span class='PDMVar'>loAPI</span><span class='PDMOper'>.</span><span class='PDMVar'>CheckProcessExitCode</span><span class='PDMOper'>(</span><span class='PDMOper'>)</span>
+<span class='PDMCnt'>3437</span> <span class='PDMInd'> 5</span>      <span class='PDMVar'>tnExitCode</span>    <span class='PDMOper'>=</span> <span class='PDMResF'>NVL</span><span class='PDMOper'>(</span><span class='PDMVar'>m</span><span class='PDMOper'>.</span><span class='PDMVar'>tnExitCode</span><span class='PDMOper'>,</span><span class='PDMOper'>-</span><span class='PDMLit'>1</span><span class='PDMOper'>)</span>
+<span class='PDMCnt'>3438</span> <span class='PDMInd'> 4</span>     <span class='PDMResK'>ENDIF</span> <span class='PDMCom'>&amp;&amp;m.loAPI.LaunchAppAndWait()</span>
+<span class='PDMCnt'>3439</span> <span class='PDMInd'> 3</span>    <span class='PDMResK'>ENDIF</span> <span class='PDMCom'>&amp;&amp;m.tlNoWait</span>
+<span class='PDMCnt'>3440</span> <span class='PDMInd'> 2</span>   <span class='PDMResK'>ENDIF</span> <span class='PDMCom'>&amp;&amp;EMPTY(m.loAPI.icErrorMessage)</span>
+<span class='PDMCnt'>3441</span> <span class='PDMInd'>  </span> 
+<span class='PDMCnt'>3442</span> <span class='PDMInd'> 2</span>   <span class='PDMResK'>IF</span> <span class='PDMOper'>!</span><span class='PDMResF'>EMPTY</span><span class='PDMOper'>(</span><span class='PDMVar'>m</span><span class='PDMOper'>.</span><span class='PDMVar'>loAPI</span><span class='PDMOper'>.</span><span class='PDMVar'>icErrorMessage</span><span class='PDMOper'>)</span> <span class='PDMResK'>THEN</span>
+<span class='PDMCnt'>3443</span> <span class='PDMInd'> 3</span>    <span class='PDMResF'>MESSAGEBOX</span><span class='PDMOper'>(</span><span class='PDMVar'>m</span><span class='PDMOper'>.</span><span class='PDMVar'>loAPI</span><span class='PDMOper'>.</span><span class='PDMVar'>icErrorMessage</span><span class='PDMOper'>,</span><span class='PDMLit'>0</span><span class='PDMOper'>,</span><span class='PDMStr'>'API Run / Bin2Text v'</span><span class='PDMOper'>+</span><span class='PDMVar'>dcB2T_Verno</span><span class='PDMOper'>)</span>
+<span class='PDMCnt'>3444</span> <span class='PDMInd'> 2</span>   <span class='PDMResK'>ENDIF</span> <span class='PDMCom'>&amp;&amp;!EMPTY(m.loAPI.icErrorMessage)</span>
+<span class='PDMCnt'>3445</span> <span class='PDMInd'> 1</span>  <span class='PDMResK'>ENDIF</span> <span class='PDMCom'>&amp;&amp;VARTYPE(m.loAPI)='O' AND !ISNULL(m.loAPI)</span>
+<span class='PDMCnt'>3446</span> <span class='PDMInd'>  </span> 
+<span class='PDMCnt'>3447</span> <span class='PDMInd'> 1</span>  <span class='PDMVar'>loAPI</span> <span class='PDMOper'>=</span> <span class='PDMOper'>.</span><span class='PDMResK'>NULL</span><span class='PDMOper'>.</span>
+<span class='PDMCnt'>3448</span> <span class='PDMInd'>  </span> 
+<span class='PDMCnt'>3449</span> <span class='PDMInd'> 1</span>  <span class='PDMResK'>RETURN</span> <span class='PDMVar'>m</span><span class='PDMOper'>.</span><span class='PDMVar'>tnExitCode</span><span class='PDMOper'>=</span><span class='PDMLit'>0</span>
+<span class='PDMCnt'>3450</span> <span class='PDMInd'>  </span> </pre>
+ <!-- Code End -->
+  </div>
+ </div>
+</div>
+<div class="diaxp_mfoot"> <div class="PDM_AB_CopyRight"><!-- Footer Begin -->
+  <hr />
+  <div class="PDM_AB_Body">
+
+	<img src="../../repository/vfpxbanner_small.png" alt="VFPX logo"/><br/>
+	<p>This project is part of <a href="https://vfpx.github.io/"  title="Skip to VFPX" target="_blank">VFPX</a>.</p>
+	<p><i>&copy; 12.6.2015 Lutz Scheffler Software Ingenieurb&uuml;ro</i></p>
+	
+  </div><!-- Body End -->
+ </div><!-- Footer End -->
+</div>
+<script language="JavaScript" type="text/javascript">
+lo=document.getElementById("TX_SP_P24");
+lo.XType="SourceCode";
+lo.Dir="../../imgs/";
+
+
+</script>
+</body>
+</html>

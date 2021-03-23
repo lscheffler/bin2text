@@ -1,0 +1,120 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="de" lang="de">
+<head>
+<title>Procedure SwitchErrorHandler</title>
+<meta content="text/html; charset=windows-1252" http-equiv="Content-Type" />
+<meta name="Generator" content="Project Documenting Machine" />
+<meta name="Version" content="1.3.1" />
+<link rel="stylesheet" href="../../css/foxw.css" type="text/css" />
+<link rel="stylesheet" href="../../css/sc.css" type="text/css" />
+<link rel="stylesheet" href="../../repository/diamp_pdm_ab.css" type="text/css" />
+<link rel="stylesheet" href="../../repository/pdm_ab.css" type="text/css" />
+<link rel="stylesheet" href="../../repository/pdm_ab_notes.css" type="text/css" />
+<script src="../../js/pdm.js" language="JavaScript" type="text/javascript"></script>
+<script src="../../repository/pdm_ab.js" language="JavaScript" type="text/javascript"></script>
+</head>
+<body>
+<div class="diaxp_mhead">SwitchErrorHandler Function</div>
+<div class="diaxp_mbody">
+<!-- Created with _diamp_pdm_ab by Agnes Beste    23.03.2021 13:20 -->
+ <div class="PDM_AB_Descr"><!-- Descr Begin -->
+Turn ErrorHandler on and off
+ </div><!-- Descr End -->
+
+ <div class="DIAMP_PDM_AB_Syntax"><!-- Syntax Begin -->
+  <div class="SColor">
+   <div class="PEM">
+    SwitchErrorHandler
+   </div>
+   <div class="Para">
+    (<a href="#_60D0SLW0B">tlOn</a>)
+   </div>
+   <div style="clear: both"></div>
+  </div><!-- Colour End -->
+ </div><!-- Syntax End -->
+
+ <div class="DIAMP_PDM_AB_Params"><!-- Parameters Begin -->
+  <span class="PDM_AB_Head">
+   Parameter
+  </span>
+  <dl class="DIAMP_PDM_AB_Params_List">
+   <dt class="dt_">
+    <a class="DIAMP_PDM_AB_Params_ParaName" id="_60D0SLW0B" name="_60D0SLW0B">
+     <span class="PDMEXPR PDMNor" ><span class='PDMVar'>tlOn</span></span>
+
+    </a>
+   </dt>
+   <dd class="dd_">
+    <span class="Params_Short">
+     Turn errorhandling On
+    </span>
+    <table class="Params_Info">
+     <colgroup>
+      <col class="ColumnValue" />
+      <col class="ColumnData" />
+     </colgroup>
+     <tbody>
+      <tr>
+       <td class="CellValue">Type</td>
+       <td class="CellData">Boolean</td>
+      </tr>
+      <tr>
+       <td class="CellValue">Direction</td>
+       <td class="CellData">Input</td>
+      </tr>
+     </tbody>
+    </table>
+   </dd>
+  </dl>
+ </div><!-- Parameters End -->
+
+
+<!-- /Created with _diamp_pdm_ab by Agnes Beste    23.03.2021 13:20 -->
+
+ <div class="SC">
+  <img onclick="ExpandSC('SP_P27',-1);" class="imgEC" src="../../imgs/dotab.gif" alt="Expand/Collapse source code of procedure SwitchErrorHandler" id="IMG_SP_P27" />
+  <span onclick="ExpandSC('SP_P27',-1);" class="SCCaption"><a name="pm.switcherrorhandler">Source Code</a></span>
+  <div ondblclick="ExpandSC('SP_P27',-1);" class="SCE" style="display: none;" id="TX_SP_P27">
+<!-- Code Begin -->
+<pre class="PDMCODE PDMNor" ><span class='PDMCnt'>3890</span> <span class='PDMInd'> 1</span>  <span class='PDMResK'>LPARAMETERS</span><span class='PDMOper'>;</span>
+<span class='PDMCnt'>3891</span> <span class='PDMInd'> 2</span>   <span class='PDMVar'>tlOn</span>
+<span class='PDMCnt'>3892</span> <span class='PDMInd'>  </span> 
+<span class='PDMCnt'>3893</span> <span class='PDMInd'>  </span> 
+<span class='PDMCnt'>3914</span> <span class='PDMInd'>  </span> 
+<span class='PDMCnt'>3915</span> <span class='PDMInd'> 1</span>  <span class='PDMResK'>DO</span> <span class='PDMResK'>CASE</span>
+<span class='PDMCnt'>3916</span> <span class='PDMInd'> 2</span>   <span class='PDMResK'>CASE</span> <span class='PDMVar'>m</span><span class='PDMOper'>.</span><span class='PDMVar'>tlOn</span>
+<span class='PDMCnt'>3917</span> <span class='PDMInd'> 3</span>    <span class='PDMVar'>_SCREEN</span><span class='PDMOper'>.</span><span class='PDMResM'>ADDPROPERTY</span><span class='PDMOper'>(</span><span class='PDMStr'>'gcB2T_Err'</span><span class='PDMOper'>,</span><span class='PDMResK'>ON</span><span class='PDMOper'>(</span><span class='PDMStr'>'Error'</span><span class='PDMOper'>)</span><span class='PDMOper'>)</span>
+<span class='PDMCnt'>3918</span> <span class='PDMInd'> 3</span>    <span class='PDMResK'>ON</span> <span class='PDMResK'>ERROR</span> <span class='PDMResK'>DO</span> <span class='PDMVar'>CatchError</span> <span class='PDMResK'>WITH</span> <span class='PDMResF'>PROGRAM</span><span class='PDMOper'>(</span> <span class='PDMOper'>)</span><span class='PDMOper'>,</span> <span class='PDMResF'>LINENO</span><span class='PDMOper'>(</span> <span class='PDMOper'>)</span>
+<span class='PDMCnt'>3919</span> <span class='PDMInd'> 2</span>   <span class='PDMResK'>CASE</span> <span class='PDMResF'>PEMSTATUS</span><span class='PDMOper'>(</span><span class='PDMVar'>_SCREEN</span><span class='PDMOper'>,</span><span class='PDMStr'>'gcB2T_Err'</span><span class='PDMOper'>,</span><span class='PDMLit'>5</span><span class='PDMOper'>)</span>
+<span class='PDMCnt'>3920</span> <span class='PDMInd'> 3</span>    <span class='PDMResK'>LOCAL</span><span class='PDMOper'>;</span>
+<span class='PDMCnt'>3921</span> <span class='PDMInd'> 4</span>     <span class='PDMVar'>lcTemp</span>
+<span class='PDMCnt'>3922</span> <span class='PDMInd'> 3</span>    <span class='PDMVar'>lcTemp</span> <span class='PDMOper'>=</span> <span class='PDMVar'>_SCREEN</span><span class='PDMOper'>.</span><span class='PDMVar'>gcB2T_Err</span>
+<span class='PDMCnt'>3923</span> <span class='PDMInd'> 3</span>    <span class='PDMResF'>REMOVEPROPERTY</span><span class='PDMOper'>(</span><span class='PDMVar'>_SCREEN</span><span class='PDMOper'>,</span><span class='PDMStr'>'gcB2T_Err'</span><span class='PDMOper'>)</span>
+<span class='PDMCnt'>3924</span> <span class='PDMInd'> 3</span>    <span class='PDMResK'>ON</span> <span class='PDMResK'>ERROR</span> <span class='PDMOper'>&amp;</span><span class='PDMVar'>lcTemp</span>
+<span class='PDMCnt'>3925</span> <span class='PDMInd'> 2</span>   <span class='PDMResK'>OTHERWISE</span>
+<span class='PDMCnt'>3926</span> <span class='PDMInd'> 3</span>    <span class='PDMResK'>ON</span> <span class='PDMResK'>ERROR</span>
+<span class='PDMCnt'>3927</span> <span class='PDMInd'> 1</span>  <span class='PDMResK'>ENDCASE</span></pre>
+ <!-- Code End -->
+  </div>
+ </div>
+</div>
+<div class="diaxp_mfoot"> <div class="PDM_AB_CopyRight"><!-- Footer Begin -->
+  <hr />
+  <div class="PDM_AB_Body">
+
+	<img src="../../repository/vfpxbanner_small.png" alt="VFPX logo"/><br/>
+	<p>This project is part of <a href="https://vfpx.github.io/"  title="Skip to VFPX" target="_blank">VFPX</a>.</p>
+	<p><i>&copy; 19.4.2015 Lutz Scheffler Software Ingenieurb&uuml;ro</i></p>
+	
+  </div><!-- Body End -->
+ </div><!-- Footer End -->
+</div>
+<script language="JavaScript" type="text/javascript">
+lo=document.getElementById("TX_SP_P27");
+lo.XType="SourceCode";
+lo.Dir="../../imgs/";
+
+
+</script>
+</body>
+</html>

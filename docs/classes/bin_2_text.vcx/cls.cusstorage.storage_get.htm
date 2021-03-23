@@ -25,21 +25,21 @@
 </table>
 </div>
 <div class="diaxp_mbody">
-<!-- Created with _diamp_pdm_ab by Agnes Beste    17.03.2021 15:42 -->
+<!-- Created with _diamp_pdm_ab by Agnes Beste    23.03.2021 13:20 -->
  <div class="PDM_AB_Descr"><!-- Descr Begin -->
 Get settings from storage file.
  </div><!-- Descr End -->
 
  <div class="DIAMP_PDM_AB_Syntax"><!-- Syntax Begin -->
   <div class="SColor">
-   <div class="RetVal"><a href="#_6070XOM96">RetVal</a>&nbsp;</div>   <div class="RetValEq">=</div>   <div class="PEM">
+   <div class="RetVal"><a href="#_60D0SLUGG">RetVal</a>&nbsp;</div>   <div class="RetValEq">=</div>   <div class="PEM">
     Object.storage_get
    </div>
    <div class="Para">
-    (<a href="#_6070XOM97">tcType</a>
-     <wbr />,<a href="#_6070XOM98">toSettings</a>
-     <wbr />,<a href="#_6070XOM99">tcStorage</a>
-     [<wbr />,<a href="#_6070XOM9A">tcWhere</a>])
+    (<a href="#_60D0SLUGH">tcType</a>
+     <wbr />,<a href="#_60D0SLUGI">toSettings</a>
+     <wbr />,<a href="#_60D0SLUGJ">tcStorage</a>
+     [<wbr />,<a href="#_60D0SLUGK">tcWhere</a>])
    </div>
    <div style="clear: both"></div>
   </div><!-- Colour End -->
@@ -51,7 +51,7 @@ Get settings from storage file.
   </span>
   <dl class="DIAMP_PDM_AB_Params_List">
    <dt class="dt_">
-    <a class="DIAMP_PDM_AB_Params_ParaName" id="_6070XOM97" name="_6070XOM97">
+    <a class="DIAMP_PDM_AB_Params_ParaName" id="_60D0SLUGH" name="_60D0SLUGH">
      <span class="PDMEXPR PDMNor" ><span class='PDMVar'>tcType</span></span>
 
     </a>
@@ -78,7 +78,7 @@ Get settings from storage file.
     </table>
    </dd>
    <dt class="dt_">
-    <a class="DIAMP_PDM_AB_Params_ParaName" id="_6070XOM98" name="_6070XOM98">
+    <a class="DIAMP_PDM_AB_Params_ParaName" id="_60D0SLUGI" name="_60D0SLUGI">
      <span class="PDMEXPR PDMNor" ><span class='PDMVar'>toSettings</span></span>
 
     </a>
@@ -105,7 +105,7 @@ Get settings from storage file.
     </table>
    </dd>
    <dt class="dt_">
-    <a class="DIAMP_PDM_AB_Params_ParaName" id="_6070XOM99" name="_6070XOM99">
+    <a class="DIAMP_PDM_AB_Params_ParaName" id="_60D0SLUGJ" name="_60D0SLUGJ">
      <span class="PDMEXPR PDMNor" ><span class='PDMVar'>tcStorage</span></span>
 
     </a>
@@ -132,7 +132,7 @@ Get settings from storage file.
     </table>
    </dd>
    <dt class="dt_">
-    <a class="DIAMP_PDM_AB_Params_ParaName" id="_6070XOM9A" name="_6070XOM9A">
+    <a class="DIAMP_PDM_AB_Params_ParaName" id="_60D0SLUGK" name="_60D0SLUGK">
      <span class="PDMEXPR PDMNor" ><span class='PDMVar'>tcWhere</span></span>
 
     </a>
@@ -171,7 +171,7 @@ Used to filter records, in special the DBF for additional index per DBF (cType I
  <div class="DIAMP_PDM_AB_RetVal"><!-- Returns Begin -->
   <div>
    <span class="PDM_AB_Head">
-    <a id="_6070XOM96" name="_6070XOM96">
+    <a id="_60D0SLUGG" name="_60D0SLUGG">
      Return value
     </a>
    </span> <span class="RetVal_Ttype">Boolean</span>
@@ -188,10 +188,10 @@ At least one setting found.
   <div class="PDM_AB_Body">
 
 
-<p>Every record in <a class="DIAMP_PDM_AB_Para_Link" href="#_6070XOM99">tcStorage</a> marked with <a class="DIAMP_PDM_AB_Para_Link" href="#_6070XOM97">tcType</a> will be read
-and stored into <a class="DIAMP_PDM_AB_Para_Link" href="#_6070XOM98">toSettings</a>.</p>
-<p><a class="DIAMP_PDM_AB_Para_Link" href="#_6070XOM98">toSettings</a> will be cleared before read.</p>
-<p>For every item in <a class="DIAMP_PDM_AB_Para_Link" href="#_6070XOM98">toSettings</a> a property of <span class="PDMEXPR PDMNor" ><span class='PDMVar'>_SCREEN</span></span>
+<p>Every record in <a class="DIAMP_PDM_AB_Para_Link" href="#_60D0SLUGJ">tcStorage</a> marked with <a class="DIAMP_PDM_AB_Para_Link" href="#_60D0SLUGH">tcType</a> will be read
+and stored into <a class="DIAMP_PDM_AB_Para_Link" href="#_60D0SLUGI">toSettings</a>.</p>
+<p><a class="DIAMP_PDM_AB_Para_Link" href="#_60D0SLUGI">toSettings</a> will be cleared before read.</p>
+<p>For every item in <a class="DIAMP_PDM_AB_Para_Link" href="#_60D0SLUGI">toSettings</a> a property of <span class="PDMEXPR PDMNor" ><span class='PDMVar'>_SCREEN</span></span>
  will be created.
 Form: <span class="PDMEXPR PDMNor" ><span class='PDMVar'>_SCREEN</span><span class='PDMOper'>.</span><span class='PDMResM'>ADDPROPERTY</span><span class='PDMOper'>(</span><span class='PDMResF'>TRIM</span><span class='PDMOper'>(</span><span class='PDMVar'>cUniqueID</span><span class='PDMOper'>)</span><span class='PDMOper'>,</span><span class='PDMResF'>TRIM</span><span class='PDMOper'>(</span><span class='PDMVar'>cFile</span><span class='PDMOper'>)</span><span class='PDMOper'>)</span></span>
 </p>
@@ -200,7 +200,7 @@ Form: <span class="PDMEXPR PDMNor" ><span class='PDMVar'>_SCREEN</span><span cla
  </div><!-- Remarks End -->
 
 
-<!-- /Created with _diamp_pdm_ab by Agnes Beste    17.03.2021 15:42 -->
+<!-- /Created with _diamp_pdm_ab by Agnes Beste    23.03.2021 13:20 -->
 
  <div class="SC">
   <img onclick="ExpandSC('SP_40',-1);"class="imgEC" src="../../imgs/dotab.gif" alt="Expand/Collapse source code of procedure storage_get" id="IMG_SP_40" />
@@ -227,29 +227,27 @@ Form: <span class="PDMEXPR PDMNor" ><span class='PDMVar'>_SCREEN</span><span cla
 <span class='PDMCnt'>  49</span> <span class='PDMInd'>  </span> 
 <span class='PDMCnt'>  50</span> <span class='PDMInd'>  </span> <span class='PDMResK'>SELECT</span><span class='PDMOper'>;</span>
 <span class='PDMCnt'>  51</span> <span class='PDMInd'> 1</span>  <span class='PDMVar'>Cur1</span><span class='PDMOper'>.</span><span class='PDMVar'>cFile</span><span class='PDMOper'>,</span><span class='PDMOper'>;</span>
-<span class='PDMCnt'>  52</span> <span class='PDMInd'> 1</span>  <span class='PDMVar'>Cur1</span><span class='PDMOper'>.</span><span class='PDMVar'>cFile2</span><span class='PDMOper'>,</span><span class='PDMOper'>;</span>
-<span class='PDMCnt'>  53</span> <span class='PDMInd'> 1</span>  <span class='PDMVar'>Cur1</span><span class='PDMOper'>.</span><span class='PDMVar'>cUniqueId</span><span class='PDMOper'>;</span>
-<span class='PDMCnt'>  54</span> <span class='PDMInd'> 1</span>  <span class='PDMResK'>FROM</span> <span class='PDMOper'>(</span><span class='PDMVar'>m</span><span class='PDMOper'>.</span><span class='PDMVar'>tcStorage</span><span class='PDMOper'>)</span> <span class='PDMResK'>AS</span> <span class='PDMVar'>Cur1</span><span class='PDMOper'>;</span>
-<span class='PDMCnt'>  55</span> <span class='PDMInd'> 1</span>  <span class='PDMResK'>INTO</span> <span class='PDMResK'>CURSOR</span> <span class='PDMVar'>curHelp</span><span class='PDMOper'>;</span>
-<span class='PDMCnt'>  56</span> <span class='PDMInd'> 1</span>  <span class='PDMResK'>WHERE</span> <span class='PDMVar'>Cur1</span><span class='PDMOper'>.</span><span class='PDMVar'>cType</span><span class='PDMOper'>==</span><span class='PDMVar'>m</span><span class='PDMOper'>.</span><span class='PDMVar'>tcType</span><span class='PDMOper'>;</span>
-<span class='PDMCnt'>  57</span> <span class='PDMInd'> 1</span>  <span class='PDMOper'>&amp;</span><span class='PDMVar'>tcWhere</span>
-<span class='PDMCnt'>  58</span> <span class='PDMInd'>  </span> 
-<span class='PDMCnt'>  59</span> <span class='PDMInd'>  </span> <span class='PDMVar'>llOk</span> <span class='PDMOper'>=</span> <span class='PDMResF'>RECCOUNT</span><span class='PDMOper'>(</span><span class='PDMOper'>)</span><span class='PDMOper'>&gt;</span><span class='PDMLit'>0</span>
-<span class='PDMCnt'>  60</span> <span class='PDMInd'>  </span> <span class='PDMVar'>toSettings</span><span class='PDMOper'>.</span><span class='PDMResM'>REMOVE</span><span class='PDMOper'>(</span><span class='PDMOper'>-</span><span class='PDMLit'>1</span><span class='PDMOper'>)</span>
-<span class='PDMCnt'>  61</span> <span class='PDMInd'>  </span> <span class='PDMResK'>SCAN</span>
-<span class='PDMCnt'>  62</span> <span class='PDMInd'> 1</span>  <span class='PDMVar'>loSetting</span> <span class='PDMOper'>=</span> <span class='PDMResF'>CREATEOBJECT</span><span class='PDMOper'>(</span><span class='PDMStr'>'EMPTY'</span><span class='PDMOper'>)</span>
-<span class='PDMCnt'>  63</span> <span class='PDMInd'> 1</span>  <span class='PDMResF'>ADDPROPERTY</span><span class='PDMOper'>(</span><span class='PDMVar'>loSetting</span><span class='PDMOper'>,</span><span class='PDMStr'>'gcFile'</span><span class='PDMOper'>,</span><span class='PDMResF'>TRIM</span><span class='PDMOper'>(</span><span class='PDMVar'>cFile</span><span class='PDMOper'>)</span><span class='PDMOper'>)</span>
-<span class='PDMCnt'>  64</span> <span class='PDMInd'> 1</span>  <span class='PDMResF'>ADDPROPERTY</span><span class='PDMOper'>(</span><span class='PDMVar'>loSetting</span><span class='PDMOper'>,</span><span class='PDMStr'>'gcFile2'</span><span class='PDMOper'>,</span><span class='PDMResF'>TRIM</span><span class='PDMOper'>(</span><span class='PDMVar'>cFile2</span><span class='PDMOper'>)</span><span class='PDMOper'>)</span>
-<span class='PDMCnt'>  65</span> <span class='PDMInd'> 1</span>  <span class='PDMResF'>ADDPROPERTY</span><span class='PDMOper'>(</span><span class='PDMVar'>loSetting</span><span class='PDMOper'>,</span><span class='PDMStr'>'gcUniqueId'</span><span class='PDMOper'>,</span><span class='PDMResF'>TRIM</span><span class='PDMOper'>(</span><span class='PDMVar'>cUniqueId</span><span class='PDMOper'>)</span><span class='PDMOper'>)</span>
-<span class='PDMCnt'>  66</span> <span class='PDMInd'>  </span> 
-<span class='PDMCnt'>  67</span> <span class='PDMInd'> 1</span>  <span class='PDMVar'>toSettings</span><span class='PDMOper'>.</span><span class='PDMResK'>ADD</span><span class='PDMOper'>(</span><span class='PDMVar'>m</span><span class='PDMOper'>.</span><span class='PDMVar'>loSetting</span><span class='PDMOper'>,</span><span class='PDMVar'>m</span><span class='PDMOper'>.</span><span class='PDMVar'>loSetting</span><span class='PDMOper'>.</span><span class='PDMVar'>gcUniqueId</span><span class='PDMOper'>)</span>
-<span class='PDMCnt'>  68</span> <span class='PDMInd'> 1</span>  <span class='PDMVar'>_SCREEN</span><span class='PDMOper'>.</span><span class='PDMResM'>ADDPROPERTY</span><span class='PDMOper'>(</span><span class='PDMVar'>m</span><span class='PDMOper'>.</span><span class='PDMVar'>loSetting</span><span class='PDMOper'>.</span><span class='PDMVar'>gcUniqueId</span><span class='PDMOper'>,</span><span class='PDMVar'>m</span><span class='PDMOper'>.</span><span class='PDMVar'>loSetting</span><span class='PDMOper'>.</span><span class='PDMVar'>gcFile</span><span class='PDMOper'>)</span>
-<span class='PDMCnt'>  69</span> <span class='PDMInd'>  </span> <span class='PDMResK'>ENDSCAN</span>
+<span class='PDMCnt'>  52</span> <span class='PDMInd'> 1</span>  <span class='PDMVar'>Cur1</span><span class='PDMOper'>.</span><span class='PDMVar'>cUniqueId</span><span class='PDMOper'>;</span>
+<span class='PDMCnt'>  53</span> <span class='PDMInd'> 1</span>  <span class='PDMResK'>FROM</span> <span class='PDMOper'>(</span><span class='PDMVar'>m</span><span class='PDMOper'>.</span><span class='PDMVar'>tcStorage</span><span class='PDMOper'>)</span> <span class='PDMResK'>AS</span> <span class='PDMVar'>Cur1</span><span class='PDMOper'>;</span>
+<span class='PDMCnt'>  54</span> <span class='PDMInd'> 1</span>  <span class='PDMResK'>INTO</span> <span class='PDMResK'>CURSOR</span> <span class='PDMVar'>curHelp</span><span class='PDMOper'>;</span>
+<span class='PDMCnt'>  55</span> <span class='PDMInd'> 1</span>  <span class='PDMResK'>WHERE</span> <span class='PDMVar'>Cur1</span><span class='PDMOper'>.</span><span class='PDMVar'>cType</span><span class='PDMOper'>==</span><span class='PDMVar'>m</span><span class='PDMOper'>.</span><span class='PDMVar'>tcType</span><span class='PDMOper'>;</span>
+<span class='PDMCnt'>  56</span> <span class='PDMInd'> 1</span>  <span class='PDMOper'>&amp;</span><span class='PDMVar'>tcWhere</span>
+<span class='PDMCnt'>  57</span> <span class='PDMInd'>  </span> 
+<span class='PDMCnt'>  58</span> <span class='PDMInd'>  </span> <span class='PDMVar'>llOk</span> <span class='PDMOper'>=</span> <span class='PDMResF'>RECCOUNT</span><span class='PDMOper'>(</span><span class='PDMOper'>)</span><span class='PDMOper'>&gt;</span><span class='PDMLit'>0</span>
+<span class='PDMCnt'>  59</span> <span class='PDMInd'>  </span> <span class='PDMVar'>toSettings</span><span class='PDMOper'>.</span><span class='PDMResM'>REMOVE</span><span class='PDMOper'>(</span><span class='PDMOper'>-</span><span class='PDMLit'>1</span><span class='PDMOper'>)</span>
+<span class='PDMCnt'>  60</span> <span class='PDMInd'>  </span> <span class='PDMResK'>SCAN</span>
+<span class='PDMCnt'>  61</span> <span class='PDMInd'> 1</span>  <span class='PDMVar'>loSetting</span> <span class='PDMOper'>=</span> <span class='PDMResF'>CREATEOBJECT</span><span class='PDMOper'>(</span><span class='PDMStr'>'EMPTY'</span><span class='PDMOper'>)</span>
+<span class='PDMCnt'>  62</span> <span class='PDMInd'> 1</span>  <span class='PDMResF'>ADDPROPERTY</span><span class='PDMOper'>(</span><span class='PDMVar'>loSetting</span><span class='PDMOper'>,</span><span class='PDMStr'>'gcFile'</span><span class='PDMOper'>,</span><span class='PDMResF'>TRIM</span><span class='PDMOper'>(</span><span class='PDMVar'>cFile</span><span class='PDMOper'>)</span><span class='PDMOper'>)</span>
+<span class='PDMCnt'>  63</span> <span class='PDMInd'> 1</span>  <span class='PDMResF'>ADDPROPERTY</span><span class='PDMOper'>(</span><span class='PDMVar'>loSetting</span><span class='PDMOper'>,</span><span class='PDMStr'>'gcUniqueId'</span><span class='PDMOper'>,</span><span class='PDMResF'>TRIM</span><span class='PDMOper'>(</span><span class='PDMVar'>cUniqueId</span><span class='PDMOper'>)</span><span class='PDMOper'>)</span>
+<span class='PDMCnt'>  64</span> <span class='PDMInd'>  </span> 
+<span class='PDMCnt'>  65</span> <span class='PDMInd'> 1</span>  <span class='PDMVar'>toSettings</span><span class='PDMOper'>.</span><span class='PDMResK'>ADD</span><span class='PDMOper'>(</span><span class='PDMVar'>m</span><span class='PDMOper'>.</span><span class='PDMVar'>loSetting</span><span class='PDMOper'>,</span><span class='PDMVar'>m</span><span class='PDMOper'>.</span><span class='PDMVar'>loSetting</span><span class='PDMOper'>.</span><span class='PDMVar'>gcUniqueId</span><span class='PDMOper'>)</span>
+<span class='PDMCnt'>  66</span> <span class='PDMInd'> 1</span>  <span class='PDMVar'>_SCREEN</span><span class='PDMOper'>.</span><span class='PDMResM'>ADDPROPERTY</span><span class='PDMOper'>(</span><span class='PDMVar'>m</span><span class='PDMOper'>.</span><span class='PDMVar'>loSetting</span><span class='PDMOper'>.</span><span class='PDMVar'>gcUniqueId</span><span class='PDMOper'>,</span><span class='PDMVar'>m</span><span class='PDMOper'>.</span><span class='PDMVar'>loSetting</span><span class='PDMOper'>.</span><span class='PDMVar'>gcFile</span><span class='PDMOper'>)</span>
+<span class='PDMCnt'>  67</span> <span class='PDMInd'>  </span> <span class='PDMResK'>ENDSCAN</span>
+<span class='PDMCnt'>  68</span> <span class='PDMInd'>  </span> 
+<span class='PDMCnt'>  69</span> <span class='PDMInd'>  </span> <span class='PDMResK'>USE</span> <span class='PDMResK'>IN</span> <span class='PDMResF'>SELECT</span><span class='PDMOper'>(</span><span class='PDMStr'>'curHelp'</span><span class='PDMOper'>)</span>
 <span class='PDMCnt'>  70</span> <span class='PDMInd'>  </span> 
-<span class='PDMCnt'>  71</span> <span class='PDMInd'>  </span> <span class='PDMResK'>USE</span> <span class='PDMResK'>IN</span> <span class='PDMResF'>SELECT</span><span class='PDMOper'>(</span><span class='PDMStr'>'curHelp'</span><span class='PDMOper'>)</span>
-<span class='PDMCnt'>  72</span> <span class='PDMInd'>  </span> 
-<span class='PDMCnt'>  73</span> <span class='PDMInd'>  </span> <span class='PDMResK'>RETURN</span> <span class='PDMVar'>m</span><span class='PDMOper'>.</span><span class='PDMVar'>llOk</span>
-<span class='PDMCnt'>  74</span> <span class='PDMInd'>  </span> </pre>
+<span class='PDMCnt'>  71</span> <span class='PDMInd'>  </span> <span class='PDMResK'>RETURN</span> <span class='PDMVar'>m</span><span class='PDMOper'>.</span><span class='PDMVar'>llOk</span>
+<span class='PDMCnt'>  72</span> <span class='PDMInd'>  </span> </pre>
  <!-- Code End -->
   </div>
  </div>

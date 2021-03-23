@@ -25,7 +25,7 @@
 </table>
 </div>
 <div class="diaxp_mbody">
-<!-- Created with _diamp_pdm_ab by Agnes Beste    17.03.2021 15:42 -->
+<!-- Created with _diamp_pdm_ab by Agnes Beste    23.03.2021 13:20 -->
  <div class="PDM_AB_Descr"><!-- Descr Begin -->
 Puts settings into storage file.
  </div><!-- Descr End -->
@@ -36,9 +36,9 @@ Puts settings into storage file.
     Object.storage_set
    </div>
    <div class="Para">
-    (<a href="#_6070XOME4">tcType</a>
-     <wbr />,<a href="#_6070XOME5">toSettings</a>
-     <wbr />,<a href="#_6070XOME6">tcStorage</a>)
+    (<a href="#_60D0SLULA">tcType</a>
+     <wbr />,<a href="#_60D0SLULB">toSettings</a>
+     <wbr />,<a href="#_60D0SLULC">tcStorage</a>)
    </div>
    <div style="clear: both"></div>
   </div><!-- Colour End -->
@@ -50,7 +50,7 @@ Puts settings into storage file.
   </span>
   <dl class="DIAMP_PDM_AB_Params_List">
    <dt class="dt_">
-    <a class="DIAMP_PDM_AB_Params_ParaName" id="_6070XOME4" name="_6070XOME4">
+    <a class="DIAMP_PDM_AB_Params_ParaName" id="_60D0SLULA" name="_60D0SLULA">
      <span class="PDMEXPR PDMNor" ><span class='PDMVar'>tcType</span></span>
 
     </a>
@@ -77,7 +77,7 @@ Puts settings into storage file.
     </table>
    </dd>
    <dt class="dt_">
-    <a class="DIAMP_PDM_AB_Params_ParaName" id="_6070XOME5" name="_6070XOME5">
+    <a class="DIAMP_PDM_AB_Params_ParaName" id="_60D0SLULB" name="_60D0SLULB">
      <span class="PDMEXPR PDMNor" ><span class='PDMVar'>toSettings</span></span>
 
     </a>
@@ -104,7 +104,7 @@ Puts settings into storage file.
     </table>
    </dd>
    <dt class="dt_">
-    <a class="DIAMP_PDM_AB_Params_ParaName" id="_6070XOME6" name="_6070XOME6">
+    <a class="DIAMP_PDM_AB_Params_ParaName" id="_60D0SLULC" name="_60D0SLULC">
      <span class="PDMEXPR PDMNor" ><span class='PDMVar'>tcStorage</span></span>
 
     </a>
@@ -140,7 +140,7 @@ Puts settings into storage file.
   <div class="PDM_AB_Body">
 
 
-<p>Every item of the collection <a class="DIAMP_PDM_AB_Para_Link" href="#_6070XOME5">toSettings</a> will create a record in <a class="DIAMP_PDM_AB_Para_Link" href="#_6070XOME6">tcStorage</a>
+<p>Every item of the collection <a class="DIAMP_PDM_AB_Para_Link" href="#_60D0SLULB">toSettings</a> will create a record in <a class="DIAMP_PDM_AB_Para_Link" href="#_60D0SLULC">tcStorage</a>
 with key and value.</p>
 <p>Note that lenght of key is limited to 14 signs, see <a class="PDM_AB_See" href="../../classes/bin_2_text.vcx/cls.cusstorage.storage_open.htm" title="Skip to method Storage_Open">Storage_Open</a>.</p>
 
@@ -160,7 +160,7 @@ with key and value.</p>
  </div><!-- SeeAlso End -->
 
 
-<!-- /Created with _diamp_pdm_ab by Agnes Beste    17.03.2021 15:42 -->
+<!-- /Created with _diamp_pdm_ab by Agnes Beste    23.03.2021 13:20 -->
 
  <div class="SC">
   <img onclick="ExpandSC('SP_40',-1);"class="imgEC" src="../../imgs/dotab.gif" alt="Expand/Collapse source code of procedure storage_set" id="IMG_SP_40" />
@@ -177,34 +177,31 @@ with key and value.</p>
 <span class='PDMCnt'>  32</span> <span class='PDMInd'>  </span> <span class='PDMResK'>LOCAL</span><span class='PDMOper'>;</span>
 <span class='PDMCnt'>  33</span> <span class='PDMInd'> 1</span>  <span class='PDMVar'>lcKey</span>     <span class='PDMResK'>AS</span> <span class='PDMResK'>CHARACTER</span><span class='PDMOper'>,</span><span class='PDMOper'>;</span>
 <span class='PDMCnt'>  34</span> <span class='PDMInd'> 1</span>  <span class='PDMVar'>lcValue</span>   <span class='PDMResK'>AS</span> <span class='PDMResK'>CHARACTER</span><span class='PDMOper'>,</span><span class='PDMOper'>;</span>
-<span class='PDMCnt'>  35</span> <span class='PDMInd'> 1</span>  <span class='PDMVar'>lcValue2</span>  <span class='PDMResK'>AS</span> <span class='PDMResK'>CHARACTER</span><span class='PDMOper'>,</span><span class='PDMOper'>;</span>
-<span class='PDMCnt'>  36</span> <span class='PDMInd'> 1</span>  <span class='PDMVar'>loSetting</span> <span class='PDMResK'>AS</span> <span class='PDMResK'>EMPTY</span>
-<span class='PDMCnt'>  37</span> <span class='PDMInd'>  </span> 
-<span class='PDMCnt'>  38</span> <span class='PDMInd'>  </span> <span class='PDMResK'>FOR</span> <span class='PDMResK'>EACH</span> <span class='PDMVar'>loSetting</span> <span class='PDMResK'>IN</span> <span class='PDMVar'>toSettings</span> <span class='PDMResK'>FOXOBJECT</span>  
-<span class='PDMCnt'>  39</span> <span class='PDMInd'>  </span> 
-<span class='PDMCnt'>  40</span> <span class='PDMInd'> 1</span>  <span class='PDMVar'>lcKey</span>    <span class='PDMOper'>=</span> <span class='PDMVar'>m</span><span class='PDMOper'>.</span><span class='PDMVar'>loSetting</span><span class='PDMOper'>.</span><span class='PDMVar'>gcUniqueId</span>
-<span class='PDMCnt'>  41</span> <span class='PDMInd'> 1</span>  <span class='PDMVar'>lcValue</span>  <span class='PDMOper'>=</span> <span class='PDMVar'>m</span><span class='PDMOper'>.</span><span class='PDMVar'>loSetting</span><span class='PDMOper'>.</span><span class='PDMVar'>gcFile</span>
-<span class='PDMCnt'>  42</span> <span class='PDMInd'> 1</span>  <span class='PDMVar'>lcValue2</span> <span class='PDMOper'>=</span> <span class='PDMVar'>m</span><span class='PDMOper'>.</span><span class='PDMVar'>loSetting</span><span class='PDMOper'>.</span><span class='PDMVar'>gcFile2</span>
+<span class='PDMCnt'>  35</span> <span class='PDMInd'> 1</span>  <span class='PDMVar'>loSetting</span> <span class='PDMResK'>AS</span> <span class='PDMResK'>EMPTY</span>
+<span class='PDMCnt'>  36</span> <span class='PDMInd'>  </span> 
+<span class='PDMCnt'>  37</span> <span class='PDMInd'>  </span> <span class='PDMResK'>FOR</span> <span class='PDMResK'>EACH</span> <span class='PDMVar'>loSetting</span> <span class='PDMResK'>IN</span> <span class='PDMVar'>toSettings</span> <span class='PDMResK'>FOXOBJECT</span>  
+<span class='PDMCnt'>  38</span> <span class='PDMInd'>  </span> 
+<span class='PDMCnt'>  39</span> <span class='PDMInd'> 1</span>  <span class='PDMVar'>lcKey</span>    <span class='PDMOper'>=</span> <span class='PDMVar'>m</span><span class='PDMOper'>.</span><span class='PDMVar'>loSetting</span><span class='PDMOper'>.</span><span class='PDMVar'>gcUniqueId</span>
+<span class='PDMCnt'>  40</span> <span class='PDMInd'> 1</span>  <span class='PDMVar'>lcValue</span>  <span class='PDMOper'>=</span> <span class='PDMVar'>m</span><span class='PDMOper'>.</span><span class='PDMVar'>loSetting</span><span class='PDMOper'>.</span><span class='PDMVar'>gcFile</span>
+<span class='PDMCnt'>  41</span> <span class='PDMInd'>  </span> 
+<span class='PDMCnt'>  42</span> <span class='PDMInd'> 1</span>  <span class='PDMVar'>_SCREEN</span><span class='PDMOper'>.</span><span class='PDMResM'>ADDPROPERTY</span><span class='PDMOper'>(</span><span class='PDMVar'>m</span><span class='PDMOper'>.</span><span class='PDMVar'>lcKey</span><span class='PDMOper'>,</span><span class='PDMVar'>m</span><span class='PDMOper'>.</span><span class='PDMVar'>lcValue</span><span class='PDMOper'>)</span>
 <span class='PDMCnt'>  43</span> <span class='PDMInd'>  </span> 
-<span class='PDMCnt'>  44</span> <span class='PDMInd'> 1</span>  <span class='PDMVar'>_SCREEN</span><span class='PDMOper'>.</span><span class='PDMResM'>ADDPROPERTY</span><span class='PDMOper'>(</span><span class='PDMVar'>m</span><span class='PDMOper'>.</span><span class='PDMVar'>lcKey</span><span class='PDMOper'>,</span><span class='PDMVar'>m</span><span class='PDMOper'>.</span><span class='PDMVar'>lcValue</span><span class='PDMOper'>)</span>
-<span class='PDMCnt'>  45</span> <span class='PDMInd'>  </span> 
-<span class='PDMCnt'>  46</span> <span class='PDMInd'> 1</span>  <span class='PDMResK'>UPDATE</span> <span class='PDMVar'>cur1</span> <span class='PDMResK'>SET</span><span class='PDMOper'>;</span>
-<span class='PDMCnt'>  47</span> <span class='PDMInd'> 2</span>   <span class='PDMVar'>cFile</span>    <span class='PDMOper'>=</span> <span class='PDMVar'>m</span><span class='PDMOper'>.</span><span class='PDMVar'>lcValue</span><span class='PDMOper'>,</span><span class='PDMOper'>;</span>
-<span class='PDMCnt'>  48</span> <span class='PDMInd'> 2</span>   <span class='PDMVar'>cFile2</span>   <span class='PDMOper'>=</span> <span class='PDMVar'>m</span><span class='PDMOper'>.</span><span class='PDMVar'>lcValue2</span><span class='PDMOper'>,</span><span class='PDMOper'>;</span>
-<span class='PDMCnt'>  49</span> <span class='PDMInd'> 2</span>   <span class='PDMVar'>iDirty</span>   <span class='PDMOper'>=</span> <span class='PDMLit'>0</span><span class='PDMOper'>,</span><span class='PDMOper'>;</span>
-<span class='PDMCnt'>  50</span> <span class='PDMInd'> 2</span>   <span class='PDMVar'>tLastUse</span> <span class='PDMOper'>=</span> <span class='PDMResF'>DATETIME</span><span class='PDMOper'>(</span><span class='PDMOper'>)</span><span class='PDMOper'>;</span>
-<span class='PDMCnt'>  51</span> <span class='PDMInd'> 2</span>   <span class='PDMResK'>FROM</span> <span class='PDMOper'>(</span><span class='PDMVar'>m</span><span class='PDMOper'>.</span><span class='PDMVar'>tcStorage</span><span class='PDMOper'>)</span> <span class='PDMResK'>AS</span> <span class='PDMVar'>cur1</span><span class='PDMOper'>;</span>
-<span class='PDMCnt'>  52</span> <span class='PDMInd'> 2</span>   <span class='PDMResK'>WHERE</span> <span class='PDMVar'>cur1</span><span class='PDMOper'>.</span><span class='PDMVar'>cUniqueId</span><span class='PDMOper'>==</span><span class='PDMVar'>m</span><span class='PDMOper'>.</span><span class='PDMVar'>lcKey</span><span class='PDMOper'>;</span>
-<span class='PDMCnt'>  53</span> <span class='PDMInd'> 2</span>   <span class='PDMOper'>AND</span> <span class='PDMVar'>cur1</span><span class='PDMOper'>.</span><span class='PDMVar'>cType</span><span class='PDMOper'>==</span><span class='PDMVar'>m</span><span class='PDMOper'>.</span><span class='PDMVar'>tcType</span>
-<span class='PDMCnt'>  54</span> <span class='PDMInd'>  </span> 
-<span class='PDMCnt'>  55</span> <span class='PDMInd'> 1</span>  <span class='PDMResK'>IF</span> <span class='PDMVar'>_TALLY</span><span class='PDMOper'>=</span><span class='PDMLit'>0</span> <span class='PDMResK'>THEN</span>
-<span class='PDMCnt'>  56</span> <span class='PDMInd'> 2</span>   <span class='PDMResK'>INSERT</span> <span class='PDMResK'>INTO</span> <span class='PDMOper'>(</span><span class='PDMVar'>m</span><span class='PDMOper'>.</span><span class='PDMVar'>tcStorage</span><span class='PDMOper'>)</span><span class='PDMOper'>;</span>
-<span class='PDMCnt'>  57</span> <span class='PDMInd'> 3</span>    <span class='PDMOper'>(</span><span class='PDMVar'>cType</span><span class='PDMOper'>,</span> <span class='PDMVar'>cFile</span><span class='PDMOper'>,</span> <span class='PDMVar'>cFile2</span><span class='PDMOper'>,</span> <span class='PDMVar'>cUniqueId</span><span class='PDMOper'>,</span> <span class='PDMVar'>iDirty</span><span class='PDMOper'>,</span> <span class='PDMVar'>tLastUse</span><span class='PDMOper'>)</span><span class='PDMOper'>;</span>
-<span class='PDMCnt'>  58</span> <span class='PDMInd'> 3</span>    <span class='PDMResK'>VALUES</span><span class='PDMOper'>;</span>
-<span class='PDMCnt'>  59</span> <span class='PDMInd'> 3</span>    <span class='PDMOper'>(</span><span class='PDMVar'>m</span><span class='PDMOper'>.</span><span class='PDMVar'>tcType</span><span class='PDMOper'>,</span> <span class='PDMVar'>m</span><span class='PDMOper'>.</span><span class='PDMVar'>lcValue</span><span class='PDMOper'>,</span> <span class='PDMVar'>m</span><span class='PDMOper'>.</span><span class='PDMVar'>lcValue2</span><span class='PDMOper'>,</span> <span class='PDMVar'>m</span><span class='PDMOper'>.</span><span class='PDMVar'>lcKey</span><span class='PDMOper'>,</span> <span class='PDMLit'>0</span><span class='PDMOper'>,</span> <span class='PDMResF'>DATETIME</span><span class='PDMOper'>(</span><span class='PDMOper'>)</span><span class='PDMOper'>)</span>
-<span class='PDMCnt'>  60</span> <span class='PDMInd'> 1</span>  <span class='PDMResK'>ENDIF</span> <span class='PDMCom'>&amp;&amp;_TALLY=0</span>
-<span class='PDMCnt'>  61</span> <span class='PDMInd'>  </span> <span class='PDMResK'>ENDFOR</span> <span class='PDMCom'>&amp;&amp;loSetting </span>
-<span class='PDMCnt'>  62</span> <span class='PDMInd'>  </span> </pre>
+<span class='PDMCnt'>  44</span> <span class='PDMInd'> 1</span>  <span class='PDMResK'>UPDATE</span> <span class='PDMVar'>cur1</span> <span class='PDMResK'>SET</span><span class='PDMOper'>;</span>
+<span class='PDMCnt'>  45</span> <span class='PDMInd'> 2</span>   <span class='PDMVar'>cFile</span>    <span class='PDMOper'>=</span> <span class='PDMVar'>m</span><span class='PDMOper'>.</span><span class='PDMVar'>lcValue</span><span class='PDMOper'>,</span><span class='PDMOper'>;</span>
+<span class='PDMCnt'>  46</span> <span class='PDMInd'> 2</span>   <span class='PDMVar'>iDirty</span>   <span class='PDMOper'>=</span> <span class='PDMLit'>0</span><span class='PDMOper'>,</span><span class='PDMOper'>;</span>
+<span class='PDMCnt'>  47</span> <span class='PDMInd'> 2</span>   <span class='PDMVar'>tLastUse</span> <span class='PDMOper'>=</span> <span class='PDMResF'>DATETIME</span><span class='PDMOper'>(</span><span class='PDMOper'>)</span><span class='PDMOper'>;</span>
+<span class='PDMCnt'>  48</span> <span class='PDMInd'> 2</span>   <span class='PDMResK'>FROM</span> <span class='PDMOper'>(</span><span class='PDMVar'>m</span><span class='PDMOper'>.</span><span class='PDMVar'>tcStorage</span><span class='PDMOper'>)</span> <span class='PDMResK'>AS</span> <span class='PDMVar'>cur1</span><span class='PDMOper'>;</span>
+<span class='PDMCnt'>  49</span> <span class='PDMInd'> 2</span>   <span class='PDMResK'>WHERE</span> <span class='PDMVar'>cur1</span><span class='PDMOper'>.</span><span class='PDMVar'>cUniqueId</span><span class='PDMOper'>==</span><span class='PDMVar'>m</span><span class='PDMOper'>.</span><span class='PDMVar'>lcKey</span><span class='PDMOper'>;</span>
+<span class='PDMCnt'>  50</span> <span class='PDMInd'> 2</span>   <span class='PDMOper'>AND</span> <span class='PDMVar'>cur1</span><span class='PDMOper'>.</span><span class='PDMVar'>cType</span><span class='PDMOper'>==</span><span class='PDMVar'>m</span><span class='PDMOper'>.</span><span class='PDMVar'>tcType</span>
+<span class='PDMCnt'>  51</span> <span class='PDMInd'>  </span> 
+<span class='PDMCnt'>  52</span> <span class='PDMInd'> 1</span>  <span class='PDMResK'>IF</span> <span class='PDMVar'>_TALLY</span><span class='PDMOper'>=</span><span class='PDMLit'>0</span> <span class='PDMResK'>THEN</span>
+<span class='PDMCnt'>  53</span> <span class='PDMInd'> 2</span>   <span class='PDMResK'>INSERT</span> <span class='PDMResK'>INTO</span> <span class='PDMOper'>(</span><span class='PDMVar'>m</span><span class='PDMOper'>.</span><span class='PDMVar'>tcStorage</span><span class='PDMOper'>)</span><span class='PDMOper'>;</span>
+<span class='PDMCnt'>  54</span> <span class='PDMInd'> 3</span>    <span class='PDMOper'>(</span><span class='PDMVar'>cType</span><span class='PDMOper'>,</span> <span class='PDMVar'>cFile</span><span class='PDMOper'>,</span> <span class='PDMVar'>cUniqueId</span><span class='PDMOper'>,</span> <span class='PDMVar'>iDirty</span><span class='PDMOper'>,</span> <span class='PDMVar'>tLastUse</span><span class='PDMOper'>)</span><span class='PDMOper'>;</span>
+<span class='PDMCnt'>  55</span> <span class='PDMInd'> 3</span>    <span class='PDMResK'>VALUES</span><span class='PDMOper'>;</span>
+<span class='PDMCnt'>  56</span> <span class='PDMInd'> 3</span>    <span class='PDMOper'>(</span><span class='PDMVar'>m</span><span class='PDMOper'>.</span><span class='PDMVar'>tcType</span><span class='PDMOper'>,</span> <span class='PDMVar'>m</span><span class='PDMOper'>.</span><span class='PDMVar'>lcValue</span><span class='PDMOper'>,</span> <span class='PDMVar'>m</span><span class='PDMOper'>.</span><span class='PDMVar'>lcKey</span><span class='PDMOper'>,</span> <span class='PDMLit'>0</span><span class='PDMOper'>,</span> <span class='PDMResF'>DATETIME</span><span class='PDMOper'>(</span><span class='PDMOper'>)</span><span class='PDMOper'>)</span>
+<span class='PDMCnt'>  57</span> <span class='PDMInd'> 1</span>  <span class='PDMResK'>ENDIF</span> <span class='PDMCom'>&amp;&amp;_TALLY=0</span>
+<span class='PDMCnt'>  58</span> <span class='PDMInd'>  </span> <span class='PDMResK'>ENDFOR</span> <span class='PDMCom'>&amp;&amp;loSetting </span>
+<span class='PDMCnt'>  59</span> <span class='PDMInd'>  </span> </pre>
  <!-- Code End -->
   </div>
  </div>

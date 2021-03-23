@@ -1,0 +1,145 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="de" lang="de">
+<head>
+<title>Procedure Main Program</title>
+<meta content="text/html; charset=windows-1252" http-equiv="Content-Type" />
+<meta name="Generator" content="Project Documenting Machine" />
+<meta name="Version" content="1.3.1" />
+<link rel="stylesheet" href="../../css/foxw.css" type="text/css" />
+<link rel="stylesheet" href="../../css/sc.css" type="text/css" />
+<link rel="stylesheet" href="../../repository/diamp_pdm_ab.css" type="text/css" />
+<link rel="stylesheet" href="../../repository/pdm_ab.css" type="text/css" />
+<link rel="stylesheet" href="../../repository/pdm_ab_notes.css" type="text/css" />
+<script src="../../js/pdm.js" language="JavaScript" type="text/javascript"></script>
+<script src="../../repository/pdm_ab.js" language="JavaScript" type="text/javascript"></script>
+</head>
+<body>
+<div class="diaxp_mhead">Main Program</div>
+<div class="diaxp_mbody">
+<!-- Created with _diamp_pdm_ab by Agnes Beste    23.03.2021 13:20 -->
+ <div class="PDM_AB_Descr"><!-- Descr Begin -->
+Just an error catcher.
+ </div><!-- Descr End -->
+
+ <div class="DIAMP_PDM_AB_Syntax"><!-- Syntax Begin -->
+  <div class="SColor">
+   <div class="PEM">
+    RUNB2T
+   </div>
+   <div class="Para">
+    ([<a href="#_60D0SLVAC">tv01, .., tv24</a>])
+   </div>
+   <div style="clear: both"></div>
+  </div><!-- Colour End -->
+ </div><!-- Syntax End -->
+
+ <div class="DIAMP_PDM_AB_Params"><!-- Parameters Begin -->
+  <span class="PDM_AB_Head">
+   Parameter
+  </span>
+  <dl class="DIAMP_PDM_AB_Params_List">
+   <dt class="dt_">
+    <a class="DIAMP_PDM_AB_Params_ParaName" id="_60D0SLVAC" name="_60D0SLVAC">
+     <span class="PDMEXPR PDMNor" ><span class='PDMVar'>tv01</span><span class='PDMOper'>,</span> <span class='PDMOper'>.</span><span class='PDMOper'>.</span><span class='PDMOper'>,</span> <span class='PDMVar'>tv24</span></span>
+
+    </a>
+   </dt>
+   <dd class="dd_">
+    <span class="Params_Short">
+     Dummies
+    </span>
+    <table class="Params_Info">
+     <colgroup>
+      <col class="ColumnValue" />
+      <col class="ColumnData" />
+     </colgroup>
+     <tbody>
+      <tr>
+       <td class="CellValue">Type</td>
+       <td class="CellData">Variant</td>
+      </tr>
+      <tr>
+       <td class="CellValue">Direction</td>
+       <td class="CellData">Input</td>
+      </tr>
+      <tr>
+       <td class="CellValue">Optional</td>
+      <td class="CellData">&nbsp;</td>
+      </tr>
+     </tbody>
+    </table>
+   </dd>
+  </dl>
+ </div><!-- Parameters End -->
+
+ <div class="PDM_AB_Remarks"><!-- Remarks Begin -->
+  <span class="PDM_AB_Head">
+   Remarks
+  </span>
+  <div class="PDM_AB_Body">
+
+
+<p>
+ This program stores functions to wrap Fernando D. Bozzo
+ <a href="https://github.com/fdbozzo/foxbin2prg">FoxBin2Prg</a> for IDE purposes.
+</p>
+
+  </div>
+ </div><!-- Remarks End -->
+
+
+<!-- /Created with _diamp_pdm_ab by Agnes Beste    23.03.2021 13:20 -->
+
+ <div class="SC">
+  <img onclick="ExpandSC('SP_P1',-1);" class="imgEC" src="../../imgs/dotab.gif" alt="Expand/Collapse source code of procedure Main Program" id="IMG_SP_P1" />
+  <span onclick="ExpandSC('SP_P1',-1);" class="SCCaption"><a name="pm.main program">Source Code</a></span>
+  <div ondblclick="ExpandSC('SP_P1',-1);" class="SCE" style="display: none;" id="TX_SP_P1">
+<!-- Code Begin -->
+<pre class="PDMCODE PDMNor" ><span class='PDMCnt'>   1</span> <span class='PDMInd'>  </span> <span class='PDMOper'>#</span><span class='PDMResK'>INCLUDE</span> <span class='PDMResF'>STUFF</span><span class='PDMOper'>.</span><span class='PDMVar'>h</span>
+<span class='PDMCnt'>   2</span> <span class='PDMInd'>  </span> <span class='PDMResK'>LPARAMETERS</span><span class='PDMOper'>;</span>
+<span class='PDMCnt'>   3</span> <span class='PDMInd'> 1</span>  <span class='PDMVar'>tv01</span><span class='PDMOper'>,</span><span class='PDMVar'>tv02</span><span class='PDMOper'>,</span><span class='PDMVar'>tv03</span><span class='PDMOper'>,</span><span class='PDMVar'>tv04</span><span class='PDMOper'>,</span><span class='PDMVar'>tv05</span><span class='PDMOper'>,</span><span class='PDMVar'>tv06</span><span class='PDMOper'>,</span><span class='PDMVar'>tv07</span><span class='PDMOper'>,</span><span class='PDMVar'>tv08</span><span class='PDMOper'>,</span><span class='PDMOper'>;</span>
+<span class='PDMCnt'>   4</span> <span class='PDMInd'> 1</span>  <span class='PDMVar'>tv09</span><span class='PDMOper'>,</span><span class='PDMVar'>tv10</span><span class='PDMOper'>,</span><span class='PDMVar'>tv11</span><span class='PDMOper'>,</span><span class='PDMVar'>tv12</span><span class='PDMOper'>,</span><span class='PDMVar'>tv13</span><span class='PDMOper'>,</span><span class='PDMVar'>tv14</span><span class='PDMOper'>,</span><span class='PDMVar'>tv15</span><span class='PDMOper'>,</span><span class='PDMVar'>tv16</span><span class='PDMOper'>,</span><span class='PDMOper'>;</span>
+<span class='PDMCnt'>   5</span> <span class='PDMInd'> 1</span>  <span class='PDMVar'>tv17</span><span class='PDMOper'>,</span><span class='PDMVar'>tv18</span><span class='PDMOper'>,</span><span class='PDMVar'>tv19</span><span class='PDMOper'>,</span><span class='PDMVar'>tv20</span><span class='PDMOper'>,</span><span class='PDMVar'>tv21</span><span class='PDMOper'>,</span><span class='PDMVar'>tv22</span><span class='PDMOper'>,</span><span class='PDMVar'>tv23</span><span class='PDMOper'>,</span><span class='PDMVar'>tv24</span>
+<span class='PDMCnt'>   6</span> <span class='PDMInd'>  </span> 
+<span class='PDMCnt'>   7</span> <span class='PDMInd'>  </span> <span class='PDMResK'>LOCAL</span><span class='PDMOper'>;</span>
+<span class='PDMCnt'>   8</span> <span class='PDMInd'> 1</span>  <span class='PDMVar'>loConverter</span>
+<span class='PDMCnt'>   9</span> <span class='PDMInd'>  </span> 
+<span class='PDMCnt'>  10</span> <span class='PDMInd'>  </span> <span class='PDMVar'>Construct_Objects</span><span class='PDMOper'>(</span><span class='PDMOper'>)</span>
+<span class='PDMCnt'>  11</span> <span class='PDMInd'>  </span> <span class='PDMResK'>IF</span> <span class='PDMVar'>_SCREEN</span><span class='PDMOper'>.</span><span class='PDMVar'>frmB2T_Envelop</span><span class='PDMOper'>.</span><span class='PDMVar'>cusB2T</span><span class='PDMOper'>.</span><span class='PDMVar'>Get_Converter</span><span class='PDMOper'>(</span><span class='PDMOper'>,</span><span class='PDMOper'>@</span><span class='PDMVar'>loConverter</span><span class='PDMOper'>,</span><span class='PDMLit'>.T.</span><span class='PDMOper'>)</span> <span class='PDMResK'>THEN</span>
+<span class='PDMCnt'>  12</span> <span class='PDMInd'> 1</span>  <span class='PDMVar'>SwitchErrorHandler</span><span class='PDMOper'>(</span><span class='PDMLit'>.F.</span><span class='PDMOper'>)</span>
+<span class='PDMCnt'>  13</span> <span class='PDMInd'> 1</span>  <span class='PDMResK'>RETURN</span> <span class='PDMLit'>.F.</span>
+<span class='PDMCnt'>  14</span> <span class='PDMInd'>  </span> <span class='PDMResK'>ENDIF</span> <span class='PDMCom'>&amp;&amp;_SCREEN.frmB2T_Envelop.cusB2T.Get_Converter(@lcStorage,@loConverter,.T.)</span>
+<span class='PDMCnt'>  15</span> <span class='PDMInd'>  </span> 
+<span class='PDMCnt'>  16</span> <span class='PDMInd'>  </span> 
+<span class='PDMCnt'>  35</span> <span class='PDMInd'>  </span> 
+<span class='PDMCnt'>  36</span> <span class='PDMInd'>  </span> <span class='PDMVar'>SwitchErrorHandler</span><span class='PDMOper'>(</span><span class='PDMLit'>.T.</span><span class='PDMOper'>)</span>
+<span class='PDMCnt'>  37</span> <span class='PDMInd'>  </span> <span class='PDMVar'>HelpMsg</span><span class='PDMOper'>(</span><span class='PDMLit'>0</span><span class='PDMOper'>)</span>
+<span class='PDMCnt'>  38</span> <span class='PDMInd'>  </span> <span class='PDMVar'>SwitchErrorHandler</span><span class='PDMOper'>(</span><span class='PDMLit'>.F.</span><span class='PDMOper'>)</span>
+<span class='PDMCnt'>  39</span> <span class='PDMInd'>  </span> <span class='PDMOper'>?</span><span class='PDMVar'>Is_git</span><span class='PDMOper'>(</span><span class='PDMOper'>)</span>
+<span class='PDMCnt'>  40</span> <span class='PDMInd'>  </span> <span class='PDMOper'>?</span><span class='PDMVar'>GetBranch</span><span class='PDMOper'>(</span><span class='PDMOper'>)</span>
+<span class='PDMCnt'>  41</span> <span class='PDMInd'>  </span> 
+<span class='PDMCnt'>  42</span> <span class='PDMInd'>  </span> </pre>
+ <!-- Code End -->
+  </div>
+ </div>
+</div>
+<div class="diaxp_mfoot"> <div class="PDM_AB_CopyRight"><!-- Footer Begin -->
+  <hr />
+  <div class="PDM_AB_Body">
+
+	<img src="../../repository/vfpxbanner_small.png" alt="VFPX logo"/><br/>
+	<p>This project is part of <a href="https://vfpx.github.io/"  title="Skip to VFPX" target="_blank">VFPX</a>.</p>
+	<p><i>&copy; 25.09.2019 Lutz Scheffler Software Ingenieurb&uuml;ro</i></p>
+	
+  </div><!-- Body End -->
+ </div><!-- Footer End -->
+</div>
+<script language="JavaScript" type="text/javascript">
+lo=document.getElementById("TX_SP_P1");
+lo.XType="SourceCode";
+lo.Dir="../../imgs/";
+
+
+</script>
+</body>
+</html>

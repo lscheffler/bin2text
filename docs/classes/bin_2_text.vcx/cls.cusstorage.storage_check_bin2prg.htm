@@ -25,7 +25,7 @@
 </table>
 </div>
 <div class="diaxp_mbody">
-<!-- Created with _diamp_pdm_ab by Agnes Beste    17.03.2021 15:42 -->
+<!-- Created with _diamp_pdm_ab by Agnes Beste    23.03.2021 13:20 -->
  <div class="PDM_AB_Descr"><!-- Descr Begin -->
 Check if FoxBin2PRG is found, locate.
  </div><!-- Descr End -->
@@ -36,8 +36,8 @@ Check if FoxBin2PRG is found, locate.
     Object.storage_check_bin2prg
    </div>
    <div class="Para">
-    (@<a href="#_6070XOM8B">toSettings</a>
-     <wbr />,@<a href="#_6070XOM8C">tlError</a>)
+    (@<a href="#_60D0SLUFL">toSettings</a>
+     <wbr />,@<a href="#_60D0SLUFM">tlError</a>)
    </div>
    <div style="clear: both"></div>
   </div><!-- Colour End -->
@@ -49,7 +49,7 @@ Check if FoxBin2PRG is found, locate.
   </span>
   <dl class="DIAMP_PDM_AB_Params_List">
    <dt class="dt_">
-    <a class="DIAMP_PDM_AB_Params_ParaName" id="_6070XOM8B" name="_6070XOM8B">
+    <a class="DIAMP_PDM_AB_Params_ParaName" id="_60D0SLUFL" name="_60D0SLUFL">
      <span class="PDMEXPR PDMNor" ><span class='PDMVar'>toSettings</span></span>
 
     </a>
@@ -83,7 +83,7 @@ Object with settings.
     </span>
    </dd>
    <dt class="dt_">
-    <a class="DIAMP_PDM_AB_Params_ParaName" id="_6070XOM8C" name="_6070XOM8C">
+    <a class="DIAMP_PDM_AB_Params_ParaName" id="_60D0SLUFM" name="_60D0SLUFM">
      <span class="PDMEXPR PDMNor" ><span class='PDMVar'>tlError</span></span>
 
     </a>
@@ -117,7 +117,7 @@ Object with settings.
  </div><!-- Parameters End -->
 
 
-<!-- /Created with _diamp_pdm_ab by Agnes Beste    17.03.2021 15:42 -->
+<!-- /Created with _diamp_pdm_ab by Agnes Beste    23.03.2021 13:20 -->
 
  <div class="SC">
   <img onclick="ExpandSC('SP_40',-1);"class="imgEC" src="../../imgs/dotab.gif" alt="Expand/Collapse source code of procedure storage_check_bin2prg" id="IMG_SP_40" />
@@ -204,13 +204,12 @@ Object with settings.
 <span class='PDMCnt'> 102</span> <span class='PDMInd'>  </span> 
 <span class='PDMCnt'> 103</span> <span class='PDMInd'> 1</span>  <span class='PDMVar'>loSetting</span> <span class='PDMOper'>=</span> <span class='PDMResF'>CREATEOBJECT</span><span class='PDMOper'>(</span><span class='PDMStr'>'EMPTY'</span><span class='PDMOper'>)</span>
 <span class='PDMCnt'> 104</span> <span class='PDMInd'> 1</span>  <span class='PDMResF'>ADDPROPERTY</span><span class='PDMOper'>(</span><span class='PDMVar'>loSetting</span><span class='PDMOper'>,</span><span class='PDMStr'>'gcFile'</span><span class='PDMOper'>,</span><span class='PDMResF'>TRIM</span><span class='PDMOper'>(</span><span class='PDMVar'>m</span><span class='PDMOper'>.</span><span class='PDMVar'>lcFile</span><span class='PDMOper'>)</span><span class='PDMOper'>)</span>
-<span class='PDMCnt'> 105</span> <span class='PDMInd'> 1</span>  <span class='PDMResF'>ADDPROPERTY</span><span class='PDMOper'>(</span><span class='PDMVar'>loSetting</span><span class='PDMOper'>,</span><span class='PDMStr'>'gcFile2'</span><span class='PDMOper'>,</span><span class='PDMStr'>""</span><span class='PDMOper'>)</span>
-<span class='PDMCnt'> 106</span> <span class='PDMInd'> 1</span>  <span class='PDMResF'>ADDPROPERTY</span><span class='PDMOper'>(</span><span class='PDMVar'>loSetting</span><span class='PDMOper'>,</span><span class='PDMStr'>'gcUniqueId'</span><span class='PDMOper'>,</span><span class='PDMStr'>"gcB2T_FB2T"</span><span class='PDMOper'>)</span>
-<span class='PDMCnt'> 107</span> <span class='PDMInd'> 1</span>  <span class='PDMVar'>toSettings</span><span class='PDMOper'>.</span><span class='PDMResK'>ADD</span><span class='PDMOper'>(</span><span class='PDMVar'>m</span><span class='PDMOper'>.</span><span class='PDMVar'>loSetting</span><span class='PDMOper'>,</span><span class='PDMVar'>m</span><span class='PDMOper'>.</span><span class='PDMVar'>loSetting</span><span class='PDMOper'>.</span><span class='PDMVar'>gcUniqueId</span><span class='PDMOper'>)</span>
-<span class='PDMCnt'> 108</span> <span class='PDMInd'>  </span> 
-<span class='PDMCnt'> 109</span> <span class='PDMInd'>  </span> <span class='PDMResK'>ENDIF</span> <span class='PDMCom'>&amp;&amp;m.llSearch</span>
-<span class='PDMCnt'> 110</span> <span class='PDMInd'>  </span> <span class='PDMCom'>*/get FoxBin2Prg.prg</span>
-<span class='PDMCnt'> 111</span> <span class='PDMInd'>  </span> </pre>
+<span class='PDMCnt'> 105</span> <span class='PDMInd'> 1</span>  <span class='PDMResF'>ADDPROPERTY</span><span class='PDMOper'>(</span><span class='PDMVar'>loSetting</span><span class='PDMOper'>,</span><span class='PDMStr'>'gcUniqueId'</span><span class='PDMOper'>,</span><span class='PDMStr'>"gcB2T_FB2T"</span><span class='PDMOper'>)</span>
+<span class='PDMCnt'> 106</span> <span class='PDMInd'> 1</span>  <span class='PDMVar'>toSettings</span><span class='PDMOper'>.</span><span class='PDMResK'>ADD</span><span class='PDMOper'>(</span><span class='PDMVar'>m</span><span class='PDMOper'>.</span><span class='PDMVar'>loSetting</span><span class='PDMOper'>,</span><span class='PDMVar'>m</span><span class='PDMOper'>.</span><span class='PDMVar'>loSetting</span><span class='PDMOper'>.</span><span class='PDMVar'>gcUniqueId</span><span class='PDMOper'>)</span>
+<span class='PDMCnt'> 107</span> <span class='PDMInd'>  </span> 
+<span class='PDMCnt'> 108</span> <span class='PDMInd'>  </span> <span class='PDMResK'>ENDIF</span> <span class='PDMCom'>&amp;&amp;m.llSearch</span>
+<span class='PDMCnt'> 109</span> <span class='PDMInd'>  </span> <span class='PDMCom'>*/get FoxBin2Prg.prg</span>
+<span class='PDMCnt'> 110</span> <span class='PDMInd'>  </span> </pre>
  <!-- Code End -->
   </div>
  </div>

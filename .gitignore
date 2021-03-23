@@ -49,26 +49,6 @@
 #diverse
 !*.reg
 !/FoxBin2prg.cfg
-#Doku
-#!/docs/**/*.htm
-#!/docs/**/*.html
-#!/docs/**/*.js
-#!/docs/**/*.gif
-#!/docs/**/*.png
-#!/docs/**/*.css
-
-!/docs/*.htm
-!/docs/*.html
-!/docs/*.js
-!/docs/*.gif
-!/docs/*.png
-!/docs/*.css
-!/Doku/*.pdm*
-!/Doku/Source/*.gif
-!/Doku/Source/*.png
-!/Doku/Source/*.htm
-!/Doku/Source/*.html
-#/Doku/**/*.**.bak
 
 #exclude special
 foxuser_9.*
@@ -105,5 +85,15 @@ tmp/
 Bin2Txt.*
 bin2txt.*
 
+#Doku
+!/.github/
+!/docs/**/*.*
+!Doku/*.pdm*
+!Doku/Source/*.gif
+!Doku/Source/*.png
+!Doku/Source/*.htm
+!Doku/Source/*.html
+#/Doku/**/*.**.bak
+
 #reinclude
-!/docs/classes/bin_2_text.vcx/*.*.htm*
+!docs/classes/bin_2_text.vcx/*.*.htm*
