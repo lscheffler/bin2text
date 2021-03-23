@@ -1,0 +1,2 @@
+RESOURCE = 'FoxUser_9.dbf'
+COMMAND  = DO IDE_Bin2Text.prg

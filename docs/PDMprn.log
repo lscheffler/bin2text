@@ -84,12 +84,18 @@ code/runb2t.prg/Main_h.htm
 code/runb2t.prg/Main_f.htm
 code/runb2t.prg/Main_d.main program.htm
 code/runb2t.prg/Main_d.catcherror.htm
+code/runb2t.prg/Main_d.compare_verno.htm
 code/runb2t.prg/Main_d.construct_objects.htm
-code/runb2t.prg/Main_d.convert_array.htm
-code/runb2t.prg/Main_d.convert_file.htm
-code/runb2t.prg/Main_d.convert_pjx.htm
+code/runb2t.prg/Main_d.convert_array_2bin.htm
+code/runb2t.prg/Main_d.convert_array_2txt.htm
+code/runb2t.prg/Main_d.convert_directory_2bin.htm
+code/runb2t.prg/Main_d.convert_directory_2txt.htm
+code/runb2t.prg/Main_d.convert_file_2bin.htm
+code/runb2t.prg/Main_d.convert_file_2txt.htm
+code/runb2t.prg/Main_d.convert_pjx_2bin.htm
+code/runb2t.prg/Main_d.convert_pjx_2txt.htm
 code/runb2t.prg/Main_d.destruct_objects.htm
-code/runb2t.prg/Main_d.dir_action.htm
+code/runb2t.prg/Main_d.dir_action_pjx.htm
 code/runb2t.prg/Main_d.get_git_path.htm
 code/runb2t.prg/Main_d.getbasedir.htm
 code/runb2t.prg/Main_d.getbranch.htm
@@ -100,6 +106,7 @@ code/runb2t.prg/Main_d.helpmsg.htm
 code/runb2t.prg/Main_d.initmenu.htm
 code/runb2t.prg/Main_d.inter_active.htm
 code/runb2t.prg/Main_d.is_git.htm
+code/runb2t.prg/Main_d.isfile.htm
 code/runb2t.prg/Main_d.pjx2commit.htm
 code/runb2t.prg/Main_d.print_activebranch.htm
 code/runb2t.prg/Main_d.run_extapp.htm
