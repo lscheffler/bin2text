@@ -16,18 +16,18 @@
 <body>
 <div class="diaxp_mhead">Pjx2Commit Function</div>
 <div class="diaxp_mbody">
-<!-- Created with _diamp_pdm_ab by Agnes Beste    23.03.2021 13:20 -->
+<!-- Created with _diamp_pdm_ab by Agnes Beste    27.03.2021 18:56 -->
  <div class="PDM_AB_Descr"><!-- Descr Begin -->
 Create a commit to git.
  </div><!-- Descr End -->
 
  <div class="DIAMP_PDM_AB_Syntax"><!-- Syntax Begin -->
   <div class="SColor">
-   <div class="RetVal"><a href="#_60D0SLVB9">RetVal</a>&nbsp;</div>   <div class="RetValEq">=</div>   <div class="PEM">
+   <div class="RetVal"><a href="#_60H14L6B4">RetVal</a>&nbsp;</div>   <div class="RetValEq">=</div>   <div class="PEM">
     Pjx2Commit
    </div>
    <div class="Para">
-    ([<a href="#_60D0SLVBA">tlAll</a>])
+    ([<a href="#_60H14L6B5">tlAll</a>])
    </div>
    <div style="clear: both"></div>
   </div><!-- Colour End -->
@@ -39,7 +39,7 @@ Create a commit to git.
   </span>
   <dl class="DIAMP_PDM_AB_Params_List">
    <dt class="dt_">
-    <a class="DIAMP_PDM_AB_Params_ParaName" id="_60D0SLVBA" name="_60D0SLVBA">
+    <a class="DIAMP_PDM_AB_Params_ParaName" id="_60H14L6B5" name="_60H14L6B5">
      <span class="PDMEXPR PDMNor" ><span class='PDMVar'>tlAll</span></span>
 
     </a>
@@ -75,7 +75,7 @@ Create a commit to git.
  <div class="DIAMP_PDM_AB_RetVal"><!-- Returns Begin -->
   <div>
    <span class="PDM_AB_Head">
-    <a id="_60D0SLVB9" name="_60D0SLVB9">
+    <a id="_60H14L6B4" name="_60H14L6B4">
      Return value
     </a>
    </span> <span class="RetVal_Ttype">Boolean</span>
@@ -111,7 +111,7 @@ This calls FoxBin2PRG to process active project or all projects in the path. And
     04.06.2015 11:19
    </span><br />
 Changed by: SF<br />
-	New parameter <a class="DIAMP_PDM_AB_Para_Link" href="#_60D0SLVBA">tlAll</a>
+	New parameter <a class="DIAMP_PDM_AB_Para_Link" href="#_60H14L6B5">tlAll</a>
 	
   </div>
   <div class="PDM_AB_Body">
@@ -143,7 +143,7 @@ Changed by: SF<br />
  </div><!-- Changes End -->
 
 
-<!-- /Created with _diamp_pdm_ab by Agnes Beste    23.03.2021 13:20 -->
+<!-- /Created with _diamp_pdm_ab by Agnes Beste    27.03.2021 18:56 -->
 
  <div class="SC">
   <img onclick="ExpandSC('SP_P2',-1);" class="imgEC" src="../../imgs/dotab.gif" alt="Expand/Collapse source code of procedure Pjx2Commit" id="IMG_SP_P2" />
@@ -188,7 +188,7 @@ Changed by: SF<br />
 <span class='PDMCnt'> 101</span> <span class='PDMInd'>  </span> <span class='PDMCom'>*DO Convert_Pjx_2Bin IN (_SCREEN.gcB2T_App) WITH .F.,2,0</span>
 <span class='PDMCnt'> 102</span> <span class='PDMInd'>  </span> <span class='PDMCom'>*DO Pjx2Commit IN (_SCREEN.gcB2T_App) WITH .T.</span>
 <span class='PDMCnt'> 103</span> <span class='PDMInd'>  </span> <span class='PDMCom'>* IF Convert_Pjx_2Bin(.F.,IIF(m.tlAll,3,1),ICASE(m.tlAll,0,_SCREEN.gcB2T_GitPjx="1",4,3)) THEN</span>
-<span class='PDMCnt'> 104</span> <span class='PDMInd'> 1</span>  <span class='PDMResK'>IF</span> <span class='PDMVar'>Convert_Pjx_2Bin</span><span class='PDMOper'>(</span><span class='PDMLit'>.F.</span><span class='PDMOper'>,</span><span class='PDMResF'>IIF</span><span class='PDMOper'>(</span><span class='PDMVar'>m</span><span class='PDMOper'>.</span><span class='PDMVar'>tlAll</span><span class='PDMOper'>,</span><span class='PDMLit'>3</span><span class='PDMOper'>,</span><span class='PDMLit'>1</span><span class='PDMOper'>)</span><span class='PDMOper'>,</span><span class='PDMResF'>ICASE</span><span class='PDMOper'>(</span><span class='PDMVar'>m</span><span class='PDMOper'>.</span><span class='PDMVar'>tlAll</span><span class='PDMOper'>,</span><span class='PDMLit'>0</span><span class='PDMOper'>,</span><span class='PDMVar'>_SCREEN</span><span class='PDMOper'>.</span><span class='PDMVar'>gcB2T_GitPjx</span><span class='PDMOper'>=</span><span class='PDMStr'>"1"</span><span class='PDMOper'>,</span><span class='PDMLit'>4</span><span class='PDMOper'>,</span><span class='PDMLit'>3</span><span class='PDMOper'>)</span><span class='PDMOper'>)</span> <span class='PDMResK'>THEN</span>
+<span class='PDMCnt'> 104</span> <span class='PDMInd'> 1</span>  <span class='PDMResK'>IF</span> <span class='PDMVar'>Convert_Pjx_2Txt</span><span class='PDMOper'>(</span><span class='PDMResF'>IIF</span><span class='PDMOper'>(</span><span class='PDMVar'>m</span><span class='PDMOper'>.</span><span class='PDMVar'>tlAll</span><span class='PDMOper'>,</span><span class='PDMLit'>3</span><span class='PDMOper'>,</span><span class='PDMLit'>1</span><span class='PDMOper'>)</span><span class='PDMOper'>,</span><span class='PDMResF'>ICASE</span><span class='PDMOper'>(</span><span class='PDMVar'>m</span><span class='PDMOper'>.</span><span class='PDMVar'>tlAll</span><span class='PDMOper'>,</span><span class='PDMLit'>0</span><span class='PDMOper'>,</span><span class='PDMVar'>_SCREEN</span><span class='PDMOper'>.</span><span class='PDMVar'>gcB2T_GitPjx</span><span class='PDMOper'>=</span><span class='PDMStr'>"1"</span><span class='PDMOper'>,</span><span class='PDMLit'>4</span><span class='PDMOper'>,</span><span class='PDMLit'>3</span><span class='PDMOper'>)</span><span class='PDMOper'>)</span> <span class='PDMResK'>THEN</span>
 <span class='PDMCnt'> 105</span> <span class='PDMInd'> 2</span>   <span class='PDMVar'>SwitchErrorHandler</span><span class='PDMOper'>(</span><span class='PDMLit'>.T.</span><span class='PDMOper'>)</span>
 <span class='PDMCnt'> 106</span> <span class='PDMInd'> 2</span>   <span class='PDMVar'>_SCREEN</span><span class='PDMOper'>.</span><span class='PDMResM'>ADDPROPERTY</span><span class='PDMOper'>(</span><span class='PDMStr'>'gcOld_Path'</span><span class='PDMOper'>,</span><span class='PDMResF'>FULLPATH</span><span class='PDMOper'>(</span><span class='PDMResF'>CURDIR</span><span class='PDMOper'>(</span><span class='PDMOper'>)</span><span class='PDMOper'>)</span><span class='PDMOper'>)</span>
 <span class='PDMCnt'> 107</span> <span class='PDMInd'> 2</span>   <span class='PDMResK'>CD</span> <span class='PDMOper'>(</span><span class='PDMResF'>JUSTPATH</span><span class='PDMOper'>(</span><span class='PDMVar'>_SCREEN</span><span class='PDMOper'>.</span><span class='PDMVar'>gcB2T_Path</span><span class='PDMOper'>)</span><span class='PDMOper'>)</span>
@@ -260,7 +260,7 @@ Changed by: SF<br />
 <span class='PDMCnt'> 182</span> <span class='PDMInd'> 2</span>   <span class='PDMResF'>REMOVEPROPERTY</span><span class='PDMOper'>(</span><span class='PDMVar'>_SCREEN</span><span class='PDMOper'>,</span><span class='PDMStr'>'gcOld_Path'</span><span class='PDMOper'>)</span>
 <span class='PDMCnt'> 183</span> <span class='PDMInd'> 2</span>   <span class='PDMVar'>SwitchErrorHandler</span><span class='PDMOper'>(</span><span class='PDMLit'>.F.</span><span class='PDMOper'>)</span>
 <span class='PDMCnt'> 184</span> <span class='PDMInd'>  </span> 
-<span class='PDMCnt'> 185</span> <span class='PDMInd'> 1</span>  <span class='PDMResK'>ENDIF</span> <span class='PDMCom'>&amp;&amp;Convert_Pjx_2Bin(.F.,IIF(m.tlAll,3,1),ICASE(m.tlAll,0,_SCREEN.gcB2T_GitPjx="1",4,3))</span></pre>
+<span class='PDMCnt'> 185</span> <span class='PDMInd'> 1</span>  <span class='PDMResK'>ENDIF</span> <span class='PDMCom'>&amp;&amp;Convert_Pjx_2Txt(IIF(m.tlAll,3,1),ICASE(m.tlAll,0,_SCREEN.gcB2T_GitPjx="1",4,3))</span></pre>
  <!-- Code End -->
   </div>
  </div>

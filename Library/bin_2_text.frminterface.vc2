@@ -472,6 +472,7 @@ DEFINE CLASS frminterface AS form 		&& Just to create an interface as well as a 
 		 ENDIF &&RECCOUNT('curBin2Text')>0
 		ENDIF &&USED('curBin2Text')
 		
+		THIS.grdList.REFRESH()
 	ENDPROC
 
 	PROCEDURE Init
@@ -506,22 +507,31 @@ DEFINE CLASS frminterface AS form 		&& Just to create an interface as well as a 
 		  THISFORM.New_File(.F.)
 		 ENDIF &&EOF('curBin2Text')
 		
-		 lOldcPath =  FULLPATH(CURDIR())
-		 lcPath    = JUSTPATH(curBin2Text.cFile)
+		 lOldcPath = FULLPATH(CURDIR())
+		 lcPath    = FULLPATH(JUSTPATH(curBin2Text.cFile),_SCREEN.gcB2T_Path)
 		
 		 IF DIRECTORY(m.lcPath) THEN
 		  CD (m.lcPath)
 		 ENDIF &&DIRECTORY(lcPath)
 		
-		 lcPath = GETFILE('DBC;DBF, Table')
+		 IF UPPER(JUSTEXT(curBin2Text.cFile))=='DBF' THEN
+		  lcPath = 'DBF, Table;DBC'
+		 ELSE  &&UPPER(JUSTEXT(curBin2Text.cFile))=='DBF'
+		  lcPath = 'DBC;DBF, Table'
+		 ENDIF &&UPPER(JUSTEXT(curBin2Text.cFile))=='DBF'
+		
+		 lcPath = GETFILE(m.lcPath)
+		
 		 IF !EMPTY(m.lcPath) AND FILE(m.lcPath) THEN
 		  SELECT curBin2Text
 		  REPLACE;
-		   cFile WITH m.lcPath
+		   cFile WITH SYS(2014,m.lcPath,_SCREEN.gcB2T_Path)
 		 ENDIF &&!EMPTY(lcPath) AND FILE(lcPath)
 		
 		 CD (m.lOldcPath)
 		ENDIF &&USED('curBin2Text')
+		
+		THIS.grdList.REFRESH()
 		
 	ENDPROC
 
