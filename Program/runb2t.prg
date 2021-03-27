@@ -101,7 +101,7 @@ FUNCTION Pjx2Commit	&&Create a commit to git.
 *DO Convert_Pjx_2Bin IN (_SCREEN.gcB2T_App) WITH .F.,2,0
 *DO Pjx2Commit IN (_SCREEN.gcB2T_App) WITH .T.
 * IF Convert_Pjx_2Bin(.F.,IIF(m.tlAll,3,1),ICASE(m.tlAll,0,_SCREEN.gcB2T_GitPjx="1",4,3)) THEN
- IF Convert_Pjx_2Bin(.F.,IIF(m.tlAll,3,1),ICASE(m.tlAll,0,_SCREEN.gcB2T_GitPjx="1",4,3)) THEN
+ IF Convert_Pjx_2Txt(IIF(m.tlAll,3,1),ICASE(m.tlAll,0,_SCREEN.gcB2T_GitPjx="1",4,3)) THEN
   SwitchErrorHandler(.T.)
   _SCREEN.ADDPROPERTY('gcOld_Path',FULLPATH(CURDIR()))
   CD (JUSTPATH(_SCREEN.gcB2T_Path))
@@ -182,7 +182,7 @@ FUNCTION Pjx2Commit	&&Create a commit to git.
   REMOVEPROPERTY(_SCREEN,'gcOld_Path')
   SwitchErrorHandler(.F.)
 
- ENDIF &&Convert_Pjx_2Bin(.F.,IIF(m.tlAll,3,1),ICASE(m.tlAll,0,_SCREEN.gcB2T_GitPjx="1",4,3))
+ ENDIF &&Convert_Pjx_2Txt(IIF(m.tlAll,3,1),ICASE(m.tlAll,0,_SCREEN.gcB2T_GitPjx="1",4,3))
 ENDFUNC &&Pjx2Commit
 
 FUNCTION Inter_Active &&Run settings mask.
@@ -687,6 +687,7 @@ FUNCTION Convert_Pjx_2Bin &&Runs FoxBin2Prg for multiple projects to create bina
 
 *to remove Classlibs so we can recreate
  CLEAR ALL
+ CLOSE DATABASES ALL
 
  LOCAL ARRAY;
   laFiles(1,1)
@@ -701,6 +702,7 @@ FUNCTION Convert_Pjx_2Bin &&Runs FoxBin2Prg for multiple projects to create bina
  Destruct_Objects()
 
  CLEAR ALL
+ CLOSE DATABASES ALL
 
 */Move
  REMOVEPROPERTY(_SCREEN,'gvMode')
@@ -755,6 +757,7 @@ FUNCTION Convert_Pjx_2Bin &&Runs FoxBin2Prg for multiple projects to create bina
  REMOVEPROPERTY(_SCREEN,'gaProjects')
 
  CLEAR ALL
+ CLOSE DATABASES ALL
 
 *!*	Changed by: SF 5.6.2015
 *!*	<pdm>
@@ -1207,6 +1210,7 @@ FUNCTION Convert_Pjx_2Txt &&Runs FoxBin2Prg for multiple projects to create text
 
 *to remove Classlibs so we can recreate
  CLEAR ALL
+ CLOSE DATABASES ALL
 
  LOCAL ARRAY;
   laFiles(1,1)
@@ -1221,6 +1225,7 @@ FUNCTION Convert_Pjx_2Txt &&Runs FoxBin2Prg for multiple projects to create text
  Destruct_Objects()
 
  CLEAR ALL
+ CLOSE DATABASES ALL
 
 */Move
  REMOVEPROPERTY(_SCREEN,'gvMode')
@@ -1276,6 +1281,7 @@ FUNCTION Convert_Pjx_2Txt &&Runs FoxBin2Prg for multiple projects to create text
  REMOVEPROPERTY(_SCREEN,'gaProjects')
 
  CLEAR ALL
+ CLOSE DATABASES ALL
 
 *!*	Changed by: SF 5.6.2015
 *!*	<pdm>
@@ -1643,6 +1649,7 @@ FUNCTION Convert_File_2Bin  	&&Runs FoxBin2Prg for a single file or vcx/class to
  IF m.llReturn THEN
 
   CLEAR ALL
+  CLOSE DATABASES ALL
 
 *process Transformation
   Construct_Objects()
@@ -1993,6 +2000,7 @@ FUNCTION Convert_File_2Txt  	&&Runs FoxBin2Prg for a single file or vcx/class to
  IF m.llReturn THEN
 
   CLEAR ALL
+  CLOSE DATABASES ALL
 
 *process Transformation
   Construct_Objects()
@@ -2152,6 +2160,7 @@ FUNCTION Convert_Directory_2Bin  	&&Runs FoxBin2Prg for a single directory and i
 
  IF m.llReturn THEN
   CLEAR ALL
+  CLOSE DATABASES ALL
 
 *process Transformation
   Construct_Objects()
@@ -2285,6 +2294,7 @@ FUNCTION Convert_Directory_2Txt  	&&Runs FoxBin2Prg for a single directory and i
 
  IF m.llReturn THEN
   CLEAR ALL
+  CLOSE DATABASES ALL
 
 *process Transformation
   Construct_Objects()
@@ -3496,7 +3506,7 @@ FUNCTION HelpMsg	&&Internal. Display help message for external functions
   [            2 nur Projekdateien (PJX)]+0h0d0a+;
   [  cFile     Datei, für die die Methode gerufen wird.]+0h0d0a+;
   [Alle Projekte werden temporär geschlossen.]+0h0d0a+;
-  [Führt ein CLEAR ALL aus]
+  [Führt ein CLEAR ALL / CLOSE DATABASES ALL aus]
 
  #DEFINE dcText_DE_H01_txt;
   "DO Convert_Pjx_2Txt IN Bin2Text.app [[/?]|[nProjects[,nMode[,cFile]]]"+0h0d0a+;
@@ -3516,7 +3526,7 @@ FUNCTION HelpMsg	&&Internal. Display help message for external functions
   [            2 nur Projekdateien (PJX)]+0h0d0a+;
   [  cFile     Datei, für die die Methode gerufen wird.]+0h0d0a+;
   [Alle Projekte werden temporär geschlossen.]+0h0d0a+;
-  [Führt ein CLEAR ALL aus]
+  [Führt ein CLEAR ALL / CLOSE DATABASES ALL aus]
 
  #DEFINE dcText_DE_H02;
   "DO Convert_Pjx_2Bin IN Bin2Text.app [/?]|[nProjects[,nMode[,cFile]]]"+0h0d0a+;
@@ -3589,7 +3599,7 @@ FUNCTION HelpMsg	&&Internal. Display help message for external functions
   [  lSingleClass  Bestimme eine Klasse zum Transformieren.]+0h0d0a+;
   [  cFile         Datei, für die die Methode gerufen wird.]+0h0d0a+;
   [  cClass        Klasse, für lSingleClass .]+0h0d0a+;
-  [Führt ein CLEAR ALL aus.]
+  [Führt ein CLEAR ALL / CLOSE DATABASES ALL aus.]
 
  #DEFINE dcText_DE_H11_Txt;
   "DO Convert_File_2Txt IN Bin2Text.app [/?]|[lSingleClass[,cFile|,cFile,cClass]]"+0h0d0a+;
@@ -3599,7 +3609,7 @@ FUNCTION HelpMsg	&&Internal. Display help message for external functions
   [  lSingleClass  Bestimme eine Klasse zum Transformieren.]+0h0d0a+;
   [  cFile         Datei, für die die Methode gerufen wird.]+0h0d0a+;
   [  cClass        Klasse, für lSingleClass .]+0h0d0a+;
-  [Führt ein CLEAR ALL aus.]
+  [Führt ein CLEAR ALL / CLOSE DATABASES ALL aus.]
 
  #DEFINE dcText_DE_H12;
   "DO Convert_Directory_2Bin IN Bin2Text.app [/?]|[tcDirectory]"+0h0d0a+;
@@ -3607,7 +3617,7 @@ FUNCTION HelpMsg	&&Internal. Display help message for external functions
   [ Parameter:]+0h0d0a+;
   [  /?            Zeigt diesen Hilfstext]+0h0d0a+;
   [  tlWithSub     Verzeichnisse.]+0h0d0a+;
-  [Führt ein CLEAR ALL aus.]
+  [Führt ein CLEAR ALL / CLOSE DATABASES ALL aus.]
 
  #DEFINE dcText_DE_H12_txt;
   "DO Convert_Directory_2Txt IN Bin2Text.app [/?]|[tcDirectory]"+0h0d0a+;
@@ -3615,7 +3625,7 @@ FUNCTION HelpMsg	&&Internal. Display help message for external functions
   [ Parameter:]+0h0d0a+;
   [  /?            Zeigt diesen Hilfstext]+0h0d0a+;
   [  tcDirectory   Verzeichnisse.]+0h0d0a+;
-  [Führt ein CLEAR ALL aus.]
+  [Führt ein CLEAR ALL / CLOSE DATABASES ALL aus.]
 
 
 ************************************************
@@ -3661,7 +3671,7 @@ FUNCTION HelpMsg	&&Internal. Display help message for external functions
   [            2 project files only (PJX)]+0h0d0a+;
   [  cFile     File that method should run for.]+0h0d0a+;
   [All projects will be closed temporary.]+0h0d0a+;
-  [This will use CLEAR ALL!]
+  [This will use CLEAR ALL / CLOSE DATABASES ALL!]
 
  #DEFINE dcText_EN_H01_txt;
   "DO Convert_Pjx_2Txt IN Bin2Text.app [/?]|[nProjects[,nMode[,cFile]]]"+0h0d0a+;
@@ -3681,7 +3691,7 @@ FUNCTION HelpMsg	&&Internal. Display help message for external functions
   [            2 project files only (PJX)]+0h0d0a+;
   [  cFile     File that method should run for.]+0h0d0a+;
   [All projects will be closed temporary.]+0h0d0a+;
-  [This will use CLEAR ALL!]
+  [This will use CLEAR ALL / CLOSE DATABASES ALL!]
 
  #DEFINE dcText_EN_H02;
   "DO Convert_Pjx_2Bin IN Bin2Text.app [/?]|[nProjects[,nMode[,cFile]]]"+0h0D0A0D0A+;
@@ -3754,7 +3764,7 @@ FUNCTION HelpMsg	&&Internal. Display help message for external functions
   [  lSingleClass  Select a class to transform.]+0h0d0a+;
   [  cFile         File that method should run for.]+0h0d0a+;
   [  cClass        Class of cFile for lSingleClass.]+0h0d0a+;
-  [This will use CLEAR ALL!]
+  [This will use CLEAR ALL / CLOSE DATABASES ALL!]
 
  #DEFINE dcText_EN_H11_txt;
   "DO Convert_File_2Txt IN Bin2Text.app [/?]|[lSingleClass[,cFile|,cFile,cClass]]"+0h0d0a+;
@@ -3764,7 +3774,7 @@ FUNCTION HelpMsg	&&Internal. Display help message for external functions
   [  lSingleClass  Select a class to transform.]+0h0d0a+;
   [  cFile         File that method should run for.]+0h0d0a+;
   [  cClass        Class of cFile for lSingleClass.]+0h0d0a+;
-  [This will use CLEAR ALL!]
+  [This will use CLEAR ALL / CLOSE DATABASES ALL!]
 
  #DEFINE dcText_EN_H12;
   "DO Convert_Directory_2Bin IN Bin2Text.app [/?]|[tcDirectory]"+0h0d0a+;
@@ -3775,7 +3785,7 @@ FUNCTION HelpMsg	&&Internal. Display help message for external functions
   [                if false create text files.(Default)]+0h0d0a+;
   [                Optional in FoxBin2PRG style]+0h0d0a+;
   [  tcDirectory   Folder.]+0h0d0a+;
-  [This will use CLEAR ALL!]
+  [This will use CLEAR ALL / CLOSE DATABASES ALL!]
 
  #DEFINE dcText_EN_H12_txt;
   "DO Convert_Directory_2Txt IN Bin2Text.app [/?]|[tcDirectory]"+0h0d0a+;
@@ -3786,7 +3796,7 @@ FUNCTION HelpMsg	&&Internal. Display help message for external functions
   [                if false create text files.(Default)]+0h0d0a+;
   [                Optional in FoxBin2PRG style]+0h0d0a+;
   [  tcDirectory   Folder.]+0h0d0a+;
-  [This will use CLEAR ALL!]
+  [This will use CLEAR ALL / CLOSE DATABASES ALL!]
 
  LPARAMETERS;
   tnHelp

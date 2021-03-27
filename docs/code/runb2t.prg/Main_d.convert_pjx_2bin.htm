@@ -16,20 +16,20 @@
 <body>
 <div class="diaxp_mhead">Convert_Pjx_2Bin Function</div>
 <div class="diaxp_mbody">
-<!-- Created with _diamp_pdm_ab by Agnes Beste    23.03.2021 13:20 -->
+<!-- Created with _diamp_pdm_ab by Agnes Beste    27.03.2021 18:56 -->
  <div class="PDM_AB_Descr"><!-- Descr Begin -->
 Runs FoxBin2Prg for multiple projects to create project-binary.
  </div><!-- Descr End -->
 
  <div class="DIAMP_PDM_AB_Syntax"><!-- Syntax Begin -->
   <div class="SColor">
-   <div class="RetVal"><a href="#_60D0SLVEN">RetVal</a>&nbsp;</div>   <div class="RetValEq">=</div>   <div class="PEM">
+   <div class="RetVal"><a href="#_60H14L6EI">RetVal</a>&nbsp;</div>   <div class="RetValEq">=</div>   <div class="PEM">
     Convert_Pjx_2Bin
    </div>
    <div class="Para">
-    (<a href="#_60D0SLVEO">tnProjects</a>
-     <wbr />,<a href="#_60D0SLVEP">tnMode</a>
-     [<wbr />,<a href="#_60D0SLVEQ">tcFile</a>])
+    (<a href="#_60H14L6EJ">tnProjects</a>
+     <wbr />,<a href="#_60H14L6EK">tnMode</a>
+     [<wbr />,<a href="#_60H14L6EL">tcFile</a>])
    </div>
    <div style="clear: both"></div>
   </div><!-- Colour End -->
@@ -41,7 +41,7 @@ Runs FoxBin2Prg for multiple projects to create project-binary.
   </span>
   <dl class="DIAMP_PDM_AB_Params_List">
    <dt class="dt_">
-    <a class="DIAMP_PDM_AB_Params_ParaName" id="_60D0SLVEO" name="_60D0SLVEO">
+    <a class="DIAMP_PDM_AB_Params_ParaName" id="_60H14L6EJ" name="_60H14L6EJ">
      <span class="PDMEXPR PDMNor" ><span class='PDMVar'>tnProjects</span></span>
 
     </a>
@@ -80,7 +80,7 @@ Runs FoxBin2Prg for multiple projects to create project-binary.
     </span>
    </dd>
    <dt class="dt_">
-    <a class="DIAMP_PDM_AB_Params_ParaName" id="_60D0SLVEP" name="_60D0SLVEP">
+    <a class="DIAMP_PDM_AB_Params_ParaName" id="_60H14L6EK" name="_60H14L6EK">
      <span class="PDMEXPR PDMNor" ><span class='PDMVar'>tnMode</span></span>
 
     </a>
@@ -123,7 +123,7 @@ Runs FoxBin2Prg for multiple projects to create project-binary.
     </span>
    </dd>
    <dt class="dt_">
-    <a class="DIAMP_PDM_AB_Params_ParaName" id="_60D0SLVEQ" name="_60D0SLVEQ">
+    <a class="DIAMP_PDM_AB_Params_ParaName" id="_60H14L6EL" name="_60H14L6EL">
      <span class="PDMEXPR PDMNor" ><span class='PDMVar'>tcFile</span></span>
 
     </a>
@@ -154,7 +154,7 @@ Runs FoxBin2Prg for multiple projects to create project-binary.
     </table>
     <span class="Params_Detail">
 
-	<p>For <a class="DIAMP_PDM_AB_Para_Link" href="#_60D0SLVEO">tnProjects</a>=0 only. Will be ignored for other values.
+	<p>For <a class="DIAMP_PDM_AB_Para_Link" href="#_60H14L6EJ">tnProjects</a>=0 only. Will be ignored for other values.
 	Extension might be <em>PJX</em> or <em>PJX</em> and <em>PJ2</em>.
 	</p>
 	
@@ -166,7 +166,7 @@ Runs FoxBin2Prg for multiple projects to create project-binary.
  <div class="DIAMP_PDM_AB_RetVal"><!-- Returns Begin -->
   <div>
    <span class="PDM_AB_Head">
-    <a id="_60D0SLVEN" name="_60D0SLVEN">
+    <a id="_60H14L6EI" name="_60H14L6EI">
      Return value
     </a>
    </span> <span class="RetVal_Ttype">Boolean</span>
@@ -211,7 +211,7 @@ True if successfull.
     12.05.2015 09:56
    </span><br />
 Changed by: SF<br />
-	New value for parameter <a class="DIAMP_PDM_AB_Para_Link" href="#_60D0SLVEP">tnMode</a> &quot;4&quot;
+	New value for parameter <a class="DIAMP_PDM_AB_Para_Link" href="#_60H14L6EK">tnMode</a> &quot;4&quot;
 	
   </div>
   <div class="PDM_AB_Body">
@@ -266,7 +266,7 @@ Changed by: SF<br />
  </div><!-- Changes End -->
 
 
-<!-- /Created with _diamp_pdm_ab by Agnes Beste    23.03.2021 13:20 -->
+<!-- /Created with _diamp_pdm_ab by Agnes Beste    27.03.2021 18:56 -->
 
  <div class="SC">
   <img onclick="ExpandSC('SP_P4',-1);" class="imgEC" src="../../imgs/dotab.gif" alt="Expand/Collapse source code of procedure Convert_Pjx_2Bin" id="IMG_SP_P4" />
@@ -661,87 +661,90 @@ Changed by: SF<br />
 <span class='PDMCnt'> 687</span> <span class='PDMInd'>  </span> 
 <span class='PDMCnt'> 688</span> <span class='PDMInd'>  </span> <span class='PDMCom'>*to remove Classlibs so we can recreate</span>
 <span class='PDMCnt'> 689</span> <span class='PDMInd'> 1</span>  <span class='PDMResK'>CLEAR</span> <span class='PDMResK'>ALL</span>
-<span class='PDMCnt'> 690</span> <span class='PDMInd'>  </span> 
-<span class='PDMCnt'> 691</span> <span class='PDMInd'> 1</span>  <span class='PDMResK'>LOCAL</span> <span class='PDMResK'>ARRAY</span><span class='PDMOper'>;</span>
-<span class='PDMCnt'> 692</span> <span class='PDMInd'> 2</span>   <span class='PDMVar'>laFiles</span><span class='PDMOper'>(</span><span class='PDMLit'>1</span><span class='PDMOper'>,</span><span class='PDMLit'>1</span><span class='PDMOper'>)</span>
-<span class='PDMCnt'> 693</span> <span class='PDMInd'>  </span> 
-<span class='PDMCnt'> 694</span> <span class='PDMInd'> 1</span>  <span class='PDMResF'>ACOPY</span><span class='PDMOper'>(</span><span class='PDMVar'>_SCREEN</span><span class='PDMOper'>.</span><span class='PDMVar'>gaFiles</span><span class='PDMOper'>,</span><span class='PDMVar'>m</span><span class='PDMOper'>.</span><span class='PDMVar'>laFiles</span><span class='PDMOper'>)</span>    <span class='PDMCom'>&amp;&amp; will autoresize laFiles</span>
-<span class='PDMCnt'> 695</span> <span class='PDMInd'> 1</span>  <span class='PDMResF'>REMOVEPROPERTY</span><span class='PDMOper'>(</span><span class='PDMVar'>_SCREEN</span><span class='PDMOper'>,</span><span class='PDMStr'>'gaFiles'</span><span class='PDMOper'>)</span>
-<span class='PDMCnt'> 696</span> <span class='PDMInd'>  </span> 
-<span class='PDMCnt'> 697</span> <span class='PDMInd'>  </span> <span class='PDMOper'>*</span><span class='PDMVar'>process</span> <span class='PDMVar'>Transformation</span>
-<span class='PDMCnt'> 698</span> <span class='PDMInd'> 1</span>  <span class='PDMVar'>Construct_Objects</span><span class='PDMOper'>(</span><span class='PDMOper'>)</span>
-<span class='PDMCnt'> 699</span> <span class='PDMInd'>  </span> 
-<span class='PDMCnt'> 700</span> <span class='PDMInd'> 1</span>  <span class='PDMVar'>_SCREEN</span><span class='PDMOper'>.</span><span class='PDMVar'>frmB2T_Envelop</span><span class='PDMOper'>.</span><span class='PDMVar'>cusB2T</span><span class='PDMOper'>.</span><span class='PDMVar'>Process_Txt2Bin</span><span class='PDMOper'>(</span><span class='PDMOper'>@</span><span class='PDMVar'>laFiles</span><span class='PDMOper'>,</span><span class='PDMVar'>_SCREEN</span><span class='PDMOper'>.</span><span class='PDMVar'>gvMode</span><span class='PDMOper'>,</span><span class='PDMLit'>.F.</span><span class='PDMOper'>)</span>
-<span class='PDMCnt'> 701</span> <span class='PDMInd'> 1</span>  <span class='PDMVar'>Destruct_Objects</span><span class='PDMOper'>(</span><span class='PDMOper'>)</span>
-<span class='PDMCnt'> 702</span> <span class='PDMInd'>  </span> 
-<span class='PDMCnt'> 703</span> <span class='PDMInd'> 1</span>  <span class='PDMResK'>CLEAR</span> <span class='PDMResK'>ALL</span>
-<span class='PDMCnt'> 704</span> <span class='PDMInd'>  </span> 
-<span class='PDMCnt'> 705</span> <span class='PDMInd'>  </span> <span class='PDMCom'>*/Move</span>
-<span class='PDMCnt'> 706</span> <span class='PDMInd'> 1</span>  <span class='PDMResF'>REMOVEPROPERTY</span><span class='PDMOper'>(</span><span class='PDMVar'>_SCREEN</span><span class='PDMOper'>,</span><span class='PDMStr'>'gvMode'</span><span class='PDMOper'>)</span>
-<span class='PDMCnt'> 707</span> <span class='PDMInd'>  </span> 
-<span class='PDMCnt'> 708</span> <span class='PDMInd'>  </span> 
-<span class='PDMCnt'> 709</span> <span class='PDMInd'>  </span> <span class='PDMCom'>*Move</span>
-<span class='PDMCnt'> 710</span> <span class='PDMInd'> 1</span>  <span class='PDMResK'>LOCAL</span><span class='PDMOper'>;</span>
-<span class='PDMCnt'> 711</span> <span class='PDMInd'> 2</span>   <span class='PDMVar'>lcProj</span>      <span class='PDMResK'>AS</span> <span class='PDMResK'>CHARACTER</span><span class='PDMOper'>,</span><span class='PDMOper'>;</span>
-<span class='PDMCnt'> 712</span> <span class='PDMInd'> 2</span>   <span class='PDMVar'>lcSourceExt</span> <span class='PDMResK'>AS</span> <span class='PDMResK'>CHARACTER</span><span class='PDMOper'>,</span><span class='PDMOper'>;</span>
-<span class='PDMCnt'> 713</span> <span class='PDMInd'> 2</span>   <span class='PDMVar'>lnProj</span>      <span class='PDMResK'>AS</span> <span class='PDMResK'>NUMBER</span><span class='PDMOper'>,</span><span class='PDMOper'>;</span>
-<span class='PDMCnt'> 714</span> <span class='PDMInd'> 2</span>   <span class='PDMVar'>lnProjs</span>     <span class='PDMResK'>AS</span> <span class='PDMResK'>NUMBER</span><span class='PDMOper'>,</span><span class='PDMOper'>;</span>
-<span class='PDMCnt'> 715</span> <span class='PDMInd'> 2</span>   <span class='PDMVar'>lnReturn</span>    <span class='PDMResK'>AS</span> <span class='PDMResK'>NUMBER</span><span class='PDMOper'>,</span><span class='PDMOper'>;</span>
-<span class='PDMCnt'> 716</span> <span class='PDMInd'> 2</span>   <span class='PDMVar'>llNotFound</span>  <span class='PDMResK'>AS</span> <span class='PDMVar'>BOOLEAN</span><span class='PDMOper'>,</span><span class='PDMOper'>;</span>
-<span class='PDMCnt'> 717</span> <span class='PDMInd'> 2</span>   <span class='PDMVar'>loProject</span>   <span class='PDMResK'>AS</span> <span class='PDMResK'>PROJECT</span>
-<span class='PDMCnt'> 718</span> <span class='PDMInd'>  </span> 
-<span class='PDMCnt'> 719</span> <span class='PDMInd'> 1</span>  <span class='PDMResK'>IF</span> <span class='PDMOper'>!</span><span class='PDMResF'>ISNULL</span><span class='PDMOper'>(</span><span class='PDMVar'>_SCREEN</span><span class='PDMOper'>.</span><span class='PDMVar'>gaProjects</span><span class='PDMOper'>(</span><span class='PDMLit'>1</span><span class='PDMOper'>,</span><span class='PDMLit'>1</span><span class='PDMOper'>)</span><span class='PDMOper'>)</span> <span class='PDMResK'>THEN</span>
+<span class='PDMCnt'> 690</span> <span class='PDMInd'> 1</span>  <span class='PDMResK'>CLOSE</span> <span class='PDMResK'>DATABASES</span> <span class='PDMResK'>ALL</span>
+<span class='PDMCnt'> 691</span> <span class='PDMInd'>  </span> 
+<span class='PDMCnt'> 692</span> <span class='PDMInd'> 1</span>  <span class='PDMResK'>LOCAL</span> <span class='PDMResK'>ARRAY</span><span class='PDMOper'>;</span>
+<span class='PDMCnt'> 693</span> <span class='PDMInd'> 2</span>   <span class='PDMVar'>laFiles</span><span class='PDMOper'>(</span><span class='PDMLit'>1</span><span class='PDMOper'>,</span><span class='PDMLit'>1</span><span class='PDMOper'>)</span>
+<span class='PDMCnt'> 694</span> <span class='PDMInd'>  </span> 
+<span class='PDMCnt'> 695</span> <span class='PDMInd'> 1</span>  <span class='PDMResF'>ACOPY</span><span class='PDMOper'>(</span><span class='PDMVar'>_SCREEN</span><span class='PDMOper'>.</span><span class='PDMVar'>gaFiles</span><span class='PDMOper'>,</span><span class='PDMVar'>m</span><span class='PDMOper'>.</span><span class='PDMVar'>laFiles</span><span class='PDMOper'>)</span>    <span class='PDMCom'>&amp;&amp; will autoresize laFiles</span>
+<span class='PDMCnt'> 696</span> <span class='PDMInd'> 1</span>  <span class='PDMResF'>REMOVEPROPERTY</span><span class='PDMOper'>(</span><span class='PDMVar'>_SCREEN</span><span class='PDMOper'>,</span><span class='PDMStr'>'gaFiles'</span><span class='PDMOper'>)</span>
+<span class='PDMCnt'> 697</span> <span class='PDMInd'>  </span> 
+<span class='PDMCnt'> 698</span> <span class='PDMInd'>  </span> <span class='PDMCom'>*process Transformation</span>
+<span class='PDMCnt'> 699</span> <span class='PDMInd'> 1</span>  <span class='PDMVar'>Construct_Objects</span><span class='PDMOper'>(</span><span class='PDMOper'>)</span>
+<span class='PDMCnt'> 700</span> <span class='PDMInd'>  </span> 
+<span class='PDMCnt'> 701</span> <span class='PDMInd'> 1</span>  <span class='PDMVar'>_SCREEN</span><span class='PDMOper'>.</span><span class='PDMVar'>frmB2T_Envelop</span><span class='PDMOper'>.</span><span class='PDMVar'>cusB2T</span><span class='PDMOper'>.</span><span class='PDMVar'>Process_Txt2Bin</span><span class='PDMOper'>(</span><span class='PDMOper'>@</span><span class='PDMVar'>laFiles</span><span class='PDMOper'>,</span><span class='PDMVar'>_SCREEN</span><span class='PDMOper'>.</span><span class='PDMVar'>gvMode</span><span class='PDMOper'>,</span><span class='PDMLit'>.F.</span><span class='PDMOper'>)</span>
+<span class='PDMCnt'> 702</span> <span class='PDMInd'> 1</span>  <span class='PDMVar'>Destruct_Objects</span><span class='PDMOper'>(</span><span class='PDMOper'>)</span>
+<span class='PDMCnt'> 703</span> <span class='PDMInd'>  </span> 
+<span class='PDMCnt'> 704</span> <span class='PDMInd'> 1</span>  <span class='PDMResK'>CLEAR</span> <span class='PDMResK'>ALL</span>
+<span class='PDMCnt'> 705</span> <span class='PDMInd'> 1</span>  <span class='PDMResK'>CLOSE</span> <span class='PDMResK'>DATABASES</span> <span class='PDMResK'>ALL</span>
+<span class='PDMCnt'> 706</span> <span class='PDMInd'>  </span> 
+<span class='PDMCnt'> 707</span> <span class='PDMInd'>  </span> <span class='PDMCom'>*/Move</span>
+<span class='PDMCnt'> 708</span> <span class='PDMInd'> 1</span>  <span class='PDMResF'>REMOVEPROPERTY</span><span class='PDMOper'>(</span><span class='PDMVar'>_SCREEN</span><span class='PDMOper'>,</span><span class='PDMStr'>'gvMode'</span><span class='PDMOper'>)</span>
+<span class='PDMCnt'> 709</span> <span class='PDMInd'>  </span> 
+<span class='PDMCnt'> 710</span> <span class='PDMInd'>  </span> 
+<span class='PDMCnt'> 711</span> <span class='PDMInd'>  </span> <span class='PDMCom'>*Move</span>
+<span class='PDMCnt'> 712</span> <span class='PDMInd'> 1</span>  <span class='PDMResK'>LOCAL</span><span class='PDMOper'>;</span>
+<span class='PDMCnt'> 713</span> <span class='PDMInd'> 2</span>   <span class='PDMVar'>lcProj</span>      <span class='PDMResK'>AS</span> <span class='PDMResK'>CHARACTER</span><span class='PDMOper'>,</span><span class='PDMOper'>;</span>
+<span class='PDMCnt'> 714</span> <span class='PDMInd'> 2</span>   <span class='PDMVar'>lcSourceExt</span> <span class='PDMResK'>AS</span> <span class='PDMResK'>CHARACTER</span><span class='PDMOper'>,</span><span class='PDMOper'>;</span>
+<span class='PDMCnt'> 715</span> <span class='PDMInd'> 2</span>   <span class='PDMVar'>lnProj</span>      <span class='PDMResK'>AS</span> <span class='PDMResK'>NUMBER</span><span class='PDMOper'>,</span><span class='PDMOper'>;</span>
+<span class='PDMCnt'> 716</span> <span class='PDMInd'> 2</span>   <span class='PDMVar'>lnProjs</span>     <span class='PDMResK'>AS</span> <span class='PDMResK'>NUMBER</span><span class='PDMOper'>,</span><span class='PDMOper'>;</span>
+<span class='PDMCnt'> 717</span> <span class='PDMInd'> 2</span>   <span class='PDMVar'>lnReturn</span>    <span class='PDMResK'>AS</span> <span class='PDMResK'>NUMBER</span><span class='PDMOper'>,</span><span class='PDMOper'>;</span>
+<span class='PDMCnt'> 718</span> <span class='PDMInd'> 2</span>   <span class='PDMVar'>llNotFound</span>  <span class='PDMResK'>AS</span> <span class='PDMVar'>BOOLEAN</span><span class='PDMOper'>,</span><span class='PDMOper'>;</span>
+<span class='PDMCnt'> 719</span> <span class='PDMInd'> 2</span>   <span class='PDMVar'>loProject</span>   <span class='PDMResK'>AS</span> <span class='PDMResK'>PROJECT</span>
 <span class='PDMCnt'> 720</span> <span class='PDMInd'>  </span> 
-<span class='PDMCnt'> 721</span> <span class='PDMInd'>  </span> <span class='PDMCom'>*/process Transformation</span>
+<span class='PDMCnt'> 721</span> <span class='PDMInd'> 1</span>  <span class='PDMResK'>IF</span> <span class='PDMOper'>!</span><span class='PDMResF'>ISNULL</span><span class='PDMOper'>(</span><span class='PDMVar'>_SCREEN</span><span class='PDMOper'>.</span><span class='PDMVar'>gaProjects</span><span class='PDMOper'>(</span><span class='PDMLit'>1</span><span class='PDMOper'>,</span><span class='PDMLit'>1</span><span class='PDMOper'>)</span><span class='PDMOper'>)</span> <span class='PDMResK'>THEN</span>
 <span class='PDMCnt'> 722</span> <span class='PDMInd'>  </span> 
-<span class='PDMCnt'> 723</span> <span class='PDMInd'>  </span> <span class='PDMCom'>*reopen  all the projects in the IDE / from ReStorePjx</span>
-<span class='PDMCnt'> 724</span> <span class='PDMInd'> 2</span>   <span class='PDMVar'>lnProjs</span> <span class='PDMOper'>=</span> <span class='PDMResF'>ALEN</span><span class='PDMOper'>(</span><span class='PDMVar'>_SCREEN</span><span class='PDMOper'>.</span><span class='PDMVar'>gaProjects</span><span class='PDMOper'>,</span><span class='PDMLit'>1</span><span class='PDMOper'>)</span>
-<span class='PDMCnt'> 725</span> <span class='PDMInd'> 2</span>   <span class='PDMResK'>FOR</span> <span class='PDMVar'>lnProj</span> <span class='PDMOper'>=</span> <span class='PDMVar'>m</span><span class='PDMOper'>.</span><span class='PDMVar'>lnProjs</span> <span class='PDMResK'>TO</span> <span class='PDMLit'>1</span> <span class='PDMResK'>STEP</span> <span class='PDMOper'>-</span><span class='PDMLit'>1</span>
-<span class='PDMCnt'> 726</span> <span class='PDMInd'> 3</span>    <span class='PDMVar'>lcProj</span> <span class='PDMOper'>=</span> <span class='PDMVar'>_SCREEN</span><span class='PDMOper'>.</span><span class='PDMVar'>gaProjects</span><span class='PDMOper'>(</span><span class='PDMVar'>m</span><span class='PDMOper'>.</span><span class='PDMVar'>lnProj</span><span class='PDMOper'>,</span><span class='PDMLit'>1</span><span class='PDMOper'>)</span>
-<span class='PDMCnt'> 727</span> <span class='PDMInd'> 3</span>    <span class='PDMResK'>IF</span> <span class='PDMOper'>!</span><span class='PDMResF'>FILE</span><span class='PDMOper'>(</span><span class='PDMVar'>m</span><span class='PDMOper'>.</span><span class='PDMVar'>lcProj</span><span class='PDMOper'>)</span> <span class='PDMResK'>THEN</span>
-<span class='PDMCnt'> 728</span> <span class='PDMInd'> 4</span>     <span class='PDMResK'>LOOP</span>
-<span class='PDMCnt'> 729</span> <span class='PDMInd'> 3</span>    <span class='PDMResK'>ENDIF</span> <span class='PDMCom'>&amp;&amp;!FILE(m.lcProj)</span>
-<span class='PDMCnt'> 730</span> <span class='PDMInd'>  </span> 
-<span class='PDMCnt'> 731</span> <span class='PDMInd'> 3</span>    <span class='PDMVar'>llNotFound</span> <span class='PDMOper'>=</span> <span class='PDMLit'>.T.</span>
-<span class='PDMCnt'> 732</span> <span class='PDMInd'> 3</span>    <span class='PDMResK'>FOR</span> <span class='PDMResK'>EACH</span> <span class='PDMVar'>m</span><span class='PDMOper'>.</span><span class='PDMVar'>loProject</span> <span class='PDMResK'>IN</span> <span class='PDMVar'>_VFP</span><span class='PDMOper'>.</span><span class='PDMVar'>PROJECTS</span> <span class='PDMResK'>FOXOBJECT</span>
-<span class='PDMCnt'> 733</span> <span class='PDMInd'> 4</span>     <span class='PDMResK'>IF</span> <span class='PDMResF'>UPPER</span><span class='PDMOper'>(</span><span class='PDMResF'>JUSTSTEM</span><span class='PDMOper'>(</span><span class='PDMVar'>m</span><span class='PDMOper'>.</span><span class='PDMVar'>loProject</span><span class='PDMOper'>.</span><span class='PDMResP'>NAME</span><span class='PDMOper'>)</span><span class='PDMOper'>)</span><span class='PDMOper'>==</span><span class='PDMVar'>m</span><span class='PDMOper'>.</span><span class='PDMVar'>lcProj</span> <span class='PDMResK'>THEN</span>
-<span class='PDMCnt'> 734</span> <span class='PDMInd'> 5</span>      <span class='PDMVar'>llNotFound</span> <span class='PDMOper'>=</span> <span class='PDMLit'>.F.</span>
-<span class='PDMCnt'> 735</span> <span class='PDMInd'> 5</span>      <span class='PDMResK'>EXIT</span>
-<span class='PDMCnt'> 736</span> <span class='PDMInd'> 4</span>     <span class='PDMResK'>ENDIF</span> <span class='PDMCom'>&amp;&amp;UPPER(JUSTSTEM(m.loProject.NAME))==m.lcProj</span>
-<span class='PDMCnt'> 737</span> <span class='PDMInd'> 3</span>    <span class='PDMResK'>ENDFOR</span> <span class='PDMCom'>&amp;&amp;loProject</span>
-<span class='PDMCnt'> 738</span> <span class='PDMInd'>  </span> 
-<span class='PDMCnt'> 739</span> <span class='PDMInd'> 3</span>    <span class='PDMResK'>IF</span> <span class='PDMVar'>m</span><span class='PDMOper'>.</span><span class='PDMVar'>llNotFound</span> <span class='PDMResK'>THEN</span>
-<span class='PDMCnt'> 740</span> <span class='PDMInd'> 4</span>     <span class='PDMResK'>MODIFY</span> <span class='PDMResK'>PROJECT</span> <span class='PDMOper'>(</span><span class='PDMVar'>m</span><span class='PDMOper'>.</span><span class='PDMVar'>lcProj</span><span class='PDMOper'>)</span> <span class='PDMResK'>NOWAIT</span> <span class='PDMResK'>SAVE</span>
-<span class='PDMCnt'> 741</span> <span class='PDMInd'> 4</span>     <span class='PDMVar'>loProject</span>          <span class='PDMOper'>=</span> <span class='PDMVar'>_VFP</span><span class='PDMOper'>.</span><span class='PDMVar'>ACTIVEPROJECT</span>
-<span class='PDMCnt'> 742</span> <span class='PDMInd'> 4</span>     <span class='PDMVar'>loProject</span><span class='PDMOper'>.</span><span class='PDMResP'>VISIBLE</span> <span class='PDMOper'>=</span> <span class='PDMLit'>.F.</span>
-<span class='PDMCnt'> 743</span> <span class='PDMInd'> 4</span>     <span class='PDMVar'>loProject</span><span class='PDMOper'>.</span><span class='PDMResP'>VISIBLE</span> <span class='PDMOper'>=</span> <span class='PDMLit'>.T.</span>
-<span class='PDMCnt'> 744</span> <span class='PDMInd'>  </span> <span class='PDMCom'>*SF internal</span>
-<span class='PDMCnt'> 745</span> <span class='PDMInd'> 4</span>     <span class='PDMResK'>IF</span> <span class='PDMResF'>VARTYPE</span><span class='PDMOper'>(</span><span class='PDMVar'>m</span><span class='PDMOper'>.</span><span class='PDMVar'>loProject</span><span class='PDMOper'>.</span><span class='PDMResP'>PROJECTHOOK</span><span class='PDMOper'>)</span><span class='PDMOper'>=</span><span class='PDMStr'>'O'</span><span class='PDMOper'>;</span>
-<span class='PDMCnt'> 746</span> <span class='PDMInd'> 6</span>       <span class='PDMOper'>AND</span> <span class='PDMOper'>!</span><span class='PDMResF'>ISNULL</span><span class='PDMOper'>(</span><span class='PDMVar'>m</span><span class='PDMOper'>.</span><span class='PDMVar'>loProject</span><span class='PDMOper'>.</span><span class='PDMResP'>PROJECTHOOK</span><span class='PDMOper'>)</span><span class='PDMOper'>;</span>
-<span class='PDMCnt'> 747</span> <span class='PDMInd'> 6</span>       <span class='PDMOper'>AND</span> <span class='PDMResF'>PEMSTATUS</span><span class='PDMOper'>(</span><span class='PDMVar'>m</span><span class='PDMOper'>.</span><span class='PDMVar'>loProject</span><span class='PDMOper'>.</span><span class='PDMResP'>PROJECTHOOK</span><span class='PDMOper'>,</span><span class='PDMStr'>'glCompileAll'</span><span class='PDMOper'>,</span><span class='PDMLit'>5</span><span class='PDMOper'>)</span> <span class='PDMResK'>THEN</span>
-<span class='PDMCnt'> 748</span> <span class='PDMInd'> 5</span>      <span class='PDMVar'>loProject</span><span class='PDMOper'>.</span><span class='PDMResP'>PROJECTHOOK</span><span class='PDMOper'>.</span><span class='PDMVar'>glCompileAll</span> <span class='PDMOper'>=</span> <span class='PDMVar'>_SCREEN</span><span class='PDMOper'>.</span><span class='PDMVar'>gaProjects</span><span class='PDMOper'>(</span><span class='PDMVar'>m</span><span class='PDMOper'>.</span><span class='PDMVar'>lnProj</span><span class='PDMOper'>,</span><span class='PDMLit'>2</span><span class='PDMOper'>)</span>
-<span class='PDMCnt'> 749</span> <span class='PDMInd'> 4</span>     <span class='PDMResK'>ENDIF</span> <span class='PDMCom'>&amp;&amp;VARTYPE(m.loProject.PROJECTHOOK)='O' AND !ISNULL(m.loProject.PROJECTHOOK) AND PEMSTATUS(m.loProject. ...</span>
-<span class='PDMCnt'> 750</span> <span class='PDMInd'>  </span> <span class='PDMCom'>*/SF internal</span>
-<span class='PDMCnt'> 751</span> <span class='PDMInd'> 3</span>    <span class='PDMResK'>ENDIF</span> <span class='PDMCom'>&amp;&amp;m.llNotFound</span>
-<span class='PDMCnt'> 752</span> <span class='PDMInd'> 2</span>   <span class='PDMResK'>ENDFOR</span> <span class='PDMCom'>&amp;&amp;lnProj</span>
-<span class='PDMCnt'> 753</span> <span class='PDMInd'> 1</span>  <span class='PDMResK'>ENDIF</span> <span class='PDMCom'>&amp;&amp;!ISNULL(_SCREEN.gaProjects(1,1))</span>
-<span class='PDMCnt'> 754</span> <span class='PDMInd'>  </span> 
-<span class='PDMCnt'> 755</span> <span class='PDMInd'> 1</span>  <span class='PDMResF'>REMOVEPROPERTY</span><span class='PDMOper'>(</span><span class='PDMVar'>_SCREEN</span><span class='PDMOper'>,</span><span class='PDMStr'>'gaProjects'</span><span class='PDMOper'>)</span>
+<span class='PDMCnt'> 723</span> <span class='PDMInd'>  </span> <span class='PDMCom'>*/process Transformation</span>
+<span class='PDMCnt'> 724</span> <span class='PDMInd'>  </span> 
+<span class='PDMCnt'> 725</span> <span class='PDMInd'>  </span> <span class='PDMCom'>*reopen  all the projects in the IDE / from ReStorePjx</span>
+<span class='PDMCnt'> 726</span> <span class='PDMInd'> 2</span>   <span class='PDMVar'>lnProjs</span> <span class='PDMOper'>=</span> <span class='PDMResF'>ALEN</span><span class='PDMOper'>(</span><span class='PDMVar'>_SCREEN</span><span class='PDMOper'>.</span><span class='PDMVar'>gaProjects</span><span class='PDMOper'>,</span><span class='PDMLit'>1</span><span class='PDMOper'>)</span>
+<span class='PDMCnt'> 727</span> <span class='PDMInd'> 2</span>   <span class='PDMResK'>FOR</span> <span class='PDMVar'>lnProj</span> <span class='PDMOper'>=</span> <span class='PDMVar'>m</span><span class='PDMOper'>.</span><span class='PDMVar'>lnProjs</span> <span class='PDMResK'>TO</span> <span class='PDMLit'>1</span> <span class='PDMResK'>STEP</span> <span class='PDMOper'>-</span><span class='PDMLit'>1</span>
+<span class='PDMCnt'> 728</span> <span class='PDMInd'> 3</span>    <span class='PDMVar'>lcProj</span> <span class='PDMOper'>=</span> <span class='PDMVar'>_SCREEN</span><span class='PDMOper'>.</span><span class='PDMVar'>gaProjects</span><span class='PDMOper'>(</span><span class='PDMVar'>m</span><span class='PDMOper'>.</span><span class='PDMVar'>lnProj</span><span class='PDMOper'>,</span><span class='PDMLit'>1</span><span class='PDMOper'>)</span>
+<span class='PDMCnt'> 729</span> <span class='PDMInd'> 3</span>    <span class='PDMResK'>IF</span> <span class='PDMOper'>!</span><span class='PDMResF'>FILE</span><span class='PDMOper'>(</span><span class='PDMVar'>m</span><span class='PDMOper'>.</span><span class='PDMVar'>lcProj</span><span class='PDMOper'>)</span> <span class='PDMResK'>THEN</span>
+<span class='PDMCnt'> 730</span> <span class='PDMInd'> 4</span>     <span class='PDMResK'>LOOP</span>
+<span class='PDMCnt'> 731</span> <span class='PDMInd'> 3</span>    <span class='PDMResK'>ENDIF</span> <span class='PDMCom'>&amp;&amp;!FILE(m.lcProj)</span>
+<span class='PDMCnt'> 732</span> <span class='PDMInd'>  </span> 
+<span class='PDMCnt'> 733</span> <span class='PDMInd'> 3</span>    <span class='PDMVar'>llNotFound</span> <span class='PDMOper'>=</span> <span class='PDMLit'>.T.</span>
+<span class='PDMCnt'> 734</span> <span class='PDMInd'> 3</span>    <span class='PDMResK'>FOR</span> <span class='PDMResK'>EACH</span> <span class='PDMVar'>m</span><span class='PDMOper'>.</span><span class='PDMVar'>loProject</span> <span class='PDMResK'>IN</span> <span class='PDMVar'>_VFP</span><span class='PDMOper'>.</span><span class='PDMVar'>PROJECTS</span> <span class='PDMResK'>FOXOBJECT</span>
+<span class='PDMCnt'> 735</span> <span class='PDMInd'> 4</span>     <span class='PDMResK'>IF</span> <span class='PDMResF'>UPPER</span><span class='PDMOper'>(</span><span class='PDMResF'>JUSTSTEM</span><span class='PDMOper'>(</span><span class='PDMVar'>m</span><span class='PDMOper'>.</span><span class='PDMVar'>loProject</span><span class='PDMOper'>.</span><span class='PDMResP'>NAME</span><span class='PDMOper'>)</span><span class='PDMOper'>)</span><span class='PDMOper'>==</span><span class='PDMVar'>m</span><span class='PDMOper'>.</span><span class='PDMVar'>lcProj</span> <span class='PDMResK'>THEN</span>
+<span class='PDMCnt'> 736</span> <span class='PDMInd'> 5</span>      <span class='PDMVar'>llNotFound</span> <span class='PDMOper'>=</span> <span class='PDMLit'>.F.</span>
+<span class='PDMCnt'> 737</span> <span class='PDMInd'> 5</span>      <span class='PDMResK'>EXIT</span>
+<span class='PDMCnt'> 738</span> <span class='PDMInd'> 4</span>     <span class='PDMResK'>ENDIF</span> <span class='PDMCom'>&amp;&amp;UPPER(JUSTSTEM(m.loProject.NAME))==m.lcProj</span>
+<span class='PDMCnt'> 739</span> <span class='PDMInd'> 3</span>    <span class='PDMResK'>ENDFOR</span> <span class='PDMCom'>&amp;&amp;loProject</span>
+<span class='PDMCnt'> 740</span> <span class='PDMInd'>  </span> 
+<span class='PDMCnt'> 741</span> <span class='PDMInd'> 3</span>    <span class='PDMResK'>IF</span> <span class='PDMVar'>m</span><span class='PDMOper'>.</span><span class='PDMVar'>llNotFound</span> <span class='PDMResK'>THEN</span>
+<span class='PDMCnt'> 742</span> <span class='PDMInd'> 4</span>     <span class='PDMResK'>MODIFY</span> <span class='PDMResK'>PROJECT</span> <span class='PDMOper'>(</span><span class='PDMVar'>m</span><span class='PDMOper'>.</span><span class='PDMVar'>lcProj</span><span class='PDMOper'>)</span> <span class='PDMResK'>NOWAIT</span> <span class='PDMResK'>SAVE</span>
+<span class='PDMCnt'> 743</span> <span class='PDMInd'> 4</span>     <span class='PDMVar'>loProject</span>          <span class='PDMOper'>=</span> <span class='PDMVar'>_VFP</span><span class='PDMOper'>.</span><span class='PDMVar'>ACTIVEPROJECT</span>
+<span class='PDMCnt'> 744</span> <span class='PDMInd'> 4</span>     <span class='PDMVar'>loProject</span><span class='PDMOper'>.</span><span class='PDMResP'>VISIBLE</span> <span class='PDMOper'>=</span> <span class='PDMLit'>.F.</span>
+<span class='PDMCnt'> 745</span> <span class='PDMInd'> 4</span>     <span class='PDMVar'>loProject</span><span class='PDMOper'>.</span><span class='PDMResP'>VISIBLE</span> <span class='PDMOper'>=</span> <span class='PDMLit'>.T.</span>
+<span class='PDMCnt'> 746</span> <span class='PDMInd'>  </span> <span class='PDMCom'>*SF internal</span>
+<span class='PDMCnt'> 747</span> <span class='PDMInd'> 4</span>     <span class='PDMResK'>IF</span> <span class='PDMResF'>VARTYPE</span><span class='PDMOper'>(</span><span class='PDMVar'>m</span><span class='PDMOper'>.</span><span class='PDMVar'>loProject</span><span class='PDMOper'>.</span><span class='PDMResP'>PROJECTHOOK</span><span class='PDMOper'>)</span><span class='PDMOper'>=</span><span class='PDMStr'>'O'</span><span class='PDMOper'>;</span>
+<span class='PDMCnt'> 748</span> <span class='PDMInd'> 6</span>       <span class='PDMOper'>AND</span> <span class='PDMOper'>!</span><span class='PDMResF'>ISNULL</span><span class='PDMOper'>(</span><span class='PDMVar'>m</span><span class='PDMOper'>.</span><span class='PDMVar'>loProject</span><span class='PDMOper'>.</span><span class='PDMResP'>PROJECTHOOK</span><span class='PDMOper'>)</span><span class='PDMOper'>;</span>
+<span class='PDMCnt'> 749</span> <span class='PDMInd'> 6</span>       <span class='PDMOper'>AND</span> <span class='PDMResF'>PEMSTATUS</span><span class='PDMOper'>(</span><span class='PDMVar'>m</span><span class='PDMOper'>.</span><span class='PDMVar'>loProject</span><span class='PDMOper'>.</span><span class='PDMResP'>PROJECTHOOK</span><span class='PDMOper'>,</span><span class='PDMStr'>'glCompileAll'</span><span class='PDMOper'>,</span><span class='PDMLit'>5</span><span class='PDMOper'>)</span> <span class='PDMResK'>THEN</span>
+<span class='PDMCnt'> 750</span> <span class='PDMInd'> 5</span>      <span class='PDMVar'>loProject</span><span class='PDMOper'>.</span><span class='PDMResP'>PROJECTHOOK</span><span class='PDMOper'>.</span><span class='PDMVar'>glCompileAll</span> <span class='PDMOper'>=</span> <span class='PDMVar'>_SCREEN</span><span class='PDMOper'>.</span><span class='PDMVar'>gaProjects</span><span class='PDMOper'>(</span><span class='PDMVar'>m</span><span class='PDMOper'>.</span><span class='PDMVar'>lnProj</span><span class='PDMOper'>,</span><span class='PDMLit'>2</span><span class='PDMOper'>)</span>
+<span class='PDMCnt'> 751</span> <span class='PDMInd'> 4</span>     <span class='PDMResK'>ENDIF</span> <span class='PDMCom'>&amp;&amp;VARTYPE(m.loProject.PROJECTHOOK)='O' AND !ISNULL(m.loProject.PROJECTHOOK) AND PEMSTATUS(m.loProject. ...</span>
+<span class='PDMCnt'> 752</span> <span class='PDMInd'>  </span> <span class='PDMCom'>*/SF internal</span>
+<span class='PDMCnt'> 753</span> <span class='PDMInd'> 3</span>    <span class='PDMResK'>ENDIF</span> <span class='PDMCom'>&amp;&amp;m.llNotFound</span>
+<span class='PDMCnt'> 754</span> <span class='PDMInd'> 2</span>   <span class='PDMResK'>ENDFOR</span> <span class='PDMCom'>&amp;&amp;lnProj</span>
+<span class='PDMCnt'> 755</span> <span class='PDMInd'> 1</span>  <span class='PDMResK'>ENDIF</span> <span class='PDMCom'>&amp;&amp;!ISNULL(_SCREEN.gaProjects(1,1))</span>
 <span class='PDMCnt'> 756</span> <span class='PDMInd'>  </span> 
-<span class='PDMCnt'> 757</span> <span class='PDMInd'> 1</span>  <span class='PDMResK'>CLEAR</span> <span class='PDMResK'>ALL</span>
+<span class='PDMCnt'> 757</span> <span class='PDMInd'> 1</span>  <span class='PDMResF'>REMOVEPROPERTY</span><span class='PDMOper'>(</span><span class='PDMVar'>_SCREEN</span><span class='PDMOper'>,</span><span class='PDMStr'>'gaProjects'</span><span class='PDMOper'>)</span>
 <span class='PDMCnt'> 758</span> <span class='PDMInd'>  </span> 
-<span class='PDMCnt'> 759</span> <span class='PDMInd'>  </span> <span class='PDMCom'>*!*    Changed by: SF 5.6.2015</span>
-<span class='PDMCnt'> 760</span> <span class='PDMInd'>  </span> 
-<span class='PDMCnt'> 765</span> <span class='PDMInd'> 1</span>  <span class='PDMVar'>lcProj</span> <span class='PDMOper'>=</span> <span class='PDMVar'>GetBranch</span><span class='PDMOper'>(</span><span class='PDMOper'>)</span>
-<span class='PDMCnt'> 766</span> <span class='PDMInd'> 1</span>  <span class='PDMResK'>IF</span> <span class='PDMOper'>!</span><span class='PDMResF'>EMPTY</span><span class='PDMOper'>(</span><span class='PDMVar'>m</span><span class='PDMOper'>.</span><span class='PDMVar'>lcProj</span><span class='PDMOper'>)</span> <span class='PDMResK'>THEN</span>
-<span class='PDMCnt'> 767</span> <span class='PDMInd'> 2</span>   <span class='PDMOper'>?</span><span class='PDMStr'>'On branch '</span><span class='PDMOper'>+</span><span class='PDMVar'>m</span><span class='PDMOper'>.</span><span class='PDMVar'>lcProj</span>
-<span class='PDMCnt'> 768</span> <span class='PDMInd'> 1</span>  <span class='PDMResK'>ENDIF</span> <span class='PDMCom'>&amp;&amp;!EMPTY(m.lcProj)</span>
-<span class='PDMCnt'> 769</span> <span class='PDMInd'>  </span> <span class='PDMCom'>*!*    /Changed by: SF 5.6.2015</span>
-<span class='PDMCnt'> 770</span> <span class='PDMInd'>  </span> 
-<span class='PDMCnt'> 771</span> <span class='PDMInd'> 1</span>  <span class='PDMResK'>CD</span> <span class='PDMOper'>(</span><span class='PDMVar'>_SCREEN</span><span class='PDMOper'>.</span><span class='PDMVar'>gcOld_Path</span><span class='PDMOper'>)</span>
-<span class='PDMCnt'> 772</span> <span class='PDMInd'> 1</span>  <span class='PDMResF'>REMOVEPROPERTY</span><span class='PDMOper'>(</span><span class='PDMVar'>_SCREEN</span><span class='PDMOper'>,</span><span class='PDMStr'>'gcOld_Path'</span><span class='PDMOper'>)</span>
+<span class='PDMCnt'> 759</span> <span class='PDMInd'> 1</span>  <span class='PDMResK'>CLEAR</span> <span class='PDMResK'>ALL</span>
+<span class='PDMCnt'> 760</span> <span class='PDMInd'> 1</span>  <span class='PDMResK'>CLOSE</span> <span class='PDMResK'>DATABASES</span> <span class='PDMResK'>ALL</span>
+<span class='PDMCnt'> 761</span> <span class='PDMInd'>  </span> 
+<span class='PDMCnt'> 762</span> <span class='PDMInd'>  </span> <span class='PDMCom'>*!*    Changed by: SF 5.6.2015</span>
+<span class='PDMCnt'> 763</span> <span class='PDMInd'>  </span> 
+<span class='PDMCnt'> 768</span> <span class='PDMInd'> 1</span>  <span class='PDMVar'>lcProj</span> <span class='PDMOper'>=</span> <span class='PDMVar'>GetBranch</span><span class='PDMOper'>(</span><span class='PDMOper'>)</span>
+<span class='PDMCnt'> 769</span> <span class='PDMInd'> 1</span>  <span class='PDMResK'>IF</span> <span class='PDMOper'>!</span><span class='PDMResF'>EMPTY</span><span class='PDMOper'>(</span><span class='PDMVar'>m</span><span class='PDMOper'>.</span><span class='PDMVar'>lcProj</span><span class='PDMOper'>)</span> <span class='PDMResK'>THEN</span>
+<span class='PDMCnt'> 770</span> <span class='PDMInd'> 2</span>   <span class='PDMOper'>?</span><span class='PDMStr'>'On branch '</span><span class='PDMOper'>+</span><span class='PDMVar'>m</span><span class='PDMOper'>.</span><span class='PDMVar'>lcProj</span>
+<span class='PDMCnt'> 771</span> <span class='PDMInd'> 1</span>  <span class='PDMResK'>ENDIF</span> <span class='PDMCom'>&amp;&amp;!EMPTY(m.lcProj)</span>
+<span class='PDMCnt'> 772</span> <span class='PDMInd'>  </span> <span class='PDMCom'>*!*    /Changed by: SF 5.6.2015</span>
 <span class='PDMCnt'> 773</span> <span class='PDMInd'>  </span> 
-<span class='PDMCnt'> 774</span> <span class='PDMInd'> 1</span>  <span class='PDMVar'>SwitchErrorHandler</span><span class='PDMOper'>(</span><span class='PDMLit'>.F.</span><span class='PDMOper'>)</span></pre>
+<span class='PDMCnt'> 774</span> <span class='PDMInd'> 1</span>  <span class='PDMResK'>CD</span> <span class='PDMOper'>(</span><span class='PDMVar'>_SCREEN</span><span class='PDMOper'>.</span><span class='PDMVar'>gcOld_Path</span><span class='PDMOper'>)</span>
+<span class='PDMCnt'> 775</span> <span class='PDMInd'> 1</span>  <span class='PDMResF'>REMOVEPROPERTY</span><span class='PDMOper'>(</span><span class='PDMVar'>_SCREEN</span><span class='PDMOper'>,</span><span class='PDMStr'>'gcOld_Path'</span><span class='PDMOper'>)</span>
+<span class='PDMCnt'> 776</span> <span class='PDMInd'>  </span> 
+<span class='PDMCnt'> 777</span> <span class='PDMInd'> 1</span>  <span class='PDMVar'>SwitchErrorHandler</span><span class='PDMOper'>(</span><span class='PDMLit'>.F.</span><span class='PDMOper'>)</span></pre>
  <!-- Code End -->
   </div>
  </div>

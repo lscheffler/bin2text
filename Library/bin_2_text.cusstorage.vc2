@@ -3443,17 +3443,35 @@ DEFINE CLASS cusstorage AS custom 		&& The stuff that does the work.
 		 CASE m.lnResult=1
 		*table is of new version
 		  ?"Bin2Text"
-		  ?"Storage table is not fitting to this version. Expected: "+dcB2T_Verno+", found: "+cUniqueId
+		  ?"Storage table is not fitting to this version. Expected: "+dcB2T_Verno+", new version found: "+cUniqueId
 		  ?'Table: '+DBF('Storage')
 		  USE IN curHelp
 		  USE IN SELECT('Storage')
 		  RETURN NIL
 		
+		 CASE m.lnResult=2;
+		   AND SUBSTR(cUniqueId,1,AT('.',cUniqueId,2))==SUBSTR(dcB2T_Verno,1,AT('.',dcB2T_Verno,2))
+		*known pair, go ahead (only minor change w/o dbf change)
+		  UPDATE Storage SET;
+		   cUniqueId = dcB2T_Verno;
+		   WHERE cType=="X"
+		
+		 CASE m.lnResult=2;
+		   AND SUBSTR(cUniqueId,1,AT('.',cUniqueId,2))='1.0' AND SUBSTR(dcB2T_Verno,1,AT('.',dcB2T_Verno,2))='1.1'
+		* change storage of additional path "inkomensurabel" to relative
+		  UPDATE Storage SET;
+		   cFile = SYS(2014,cFile,DBF('Storage'));
+		   WHERE cType=="A"
+		
+		  UPDATE Storage SET;
+		   cUniqueId = dcB2T_Verno;
+		   WHERE cType=="X"
+		
 		 CASE m.lnResult=2
 		*table is of old version
 		*update added here ....
 		  ?"Bin2Text"
-		  ?"Storage table is not fitting to this version. Expected: "+dcB2T_Verno+", found: "+cUniqueId
+		  ?"Storage table is not fitting to this version. Expected: "+dcB2T_Verno+", old version found: "+cUniqueId
 		  ?'Table: '+DBF('Storage')
 		  USE IN curHelp
 		  USE IN SELECT('Storage')
