@@ -1,0 +1,18 @@
+lparameters toUpdateObject
+local;
+ ldDate,;
+ lcappName,;
+ lcmajorVersion,;
+ lnJulian,;
+ lcJulian
+
+lcappName      = "Bin2Text"
+ldDate         = date(2021,03,29)
+lcmajorVersion = "1.1.1"
+
+lnJulian = val(sys(11, m.ldDate)) - val(sys(11, {^2000-01-01}))
+lcJulian = padl(transform(lnJulian), 4, '0')
+toUpdateObject.AvailableVersion = m.lcappName + '-' + m.lcmajorVersion + m.lcJulian + ;
+	'-update-' + dtoc(m.ldDate, 1)
+
+return m.toUpdateObject
