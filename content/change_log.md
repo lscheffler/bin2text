@@ -5,6 +5,15 @@ This page gives a brief overview of changes to the [Bin 2 Text Extension](https:
 A complete list of changes is available on the offline documentation via **local folder** _docu/index.htm_.
 
 ---
+### Version 1.1.1
+
+Stable release.
+* Additional files Internal set counter wrong
+* Processing of projects. Error on files missing and user canceled MODI PROJECT.
+* Processing of tags onb non free tables. Processing of tags let databases open what would raise handling the DBC.
+* Iterating subdirs. Call on itertation used wrong parameter.
+ 
+---
 ### Version 1.0.0
 Stable release.
 * Changes to tags will force processing whole DBF / DBC.

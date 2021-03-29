@@ -4089,8 +4089,9 @@ FUNCTION ScanDir		&&Internal. Recursivly scan directories
   IF INLIST(m.laDir(m.lnLoop1,1),'.','..') THEN
    LOOP
   ENDIF &&INLIST(laDir(m.lnLoop1,1),'.','..')
-  ScanDir(ADDBS(ADDBS(m.tcDir)+m.laDir(m.lnLoop1,1)),m.tlText2Bin,m.toConverter)
+  ScanDir(m.tnAction,ADDBS(ADDBS(m.tcDir)+m.laDir(m.lnLoop1,1)),m.tlText2Bin,m.toConverter)
  ENDFOR &&lnLoop1
+
  DO CASE
   CASE m.tnAction=1
    Dir_Action_PJX(m.tcDir,m.tlText2Bin,m.toConverter)
