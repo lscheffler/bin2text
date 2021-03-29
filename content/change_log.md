@@ -10,9 +10,10 @@ A complete list of changes is available on the offline documentation via **local
 Stable release.
 * Additional files Internal set counter wrong
 * Processing of projects. Error on files missing and user canceled MODI PROJECT.
-* Processing of tags onb non free tables. Processing of tags let databases open what would raise handling the DBC.
+* Processing of tags on non free tables. Processing of tags let databases open what would raise handling the DBC.
 * Iterating subdirs. Call on itertation used wrong parameter.
- 
+* Better integration into [Thor](https://github.com/VFPX/Thor).
+
 ---
 ### Version 1.0.0
 Stable release.
