@@ -1178,7 +1178,7 @@ DEFINE CLASS cusstorage AS custom 		&& The stuff that does the work.
 		*!*	  </dd>
 		*!*	 <dt>Column three</dt>
 		*!*	 <dd>
-		*!*	  Additional files to process, non structural index-files for DBF. 
+		*!*	  Additional files to process, non structural index-files for DBF.
 		*!*	  List of files, delimited by <expr>CHR(0)</expr>, starting with <expr>CHR(0)</expr>.<br/>
 		*!*	  Ignored if empty.
 		*!*	 </dd>
@@ -1327,7 +1327,8 @@ DEFINE CLASS cusstorage AS custom 		&& The stuff that does the work.
 		 FOR EACH loSetting IN m.loExtraFiles FOXOBJECT
 		  IF EMPTY(ASCAN(m.taFiles,m.loSetting.gcFile,1,-1,2,15)) THEN
 		*additional file not found. Add
-		   lnFiles = m.lnFiles+1
+		   lnFiles   = m.lnFiles+1
+		   lnOffsets = m.lnOffsets+1
 		   DIMENSION;
 		    m.taFiles(m.lnFiles,ALEN(m.taFiles,2))
 		
@@ -1495,7 +1496,7 @@ DEFINE CLASS cusstorage AS custom 		&& The stuff that does the work.
 		    _VFP.PROJECTS.ITEM(m.lcFile)
 		    llPJXOpen = .T.
 		
-		   CATCH TO loException WHEN m.loException.ERRORNO=1429
+		   CATCH TO loException WHEN m.loException.ERRORNO=1429 OR m.loException.ERRORNO=1428
 		* Abzufangender Fehler
 		    llPJXOpen = .F.
 		   CATCH TO loException
@@ -1511,7 +1512,23 @@ DEFINE CLASS cusstorage AS custom 		&& The stuff that does the work.
 		    MODIFY PROJECT (m.lcFile) NOWAIT NOSHOW NOPROJECTHOOK
 		    llPJXUsed = .T.
 		   ENDIF &&!m.llPJXOpen AND !m.llPJXUsed
-		   loProject = _VFP.PROJECTS(JUSTFNAME(m.lcFile))
+		   TRY
+		*Was zu testen ist
+		     loProject = _VFP.PROJECTS(JUSTFNAME(m.lcFile))
+		
+		    CATCH TO loException WHEN m.loException.ERRORNO=1429 OR m.loException.ERRORNO=1428
+		* Abzufangender Fehler -> project open cancled
+		     llPJXUsed = .F.
+		    CATCH TO loException
+		* andere Fehler, Standardhandler rufen
+		     THROW
+		    FINALLY
+		
+		   ENDTRY
+		
+		   IF !m.llPJXUsed THEN
+		    LOOP
+		   ENDIF &&!m.llPJXUsed
 		
 		   lnTable = 0
 		
@@ -1547,7 +1564,24 @@ DEFINE CLASS cusstorage AS custom 		&& The stuff that does the work.
 		    MODIFY PROJECT (m.lcFile) NOWAIT NOSHOW NOPROJECTHOOK
 		    llPJXUsed = .T.
 		   ENDIF &&!m.llPJXOpen AND !m.llPJXUsed
-		   loProject = _VFP.PROJECTS(JUSTFNAME(m.lcFile))
+		
+		   TRY
+		*Was zu testen ist
+		     loProject = _VFP.PROJECTS(JUSTFNAME(m.lcFile))
+		
+		    CATCH TO loException WHEN m.loException.ERRORNO=1429 OR m.loException.ERRORNO=1428
+		* Abzufangender Fehler -> project open cancled
+		     llPJXUsed = .F.
+		    CATCH TO loException
+		* andere Fehler, Standardhandler rufen
+		     THROW
+		    FINALLY
+		
+		   ENDTRY
+		
+		   IF !m.llPJXUsed THEN
+		    LOOP
+		   ENDIF &&!m.llPJXUsed
 		
 		   lcFile = ALLTRIM(m.loProject.PROJECTHOOKLIBRARY)
 		
@@ -2060,7 +2094,8 @@ DEFINE CLASS cusstorage AS custom 		&& The stuff that does the work.
 		 FOR EACH loSetting IN m.loExtraFiles FOXOBJECT
 		  IF EMPTY(ASCAN(m.taFiles,m.loSetting.gcFile,1,-1,2,15)) THEN
 		*additional file not found. Add
-		   lnFiles = m.lnFiles+1
+		   lnFiles   = m.lnFiles+1
+		   lnOffsets = m.lnOffsets+1 
 		   DIMENSION;
 		    m.taFiles(m.lnFiles,ALEN(m.taFiles,2))
 		
@@ -3626,13 +3661,14 @@ DEFINE CLASS cusstorage AS custom 		&& The stuff that does the work.
 		*!*	</pdm>
 		
 		LOCAL;
-		 lcFile2   AS CHARACTER,;
-		 lcCell    AS CHARACTER,;
-		 lcTags    AS CHARACTER,;
-		 lnStep    AS NUMBER,;
-		 llDirty   AS BOOLEAN,;
-		 llRecall  AS BOOLEAN,;
-		 llWithCDX AS BOOLEAN
+		 lcFile2    AS STRING,;
+		 lcCell     AS STRING,;
+		 lcTags     AS STRING,;
+		 lcDataBase AS STRING,;
+		 lnStep     AS NUMBER,;
+		 llDirty    AS BOOLEAN,;
+		 llRecall   AS BOOLEAN,;
+		 llWithCDX  AS BOOLEAN
 		
 		* we only check the taginfo of the cdx, the data of the index itself will not be stored anyway.
 		* no handling of additional CDX or IDX
@@ -3658,8 +3694,16 @@ DEFINE CLASS cusstorage AS custom 		&& The stuff that does the work.
 		
 		  SELECT 0
 		  USE (m.tcFile) ALIAS cur_Tags
+		  lcDataBase = CURSORGETPROP("Database")
+		
 		  ATAGINFO(laTags)
+		
 		  USE IN SELECT('cur_Tags')
+		  IF !EMPTY(m.lcDataBase) AND EMPTY(DBC()) THEN
+		   SET DATABASE TO (m.lcDataBase)
+		   CLOSE DATABASES 
+		  ENDIF &&!EMPTY(m.lcDataBase) AND EMPTY(DBC()) 
+		
 		  FOR EACH lcCell IN m.laTags
 		   lcTags = lcTags+lcCell
 		  ENDFOR &&lcTemp
