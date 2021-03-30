@@ -18,10 +18,10 @@ lcmajorVersion = "1.1.1"
 
 lcTemp = m.lcappName + ' - ' + m.lcmajorVersion + ;
 	' - update - ' + dtoc(m.ldDate, 1)
-AddProperty(toUpdateInfo, 'AvailableVersion', m.lcTemp)
+AddProperty(toUpdateObject, 'AvailableVersion', m.lcTemp)
 
 lcTemp = GetNotes()
-AddProperty(toUpdateInfo, 'Notes', m.lcTemp)
+AddProperty(toUpdateObject, 'Notes', m.lcTemp)
 
 return m.toUpdateObject
 
