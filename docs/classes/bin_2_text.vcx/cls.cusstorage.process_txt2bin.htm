@@ -25,21 +25,21 @@
 </table>
 </div>
 <div class="diaxp_mbody">
-<!-- Created with _diamp_pdm_ab by Agnes Beste    29.03.2021 19:19 -->
+<!-- Created with _diamp_pdm_ab by Agnes Beste    12.04.2021 14:00 -->
  <div class="PDM_AB_Descr"><!-- Descr Begin -->
 Process all files of a given Array.
  </div><!-- Descr End -->
 
  <div class="DIAMP_PDM_AB_Syntax"><!-- Syntax Begin -->
   <div class="SColor">
-   <div class="RetVal"><a href="#_60J15FNXA">RetVal</a>&nbsp;</div>   <div class="RetValEq">=</div>   <div class="PEM">
+   <div class="RetVal"><a href="#_60X0U0J0J">RetVal</a>&nbsp;</div>   <div class="RetValEq">=</div>   <div class="PEM">
     Object.process_txt2bin
    </div>
    <div class="Para">
-    (@<a href="#_60J15FNXB">taFiles</a>
-     <wbr />,<a href="#_60J15FNXC">tlCheckAll</a>
-     [<wbr />,<a href="#_60J15FNXD">tlIncludeAll</a>
-     [<wbr />,<a href="#_60J15FNXE">toFB2T_Setting</a>]])
+    (@<a href="#_60X0U0J0K">taFiles</a>
+     <wbr />,<a href="#_60X0U0J0L">tlCheckAll</a>
+     [<wbr />,<a href="#_60X0U0J0M">tlIncludeAll</a>
+     [<wbr />,<a href="#_60X0U0J0N">toFB2T_Setting</a>]])
    </div>
    <div style="clear: both"></div>
   </div><!-- Colour End -->
@@ -51,7 +51,7 @@ Process all files of a given Array.
   </span>
   <dl class="DIAMP_PDM_AB_Params_List">
    <dt class="dt_">
-    <a class="DIAMP_PDM_AB_Params_ParaName" id="_60J15FNXB" name="_60J15FNXB">
+    <a class="DIAMP_PDM_AB_Params_ParaName" id="_60X0U0J0K" name="_60X0U0J0K">
      <span class="PDMEXPR PDMNor" ><span class='PDMVar'>taFiles</span></span>
 
     </a>
@@ -104,7 +104,7 @@ Process all files of a given Array.
     </span>
    </dd>
    <dt class="dt_">
-    <a class="DIAMP_PDM_AB_Params_ParaName" id="_60J15FNXC" name="_60J15FNXC">
+    <a class="DIAMP_PDM_AB_Params_ParaName" id="_60X0U0J0L" name="_60X0U0J0L">
      <span class="PDMEXPR PDMNor" ><span class='PDMVar'>tlCheckAll</span></span>
 
     </a>
@@ -131,14 +131,14 @@ Process all files of a given Array.
     </table>
     <span class="Params_Detail">
 
-	<p>Checks if all files listed in <a class="DIAMP_PDM_AB_Para_Link" href="#_60J15FNXB">taFiles</a> are used.</p>
+	<p>Checks if all files listed in <a class="DIAMP_PDM_AB_Para_Link" href="#_60X0U0J0K">taFiles</a> are used.</p>
 	<p>If a file is not found, text file corresponding will be deleted.</p>
 	<p>Only if <b>Delete obsolete files</b> is checked in settings dialog.</p>
 	
     </span>
    </dd>
    <dt class="dt_">
-    <a class="DIAMP_PDM_AB_Params_ParaName" id="_60J15FNXD" name="_60J15FNXD">
+    <a class="DIAMP_PDM_AB_Params_ParaName" id="_60X0U0J0M" name="_60X0U0J0M">
      <span class="PDMEXPR PDMNor" ><span class='PDMVar'>tlIncludeAll</span></span>
 
     </a>
@@ -176,7 +176,7 @@ Process all files of a given Array.
     </span>
    </dd>
    <dt class="dt_">
-    <a class="DIAMP_PDM_AB_Params_ParaName" id="_60J15FNXE" name="_60J15FNXE">
+    <a class="DIAMP_PDM_AB_Params_ParaName" id="_60X0U0J0N" name="_60X0U0J0N">
      <span class="PDMEXPR PDMNor" ><span class='PDMVar'>toFB2T_Setting</span></span>
 
     </a>
@@ -216,7 +216,7 @@ A settings object as returned by FoxBin2PRgs Get_DirSettings. May be used to man
  <div class="DIAMP_PDM_AB_RetVal"><!-- Returns Begin -->
   <div>
    <span class="PDM_AB_Head">
-    <a id="_60J15FNXA" name="_60J15FNXA">
+    <a id="_60X0U0J0J" name="_60X0U0J0J">
      Return value
     </a>
    </span> <span class="RetVal_Ttype">Boolean</span>
@@ -238,7 +238,7 @@ Returns succcess of operation.
 	 <li>Accepts a mixed array of files. (including whole PJX) </li>
 	 <li>Can limit the Bin2Text operation to dirty files only.</li>
 	 <li>Can delete obsolete class files in ClassPerFile operations.</li>
-	 <li>Can delete obsolete files for removed binaries if <a class="DIAMP_PDM_AB_Para_Link" href="#_60J15FNXD">tlIncludeAll</a>.</li>
+	 <li>Can delete obsolete files for removed binaries if <a class="DIAMP_PDM_AB_Para_Link" href="#_60X0U0J0M">tlIncludeAll</a>.</li>
 	</ul>
 	<p>If text to binary, it just passes the files to FoxBin2Prg</p>
 	<p>Creating text files, depending on a setting, it first let check FoxBin2Prg what to do.
@@ -281,7 +281,7 @@ Changed by: SF<br />
     05.06.2015 11:19
    </span><br />
 Changed by: SF<br />
-	New parameter <a class="DIAMP_PDM_AB_Para_Link" href="#_60J15FNXD">tlIncludeAll</a>
+	New parameter <a class="DIAMP_PDM_AB_Para_Link" href="#_60X0U0J0M">tlIncludeAll</a>
 	
   </div>
   <div class="PDM_AB_Body">
@@ -315,7 +315,7 @@ Changed by: SF<br />
     13.03.2017 14:00
    </span><br />
 Changed by: SF<br />
-	<a class="DIAMP_PDM_AB_Para_Link" href="#_60J15FNXB">taFiles</a> may now hold text files for Text To Bin operation.
+	<a class="DIAMP_PDM_AB_Para_Link" href="#_60X0U0J0K">taFiles</a> may now hold text files for Text To Bin operation.
 	
   </div>
   <div class="PDM_AB_Body">
@@ -323,7 +323,7 @@ Changed by: SF<br />
     13.03.2017 16:00
    </span><br />
 Changed by: SF<br />
-	New parameter <a class="DIAMP_PDM_AB_Para_Link" href="#_60J15FNXE">toFB2T_Setting</a> to force single file operation.
+	New parameter <a class="DIAMP_PDM_AB_Para_Link" href="#_60X0U0J0N">toFB2T_Setting</a> to force single file operation.
 	
   </div>
   <div class="PDM_AB_Body">
@@ -345,7 +345,7 @@ Changed  by: SF<br />
  </div><!-- Changes End -->
 
 
-<!-- /Created with _diamp_pdm_ab by Agnes Beste    29.03.2021 19:19 -->
+<!-- /Created with _diamp_pdm_ab by Agnes Beste    12.04.2021 14:00 -->
 
  <div class="SC">
   <img onclick="ExpandSC('SP_40',-1);"class="imgEC" src="../../imgs/dotab.gif" alt="Expand/Collapse source code of procedure process_txt2bin" id="IMG_SP_40" />
@@ -930,7 +930,7 @@ Changed  by: SF<br />
 <span class='PDMCnt'> 679</span> <span class='PDMInd'> 4</span>     <span class='PDMVar'>m</span><span class='PDMOper'>.</span><span class='PDMVar'>laFiles2</span><span class='PDMOper'>(</span><span class='PDMLit'>1</span><span class='PDMOper'>,</span><span class='PDMLit'>1</span><span class='PDMOper'>)</span>
 <span class='PDMCnt'> 680</span> <span class='PDMInd'>  </span> <span class='PDMCom'>*just rework hooks and DBF's in storage table</span>
 <span class='PDMCnt'> 681</span> <span class='PDMInd'> 3</span>    <span class='PDMResK'>IF</span> <span class='PDMVar'>m</span><span class='PDMOper'>.</span><span class='PDMVar'>loConverter</span><span class='PDMOper'>.</span><span class='PDMVar'>Get_Processed</span><span class='PDMOper'>(</span><span class='PDMOper'>@</span><span class='PDMVar'>laFiles2</span><span class='PDMOper'>)</span><span class='PDMOper'>#</span><span class='PDMLit'>0</span> <span class='PDMResK'>THEN</span>
-<span class='PDMCnt'> 682</span> <span class='PDMInd'> 4</span>     <span class='PDMResK'>THIS</span><span class='PDMOper'>.</span><span class='PDMVar'>FilesToProcess</span><span class='PDMOper'>(</span><span class='PDMOper'>@</span><span class='PDMVar'>laFiles2</span><span class='PDMOper'>,</span><span class='PDMVar'>m</span><span class='PDMOper'>.</span><span class='PDMVar'>lcPath</span><span class='PDMOper'>,</span><span class='PDMVar'>m</span><span class='PDMOper'>.</span><span class='PDMVar'>tlText2Bin</span><span class='PDMOper'>,</span><span class='PDMLit'>.F.</span><span class='PDMOper'>,</span><span class='PDMVar'>m</span><span class='PDMOper'>.</span><span class='PDMVar'>lcStorage</span><span class='PDMOper'>,</span><span class='PDMVar'>m</span><span class='PDMOper'>.</span><span class='PDMVar'>loConverter</span><span class='PDMOper'>)</span>
+<span class='PDMCnt'> 682</span> <span class='PDMInd'> 4</span>     <span class='PDMResK'>THIS</span><span class='PDMOper'>.</span><span class='PDMVar'>FilesToProcess</span><span class='PDMOper'>(</span><span class='PDMOper'>@</span><span class='PDMVar'>laFiles2</span><span class='PDMOper'>,</span><span class='PDMVar'>m</span><span class='PDMOper'>.</span><span class='PDMVar'>lcPath</span><span class='PDMOper'>,</span><span class='PDMLit'>.T.</span><span class='PDMOper'>,</span><span class='PDMLit'>.F.</span><span class='PDMOper'>,</span><span class='PDMVar'>m</span><span class='PDMOper'>.</span><span class='PDMVar'>lcStorage</span><span class='PDMOper'>,</span><span class='PDMVar'>m</span><span class='PDMOper'>.</span><span class='PDMVar'>loConverter</span><span class='PDMOper'>)</span>
 <span class='PDMCnt'> 683</span> <span class='PDMInd'> 3</span>    <span class='PDMResK'>ENDIF</span> <span class='PDMCom'>&amp;&amp;loConverter.Get_Processed(@laFiles2)#0</span>
 <span class='PDMCnt'> 684</span> <span class='PDMInd'> 2</span>   <span class='PDMResK'>ENDIF</span> <span class='PDMCom'>&amp;&amp;m.lnOffset&gt;0</span>
 <span class='PDMCnt'> 685</span> <span class='PDMInd'>  </span> 

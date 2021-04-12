@@ -16,20 +16,20 @@
 <body>
 <div class="diaxp_mhead">Convert_Pjx_2Bin Function</div>
 <div class="diaxp_mbody">
-<!-- Created with _diamp_pdm_ab by Agnes Beste    29.03.2021 19:19 -->
+<!-- Created with _diamp_pdm_ab by Agnes Beste    12.04.2021 14:00 -->
  <div class="PDM_AB_Descr"><!-- Descr Begin -->
 Runs FoxBin2Prg for multiple projects to create project-binary.
  </div><!-- Descr End -->
 
  <div class="DIAMP_PDM_AB_Syntax"><!-- Syntax Begin -->
   <div class="SColor">
-   <div class="RetVal"><a href="#_60J15FOJP">RetVal</a>&nbsp;</div>   <div class="RetValEq">=</div>   <div class="PEM">
+   <div class="RetVal"><a href="#_60X0U0JBS">RetVal</a>&nbsp;</div>   <div class="RetValEq">=</div>   <div class="PEM">
     Convert_Pjx_2Bin
    </div>
    <div class="Para">
-    (<a href="#_60J15FOJQ">tnProjects</a>
-     <wbr />,<a href="#_60J15FOJR">tnMode</a>
-     [<wbr />,<a href="#_60J15FOJS">tcFile</a>])
+    (<a href="#_60X0U0JBT">tnProjects</a>
+     <wbr />,<a href="#_60X0U0JBU">tnMode</a>
+     [<wbr />,<a href="#_60X0U0JBV">tcFile</a>])
    </div>
    <div style="clear: both"></div>
   </div><!-- Colour End -->
@@ -41,7 +41,7 @@ Runs FoxBin2Prg for multiple projects to create project-binary.
   </span>
   <dl class="DIAMP_PDM_AB_Params_List">
    <dt class="dt_">
-    <a class="DIAMP_PDM_AB_Params_ParaName" id="_60J15FOJQ" name="_60J15FOJQ">
+    <a class="DIAMP_PDM_AB_Params_ParaName" id="_60X0U0JBT" name="_60X0U0JBT">
      <span class="PDMEXPR PDMNor" ><span class='PDMVar'>tnProjects</span></span>
 
     </a>
@@ -80,7 +80,7 @@ Runs FoxBin2Prg for multiple projects to create project-binary.
     </span>
    </dd>
    <dt class="dt_">
-    <a class="DIAMP_PDM_AB_Params_ParaName" id="_60J15FOJR" name="_60J15FOJR">
+    <a class="DIAMP_PDM_AB_Params_ParaName" id="_60X0U0JBU" name="_60X0U0JBU">
      <span class="PDMEXPR PDMNor" ><span class='PDMVar'>tnMode</span></span>
 
     </a>
@@ -123,7 +123,7 @@ Runs FoxBin2Prg for multiple projects to create project-binary.
     </span>
    </dd>
    <dt class="dt_">
-    <a class="DIAMP_PDM_AB_Params_ParaName" id="_60J15FOJS" name="_60J15FOJS">
+    <a class="DIAMP_PDM_AB_Params_ParaName" id="_60X0U0JBV" name="_60X0U0JBV">
      <span class="PDMEXPR PDMNor" ><span class='PDMVar'>tcFile</span></span>
 
     </a>
@@ -154,7 +154,7 @@ Runs FoxBin2Prg for multiple projects to create project-binary.
     </table>
     <span class="Params_Detail">
 
-	<p>For <a class="DIAMP_PDM_AB_Para_Link" href="#_60J15FOJQ">tnProjects</a>=0 only. Will be ignored for other values.
+	<p>For <a class="DIAMP_PDM_AB_Para_Link" href="#_60X0U0JBT">tnProjects</a>=0 only. Will be ignored for other values.
 	Extension might be <em>PJX</em> or <em>PJX</em> and <em>PJ2</em>.
 	</p>
 	
@@ -166,7 +166,7 @@ Runs FoxBin2Prg for multiple projects to create project-binary.
  <div class="DIAMP_PDM_AB_RetVal"><!-- Returns Begin -->
   <div>
    <span class="PDM_AB_Head">
-    <a id="_60J15FOJP" name="_60J15FOJP">
+    <a id="_60X0U0JBS" name="_60X0U0JBS">
      Return value
     </a>
    </span> <span class="RetVal_Ttype">Boolean</span>
@@ -211,7 +211,7 @@ True if successfull.
     12.05.2015 09:56
    </span><br />
 Changed by: SF<br />
-	New value for parameter <a class="DIAMP_PDM_AB_Para_Link" href="#_60J15FOJR">tnMode</a> &quot;4&quot;
+	New value for parameter <a class="DIAMP_PDM_AB_Para_Link" href="#_60X0U0JBU">tnMode</a> &quot;4&quot;
 	
   </div>
   <div class="PDM_AB_Body">
@@ -266,7 +266,7 @@ Changed by: SF<br />
  </div><!-- Changes End -->
 
 
-<!-- /Created with _diamp_pdm_ab by Agnes Beste    29.03.2021 19:19 -->
+<!-- /Created with _diamp_pdm_ab by Agnes Beste    12.04.2021 14:00 -->
 
  <div class="SC">
   <img onclick="ExpandSC('SP_P4',-1);" class="imgEC" src="../../imgs/dotab.gif" alt="Expand/Collapse source code of procedure Convert_Pjx_2Bin" id="IMG_SP_P4" />
@@ -396,7 +396,7 @@ Changed by: SF<br />
 <span class='PDMCnt'> 406</span> <span class='PDMInd'>  </span> 
 <span class='PDMCnt'> 407</span> <span class='PDMInd'>  </span> <span class='PDMCom'>*Just guess</span>
 <span class='PDMCnt'> 408</span> <span class='PDMInd'> 4</span>     <span class='PDMVar'>loFB2T_Setting</span>    <span class='PDMOper'>=</span> <span class='PDMVar'>m</span><span class='PDMOper'>.</span><span class='PDMVar'>loConverter</span><span class='PDMOper'>.</span><span class='PDMVar'>Get_DirSettings</span><span class='PDMOper'>(</span><span class='PDMVar'>m</span><span class='PDMOper'>.</span><span class='PDMVar'>lcPath</span><span class='PDMOper'>)</span>
-<span class='PDMCnt'> 409</span> <span class='PDMInd'> 4</span>     <span class='PDMVar'>lcSourceExt</span>    <span class='PDMOper'>=</span> <span class='PDMResF'>UPPER</span><span class='PDMOper'>(</span><span class='PDMVar'>m</span><span class='PDMOper'>.</span><span class='PDMVar'>loFB2T_Setting</span><span class='PDMOper'>.</span><span class='PDMVar'>c_PJ2</span><span class='PDMOper'>)</span>
+<span class='PDMCnt'> 409</span> <span class='PDMInd'> 4</span>     <span class='PDMVar'>lcSourceExt</span>    <span class='PDMOper'>=</span> <span class='PDMStr'>"Project:PJX,"</span><span class='PDMOper'>+</span><span class='PDMResF'>UPPER</span><span class='PDMOper'>(</span><span class='PDMVar'>m</span><span class='PDMOper'>.</span><span class='PDMVar'>loFB2T_Setting</span><span class='PDMOper'>.</span><span class='PDMVar'>c_PJ2</span><span class='PDMOper'>)</span>
 <span class='PDMCnt'> 410</span> <span class='PDMInd'>  </span> 
 <span class='PDMCnt'> 411</span> <span class='PDMInd'> 4</span>     <span class='PDMVar'>lcProj</span> <span class='PDMOper'>=</span> <span class='PDMResF'>GETFILE</span><span class='PDMOper'>(</span><span class='PDMVar'>m</span><span class='PDMOper'>.</span><span class='PDMVar'>lcSourceExt</span><span class='PDMOper'>)</span>
 <span class='PDMCnt'> 412</span> <span class='PDMInd'> 3</span>    <span class='PDMResK'>ENDIF</span> <span class='PDMCom'>&amp;&amp;EMPTY(m.lcProj)</span>

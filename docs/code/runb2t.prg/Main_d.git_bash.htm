@@ -16,7 +16,7 @@
 <body>
 <div class="diaxp_mhead">git_bash Function</div>
 <div class="diaxp_mbody">
-<!-- Created with _diamp_pdm_ab by Agnes Beste    29.03.2021 19:19 -->
+<!-- Created with _diamp_pdm_ab by Agnes Beste    12.04.2021 14:00 -->
  <div class="PDM_AB_Descr"><!-- Descr Begin -->
 Run <i>git bash</i> for current project in git based irectory.
  </div><!-- Descr End -->
@@ -76,47 +76,47 @@ Changed by: SF<br />
  </div><!-- Changes End -->
 
 
-<!-- /Created with _diamp_pdm_ab by Agnes Beste    29.03.2021 19:19 -->
+<!-- /Created with _diamp_pdm_ab by Agnes Beste    12.04.2021 14:00 -->
 
  <div class="SC">
   <img onclick="ExpandSC('SP_P13',-1);" class="imgEC" src="../../imgs/dotab.gif" alt="Expand/Collapse source code of procedure git_bash" id="IMG_SP_P13" />
   <span onclick="ExpandSC('SP_P13',-1);" class="SCCaption"><a name="pm.git_bash">Source Code</a></span>
   <div ondblclick="ExpandSC('SP_P13',-1);" class="SCE" style="display: none;" id="TX_SP_P13">
 <!-- Code Begin -->
-<pre class="PDMCODE PDMNor" ><span class='PDMCnt'>2654</span> <span class='PDMInd'>  </span> 
-<span class='PDMCnt'>2671</span> <span class='PDMInd'>  </span> 
-<span class='PDMCnt'>2672</span> <span class='PDMInd'>  </span> <span class='PDMCom'>*!*    Changed by: SF 14.3.2016</span>
-<span class='PDMCnt'>2673</span> <span class='PDMInd'>  </span> 
-<span class='PDMCnt'>2679</span> <span class='PDMInd'>  </span> 
-<span class='PDMCnt'>2680</span> <span class='PDMInd'> 1</span>  <span class='PDMResK'>LOCAL</span><span class='PDMOper'>;</span>
-<span class='PDMCnt'>2681</span> <span class='PDMInd'> 2</span>   <span class='PDMVar'>lc_Git</span> <span class='PDMResK'>AS</span> <span class='PDMResK'>CHARACTER</span><span class='PDMOper'>,</span><span class='PDMOper'>;</span>
-<span class='PDMCnt'>2682</span> <span class='PDMInd'> 2</span>   <span class='PDMVar'>llIs64</span> <span class='PDMResK'>AS</span> <span class='PDMVar'>BOOLEAN</span>
-<span class='PDMCnt'>2683</span> <span class='PDMInd'>  </span> 
-<span class='PDMCnt'>2684</span> <span class='PDMInd'> 1</span>  <span class='PDMResK'>IF</span> <span class='PDMVar'>Get_git_Path</span><span class='PDMOper'>(</span><span class='PDMOper'>@</span><span class='PDMVar'>lc_Git</span><span class='PDMOper'>,</span><span class='PDMOper'>@</span><span class='PDMVar'>llIs64</span><span class='PDMOper'>)</span> <span class='PDMResK'>THEN</span>
-<span class='PDMCnt'>2685</span> <span class='PDMInd'> 2</span>   <span class='PDMResK'>LOCAL</span><span class='PDMOper'>;</span>
-<span class='PDMCnt'>2686</span> <span class='PDMInd'> 3</span>    <span class='PDMVar'>lcOldPath</span> <span class='PDMResK'>AS</span> <span class='PDMResK'>CHARACTER</span><span class='PDMOper'>,</span><span class='PDMOper'>;</span>
-<span class='PDMCnt'>2687</span> <span class='PDMInd'> 3</span>    <span class='PDMVar'>lcPath</span>    <span class='PDMResK'>AS</span> <span class='PDMResK'>CHARACTER</span>
-<span class='PDMCnt'>2688</span> <span class='PDMInd'>  </span> 
-<span class='PDMCnt'>2689</span> <span class='PDMInd'> 2</span>   <span class='PDMVar'>lcOldPath</span>    <span class='PDMOper'>=</span> <span class='PDMResF'>JUSTPATH</span><span class='PDMOper'>(</span><span class='PDMResF'>FULLPATH</span><span class='PDMOper'>(</span><span class='PDMResF'>CURDIR</span><span class='PDMOper'>(</span><span class='PDMOper'>)</span><span class='PDMOper'>)</span><span class='PDMOper'>)</span>
-<span class='PDMCnt'>2690</span> <span class='PDMInd'> 2</span>   <span class='PDMVar'>lcPath</span>    <span class='PDMOper'>=</span> <span class='PDMVar'>GetBaseDir</span><span class='PDMOper'>(</span><span class='PDMOper'>)</span>
-<span class='PDMCnt'>2691</span> <span class='PDMInd'>  </span> 
-<span class='PDMCnt'>2692</span> <span class='PDMInd'> 2</span>   <span class='PDMResK'>CD</span> <span class='PDMOper'>(</span><span class='PDMVar'>m</span><span class='PDMOper'>.</span><span class='PDMVar'>lcPath</span><span class='PDMOper'>)</span>
-<span class='PDMCnt'>2693</span> <span class='PDMInd'>  </span> 
-<span class='PDMCnt'>2694</span> <span class='PDMInd'>  </span> <span class='PDMCom'>*!*    Changed by: SF 5.1.2016</span>
-<span class='PDMCnt'>2695</span> <span class='PDMInd'>  </span> 
-<span class='PDMCnt'>2703</span> <span class='PDMInd'>  </span> 
-<span class='PDMCnt'>2704</span> <span class='PDMInd'> 2</span>   <span class='PDMResK'>IF</span> <span class='PDMResF'>TYPE</span><span class='PDMOper'>(</span><span class='PDMStr'>'_SCREEN.gcB2T_UseBash'</span><span class='PDMOper'>)</span><span class='PDMOper'>=</span><span class='PDMStr'>"C"</span> <span class='PDMOper'>AND</span> <span class='PDMVar'>_SCREEN</span><span class='PDMOper'>.</span><span class='PDMVar'>gcB2T_UseBash</span><span class='PDMOper'>==</span><span class='PDMStr'>"1"</span> <span class='PDMResK'>THEN</span>
-<span class='PDMCnt'>2705</span> <span class='PDMInd'> 3</span>    <span class='PDMVar'>llReturn</span> <span class='PDMOper'>=</span> <span class='PDMVar'>Run_ExtApp</span><span class='PDMOper'>(</span><span class='PDMStr'>'"'</span><span class='PDMOper'>+</span><span class='PDMResF'>FORCEPATH</span><span class='PDMOper'>(</span><span class='PDMStr'>'git-bash.exe'</span><span class='PDMOper'>,</span><span class='PDMResF'>JUSTPATH</span><span class='PDMOper'>(</span><span class='PDMResF'>JUSTPATH</span><span class='PDMOper'>(</span><span class='PDMVar'>m</span><span class='PDMOper'>.</span><span class='PDMVar'>lc_Git</span><span class='PDMOper'>)</span><span class='PDMOper'>)</span><span class='PDMOper'>)</span><span class='PDMOper'>+</span><span class='PDMStr'>'" '</span><span class='PDMOper'>,</span><span class='PDMVar'>m</span><span class='PDMOper'>.</span><span class='PDMVar'>lcPath</span><span class='PDMOper'>,</span><span class='PDMStr'>'NOR'</span><span class='PDMOper'>,</span><span class='PDMOper'>,</span><span class='PDMLit'>.T.</span><span class='PDMOper'>)</span>
-<span class='PDMCnt'>2706</span> <span class='PDMInd'> 2</span>   <span class='PDMResK'>ELSE</span>  <span class='PDMCom'>&amp;&amp;TYPE('_SCREEN.gcB2T_UseBash')="C" AND _SCREEN.gcB2T_UseBash=="1"</span>
-<span class='PDMCnt'>2707</span> <span class='PDMInd'> 3</span>    <span class='PDMVar'>llReturn</span> <span class='PDMOper'>=</span> <span class='PDMVar'>Run_ExtApp</span><span class='PDMOper'>(</span><span class='PDMStr'>'cmd'</span><span class='PDMOper'>,</span><span class='PDMVar'>m</span><span class='PDMOper'>.</span><span class='PDMVar'>lcPath</span><span class='PDMOper'>,</span><span class='PDMStr'>'NOR'</span><span class='PDMOper'>,</span><span class='PDMOper'>,</span><span class='PDMLit'>.T.</span><span class='PDMOper'>)</span>
-<span class='PDMCnt'>2708</span> <span class='PDMInd'> 2</span>   <span class='PDMResK'>ENDIF</span> <span class='PDMCom'>&amp;&amp;TYPE('_SCREEN.gcB2T_UseBash')="C" AND _SCREEN.gcB2T_UseBash=="1"</span>
-<span class='PDMCnt'>2709</span> <span class='PDMInd'>  </span> 
-<span class='PDMCnt'>2710</span> <span class='PDMInd'> 2</span>   <span class='PDMResK'>CD</span> <span class='PDMOper'>(</span><span class='PDMVar'>m</span><span class='PDMOper'>.</span><span class='PDMVar'>lcOldPath</span><span class='PDMOper'>)</span>
-<span class='PDMCnt'>2711</span> <span class='PDMInd'>  </span> 
-<span class='PDMCnt'>2712</span> <span class='PDMInd'>  </span> <span class='PDMCom'>*!*    /Changed by: SF 5.1.2016</span>
-<span class='PDMCnt'>2713</span> <span class='PDMInd'> 1</span>  <span class='PDMResK'>ENDIF</span> <span class='PDMCom'>&amp;&amp;Get_git_Path(@lc_Git,@llIs64)</span>
-<span class='PDMCnt'>2714</span> <span class='PDMInd'>  </span> 
-<span class='PDMCnt'>2715</span> <span class='PDMInd'>  </span> <span class='PDMCom'>*!*    /Changed by: SF 14.3.2016</span></pre>
+<pre class="PDMCODE PDMNor" ><span class='PDMCnt'>2653</span> <span class='PDMInd'>  </span> 
+<span class='PDMCnt'>2670</span> <span class='PDMInd'>  </span> 
+<span class='PDMCnt'>2671</span> <span class='PDMInd'>  </span> <span class='PDMCom'>*!*    Changed by: SF 14.3.2016</span>
+<span class='PDMCnt'>2672</span> <span class='PDMInd'>  </span> 
+<span class='PDMCnt'>2678</span> <span class='PDMInd'>  </span> 
+<span class='PDMCnt'>2679</span> <span class='PDMInd'> 1</span>  <span class='PDMResK'>LOCAL</span><span class='PDMOper'>;</span>
+<span class='PDMCnt'>2680</span> <span class='PDMInd'> 2</span>   <span class='PDMVar'>lc_Git</span> <span class='PDMResK'>AS</span> <span class='PDMResK'>CHARACTER</span><span class='PDMOper'>,</span><span class='PDMOper'>;</span>
+<span class='PDMCnt'>2681</span> <span class='PDMInd'> 2</span>   <span class='PDMVar'>llIs64</span> <span class='PDMResK'>AS</span> <span class='PDMVar'>BOOLEAN</span>
+<span class='PDMCnt'>2682</span> <span class='PDMInd'>  </span> 
+<span class='PDMCnt'>2683</span> <span class='PDMInd'> 1</span>  <span class='PDMResK'>IF</span> <span class='PDMVar'>Get_git_Path</span><span class='PDMOper'>(</span><span class='PDMOper'>@</span><span class='PDMVar'>lc_Git</span><span class='PDMOper'>,</span><span class='PDMOper'>@</span><span class='PDMVar'>llIs64</span><span class='PDMOper'>)</span> <span class='PDMResK'>THEN</span>
+<span class='PDMCnt'>2684</span> <span class='PDMInd'> 2</span>   <span class='PDMResK'>LOCAL</span><span class='PDMOper'>;</span>
+<span class='PDMCnt'>2685</span> <span class='PDMInd'> 3</span>    <span class='PDMVar'>lcOldPath</span> <span class='PDMResK'>AS</span> <span class='PDMResK'>CHARACTER</span><span class='PDMOper'>,</span><span class='PDMOper'>;</span>
+<span class='PDMCnt'>2686</span> <span class='PDMInd'> 3</span>    <span class='PDMVar'>lcPath</span>    <span class='PDMResK'>AS</span> <span class='PDMResK'>CHARACTER</span>
+<span class='PDMCnt'>2687</span> <span class='PDMInd'>  </span> 
+<span class='PDMCnt'>2688</span> <span class='PDMInd'> 2</span>   <span class='PDMVar'>lcOldPath</span>    <span class='PDMOper'>=</span> <span class='PDMResF'>JUSTPATH</span><span class='PDMOper'>(</span><span class='PDMResF'>FULLPATH</span><span class='PDMOper'>(</span><span class='PDMResF'>CURDIR</span><span class='PDMOper'>(</span><span class='PDMOper'>)</span><span class='PDMOper'>)</span><span class='PDMOper'>)</span>
+<span class='PDMCnt'>2689</span> <span class='PDMInd'> 2</span>   <span class='PDMVar'>lcPath</span>    <span class='PDMOper'>=</span> <span class='PDMVar'>GetBaseDir</span><span class='PDMOper'>(</span><span class='PDMOper'>)</span>
+<span class='PDMCnt'>2690</span> <span class='PDMInd'>  </span> 
+<span class='PDMCnt'>2691</span> <span class='PDMInd'> 2</span>   <span class='PDMResK'>CD</span> <span class='PDMOper'>(</span><span class='PDMVar'>m</span><span class='PDMOper'>.</span><span class='PDMVar'>lcPath</span><span class='PDMOper'>)</span>
+<span class='PDMCnt'>2692</span> <span class='PDMInd'>  </span> 
+<span class='PDMCnt'>2693</span> <span class='PDMInd'>  </span> <span class='PDMCom'>*!*    Changed by: SF 5.1.2016</span>
+<span class='PDMCnt'>2694</span> <span class='PDMInd'>  </span> 
+<span class='PDMCnt'>2702</span> <span class='PDMInd'>  </span> 
+<span class='PDMCnt'>2703</span> <span class='PDMInd'> 2</span>   <span class='PDMResK'>IF</span> <span class='PDMResF'>TYPE</span><span class='PDMOper'>(</span><span class='PDMStr'>'_SCREEN.gcB2T_UseBash'</span><span class='PDMOper'>)</span><span class='PDMOper'>=</span><span class='PDMStr'>"C"</span> <span class='PDMOper'>AND</span> <span class='PDMVar'>_SCREEN</span><span class='PDMOper'>.</span><span class='PDMVar'>gcB2T_UseBash</span><span class='PDMOper'>==</span><span class='PDMStr'>"1"</span> <span class='PDMResK'>THEN</span>
+<span class='PDMCnt'>2704</span> <span class='PDMInd'> 3</span>    <span class='PDMVar'>llReturn</span> <span class='PDMOper'>=</span> <span class='PDMVar'>Run_ExtApp</span><span class='PDMOper'>(</span><span class='PDMStr'>'"'</span><span class='PDMOper'>+</span><span class='PDMResF'>FORCEPATH</span><span class='PDMOper'>(</span><span class='PDMStr'>'git-bash.exe'</span><span class='PDMOper'>,</span><span class='PDMResF'>JUSTPATH</span><span class='PDMOper'>(</span><span class='PDMResF'>JUSTPATH</span><span class='PDMOper'>(</span><span class='PDMVar'>m</span><span class='PDMOper'>.</span><span class='PDMVar'>lc_Git</span><span class='PDMOper'>)</span><span class='PDMOper'>)</span><span class='PDMOper'>)</span><span class='PDMOper'>+</span><span class='PDMStr'>'" '</span><span class='PDMOper'>,</span><span class='PDMVar'>m</span><span class='PDMOper'>.</span><span class='PDMVar'>lcPath</span><span class='PDMOper'>,</span><span class='PDMStr'>'NOR'</span><span class='PDMOper'>,</span><span class='PDMOper'>,</span><span class='PDMLit'>.T.</span><span class='PDMOper'>)</span>
+<span class='PDMCnt'>2705</span> <span class='PDMInd'> 2</span>   <span class='PDMResK'>ELSE</span>  <span class='PDMCom'>&amp;&amp;TYPE('_SCREEN.gcB2T_UseBash')="C" AND _SCREEN.gcB2T_UseBash=="1"</span>
+<span class='PDMCnt'>2706</span> <span class='PDMInd'> 3</span>    <span class='PDMVar'>llReturn</span> <span class='PDMOper'>=</span> <span class='PDMVar'>Run_ExtApp</span><span class='PDMOper'>(</span><span class='PDMStr'>'cmd'</span><span class='PDMOper'>,</span><span class='PDMVar'>m</span><span class='PDMOper'>.</span><span class='PDMVar'>lcPath</span><span class='PDMOper'>,</span><span class='PDMStr'>'NOR'</span><span class='PDMOper'>,</span><span class='PDMOper'>,</span><span class='PDMLit'>.T.</span><span class='PDMOper'>)</span>
+<span class='PDMCnt'>2707</span> <span class='PDMInd'> 2</span>   <span class='PDMResK'>ENDIF</span> <span class='PDMCom'>&amp;&amp;TYPE('_SCREEN.gcB2T_UseBash')="C" AND _SCREEN.gcB2T_UseBash=="1"</span>
+<span class='PDMCnt'>2708</span> <span class='PDMInd'>  </span> 
+<span class='PDMCnt'>2709</span> <span class='PDMInd'> 2</span>   <span class='PDMResK'>CD</span> <span class='PDMOper'>(</span><span class='PDMVar'>m</span><span class='PDMOper'>.</span><span class='PDMVar'>lcOldPath</span><span class='PDMOper'>)</span>
+<span class='PDMCnt'>2710</span> <span class='PDMInd'>  </span> 
+<span class='PDMCnt'>2711</span> <span class='PDMInd'>  </span> <span class='PDMCom'>*!*    /Changed by: SF 5.1.2016</span>
+<span class='PDMCnt'>2712</span> <span class='PDMInd'> 1</span>  <span class='PDMResK'>ENDIF</span> <span class='PDMCom'>&amp;&amp;Get_git_Path(@lc_Git,@llIs64)</span>
+<span class='PDMCnt'>2713</span> <span class='PDMInd'>  </span> 
+<span class='PDMCnt'>2714</span> <span class='PDMInd'>  </span> <span class='PDMCom'>*!*    /Changed by: SF 14.3.2016</span></pre>
  <!-- Code End -->
   </div>
  </div>

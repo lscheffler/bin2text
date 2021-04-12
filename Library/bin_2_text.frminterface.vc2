@@ -740,7 +740,7 @@ DEFINE CLASS frminterface AS form 		&& Just to create an interface as well as a 
 		loSetting.gcFile = THIS.txtGUI.VALUE
 		
 		loSetting        = m.toSettings.ITEM("gcB2T_DBC")
-		loSetting.gcFile = IIF(THIS.chkDBC.VALUE,"0","1")
+		loSetting.gcFile = IIF(THIS.chkDBC.VALUE,"1","0")
 		
 		loSetting        = m.toSettings.ITEM("gcB2T_Opt")
 		loSetting.gcFile = IIF(THIS.chkAll.VALUE,"0","1")

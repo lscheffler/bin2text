@@ -25,7 +25,7 @@
 </table>
 </div>
 <div class="diaxp_mbody">
-<!-- Created with _diamp_pdm_ab by Agnes Beste    29.03.2021 19:19 -->
+<!-- Created with _diamp_pdm_ab by Agnes Beste    12.04.2021 14:00 -->
  <div class="PDM_AB_Descr"><!-- Descr Begin -->
 Stores changes to the settings object.
  </div><!-- Descr End -->
@@ -36,7 +36,7 @@ Stores changes to the settings object.
     Object.storage_put
    </div>
    <div class="Para">
-    (<a href="#_60J15FN3B">toSettings</a>)
+    (<a href="#_60X0U0I6P">toSettings</a>)
    </div>
    <div style="clear: both"></div>
   </div><!-- Colour End -->
@@ -48,7 +48,7 @@ Stores changes to the settings object.
   </span>
   <dl class="DIAMP_PDM_AB_Params_List">
    <dt class="dt_">
-    <a class="DIAMP_PDM_AB_Params_ParaName" id="_60J15FN3B" name="_60J15FN3B">
+    <a class="DIAMP_PDM_AB_Params_ParaName" id="_60X0U0I6P" name="_60X0U0I6P">
      <span class="PDMEXPR PDMNor" ><span class='PDMVar'>toSettings</span></span>
 
     </a>
@@ -78,7 +78,7 @@ Stores changes to the settings object.
  </div><!-- Parameters End -->
 
 
-<!-- /Created with _diamp_pdm_ab by Agnes Beste    29.03.2021 19:19 -->
+<!-- /Created with _diamp_pdm_ab by Agnes Beste    12.04.2021 14:00 -->
 
  <div class="SC">
   <img onclick="ExpandSC('SP_5',-1);"class="imgEC" src="../../imgs/dotab.gif" alt="Expand/Collapse source code of procedure storage_put" id="IMG_SP_5" />
@@ -100,7 +100,7 @@ Stores changes to the settings object.
 <span class='PDMCnt'> 20</span> <span class='PDMInd'>  </span> <span class='PDMVar'>loSetting</span><span class='PDMOper'>.</span><span class='PDMVar'>gcFile</span> <span class='PDMOper'>=</span> <span class='PDMResK'>THIS</span><span class='PDMOper'>.</span><span class='PDMVar'>txtGUI</span><span class='PDMOper'>.</span><span class='PDMResP'>VALUE</span>
 <span class='PDMCnt'> 21</span> <span class='PDMInd'>  </span> 
 <span class='PDMCnt'> 22</span> <span class='PDMInd'>  </span> <span class='PDMVar'>loSetting</span>        <span class='PDMOper'>=</span> <span class='PDMVar'>m</span><span class='PDMOper'>.</span><span class='PDMVar'>toSettings</span><span class='PDMOper'>.</span><span class='PDMResM'>ITEM</span><span class='PDMOper'>(</span><span class='PDMStr'>"gcB2T_DBC"</span><span class='PDMOper'>)</span>
-<span class='PDMCnt'> 23</span> <span class='PDMInd'>  </span> <span class='PDMVar'>loSetting</span><span class='PDMOper'>.</span><span class='PDMVar'>gcFile</span> <span class='PDMOper'>=</span> <span class='PDMResF'>IIF</span><span class='PDMOper'>(</span><span class='PDMResK'>THIS</span><span class='PDMOper'>.</span><span class='PDMVar'>chkDBC</span><span class='PDMOper'>.</span><span class='PDMResP'>VALUE</span><span class='PDMOper'>,</span><span class='PDMStr'>"0"</span><span class='PDMOper'>,</span><span class='PDMStr'>"1"</span><span class='PDMOper'>)</span>
+<span class='PDMCnt'> 23</span> <span class='PDMInd'>  </span> <span class='PDMVar'>loSetting</span><span class='PDMOper'>.</span><span class='PDMVar'>gcFile</span> <span class='PDMOper'>=</span> <span class='PDMResF'>IIF</span><span class='PDMOper'>(</span><span class='PDMResK'>THIS</span><span class='PDMOper'>.</span><span class='PDMVar'>chkDBC</span><span class='PDMOper'>.</span><span class='PDMResP'>VALUE</span><span class='PDMOper'>,</span><span class='PDMStr'>"1"</span><span class='PDMOper'>,</span><span class='PDMStr'>"0"</span><span class='PDMOper'>)</span>
 <span class='PDMCnt'> 24</span> <span class='PDMInd'>  </span> 
 <span class='PDMCnt'> 25</span> <span class='PDMInd'>  </span> <span class='PDMVar'>loSetting</span>        <span class='PDMOper'>=</span> <span class='PDMVar'>m</span><span class='PDMOper'>.</span><span class='PDMVar'>toSettings</span><span class='PDMOper'>.</span><span class='PDMResM'>ITEM</span><span class='PDMOper'>(</span><span class='PDMStr'>"gcB2T_Opt"</span><span class='PDMOper'>)</span>
 <span class='PDMCnt'> 26</span> <span class='PDMInd'>  </span> <span class='PDMVar'>loSetting</span><span class='PDMOper'>.</span><span class='PDMVar'>gcFile</span> <span class='PDMOper'>=</span> <span class='PDMResF'>IIF</span><span class='PDMOper'>(</span><span class='PDMResK'>THIS</span><span class='PDMOper'>.</span><span class='PDMVar'>chkAll</span><span class='PDMOper'>.</span><span class='PDMResP'>VALUE</span><span class='PDMOper'>,</span><span class='PDMStr'>"0"</span><span class='PDMOper'>,</span><span class='PDMStr'>"1"</span><span class='PDMOper'>)</span>

@@ -2607,7 +2607,7 @@ DEFINE CLASS cusstorage AS custom 		&& The stuff that does the work.
 		    m.laFiles2(1,1)
 		*just rework hooks and DBF's in storage table
 		   IF m.loConverter.Get_Processed(@laFiles2)#0 THEN
-		    THIS.FilesToProcess(@laFiles2,m.lcPath,m.tlText2Bin,.F.,m.lcStorage,m.loConverter)
+		    THIS.FilesToProcess(@laFiles2,m.lcPath,.T.,.F.,m.lcStorage,m.loConverter)
 		   ENDIF &&loConverter.Get_Processed(@laFiles2)#0
 		  ENDIF &&m.lnOffset>0
 		
