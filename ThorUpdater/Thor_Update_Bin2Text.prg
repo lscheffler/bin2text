@@ -72,6 +72,12 @@ A complete list of changes is available on the offline documentation via local f
 +++++++++++++++++++++++ Change log +++++++++++++++++++++++
 
 ---
+### Version 1.1.2
+
+Stable release.
+* Bugfixes
+* Getfile dialog improved
+
 ### Version 1.1.1
 
 Stable release.
