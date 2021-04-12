@@ -406,7 +406,7 @@ FUNCTION Convert_Pjx_2Bin &&Runs FoxBin2Prg for multiple projects to create bina
 
 *Just guess
     loFB2T_Setting	= m.loConverter.Get_DirSettings(m.lcPath)
-    lcSourceExt	= UPPER(m.loFB2T_Setting.c_PJ2)
+    lcSourceExt	= "Project:PJX,"+UPPER(m.loFB2T_Setting.c_PJ2)
 
     lcProj = GETFILE(m.lcSourceExt)
    ENDIF &&EMPTY(m.lcProj)
@@ -1437,29 +1437,28 @@ FUNCTION Convert_File_2Bin  	&&Runs FoxBin2Prg for a single file or vcx/class to
  IF m.llReturn THEN
   loFB2T_Setting = m.loConverter.Get_DirSettings(m.lcPath)
 
-  lcFileTypes = "VCX;FRX;MNX;SCX;LBX;DBF;DBC"
-*Additional extensions
-  lcFileTypes = m.lcFileTypes+";MEM;FKY"
+  lcFileTypes = ""
 
   lvTemp	  = UPPER(m.loFB2T_Setting.c_VC2)
-  lcFileTypes = m.lcFileTypes+";*."+m.lvTemp+":"+m.lvTemp
+  lcFileTypes = m.lcFileTypes+"Visual Class Library:VCX,"+m.lvTemp
   lvTemp	  = UPPER(m.loFB2T_Setting.c_FR2)
-  lcFileTypes = m.lcFileTypes+";*."+m.lvTemp+":"+m.lvTemp
+  lcFileTypes = m.lcFileTypes+";Report:FRX,"+m.lvTemp
   lvTemp	  = UPPER(m.loFB2T_Setting.c_MN2)
-  lcFileTypes = m.lcFileTypes+";*."+m.lvTemp+":"+m.lvTemp
+  lcFileTypes = m.lcFileTypes+";Menu:MNX,"+m.lvTemp
   lvTemp	  = UPPER(m.loFB2T_Setting.c_SC2)
-  lcFileTypes = m.lcFileTypes+";*."+m.lvTemp+":"+m.lvTemp
+  lcFileTypes = m.lcFileTypes+";Form:SCX,"+m.lvTemp
   lvTemp	  = UPPER(m.loFB2T_Setting.c_LB2)
-  lcFileTypes = m.lcFileTypes+";*."+m.lvTemp+":"+m.lvTemp
+  lcFileTypes = m.lcFileTypes+";Label:LBX,"+m.lvTemp
   lvTemp	  = UPPER(m.loFB2T_Setting.c_DB2)
-  lcFileTypes = m.lcFileTypes+";*."+m.lvTemp+":"+m.lvTemp
+  lcFileTypes = m.lcFileTypes+";Table:DBF,"+m.lvTemp
   lvTemp	  = UPPER(m.loFB2T_Setting.c_DC2)
-  lcFileTypes = m.lcFileTypes+";*."+m.lvTemp+":"+m.lvTemp
+  lcFileTypes = m.lcFileTypes+";Database:DBC,"+m.lvTemp
 *Additional extensions
   lvTemp	  = UPPER(m.loFB2T_Setting.c_FK2)
-  lcFileTypes = m.lcFileTypes+";*."+m.lvTemp+":"+m.lvTemp
+  lcFileTypes = m.lcFileTypes+";Memo File:MEM,"+m.lvTemp
   lvTemp	  = UPPER(m.loFB2T_Setting.c_ME2)
-  lcFileTypes = m.lcFileTypes+";*."+m.lvTemp+":"+m.lvTemp
+  lcFileTypes = m.lcFileTypes+";Macro File:FKY,"+m.lvTemp
+  lvTemp	  = UPPER(m.loFB2T_Setting.c_VC2)
  ENDIF &&m.llReturn
 
  DO CASE
@@ -1843,7 +1842,7 @@ FUNCTION Convert_File_2Txt  	&&Runs FoxBin2Prg for a single file or vcx/class to
 
   lcFileTypes = "VCX;FRX;MNX;SCX;LBX;DBF;DBC"
 *Additional extensions
-  lcFileTypes = m.lcFileTypes+";MEM;FKY"
+  lcFileTypes = m.lcFileTypes+";Memo file:MEM;FKY"
 
  ENDIF &&m.llReturn
 

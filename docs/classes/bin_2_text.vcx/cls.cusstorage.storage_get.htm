@@ -25,21 +25,21 @@
 </table>
 </div>
 <div class="diaxp_mbody">
-<!-- Created with _diamp_pdm_ab by Agnes Beste    29.03.2021 19:19 -->
+<!-- Created with _diamp_pdm_ab by Agnes Beste    12.04.2021 14:00 -->
  <div class="PDM_AB_Descr"><!-- Descr Begin -->
 Get settings from storage file.
  </div><!-- Descr End -->
 
  <div class="DIAMP_PDM_AB_Syntax"><!-- Syntax Begin -->
   <div class="SColor">
-   <div class="RetVal"><a href="#_60J15FNKE">RetVal</a>&nbsp;</div>   <div class="RetValEq">=</div>   <div class="PEM">
+   <div class="RetVal"><a href="#_60X0U0INS">RetVal</a>&nbsp;</div>   <div class="RetValEq">=</div>   <div class="PEM">
     Object.storage_get
    </div>
    <div class="Para">
-    (<a href="#_60J15FNKF">tcType</a>
-     <wbr />,<a href="#_60J15FNKG">toSettings</a>
-     <wbr />,<a href="#_60J15FNKH">tcStorage</a>
-     [<wbr />,<a href="#_60J15FNKI">tcWhere</a>])
+    (<a href="#_60X0U0INT">tcType</a>
+     <wbr />,<a href="#_60X0U0INU">toSettings</a>
+     <wbr />,<a href="#_60X0U0INV">tcStorage</a>
+     [<wbr />,<a href="#_60X0U0INW">tcWhere</a>])
    </div>
    <div style="clear: both"></div>
   </div><!-- Colour End -->
@@ -51,7 +51,7 @@ Get settings from storage file.
   </span>
   <dl class="DIAMP_PDM_AB_Params_List">
    <dt class="dt_">
-    <a class="DIAMP_PDM_AB_Params_ParaName" id="_60J15FNKF" name="_60J15FNKF">
+    <a class="DIAMP_PDM_AB_Params_ParaName" id="_60X0U0INT" name="_60X0U0INT">
      <span class="PDMEXPR PDMNor" ><span class='PDMVar'>tcType</span></span>
 
     </a>
@@ -78,7 +78,7 @@ Get settings from storage file.
     </table>
    </dd>
    <dt class="dt_">
-    <a class="DIAMP_PDM_AB_Params_ParaName" id="_60J15FNKG" name="_60J15FNKG">
+    <a class="DIAMP_PDM_AB_Params_ParaName" id="_60X0U0INU" name="_60X0U0INU">
      <span class="PDMEXPR PDMNor" ><span class='PDMVar'>toSettings</span></span>
 
     </a>
@@ -105,7 +105,7 @@ Get settings from storage file.
     </table>
    </dd>
    <dt class="dt_">
-    <a class="DIAMP_PDM_AB_Params_ParaName" id="_60J15FNKH" name="_60J15FNKH">
+    <a class="DIAMP_PDM_AB_Params_ParaName" id="_60X0U0INV" name="_60X0U0INV">
      <span class="PDMEXPR PDMNor" ><span class='PDMVar'>tcStorage</span></span>
 
     </a>
@@ -132,7 +132,7 @@ Get settings from storage file.
     </table>
    </dd>
    <dt class="dt_">
-    <a class="DIAMP_PDM_AB_Params_ParaName" id="_60J15FNKI" name="_60J15FNKI">
+    <a class="DIAMP_PDM_AB_Params_ParaName" id="_60X0U0INW" name="_60X0U0INW">
      <span class="PDMEXPR PDMNor" ><span class='PDMVar'>tcWhere</span></span>
 
     </a>
@@ -171,7 +171,7 @@ Used to filter records, in special the DBF for additional index per DBF (cType I
  <div class="DIAMP_PDM_AB_RetVal"><!-- Returns Begin -->
   <div>
    <span class="PDM_AB_Head">
-    <a id="_60J15FNKE" name="_60J15FNKE">
+    <a id="_60X0U0INS" name="_60X0U0INS">
      Return value
     </a>
    </span> <span class="RetVal_Ttype">Boolean</span>
@@ -188,10 +188,10 @@ At least one setting found.
   <div class="PDM_AB_Body">
 
 
-<p>Every record in <a class="DIAMP_PDM_AB_Para_Link" href="#_60J15FNKH">tcStorage</a> marked with <a class="DIAMP_PDM_AB_Para_Link" href="#_60J15FNKF">tcType</a> will be read
-and stored into <a class="DIAMP_PDM_AB_Para_Link" href="#_60J15FNKG">toSettings</a>.</p>
-<p><a class="DIAMP_PDM_AB_Para_Link" href="#_60J15FNKG">toSettings</a> will be cleared before read.</p>
-<p>For every item in <a class="DIAMP_PDM_AB_Para_Link" href="#_60J15FNKG">toSettings</a> a property of <span class="PDMEXPR PDMNor" ><span class='PDMVar'>_SCREEN</span></span>
+<p>Every record in <a class="DIAMP_PDM_AB_Para_Link" href="#_60X0U0INV">tcStorage</a> marked with <a class="DIAMP_PDM_AB_Para_Link" href="#_60X0U0INT">tcType</a> will be read
+and stored into <a class="DIAMP_PDM_AB_Para_Link" href="#_60X0U0INU">toSettings</a>.</p>
+<p><a class="DIAMP_PDM_AB_Para_Link" href="#_60X0U0INU">toSettings</a> will be cleared before read.</p>
+<p>For every item in <a class="DIAMP_PDM_AB_Para_Link" href="#_60X0U0INU">toSettings</a> a property of <span class="PDMEXPR PDMNor" ><span class='PDMVar'>_SCREEN</span></span>
  will be created.
 Form: <span class="PDMEXPR PDMNor" ><span class='PDMVar'>_SCREEN</span><span class='PDMOper'>.</span><span class='PDMResM'>ADDPROPERTY</span><span class='PDMOper'>(</span><span class='PDMResF'>TRIM</span><span class='PDMOper'>(</span><span class='PDMVar'>cUniqueID</span><span class='PDMOper'>)</span><span class='PDMOper'>,</span><span class='PDMResF'>TRIM</span><span class='PDMOper'>(</span><span class='PDMVar'>cFile</span><span class='PDMOper'>)</span><span class='PDMOper'>)</span></span>
 </p>
@@ -200,7 +200,7 @@ Form: <span class="PDMEXPR PDMNor" ><span class='PDMVar'>_SCREEN</span><span cla
  </div><!-- Remarks End -->
 
 
-<!-- /Created with _diamp_pdm_ab by Agnes Beste    29.03.2021 19:19 -->
+<!-- /Created with _diamp_pdm_ab by Agnes Beste    12.04.2021 14:00 -->
 
  <div class="SC">
   <img onclick="ExpandSC('SP_40',-1);"class="imgEC" src="../../imgs/dotab.gif" alt="Expand/Collapse source code of procedure storage_get" id="IMG_SP_40" />
