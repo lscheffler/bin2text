@@ -82,30 +82,46 @@ ON PAD _000000001 OF _MSYSMENU ACTIVATE POPUP FoxBin2Tex
 		DEFINE POPUP Text2Bin MARGIN RELATIVE SHADOW COLOR SCHEME 4
 		DEFINE BAR 1 OF Text2Bin PROMPT "\<Active" ;
 			SKIP FOR _VFP.PROJECTS.COUNT=0 ;
-			MESSAGE "Text2Bin on active project"
+			MESSAGE "Recreate active project and  conmtent."
 		ON SELECTION BAR 1 OF Text2Bin DO Convert_Pjx_2Bin IN (_SCREEN.gcB2T_App) WITH 1,0
 
 		DEFINE BAR 2 OF Text2Bin PROMPT "\<IDE" ;
 			SKIP FOR _VFP.PROJECTS.COUNT=0 ;
-			MESSAGE "Text2Bin on projects open in IDE"
+			MESSAGE "Recreate projects open in IDE and there content."
 		ON SELECTION BAR 2 OF Text2Bin DO Convert_Pjx_2Bin IN (_SCREEN.gcB2T_App) WITH 2,0
 
 		DEFINE BAR 3 OF Text2Bin PROMPT "\<Path" ;
-			MESSAGE "Text2Bin on projects in path"
+			MESSAGE "Recreate projects in path and there content."
 		ON SELECTION BAR 3 OF Text2Bin DO Convert_Pjx_2Bin IN (_SCREEN.gcB2T_App) WITH 3,0
 
 		DEFINE BAR 4 OF Text2Bin PROMPT "\<Get PJX" ;
-			MESSAGE "Text2Bin pick a file"
+			MESSAGE "Pick a project and recreate"
 		ON SELECTION BAR 4 OF Text2Bin DO Convert_Pjx_2Bin IN (_SCREEN.gcB2T_App) WITH 0,0
 
-		DEFINE BAR 5 OF Text2Bin PROMPT "Get \<File"
+		DEFINE BAR 5 OF Text2Bin PROMPT "Get \<File" ;
+			MESSAGE "Pick a file and recreate"
 		ON SELECTION BAR 5 OF Text2Bin DO Convert_File_2Bin IN (_SCREEN.gcB2T_App) WITH .F.
 
-		DEFINE BAR 6 OF Text2Bin PROMPT "Get \<Class"
-		ON SELECTION BAR 6 OF Text2Bin DO Convert_File_2Bin IN (_SCREEN.gcB2T_App) WITH .T.
+		DEFINE BAR 6 OF Text2Bin PROMPT "Get \<Class" ;
+			MESSAGE "Create binary class"
+		ON BAR 6 OF Text2Bin ACTIVATE POPUP GetClass
+
+			*----------------------------------
+			DEFINE POPUP GetClass MARGIN RELATIVE SHADOW COLOR SCHEME 4
+			DEFINE BAR 1 OF GetClass PROMPT "Text file to \<lib" ;
+				MESSAGE "Pick a text file and add to library."
+			ON SELECTION BAR 1 OF GetClass DO Convert_Class_2Bin IN (_SCREEN.gcB2T_App) WITH .F.,.T.
+
+			DEFINE BAR 2 OF GetClass PROMPT "Text file to \<lsingle lib" ;
+				MESSAGE "Pick a text file and create single library."
+			ON SELECTION BAR 2 OF GetClass DO Convert_Class_2Bin IN (_SCREEN.gcB2T_App) WITH .T.,.T.
+
+			DEFINE BAR 3 OF GetClass PROMPT "Pick \<class" ;
+				MESSAGE "Pick a  class mit AGETCLASS and add to library.."
+			ON SELECTION BAR 3 OF GetClass DO Convert_Class_2Bin IN (_SCREEN.gcB2T_App) WITH .F.,.F.
 
 		DEFINE BAR 7 OF Text2Bin PROMPT "Path \<recursive" ;
-			MESSAGE "Text2Bin on projects in path and all subdirectories"
+			MESSAGE "Run through all projects in path and all subdirectories and recreate."
 		ON SELECTION BAR 7 OF Text2Bin DO Convert_Pjx_2Bin IN (_SCREEN.gcB2T_App) WITH 4,0
 
 		DEFINE BAR 8 OF Text2Bin PROMPT "\-"

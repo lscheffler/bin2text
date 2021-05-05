@@ -35,7 +35,7 @@ The problems this project tries to solve:
 9. **This repository does not ship binary sources.**
 3. Run `DO FOXBIN2PRG.PRG WITH "bin2text.pj2", "*"`
    - check appropriate for path
-4. Compile to APP
+4. Compile to EXE
 
 ---
 ### Documentation
@@ -45,4 +45,4 @@ For quick run see [Bin 2 Text Documentation](content/documentation.md).
 
 ---
 ## Note
-Bin 2 Text Extension is tested with _git for windows_ version 2.31.0.windows.1 (2021-03-15) 32 and 64bit.
+Bin 2 Text Extension is tested with _git for windows_ version 2.31.1.windows.1 (2021-03-26) 32 and 64bit.

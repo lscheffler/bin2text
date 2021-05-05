@@ -108,16 +108,16 @@
   		</ul>
   	</p>
   </li>
-  <li>Compile the Bin2Text.pjx that ships with this documentation to Bin2Text.app.</li>
+  <li>Compile the Bin2Text.pjx that ships with this documentation to Bin2Text.exe.</li>
   <li>
-  	Place Bin2Text.app next to FoxBin2Prg.prg.<br />
+  	Place Bin2Text.exe next to FoxBin2Prg.prg.<br />
   	It will work from any other place but then you must pick up the FoxBin2Prg.prg location.
   </li>
   <li>
    Run from IDE. (Best: with project open)<br/>
-   <span class="example">DO InitMenu IN Bin2Text.app</span><br/>
+   <span class="example">DO InitMenu IN Bin2Text.exe</span><br/>
    or to define a base directory:<br />
-   <span class="example">DO InitMenu IN Bin2Text.app WITH lcHomePath</span><br/>
+   <span class="example">DO InitMenu IN Bin2Text.exe WITH lcHomePath</span><br/>
    Check <a href="#InitMenu">InitMenu</a> for more information.<br/>
    <strong>You need to run this on every start of the IDE.</strong>
   </li>
@@ -204,7 +204,7 @@
  	The other stuff will be in this documentation anyway. See the exact interface parameters at <a href="../code/runb2t.prg/Main.htm" target="_top">RunB2T.prg</a> in this documentation or run with help parameter.
   </p>
   <h3><a name="InitMenu">InitMenu</a></h3>
-   <span class="example">DO InitMenu IN Bin2Text.app [WITH lcPath]</span>
+   <span class="example">DO InitMenu IN Bin2Text.exe [WITH lcPath]</span>
    <p>
    	Initialise the extension and start the menu.
    </p>
@@ -223,7 +223,7 @@
    	See <a href="../code/runb2t.prg/Main_d.initmenu.htm" title="Skip to procedure InitMenu">InitMenu</a>
    </p>
   <h3><a name="Inter_Active">Inter_Active</a></h3>
-   <span class="example">DO Inter_Active IN Bin2Text.app</span>
+   <span class="example">DO Inter_Active IN Bin2Text.exe</span>
    <p>
    	Call the settings form.
    </p>
@@ -234,7 +234,7 @@
    	See <a href="../code/runb2t.prg/Main_d.inter_active.htm" title="Skip to procedure Inter_Active">Inter_Active</a>
    </p>
   <h3><a name="PJX2Commit">PJX2Commit</a></h3>
-   <span class="example">DO PJX2Commit IN Bin2Text.app</span>
+   <span class="example">DO PJX2Commit IN Bin2Text.exe</span>
    <p>
    	Convert the files of the active project / all projects to text and run <em>git commit</em>.
    </p>
@@ -245,7 +245,7 @@
    	See <a href="../code/runb2t.prg/Main_d.pjx2commit.htm" title="Skip to procedure Pjx2Commit">Pjx2Commit</a>
    </p>
   <h3><a name="Convert_Pjx">Convert_Pjx</a></h3>
-   <span class="example">DO Convert_Pjx IN Bin2Text.app [[/?]|[lToBin[,nProjects[,nMode]]</span>
+   <span class="example">DO Convert_Pjx IN Bin2Text.exe [[/?]|[lToBin[,nProjects[,nMode]]</span>
    <p>
    	Calls the pjx processing feature.
    </p>
@@ -260,7 +260,7 @@
  	There is one interface that offers a way to process any group of files, more complex then one can express with the FoxBin2Prg interface.
   <h3><a name="Convert_Array">Convert_Array</a></h3>
   </p>
-   <span class="example">DO Convert_Array IN Bin2Text.app [/?]|lToBin,cMode,@aFiles</span>
+   <span class="example">DO Convert_Array IN Bin2Text.exe [/?]|lToBin,cMode,@aFiles</span>
    <p>
    	This is will process the file list.
    </p>
