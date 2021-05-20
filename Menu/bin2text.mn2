@@ -112,7 +112,7 @@ ON PAD _000000001 OF _MSYSMENU ACTIVATE POPUP FoxBin2Tex
 				MESSAGE "Pick a text file and add to library."
 			ON SELECTION BAR 1 OF GetClass DO Convert_Class_2Bin IN (_SCREEN.gcB2T_App) WITH .F.,.T.
 
-			DEFINE BAR 2 OF GetClass PROMPT "Text file to \<lsingle lib" ;
+			DEFINE BAR 2 OF GetClass PROMPT "Text file to \<single lib" ;
 				MESSAGE "Pick a text file and create single library."
 			ON SELECTION BAR 2 OF GetClass DO Convert_Class_2Bin IN (_SCREEN.gcB2T_App) WITH .T.,.T.
 

@@ -14,16 +14,18 @@
 paPads=[1];
 paPads[0]=["Pad_3","Pop_3"];
 
-paPopups=[5];
+paPopups=[6];
 paPopups[0]=["Pop_7"];
-paPopups[1]=["Pop_18"];
-paPopups[2]=["Pop_29"];
-paPopups[3]=["Pop_32"];
-paPopups[4]=["Pop_3"];
+paPopups[1]=["Pop_25"];
+paPopups[2]=["Pop_18"];
+paPopups[3]=["Pop_33"];
+paPopups[4]=["Pop_36"];
+paPopups[5]=["Pop_3"];
 
-paBarsP=[2];
+paBarsP=[3];
 paBarsP[0]=["Bar_3_7","Pop_7"];
-paBarsP[1]=["Bar_3_18","Pop_18"];
+paBarsP[1]=["Bar_18_25","Pop_25"];
+paBarsP[2]=["Bar_3_18","Pop_18"];
 
 paBarsM=[0];
 
@@ -74,22 +76,28 @@ function onBarClick(loRef)
  <div class="menuBar" id="Bar_7_17"><img name="HL" class="imgHL" /><span class="menuBar"><span class="HotKey">D</span>irectory</span></div>
 </div>
 
+<div class="menuPopup" id="Pop_25">
+ <div class="menuBar" id="Bar_25_27"><img name="HL" class="imgHL" /><span class="menuBar">Text file to <span class="HotKey">l</span>ib</span></div>
+ <div class="menuBar" id="Bar_25_28"><img name="HL" class="imgHL" /><span class="menuBar">Text file to <span class="HotKey">s</span>ingle lib</span></div>
+ <div class="menuBar" id="Bar_25_29"><img name="HL" class="imgHL" /><span class="menuBar">Pick <span class="HotKey">c</span>lass</span></div>
+</div>
+
 <div class="menuPopup" id="Pop_18">
  <div class="menuBar" id="Bar_18_20"><img name="HL" class="imgHL" /><span class="menuBar"><span class="HotKey">A</span>ctive</span></div>
  <div class="menuBar" id="Bar_18_21"><img name="HL" class="imgHL" /><span class="menuBar"><span class="HotKey">I</span>DE</span></div>
  <div class="menuBar" id="Bar_18_22"><img name="HL" class="imgHL" /><span class="menuBar"><span class="HotKey">P</span>ath</span></div>
  <div class="menuBar" id="Bar_18_23"><img name="HL" class="imgHL" /><span class="menuBar"><span class="HotKey">G</span>et PJX</span></div>
  <div class="menuBar" id="Bar_18_24"><img name="HL" class="imgHL" /><span class="menuBar">Get <span class="HotKey">F</span>ile</span></div>
- <div class="menuBar" id="Bar_18_25"><img name="HL" class="imgHL" /><span class="menuBar">Get <span class="HotKey">C</span>lass</span></div>
- <div class="menuBar" id="Bar_18_26"><img name="HL" class="imgHL" /><span class="menuBar">Path <span class="HotKey">r</span>ecursive</span></div>
- <div name="Sep" class="menuSep" id="Bar_18_27"></div>
- <div class="menuBar" id="Bar_18_28"><img name="HL" class="imgHL" /><span class="menuBar"><span class="HotKey">D</span>irectory</span></div>
+ <div class="menuBar" id="Bar_18_25"><img name="HL" class="imgHL" /><span class="menuBar">Get <span class="HotKey">C</span>lass</span><img name="Popup" class="imgPopup" /></div>
+ <div class="menuBar" id="Bar_18_30"><img name="HL" class="imgHL" /><span class="menuBar">Path <span class="HotKey">r</span>ecursive</span></div>
+ <div name="Sep" class="menuSep" id="Bar_18_31"></div>
+ <div class="menuBar" id="Bar_18_32"><img name="HL" class="imgHL" /><span class="menuBar"><span class="HotKey">D</span>irectory</span></div>
 </div>
 
-<div class="menuPopup" id="Pop_29">
+<div class="menuPopup" id="Pop_33">
 </div>
 
-<div class="menuPopup" id="Pop_32">
+<div class="menuPopup" id="Pop_36">
 </div>
 
 <div class="menuPopup" id="Pop_3">
@@ -97,11 +105,11 @@ function onBarClick(loRef)
  <div class="menuBar" id="Bar_3_6"><img name="HL" class="imgHL" /><span class="menuBar">git commit <span class="HotKey">A</span>ll</span></div>
  <div class="menuBar" id="Bar_3_7"><img name="HL" class="imgHL" /><span class="menuBar"><span class="HotKey">B</span>in to Text</span><img name="Popup" class="imgPopup" /></div>
  <div class="menuBar" id="Bar_3_18"><img name="HL" class="imgHL" /><span class="menuBar"><span class="HotKey">T</span>ext to Bin</span><img name="Popup" class="imgPopup" /></div>
- <div name="Sep" class="menuSep" id="Bar_3_29"></div>
- <div class="menuBar" id="Bar_3_31"><img name="HL" class="imgHL" /><span class="menuBar"><span class="HotKey">S</span>ettings</span></div>
- <div name="Sep" class="menuSep" id="Bar_3_32"></div>
- <div class="menuBar" id="Bar_3_34"><img name="HL" class="imgHL" /><span class="menuBar">GUI</span></div>
- <div class="menuBar" id="Bar_3_35"><img name="HL" class="imgHL" /><span class="menuBar">git shell</span></div>
+ <div name="Sep" class="menuSep" id="Bar_3_33"></div>
+ <div class="menuBar" id="Bar_3_35"><img name="HL" class="imgHL" /><span class="menuBar"><span class="HotKey">S</span>ettings</span></div>
+ <div name="Sep" class="menuSep" id="Bar_3_36"></div>
+ <div class="menuBar" id="Bar_3_38"><img name="HL" class="imgHL" /><span class="menuBar">GUI</span></div>
+ <div class="menuBar" id="Bar_3_39"><img name="HL" class="imgHL" /><span class="menuBar">git shell</span></div>
 </div>
 
 <script language="JavaScript" type="text/javascript">

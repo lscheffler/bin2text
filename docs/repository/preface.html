@@ -93,13 +93,13 @@
  </p>
  <hr /><h2><a name="howto">How to get it to work</a></h2>
  <ol>
-  <li>You need <a href="https://github.com/fdbozzo/foxbin2prg" target="_blank">FoxBin2Prg</a> at least version 1.19.42</li>
+  <li>You need <a href="https://github.com/fdbozzo/foxbin2prg" target="_blank">FoxBin2Prg</a> at least version 1.19.65</li>
   <li>
   	<p>
   		If you like to have it interacting with <em>git</em>, you need <a href="http://git-scm.com/download/win" target="_blank">git for windows</a>.
   	</p>
   	<p>
-  		The programm is tested with <i>git for windows</i> version 2.12.2.windows.1 (2017-03-24) 32 and 64bit.
+  		The programm is tested with <i>git for windows</i> version 2.31.1.windows.1 (2021-03-26) 32 and 64bit.
   		See <a href="https://github.com/lscheffler/bin2text">Bin 2 Text Extension</a> for latest <i>git</i> version supported.
   		<ul>
   			<li>The <em>git</em> commands must be working in windows command line.</li>
@@ -108,16 +108,16 @@
   		</ul>
   	</p>
   </li>
-  <li>Compile the Bin2Text.pjx that ships with this documentation to Bin2Text.app.</li>
+  <li>Compile the Bin2Text.pjx that ships with this documentation to Bin2Text.exe.</li>
   <li>
-  	Place Bin2Text.app next to FoxBin2Prg.prg.<br />
-  	It will work from any other place but then you must pick up the FoxBin2Prg.prg location.
+  	Place Bin2Text.exe next to FoxBin2Prg.EXE.<br />
+  	It will work from any other place but then you must pick up the FoxBin2Prg.EXE location.
   </li>
   <li>
    Run from IDE. (Best: with project open)<br/>
-   <span class="example">DO InitMenu IN Bin2Text.app</span><br/>
+   <span class="example">DO InitMenu IN Bin2Text.exe</span><br/>
    or to define a base directory:<br />
-   <span class="example">DO InitMenu IN Bin2Text.app WITH lcHomePath</span><br/>
+   <span class="example">DO InitMenu IN Bin2Text.exe WITH lcHomePath</span><br/>
    Check <a href="#InitMenu">InitMenu</a> for more information.<br/>
    <strong>You need to run this on every start of the IDE.</strong>
   </li>
@@ -204,7 +204,7 @@
  	The other stuff will be in this documentation anyway. See the exact interface parameters at <a href="../code/runb2t.prg/Main.htm" target="_top">RunB2T.prg</a> in this documentation or run with help parameter.
   </p>
   <h3><a name="InitMenu">InitMenu</a></h3>
-   <span class="example">DO InitMenu IN Bin2Text.app [WITH lcPath]</span>
+   <span class="example">DO InitMenu IN Bin2Text.exe [WITH lcPath]</span>
    <p>
    	Initialise the extension and start the menu.
    </p>
@@ -223,7 +223,7 @@
    	See <a href="../code/runb2t.prg/Main_d.initmenu.htm" title="Skip to procedure InitMenu">InitMenu</a>
    </p>
   <h3><a name="Inter_Active">Inter_Active</a></h3>
-   <span class="example">DO Inter_Active IN Bin2Text.app</span>
+   <span class="example">DO Inter_Active IN Bin2Text.exe</span>
    <p>
    	Call the settings form.
    </p>
@@ -234,7 +234,7 @@
    	See <a href="../code/runb2t.prg/Main_d.inter_active.htm" title="Skip to procedure Inter_Active">Inter_Active</a>
    </p>
   <h3><a name="PJX2Commit">PJX2Commit</a></h3>
-   <span class="example">DO PJX2Commit IN Bin2Text.app</span>
+   <span class="example">DO PJX2Commit IN Bin2Text.exe</span>
    <p>
    	Convert the files of the active project / all projects to text and run <em>git commit</em>.
    </p>
@@ -244,23 +244,80 @@
    <p>
    	See <a href="../code/runb2t.prg/Main_d.pjx2commit.htm" title="Skip to procedure Pjx2Commit">Pjx2Commit</a>
    </p>
-  <h3><a name="Convert_Pjx">Convert_Pjx</a></h3>
-   <span class="example">DO Convert_Pjx IN Bin2Text.app [[/?]|[lToBin[,nProjects[,nMode]]</span>
+  <h3><a name="Convert_">Convert_Methods</a></h3>
+   <span class="example">DO Convert_Pjx_2Txt IN Bin2Text.exe [[/?]|[nProjects[,nMode[,cFile]]]</span>
    <p>
-   	Calls the pjx processing feature.
+   	A couple of functions to create text / binay files.
    </p>
-   <p>
-   	This is what all other menus item are calling.
-   </p>
-   <p>
-   	See <a href="../code/runb2t.prg/Main_d.convert_pjx.htm" title="Skip to procedure Convert_Pjx">Convert_Pjx</a>
-   </p>
+   <dl>
+   	<dt>
+   	 Convert_Pjx_2Bin
+   	</dt>
+   	<dd>
+     <p></p><span class="example">DO Convert_Pjx_2Bin IN Bin2Text.exe [[/?]|[nProjects[,nMode[,cFile]]]</span></p>
+   	 <p>Create binaries for PJX(s) and all files contained.</p>
+   	 <p>See <a href="../code/runb2t.prg/Main_d.convert_pjx_2bin.htm" title="Skip to procedure Convert_Pjx_2Bin">Convert_Pjx_2Bin</a></p>
+   	</dd>
+   	<dt>
+   	 Convert_Pjx_2Txt
+   	</dt>
+   	<dd>
+     <p></p><span class="example">DO Convert_Pjx_2Txt IN Bin2Text.exe [[/?]|[nProjects[,nMode[,cFile]]]</span></p>
+   	 <p>Create text files for PJX(s) and all files contained.</p>
+   	 <p>See <a href="../code/runb2t.prg/Main_d.convert_pjx_2txt.htm" title="Skip to procedure Convert_Pjx_2Txt">Convert_Pjx_2Txt</a></p>
+   	</dd>
+   <dl>
+   	<dt>
+   	 Convert_File_2Bin
+   	</dt>
+   	<dd>
+     <p></p><span class="example">DO Convert_File_2Bin IN Bin2Text.exe [[/?]|[lSingleClass[,cFile[,cClass]]]</span></p>
+   	 <p>Create a file to its binary version. Name the class for  library operation.</p>
+   	 <p>See <a href="../code/runb2t.prg/Main_d.convert_file_2bin.htm" title="Skip to procedure Convert_File_2Bin">Convert_File_2Bin</a></p>
+   	</dd>
+   	<dt>
+   	 Convert_File_2Txt
+   	</dt>
+   	<dd>
+     <p></p><span class="example">DO Convert_File_2Txt IN Bin2Text.exe [[/?]|[lSingleClass[,cFile[,cClass]]]</span></p>
+   	 <p>Create text file for a file given or clkass of a library.</p>
+   	 <p>See <a href="../code/runb2t.prg/Main_d.convert_file_2txt.htm" title="Skip to procedure Convert_File_2Txt">Convert_File_2Txt</a></p>
+   	</dd>
+   </dl>
+   <dl>
+   	<dt>
+   	 Convert_Class_2Bin
+   	</dt>
+   	<dd>
+     <p></p><span class="example">DO Convert_File_2Bin IN Bin2Text.exe [[/?]|[lSingleClassLiv[,cTextFile]]</span></p>
+   	 <p>Create a library file for a class.</p>
+   	 <p>See <a href="../code/runb2t.prg/Main_d.convert_class_2bin.htm" title="Skip to procedure Convert_Class_2Bin">Convert_Class_2Bin</a></p>
+   	</dd>
+   <dl>
+   	<dt>
+   	 Convert_Directory_2Bin
+   	</dt>
+   	<dd>
+     <p></p><span class="example">DO Convert_File_2Bin IN Bin2Text.exe [[/?]|[lSingleClass[,cFile[,cClass]]]</span></p>
+   	 <p>Create binary versions of all text files found in a given directory.</p>
+   	 <p>See <a href="../code/runb2t.prg/Main_d.convert_directory_2bin.htm" title="Skip to procedure Convert_Directory_2Bin">Convert_Directory_2Bin</a></p>
+   	</dd>
+   	<dt>
+   	 Convert_Directory_2Txt
+   	</dt>
+   	<dd>
+     <p></p><span class="example">DO Convert_File_2Txt IN Bin2Text.exe [[/?]|[lSingleClass[,cFile[,cClass]]]</span></p>
+   	 <p>Create text file for all binary files found in a directory.</p>
+   	 <p>See <a href="../code/runb2t.prg/Main_d.convert_directory_2txt.htm" title="Skip to procedure Convert_Directory_2Txt">Convert_Directory_2Txt</a></p>
+   	</dd>
+   </dl>
+   
  <hr /><h2><a name="evenmore">And more</a></h2>
    <p>
  	There is one interface that offers a way to process any group of files, more complex then one can express with the FoxBin2Prg interface.
   <h3><a name="Convert_Array">Convert_Array</a></h3>
   </p>
-   <span class="example">DO Convert_Array IN Bin2Text.app [/?]|lToBin,cMode,@aFiles</span>
+   <span class="example">DO Convert_Array IN Bin2Text.exe [/?]|lToBin,cMode,@aFiles</span>
    <p>
    	This is will process the file list.
    </p>
@@ -279,5 +336,5 @@
    <p>
    	See <a href="../classes/bin_2_text.vcx/cls.cusstorage.storage_open.htm" title="Skip to method Storage_Open">Storage_Open</a> for a table structure.
    </p>
-<hr /><i>&copy;2019 Lutz Scheffler Software Ingenieurbüro</i>
+<hr /><i>&copy;2021 Lutz Scheffler Software Ingenieurbüro</i>
 </body></html>

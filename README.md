@@ -12,7 +12,7 @@ Project location: [Bin2Text](https://github.com/lscheffler/bin2text)
 
 The main goals of this project are:
 * The main goal is to do fast _git_ commits.
-* Visual FoxPro IDE integration that works with whole projects.
+* Visual FoxPro IDE integration that works with whole projects, not per file.
 
 The problems this project tries to solve:
 * Better IDE integration of FoxBin2Prg for VFP

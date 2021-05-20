@@ -88,6 +88,7 @@ code/runb2t.prg/Main_d.compare_verno.htm
 code/runb2t.prg/Main_d.construct_objects.htm
 code/runb2t.prg/Main_d.convert_array_2bin.htm
 code/runb2t.prg/Main_d.convert_array_2txt.htm
+code/runb2t.prg/Main_d.convert_class_2bin.htm
 code/runb2t.prg/Main_d.convert_directory_2bin.htm
 code/runb2t.prg/Main_d.convert_directory_2txt.htm
 code/runb2t.prg/Main_d.convert_file_2bin.htm
@@ -138,14 +139,17 @@ menus/bin2text.mnx/ID_22.htm
 menus/bin2text.mnx/ID_23.htm
 menus/bin2text.mnx/ID_24.htm
 menus/bin2text.mnx/ID_25.htm
-menus/bin2text.mnx/ID_26.htm
 menus/bin2text.mnx/ID_27.htm
 menus/bin2text.mnx/ID_28.htm
 menus/bin2text.mnx/ID_29.htm
+menus/bin2text.mnx/ID_30.htm
 menus/bin2text.mnx/ID_31.htm
 menus/bin2text.mnx/ID_32.htm
-menus/bin2text.mnx/ID_34.htm
+menus/bin2text.mnx/ID_33.htm
 menus/bin2text.mnx/ID_35.htm
+menus/bin2text.mnx/ID_36.htm
+menus/bin2text.mnx/ID_38.htm
+menus/bin2text.mnx/ID_39.htm
 Custom.htm
 GCT.htm
 Sta.htm
