@@ -10,13 +10,13 @@
 
 </head>
 <body>
-<h4 style=""><a name="ID_29">Object: ID_29</a></h4>
+<h4 style=""><a name="ID_39">Object: ID_39</a></h4>
 <table border="0" cellpadding="2" cellspacing="0">
  <tbody>
   <tr><td>Name:</td><td colspan="3">&nbsp;</td></tr>
   <tr><td>Type:</td><td colspan="3">Bar</td></tr>
-  <tr><td>Prompt:</td><td colspan="3">Pick <span class="HotKey">c</span>lass</td></tr>
-  <tr><td>Or.:</td><td colspan="3">3</td></tr>
+  <tr><td>Prompt:</td><td colspan="3">git shell</td></tr>
+  <tr><td>Or.:</td><td colspan="3">9</td></tr>
   <tr><td>Mark:</td><td colspan="3" class="foxMark">&#0;</td></tr>
   <tr><td colspan="2">Shortcut</td><td colspan="2">Negotiate</td></tr>
   <tr><td>Key Label:</td><td width="40px"><div class="Block">&nbsp;</div></td><td>Container:</td><td><div class="Block">None</div></td></tr>
@@ -26,12 +26,12 @@
 </table>
 <div>
  <span>Skip For:</span>
- <div class="PDMEXPR PDMNor" >&nbsp;</div>
+ <div class="PDMEXPR PDMNor" ><span class='PDMOper'>!</span><span class='PDMResF'>PEMSTATUS</span><span class='PDMOper'>(</span><span class='PDMVar'>_SCREEN</span><span class='PDMOper'>,</span><span class='PDMStr'>'gcb2t_git'</span><span class='PDMOper'>,</span><span class='PDMLit'>5</span><span class='PDMOper'>)</span> <span class='PDMOper'>OR</span> <span class='PDMResK'>EMPTY</span> <span class='PDMOper'>(</span><span class='PDMVar'>_SCREEN</span><span class='PDMOper'>.</span><span class='PDMVar'>gcb2t_git</span><span class='PDMOper'>)</span></div>
 
 </div>
 <div>
  <span>Message:</span>
- <div class="PDMEXPR PDMNor" ><span class='PDMStr'>"Pick a  class mit AGETCLASS and add to library.."</span></div>
+ <div class="PDMEXPR PDMNor" ><span class='PDMStr'>'Run git in shell window.'</span></div>
 
 </div>
 <div>
@@ -40,7 +40,7 @@
 </div>
 <div>
  <span>Execute type:</span><span style="padding-left:2px;">Command</span>
- <div><div class="PDMEXPR PDMNor" ><span class='PDMResK'>DO</span> <span class='PDMVar'>Convert_Class_2Bin</span> <span class='PDMResK'>IN</span> <span class='PDMOper'>(</span><span class='PDMVar'>_SCREEN</span><span class='PDMOper'>.</span><span class='PDMVar'>gcB2T_App</span><span class='PDMOper'>)</span> <span class='PDMResK'>WITH</span> <span class='PDMLit'>.F.</span><span class='PDMOper'>,</span><span class='PDMLit'>.F.</span></div>
+ <div><div class="PDMEXPR PDMNor" ><span class='PDMResK'>DO</span> <span class='PDMVar'>git_bash</span> <span class='PDMResK'>IN</span> <span class='PDMOper'>(</span><span class='PDMVar'>_SCREEN</span><span class='PDMOper'>.</span><span class='PDMVar'>gcB2T_App</span><span class='PDMOper'>)</span></div>
 </div>
 </div>
 </body>

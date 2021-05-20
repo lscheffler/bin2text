@@ -54,7 +54,7 @@ DEFINE CLASS base_hook AS projecthook 		&& Allgemeiner Projekt - Hook
 		 ENDFOR &&lnLoop1
 		ENDIF &&tlRebuildAll
 		
-		tcOutputName = FORCEEXT(tcOutputName,'app')
+		*tcOutputName = FORCEEXT(tcOutputName,'app')
 		DODEFAULT(tcOutputName, tnBuildAction, tlRebuildAll, tlShowErrors, tlBuildNewGuids)
 		
 	ENDPROC

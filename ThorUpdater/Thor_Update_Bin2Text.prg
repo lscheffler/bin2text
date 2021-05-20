@@ -72,6 +72,12 @@ A complete list of changes is available on the offline documentation via local f
 +++++++++++++++++++++++ Change log +++++++++++++++++++++++
 
 ---
+### Version 1.1.3
+
+Stable release.
+* Enhanced calling of git
+* Enhanced menu structure, new targets for Class_2Bin
+
 ### Version 1.1.2
 
 Stable release.
