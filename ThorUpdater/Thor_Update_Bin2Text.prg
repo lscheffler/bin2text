@@ -72,6 +72,11 @@ A complete list of changes is available on the offline documentation via local f
 +++++++++++++++++++++++ Change log +++++++++++++++++++++++
 
 ---
+### Version 1.1.4
+
+Stable release.
+* Fixed problem with automated message while commiting PJX's
+
 ### Version 1.1.3
 
 Stable release.
