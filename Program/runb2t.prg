@@ -160,6 +160,7 @@ FUNCTION Pjx2Commit	&&Create a commit to git.
 *!*	</pdm>
 
     IF TYPE('_SCREEN.gcB2T_Commit')="C" AND _SCREEN.gcB2T_Commit=="1" THEN
+
      lcCommit  = CHRTRAN(TTOC(DATETIME(),3),'T',' ')
      llSuccess = Run_git('commit -m "'+m.lcCommit+'" -m "auto-commit by RunB2T.exe"')
 *     llSuccess = Run_git('commit -m "'+m.lcCommit+'" -m "auto-commit by RunB2T.exe"',,.F.,.F.,.F.)
@@ -3602,7 +3603,7 @@ FUNCTION Run_git		&&Internal. Run a git root command
   OTHERWISE
    lcCommand = ;
     '"'+FORCEPATH('bash.exe',FORCEPATH('bin',JUSTPATH(JUSTPATH(m.lc_Git))))+'" --login -i '+;
-    '-c "git '+CHRTRAN(m.tcParameters,'\','/')+'"'
+    '-c "git '+STRTRAN(CHRTRAN(m.tcParameters,'\','/'),'"','""')+'"'
  ENDCASE
 
  IF !EMPTY(m.lcCommand) THEN

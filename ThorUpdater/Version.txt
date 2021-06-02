@@ -10,8 +10,8 @@ local;
 
 lcappName      = "Bin2Text"
 *Set following two numbers on version
-ldDate         = date(2021,05,20)
-lcmajorVersion = "1.1.3"
+ldDate         = date(2021,06,02)
+lcmajorVersion = "1.1.4"
 
 *lnJulian = val(sys(11, m.ldDate)) - val(sys(11, {^2000-01-01}))
 *lcJulian = padl(transform(lnJulian), 4, '0')
@@ -40,6 +40,11 @@ A complete list of changes is available on the offline documentation via local f
 +++++++++++++++++++++++ Change log +++++++++++++++++++++++
 
 ---
+### Version 1.1.4
+
+Stable release.
+* Fixed problem with automated message while commiting PJX's
+
 ### Version 1.1.3
 
 Stable release.
