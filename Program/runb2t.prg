@@ -22,7 +22,7 @@ ENDIF &&_SCREEN.frmB2T_Envelop.cusB2T.Get_Converter(@lcStorage,@loConverter,.T.)
 *!*	<remarks>
 *<p>
 * This program stores functions to wrap Fernando D. Bozzo
-* <a href="https://github.com/fdbozzo/foxbin2prg">FoxBin2Prg</a> for IDE purposes.
+* <a href="https://github.com/fdbozzo/foxbin2prg">FoxBin2Prg</a> for IDE purposes.1
 *</p>
 *</remarks>
 *!*
@@ -691,6 +691,7 @@ FUNCTION Convert_Pjx_2Bin &&Runs FoxBin2Prg for multiple projects to create bina
 *!*	/Changed  by: SF 28.2.2021
 
 *just to keep data over CLEAR ALL
+ _SCREEN.ADDPROPERTY('gcSetPath',FULLPATH(CURDIR()))
  _SCREEN.ADDPROPERTY('gcOld_Path',m.lcOldPath)
  _SCREEN.ADDPROPERTY('gvMode',m.lvMode)
 
@@ -1210,6 +1211,7 @@ FUNCTION Convert_Pjx_2Txt &&Runs FoxBin2Prg for multiple projects to create text
 *!*	/Changed  by: SF 28.2.2021
 
 *just to keep data over CLEAR ALL
+ _SCREEN.ADDPROPERTY('gcSetPath',FULLPATH(CURDIR()))
  _SCREEN.ADDPROPERTY('gcOld_Path',m.lcOldPath)
  _SCREEN.ADDPROPERTY('gvMode',m.lvMode)
  _SCREEN.ADDPROPERTY('glCheckAll',m.llCheckAll)
@@ -1221,6 +1223,8 @@ FUNCTION Convert_Pjx_2Txt &&Runs FoxBin2Prg for multiple projects to create text
  LOCAL ARRAY;
   laFiles(1,1)
 
+ CD (_SCREEN.gcSetPath)
+ REMOVEPROPERTY(_SCREEN,'gcSetPath')
  ACOPY(_SCREEN.gaFiles,m.laFiles)	&& will autoresize laFiles
  REMOVEPROPERTY(_SCREEN,'gaFiles')
 
@@ -1405,9 +1409,9 @@ FUNCTION Convert_Class_2Bin  	&&Runs FoxBin2Prg for a single class to create bin
 
  IF m.llReturn THEN
   IF m.tlTextFile THEN
-  loFB2T_Setting = m.loConverter.Get_DirSettings(m.lcPath)
+   loFB2T_Setting = m.loConverter.Get_DirSettings(m.lcPath)
 
-  lcFileTypes = "Visual Class Library:"+m.loFB2T_Setting.c_VC2
+   lcFileTypes = "Visual Class Library:"+m.loFB2T_Setting.c_VC2
    _SCREEN.gaFiles(1,1) = GETFILE(m.lcFileTypes,'','',0,m.lvTemp)
 
   ELSE  &&m.tlTextFile THEN
@@ -1478,7 +1482,7 @@ FUNCTION Convert_Class_2Bin  	&&Runs FoxBin2Prg for a single class to create bin
      ?'File is not a class representation.' FONT '' STYLE 'B'
      lcSourceExt = ""
     ENDIF &&!m.llReturn
-    
+
 
    OTHERWISE
     ?'File of this type is not supported.' FONT '' STYLE 'B'
@@ -1518,7 +1522,7 @@ FUNCTION Convert_Class_2Bin  	&&Runs FoxBin2Prg for a single class to create bin
  ENDIF &&m.llReturn
 
  _SCREEN.glInfo		   = .T.
- 
+
  loFB2T_Setting = .NULL.
 
  Destruct_Objects()
@@ -1555,7 +1559,7 @@ FUNCTION Convert_Class_2Bin  	&&Runs FoxBin2Prg for a single class to create bin
 
    IF m.llReturn THEN
 * neue Technik mit redirect2
-     loFB2T_Setting.n_RedirectClassType = _SCREEN.gnRedirectClassType
+    loFB2T_Setting.n_RedirectClassType = _SCREEN.gnRedirectClassType
 
    ENDIF &&m.llReturn
   ENDIF &&_SCREEN.glInfo
