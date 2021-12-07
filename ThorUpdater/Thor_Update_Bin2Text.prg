@@ -72,6 +72,12 @@ A complete list of changes is available on the offline documentation via local f
 +++++++++++++++++++++++ Change log +++++++++++++++++++++++
 
 ---
+### Version 1.1.5
+
+Stable release.
+* Fixed condition where additonal app closed by CLEAR ALL resets current path. Problems with additional (relative) files.
+* String to long. Fixed problem on file hashing for large files.
+ 
 ### Version 1.1.4
 
 Stable release.

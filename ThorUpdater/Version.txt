@@ -10,8 +10,8 @@ local;
 
 lcappName      = "Bin2Text"
 *Set following two numbers on version
-ldDate         = date(2021,06,02)
-lcmajorVersion = "1.1.4"
+ldDate         = date(2021,12,07)
+lcmajorVersion = "1.1.5"
 
 *lnJulian = val(sys(11, m.ldDate)) - val(sys(11, {^2000-01-01}))
 *lcJulian = padl(transform(lnJulian), 4, '0')
@@ -40,6 +40,12 @@ A complete list of changes is available on the offline documentation via local f
 +++++++++++++++++++++++ Change log +++++++++++++++++++++++
 
 ---
+### Version 1.1.5
+
+Stable release.
+* Fixed condition where additonal app closed by CLEAR ALL resets current path. Problems with additional (relative) files.
+* String to long. Fixed problem on file hashing for large files.
+ 
 ### Version 1.1.4
 
 Stable release.

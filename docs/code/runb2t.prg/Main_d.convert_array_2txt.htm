@@ -16,19 +16,19 @@
 <body>
 <div class="diaxp_mhead">Convert_Array_2Txt Function</div>
 <div class="diaxp_mbody">
-<!-- Created with _diamp_pdm_ab by Agnes Beste    02.06.2021 07:08 -->
+<!-- Created with _diamp_pdm_ab by Agnes Beste    07.12.2021 20:44 -->
  <div class="PDM_AB_Descr"><!-- Descr Begin -->
 Runs FoxBin2Prg for multiple files to text.
  </div><!-- Descr End -->
 
  <div class="DIAMP_PDM_AB_Syntax"><!-- Syntax Begin -->
   <div class="SColor">
-   <div class="RetVal"><a href="#_62C0FAR5F">RetVal</a>&nbsp;</div>   <div class="RetValEq">=</div>   <div class="PEM">
+   <div class="RetVal"><a href="#_67K18G3HE">RetVal</a>&nbsp;</div>   <div class="RetValEq">=</div>   <div class="PEM">
     Convert_Array_2Txt
    </div>
    <div class="Para">
-    ([<a href="#_62C0FAR5G">tcMode</a>
-     <wbr />,@<a href="#_62C0FAR5H">taFiles</a>])
+    ([<a href="#_67K18G3HF">tcMode</a>
+     <wbr />,@<a href="#_67K18G3HG">taFiles</a>])
    </div>
    <div style="clear: both"></div>
   </div><!-- Colour End -->
@@ -40,7 +40,7 @@ Runs FoxBin2Prg for multiple files to text.
   </span>
   <dl class="DIAMP_PDM_AB_Params_List">
    <dt class="dt_">
-    <a class="DIAMP_PDM_AB_Params_ParaName" id="_62C0FAR5G" name="_62C0FAR5G">
+    <a class="DIAMP_PDM_AB_Params_ParaName" id="_67K18G3HF" name="_67K18G3HF">
      <span class="PDMEXPR PDMNor" ><span class='PDMVar'>tcMode</span></span>
 
     </a>
@@ -74,7 +74,7 @@ Pjx (&quot;*&quot;,&quot;*-&quot;,&quot;&quot;) parameters as used by FoxBin2Prg
     </span>
    </dd>
    <dt class="dt_">
-    <a class="DIAMP_PDM_AB_Params_ParaName" id="_62C0FAR5H" name="_62C0FAR5H">
+    <a class="DIAMP_PDM_AB_Params_ParaName" id="_67K18G3HG" name="_67K18G3HG">
      <span class="PDMEXPR PDMNor" ><span class='PDMVar'>taFiles</span></span>
 
     </a>
@@ -118,7 +118,7 @@ Pjx (&quot;*&quot;,&quot;*-&quot;,&quot;&quot;) parameters as used by FoxBin2Prg
  <div class="DIAMP_PDM_AB_RetVal"><!-- Returns Begin -->
   <div>
    <span class="PDM_AB_Head">
-    <a id="_62C0FAR5F" name="_62C0FAR5F">
+    <a id="_67K18G3HE" name="_67K18G3HE">
      Return value
     </a>
    </span> <span class="RetVal_Ttype">Boolean</span>
@@ -157,65 +157,65 @@ True if successfull.
  </div><!-- Remarks End -->
 
 
-<!-- /Created with _diamp_pdm_ab by Agnes Beste    02.06.2021 07:08 -->
+<!-- /Created with _diamp_pdm_ab by Agnes Beste    07.12.2021 20:44 -->
 
  <div class="SC">
   <img onclick="ExpandSC('SP_P12',-1);" class="imgEC" src="../../imgs/dotab.gif" alt="Expand/Collapse source code of procedure Convert_Array_2Txt" id="IMG_SP_P12" />
   <span onclick="ExpandSC('SP_P12',-1);" class="SCCaption"><a name="pm.convert_array_2txt">Source Code</a></span>
   <div ondblclick="ExpandSC('SP_P12',-1);" class="SCE" style="display: none;" id="TX_SP_P12">
 <!-- Code Begin -->
-<pre class="PDMCODE PDMNor" ><span class='PDMCnt'>2691</span> <span class='PDMInd'> 1</span>  <span class='PDMResK'>LPARAMETERS</span><span class='PDMOper'>;</span>
-<span class='PDMCnt'>2692</span> <span class='PDMInd'> 2</span>   <span class='PDMVar'>tcMode</span><span class='PDMOper'>,</span><span class='PDMOper'>;</span>
-<span class='PDMCnt'>2693</span> <span class='PDMInd'> 2</span>   <span class='PDMVar'>taFiles</span>
-<span class='PDMCnt'>2694</span> <span class='PDMInd'>  </span> 
-<span class='PDMCnt'>2695</span> <span class='PDMInd'>  </span> 
-<span class='PDMCnt'>2724</span> <span class='PDMInd'>  </span> 
-<span class='PDMCnt'>2725</span> <span class='PDMInd'> 1</span>  <span class='PDMResK'>EXTERNAL</span> <span class='PDMResK'>ARRAY</span><span class='PDMOper'>;</span>
-<span class='PDMCnt'>2726</span> <span class='PDMInd'> 2</span>   <span class='PDMVar'>taFiles</span>
-<span class='PDMCnt'>2727</span> <span class='PDMInd'>  </span> 
-<span class='PDMCnt'>2728</span> <span class='PDMInd'>  </span> <span class='PDMCom'>*check parameters</span>
-<span class='PDMCnt'>2729</span> <span class='PDMInd'>  </span> 
-<span class='PDMCnt'>2730</span> <span class='PDMInd'> 1</span>  <span class='PDMResK'>DO</span> <span class='PDMResK'>CASE</span>
-<span class='PDMCnt'>2731</span> <span class='PDMInd'> 2</span>   <span class='PDMResK'>CASE</span> <span class='PDMVar'>_VFP</span><span class='PDMOper'>.</span><span class='PDMVar'>STARTMODE</span><span class='PDMOper'>#</span><span class='PDMLit'>0</span>
-<span class='PDMCnt'>2732</span> <span class='PDMInd'> 3</span>    <span class='PDMVar'>HelpMsg</span><span class='PDMOper'>(</span><span class='PDMLit'>10</span><span class='PDMOper'>)</span>
-<span class='PDMCnt'>2733</span> <span class='PDMInd'> 3</span>    <span class='PDMResK'>RETURN</span> <span class='PDMLit'>.F.</span>
-<span class='PDMCnt'>2734</span> <span class='PDMInd'> 2</span>   <span class='PDMResK'>CASE</span> <span class='PDMResF'>PCOUNT</span><span class='PDMOper'>(</span><span class='PDMOper'>)</span><span class='PDMOper'>&lt;</span><span class='PDMLit'>2</span>
-<span class='PDMCnt'>2735</span> <span class='PDMInd'> 3</span>    <span class='PDMVar'>tcMode</span> <span class='PDMOper'>=</span> <span class='PDMStr'>'?'</span>
-<span class='PDMCnt'>2736</span> <span class='PDMInd'> 2</span>   <span class='PDMResK'>CASE</span> <span class='PDMResF'>VARTYPE</span><span class='PDMOper'>(</span><span class='PDMVar'>m</span><span class='PDMOper'>.</span><span class='PDMVar'>tcMode</span><span class='PDMOper'>)</span><span class='PDMOper'>#</span><span class='PDMStr'>'C'</span>
-<span class='PDMCnt'>2737</span> <span class='PDMInd'> 3</span>    <span class='PDMVar'>tcMode</span> <span class='PDMOper'>=</span> <span class='PDMStr'>'?'</span>
-<span class='PDMCnt'>2738</span> <span class='PDMInd'> 2</span>   <span class='PDMResK'>CASE</span> <span class='PDMResF'>TYPE</span><span class='PDMOper'>(</span><span class='PDMStr'>'ALEN(taFiles)'</span><span class='PDMOper'>)</span><span class='PDMOper'>#</span><span class='PDMStr'>'N'</span>
+<pre class="PDMCODE PDMNor" ><span class='PDMCnt'>2695</span> <span class='PDMInd'> 1</span>  <span class='PDMResK'>LPARAMETERS</span><span class='PDMOper'>;</span>
+<span class='PDMCnt'>2696</span> <span class='PDMInd'> 2</span>   <span class='PDMVar'>tcMode</span><span class='PDMOper'>,</span><span class='PDMOper'>;</span>
+<span class='PDMCnt'>2697</span> <span class='PDMInd'> 2</span>   <span class='PDMVar'>taFiles</span>
+<span class='PDMCnt'>2698</span> <span class='PDMInd'>  </span> 
+<span class='PDMCnt'>2699</span> <span class='PDMInd'>  </span> 
+<span class='PDMCnt'>2728</span> <span class='PDMInd'>  </span> 
+<span class='PDMCnt'>2729</span> <span class='PDMInd'> 1</span>  <span class='PDMResK'>EXTERNAL</span> <span class='PDMResK'>ARRAY</span><span class='PDMOper'>;</span>
+<span class='PDMCnt'>2730</span> <span class='PDMInd'> 2</span>   <span class='PDMVar'>taFiles</span>
+<span class='PDMCnt'>2731</span> <span class='PDMInd'>  </span> 
+<span class='PDMCnt'>2732</span> <span class='PDMInd'>  </span> <span class='PDMCom'>*check parameters</span>
+<span class='PDMCnt'>2733</span> <span class='PDMInd'>  </span> 
+<span class='PDMCnt'>2734</span> <span class='PDMInd'> 1</span>  <span class='PDMResK'>DO</span> <span class='PDMResK'>CASE</span>
+<span class='PDMCnt'>2735</span> <span class='PDMInd'> 2</span>   <span class='PDMResK'>CASE</span> <span class='PDMVar'>_VFP</span><span class='PDMOper'>.</span><span class='PDMVar'>STARTMODE</span><span class='PDMOper'>#</span><span class='PDMLit'>0</span>
+<span class='PDMCnt'>2736</span> <span class='PDMInd'> 3</span>    <span class='PDMVar'>HelpMsg</span><span class='PDMOper'>(</span><span class='PDMLit'>10</span><span class='PDMOper'>)</span>
+<span class='PDMCnt'>2737</span> <span class='PDMInd'> 3</span>    <span class='PDMResK'>RETURN</span> <span class='PDMLit'>.F.</span>
+<span class='PDMCnt'>2738</span> <span class='PDMInd'> 2</span>   <span class='PDMResK'>CASE</span> <span class='PDMResF'>PCOUNT</span><span class='PDMOper'>(</span><span class='PDMOper'>)</span><span class='PDMOper'>&lt;</span><span class='PDMLit'>2</span>
 <span class='PDMCnt'>2739</span> <span class='PDMInd'> 3</span>    <span class='PDMVar'>tcMode</span> <span class='PDMOper'>=</span> <span class='PDMStr'>'?'</span>
-<span class='PDMCnt'>2740</span> <span class='PDMInd'> 2</span>   <span class='PDMResK'>CASE</span> <span class='PDMResF'>ALEN</span><span class='PDMOper'>(</span><span class='PDMVar'>taFiles</span><span class='PDMOper'>,</span><span class='PDMLit'>2</span><span class='PDMOper'>)</span><span class='PDMOper'>&lt;</span><span class='PDMLit'>3</span>
+<span class='PDMCnt'>2740</span> <span class='PDMInd'> 2</span>   <span class='PDMResK'>CASE</span> <span class='PDMResF'>VARTYPE</span><span class='PDMOper'>(</span><span class='PDMVar'>m</span><span class='PDMOper'>.</span><span class='PDMVar'>tcMode</span><span class='PDMOper'>)</span><span class='PDMOper'>#</span><span class='PDMStr'>'C'</span>
 <span class='PDMCnt'>2741</span> <span class='PDMInd'> 3</span>    <span class='PDMVar'>tcMode</span> <span class='PDMOper'>=</span> <span class='PDMStr'>'?'</span>
-<span class='PDMCnt'>2742</span> <span class='PDMInd'> 2</span>   <span class='PDMResK'>OTHERWISE</span>
-<span class='PDMCnt'>2743</span> <span class='PDMInd'> 3</span>    <span class='PDMResK'>LOCAL</span><span class='PDMOper'>;</span>
-<span class='PDMCnt'>2744</span> <span class='PDMInd'> 4</span>     <span class='PDMVar'>lnLoop</span>
-<span class='PDMCnt'>2745</span> <span class='PDMInd'>  </span> 
-<span class='PDMCnt'>2746</span> <span class='PDMInd'> 3</span>    <span class='PDMResK'>FOR</span> <span class='PDMVar'>lnLoop</span> <span class='PDMOper'>=</span> <span class='PDMLit'>1</span> <span class='PDMResK'>TO</span> <span class='PDMResF'>ALEN</span><span class='PDMOper'>(</span><span class='PDMVar'>m</span><span class='PDMOper'>.</span><span class='PDMVar'>taFiles</span><span class='PDMOper'>)</span>
-<span class='PDMCnt'>2747</span> <span class='PDMInd'> 4</span>     <span class='PDMResK'>IF</span> <span class='PDMOper'>!</span><span class='PDMResF'>TYPE</span><span class='PDMOper'>(</span><span class='PDMVar'>m</span><span class='PDMOper'>.</span><span class='PDMVar'>taFiles</span><span class='PDMOper'>(</span><span class='PDMVar'>m</span><span class='PDMOper'>.</span><span class='PDMVar'>lnLoop</span><span class='PDMOper'>,</span><span class='PDMLit'>1</span><span class='PDMOper'>)</span><span class='PDMOper'>)</span><span class='PDMOper'>=</span><span class='PDMStr'>'C'</span><span class='PDMOper'>;</span>
-<span class='PDMCnt'>2748</span> <span class='PDMInd'> 6</span>       <span class='PDMOper'>OR</span> <span class='PDMOper'>!</span><span class='PDMResF'>TYPE</span><span class='PDMOper'>(</span><span class='PDMVar'>m</span><span class='PDMOper'>.</span><span class='PDMVar'>taFiles</span><span class='PDMOper'>(</span><span class='PDMVar'>m</span><span class='PDMOper'>.</span><span class='PDMVar'>lnLoop</span><span class='PDMOper'>,</span><span class='PDMLit'>2</span><span class='PDMOper'>)</span><span class='PDMOper'>)</span><span class='PDMOper'>=</span><span class='PDMStr'>'C'</span><span class='PDMOper'>;</span>
-<span class='PDMCnt'>2749</span> <span class='PDMInd'> 6</span>       <span class='PDMOper'>OR</span> <span class='PDMResF'>ISNULL</span><span class='PDMOper'>(</span><span class='PDMVar'>m</span><span class='PDMOper'>.</span><span class='PDMVar'>taFiles</span><span class='PDMOper'>(</span><span class='PDMVar'>m</span><span class='PDMOper'>.</span><span class='PDMVar'>lnLoop</span><span class='PDMOper'>,</span><span class='PDMLit'>2</span><span class='PDMOper'>)</span><span class='PDMOper'>)</span> <span class='PDMResK'>THEN</span>
-<span class='PDMCnt'>2750</span> <span class='PDMInd'> 5</span>      <span class='PDMVar'>tcMode</span> <span class='PDMOper'>=</span> <span class='PDMStr'>'?'</span>
-<span class='PDMCnt'>2751</span> <span class='PDMInd'> 5</span>      <span class='PDMResK'>EXIT</span>
-<span class='PDMCnt'>2752</span> <span class='PDMInd'>  </span> 
-<span class='PDMCnt'>2753</span> <span class='PDMInd'> 4</span>     <span class='PDMResK'>ENDIF</span> <span class='PDMCom'>&amp;&amp;!TYPE(m.taFiles(m.lnLoop,1))='C' OR !TYPE(m.taFiles(m.lnLoop,2))='C' OR ISNULL(m.taFiles(m.lnLoop,2))</span>
-<span class='PDMCnt'>2754</span> <span class='PDMInd'> 3</span>    <span class='PDMResK'>ENDFOR</span> <span class='PDMCom'>&amp;&amp;lnLoop</span>
-<span class='PDMCnt'>2755</span> <span class='PDMInd'>  </span> 
-<span class='PDMCnt'>2756</span> <span class='PDMInd'> 1</span>  <span class='PDMResK'>ENDCASE</span>
-<span class='PDMCnt'>2757</span> <span class='PDMInd'>  </span> 
-<span class='PDMCnt'>2758</span> <span class='PDMInd'> 1</span>  <span class='PDMResK'>IF</span> <span class='PDMResF'>VARTYPE</span><span class='PDMOper'>(</span><span class='PDMVar'>m</span><span class='PDMOper'>.</span><span class='PDMVar'>tcMode</span><span class='PDMOper'>)</span><span class='PDMOper'>=</span><span class='PDMStr'>'C'</span><span class='PDMOper'>;</span>
-<span class='PDMCnt'>2759</span> <span class='PDMInd'> 3</span>    <span class='PDMOper'>AND</span> <span class='PDMResF'>INLIST</span><span class='PDMOper'>(</span><span class='PDMResF'>LOWER</span><span class='PDMOper'>(</span><span class='PDMVar'>m</span><span class='PDMOper'>.</span><span class='PDMVar'>tcMode</span><span class='PDMOper'>)</span><span class='PDMOper'>,</span><span class='PDMStr'>'?'</span><span class='PDMOper'>,</span><span class='PDMStr'>'/?'</span><span class='PDMOper'>,</span><span class='PDMStr'>'-?'</span><span class='PDMOper'>,</span><span class='PDMStr'>'h'</span><span class='PDMOper'>,</span><span class='PDMStr'>'/h'</span><span class='PDMOper'>,</span><span class='PDMStr'>'-h'</span><span class='PDMOper'>,</span><span class='PDMStr'>'help'</span><span class='PDMOper'>,</span><span class='PDMStr'>'/help'</span><span class='PDMOper'>,</span><span class='PDMStr'>'-help'</span><span class='PDMOper'>)</span> <span class='PDMResK'>THEN</span>
-<span class='PDMCnt'>2760</span> <span class='PDMInd'> 2</span>   <span class='PDMVar'>HelpMsg</span><span class='PDMOper'>(</span><span class='PDMLit'>1</span><span class='PDMOper'>)</span>
-<span class='PDMCnt'>2761</span> <span class='PDMInd'> 2</span>   <span class='PDMResK'>RETURN</span> <span class='PDMLit'>.F.</span>
-<span class='PDMCnt'>2762</span> <span class='PDMInd'> 1</span>  <span class='PDMResK'>ENDIF</span> <span class='PDMCom'>&amp;&amp;VARTYPE(m.tcMode)='C' AND INLIST(LOWER(m.tcMode),'?','/?','-?','h','/h','-h','help','/help','-help')</span>
-<span class='PDMCnt'>2763</span> <span class='PDMInd'>  </span> 
-<span class='PDMCnt'>2764</span> <span class='PDMInd'> 1</span>  <span class='PDMVar'>SwitchErrorHandler</span><span class='PDMOper'>(</span><span class='PDMLit'>.T.</span><span class='PDMOper'>)</span>
-<span class='PDMCnt'>2765</span> <span class='PDMInd'>  </span> <span class='PDMCom'>*process Transformation</span>
-<span class='PDMCnt'>2766</span> <span class='PDMInd'> 1</span>  <span class='PDMVar'>Construct_Objects</span><span class='PDMOper'>(</span><span class='PDMOper'>)</span>
-<span class='PDMCnt'>2767</span> <span class='PDMInd'> 1</span>  <span class='PDMVar'>_SCREEN</span><span class='PDMOper'>.</span><span class='PDMVar'>frmB2T_Envelop</span><span class='PDMOper'>.</span><span class='PDMVar'>cusB2T</span><span class='PDMOper'>.</span><span class='PDMVar'>Process_Bin2Txt</span><span class='PDMOper'>(</span><span class='PDMOper'>@</span><span class='PDMVar'>taFiles</span><span class='PDMOper'>,</span><span class='PDMVar'>m</span><span class='PDMOper'>.</span><span class='PDMVar'>tcMode</span><span class='PDMOper'>)</span>
-<span class='PDMCnt'>2768</span> <span class='PDMInd'> 1</span>  <span class='PDMVar'>Destruct_Objects</span><span class='PDMOper'>(</span><span class='PDMOper'>)</span>
-<span class='PDMCnt'>2769</span> <span class='PDMInd'> 1</span>  <span class='PDMVar'>SwitchErrorHandler</span><span class='PDMOper'>(</span><span class='PDMLit'>.F.</span><span class='PDMOper'>)</span>
-<span class='PDMCnt'>2770</span> <span class='PDMInd'>  </span> </pre>
+<span class='PDMCnt'>2742</span> <span class='PDMInd'> 2</span>   <span class='PDMResK'>CASE</span> <span class='PDMResF'>TYPE</span><span class='PDMOper'>(</span><span class='PDMStr'>'ALEN(taFiles)'</span><span class='PDMOper'>)</span><span class='PDMOper'>#</span><span class='PDMStr'>'N'</span>
+<span class='PDMCnt'>2743</span> <span class='PDMInd'> 3</span>    <span class='PDMVar'>tcMode</span> <span class='PDMOper'>=</span> <span class='PDMStr'>'?'</span>
+<span class='PDMCnt'>2744</span> <span class='PDMInd'> 2</span>   <span class='PDMResK'>CASE</span> <span class='PDMResF'>ALEN</span><span class='PDMOper'>(</span><span class='PDMVar'>taFiles</span><span class='PDMOper'>,</span><span class='PDMLit'>2</span><span class='PDMOper'>)</span><span class='PDMOper'>&lt;</span><span class='PDMLit'>3</span>
+<span class='PDMCnt'>2745</span> <span class='PDMInd'> 3</span>    <span class='PDMVar'>tcMode</span> <span class='PDMOper'>=</span> <span class='PDMStr'>'?'</span>
+<span class='PDMCnt'>2746</span> <span class='PDMInd'> 2</span>   <span class='PDMResK'>OTHERWISE</span>
+<span class='PDMCnt'>2747</span> <span class='PDMInd'> 3</span>    <span class='PDMResK'>LOCAL</span><span class='PDMOper'>;</span>
+<span class='PDMCnt'>2748</span> <span class='PDMInd'> 4</span>     <span class='PDMVar'>lnLoop</span>
+<span class='PDMCnt'>2749</span> <span class='PDMInd'>  </span> 
+<span class='PDMCnt'>2750</span> <span class='PDMInd'> 3</span>    <span class='PDMResK'>FOR</span> <span class='PDMVar'>lnLoop</span> <span class='PDMOper'>=</span> <span class='PDMLit'>1</span> <span class='PDMResK'>TO</span> <span class='PDMResF'>ALEN</span><span class='PDMOper'>(</span><span class='PDMVar'>m</span><span class='PDMOper'>.</span><span class='PDMVar'>taFiles</span><span class='PDMOper'>)</span>
+<span class='PDMCnt'>2751</span> <span class='PDMInd'> 4</span>     <span class='PDMResK'>IF</span> <span class='PDMOper'>!</span><span class='PDMResF'>TYPE</span><span class='PDMOper'>(</span><span class='PDMVar'>m</span><span class='PDMOper'>.</span><span class='PDMVar'>taFiles</span><span class='PDMOper'>(</span><span class='PDMVar'>m</span><span class='PDMOper'>.</span><span class='PDMVar'>lnLoop</span><span class='PDMOper'>,</span><span class='PDMLit'>1</span><span class='PDMOper'>)</span><span class='PDMOper'>)</span><span class='PDMOper'>=</span><span class='PDMStr'>'C'</span><span class='PDMOper'>;</span>
+<span class='PDMCnt'>2752</span> <span class='PDMInd'> 6</span>       <span class='PDMOper'>OR</span> <span class='PDMOper'>!</span><span class='PDMResF'>TYPE</span><span class='PDMOper'>(</span><span class='PDMVar'>m</span><span class='PDMOper'>.</span><span class='PDMVar'>taFiles</span><span class='PDMOper'>(</span><span class='PDMVar'>m</span><span class='PDMOper'>.</span><span class='PDMVar'>lnLoop</span><span class='PDMOper'>,</span><span class='PDMLit'>2</span><span class='PDMOper'>)</span><span class='PDMOper'>)</span><span class='PDMOper'>=</span><span class='PDMStr'>'C'</span><span class='PDMOper'>;</span>
+<span class='PDMCnt'>2753</span> <span class='PDMInd'> 6</span>       <span class='PDMOper'>OR</span> <span class='PDMResF'>ISNULL</span><span class='PDMOper'>(</span><span class='PDMVar'>m</span><span class='PDMOper'>.</span><span class='PDMVar'>taFiles</span><span class='PDMOper'>(</span><span class='PDMVar'>m</span><span class='PDMOper'>.</span><span class='PDMVar'>lnLoop</span><span class='PDMOper'>,</span><span class='PDMLit'>2</span><span class='PDMOper'>)</span><span class='PDMOper'>)</span> <span class='PDMResK'>THEN</span>
+<span class='PDMCnt'>2754</span> <span class='PDMInd'> 5</span>      <span class='PDMVar'>tcMode</span> <span class='PDMOper'>=</span> <span class='PDMStr'>'?'</span>
+<span class='PDMCnt'>2755</span> <span class='PDMInd'> 5</span>      <span class='PDMResK'>EXIT</span>
+<span class='PDMCnt'>2756</span> <span class='PDMInd'>  </span> 
+<span class='PDMCnt'>2757</span> <span class='PDMInd'> 4</span>     <span class='PDMResK'>ENDIF</span> <span class='PDMCom'>&amp;&amp;!TYPE(m.taFiles(m.lnLoop,1))='C' OR !TYPE(m.taFiles(m.lnLoop,2))='C' OR ISNULL(m.taFiles(m.lnLoop,2))</span>
+<span class='PDMCnt'>2758</span> <span class='PDMInd'> 3</span>    <span class='PDMResK'>ENDFOR</span> <span class='PDMCom'>&amp;&amp;lnLoop</span>
+<span class='PDMCnt'>2759</span> <span class='PDMInd'>  </span> 
+<span class='PDMCnt'>2760</span> <span class='PDMInd'> 1</span>  <span class='PDMResK'>ENDCASE</span>
+<span class='PDMCnt'>2761</span> <span class='PDMInd'>  </span> 
+<span class='PDMCnt'>2762</span> <span class='PDMInd'> 1</span>  <span class='PDMResK'>IF</span> <span class='PDMResF'>VARTYPE</span><span class='PDMOper'>(</span><span class='PDMVar'>m</span><span class='PDMOper'>.</span><span class='PDMVar'>tcMode</span><span class='PDMOper'>)</span><span class='PDMOper'>=</span><span class='PDMStr'>'C'</span><span class='PDMOper'>;</span>
+<span class='PDMCnt'>2763</span> <span class='PDMInd'> 3</span>    <span class='PDMOper'>AND</span> <span class='PDMResF'>INLIST</span><span class='PDMOper'>(</span><span class='PDMResF'>LOWER</span><span class='PDMOper'>(</span><span class='PDMVar'>m</span><span class='PDMOper'>.</span><span class='PDMVar'>tcMode</span><span class='PDMOper'>)</span><span class='PDMOper'>,</span><span class='PDMStr'>'?'</span><span class='PDMOper'>,</span><span class='PDMStr'>'/?'</span><span class='PDMOper'>,</span><span class='PDMStr'>'-?'</span><span class='PDMOper'>,</span><span class='PDMStr'>'h'</span><span class='PDMOper'>,</span><span class='PDMStr'>'/h'</span><span class='PDMOper'>,</span><span class='PDMStr'>'-h'</span><span class='PDMOper'>,</span><span class='PDMStr'>'help'</span><span class='PDMOper'>,</span><span class='PDMStr'>'/help'</span><span class='PDMOper'>,</span><span class='PDMStr'>'-help'</span><span class='PDMOper'>)</span> <span class='PDMResK'>THEN</span>
+<span class='PDMCnt'>2764</span> <span class='PDMInd'> 2</span>   <span class='PDMVar'>HelpMsg</span><span class='PDMOper'>(</span><span class='PDMLit'>1</span><span class='PDMOper'>)</span>
+<span class='PDMCnt'>2765</span> <span class='PDMInd'> 2</span>   <span class='PDMResK'>RETURN</span> <span class='PDMLit'>.F.</span>
+<span class='PDMCnt'>2766</span> <span class='PDMInd'> 1</span>  <span class='PDMResK'>ENDIF</span> <span class='PDMCom'>&amp;&amp;VARTYPE(m.tcMode)='C' AND INLIST(LOWER(m.tcMode),'?','/?','-?','h','/h','-h','help','/help','-help')</span>
+<span class='PDMCnt'>2767</span> <span class='PDMInd'>  </span> 
+<span class='PDMCnt'>2768</span> <span class='PDMInd'> 1</span>  <span class='PDMVar'>SwitchErrorHandler</span><span class='PDMOper'>(</span><span class='PDMLit'>.T.</span><span class='PDMOper'>)</span>
+<span class='PDMCnt'>2769</span> <span class='PDMInd'>  </span> <span class='PDMCom'>*process Transformation</span>
+<span class='PDMCnt'>2770</span> <span class='PDMInd'> 1</span>  <span class='PDMVar'>Construct_Objects</span><span class='PDMOper'>(</span><span class='PDMOper'>)</span>
+<span class='PDMCnt'>2771</span> <span class='PDMInd'> 1</span>  <span class='PDMVar'>_SCREEN</span><span class='PDMOper'>.</span><span class='PDMVar'>frmB2T_Envelop</span><span class='PDMOper'>.</span><span class='PDMVar'>cusB2T</span><span class='PDMOper'>.</span><span class='PDMVar'>Process_Bin2Txt</span><span class='PDMOper'>(</span><span class='PDMOper'>@</span><span class='PDMVar'>taFiles</span><span class='PDMOper'>,</span><span class='PDMVar'>m</span><span class='PDMOper'>.</span><span class='PDMVar'>tcMode</span><span class='PDMOper'>)</span>
+<span class='PDMCnt'>2772</span> <span class='PDMInd'> 1</span>  <span class='PDMVar'>Destruct_Objects</span><span class='PDMOper'>(</span><span class='PDMOper'>)</span>
+<span class='PDMCnt'>2773</span> <span class='PDMInd'> 1</span>  <span class='PDMVar'>SwitchErrorHandler</span><span class='PDMOper'>(</span><span class='PDMLit'>.F.</span><span class='PDMOper'>)</span>
+<span class='PDMCnt'>2774</span> <span class='PDMInd'>  </span> </pre>
  <!-- Code End -->
   </div>
  </div>

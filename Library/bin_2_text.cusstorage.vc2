@@ -3670,6 +3670,10 @@ DEFINE CLASS cusstorage AS custom 		&& The stuff that does the work.
 		 llRecall   AS BOOLEAN,;
 		 llWithCDX  AS BOOLEAN
 		
+		LOCAL;
+		 llError     AS BOOLEAN,;
+		 loException AS EXCEPTION
+		
 		* we only check the taginfo of the cdx, the data of the index itself will not be stored anyway.
 		* no handling of additional CDX or IDX
 		* I'm  not shure with the memo, my guess is, it will alter the table too but I'm to lazy to check :)
@@ -3701,8 +3705,8 @@ DEFINE CLASS cusstorage AS custom 		&& The stuff that does the work.
 		  USE IN SELECT('cur_Tags')
 		  IF !EMPTY(m.lcDataBase) AND EMPTY(DBC()) THEN
 		   SET DATABASE TO (m.lcDataBase)
-		   CLOSE DATABASES 
-		  ENDIF &&!EMPTY(m.lcDataBase) AND EMPTY(DBC()) 
+		   CLOSE DATABASES
+		  ENDIF &&!EMPTY(m.lcDataBase) AND EMPTY(DBC())
 		
 		  FOR EACH lcCell IN m.laTags
 		   lcTags = lcTags+lcCell
@@ -3822,16 +3826,42 @@ DEFINE CLASS cusstorage AS custom 		&& The stuff that does the work.
 		*!*	Changed by: SF 4.6.2015
 		*!*	<pdm>
 		*!*	<change date="{^2015-06-04,11:00:00}">Changed by: SF<br />
-		*!*	Ignore the first 4 bytes of a table. (means: bytes 1-3)
-		*VFP seems to alter <i>Last update</i> on compile. If the rest of the table is not changed, we can ignore this.
+		*!*	Ignore the first 4 bytes of a table. (means: bytes 1-3)<br />
+		*!*	VFP seems to alter <i>Last update</i> on compile. If the rest of the table is not changed, we can ignore this.
 		*!*	</change>
 		*!*	</pdm>
 		
-		   IF FILE(m.lcFile2) THEN
-		    lcFile2 = SYS(2007,SUBSTR(FILETOSTR(m.tcFile),5)+FILETOSTR(m.lcFile2)+m.lcTags,0,1)
-		   ELSE  &&FILE(m.lcFile2)
-		    lcFile2 = SYS(2007,SUBSTR(FILETOSTR(m.tcFile),5)+m.lcTags,0,1)
-		   ENDIF &&FILE(m.lcFile2)
+		*!*	Changed by: SF 07.12.2021
+		*!*	<pdm>
+		*!*	<change date="{^2021-12-07,18:00:00}">Changed by: SF<br />
+		*!*	https://github.com/lscheffler/bin2text/issues/2<br />
+		*!*	File opperation fails on too large files (unpacked something?)<br />
+		*!*	Just catch the error, the file must then be processed all the time
+		*!*	</change>
+		*!*	</pdm>
+		
+		   TRY
+		*Was zu testen ist
+		*String might be to long
+		
+		     IF FILE(m.lcFile2) THEN
+		      lcFile2 = SYS(2007,SUBSTR(FILETOSTR(m.tcFile),5)+FILETOSTR(m.lcFile2)+m.lcTags,0,1)
+		     ELSE  &&FILE(m.lcFile2)
+		      lcFile2 = SYS(2007,SUBSTR(FILETOSTR(m.tcFile),5)+m.lcTags,0,1)
+		     ENDIF &&FILE(m.lcFile2)
+		
+		    CATCH TO loException WHEN loException.ERRORNO=1903
+		* Abzufangender Fehler
+		*String is too long to fit (Error 1903)
+		     lcFile2 = ""
+		
+		    CATCH TO loException
+		* andere Fehler, Standardhandler rufen
+		     RAISEEVENT(THIS,'ERROR',loException.ERRORNO,loException.PROCEDURE,loException.LINENO)
+		     llError = doApp.glQuitting
+		    FINALLY
+		*
+		   ENDTRY
 		
 		*!*	IF FILE(m.lcFile2) THEN
 		*!*	 m.lcFile2 = SYS(2007,FILETOSTR(m.tcFile)+FILETOSTR(m.lcFile2),0,1)
@@ -3845,6 +3875,8 @@ DEFINE CLASS cusstorage AS custom 		&& The stuff that does the work.
 		*/	&&m.lnStep=3 	&&get file checksum
 		
 		  CASE m.lnStep=4 AND !TRIM(cUniqueId)==m.lcFile2   	 	&&changed, process dirty
+		*just do something for long files
+		   lcFile2 = EVL(m.lcFile2,"File to long.")
 		   llDirty = True
 		
 		   lnDirty = IIF(m.tlText2Bin,3,2)
