@@ -3674,6 +3674,9 @@ DEFINE CLASS cusstorage AS custom 		&& The stuff that does the work.
 		 llError     AS BOOLEAN,;
 		 loException AS EXCEPTION
 		
+		LOCAL ARRAY;
+		 laFiles(1,5)
+		
 		* we only check the taginfo of the cdx, the data of the index itself will not be stored anyway.
 		* no handling of additional CDX or IDX
 		* I'm  not shure with the memo, my guess is, it will alter the table too but I'm to lazy to check :)
@@ -3724,7 +3727,9 @@ DEFINE CLASS cusstorage AS custom 		&& The stuff that does the work.
 		
 		  SELECT 0
 		  USE (m.tcFile) ALIAS cur_Tags
+		
 		  ATAGINFO(laTags)
+		
 		  USE IN SELECT('cur_Tags')
 		  FOR EACH lcCell IN m.laTags
 		   lcTags = lcTags+lcCell
@@ -3834,7 +3839,7 @@ DEFINE CLASS cusstorage AS custom 		&& The stuff that does the work.
 		*!*	Changed by: SF 07.12.2021
 		*!*	<pdm>
 		*!*	<change date="{^2021-12-07,18:00:00}">Changed by: SF<br />
-		*!*	https://github.com/lscheffler/bin2text/issues/2<br />
+		*!*	https://github.com/lscheffler/bin2text/iss,ues/2<br />
 		*!*	File opperation fails on too large files (unpacked something?)<br />
 		*!*	Just catch the error, the file must then be processed all the time
 		*!*	</change>
@@ -3845,7 +3850,21 @@ DEFINE CLASS cusstorage AS custom 		&& The stuff that does the work.
 		*String might be to long
 		
 		     IF FILE(m.lcFile2) THEN
+		*check max string lenght, pack for sources (not for table/database)
+		      IF INLIST(m.tcType,"V","R","P","K","B","f") THEN
+		       ADIR(laFiles,m.tcFile)
+		       lnFileSize = laFiles(1,2)
+		       ADIR(laFiles,m.lcFile2)
+		       IF 16777184<m.lnFileSize+laFiles(1,2) THEN
+		        SELECT 0
+		        USE (m.tcFile) ALIAS cur_Tags EXCLUSIVE
+		        PACK
+		       ENDIF &&16777184<m.lnFileSize+laFiles(1,2)
+		      ENDIF &&INLIST(m.tcType,"V","R","P","K","B","f")
+		
+		*if (still) to large, the catch does the work
 		      lcFile2 = SYS(2007,SUBSTR(FILETOSTR(m.tcFile),5)+FILETOSTR(m.lcFile2)+m.lcTags,0,1)
+		
 		     ELSE  &&FILE(m.lcFile2)
 		      lcFile2 = SYS(2007,SUBSTR(FILETOSTR(m.tcFile),5)+m.lcTags,0,1)
 		     ENDIF &&FILE(m.lcFile2)
@@ -3854,6 +3873,10 @@ DEFINE CLASS cusstorage AS custom 		&& The stuff that does the work.
 		* Abzufangender Fehler
 		*String is too long to fit (Error 1903)
 		     lcFile2 = ""
+		    CATCH TO loException WHEN INLIST(loException.ERRORNO,1,3,15,1600,1705)
+		* Abzufangender Fehler
+		* Problem with USE
+		     lcFile2 = ""
 		
 		    CATCH TO loException
 		* andere Fehler, Standardhandler rufen
@@ -3861,6 +3884,8 @@ DEFINE CLASS cusstorage AS custom 		&& The stuff that does the work.
 		     llError = doApp.glQuitting
 		    FINALLY
 		*
+		     USE IN SELECT('cur_Tags')
+		
 		   ENDTRY
 		
 		*!*	IF FILE(m.lcFile2) THEN
