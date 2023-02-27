@@ -1,5 +1,5 @@
 appName = Bin2Text
 appID = Bin2Text
-majorVersion = 1.1.5
+majorVersion = 1.2.0
 excludeFiles = *.bak,*.bat,*.fxp,*.cfg,*.err,*.fpwa,*.h,*.fxp,*.md,*.cdx,*.prg,*.pj?,*.dbf,*.fpt,*.log,DisplayItemCount.*,projectexplorercategories.*,projectexplorertags.*,README.md,.gitignore
 excludeFolders = *Docs*,*FoxBin2PRG*,*ThorUpdater*,*content*,*data*,*Library*,*Menu*,*Program*

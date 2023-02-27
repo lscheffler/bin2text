@@ -24,3 +24,6 @@ See [Bin 2 Text Change Log](change_log.md) for a short change list.
 Help and documentation is in the **local folder** _docu/index.htm_.
 
 Basic information is on section _How to get it to work_.
+
+----
+Last changed: _2023/02/27_ ![Picture](./vfpxpoweredby_alternative.gif)

@@ -72,31 +72,30 @@ A complete list of changes is available on the offline documentation via local f
 +++++++++++++++++++++++ Change log +++++++++++++++++++++++
 
 ---
-### Version 1.1.5
+### Version 1.2.0
+Stable release.
+* Fixed SCX text files deleted. issue #3
 
+### Version 1.1.5
 Stable release.
 * Fixed condition where additonal app closed by CLEAR ALL resets current path. Problems with additional (relative) files.
 * String to long. Fixed problem on file hashing for large files.
  
 ### Version 1.1.4
-
 Stable release.
 * Fixed problem with automated message while commiting PJX's
 
 ### Version 1.1.3
-
 Stable release.
 * Enhanced calling of git
 * Enhanced menu structure, new targets for Class_2Bin
 
 ### Version 1.1.2
-
 Stable release.
 * Bugfixes
 * Getfile dialog improved
 
 ### Version 1.1.1
-
 Stable release.
 * Additional files Internal set counter wrong
 * Processing of projects. Error on files missing and user canceled MODI PROJECT.

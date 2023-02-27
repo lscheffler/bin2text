@@ -7,8 +7,8 @@ This is project is part of [VFPX](https://vfpx.github.io/)
 
 ![VFPX](content/vfpxlogo.gif "VFPX")
 
-Project manager: [Lutz Scheffler](https://github.com/lscheffler)
-Project location: [Bin2Text](https://github.com/lscheffler/bin2text)
+Project manager: [Lutz Scheffler](https://github.com/lscheffler)   
+Project location: [Bin2Text](https://github.com/lscheffler/bin2text)   
 
 The main goals of this project are:
 * The main goal is to do fast _git_ commits.
@@ -45,4 +45,7 @@ For quick run see [Bin 2 Text Documentation](content/documentation.md).
 
 ---
 ## Note
-Bin 2 Text Extension is tested with _git for windows_ version 2.31.1.windows.1 (2021-03-26) 32 and 64bit.
+Bin 2 Text Extension is tested with _git for windows_ version 2.39.2.windows.1 (2023-02-06) 32 and 64bit.
+
+----
+Last changed: _2023/02/27_ ![Picture](./content/vfpxpoweredby_alternative.gif)

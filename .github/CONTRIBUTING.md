@@ -1,4 +1,4 @@
-# How to contribute to FoxBin2Prg
+# How to contribute to Bin2Text
 ## Bug report?
 - Please check  [issues](https://github.com/lscheffler/bin2text/issues) if the bug is reported
 - If you're unable to find an open issue addressing the problem, open a new one. Be sure to include a title and clear description, as much relevant information as possible, and a code sample or an executable test case demonstrating the expected behavior that is not occurring.
@@ -26,16 +26,20 @@ Start reading our code and you'll get the hang of it. We optimize for readabilit
 Please note, there are some tasks to set up a new version.
 Stuff is a bit scattered, so this is where to look up.
 1. Please create a fork at github
-0. In _stuff.h_ there are two #DEFINES with version numbers:   
-`#DEFINE dcB2T_Verno       "1.0.0"`    
+2. If already forked, remember to first `git pull` the most recent code.
+3. In _stuff.h_ there are two #DEFINES with version numbers, change according:   
+`#DEFINE dcB2T_Verno       "1.2.0"`    
 `#DEFINE dcFB2P_Verno_Min  "1.19.57"`
-4. If available run PDM <a href="http://gorila.netlab.cz/pdm.html" title="PDM"  target="_blank">Project Documenting Machine</a> by Martina Jindrová using the AB-plugins.
-   The pdm setting is stored in the _Doku/_ folder.
-4. Add a description to _Changes.html_
-4. For changed functionality, add descriptive text to _Preface.html_ file.
-4. Highlight the change on _README.md_ in projects root
-0. Compile to app
-1. Change Thor (see below)
+4. Add a description of changes to _Doku/Source/Changes.html_ (this is for PDM docu)
+5. For changed functionality, add descriptive text to _Doku/Source/Preface.html_ file. (this is for PDM docu)
+6. Check of the git version mentioned in _Doku/Source/Preface.html_ and _README.md_ might be updated.
+7. Highlight the change on _README.md_ in projects root
+8. Add a description of changes to _content/change_log.md_ (this is for github docu)
+9. Change date in the footer of documentation files touched.
+10. If available run PDM <a href="http://gorila.netlab.cz/pdm.html" title="PDM"  target="_blank">Project Documenting Machine</a> by Martina Jindrová using the AB-plugins.
+  The pdm setting is stored in the _Doku/_ folder.
+11. Compile to app, on VFP9 SP2.
+12. Change Thor (see below)
 
 ## Thor conventions
 This project is part of [VFPX](https://vfpx.github.io/) and published via [Thor](https://github.com/VFPX/Thor).   
@@ -44,7 +48,10 @@ Please check [Supporting Thor Updater](https://vfpx.github.io/thorupdate/)
 In special:
 - Update _Project.txt_, in special the version number
 - Run the script included, or 
-   - add files to _Bin2Text.zip_, namly Bin2Text.app
+   - add files to _Bin2Text.zip_, namly Bin2Text.exe
    - Update the version number in _Bin2Text.txt_
 
 Thanks
+
+----
+Last changed: _2023/02/27_ ![Picture](../content/vfpxpoweredby_alternative.gif)
