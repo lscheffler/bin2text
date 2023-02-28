@@ -6,7 +6,7 @@ This page gives a brief overview of changes to the [Bin 2 Text Extension](https:
 A complete list of changes is available on the offline documentation via **local folder** _docu/index.htm_.
 
 ---
-## Version 2.0.0
+## Version 1.2.0
 Stable release.
 * Bug fixes Text files of SCX deleted; Fixed an issue where text files of an SCX gets deleted. issue#3
 

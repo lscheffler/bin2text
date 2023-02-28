@@ -10,8 +10,8 @@ local;
 
 lcappName      = "Bin2Text"
 *Set following two numbers on version
-ldDate         = date(2021,12,07)
-lcmajorVersion = "1.1.5"
+ldDate         = date(2023,02,27)
+lcmajorVersion = "1.2.0"
 
 *lnJulian = val(sys(11, m.ldDate)) - val(sys(11, {^2000-01-01}))
 *lcJulian = padl(transform(lnJulian), 4, '0')
@@ -38,6 +38,11 @@ Capability to process tables of databases with the database.
 A complete list of changes is available on the offline documentation via local folder docu/index.htm.
 
 +++++++++++++++++++++++ Change log +++++++++++++++++++++++
+
+---
+## Version 1.2.0
+Stable release.
+* Bug fixes Text files of SCX deleted; Fixed an issue where text files of an SCX gets deleted. issue#3
 
 ---
 ### Version 1.1.5
