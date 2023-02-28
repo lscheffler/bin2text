@@ -47,6 +47,7 @@ There are some considerations to make to add a new version to Thor.
 Please check [Supporting Thor Updater](https://vfpx.github.io/thorupdate/)
 In special:
 - Update _Project.txt_, in special the version number
+- Update _Version.txt_, in special the version number and date
 - Run the script included, or 
    - add files to _Bin2Text.zip_, namly Bin2Text.exe
    - Update the version number in _Bin2Text.txt_
@@ -54,4 +55,4 @@ In special:
 Thanks
 
 ----
-Last changed: _2023/02/27_ ![Picture](../content/vfpxpoweredby_alternative.gif)
+Last changed: _2023/02/28_ ![Picture](../content/vfpxpoweredby_alternative.gif)
