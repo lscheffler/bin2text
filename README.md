@@ -1,5 +1,6 @@
 # ![](content/home.png "Home") Bin 2 Text Extension
 ## Provides better IDE integration of FoxBin2Prg in VFP
+**Version <!--VERNO-->1.2.1<!--/VerNo-->, <!--DeploymentDate-->2023-05-18<!--/DeploymentDate-->**   
 
 ---
 ### Synopsis
@@ -60,4 +61,5 @@ See [How to contribute to Bin2Text](https://github.com/lscheffler/bin2text/blob/
 Bin 2 Text Extension is tested with _[git for windows](https://git-scm.com/download/win)_ version 2.39.2.windows.1 (2023-02-06) 32 and 64bit.
 
 ----
-Last changed: _2023/02/28_ ![ Powered by VFPX](https://github.com/lscheffler/bin2text/blob/master/content/vfpxpoweredby_alternative.gif)
+Last changed: _<!--DeploymentDate-->2023-05-18<!--/DeploymentDate-->_   
+ ![ Powered by VFPX](https://github.com/lscheffler/bin2text/blob/master/content/vfpxpoweredby_alternative.gif "powered by VFPX")

@@ -4,7 +4,7 @@
 <title>Main menu</title>
 <meta content="text/html; charset=windows-1252" http-equiv="Content-Type" />
 <meta name="Generator" content="Project Documenting Machine" />
-<meta name="Version" content="1.3.1" />
+<meta name="Version" content="1.3.3" />
 <link rel="stylesheet" href="css/foxw.css" type="text/css" />
 <script src="js/pdm.js" language="JavaScript" type="text/javascript"></script>
 </head><body class="mainmenu">
@@ -26,18 +26,28 @@
  <div class="mainmenu"><img class="mm_hf" src="imgs/footer.gif" alt="" /></div>
  <img id="IMG_QUICKVIEW" class="imgQuickView" src=""  alt="" title="" />
 </div>
-<div class="mainmenuRight">
+<div class="mainmenuRight" style="visibility:hidden;">
  <iframe id='IFRAME_LIST' class='iframe_QL' frameborder='0px'  src='Blank_QL.htm' ></iframe>
 </div>
 <script language="JavaScript" type="text/javascript">
 var lcSearch=document.location.search;
 var laParams = lcSearch.split("=");
 var lcRefer= laParams[1];
+var loQL;
 
-if (lcRefer!=null)
+if (lcRefer!=null && (loQL=document.getElementById("IFRAME_LIST"))!=null)
    { 
-   var loQL=document.getElementById("IFRAME_LIST");
-   loQL.src=lcRefer;
+   if (lcRefer=='Blank_QL.htm')
+       {
+       loQL.style.visibility="hidden";
+       loQL.parentNode.style.width='0%'; 
+       }
+   else
+       {  
+       loQL.src=lcRefer;
+       loQL.style.visibility="visible";
+       loQL.parentNode.style.width='67%'; 
+       }
    }
 </script>
 

@@ -25,13 +25,15 @@ DEFINE CLASS api_apprun AS custom 		&& Ed Raus API_AppRun, see UT download
 	*</DefinedPropArrayMethod>
 
 	PROTECTED inprocesshandle,inthreadhandle
-	iccommandline = (space(0))
-	icerrormessage = (space(0))
-	iclaunchdir = (space(0))
-	icwindowmode = (space(0))
-	inprocesshandle = .NULL.
-	inthreadhandle = .NULL.
-	Name = "api_apprun"
+	*<PropValue>
+		iccommandline = (space(0))
+		icerrormessage = (space(0))
+		iclaunchdir = (space(0))
+		icwindowmode = (space(0))
+		inprocesshandle = .NULL.
+		inthreadhandle = .NULL.
+		Name = "api_apprun"
+	*</PropValue>
 	
 	PROCEDURE checkprocessexitcode
 		LPARAMETER nProcessToCheck

@@ -4,7 +4,7 @@
 <title>Procedure Run_ExtApp</title>
 <meta content="text/html; charset=windows-1252" http-equiv="Content-Type" />
 <meta name="Generator" content="Project Documenting Machine" />
-<meta name="Version" content="1.3.1" />
+<meta name="Version" content="1.3.3" />
 <link rel="stylesheet" href="../../css/foxw.css" type="text/css" />
 <link rel="stylesheet" href="../../css/sc.css" type="text/css" />
 <link rel="stylesheet" href="../../repository/diamp_pdm_ab.css" type="text/css" />
@@ -16,23 +16,23 @@
 <body>
 <div class="diaxp_mhead">Run_ExtApp Function</div>
 <div class="diaxp_mbody">
-<!-- Created with _diamp_pdm_ab by Agnes Beste    27.02.2023 17:39 -->
+<!-- Created with _diamp_pdm_ab by Agnes Beste    18.05.2023 22:03 -->
  <div class="PDM_AB_Descr"><!-- Descr Begin -->
 Run Ed Raus API_AppRun
  </div><!-- Descr End -->
 
  <div class="DIAMP_PDM_AB_Syntax"><!-- Syntax Begin -->
   <div class="SColor">
-   <div class="RetVal"><a href="#_6K311U7NY">RetVal</a>&nbsp;</div>   <div class="RetValEq">=</div>   <div class="PEM">
+   <div class="RetVal"><a href="#_6MB1B9KDP">RetVal</a>&nbsp;</div>   <div class="RetValEq">=</div>   <div class="PEM">
     Run_ExtApp
    </div>
    <div class="Para">
-    (<a href="#_6K311U7NZ">tcCommandLine</a>
-     <wbr />,<a href="#_6K311U7O0">tcLaunchDir</a>
-     <wbr />,<a href="#_6K311U7O1">tcWindowMode</a>
-     [<wbr />,@<a href="#_6K311U7O2">tnExitCode</a>
+    (<a href="#_6MB1B9KDQ">tcCommandLine</a>
+     <wbr />,<a href="#_6MB1B9KDR">tcLaunchDir</a>
+     <wbr />,<a href="#_6MB1B9KDS">tcWindowMode</a>
+     [<wbr />,@<a href="#_6MB1B9KDT">tnExitCode</a>
      
-     [<wbr />,<a href="#_6K311U7O3">tlNoWait</a>]])
+     [<wbr />,<a href="#_6MB1B9KDU">tlNoWait</a>]])
    </div>
    <div style="clear: both"></div>
   </div><!-- Colour End -->
@@ -44,7 +44,7 @@ Run Ed Raus API_AppRun
   </span>
   <dl class="DIAMP_PDM_AB_Params_List">
    <dt class="dt_">
-    <a class="DIAMP_PDM_AB_Params_ParaName" id="_6K311U7NZ" name="_6K311U7NZ">
+    <a class="DIAMP_PDM_AB_Params_ParaName" id="_6MB1B9KDQ" name="_6MB1B9KDQ">
      <span class="PDMEXPR PDMNor" ><span class='PDMVar'>tcCommandLine</span></span>
 
     </a>
@@ -71,14 +71,14 @@ Run Ed Raus API_AppRun
     </table>
    </dd>
    <dt class="dt_">
-    <a class="DIAMP_PDM_AB_Params_ParaName" id="_6K311U7O0" name="_6K311U7O0">
+    <a class="DIAMP_PDM_AB_Params_ParaName" id="_6MB1B9KDR" name="_6MB1B9KDR">
      <span class="PDMEXPR PDMNor" ><span class='PDMVar'>tcLaunchDir</span></span>
 
     </a>
    </dt>
    <dd class="dd_">
     <span class="Params_Short">
-     Path to run <a class="DIAMP_PDM_AB_Para_Link" href="#_6K311U7NZ">tcCommandLine</a> in.
+     Path to run <a class="DIAMP_PDM_AB_Para_Link" href="#_6MB1B9KDQ">tcCommandLine</a> in.
     </span>
     <table class="Params_Info">
      <colgroup>
@@ -98,7 +98,7 @@ Run Ed Raus API_AppRun
     </table>
    </dd>
    <dt class="dt_">
-    <a class="DIAMP_PDM_AB_Params_ParaName" id="_6K311U7O1" name="_6K311U7O1">
+    <a class="DIAMP_PDM_AB_Params_ParaName" id="_6MB1B9KDS" name="_6MB1B9KDS">
      <span class="PDMEXPR PDMNor" ><span class='PDMVar'>tcWindowMode</span></span>
 
     </a>
@@ -129,7 +129,7 @@ defaults to empty, the default for the executable is used
     </span>
    </dd>
    <dt class="dt_">
-    <a class="DIAMP_PDM_AB_Params_ParaName" id="_6K311U7O2" name="_6K311U7O2">
+    <a class="DIAMP_PDM_AB_Params_ParaName" id="_6MB1B9KDT" name="_6MB1B9KDT">
      <span class="PDMEXPR PDMNor" ><span class='PDMVar'>tnExitCode</span></span>
 
     </a>
@@ -164,7 +164,7 @@ defaults to empty, the default for the executable is used
     </table>
    </dd>
    <dt class="dt_">
-    <a class="DIAMP_PDM_AB_Params_ParaName" id="_6K311U7O3" name="_6K311U7O3">
+    <a class="DIAMP_PDM_AB_Params_ParaName" id="_6MB1B9KDU" name="_6MB1B9KDU">
      <span class="PDMEXPR PDMNor" ><span class='PDMVar'>tlNoWait</span></span>
 
     </a>
@@ -200,13 +200,13 @@ defaults to empty, the default for the executable is used
  <div class="DIAMP_PDM_AB_RetVal"><!-- Returns Begin -->
   <div>
    <span class="PDM_AB_Head">
-    <a id="_6K311U7NY" name="_6K311U7NY">
+    <a id="_6MB1B9KDP" name="_6MB1B9KDP">
      Return value
     </a>
    </span> <span class="RetVal_Ttype">Boolean</span>
   </div>
   <div class="PDM_AB_Body">
-Success (<a class="DIAMP_PDM_AB_Para_Link" href="#_6K311U7O2">tnExitCode</a><span class="PDMEXPR PDMNor" ><span class='PDMOper'>=</span><span class='PDMLit'>0</span></span>
+Success (<a class="DIAMP_PDM_AB_Para_Link" href="#_6MB1B9KDT">tnExitCode</a><span class="PDMEXPR PDMNor" ><span class='PDMOper'>=</span><span class='PDMLit'>0</span></span>
 )
   </div>
  </div><!-- Returns End -->
@@ -227,7 +227,7 @@ SF Changed by<br />
  </div><!-- Changes End -->
 
 
-<!-- /Created with _diamp_pdm_ab by Agnes Beste    27.02.2023 17:39 -->
+<!-- /Created with _diamp_pdm_ab by Agnes Beste    18.05.2023 22:03 -->
 
  <div class="SC">
   <img onclick="ExpandSC('SP_P25',-1);" class="imgEC" src="../../imgs/dotab.gif" alt="Expand/Collapse source code of procedure Run_ExtApp" id="IMG_SP_P25" />

@@ -10,11 +10,13 @@ DEFINE CLASS de_interface AS dataenvironment
 	*-- OBJECTDATA items order determines ZOrder / El orden de los items OBJECTDATA determina el ZOrder 
 	*< OBJECTDATA: ObjPath="capBinText" UniqueID="" Timestamp="" />
 
-	DataSource = .NULL.
-	DataSourceType = "NATIVE"
-	Height = 34
-	Name = "de_interface"
-	Width = 144
+	*<PropValue>
+		DataSource = .NULL.
+		DataSourceType = "NATIVE"
+		Height = 34
+		Name = "de_interface"
+		Width = 144
+	*</PropValue>
 
 	ADD OBJECT 'capBinText' AS cursoradapter WITH ;
 		Alias = "curbin2text", ;

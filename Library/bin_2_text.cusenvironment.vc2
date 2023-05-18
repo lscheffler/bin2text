@@ -31,12 +31,14 @@ DEFINE CLASS cusenvironment AS custom 		&& Default settings for DATASESSION
 
 	HIDDEN hcstartpath
 	PROTECTED gcdefaultclasslib,rasettings,rnsetting
-	gcdefaultclasslib = 		&& Spezielle, zur Arbeit unbedingt nötige ClassLibrarys. (Frameworkspezifisch)
-	Name = "cusenvironment"
-	rnsetting = 0		&& Zähler des letzten Satzes gespeicherter Eigenschaften
-	_memberdata = <VFPData>
-		<memberdata name="reset_oldresource" type="method" display="Reset_OldResource" favorites="False"/>
-		</VFPData>		&& XML Metadata for customizable properties
+	*<PropValue>
+		gcdefaultclasslib = 
+		Name = "cusenvironment"
+		rnsetting = 0
+		_memberdata = <VFPData>
+			<memberdata name="reset_oldresource" type="method" display="Reset_OldResource" favorites="False"/>
+		</VFPData>
+	*</PropValue>
 	
 	PROCEDURE Destroy
 		*THIS.gESET()

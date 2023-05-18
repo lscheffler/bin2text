@@ -7,6 +7,8 @@
 DEFINE CLASS bin2text_hook AS base_hook OF "hook.vcx" 
  	*< CLASSDATA: Baseclass="projecthook" Timestamp="" Scale="Pixels" Uniqueid="" />
 
-	Name = "bin2text_hook"
+	*<PropValue>
+		Name = "bin2text_hook"
+	*</PropValue>
 
 ENDDEFINE

@@ -27,6 +27,6 @@
 #DEFINE True								.T.
 #DEFINE False								.F.
 #DEFINE NIL									.NULL.
-#DEFINE dcB2T_Verno							"1.2.0"
+#DEFINE dcB2T_Verno							"1.2.1"
 
 #DEFINE dcFB2P_Verno_Min					"1.19.57"

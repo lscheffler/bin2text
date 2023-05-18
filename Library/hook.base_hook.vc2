@@ -11,8 +11,10 @@ DEFINE CLASS base_hook AS projecthook 		&& Allgemeiner Projekt - Hook
 		*p: gnbuildaction		&& BuildAction wie im BeforeBuild Event.
 	*</DefinedPropArrayMethod>
 
-	gnbuildaction = 3		&& BuildAction wie im BeforeBuild Event.
-	Name = "base_hook"
+	*<PropValue>
+		gnbuildaction = 3
+		Name = "base_hook"
+	*</PropValue>
 	
 	PROCEDURE AfterBuild
 		LPARAMETERS;

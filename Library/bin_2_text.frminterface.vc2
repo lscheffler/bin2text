@@ -54,20 +54,22 @@ DEFINE CLASS frminterface AS form 		&& Just to create an interface as well as a 
 		*m: storage_put		&& Get the values from the the surface objects and put to storage settings.
 	*</DefinedPropArrayMethod>
 
-	AutoCenter = .T.
-	Caption = "Bin <> Text"
-	Closable = .F.
-	DataSession = 2
-	DoCreate = .T.
-	Height = 570
-	MaxButton = .F.
-	MinButton = .F.
-	MinHeight = 570
-	MinWidth = 600
-	Name = "frminterface"
-	ShowTips = .T.
-	Visible = .F.
-	Width = 600
+	*<PropValue>
+		AutoCenter = .T.
+		Caption = "Bin <> Text"
+		Closable = .F.
+		DataSession = 2
+		DoCreate = .T.
+		Height = 570
+		MaxButton = .F.
+		MinButton = .F.
+		MinHeight = 570
+		MinWidth = 600
+		Name = "frminterface"
+		ShowTips = .T.
+		Visible = .F.
+		Width = 600
+	*</PropValue>
 
 	ADD OBJECT 'chkAll' AS checkbox WITH ;
 		Alignment = 0, ;

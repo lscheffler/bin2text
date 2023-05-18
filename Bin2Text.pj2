@@ -25,8 +25,8 @@ _LegalCopyright = ""
 _LegalTrademark = ""
 _ProductName = " "
 _MajorVer = "1"
-_MinorVer = "1"
-_Revision = "5"
+_MinorVer = "2"
+_Revision = "0"
 _LanguageID = ""
 _AutoIncrement = "0"
 *</DevInfo>
@@ -78,6 +78,7 @@ ENDWITH
 WITH loProject
 	*<ProjectProperties>
 	.SetMain(lcCurdir + 'program\runb2t.prg')
+
 	.Debug = .T.
 	.Encrypted = .F.
 	*<.CmntStyle = 1 />

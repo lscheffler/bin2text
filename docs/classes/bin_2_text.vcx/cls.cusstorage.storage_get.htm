@@ -4,7 +4,7 @@
 <title>Method storage_get of class cusstorage</title>
 <meta content="text/html; charset=windows-1252" http-equiv="Content-Type" />
 <meta name="Generator" content="Project Documenting Machine" />
-<meta name="Version" content="1.3.1" />
+<meta name="Version" content="1.3.3" />
 <link rel="stylesheet" href="../../css/foxw.css" type="text/css" />
 <link rel="stylesheet" href="../../css/sc.css" type="text/css" />
 <link rel="stylesheet" href="../../repository/diamp_pdm_ab.css" type="text/css" />
@@ -25,21 +25,21 @@
 </table>
 </div>
 <div class="diaxp_mbody">
-<!-- Created with _diamp_pdm_ab by Agnes Beste    27.02.2023 17:39 -->
+<!-- Created with _diamp_pdm_ab by Agnes Beste    18.05.2023 22:03 -->
  <div class="PDM_AB_Descr"><!-- Descr Begin -->
 Get settings from storage file.
  </div><!-- Descr End -->
 
  <div class="DIAMP_PDM_AB_Syntax"><!-- Syntax Begin -->
   <div class="SColor">
-   <div class="RetVal"><a href="#_6K311U6F5">RetVal</a>&nbsp;</div>   <div class="RetValEq">=</div>   <div class="PEM">
+   <div class="RetVal"><a href="#_6MB1B9J2O">RetVal</a>&nbsp;</div>   <div class="RetValEq">=</div>   <div class="PEM">
     Object.storage_get
    </div>
    <div class="Para">
-    (<a href="#_6K311U6F6">tcType</a>
-     <wbr />,<a href="#_6K311U6F7">toSettings</a>
-     <wbr />,<a href="#_6K311U6F8">tcStorage</a>
-     [<wbr />,<a href="#_6K311U6F9">tcWhere</a>])
+    (<a href="#_6MB1B9J2P">tcType</a>
+     <wbr />,<a href="#_6MB1B9J2Q">toSettings</a>
+     <wbr />,<a href="#_6MB1B9J2R">tcStorage</a>
+     [<wbr />,<a href="#_6MB1B9J2S">tcWhere</a>])
    </div>
    <div style="clear: both"></div>
   </div><!-- Colour End -->
@@ -51,7 +51,7 @@ Get settings from storage file.
   </span>
   <dl class="DIAMP_PDM_AB_Params_List">
    <dt class="dt_">
-    <a class="DIAMP_PDM_AB_Params_ParaName" id="_6K311U6F6" name="_6K311U6F6">
+    <a class="DIAMP_PDM_AB_Params_ParaName" id="_6MB1B9J2P" name="_6MB1B9J2P">
      <span class="PDMEXPR PDMNor" ><span class='PDMVar'>tcType</span></span>
 
     </a>
@@ -78,7 +78,7 @@ Get settings from storage file.
     </table>
    </dd>
    <dt class="dt_">
-    <a class="DIAMP_PDM_AB_Params_ParaName" id="_6K311U6F7" name="_6K311U6F7">
+    <a class="DIAMP_PDM_AB_Params_ParaName" id="_6MB1B9J2Q" name="_6MB1B9J2Q">
      <span class="PDMEXPR PDMNor" ><span class='PDMVar'>toSettings</span></span>
 
     </a>
@@ -105,7 +105,7 @@ Get settings from storage file.
     </table>
    </dd>
    <dt class="dt_">
-    <a class="DIAMP_PDM_AB_Params_ParaName" id="_6K311U6F8" name="_6K311U6F8">
+    <a class="DIAMP_PDM_AB_Params_ParaName" id="_6MB1B9J2R" name="_6MB1B9J2R">
      <span class="PDMEXPR PDMNor" ><span class='PDMVar'>tcStorage</span></span>
 
     </a>
@@ -132,7 +132,7 @@ Get settings from storage file.
     </table>
    </dd>
    <dt class="dt_">
-    <a class="DIAMP_PDM_AB_Params_ParaName" id="_6K311U6F9" name="_6K311U6F9">
+    <a class="DIAMP_PDM_AB_Params_ParaName" id="_6MB1B9J2S" name="_6MB1B9J2S">
      <span class="PDMEXPR PDMNor" ><span class='PDMVar'>tcWhere</span></span>
 
     </a>
@@ -171,7 +171,7 @@ Used to filter records, in special the DBF for additional index per DBF (cType I
  <div class="DIAMP_PDM_AB_RetVal"><!-- Returns Begin -->
   <div>
    <span class="PDM_AB_Head">
-    <a id="_6K311U6F5" name="_6K311U6F5">
+    <a id="_6MB1B9J2O" name="_6MB1B9J2O">
      Return value
     </a>
    </span> <span class="RetVal_Ttype">Boolean</span>
@@ -188,10 +188,10 @@ At least one setting found.
   <div class="PDM_AB_Body">
 
 
-<p>Every record in <a class="DIAMP_PDM_AB_Para_Link" href="#_6K311U6F8">tcStorage</a> marked with <a class="DIAMP_PDM_AB_Para_Link" href="#_6K311U6F6">tcType</a> will be read
-and stored into <a class="DIAMP_PDM_AB_Para_Link" href="#_6K311U6F7">toSettings</a>.</p>
-<p><a class="DIAMP_PDM_AB_Para_Link" href="#_6K311U6F7">toSettings</a> will be cleared before read.</p>
-<p>For every item in <a class="DIAMP_PDM_AB_Para_Link" href="#_6K311U6F7">toSettings</a> a property of <span class="PDMEXPR PDMNor" ><span class='PDMVar'>_SCREEN</span></span>
+<p>Every record in <a class="DIAMP_PDM_AB_Para_Link" href="#_6MB1B9J2R">tcStorage</a> marked with <a class="DIAMP_PDM_AB_Para_Link" href="#_6MB1B9J2P">tcType</a> will be read
+and stored into <a class="DIAMP_PDM_AB_Para_Link" href="#_6MB1B9J2Q">toSettings</a>.</p>
+<p><a class="DIAMP_PDM_AB_Para_Link" href="#_6MB1B9J2Q">toSettings</a> will be cleared before read.</p>
+<p>For every item in <a class="DIAMP_PDM_AB_Para_Link" href="#_6MB1B9J2Q">toSettings</a> a property of <span class="PDMEXPR PDMNor" ><span class='PDMVar'>_SCREEN</span></span>
  will be created.
 Form: <span class="PDMEXPR PDMNor" ><span class='PDMVar'>_SCREEN</span><span class='PDMOper'>.</span><span class='PDMResM'>ADDPROPERTY</span><span class='PDMOper'>(</span><span class='PDMResF'>TRIM</span><span class='PDMOper'>(</span><span class='PDMVar'>cUniqueID</span><span class='PDMOper'>)</span><span class='PDMOper'>,</span><span class='PDMResF'>TRIM</span><span class='PDMOper'>(</span><span class='PDMVar'>cFile</span><span class='PDMOper'>)</span><span class='PDMOper'>)</span></span>
 </p>
@@ -200,7 +200,7 @@ Form: <span class="PDMEXPR PDMNor" ><span class='PDMVar'>_SCREEN</span><span cla
  </div><!-- Remarks End -->
 
 
-<!-- /Created with _diamp_pdm_ab by Agnes Beste    27.02.2023 17:39 -->
+<!-- /Created with _diamp_pdm_ab by Agnes Beste    18.05.2023 22:03 -->
 
  <div class="SC">
   <img onclick="ExpandSC('SP_40',-1);"class="imgEC" src="../../imgs/dotab.gif" alt="Expand/Collapse source code of procedure storage_get" id="IMG_SP_40" />
