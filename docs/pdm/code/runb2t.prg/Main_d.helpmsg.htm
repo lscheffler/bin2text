@@ -1,0 +1,507 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="de" lang="de">
+<head>
+<title>Procedure HelpMsg</title>
+<meta content="text/html; charset=windows-1252" http-equiv="Content-Type" />
+<meta name="Generator" content="Project Documenting Machine" />
+<meta name="Version" content="1.3.3" />
+<link rel="stylesheet" href="../../css/foxw.css" type="text/css" />
+<link rel="stylesheet" href="../../css/sc.css" type="text/css" />
+<link rel="stylesheet" href="../../repository/diamp_pdm_ab.css" type="text/css" />
+<link rel="stylesheet" href="../../repository/pdm_ab.css" type="text/css" />
+<link rel="stylesheet" href="../../repository/pdm_ab_notes.css" type="text/css" />
+<script src="../../js/pdm.js" language="JavaScript" type="text/javascript"></script>
+<script src="../../repository/pdm_ab.js" language="JavaScript" type="text/javascript"></script>
+</head>
+<body>
+<div class="diaxp_mhead">HelpMsg Function</div>
+<div class="diaxp_mbody">
+<!-- Created with _diamp_pdm_ab by Agnes Beste    20.05.2023 10:19 -->
+ <div class="PDM_AB_Descr"><!-- Descr Begin -->
+Displays a help message.
+ </div><!-- Descr End -->
+
+ <div class="DIAMP_PDM_AB_Syntax"><!-- Syntax Begin -->
+  <div class="SColor">
+   <div class="PEM">
+    HelpMsg
+   </div>
+   <div class="Para">
+    (<a href="#_6MD0M59RP">tnHelp</a>)
+   </div>
+   <div style="clear: both"></div>
+  </div><!-- Colour End -->
+ </div><!-- Syntax End -->
+
+ <div class="DIAMP_PDM_AB_Params"><!-- Parameters Begin -->
+  <span class="PDM_AB_Head">
+   Parameter
+  </span>
+  <dl class="DIAMP_PDM_AB_Params_List">
+   <dt class="dt_">
+    <a class="DIAMP_PDM_AB_Params_ParaName" id="_6MD0M59RP" name="_6MD0M59RP">
+     <span class="PDMEXPR PDMNor" ><span class='PDMVar'>tnHelp</span></span>
+
+    </a>
+   </dt>
+   <dd class="dd_">
+    <span class="Params_Short">
+     Help number.
+    </span>
+    <table class="Params_Info">
+     <colgroup>
+      <col class="ColumnValue" />
+      <col class="ColumnData" />
+     </colgroup>
+     <tbody>
+      <tr>
+       <td class="CellValue">Type</td>
+       <td class="CellData">Numeric</td>
+      </tr>
+      <tr>
+       <td class="CellValue">Direction</td>
+       <td class="CellData">Input</td>
+      </tr>
+     </tbody>
+    </table>
+   </dd>
+  </dl>
+ </div><!-- Parameters End -->
+
+
+<!-- /Created with _diamp_pdm_ab by Agnes Beste    20.05.2023 10:19 -->
+
+ <div class="SC">
+  <img onclick="ExpandSC('SP_P26',-1);" class="imgEC" src="../../imgs/dotab.gif" alt="Expand/Collapse source code of procedure HelpMsg" id="IMG_SP_P26" />
+  <span onclick="ExpandSC('SP_P26',-1);" class="SCCaption"><a name="pm.helpmsg">Source Code</a></span>
+  <div ondblclick="ExpandSC('SP_P26',-1);" class="SCE" style="display: none;" id="TX_SP_P26">
+<!-- Code Begin -->
+<pre class="PDMCODE PDMNor" ><span class='PDMCnt'>3732</span> <span class='PDMInd'>  </span> 
+<span class='PDMCnt'>3733</span> <span class='PDMInd'> 1</span>  <span class='PDMOper'>#</span><span class='PDMResK'>DEFINE</span> <span class='PDMVar'>dcText_DE_H00</span><span class='PDMOper'>;</span>
+<span class='PDMCnt'>3734</span> <span class='PDMInd'> 2</span>   <span class='PDMStr'>[Run:]</span><span class='PDMOper'>+</span><span class='PDMVar'>0h0d0a</span><span class='PDMOper'>+</span><span class='PDMOper'>;</span>
+<span class='PDMCnt'>3735</span> <span class='PDMInd'> 2</span>   <span class='PDMStr'>[DO Convert_Pjx_2Bin IN RunB2T.prg]</span><span class='PDMOper'>+</span><span class='PDMStr'>" [OF Bin2Text.exe]"</span><span class='PDMOper'>+</span><span class='PDMVar'>0h0d0a</span><span class='PDMOper'>+</span><span class='PDMOper'>;</span>
+<span class='PDMCnt'>3736</span> <span class='PDMInd'> 2</span>   <span class='PDMStr'>[ IDE Interface für FoxBin2Prg]</span><span class='PDMOper'>+</span><span class='PDMVar'>0h0D0A0D0A</span><span class='PDMOper'>+</span><span class='PDMOper'>;</span>
+<span class='PDMCnt'>3737</span> <span class='PDMInd'> 2</span>   <span class='PDMStr'>[DO Convert_Pjx_2BTxt IN RunB2T.prg]</span><span class='PDMOper'>+</span><span class='PDMStr'>" [OF Bin2Text.exe]"</span><span class='PDMOper'>+</span><span class='PDMVar'>0h0d0a</span><span class='PDMOper'>+</span><span class='PDMOper'>;</span>
+<span class='PDMCnt'>3738</span> <span class='PDMInd'> 2</span>   <span class='PDMStr'>[ IDE Interface für FoxBin2Prg]</span><span class='PDMOper'>+</span><span class='PDMVar'>0h0D0A0D0A</span><span class='PDMOper'>+</span><span class='PDMOper'>;</span>
+<span class='PDMCnt'>3739</span> <span class='PDMInd'> 2</span>   <span class='PDMStr'>[DO Pjx2Commit IN RunB2T.prg]</span><span class='PDMOper'>+</span><span class='PDMStr'>" [OF Bin2Text.exe]"</span><span class='PDMOper'>+</span><span class='PDMVar'>0h0d0a</span><span class='PDMOper'>+</span><span class='PDMOper'>;</span>
+<span class='PDMCnt'>3740</span> <span class='PDMInd'> 2</span>   <span class='PDMStr'>[ Wandle alle Dateien aller PJX im Verzeichnis nach Text]</span><span class='PDMOper'>+</span><span class='PDMVar'>0h0d0a</span><span class='PDMOper'>+</span><span class='PDMOper'>;</span>
+<span class='PDMCnt'>3741</span> <span class='PDMInd'> 2</span>   <span class='PDMStr'>[ und starte "git commit -a"]</span><span class='PDMOper'>+</span><span class='PDMVar'>0h0D0A0D0A</span><span class='PDMOper'>+</span><span class='PDMOper'>;</span>
+<span class='PDMCnt'>3742</span> <span class='PDMInd'> 2</span>   <span class='PDMStr'>[DO Inter_Active IN RunB2T.prg]</span><span class='PDMOper'>+</span><span class='PDMStr'>" [OF Bin2Text.exe]"</span><span class='PDMOper'>+</span><span class='PDMVar'>0h0d0a</span><span class='PDMOper'>+</span><span class='PDMOper'>;</span>
+<span class='PDMCnt'>3743</span> <span class='PDMInd'> 2</span>   <span class='PDMStr'>[ Starte Einstellungsmaske.]</span><span class='PDMOper'>+</span><span class='PDMVar'>0h0D0A0D0A</span><span class='PDMOper'>+</span><span class='PDMOper'>;</span>
+<span class='PDMCnt'>3744</span> <span class='PDMInd'> 2</span>   <span class='PDMStr'>[DO InitMenu IN RunB2T.prg]</span><span class='PDMOper'>+</span><span class='PDMVar'>0h0d0a</span><span class='PDMOper'>+</span><span class='PDMOper'>;</span>
+<span class='PDMCnt'>3745</span> <span class='PDMInd'> 2</span>   <span class='PDMStr'>[ Starte Menü]</span><span class='PDMOper'>+</span><span class='PDMVar'>0h0D0A0D0A</span><span class='PDMOper'>+</span><span class='PDMOper'>;</span>
+<span class='PDMCnt'>3746</span> <span class='PDMInd'> 2</span>   <span class='PDMStr'>[DO Convert_Array IN RunB2T.prg]</span><span class='PDMOper'>+</span><span class='PDMStr'>" [OF Bin2Text.exe]"</span><span class='PDMOper'>+</span><span class='PDMVar'>0h0d0a</span><span class='PDMOper'>+</span><span class='PDMOper'>;</span>
+<span class='PDMCnt'>3747</span> <span class='PDMInd'> 2</span>   <span class='PDMStr'>[ IDE Interface für FoxBin2Prg, für ein Datei Array]</span><span class='PDMOper'>+</span><span class='PDMVar'>0h0D0A0D0A</span><span class='PDMOper'>+</span><span class='PDMOper'>;</span>
+<span class='PDMCnt'>3748</span> <span class='PDMInd'> 2</span>   <span class='PDMStr'>[DO Convert_Vlass_2Bin IN RunB2T.prg]</span><span class='PDMOper'>+</span><span class='PDMStr'>" [OF Bin2Text.exe]"</span><span class='PDMOper'>+</span><span class='PDMVar'>0h0d0a</span><span class='PDMOper'>+</span><span class='PDMOper'>;</span>
+<span class='PDMCnt'>3749</span> <span class='PDMInd'> 2</span>   <span class='PDMStr'>[ IDE Interface für FoxBin2Prg, für eine wählbare Klasse.]</span><span class='PDMOper'>+</span><span class='PDMVar'>0h0D0A0D0A</span><span class='PDMOper'>+</span><span class='PDMOper'>;</span>
+<span class='PDMCnt'>3750</span> <span class='PDMInd'> 2</span>   <span class='PDMStr'>[DO Convert_File_2Bin IN RunB2T.prg]</span><span class='PDMOper'>+</span><span class='PDMStr'>" [OF Bin2Text.exe]"</span><span class='PDMOper'>+</span><span class='PDMVar'>0h0d0a</span><span class='PDMOper'>+</span><span class='PDMOper'>;</span>
+<span class='PDMCnt'>3751</span> <span class='PDMInd'> 2</span>   <span class='PDMStr'>[ IDE Interface für FoxBin2Prg, für eine wählbare Datei.]</span><span class='PDMOper'>+</span><span class='PDMVar'>0h0D0A0D0A</span><span class='PDMOper'>+</span><span class='PDMOper'>;</span>
+<span class='PDMCnt'>3752</span> <span class='PDMInd'> 2</span>   <span class='PDMStr'>[DO Convert_File_2Txt IN RunB2T.prg]</span><span class='PDMOper'>+</span><span class='PDMStr'>" [OF Bin2Text.exe]"</span><span class='PDMOper'>+</span><span class='PDMVar'>0h0d0a</span><span class='PDMOper'>+</span><span class='PDMOper'>;</span>
+<span class='PDMCnt'>3753</span> <span class='PDMInd'> 2</span>   <span class='PDMStr'>[ IDE Interface für FoxBin2Prg, für eine wählbare Datei oder Klasse.]</span><span class='PDMOper'>+</span><span class='PDMVar'>0h0D0A0D0A</span><span class='PDMOper'>+</span><span class='PDMOper'>;</span>
+<span class='PDMCnt'>3754</span> <span class='PDMInd'> 2</span>   <span class='PDMStr'>[DO Convert_Directory_2Bin IN RunB2T.prg]</span><span class='PDMOper'>+</span><span class='PDMStr'>" [OF Bin2Text.exe]"</span><span class='PDMOper'>+</span><span class='PDMVar'>0h0d0a</span><span class='PDMOper'>+</span><span class='PDMOper'>;</span>
+<span class='PDMCnt'>3755</span> <span class='PDMInd'> 2</span>   <span class='PDMStr'>[ IDE Interface für FoxBin2Prg, für ein Verzeichnis.]</span><span class='PDMOper'>+</span><span class='PDMVar'>0h0d0a</span><span class='PDMOper'>+</span><span class='PDMOper'>;</span>
+<span class='PDMCnt'>3756</span> <span class='PDMInd'> 2</span>   <span class='PDMStr'>[DO Convert_Directory_2Txt IN RunB2T.prg]</span><span class='PDMOper'>+</span><span class='PDMStr'>" [OF Bin2Text.exe]"</span><span class='PDMOper'>+</span><span class='PDMVar'>0h0d0a</span><span class='PDMOper'>+</span><span class='PDMOper'>;</span>
+<span class='PDMCnt'>3757</span> <span class='PDMInd'> 2</span>   <span class='PDMStr'>[ IDE Interface für FoxBin2Prg, für ein Verzeichnis.]</span>
+<span class='PDMCnt'>3758</span> <span class='PDMInd'>  </span> 
+<span class='PDMCnt'>3759</span> <span class='PDMInd'> 1</span>  <span class='PDMOper'>#</span><span class='PDMResK'>DEFINE</span> <span class='PDMVar'>dcText_DE_H01</span><span class='PDMOper'>;</span>
+<span class='PDMCnt'>3760</span> <span class='PDMInd'> 2</span>   <span class='PDMStr'>"DO Convert_Pjx_2Bin IN Bin2Text.exe [[/?]|[nProjects[,nMode[,cFile]]]"</span><span class='PDMOper'>+</span><span class='PDMVar'>0h0d0a</span><span class='PDMOper'>+</span><span class='PDMOper'>;</span>
+<span class='PDMCnt'>3761</span> <span class='PDMInd'> 2</span>   <span class='PDMStr'>[ IDE Interface für FoxBin2Prg, erzeugt Projekt-Binärddatei]</span><span class='PDMOper'>+</span><span class='PDMVar'>0h0d0a</span><span class='PDMOper'>+</span><span class='PDMOper'>;</span>
+<span class='PDMCnt'>3762</span> <span class='PDMInd'> 2</span>   <span class='PDMStr'>[ Parameter:]</span><span class='PDMOper'>+</span><span class='PDMVar'>0h0d0a</span><span class='PDMOper'>+</span><span class='PDMOper'>;</span>
+<span class='PDMCnt'>3763</span> <span class='PDMInd'> 2</span>   <span class='PDMStr'>[  /?        Zeigt diesen Hilfstext]</span><span class='PDMOper'>+</span><span class='PDMVar'>0h0d0a</span><span class='PDMOper'>+</span><span class='PDMOper'>;</span>
+<span class='PDMCnt'>3764</span> <span class='PDMInd'> 2</span>   <span class='PDMStr'>[  nProjects Legt fest, welche Prokjekte einbezogen werden.]</span><span class='PDMOper'>+</span><span class='PDMVar'>0h0d0a</span><span class='PDMOper'>+</span><span class='PDMOper'>;</span>
+<span class='PDMCnt'>3765</span> <span class='PDMInd'> 2</span>   <span class='PDMStr'>[            0 Datei bestimmen (Default)]</span><span class='PDMOper'>+</span><span class='PDMVar'>0h0d0a</span><span class='PDMOper'>+</span><span class='PDMOper'>;</span>
+<span class='PDMCnt'>3766</span> <span class='PDMInd'> 2</span>   <span class='PDMStr'>[            1 aktives Projekt]</span><span class='PDMOper'>+</span><span class='PDMVar'>0h0d0a</span><span class='PDMOper'>+</span><span class='PDMOper'>;</span>
+<span class='PDMCnt'>3767</span> <span class='PDMInd'> 2</span>   <span class='PDMStr'>[            2 alle in der IDE aktiven Proejkte]</span><span class='PDMOper'>+</span><span class='PDMVar'>0h0d0a</span><span class='PDMOper'>+</span><span class='PDMOper'>;</span>
+<span class='PDMCnt'>3768</span> <span class='PDMInd'> 2</span>   <span class='PDMStr'>[            3 alle im Defaultpfad gefunden Projekte]</span><span class='PDMOper'>+</span><span class='PDMVar'>0h0d0a</span><span class='PDMOper'>+</span><span class='PDMOper'>;</span>
+<span class='PDMCnt'>3769</span> <span class='PDMInd'> 2</span>   <span class='PDMStr'>[  nMode     Legt fest, welcher Teil des Projektes gewandelt werden soll.]</span><span class='PDMOper'>+</span><span class='PDMVar'>0h0d0a</span><span class='PDMOper'>+</span><span class='PDMOper'>;</span>
+<span class='PDMCnt'>3770</span> <span class='PDMInd'> 2</span>   <span class='PDMStr'>[            die Quelldateien (VCX, FRX, ...) oder]</span><span class='PDMOper'>+</span><span class='PDMVar'>0h0d0a</span><span class='PDMOper'>+</span><span class='PDMOper'>;</span>
+<span class='PDMCnt'>3771</span> <span class='PDMInd'> 2</span>   <span class='PDMStr'>[            die Projekdateien (PJX)]</span><span class='PDMOper'>+</span><span class='PDMVar'>0h0d0a</span><span class='PDMOper'>+</span><span class='PDMOper'>;</span>
+<span class='PDMCnt'>3772</span> <span class='PDMInd'> 2</span>   <span class='PDMStr'>[            0 Quell-  und Projekdateien (Default)]</span><span class='PDMOper'>+</span><span class='PDMVar'>0h0d0a</span><span class='PDMOper'>+</span><span class='PDMOper'>;</span>
+<span class='PDMCnt'>3773</span> <span class='PDMInd'> 2</span>   <span class='PDMStr'>[            1 nur Quelldateien (VCX, FRX, ...)]</span><span class='PDMOper'>+</span><span class='PDMVar'>0h0d0a</span><span class='PDMOper'>+</span><span class='PDMOper'>;</span>
+<span class='PDMCnt'>3774</span> <span class='PDMInd'> 2</span>   <span class='PDMStr'>[            2 nur Projekdateien (PJX)]</span><span class='PDMOper'>+</span><span class='PDMVar'>0h0d0a</span><span class='PDMOper'>+</span><span class='PDMOper'>;</span>
+<span class='PDMCnt'>3775</span> <span class='PDMInd'> 2</span>   <span class='PDMStr'>[  cFile     Datei, für die die Methode gerufen wird.]</span><span class='PDMOper'>+</span><span class='PDMVar'>0h0d0a</span><span class='PDMOper'>+</span><span class='PDMOper'>;</span>
+<span class='PDMCnt'>3776</span> <span class='PDMInd'> 2</span>   <span class='PDMStr'>[Alle Projekte werden temporär geschlossen.]</span><span class='PDMOper'>+</span><span class='PDMVar'>0h0d0a</span><span class='PDMOper'>+</span><span class='PDMOper'>;</span>
+<span class='PDMCnt'>3777</span> <span class='PDMInd'> 2</span>   <span class='PDMStr'>[Führt ein CLEAR ALL / CLOSE DATABASES ALL aus]</span>
+<span class='PDMCnt'>3778</span> <span class='PDMInd'>  </span> 
+<span class='PDMCnt'>3779</span> <span class='PDMInd'> 1</span>  <span class='PDMOper'>#</span><span class='PDMResK'>DEFINE</span> <span class='PDMVar'>dcText_DE_H01_txt</span><span class='PDMOper'>;</span>
+<span class='PDMCnt'>3780</span> <span class='PDMInd'> 2</span>   <span class='PDMStr'>"DO Convert_Pjx_2Txt IN Bin2Text.exe [[/?]|[nProjects[,nMode[,cFile]]]"</span><span class='PDMOper'>+</span><span class='PDMVar'>0h0d0a</span><span class='PDMOper'>+</span><span class='PDMOper'>;</span>
+<span class='PDMCnt'>3781</span> <span class='PDMInd'> 2</span>   <span class='PDMStr'>[ IDE Interface für FoxBin2Prg, erzeugt Textdatei für Projekt]</span><span class='PDMOper'>+</span><span class='PDMVar'>0h0d0a</span><span class='PDMOper'>+</span><span class='PDMOper'>;</span>
+<span class='PDMCnt'>3782</span> <span class='PDMInd'> 2</span>   <span class='PDMStr'>[ Parameter:]</span><span class='PDMOper'>+</span><span class='PDMVar'>0h0d0a</span><span class='PDMOper'>+</span><span class='PDMOper'>;</span>
+<span class='PDMCnt'>3783</span> <span class='PDMInd'> 2</span>   <span class='PDMStr'>[  /?        Zeigt diesen Hilfstext]</span><span class='PDMOper'>+</span><span class='PDMVar'>0h0d0a</span><span class='PDMOper'>+</span><span class='PDMOper'>;</span>
+<span class='PDMCnt'>3784</span> <span class='PDMInd'> 2</span>   <span class='PDMStr'>[  nProjects Legt fest, welche Prokjekte einbezogen werden.]</span><span class='PDMOper'>+</span><span class='PDMVar'>0h0d0a</span><span class='PDMOper'>+</span><span class='PDMOper'>;</span>
+<span class='PDMCnt'>3785</span> <span class='PDMInd'> 2</span>   <span class='PDMStr'>[            0 Datei bestimmen (Default)]</span><span class='PDMOper'>+</span><span class='PDMVar'>0h0d0a</span><span class='PDMOper'>+</span><span class='PDMOper'>;</span>
+<span class='PDMCnt'>3786</span> <span class='PDMInd'> 2</span>   <span class='PDMStr'>[            1 aktives Projekt]</span><span class='PDMOper'>+</span><span class='PDMVar'>0h0d0a</span><span class='PDMOper'>+</span><span class='PDMOper'>;</span>
+<span class='PDMCnt'>3787</span> <span class='PDMInd'> 2</span>   <span class='PDMStr'>[            2 alle in der IDE aktiven Proejkte]</span><span class='PDMOper'>+</span><span class='PDMVar'>0h0d0a</span><span class='PDMOper'>+</span><span class='PDMOper'>;</span>
+<span class='PDMCnt'>3788</span> <span class='PDMInd'> 2</span>   <span class='PDMStr'>[            3 alle im Defaultpfad gefunden Projekte]</span><span class='PDMOper'>+</span><span class='PDMVar'>0h0d0a</span><span class='PDMOper'>+</span><span class='PDMOper'>;</span>
+<span class='PDMCnt'>3789</span> <span class='PDMInd'> 2</span>   <span class='PDMStr'>[  nMode     Legt fest, welcher Teil des Projektes gewandelt werden soll.]</span><span class='PDMOper'>+</span><span class='PDMVar'>0h0d0a</span><span class='PDMOper'>+</span><span class='PDMOper'>;</span>
+<span class='PDMCnt'>3790</span> <span class='PDMInd'> 2</span>   <span class='PDMStr'>[            die Quelldateien (VCX, FRX, ...) oder]</span><span class='PDMOper'>+</span><span class='PDMVar'>0h0d0a</span><span class='PDMOper'>+</span><span class='PDMOper'>;</span>
+<span class='PDMCnt'>3791</span> <span class='PDMInd'> 2</span>   <span class='PDMStr'>[            die Projekdateien (PJX)]</span><span class='PDMOper'>+</span><span class='PDMVar'>0h0d0a</span><span class='PDMOper'>+</span><span class='PDMOper'>;</span>
+<span class='PDMCnt'>3792</span> <span class='PDMInd'> 2</span>   <span class='PDMStr'>[            0 Quell-  und Projekdateien (Default)]</span><span class='PDMOper'>+</span><span class='PDMVar'>0h0d0a</span><span class='PDMOper'>+</span><span class='PDMOper'>;</span>
+<span class='PDMCnt'>3793</span> <span class='PDMInd'> 2</span>   <span class='PDMStr'>[            1 nur Quelldateien (VCX, FRX, ...)]</span><span class='PDMOper'>+</span><span class='PDMVar'>0h0d0a</span><span class='PDMOper'>+</span><span class='PDMOper'>;</span>
+<span class='PDMCnt'>3794</span> <span class='PDMInd'> 2</span>   <span class='PDMStr'>[            2 nur Projekdateien (PJX)]</span><span class='PDMOper'>+</span><span class='PDMVar'>0h0d0a</span><span class='PDMOper'>+</span><span class='PDMOper'>;</span>
+<span class='PDMCnt'>3795</span> <span class='PDMInd'> 2</span>   <span class='PDMStr'>[  cFile     Datei, für die die Methode gerufen wird.]</span><span class='PDMOper'>+</span><span class='PDMVar'>0h0d0a</span><span class='PDMOper'>+</span><span class='PDMOper'>;</span>
+<span class='PDMCnt'>3796</span> <span class='PDMInd'> 2</span>   <span class='PDMStr'>[Alle Projekte werden temporär geschlossen.]</span><span class='PDMOper'>+</span><span class='PDMVar'>0h0d0a</span><span class='PDMOper'>+</span><span class='PDMOper'>;</span>
+<span class='PDMCnt'>3797</span> <span class='PDMInd'> 2</span>   <span class='PDMStr'>[Führt ein CLEAR ALL / CLOSE DATABASES ALL aus]</span>
+<span class='PDMCnt'>3798</span> <span class='PDMInd'>  </span> 
+<span class='PDMCnt'>3799</span> <span class='PDMInd'> 1</span>  <span class='PDMOper'>#</span><span class='PDMResK'>DEFINE</span> <span class='PDMVar'>dcText_DE_H02</span><span class='PDMOper'>;</span>
+<span class='PDMCnt'>3800</span> <span class='PDMInd'> 2</span>   <span class='PDMStr'>"DO Convert_Pjx_2Bin IN Bin2Text.exe [/?]|[nProjects[,nMode[,cFile]]]"</span><span class='PDMOper'>+</span><span class='PDMVar'>0h0d0a</span><span class='PDMOper'>+</span><span class='PDMOper'>;</span>
+<span class='PDMCnt'>3801</span> <span class='PDMInd'> 2</span>   <span class='PDMStr'>[Nur aus der IDE starten.]</span>
+<span class='PDMCnt'>3802</span> <span class='PDMInd'>  </span> 
+<span class='PDMCnt'>3803</span> <span class='PDMInd'> 1</span>  <span class='PDMOper'>#</span><span class='PDMResK'>DEFINE</span> <span class='PDMVar'>dcText_DE_H02_txt</span><span class='PDMOper'>;</span>
+<span class='PDMCnt'>3804</span> <span class='PDMInd'> 2</span>   <span class='PDMStr'>"DO Convert_Pjx_2Txt IN Bin2Text.exe [/?]|[nProjects[,nMode[,cFile]]]"</span><span class='PDMOper'>+</span><span class='PDMVar'>0h0d0a</span><span class='PDMOper'>+</span><span class='PDMOper'>;</span>
+<span class='PDMCnt'>3805</span> <span class='PDMInd'> 2</span>   <span class='PDMStr'>[Nur aus der IDE starten.]</span>
+<span class='PDMCnt'>3806</span> <span class='PDMInd'>  </span> 
+<span class='PDMCnt'>3807</span> <span class='PDMInd'> 1</span>  <span class='PDMOper'>#</span><span class='PDMResK'>DEFINE</span> <span class='PDMVar'>dcText_DE_H03</span><span class='PDMOper'>;</span>
+<span class='PDMCnt'>3808</span> <span class='PDMInd'> 2</span>   <span class='PDMStr'>"DO Pjx2Commit IN Bin2Text.exe [/?]|[lAll]"</span><span class='PDMOper'>+</span><span class='PDMVar'>0h0d0a</span><span class='PDMOper'>+</span><span class='PDMOper'>;</span>
+<span class='PDMCnt'>3809</span> <span class='PDMInd'> 2</span>   <span class='PDMStr'>[ Wandle alle Dateien aller PJX im Verzeichnis nach Text]</span><span class='PDMOper'>+</span><span class='PDMVar'>0h0d0a</span><span class='PDMOper'>+</span><span class='PDMOper'>;</span>
+<span class='PDMCnt'>3810</span> <span class='PDMInd'> 2</span>   <span class='PDMStr'>[ und starte "git add -A" + "git commit"]</span><span class='PDMOper'>+</span><span class='PDMVar'>0h0d0a</span><span class='PDMOper'>+</span><span class='PDMOper'>;</span>
+<span class='PDMCnt'>3811</span> <span class='PDMInd'> 2</span>   <span class='PDMStr'>[ Parameter:]</span><span class='PDMOper'>+</span><span class='PDMVar'>0h0d0a</span><span class='PDMOper'>+</span><span class='PDMOper'>;</span>
+<span class='PDMCnt'>3812</span> <span class='PDMInd'> 2</span>   <span class='PDMStr'>[  /?        Zeigt diesen Hilfstext]</span><span class='PDMOper'>+</span><span class='PDMVar'>0h0d0a</span><span class='PDMOper'>+</span><span class='PDMOper'>;</span>
+<span class='PDMCnt'>3813</span> <span class='PDMInd'> 2</span>   <span class='PDMStr'>[  lAll      Dateien die einzubeziehen sind]</span><span class='PDMOper'>+</span><span class='PDMVar'>0h0d0a</span><span class='PDMOper'>+</span><span class='PDMOper'>;</span>
+<span class='PDMCnt'>3814</span> <span class='PDMInd'> 2</span>   <span class='PDMStr'>[            .T. Alle Projekte im Pfad]</span><span class='PDMOper'>+</span><span class='PDMVar'>0h0d0a</span><span class='PDMOper'>+</span><span class='PDMOper'>;</span>
+<span class='PDMCnt'>3815</span> <span class='PDMInd'> 2</span>   <span class='PDMStr'>[            .F. Aktives Projekt (default)]</span>
+<span class='PDMCnt'>3816</span> <span class='PDMInd'>  </span> 
+<span class='PDMCnt'>3817</span> <span class='PDMInd'> 1</span>  <span class='PDMOper'>#</span><span class='PDMResK'>DEFINE</span> <span class='PDMVar'>dcText_DE_H04</span><span class='PDMOper'>;</span>
+<span class='PDMCnt'>3818</span> <span class='PDMInd'> 2</span>   <span class='PDMStr'>"DO Pjx2Commit IN Bin2Text.exe [/?]"</span><span class='PDMOper'>+</span><span class='PDMVar'>0h0D0A0D0A</span><span class='PDMOper'>+</span><span class='PDMOper'>;</span>
+<span class='PDMCnt'>3819</span> <span class='PDMInd'> 2</span>   <span class='PDMStr'>[Nur aus der IDE starten.]</span>
+<span class='PDMCnt'>3820</span> <span class='PDMInd'>  </span> 
+<span class='PDMCnt'>3821</span> <span class='PDMInd'> 1</span>  <span class='PDMOper'>#</span><span class='PDMResK'>DEFINE</span> <span class='PDMVar'>dcText_DE_H05</span><span class='PDMOper'>;</span>
+<span class='PDMCnt'>3822</span> <span class='PDMInd'> 2</span>   <span class='PDMStr'>"DO InitMenu IN Bin2Text.exe [/?]|[tcPath[,tlNoMenu]]"</span><span class='PDMOper'>+</span><span class='PDMVar'>0h0d0a</span><span class='PDMOper'>+</span><span class='PDMOper'>;</span>
+<span class='PDMCnt'>3823</span> <span class='PDMInd'> 2</span>   <span class='PDMStr'>[ Starte Menü]</span><span class='PDMOper'>+</span><span class='PDMVar'>0h0d0a</span><span class='PDMOper'>+</span><span class='PDMOper'>;</span>
+<span class='PDMCnt'>3824</span> <span class='PDMInd'> 2</span>   <span class='PDMStr'>[ Parameter:]</span><span class='PDMOper'>+</span><span class='PDMVar'>0h0d0a</span><span class='PDMOper'>+</span><span class='PDMOper'>;</span>
+<span class='PDMCnt'>3825</span> <span class='PDMInd'> 2</span>   <span class='PDMStr'>[  /?        Zeigt diesen Hilfstext]</span><span class='PDMOper'>+</span><span class='PDMVar'>0h0d0a</span><span class='PDMOper'>+</span><span class='PDMOper'>;</span>
+<span class='PDMCnt'>3826</span> <span class='PDMInd'> 2</span>   <span class='PDMStr'>[  tcPath    Pfad zur Einstellungsdatei.]</span><span class='PDMOper'>+</span><span class='PDMVar'>0h0d0a</span><span class='PDMOper'>+</span><span class='PDMOper'>;</span>
+<span class='PDMCnt'>3827</span> <span class='PDMInd'> 2</span>   <span class='PDMStr'>[  tlNoMenu  Starte das Menü nicht.]</span>
+<span class='PDMCnt'>3828</span> <span class='PDMInd'>  </span> 
+<span class='PDMCnt'>3829</span> <span class='PDMInd'> 1</span>  <span class='PDMOper'>#</span><span class='PDMResK'>DEFINE</span> <span class='PDMVar'>dcText_DE_H06</span><span class='PDMOper'>;</span>
+<span class='PDMCnt'>3830</span> <span class='PDMInd'> 2</span>   <span class='PDMStr'>"DO InitMenu [/?]"</span><span class='PDMOper'>+</span><span class='PDMVar'>0h0D0A0D0A</span><span class='PDMOper'>+</span><span class='PDMOper'>;</span>
+<span class='PDMCnt'>3831</span> <span class='PDMInd'> 2</span>   <span class='PDMStr'>[Nur aus der IDE starten.]</span>
+<span class='PDMCnt'>3832</span> <span class='PDMInd'>  </span> 
+<span class='PDMCnt'>3833</span> <span class='PDMInd'> 1</span>  <span class='PDMOper'>#</span><span class='PDMResK'>DEFINE</span> <span class='PDMVar'>dcText_DE_H07</span><span class='PDMOper'>;</span>
+<span class='PDMCnt'>3834</span> <span class='PDMInd'> 2</span>   <span class='PDMStr'>"DO Inter_Active IN Bin2Text.exe [/?]"</span><span class='PDMOper'>+</span><span class='PDMVar'>0h0d0a</span><span class='PDMOper'>+</span><span class='PDMOper'>;</span>
+<span class='PDMCnt'>3835</span> <span class='PDMInd'> 2</span>   <span class='PDMStr'>[ Starte Einstllungsmaske.]</span><span class='PDMOper'>+</span><span class='PDMVar'>0h0d0a</span><span class='PDMOper'>+</span><span class='PDMOper'>;</span>
+<span class='PDMCnt'>3836</span> <span class='PDMInd'> 2</span>   <span class='PDMStr'>[ Parameter:]</span><span class='PDMOper'>+</span><span class='PDMVar'>0h0d0a</span><span class='PDMOper'>+</span><span class='PDMOper'>;</span>
+<span class='PDMCnt'>3837</span> <span class='PDMInd'> 2</span>   <span class='PDMStr'>[  /?        Zeigt diesen Hilfstext]</span>
+<span class='PDMCnt'>3838</span> <span class='PDMInd'>  </span> 
+<span class='PDMCnt'>3839</span> <span class='PDMInd'> 1</span>  <span class='PDMOper'>#</span><span class='PDMResK'>DEFINE</span> <span class='PDMVar'>dcText_DE_H08</span><span class='PDMOper'>;</span>
+<span class='PDMCnt'>3840</span> <span class='PDMInd'> 2</span>   <span class='PDMStr'>"DO Inter_Active IN Bin2Text.exe [/?]"</span><span class='PDMOper'>+</span><span class='PDMVar'>0h0D0A0D0A</span><span class='PDMOper'>+</span><span class='PDMOper'>;</span>
+<span class='PDMCnt'>3841</span> <span class='PDMInd'> 2</span>   <span class='PDMStr'>[Nur aus der IDE starten.]</span>
+<span class='PDMCnt'>3842</span> <span class='PDMInd'>  </span> 
+<span class='PDMCnt'>3843</span> <span class='PDMInd'> 1</span>  <span class='PDMOper'>#</span><span class='PDMResK'>DEFINE</span> <span class='PDMVar'>dcText_DE_H09</span><span class='PDMOper'>;</span>
+<span class='PDMCnt'>3844</span> <span class='PDMInd'> 2</span>   <span class='PDMStr'>"DO Convert_Array IN Bin2Text.exe [/?]|lText2Bin,cMode,@aFiles"</span><span class='PDMOper'>+</span><span class='PDMVar'>0h0d0a</span><span class='PDMOper'>+</span><span class='PDMOper'>;</span>
+<span class='PDMCnt'>3845</span> <span class='PDMInd'> 2</span>   <span class='PDMStr'>[ IDE interface für FoxBin2Prg, to be used with menu]</span><span class='PDMOper'>+</span><span class='PDMVar'>0h0d0a</span><span class='PDMOper'>+</span><span class='PDMOper'>;</span>
+<span class='PDMCnt'>3846</span> <span class='PDMInd'> 2</span>   <span class='PDMStr'>[ Parameter:]</span><span class='PDMOper'>+</span><span class='PDMVar'>0h0d0a</span><span class='PDMOper'>+</span><span class='PDMOper'>;</span>
+<span class='PDMCnt'>3847</span> <span class='PDMInd'> 2</span>   <span class='PDMStr'>[  /?        Zeigt diesen Hilfstext]</span><span class='PDMOper'>+</span><span class='PDMVar'>0h0d0a</span><span class='PDMOper'>+</span><span class='PDMOper'>;</span>
+<span class='PDMCnt'>3848</span> <span class='PDMInd'> 2</span>   <span class='PDMStr'>[  aFiles    Array mit Dateien]</span><span class='PDMOper'>+</span><span class='PDMVar'>0h0d0a</span><span class='PDMOper'>+</span><span class='PDMOper'>;</span>
+<span class='PDMCnt'>3849</span> <span class='PDMInd'> 2</span>   <span class='PDMStr'>[            Eine Spalte Datienamen mit pfad der Binärdatei]</span><span class='PDMOper'>+</span><span class='PDMVar'>0h0d0a</span><span class='PDMOper'>+</span><span class='PDMOper'>;</span>
+<span class='PDMCnt'>3850</span> <span class='PDMInd'> 2</span>   <span class='PDMStr'>[            Optionale zweite Spalte, wenn die erste in Projekt enthält den Projecthook]</span><span class='PDMOper'>+</span><span class='PDMVar'>0h0d0a</span><span class='PDMOper'>+</span><span class='PDMOper'>;</span>
+<span class='PDMCnt'>3851</span> <span class='PDMInd'> 2</span>   <span class='PDMStr'>[  lText2Bin Wenn wahr werden die Biärdateien erzeugt,]</span><span class='PDMOper'>+</span><span class='PDMVar'>0h0d0a</span><span class='PDMOper'>+</span><span class='PDMOper'>;</span>
+<span class='PDMCnt'>3852</span> <span class='PDMInd'> 2</span>   <span class='PDMStr'>[            sonst werden Textdateien erzeugt.(Default)]</span><span class='PDMOper'>+</span><span class='PDMVar'>0h0d0a</span><span class='PDMOper'>+</span><span class='PDMOper'>;</span>
+<span class='PDMCnt'>3853</span> <span class='PDMInd'> 2</span>   <span class='PDMStr'>[  cMode     Modus für Projekt - Dateien.]</span><span class='PDMOper'>+</span><span class='PDMVar'>0h0d0a</span><span class='PDMOper'>+</span><span class='PDMOper'>;</span>
+<span class='PDMCnt'>3854</span> <span class='PDMInd'> 2</span>   <span class='PDMStr'>[            Optional in FoxBin2PRG Stil]</span><span class='PDMOper'>+</span><span class='PDMVar'>0h0d0a</span><span class='PDMOper'>+</span><span class='PDMOper'>;</span>
+<span class='PDMCnt'>3855</span> <span class='PDMInd'> 2</span>   <span class='PDMStr'>[            Wenn dieser Parameter nicht angegben ist werden pjx wie einfache Dateien behandelt]</span><span class='PDMOper'>+</span><span class='PDMVar'>0h0d0a</span><span class='PDMOper'>+</span><span class='PDMOper'>;</span>
+<span class='PDMCnt'>3856</span> <span class='PDMInd'> 2</span>   <span class='PDMStr'>[Classlibraries und Projecthooks werden nicht freigegeben.]</span>
+<span class='PDMCnt'>3857</span> <span class='PDMInd'>  </span> 
+<span class='PDMCnt'>3858</span> <span class='PDMInd'> 1</span>  <span class='PDMOper'>#</span><span class='PDMResK'>DEFINE</span> <span class='PDMVar'>dcText_DE_H10</span><span class='PDMOper'>;</span>
+<span class='PDMCnt'>3859</span> <span class='PDMInd'> 2</span>   <span class='PDMStr'>"DO Convert_Array IN Bin2Text.exe [/?]|lText2Bin,cMode,@aFiles"</span><span class='PDMOper'>+</span><span class='PDMVar'>0h0D0A0D0A</span><span class='PDMOper'>+</span><span class='PDMOper'>;</span>
+<span class='PDMCnt'>3860</span> <span class='PDMInd'> 2</span>   <span class='PDMStr'>[Nur aus der IDE starten.]</span>
+<span class='PDMCnt'>3861</span> <span class='PDMInd'>  </span> 
+<span class='PDMCnt'>3862</span> <span class='PDMInd'> 1</span>  <span class='PDMOper'>#</span><span class='PDMResK'>DEFINE</span> <span class='PDMVar'>dcText_DE_H11_Class</span><span class='PDMOper'>;</span>
+<span class='PDMCnt'>3863</span> <span class='PDMInd'> 2</span>   <span class='PDMStr'>"DO Convert_Class_2Bin IN Bin2Text.exe [/?]|[tlSingleClassLib[,tlTextFile]]"</span><span class='PDMOper'>+</span><span class='PDMVar'>0h0d0a</span><span class='PDMOper'>+</span><span class='PDMOper'>;</span>
+<span class='PDMCnt'>3864</span> <span class='PDMInd'> 2</span>   <span class='PDMStr'>[ IDE interface für FoxBin2Prg, um eine wählbare Datei nach Binär zu transformieren.]</span><span class='PDMOper'>+</span><span class='PDMVar'>0h0d0a</span><span class='PDMOper'>+</span><span class='PDMOper'>;</span>
+<span class='PDMCnt'>3865</span> <span class='PDMInd'> 2</span>   <span class='PDMStr'>[ Parameter:]</span><span class='PDMOper'>+</span><span class='PDMVar'>0h0d0a</span><span class='PDMOper'>+</span><span class='PDMOper'>;</span>
+<span class='PDMCnt'>3866</span> <span class='PDMInd'> 2</span>   <span class='PDMStr'>[  /?               Zeigt diesen Hilfstext]</span><span class='PDMOper'>+</span><span class='PDMVar'>0h0d0a</span><span class='PDMOper'>+</span><span class='PDMOper'>;</span>
+<span class='PDMCnt'>3867</span> <span class='PDMInd'> 2</span>   <span class='PDMStr'>[  tlSingleClassLib Erzeuge eine einzelne Bibliothek für die Klasse. (Sonst integriere in die bestehende Library)]</span><span class='PDMOper'>+</span><span class='PDMVar'>0h0d0a</span><span class='PDMOper'>+</span><span class='PDMOper'>;</span>
+<span class='PDMCnt'>3868</span> <span class='PDMInd'> 2</span>   <span class='PDMStr'>[  tlTextFile       Wähle Textdatei aus (Sonst Klasse).]</span><span class='PDMOper'>+</span><span class='PDMVar'>0h0d0a</span><span class='PDMOper'>+</span><span class='PDMOper'>;</span>
+<span class='PDMCnt'>3869</span> <span class='PDMInd'> 2</span>   <span class='PDMStr'>[Führt ein CLEAR ALL / CLOSE DATABASES ALL aus.]</span>
+<span class='PDMCnt'>3870</span> <span class='PDMInd'>  </span> 
+<span class='PDMCnt'>3871</span> <span class='PDMInd'> 1</span>  <span class='PDMOper'>#</span><span class='PDMResK'>DEFINE</span> <span class='PDMVar'>dcText_DE_H11</span><span class='PDMOper'>;</span>
+<span class='PDMCnt'>3872</span> <span class='PDMInd'> 2</span>   <span class='PDMStr'>"DO Convert_File_2Bin IN Bin2Text.exe [/?]|[cFile|cFile,cClass]"</span><span class='PDMOper'>+</span><span class='PDMVar'>0h0d0a</span><span class='PDMOper'>+</span><span class='PDMOper'>;</span>
+<span class='PDMCnt'>3873</span> <span class='PDMInd'> 2</span>   <span class='PDMStr'>[ IDE interface für FoxBin2Prg, um eine wählbare Datei nach Binär zu transformieren.]</span><span class='PDMOper'>+</span><span class='PDMVar'>0h0d0a</span><span class='PDMOper'>+</span><span class='PDMOper'>;</span>
+<span class='PDMCnt'>3874</span> <span class='PDMInd'> 2</span>   <span class='PDMStr'>[ Parameter:]</span><span class='PDMOper'>+</span><span class='PDMVar'>0h0d0a</span><span class='PDMOper'>+</span><span class='PDMOper'>;</span>
+<span class='PDMCnt'>3875</span> <span class='PDMInd'> 2</span>   <span class='PDMStr'>[  /?            Zeigt diesen Hilfstext]</span><span class='PDMOper'>+</span><span class='PDMVar'>0h0d0a</span><span class='PDMOper'>+</span><span class='PDMOper'>;</span>
+<span class='PDMCnt'>3876</span> <span class='PDMInd'> 2</span>   <span class='PDMStr'>[  cFile         Datei, für die die Methode gerufen wird.]</span><span class='PDMOper'>+</span><span class='PDMVar'>0h0d0a</span><span class='PDMOper'>+</span><span class='PDMOper'>;</span>
+<span class='PDMCnt'>3877</span> <span class='PDMInd'> 2</span>   <span class='PDMStr'>[  cClass        Klasse, für lSingleClass .]</span><span class='PDMOper'>+</span><span class='PDMVar'>0h0d0a</span><span class='PDMOper'>+</span><span class='PDMOper'>;</span>
+<span class='PDMCnt'>3878</span> <span class='PDMInd'> 2</span>   <span class='PDMStr'>[Führt ein CLEAR ALL / CLOSE DATABASES ALL aus.]</span>
+<span class='PDMCnt'>3879</span> <span class='PDMInd'>  </span> 
+<span class='PDMCnt'>3880</span> <span class='PDMInd'> 1</span>  <span class='PDMOper'>#</span><span class='PDMResK'>DEFINE</span> <span class='PDMVar'>dcText_DE_H11_Txt</span><span class='PDMOper'>;</span>
+<span class='PDMCnt'>3881</span> <span class='PDMInd'> 2</span>   <span class='PDMStr'>"DO Convert_File_2Txt IN Bin2Text.exe [/?]|[lSingleClass[,cFile|,cFile,cClass]]"</span><span class='PDMOper'>+</span><span class='PDMVar'>0h0d0a</span><span class='PDMOper'>+</span><span class='PDMOper'>;</span>
+<span class='PDMCnt'>3882</span> <span class='PDMInd'> 2</span>   <span class='PDMStr'>[ IDE interface für FoxBin2Prg, um eine wählbare Datei nach Text zu transformieren.]</span><span class='PDMOper'>+</span><span class='PDMVar'>0h0d0a</span><span class='PDMOper'>+</span><span class='PDMOper'>;</span>
+<span class='PDMCnt'>3883</span> <span class='PDMInd'> 2</span>   <span class='PDMStr'>[ Parameter:]</span><span class='PDMOper'>+</span><span class='PDMVar'>0h0d0a</span><span class='PDMOper'>+</span><span class='PDMOper'>;</span>
+<span class='PDMCnt'>3884</span> <span class='PDMInd'> 2</span>   <span class='PDMStr'>[  /?            Zeigt diesen Hilfstext]</span><span class='PDMOper'>+</span><span class='PDMVar'>0h0d0a</span><span class='PDMOper'>+</span><span class='PDMOper'>;</span>
+<span class='PDMCnt'>3885</span> <span class='PDMInd'> 2</span>   <span class='PDMStr'>[  lSingleClass  Bestimme eine Klasse zum Transformieren.]</span><span class='PDMOper'>+</span><span class='PDMVar'>0h0d0a</span><span class='PDMOper'>+</span><span class='PDMOper'>;</span>
+<span class='PDMCnt'>3886</span> <span class='PDMInd'> 2</span>   <span class='PDMStr'>[  cFile         Datei, für die die Methode gerufen wird.]</span><span class='PDMOper'>+</span><span class='PDMVar'>0h0d0a</span><span class='PDMOper'>+</span><span class='PDMOper'>;</span>
+<span class='PDMCnt'>3887</span> <span class='PDMInd'> 2</span>   <span class='PDMStr'>[  cClass        Klasse, für lSingleClass .]</span><span class='PDMOper'>+</span><span class='PDMVar'>0h0d0a</span><span class='PDMOper'>+</span><span class='PDMOper'>;</span>
+<span class='PDMCnt'>3888</span> <span class='PDMInd'> 2</span>   <span class='PDMStr'>[Führt ein CLEAR ALL / CLOSE DATABASES ALL aus.]</span>
+<span class='PDMCnt'>3889</span> <span class='PDMInd'>  </span> 
+<span class='PDMCnt'>3890</span> <span class='PDMInd'> 1</span>  <span class='PDMOper'>#</span><span class='PDMResK'>DEFINE</span> <span class='PDMVar'>dcText_DE_H12</span><span class='PDMOper'>;</span>
+<span class='PDMCnt'>3891</span> <span class='PDMInd'> 2</span>   <span class='PDMStr'>"DO Convert_Directory_2Bin IN Bin2Text.exe [/?]|[tcDirectory]"</span><span class='PDMOper'>+</span><span class='PDMVar'>0h0d0a</span><span class='PDMOper'>+</span><span class='PDMOper'>;</span>
+<span class='PDMCnt'>3892</span> <span class='PDMInd'> 2</span>   <span class='PDMStr'>[ IDE interface für FoxBin2Prg, um die Dateien in einn Verzeichnis zu Binär zu transformieren.]</span><span class='PDMOper'>+</span><span class='PDMVar'>0h0d0a</span><span class='PDMOper'>+</span><span class='PDMOper'>;</span>
+<span class='PDMCnt'>3893</span> <span class='PDMInd'> 2</span>   <span class='PDMStr'>[ Parameter:]</span><span class='PDMOper'>+</span><span class='PDMVar'>0h0d0a</span><span class='PDMOper'>+</span><span class='PDMOper'>;</span>
+<span class='PDMCnt'>3894</span> <span class='PDMInd'> 2</span>   <span class='PDMStr'>[  /?            Zeigt diesen Hilfstext]</span><span class='PDMOper'>+</span><span class='PDMVar'>0h0d0a</span><span class='PDMOper'>+</span><span class='PDMOper'>;</span>
+<span class='PDMCnt'>3895</span> <span class='PDMInd'> 2</span>   <span class='PDMStr'>[  tlWithSub     Verzeichnisse.]</span><span class='PDMOper'>+</span><span class='PDMVar'>0h0d0a</span><span class='PDMOper'>+</span><span class='PDMOper'>;</span>
+<span class='PDMCnt'>3896</span> <span class='PDMInd'> 2</span>   <span class='PDMStr'>[Führt ein CLEAR ALL / CLOSE DATABASES ALL aus.]</span>
+<span class='PDMCnt'>3897</span> <span class='PDMInd'>  </span> 
+<span class='PDMCnt'>3898</span> <span class='PDMInd'> 1</span>  <span class='PDMOper'>#</span><span class='PDMResK'>DEFINE</span> <span class='PDMVar'>dcText_DE_H12_txt</span><span class='PDMOper'>;</span>
+<span class='PDMCnt'>3899</span> <span class='PDMInd'> 2</span>   <span class='PDMStr'>"DO Convert_Directory_2Txt IN Bin2Text.exe [/?]|[tcDirectory]"</span><span class='PDMOper'>+</span><span class='PDMVar'>0h0d0a</span><span class='PDMOper'>+</span><span class='PDMOper'>;</span>
+<span class='PDMCnt'>3900</span> <span class='PDMInd'> 2</span>   <span class='PDMStr'>[ IDE interface für FoxBin2Prg, um die Dateien in einn Verzeichnis zu Text zu transformieren.]</span><span class='PDMOper'>+</span><span class='PDMVar'>0h0d0a</span><span class='PDMOper'>+</span><span class='PDMOper'>;</span>
+<span class='PDMCnt'>3901</span> <span class='PDMInd'> 2</span>   <span class='PDMStr'>[ Parameter:]</span><span class='PDMOper'>+</span><span class='PDMVar'>0h0d0a</span><span class='PDMOper'>+</span><span class='PDMOper'>;</span>
+<span class='PDMCnt'>3902</span> <span class='PDMInd'> 2</span>   <span class='PDMStr'>[  /?            Zeigt diesen Hilfstext]</span><span class='PDMOper'>+</span><span class='PDMVar'>0h0d0a</span><span class='PDMOper'>+</span><span class='PDMOper'>;</span>
+<span class='PDMCnt'>3903</span> <span class='PDMInd'> 2</span>   <span class='PDMStr'>[  tcDirectory   Verzeichnisse.]</span><span class='PDMOper'>+</span><span class='PDMVar'>0h0d0a</span><span class='PDMOper'>+</span><span class='PDMOper'>;</span>
+<span class='PDMCnt'>3904</span> <span class='PDMInd'> 2</span>   <span class='PDMStr'>[Führt ein CLEAR ALL / CLOSE DATABASES ALL aus.]</span>
+<span class='PDMCnt'>3905</span> <span class='PDMInd'>  </span> 
+<span class='PDMCnt'>3906</span> <span class='PDMInd'>  </span> 
+<span class='PDMCnt'>3907</span> <span class='PDMInd'>  </span> <span class='PDMOper'>**</span><span class='PDMOper'>**</span><span class='PDMOper'>**</span><span class='PDMOper'>**</span><span class='PDMOper'>**</span><span class='PDMOper'>**</span><span class='PDMOper'>**</span><span class='PDMOper'>**</span><span class='PDMOper'>**</span><span class='PDMOper'>**</span><span class='PDMOper'>**</span><span class='PDMOper'>**</span><span class='PDMOper'>**</span><span class='PDMOper'>**</span><span class='PDMOper'>**</span><span class='PDMOper'>**</span><span class='PDMOper'>**</span><span class='PDMOper'>**</span><span class='PDMOper'>**</span><span class='PDMOper'>**</span><span class='PDMOper'>**</span><span class='PDMOper'>**</span><span class='PDMOper'>**</span><span class='PDMOper'>**</span>
+<span class='PDMCnt'>3908</span> <span class='PDMInd'> 1</span>  <span class='PDMOper'>#</span><span class='PDMResK'>DEFINE</span> <span class='PDMVar'>dcText_EN_H00</span><span class='PDMOper'>;</span>
+<span class='PDMCnt'>3909</span> <span class='PDMInd'> 2</span>   <span class='PDMStr'>[Run:]</span><span class='PDMOper'>+</span><span class='PDMVar'>0h0d0a</span><span class='PDMOper'>+</span><span class='PDMOper'>;</span>
+<span class='PDMCnt'>3910</span> <span class='PDMInd'> 2</span>   <span class='PDMStr'>[DO Convert_Pjx_2Bin IN Bin2Text.exe]</span><span class='PDMOper'>+</span><span class='PDMVar'>0h0d0a</span><span class='PDMOper'>+</span><span class='PDMOper'>;</span>
+<span class='PDMCnt'>3911</span> <span class='PDMInd'> 2</span>   <span class='PDMStr'>[ IDE interface for FoxBin2Prg, to be used with menu]</span><span class='PDMOper'>+</span><span class='PDMVar'>0h0D0A0D0A</span><span class='PDMOper'>+</span><span class='PDMOper'>;</span>
+<span class='PDMCnt'>3912</span> <span class='PDMInd'> 2</span>   <span class='PDMStr'>[DO Convert_Pjx_2Txt IN Bin2Text.exe]</span><span class='PDMOper'>+</span><span class='PDMVar'>0h0d0a</span><span class='PDMOper'>+</span><span class='PDMOper'>;</span>
+<span class='PDMCnt'>3913</span> <span class='PDMInd'> 2</span>   <span class='PDMStr'>[ IDE interface for FoxBin2Prg, to be used with menu]</span><span class='PDMOper'>+</span><span class='PDMVar'>0h0D0A0D0A</span><span class='PDMOper'>+</span><span class='PDMOper'>;</span>
+<span class='PDMCnt'>3914</span> <span class='PDMInd'> 2</span>   <span class='PDMStr'>[DO Pjx2Commit IN Bin2Text.exe]</span><span class='PDMOper'>+</span><span class='PDMVar'>0h0d0a</span><span class='PDMOper'>+</span><span class='PDMOper'>;</span>
+<span class='PDMCnt'>3915</span> <span class='PDMInd'> 2</span>   <span class='PDMStr'>[ Process all containied in all PJX in Folder to text]</span><span class='PDMOper'>+</span><span class='PDMVar'>0h0d0a</span><span class='PDMOper'>+</span><span class='PDMOper'>;</span>
+<span class='PDMCnt'>3916</span> <span class='PDMInd'> 2</span>   <span class='PDMStr'>[ and run "git commit -a"]</span><span class='PDMOper'>+</span><span class='PDMVar'>0h0D0A0D0A</span><span class='PDMOper'>+</span><span class='PDMOper'>;</span>
+<span class='PDMCnt'>3917</span> <span class='PDMInd'> 2</span>   <span class='PDMStr'>[DO Inter_Active IN RunB2T.prg]</span><span class='PDMOper'>+</span><span class='PDMStr'>" [OF Bin2Text.exe]"</span><span class='PDMOper'>+</span><span class='PDMVar'>0h0d0a</span><span class='PDMOper'>+</span><span class='PDMOper'>;</span>
+<span class='PDMCnt'>3918</span> <span class='PDMInd'> 2</span>   <span class='PDMStr'>[ Run settings form.]</span><span class='PDMOper'>+</span><span class='PDMVar'>0h0D0A0D0A</span><span class='PDMOper'>+</span><span class='PDMOper'>;</span>
+<span class='PDMCnt'>3919</span> <span class='PDMInd'> 2</span>   <span class='PDMStr'>[DO InitMenu IN RunB2T.prg]</span><span class='PDMOper'>+</span><span class='PDMVar'>0h0d0a</span><span class='PDMOper'>+</span><span class='PDMOper'>;</span>
+<span class='PDMCnt'>3920</span> <span class='PDMInd'> 2</span>   <span class='PDMStr'>[ Run menu]</span><span class='PDMOper'>+</span><span class='PDMVar'>0h0D0A0D0A</span><span class='PDMOper'>+</span><span class='PDMOper'>;</span>
+<span class='PDMCnt'>3921</span> <span class='PDMInd'> 2</span>   <span class='PDMStr'>[DO Convert_Array IN Bin2Text.exe]</span><span class='PDMOper'>+</span><span class='PDMVar'>0h0d0a</span><span class='PDMOper'>+</span><span class='PDMOper'>;</span>
+<span class='PDMCnt'>3922</span> <span class='PDMInd'> 2</span>   <span class='PDMStr'>[ IDE interface for FoxBin2Prg, to be used with an array of files.]</span><span class='PDMOper'>+</span><span class='PDMVar'>0h0D0A0D0A</span><span class='PDMOper'>+</span><span class='PDMOper'>;</span>
+<span class='PDMCnt'>3923</span> <span class='PDMInd'> 2</span>   <span class='PDMStr'>[DO Convert_File_2Bin IN RunB2T.prg]</span><span class='PDMOper'>+</span><span class='PDMStr'>" [OF Bin2Text.exe]"</span><span class='PDMOper'>+</span><span class='PDMVar'>0h0d0a</span><span class='PDMOper'>+</span><span class='PDMOper'>;</span>
+<span class='PDMCnt'>3924</span> <span class='PDMInd'> 2</span>   <span class='PDMStr'>[ IDE interface for FoxBin2Prg, pick a file or class to convert.]</span><span class='PDMOper'>+</span><span class='PDMVar'>0h0D0A0D0A</span><span class='PDMOper'>+</span><span class='PDMOper'>;</span>
+<span class='PDMCnt'>3925</span> <span class='PDMInd'> 2</span>   <span class='PDMStr'>[DO Convert_Class_2Bin IN RunB2T.prg]</span><span class='PDMOper'>+</span><span class='PDMStr'>" [OF Bin2Text.exe]"</span><span class='PDMOper'>+</span><span class='PDMVar'>0h0d0a</span><span class='PDMOper'>+</span><span class='PDMOper'>;</span>
+<span class='PDMCnt'>3926</span> <span class='PDMInd'> 2</span>   <span class='PDMStr'>[ IDE interface for FoxBin2Prg, pick a class to convert.]</span><span class='PDMOper'>+</span><span class='PDMVar'>0h0D0A0D0A</span><span class='PDMOper'>+</span><span class='PDMOper'>;</span>
+<span class='PDMCnt'>3927</span> <span class='PDMInd'> 2</span>   <span class='PDMStr'>[DO Convert_File_2Txt IN RunB2T.prg]</span><span class='PDMOper'>+</span><span class='PDMStr'>" [OF Bin2Text.exe]"</span><span class='PDMOper'>+</span><span class='PDMVar'>0h0d0a</span><span class='PDMOper'>+</span><span class='PDMOper'>;</span>
+<span class='PDMCnt'>3928</span> <span class='PDMInd'> 2</span>   <span class='PDMStr'>[ IDE interface for FoxBin2Prg, pick a file to convert.]</span><span class='PDMOper'>+</span><span class='PDMVar'>0h0D0A0D0A</span><span class='PDMOper'>+</span><span class='PDMOper'>;</span>
+<span class='PDMCnt'>3929</span> <span class='PDMInd'> 2</span>   <span class='PDMStr'>[DO Convert_Directory_2Bin IN RunB2T.prg]</span><span class='PDMOper'>+</span><span class='PDMStr'>" [OF Bin2Text.exe]"</span><span class='PDMOper'>+</span><span class='PDMVar'>0h0d0a</span><span class='PDMOper'>+</span><span class='PDMOper'>;</span>
+<span class='PDMCnt'>3930</span> <span class='PDMInd'> 2</span>   <span class='PDMStr'>[ IDE interface for FoxBin2Prg, pick a directory to convert.]</span><span class='PDMOper'>+</span><span class='PDMVar'>0h0d0a</span><span class='PDMOper'>+</span><span class='PDMOper'>;</span>
+<span class='PDMCnt'>3931</span> <span class='PDMInd'> 2</span>   <span class='PDMStr'>[DO Convert_Directory_2Txt IN RunB2T.prg]</span><span class='PDMOper'>+</span><span class='PDMStr'>" [OF Bin2Text.exe]"</span><span class='PDMOper'>+</span><span class='PDMVar'>0h0d0a</span><span class='PDMOper'>+</span><span class='PDMOper'>;</span>
+<span class='PDMCnt'>3932</span> <span class='PDMInd'> 2</span>   <span class='PDMStr'>[ IDE interface for FoxBin2Prg, pick a directory to convert.]</span>
+<span class='PDMCnt'>3933</span> <span class='PDMInd'>  </span> 
+<span class='PDMCnt'>3934</span> <span class='PDMInd'> 1</span>  <span class='PDMOper'>#</span><span class='PDMResK'>DEFINE</span> <span class='PDMVar'>dcText_EN_H01</span><span class='PDMOper'>;</span>
+<span class='PDMCnt'>3935</span> <span class='PDMInd'> 2</span>   <span class='PDMStr'>"DO Convert_Pjx_2Bin IN Bin2Text.exe [/?]|[nProjects[,nMode[,cFile]]]"</span><span class='PDMOper'>+</span><span class='PDMVar'>0h0d0a</span><span class='PDMOper'>+</span><span class='PDMOper'>;</span>
+<span class='PDMCnt'>3936</span> <span class='PDMInd'> 2</span>   <span class='PDMStr'>[ IDE interface for FoxBin2Prg;create project-binary, to be used with menu]</span><span class='PDMOper'>+</span><span class='PDMVar'>0h0d0a</span><span class='PDMOper'>+</span><span class='PDMOper'>;</span>
+<span class='PDMCnt'>3937</span> <span class='PDMInd'> 2</span>   <span class='PDMStr'>[ Parameter:]</span><span class='PDMOper'>+</span><span class='PDMVar'>0h0d0a</span><span class='PDMOper'>+</span><span class='PDMOper'>;</span>
+<span class='PDMCnt'>3938</span> <span class='PDMInd'> 2</span>   <span class='PDMStr'>[  /?        This help message]</span><span class='PDMOper'>+</span><span class='PDMVar'>0h0d0a</span><span class='PDMOper'>+</span><span class='PDMOper'>;</span>
+<span class='PDMCnt'>3939</span> <span class='PDMInd'> 2</span>   <span class='PDMStr'>[  nProjects Define which project to include.]</span><span class='PDMOper'>+</span><span class='PDMVar'>0h0d0a</span><span class='PDMOper'>+</span><span class='PDMOper'>;</span>
+<span class='PDMCnt'>3940</span> <span class='PDMInd'> 2</span>   <span class='PDMStr'>[            0 Select file interactive (Default)]</span><span class='PDMOper'>+</span><span class='PDMVar'>0h0d0a</span><span class='PDMOper'>+</span><span class='PDMOper'>;</span>
+<span class='PDMCnt'>3941</span> <span class='PDMInd'> 2</span>   <span class='PDMStr'>[            1 active project in IDE]</span><span class='PDMOper'>+</span><span class='PDMVar'>0h0d0a</span><span class='PDMOper'>+</span><span class='PDMOper'>;</span>
+<span class='PDMCnt'>3942</span> <span class='PDMInd'> 2</span>   <span class='PDMStr'>[            2 all projects open in IDE]</span><span class='PDMOper'>+</span><span class='PDMVar'>0h0d0a</span><span class='PDMOper'>+</span><span class='PDMOper'>;</span>
+<span class='PDMCnt'>3943</span> <span class='PDMInd'> 2</span>   <span class='PDMStr'>[            3 all projects in active path]</span><span class='PDMOper'>+</span><span class='PDMVar'>0h0d0a</span><span class='PDMOper'>+</span><span class='PDMOper'>;</span>
+<span class='PDMCnt'>3944</span> <span class='PDMInd'> 2</span>   <span class='PDMStr'>[  nMode     Mode of operation. Part of project to process]</span><span class='PDMOper'>+</span><span class='PDMVar'>0h0d0a</span><span class='PDMOper'>+</span><span class='PDMOper'>;</span>
+<span class='PDMCnt'>3945</span> <span class='PDMInd'> 2</span>   <span class='PDMStr'>[            source files (VCX, FRX, ...) or]</span><span class='PDMOper'>+</span><span class='PDMVar'>0h0d0a</span><span class='PDMOper'>+</span><span class='PDMOper'>;</span>
+<span class='PDMCnt'>3946</span> <span class='PDMInd'> 2</span>   <span class='PDMStr'>[            project files( (PJX)]</span><span class='PDMOper'>+</span><span class='PDMVar'>0h0d0a</span><span class='PDMOper'>+</span><span class='PDMOper'>;</span>
+<span class='PDMCnt'>3947</span> <span class='PDMInd'> 2</span>   <span class='PDMStr'>[            0 source-  and project files (Default)]</span><span class='PDMOper'>+</span><span class='PDMVar'>0h0d0a</span><span class='PDMOper'>+</span><span class='PDMOper'>;</span>
+<span class='PDMCnt'>3948</span> <span class='PDMInd'> 2</span>   <span class='PDMStr'>[            1 source files only (VCX, FRX, ...)]</span><span class='PDMOper'>+</span><span class='PDMVar'>0h0d0a</span><span class='PDMOper'>+</span><span class='PDMOper'>;</span>
+<span class='PDMCnt'>3949</span> <span class='PDMInd'> 2</span>   <span class='PDMStr'>[            2 project files only (PJX)]</span><span class='PDMOper'>+</span><span class='PDMVar'>0h0d0a</span><span class='PDMOper'>+</span><span class='PDMOper'>;</span>
+<span class='PDMCnt'>3950</span> <span class='PDMInd'> 2</span>   <span class='PDMStr'>[  cFile     File that method should run for.]</span><span class='PDMOper'>+</span><span class='PDMVar'>0h0d0a</span><span class='PDMOper'>+</span><span class='PDMOper'>;</span>
+<span class='PDMCnt'>3951</span> <span class='PDMInd'> 2</span>   <span class='PDMStr'>[All projects will be closed temporary.]</span><span class='PDMOper'>+</span><span class='PDMVar'>0h0d0a</span><span class='PDMOper'>+</span><span class='PDMOper'>;</span>
+<span class='PDMCnt'>3952</span> <span class='PDMInd'> 2</span>   <span class='PDMStr'>[This will use CLEAR ALL / CLOSE DATABASES ALL!]</span>
+<span class='PDMCnt'>3953</span> <span class='PDMInd'>  </span> 
+<span class='PDMCnt'>3954</span> <span class='PDMInd'> 1</span>  <span class='PDMOper'>#</span><span class='PDMResK'>DEFINE</span> <span class='PDMVar'>dcText_EN_H01_txt</span><span class='PDMOper'>;</span>
+<span class='PDMCnt'>3955</span> <span class='PDMInd'> 2</span>   <span class='PDMStr'>"DO Convert_Pjx_2Txt IN Bin2Text.exe [/?]|[nProjects[,nMode[,cFile]]]"</span><span class='PDMOper'>+</span><span class='PDMVar'>0h0d0a</span><span class='PDMOper'>+</span><span class='PDMOper'>;</span>
+<span class='PDMCnt'>3956</span> <span class='PDMInd'> 2</span>   <span class='PDMStr'>[ IDE interface for FoxBin2Prg; create text from project, to be used with menu]</span><span class='PDMOper'>+</span><span class='PDMVar'>0h0d0a</span><span class='PDMOper'>+</span><span class='PDMOper'>;</span>
+<span class='PDMCnt'>3957</span> <span class='PDMInd'> 2</span>   <span class='PDMStr'>[ Parameter:]</span><span class='PDMOper'>+</span><span class='PDMVar'>0h0d0a</span><span class='PDMOper'>+</span><span class='PDMOper'>;</span>
+<span class='PDMCnt'>3958</span> <span class='PDMInd'> 2</span>   <span class='PDMStr'>[  /?        This help message]</span><span class='PDMOper'>+</span><span class='PDMVar'>0h0d0a</span><span class='PDMOper'>+</span><span class='PDMOper'>;</span>
+<span class='PDMCnt'>3959</span> <span class='PDMInd'> 2</span>   <span class='PDMStr'>[  nProjects Define which project to include.]</span><span class='PDMOper'>+</span><span class='PDMVar'>0h0d0a</span><span class='PDMOper'>+</span><span class='PDMOper'>;</span>
+<span class='PDMCnt'>3960</span> <span class='PDMInd'> 2</span>   <span class='PDMStr'>[            0 Select file interactive (Default)]</span><span class='PDMOper'>+</span><span class='PDMVar'>0h0d0a</span><span class='PDMOper'>+</span><span class='PDMOper'>;</span>
+<span class='PDMCnt'>3961</span> <span class='PDMInd'> 2</span>   <span class='PDMStr'>[            1 active project in IDE]</span><span class='PDMOper'>+</span><span class='PDMVar'>0h0d0a</span><span class='PDMOper'>+</span><span class='PDMOper'>;</span>
+<span class='PDMCnt'>3962</span> <span class='PDMInd'> 2</span>   <span class='PDMStr'>[            2 all projects open in IDE]</span><span class='PDMOper'>+</span><span class='PDMVar'>0h0d0a</span><span class='PDMOper'>+</span><span class='PDMOper'>;</span>
+<span class='PDMCnt'>3963</span> <span class='PDMInd'> 2</span>   <span class='PDMStr'>[            3 all projects in active path]</span><span class='PDMOper'>+</span><span class='PDMVar'>0h0d0a</span><span class='PDMOper'>+</span><span class='PDMOper'>;</span>
+<span class='PDMCnt'>3964</span> <span class='PDMInd'> 2</span>   <span class='PDMStr'>[  nMode     Mode of operation. Part of project to process]</span><span class='PDMOper'>+</span><span class='PDMVar'>0h0d0a</span><span class='PDMOper'>+</span><span class='PDMOper'>;</span>
+<span class='PDMCnt'>3965</span> <span class='PDMInd'> 2</span>   <span class='PDMStr'>[            source files (VCX, FRX, ...) or]</span><span class='PDMOper'>+</span><span class='PDMVar'>0h0d0a</span><span class='PDMOper'>+</span><span class='PDMOper'>;</span>
+<span class='PDMCnt'>3966</span> <span class='PDMInd'> 2</span>   <span class='PDMStr'>[            project files( (PJX)]</span><span class='PDMOper'>+</span><span class='PDMVar'>0h0d0a</span><span class='PDMOper'>+</span><span class='PDMOper'>;</span>
+<span class='PDMCnt'>3967</span> <span class='PDMInd'> 2</span>   <span class='PDMStr'>[            0 source-  and project files (Default)]</span><span class='PDMOper'>+</span><span class='PDMVar'>0h0d0a</span><span class='PDMOper'>+</span><span class='PDMOper'>;</span>
+<span class='PDMCnt'>3968</span> <span class='PDMInd'> 2</span>   <span class='PDMStr'>[            1 source files only (VCX, FRX, ...)]</span><span class='PDMOper'>+</span><span class='PDMVar'>0h0d0a</span><span class='PDMOper'>+</span><span class='PDMOper'>;</span>
+<span class='PDMCnt'>3969</span> <span class='PDMInd'> 2</span>   <span class='PDMStr'>[            2 project files only (PJX)]</span><span class='PDMOper'>+</span><span class='PDMVar'>0h0d0a</span><span class='PDMOper'>+</span><span class='PDMOper'>;</span>
+<span class='PDMCnt'>3970</span> <span class='PDMInd'> 2</span>   <span class='PDMStr'>[  cFile     File that method should run for.]</span><span class='PDMOper'>+</span><span class='PDMVar'>0h0d0a</span><span class='PDMOper'>+</span><span class='PDMOper'>;</span>
+<span class='PDMCnt'>3971</span> <span class='PDMInd'> 2</span>   <span class='PDMStr'>[All projects will be closed temporary.]</span><span class='PDMOper'>+</span><span class='PDMVar'>0h0d0a</span><span class='PDMOper'>+</span><span class='PDMOper'>;</span>
+<span class='PDMCnt'>3972</span> <span class='PDMInd'> 2</span>   <span class='PDMStr'>[This will use CLEAR ALL / CLOSE DATABASES ALL!]</span>
+<span class='PDMCnt'>3973</span> <span class='PDMInd'>  </span> 
+<span class='PDMCnt'>3974</span> <span class='PDMInd'> 1</span>  <span class='PDMOper'>#</span><span class='PDMResK'>DEFINE</span> <span class='PDMVar'>dcText_EN_H02</span><span class='PDMOper'>;</span>
+<span class='PDMCnt'>3975</span> <span class='PDMInd'> 2</span>   <span class='PDMStr'>"DO Convert_Pjx_2Bin IN Bin2Text.exe [/?]|[nProjects[,nMode[,cFile]]]"</span><span class='PDMOper'>+</span><span class='PDMVar'>0h0D0A0D0A</span><span class='PDMOper'>+</span><span class='PDMOper'>;</span>
+<span class='PDMCnt'>3976</span> <span class='PDMInd'> 2</span>   <span class='PDMStr'>[Run from IDE only.]</span>
+<span class='PDMCnt'>3977</span> <span class='PDMInd'>  </span> 
+<span class='PDMCnt'>3978</span> <span class='PDMInd'> 1</span>  <span class='PDMOper'>#</span><span class='PDMResK'>DEFINE</span> <span class='PDMVar'>dcText_EN_H02_txt</span><span class='PDMOper'>;</span>
+<span class='PDMCnt'>3979</span> <span class='PDMInd'> 2</span>   <span class='PDMStr'>"DO Convert_Pjx_2Txt IN Bin2Text.exe [/?]|[nProjects[,nMode[,cFile]]]"</span><span class='PDMOper'>+</span><span class='PDMVar'>0h0D0A0D0A</span><span class='PDMOper'>+</span><span class='PDMOper'>;</span>
+<span class='PDMCnt'>3980</span> <span class='PDMInd'> 2</span>   <span class='PDMStr'>[Run from IDE only.]</span>
+<span class='PDMCnt'>3981</span> <span class='PDMInd'>  </span> 
+<span class='PDMCnt'>3982</span> <span class='PDMInd'> 1</span>  <span class='PDMOper'>#</span><span class='PDMResK'>DEFINE</span> <span class='PDMVar'>dcText_EN_H03</span><span class='PDMOper'>;</span>
+<span class='PDMCnt'>3983</span> <span class='PDMInd'> 2</span>   <span class='PDMStr'>"DO Pjx2Commit IN Bin2Text.exe [/?]|[lAll]"</span><span class='PDMOper'>+</span><span class='PDMVar'>0h0d0a</span><span class='PDMOper'>+</span><span class='PDMOper'>;</span>
+<span class='PDMCnt'>3984</span> <span class='PDMInd'> 2</span>   <span class='PDMStr'>[ Process all containied in all PJX in Folder to text]</span><span class='PDMOper'>+</span><span class='PDMVar'>0h0d0a</span><span class='PDMOper'>+</span><span class='PDMOper'>;</span>
+<span class='PDMCnt'>3985</span> <span class='PDMInd'> 2</span>   <span class='PDMStr'>[ and run "git add -A" + "git commit"]</span><span class='PDMOper'>+</span><span class='PDMVar'>0h0d0a</span><span class='PDMOper'>+</span><span class='PDMOper'>;</span>
+<span class='PDMCnt'>3986</span> <span class='PDMInd'> 2</span>   <span class='PDMStr'>[ Parameter:]</span><span class='PDMOper'>+</span><span class='PDMVar'>0h0d0a</span><span class='PDMOper'>+</span><span class='PDMOper'>;</span>
+<span class='PDMCnt'>3987</span> <span class='PDMInd'> 2</span>   <span class='PDMStr'>[  /?        This help message]</span><span class='PDMOper'>+</span><span class='PDMVar'>0h0d0a</span><span class='PDMOper'>+</span><span class='PDMOper'>;</span>
+<span class='PDMCnt'>3988</span> <span class='PDMInd'> 2</span>   <span class='PDMStr'>[  lAll      Process files]</span><span class='PDMOper'>+</span><span class='PDMVar'>0h0d0a</span><span class='PDMOper'>+</span><span class='PDMOper'>;</span>
+<span class='PDMCnt'>3989</span> <span class='PDMInd'> 2</span>   <span class='PDMStr'>[            .T. process all projects in path]</span><span class='PDMOper'>+</span><span class='PDMVar'>0h0d0a</span><span class='PDMOper'>+</span><span class='PDMOper'>;</span>
+<span class='PDMCnt'>3990</span> <span class='PDMInd'> 2</span>   <span class='PDMStr'>[            .F. process active project (default)]</span>
+<span class='PDMCnt'>3991</span> <span class='PDMInd'>  </span> 
+<span class='PDMCnt'>3992</span> <span class='PDMInd'> 1</span>  <span class='PDMOper'>#</span><span class='PDMResK'>DEFINE</span> <span class='PDMVar'>dcText_EN_H04</span><span class='PDMOper'>;</span>
+<span class='PDMCnt'>3993</span> <span class='PDMInd'> 2</span>   <span class='PDMStr'>"DO Pjx2Commit IN Bin2Text.exe [/?]"</span><span class='PDMOper'>+</span><span class='PDMVar'>0h0D0A0D0A</span><span class='PDMOper'>+</span><span class='PDMOper'>;</span>
+<span class='PDMCnt'>3994</span> <span class='PDMInd'> 2</span>   <span class='PDMStr'>[Run from IDE only.]</span>
+<span class='PDMCnt'>3995</span> <span class='PDMInd'>  </span> 
+<span class='PDMCnt'>3996</span> <span class='PDMInd'> 1</span>  <span class='PDMOper'>#</span><span class='PDMResK'>DEFINE</span> <span class='PDMVar'>dcText_EN_H05</span><span class='PDMOper'>;</span>
+<span class='PDMCnt'>3997</span> <span class='PDMInd'> 2</span>   <span class='PDMStr'>"DO InitMenu IN Bin2Text.exe [/?]|[tcPath[,tlNoMenu]]"</span><span class='PDMOper'>+</span><span class='PDMVar'>0h0d0a</span><span class='PDMOper'>+</span><span class='PDMOper'>;</span>
+<span class='PDMCnt'>3998</span> <span class='PDMInd'> 2</span>   <span class='PDMStr'>[ Run menu]</span><span class='PDMOper'>+</span><span class='PDMVar'>0h0d0a</span><span class='PDMOper'>+</span><span class='PDMOper'>;</span>
+<span class='PDMCnt'>3999</span> <span class='PDMInd'> 2</span>   <span class='PDMStr'>[ Parameter:]</span><span class='PDMOper'>+</span><span class='PDMVar'>0h0d0a</span><span class='PDMOper'>+</span><span class='PDMOper'>;</span>
+<span class='PDMCnt'>4000</span> <span class='PDMInd'> 2</span>   <span class='PDMStr'>[  /?        This help message]</span><span class='PDMOper'>+</span><span class='PDMVar'>0h0d0a</span><span class='PDMOper'>+</span><span class='PDMOper'>;</span>
+<span class='PDMCnt'>4001</span> <span class='PDMInd'> 2</span>   <span class='PDMStr'>[  tcPath    Path to the settings file.]</span><span class='PDMOper'>+</span><span class='PDMVar'>0h0d0a</span><span class='PDMOper'>+</span><span class='PDMOper'>;</span>
+<span class='PDMCnt'>4002</span> <span class='PDMInd'> 2</span>   <span class='PDMStr'>[  tlNoMenu  Do not start menu.]</span>
+<span class='PDMCnt'>4003</span> <span class='PDMInd'>  </span> 
+<span class='PDMCnt'>4004</span> <span class='PDMInd'> 1</span>  <span class='PDMOper'>#</span><span class='PDMResK'>DEFINE</span> <span class='PDMVar'>dcText_EN_H06</span><span class='PDMOper'>;</span>
+<span class='PDMCnt'>4005</span> <span class='PDMInd'> 2</span>   <span class='PDMStr'>"DO InitMenu IN Bin2Text.exe [/?]"</span><span class='PDMOper'>+</span><span class='PDMVar'>0h0D0A0D0A</span><span class='PDMOper'>+</span><span class='PDMOper'>;</span>
+<span class='PDMCnt'>4006</span> <span class='PDMInd'> 2</span>   <span class='PDMStr'>[Run from IDE only.]</span>
+<span class='PDMCnt'>4007</span> <span class='PDMInd'>  </span> 
+<span class='PDMCnt'>4008</span> <span class='PDMInd'> 1</span>  <span class='PDMOper'>#</span><span class='PDMResK'>DEFINE</span> <span class='PDMVar'>dcText_EN_H07</span><span class='PDMOper'>;</span>
+<span class='PDMCnt'>4009</span> <span class='PDMInd'> 2</span>   <span class='PDMStr'>"DO Inter_Active IN Bin2Text.exe [/?]"</span><span class='PDMOper'>+</span><span class='PDMVar'>0h0d0a</span><span class='PDMOper'>+</span><span class='PDMOper'>;</span>
+<span class='PDMCnt'>4010</span> <span class='PDMInd'> 2</span>   <span class='PDMStr'>[ Run settings form]</span><span class='PDMOper'>+</span><span class='PDMVar'>0h0d0a</span><span class='PDMOper'>+</span><span class='PDMOper'>;</span>
+<span class='PDMCnt'>4011</span> <span class='PDMInd'> 2</span>   <span class='PDMStr'>[ Parameter:]</span><span class='PDMOper'>+</span><span class='PDMVar'>0h0d0a</span><span class='PDMOper'>+</span><span class='PDMOper'>;</span>
+<span class='PDMCnt'>4012</span> <span class='PDMInd'> 2</span>   <span class='PDMStr'>[  /?        This help message]</span>
+<span class='PDMCnt'>4013</span> <span class='PDMInd'>  </span> 
+<span class='PDMCnt'>4014</span> <span class='PDMInd'> 1</span>  <span class='PDMOper'>#</span><span class='PDMResK'>DEFINE</span> <span class='PDMVar'>dcText_EN_H08</span><span class='PDMOper'>;</span>
+<span class='PDMCnt'>4015</span> <span class='PDMInd'> 2</span>   <span class='PDMStr'>"DO Inter_Active IN Bin2Text.exe [/?]"</span><span class='PDMOper'>+</span><span class='PDMVar'>0h0D0A0D0A</span><span class='PDMOper'>+</span><span class='PDMOper'>;</span>
+<span class='PDMCnt'>4016</span> <span class='PDMInd'> 2</span>   <span class='PDMStr'>[Run from IDE only.]</span>
+<span class='PDMCnt'>4017</span> <span class='PDMInd'>  </span> 
+<span class='PDMCnt'>4018</span> <span class='PDMInd'> 1</span>  <span class='PDMOper'>#</span><span class='PDMResK'>DEFINE</span> <span class='PDMVar'>dcText_EN_H09</span><span class='PDMOper'>;</span>
+<span class='PDMCnt'>4019</span> <span class='PDMInd'> 2</span>   <span class='PDMStr'>"DO Convert_Array IN Bin2Text.exe [/?]|lText2Bin,cMode,@aFiles"</span><span class='PDMOper'>+</span><span class='PDMVar'>0h0d0a</span><span class='PDMOper'>+</span><span class='PDMOper'>;</span>
+<span class='PDMCnt'>4020</span> <span class='PDMInd'> 2</span>   <span class='PDMStr'>[ IDE interface for FoxBin2Prg, to be used with menu]</span><span class='PDMOper'>+</span><span class='PDMVar'>0h0d0a</span><span class='PDMOper'>+</span><span class='PDMOper'>;</span>
+<span class='PDMCnt'>4021</span> <span class='PDMInd'> 2</span>   <span class='PDMStr'>[ Parameter:]</span><span class='PDMOper'>+</span><span class='PDMVar'>0h0d0a</span><span class='PDMOper'>+</span><span class='PDMOper'>;</span>
+<span class='PDMCnt'>4022</span> <span class='PDMInd'> 2</span>   <span class='PDMStr'>[  /?        This help message]</span><span class='PDMOper'>+</span><span class='PDMVar'>0h0d0a</span><span class='PDMOper'>+</span><span class='PDMOper'>;</span>
+<span class='PDMCnt'>4023</span> <span class='PDMInd'> 2</span>   <span class='PDMStr'>[  aFiles    Array with files]</span><span class='PDMOper'>+</span><span class='PDMVar'>0h0d0a</span><span class='PDMOper'>+</span><span class='PDMOper'>;</span>
+<span class='PDMCnt'>4024</span> <span class='PDMInd'> 2</span>   <span class='PDMStr'>[            One column, full qualified filename of binary]</span><span class='PDMOper'>+</span><span class='PDMVar'>0h0d0a</span><span class='PDMOper'>+</span><span class='PDMOper'>;</span>
+<span class='PDMCnt'>4025</span> <span class='PDMInd'> 2</span>   <span class='PDMStr'>[            Optional second column, if first colum is a project, projecthook.]</span><span class='PDMOper'>+</span><span class='PDMVar'>0h0d0a</span><span class='PDMOper'>+</span><span class='PDMOper'>;</span>
+<span class='PDMCnt'>4026</span> <span class='PDMInd'> 2</span>   <span class='PDMStr'>[  lText2Bin If true, create binaries,]</span><span class='PDMOper'>+</span><span class='PDMVar'>0h0d0a</span><span class='PDMOper'>+</span><span class='PDMOper'>;</span>
+<span class='PDMCnt'>4027</span> <span class='PDMInd'> 2</span>   <span class='PDMStr'>[            if false create text files.(Default)]</span><span class='PDMOper'>+</span><span class='PDMVar'>0h0d0a</span><span class='PDMOper'>+</span><span class='PDMOper'>;</span>
+<span class='PDMCnt'>4028</span> <span class='PDMInd'> 2</span>   <span class='PDMStr'>[  cMode     Mode for project operation.]</span><span class='PDMOper'>+</span><span class='PDMVar'>0h0d0a</span><span class='PDMOper'>+</span><span class='PDMOper'>;</span>
+<span class='PDMCnt'>4029</span> <span class='PDMInd'> 2</span>   <span class='PDMStr'>[            Optional in FoxBin2PRG style]</span><span class='PDMOper'>+</span><span class='PDMVar'>0h0d0a</span><span class='PDMOper'>+</span><span class='PDMOper'>;</span>
+<span class='PDMCnt'>4030</span> <span class='PDMInd'> 2</span>   <span class='PDMStr'>[            If not set a pjx will run in just-a-file mode]</span><span class='PDMOper'>+</span><span class='PDMVar'>0h0d0a</span><span class='PDMOper'>+</span><span class='PDMOper'>;</span>
+<span class='PDMCnt'>4031</span> <span class='PDMInd'> 2</span>   <span class='PDMStr'>[This will not clear any CLASSLIB or free project hooks.]</span>
+<span class='PDMCnt'>4032</span> <span class='PDMInd'>  </span> 
+<span class='PDMCnt'>4033</span> <span class='PDMInd'> 1</span>  <span class='PDMOper'>#</span><span class='PDMResK'>DEFINE</span> <span class='PDMVar'>dcText_EN_H10</span><span class='PDMOper'>;</span>
+<span class='PDMCnt'>4034</span> <span class='PDMInd'> 2</span>   <span class='PDMStr'>"DO Convert_Array IN Bin2Text.exe [/?]|lText2Bin,cMode,@aFiles"</span><span class='PDMOper'>+</span><span class='PDMVar'>0h0D0A0D0A</span><span class='PDMOper'>+</span><span class='PDMOper'>;</span>
+<span class='PDMCnt'>4035</span> <span class='PDMInd'> 2</span>   <span class='PDMStr'>[Run from IDE only.]</span>
+<span class='PDMCnt'>4036</span> <span class='PDMInd'>  </span> 
+<span class='PDMCnt'>4037</span> <span class='PDMInd'> 1</span>  <span class='PDMOper'>#</span><span class='PDMResK'>DEFINE</span> <span class='PDMVar'>dcText_EN_H11_Class</span><span class='PDMOper'>;</span>
+<span class='PDMCnt'>4038</span> <span class='PDMInd'> 2</span>   <span class='PDMStr'>"DO Convert_Class_2Bin IN Bin2Text.exe [/?]|[tlSingleClassLib[,tlTextFile]]"</span><span class='PDMOper'>+</span><span class='PDMVar'>0h0d0a</span><span class='PDMOper'>+</span><span class='PDMOper'>;</span>
+<span class='PDMCnt'>4039</span> <span class='PDMInd'> 2</span>   <span class='PDMStr'>[ IDE interface for FoxBin2Prg, pick a class to transform to binary.]</span><span class='PDMOper'>+</span><span class='PDMVar'>0h0d0a</span><span class='PDMOper'>+</span><span class='PDMOper'>;</span>
+<span class='PDMCnt'>4040</span> <span class='PDMInd'> 2</span>   <span class='PDMStr'>[ Parameter:]</span><span class='PDMOper'>+</span><span class='PDMVar'>0h0d0a</span><span class='PDMOper'>+</span><span class='PDMOper'>;</span>
+<span class='PDMCnt'>4041</span> <span class='PDMInd'> 2</span>   <span class='PDMStr'>[  /?               This help message]</span><span class='PDMOper'>+</span><span class='PDMVar'>0h0d0a</span><span class='PDMOper'>+</span><span class='PDMOper'>;</span>
+<span class='PDMCnt'>4042</span> <span class='PDMInd'> 2</span>   <span class='PDMStr'>[  tlSingleClassLib Creare a single lib with  the class. (Or add to existing library)]</span><span class='PDMOper'>+</span><span class='PDMVar'>0h0d0a</span><span class='PDMOper'>+</span><span class='PDMOper'>;</span>
+<span class='PDMCnt'>4043</span> <span class='PDMInd'> 2</span>   <span class='PDMStr'>[  tlTextFile       Select text file (Or class).]</span><span class='PDMOper'>+</span><span class='PDMVar'>0h0d0a</span><span class='PDMOper'>+</span><span class='PDMOper'>;</span>
+<span class='PDMCnt'>4044</span> <span class='PDMInd'> 2</span>   <span class='PDMStr'>[This will use CLEAR ALL / CLOSE DATABASES ALL!]</span>
+<span class='PDMCnt'>4045</span> <span class='PDMInd'>  </span> 
+<span class='PDMCnt'>4046</span> <span class='PDMInd'> 1</span>  <span class='PDMOper'>#</span><span class='PDMResK'>DEFINE</span> <span class='PDMVar'>dcText_EN_H11</span><span class='PDMOper'>;</span>
+<span class='PDMCnt'>4047</span> <span class='PDMInd'> 2</span>   <span class='PDMStr'>"DO Convert_File_2Bin IN Bin2Text.exe [/?]|[cFile|cFile,cClass]"</span><span class='PDMOper'>+</span><span class='PDMVar'>0h0d0a</span><span class='PDMOper'>+</span><span class='PDMOper'>;</span>
+<span class='PDMCnt'>4048</span> <span class='PDMInd'> 2</span>   <span class='PDMStr'>[ IDE interface for FoxBin2Prg, pick a file to transform to binary.]</span><span class='PDMOper'>+</span><span class='PDMVar'>0h0d0a</span><span class='PDMOper'>+</span><span class='PDMOper'>;</span>
+<span class='PDMCnt'>4049</span> <span class='PDMInd'> 2</span>   <span class='PDMStr'>[ Parameter:]</span><span class='PDMOper'>+</span><span class='PDMVar'>0h0d0a</span><span class='PDMOper'>+</span><span class='PDMOper'>;</span>
+<span class='PDMCnt'>4050</span> <span class='PDMInd'> 2</span>   <span class='PDMStr'>[  /?            This help message]</span><span class='PDMOper'>+</span><span class='PDMVar'>0h0d0a</span><span class='PDMOper'>+</span><span class='PDMOper'>;</span>
+<span class='PDMCnt'>4051</span> <span class='PDMInd'> 2</span>   <span class='PDMStr'>[  cFile         File that method should run for.]</span><span class='PDMOper'>+</span><span class='PDMVar'>0h0d0a</span><span class='PDMOper'>+</span><span class='PDMOper'>;</span>
+<span class='PDMCnt'>4052</span> <span class='PDMInd'> 2</span>   <span class='PDMStr'>[  cClass        Class of cFile for lSingleClass.]</span><span class='PDMOper'>+</span><span class='PDMVar'>0h0d0a</span><span class='PDMOper'>+</span><span class='PDMOper'>;</span>
+<span class='PDMCnt'>4053</span> <span class='PDMInd'> 2</span>   <span class='PDMStr'>[This will use CLEAR ALL / CLOSE DATABASES ALL!]</span>
+<span class='PDMCnt'>4054</span> <span class='PDMInd'>  </span> 
+<span class='PDMCnt'>4055</span> <span class='PDMInd'> 1</span>  <span class='PDMOper'>#</span><span class='PDMResK'>DEFINE</span> <span class='PDMVar'>dcText_EN_H11_txt</span><span class='PDMOper'>;</span>
+<span class='PDMCnt'>4056</span> <span class='PDMInd'> 2</span>   <span class='PDMStr'>"DO Convert_File_2Txt IN Bin2Text.exe [/?]|[lSingleClass[,cFile|,cFile,cClass]]"</span><span class='PDMOper'>+</span><span class='PDMVar'>0h0d0a</span><span class='PDMOper'>+</span><span class='PDMOper'>;</span>
+<span class='PDMCnt'>4057</span> <span class='PDMInd'> 2</span>   <span class='PDMStr'>[ IDE interface for FoxBin2Prg, pick a file or class to transform to text.]</span><span class='PDMOper'>+</span><span class='PDMVar'>0h0d0a</span><span class='PDMOper'>+</span><span class='PDMOper'>;</span>
+<span class='PDMCnt'>4058</span> <span class='PDMInd'> 2</span>   <span class='PDMStr'>[ Parameter:]</span><span class='PDMOper'>+</span><span class='PDMVar'>0h0d0a</span><span class='PDMOper'>+</span><span class='PDMOper'>;</span>
+<span class='PDMCnt'>4059</span> <span class='PDMInd'> 2</span>   <span class='PDMStr'>[  /?            This help message]</span><span class='PDMOper'>+</span><span class='PDMVar'>0h0d0a</span><span class='PDMOper'>+</span><span class='PDMOper'>;</span>
+<span class='PDMCnt'>4060</span> <span class='PDMInd'> 2</span>   <span class='PDMStr'>[  lSingleClass  Select a class to transform.]</span><span class='PDMOper'>+</span><span class='PDMVar'>0h0d0a</span><span class='PDMOper'>+</span><span class='PDMOper'>;</span>
+<span class='PDMCnt'>4061</span> <span class='PDMInd'> 2</span>   <span class='PDMStr'>[  cFile         File that method should run for.]</span><span class='PDMOper'>+</span><span class='PDMVar'>0h0d0a</span><span class='PDMOper'>+</span><span class='PDMOper'>;</span>
+<span class='PDMCnt'>4062</span> <span class='PDMInd'> 2</span>   <span class='PDMStr'>[  cClass        Class of cFile for lSingleClass.]</span><span class='PDMOper'>+</span><span class='PDMVar'>0h0d0a</span><span class='PDMOper'>+</span><span class='PDMOper'>;</span>
+<span class='PDMCnt'>4063</span> <span class='PDMInd'> 2</span>   <span class='PDMStr'>[This will use CLEAR ALL / CLOSE DATABASES ALL!]</span>
+<span class='PDMCnt'>4064</span> <span class='PDMInd'>  </span> 
+<span class='PDMCnt'>4065</span> <span class='PDMInd'> 1</span>  <span class='PDMOper'>#</span><span class='PDMResK'>DEFINE</span> <span class='PDMVar'>dcText_EN_H12</span><span class='PDMOper'>;</span>
+<span class='PDMCnt'>4066</span> <span class='PDMInd'> 2</span>   <span class='PDMStr'>"DO Convert_Directory_2Bin IN Bin2Text.exe [/?]|[tcDirectory]"</span><span class='PDMOper'>+</span><span class='PDMVar'>0h0d0a</span><span class='PDMOper'>+</span><span class='PDMOper'>;</span>
+<span class='PDMCnt'>4067</span> <span class='PDMInd'> 2</span>   <span class='PDMStr'>[ IDE interface for FoxBin2Prg, pick a directory transform to binary.]</span><span class='PDMOper'>+</span><span class='PDMVar'>0h0d0a</span><span class='PDMOper'>+</span><span class='PDMOper'>;</span>
+<span class='PDMCnt'>4068</span> <span class='PDMInd'> 2</span>   <span class='PDMStr'>[ Parameter:]</span><span class='PDMOper'>+</span><span class='PDMVar'>0h0d0a</span><span class='PDMOper'>+</span><span class='PDMOper'>;</span>
+<span class='PDMCnt'>4069</span> <span class='PDMInd'> 2</span>   <span class='PDMStr'>[  /?            This help message]</span><span class='PDMOper'>+</span><span class='PDMVar'>0h0d0a</span><span class='PDMOper'>+</span><span class='PDMOper'>;</span>
+<span class='PDMCnt'>4070</span> <span class='PDMInd'> 2</span>   <span class='PDMStr'>[  lText2Bin     If true, create binaries,]</span><span class='PDMOper'>+</span><span class='PDMVar'>0h0d0a</span><span class='PDMOper'>+</span><span class='PDMOper'>;</span>
+<span class='PDMCnt'>4071</span> <span class='PDMInd'> 2</span>   <span class='PDMStr'>[                if false create text files.(Default)]</span><span class='PDMOper'>+</span><span class='PDMVar'>0h0d0a</span><span class='PDMOper'>+</span><span class='PDMOper'>;</span>
+<span class='PDMCnt'>4072</span> <span class='PDMInd'> 2</span>   <span class='PDMStr'>[                Optional in FoxBin2PRG style]</span><span class='PDMOper'>+</span><span class='PDMVar'>0h0d0a</span><span class='PDMOper'>+</span><span class='PDMOper'>;</span>
+<span class='PDMCnt'>4073</span> <span class='PDMInd'> 2</span>   <span class='PDMStr'>[  tcDirectory   Folder.]</span><span class='PDMOper'>+</span><span class='PDMVar'>0h0d0a</span><span class='PDMOper'>+</span><span class='PDMOper'>;</span>
+<span class='PDMCnt'>4074</span> <span class='PDMInd'> 2</span>   <span class='PDMStr'>[This will use CLEAR ALL / CLOSE DATABASES ALL!]</span>
+<span class='PDMCnt'>4075</span> <span class='PDMInd'>  </span> 
+<span class='PDMCnt'>4076</span> <span class='PDMInd'> 1</span>  <span class='PDMOper'>#</span><span class='PDMResK'>DEFINE</span> <span class='PDMVar'>dcText_EN_H12_txt</span><span class='PDMOper'>;</span>
+<span class='PDMCnt'>4077</span> <span class='PDMInd'> 2</span>   <span class='PDMStr'>"DO Convert_Directory_2Txt IN Bin2Text.exe [/?]|[tcDirectory]"</span><span class='PDMOper'>+</span><span class='PDMVar'>0h0d0a</span><span class='PDMOper'>+</span><span class='PDMOper'>;</span>
+<span class='PDMCnt'>4078</span> <span class='PDMInd'> 2</span>   <span class='PDMStr'>[ IDE interface for FoxBin2Prg, pick a directory transform the files to text.]</span><span class='PDMOper'>+</span><span class='PDMVar'>0h0d0a</span><span class='PDMOper'>+</span><span class='PDMOper'>;</span>
+<span class='PDMCnt'>4079</span> <span class='PDMInd'> 2</span>   <span class='PDMStr'>[ Parameter:]</span><span class='PDMOper'>+</span><span class='PDMVar'>0h0d0a</span><span class='PDMOper'>+</span><span class='PDMOper'>;</span>
+<span class='PDMCnt'>4080</span> <span class='PDMInd'> 2</span>   <span class='PDMStr'>[  /?            This help message]</span><span class='PDMOper'>+</span><span class='PDMVar'>0h0d0a</span><span class='PDMOper'>+</span><span class='PDMOper'>;</span>
+<span class='PDMCnt'>4081</span> <span class='PDMInd'> 2</span>   <span class='PDMStr'>[  lText2Bin     If true, create binaries,]</span><span class='PDMOper'>+</span><span class='PDMVar'>0h0d0a</span><span class='PDMOper'>+</span><span class='PDMOper'>;</span>
+<span class='PDMCnt'>4082</span> <span class='PDMInd'> 2</span>   <span class='PDMStr'>[                if false create text files.(Default)]</span><span class='PDMOper'>+</span><span class='PDMVar'>0h0d0a</span><span class='PDMOper'>+</span><span class='PDMOper'>;</span>
+<span class='PDMCnt'>4083</span> <span class='PDMInd'> 2</span>   <span class='PDMStr'>[                Optional in FoxBin2PRG style]</span><span class='PDMOper'>+</span><span class='PDMVar'>0h0d0a</span><span class='PDMOper'>+</span><span class='PDMOper'>;</span>
+<span class='PDMCnt'>4084</span> <span class='PDMInd'> 2</span>   <span class='PDMStr'>[  tcDirectory   Folder.]</span><span class='PDMOper'>+</span><span class='PDMVar'>0h0d0a</span><span class='PDMOper'>+</span><span class='PDMOper'>;</span>
+<span class='PDMCnt'>4085</span> <span class='PDMInd'> 2</span>   <span class='PDMStr'>[This will use CLEAR ALL / CLOSE DATABASES ALL!]</span>
+<span class='PDMCnt'>4086</span> <span class='PDMInd'>  </span> 
+<span class='PDMCnt'>4087</span> <span class='PDMInd'> 1</span>  <span class='PDMResK'>LPARAMETERS</span><span class='PDMOper'>;</span>
+<span class='PDMCnt'>4088</span> <span class='PDMInd'> 2</span>   <span class='PDMVar'>tnHelp</span>
+<span class='PDMCnt'>4089</span> <span class='PDMInd'>  </span> 
+<span class='PDMCnt'>4090</span> <span class='PDMInd'>  </span> 
+<span class='PDMCnt'>4102</span> <span class='PDMInd'>  </span> 
+<span class='PDMCnt'>4103</span> <span class='PDMInd'> 1</span>  <span class='PDMVar'>_SCREEN</span><span class='PDMOper'>.</span><span class='PDMResM'>SHOW</span><span class='PDMOper'>(</span><span class='PDMOper'>)</span>
+<span class='PDMCnt'>4104</span> <span class='PDMInd'> 1</span>  <span class='PDMVar'>_SCREEN</span><span class='PDMOper'>.</span><span class='PDMResP'>VISIBLE</span> <span class='PDMOper'>=</span> <span class='PDMLit'>.T.</span>
+<span class='PDMCnt'>4105</span> <span class='PDMInd'>  </span> 
+<span class='PDMCnt'>4106</span> <span class='PDMInd'> 1</span>  <span class='PDMResK'>LOCAL</span><span class='PDMOper'>;</span>
+<span class='PDMCnt'>4107</span> <span class='PDMInd'> 2</span>   <span class='PDMVar'>lcOut</span>  <span class='PDMResK'>AS</span> <span class='PDMResK'>CHARACTER</span><span class='PDMOper'>,</span><span class='PDMOper'>;</span>
+<span class='PDMCnt'>4108</span> <span class='PDMInd'> 2</span>   <span class='PDMVar'>lnMemo</span> <span class='PDMResK'>AS</span> <span class='PDMResK'>NUMBER</span>
+<span class='PDMCnt'>4109</span> <span class='PDMInd'>  </span> 
+<span class='PDMCnt'>4110</span> <span class='PDMInd'> 1</span>  <span class='PDMResK'>DO</span> <span class='PDMResK'>CASE</span>
+<span class='PDMCnt'>4111</span> <span class='PDMInd'> 2</span>   <span class='PDMResK'>CASE</span> <span class='PDMVar'>m</span><span class='PDMOper'>.</span><span class='PDMVar'>tnHelp</span><span class='PDMOper'>=</span><span class='PDMLit'>01</span>
+<span class='PDMCnt'>4112</span> <span class='PDMInd'> 3</span>    <span class='PDMVar'>lcOut</span> <span class='PDMOper'>=</span> <span class='PDMVar'>dcText_EN_H01</span>
+<span class='PDMCnt'>4113</span> <span class='PDMInd'> 2</span>   <span class='PDMResK'>CASE</span> <span class='PDMVar'>m</span><span class='PDMOper'>.</span><span class='PDMVar'>tnHelp</span><span class='PDMOper'>=</span><span class='PDMLit'>02</span>
+<span class='PDMCnt'>4114</span> <span class='PDMInd'> 3</span>    <span class='PDMVar'>lcOut</span> <span class='PDMOper'>=</span> <span class='PDMVar'>dcText_EN_H02</span>
+<span class='PDMCnt'>4115</span> <span class='PDMInd'> 2</span>   <span class='PDMResK'>CASE</span> <span class='PDMVar'>m</span><span class='PDMOper'>.</span><span class='PDMVar'>tnHelp</span><span class='PDMOper'>=</span><span class='PDMLit'>03</span>
+<span class='PDMCnt'>4116</span> <span class='PDMInd'> 3</span>    <span class='PDMVar'>lcOut</span> <span class='PDMOper'>=</span> <span class='PDMVar'>dcText_EN_H03</span>
+<span class='PDMCnt'>4117</span> <span class='PDMInd'> 2</span>   <span class='PDMResK'>CASE</span> <span class='PDMVar'>m</span><span class='PDMOper'>.</span><span class='PDMVar'>tnHelp</span><span class='PDMOper'>=</span><span class='PDMLit'>04</span>
+<span class='PDMCnt'>4118</span> <span class='PDMInd'> 3</span>    <span class='PDMVar'>lcOut</span> <span class='PDMOper'>=</span> <span class='PDMVar'>dcText_EN_H04</span>
+<span class='PDMCnt'>4119</span> <span class='PDMInd'> 2</span>   <span class='PDMResK'>CASE</span> <span class='PDMVar'>m</span><span class='PDMOper'>.</span><span class='PDMVar'>tnHelp</span><span class='PDMOper'>=</span><span class='PDMLit'>05</span>
+<span class='PDMCnt'>4120</span> <span class='PDMInd'> 3</span>    <span class='PDMVar'>lcOut</span> <span class='PDMOper'>=</span> <span class='PDMVar'>dcText_EN_H05</span>
+<span class='PDMCnt'>4121</span> <span class='PDMInd'> 2</span>   <span class='PDMResK'>CASE</span> <span class='PDMVar'>m</span><span class='PDMOper'>.</span><span class='PDMVar'>tnHelp</span><span class='PDMOper'>=</span><span class='PDMLit'>06</span>
+<span class='PDMCnt'>4122</span> <span class='PDMInd'> 3</span>    <span class='PDMVar'>lcOut</span> <span class='PDMOper'>=</span> <span class='PDMVar'>dcText_EN_H06</span>
+<span class='PDMCnt'>4123</span> <span class='PDMInd'> 2</span>   <span class='PDMResK'>CASE</span> <span class='PDMVar'>m</span><span class='PDMOper'>.</span><span class='PDMVar'>tnHelp</span><span class='PDMOper'>=</span><span class='PDMLit'>07</span>
+<span class='PDMCnt'>4124</span> <span class='PDMInd'> 3</span>    <span class='PDMVar'>lcOut</span> <span class='PDMOper'>=</span> <span class='PDMVar'>dcText_EN_H07</span>
+<span class='PDMCnt'>4125</span> <span class='PDMInd'> 2</span>   <span class='PDMResK'>CASE</span> <span class='PDMVar'>m</span><span class='PDMOper'>.</span><span class='PDMVar'>tnHelp</span><span class='PDMOper'>=</span><span class='PDMLit'>08</span>
+<span class='PDMCnt'>4126</span> <span class='PDMInd'> 3</span>    <span class='PDMVar'>lcOut</span> <span class='PDMOper'>=</span> <span class='PDMVar'>dcText_EN_H08</span>
+<span class='PDMCnt'>4127</span> <span class='PDMInd'> 2</span>   <span class='PDMResK'>CASE</span> <span class='PDMVar'>m</span><span class='PDMOper'>.</span><span class='PDMVar'>tnHelp</span><span class='PDMOper'>=</span><span class='PDMLit'>09</span>
+<span class='PDMCnt'>4128</span> <span class='PDMInd'> 3</span>    <span class='PDMVar'>lcOut</span> <span class='PDMOper'>=</span> <span class='PDMVar'>dcText_EN_H09</span>
+<span class='PDMCnt'>4129</span> <span class='PDMInd'> 2</span>   <span class='PDMResK'>CASE</span> <span class='PDMVar'>m</span><span class='PDMOper'>.</span><span class='PDMVar'>tnHelp</span><span class='PDMOper'>=</span><span class='PDMLit'>10</span>
+<span class='PDMCnt'>4130</span> <span class='PDMInd'> 3</span>    <span class='PDMVar'>lcOut</span> <span class='PDMOper'>=</span> <span class='PDMVar'>dcText_EN_H10</span>
+<span class='PDMCnt'>4131</span> <span class='PDMInd'> 2</span>   <span class='PDMResK'>CASE</span> <span class='PDMVar'>m</span><span class='PDMOper'>.</span><span class='PDMVar'>tnHelp</span><span class='PDMOper'>=</span><span class='PDMLit'>11</span>
+<span class='PDMCnt'>4132</span> <span class='PDMInd'> 3</span>    <span class='PDMVar'>lcOut</span> <span class='PDMOper'>=</span> <span class='PDMVar'>dcText_EN_H11</span>
+<span class='PDMCnt'>4133</span> <span class='PDMInd'> 2</span>   <span class='PDMResK'>CASE</span> <span class='PDMVar'>m</span><span class='PDMOper'>.</span><span class='PDMVar'>tnHelp</span><span class='PDMOper'>=</span><span class='PDMLit'>12</span>
+<span class='PDMCnt'>4134</span> <span class='PDMInd'> 3</span>    <span class='PDMVar'>lcOut</span> <span class='PDMOper'>=</span> <span class='PDMVar'>dcText_EN_H12</span>
+<span class='PDMCnt'>4135</span> <span class='PDMInd'> 2</span>   <span class='PDMResK'>CASE</span> <span class='PDMVar'>m</span><span class='PDMOper'>.</span><span class='PDMVar'>tnHelp</span><span class='PDMOper'>=</span><span class='PDMLit'>13</span>
+<span class='PDMCnt'>4136</span> <span class='PDMInd'> 3</span>    <span class='PDMVar'>lcOut</span> <span class='PDMOper'>=</span> <span class='PDMVar'>dcText_EN_H11_txt</span>
+<span class='PDMCnt'>4137</span> <span class='PDMInd'> 2</span>   <span class='PDMResK'>CASE</span> <span class='PDMVar'>m</span><span class='PDMOper'>.</span><span class='PDMVar'>tnHelp</span><span class='PDMOper'>=</span><span class='PDMLit'>14</span>
+<span class='PDMCnt'>4138</span> <span class='PDMInd'> 3</span>    <span class='PDMVar'>lcOut</span> <span class='PDMOper'>=</span> <span class='PDMVar'>dcText_EN_H11_Class</span>
+<span class='PDMCnt'>4139</span> <span class='PDMInd'> 2</span>   <span class='PDMResK'>OTHERWISE</span>
+<span class='PDMCnt'>4140</span> <span class='PDMInd'> 3</span>    <span class='PDMVar'>lcOut</span> <span class='PDMOper'>=</span> <span class='PDMVar'>dcText_EN_H00</span>
+<span class='PDMCnt'>4141</span> <span class='PDMInd'> 1</span>  <span class='PDMResK'>ENDCASE</span>
+<span class='PDMCnt'>4142</span> <span class='PDMInd'>  </span> 
+<span class='PDMCnt'>4143</span> <span class='PDMInd'> 1</span>  <span class='PDMVar'>lnMemo</span> <span class='PDMOper'>=</span> <span class='PDMResF'>SET</span><span class='PDMOper'>(</span><span class='PDMStr'>"Memowidth"</span><span class='PDMOper'>)</span>
+<span class='PDMCnt'>4144</span> <span class='PDMInd'> 1</span>  <span class='PDMResK'>SET</span> <span class='PDMResK'>MEMOWIDTH</span> <span class='PDMResK'>TO</span> <span class='PDMLit'>80</span>
+<span class='PDMCnt'>4145</span> <span class='PDMInd'> 1</span>  <span class='PDMOper'>?</span><span class='PDMStr'>'Bin2Text v'</span><span class='PDMOper'>+</span><span class='PDMVar'>dcB2T_Verno</span> <span class='PDMResK'>FONT</span> <span class='PDMStr'>"Courier"</span><span class='PDMOper'>,</span><span class='PDMLit'>12</span>
+<span class='PDMCnt'>4146</span> <span class='PDMInd'> 1</span>  <span class='PDMOper'>?</span><span class='PDMVar'>m</span><span class='PDMOper'>.</span><span class='PDMVar'>lcOut</span> <span class='PDMResK'>FONT</span> <span class='PDMStr'>"Courier"</span>
+<span class='PDMCnt'>4147</span> <span class='PDMInd'> 1</span>  <span class='PDMResK'>SET</span> <span class='PDMResK'>MEMOWIDTH</span> <span class='PDMResK'>TO</span> <span class='PDMOper'>(</span><span class='PDMVar'>m</span><span class='PDMOper'>.</span><span class='PDMVar'>lnMemo</span><span class='PDMOper'>)</span></pre>
+ <!-- Code End -->
+  </div>
+ </div>
+</div>
+<div class="diaxp_mfoot"> <div class="PDM_AB_CopyRight"><!-- Footer Begin -->
+  <hr />
+  <div class="PDM_AB_Body">
+
+	<img src="../../repository/vfpxbanner_small.png" alt="VFPX logo"/><br/>
+	<p>This project is part of <a href="https://vfpx.github.io/"  title="Skip to VFPX" target="_blank">VFPX</a>.</p>
+	<p><i>&copy; 14.4.2015 Lutz Scheffler Software Ingenieurb&uuml;ro</i></p>
+	
+  </div><!-- Body End -->
+ </div><!-- Footer End -->
+</div>
+<script language="JavaScript" type="text/javascript">
+lo=document.getElementById("TX_SP_P26");
+lo.XType="SourceCode";
+lo.Dir="../../imgs/";
+
+
+</script>
+</body>
+</html>

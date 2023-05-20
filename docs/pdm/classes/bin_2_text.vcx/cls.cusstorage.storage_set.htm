@@ -1,0 +1,228 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="de" lang="de">
+<head>
+<title>Method storage_set of class cusstorage</title>
+<meta content="text/html; charset=windows-1252" http-equiv="Content-Type" />
+<meta name="Generator" content="Project Documenting Machine" />
+<meta name="Version" content="1.3.3" />
+<link rel="stylesheet" href="../../css/foxw.css" type="text/css" />
+<link rel="stylesheet" href="../../css/sc.css" type="text/css" />
+<link rel="stylesheet" href="../../repository/diamp_pdm_ab.css" type="text/css" />
+<link rel="stylesheet" href="../../repository/pdm_ab.css" type="text/css" />
+<link rel="stylesheet" href="../../repository/pdm_ab_notes.css" type="text/css" />
+<script src="../../js/pdm.js" language="JavaScript" type="text/javascript"></script>
+<script src="../../repository/pdm_ab.js" language="JavaScript" type="text/javascript"></script>
+</head>
+<body>
+<div class="diaxp_mhead">storage_set Method</div>
+<div class="diaxp_mbody_class">
+
+<table class="clear_table">
+ <tbody>
+  <tr><td>Class: </td><td><a href="cls.cusstorage.htm" title="Skip to class cusstorage">cusstorage</a></td></tr>
+  <tr><td>Description:</td><td>Set settings information to storage.</td></tr>
+ </tbody>
+</table>
+</div>
+<div class="diaxp_mbody">
+<!-- Created with _diamp_pdm_ab by Agnes Beste    20.05.2023 10:19 -->
+ <div class="PDM_AB_Descr"><!-- Descr Begin -->
+Puts settings into storage file.
+ </div><!-- Descr End -->
+
+ <div class="DIAMP_PDM_AB_Syntax"><!-- Syntax Begin -->
+  <div class="SColor">
+   <div class="PEM">
+    Object.storage_set
+   </div>
+   <div class="Para">
+    (<a href="#_6MD0M58J8">tcType</a>
+     <wbr />,<a href="#_6MD0M58J9">toSettings</a>
+     <wbr />,<a href="#_6MD0M58JA">tcStorage</a>)
+   </div>
+   <div style="clear: both"></div>
+  </div><!-- Colour End -->
+ </div><!-- Syntax End -->
+
+ <div class="DIAMP_PDM_AB_Params"><!-- Parameters Begin -->
+  <span class="PDM_AB_Head">
+   Parameter
+  </span>
+  <dl class="DIAMP_PDM_AB_Params_List">
+   <dt class="dt_">
+    <a class="DIAMP_PDM_AB_Params_ParaName" id="_6MD0M58J8" name="_6MD0M58J8">
+     <span class="PDMEXPR PDMNor" ><span class='PDMVar'>tcType</span></span>
+
+    </a>
+   </dt>
+   <dd class="dd_">
+    <span class="Params_Short">
+     Type of the storage file to assign settings value.
+    </span>
+    <table class="Params_Info">
+     <colgroup>
+      <col class="ColumnValue" />
+      <col class="ColumnData" />
+     </colgroup>
+     <tbody>
+      <tr>
+       <td class="CellValue">Type</td>
+       <td class="CellData">Character</td>
+      </tr>
+      <tr>
+       <td class="CellValue">Direction</td>
+       <td class="CellData">Input</td>
+      </tr>
+     </tbody>
+    </table>
+   </dd>
+   <dt class="dt_">
+    <a class="DIAMP_PDM_AB_Params_ParaName" id="_6MD0M58J9" name="_6MD0M58J9">
+     <span class="PDMEXPR PDMNor" ><span class='PDMVar'>toSettings</span></span>
+
+    </a>
+   </dt>
+   <dd class="dd_">
+    <span class="Params_Short">
+     Settings object to read.
+    </span>
+    <table class="Params_Info">
+     <colgroup>
+      <col class="ColumnValue" />
+      <col class="ColumnData" />
+     </colgroup>
+     <tbody>
+      <tr>
+       <td class="CellValue">Type</td>
+       <td class="CellData">COLLECTION</td>
+      </tr>
+      <tr>
+       <td class="CellValue">Direction</td>
+       <td class="CellData">Input</td>
+      </tr>
+     </tbody>
+    </table>
+   </dd>
+   <dt class="dt_">
+    <a class="DIAMP_PDM_AB_Params_ParaName" id="_6MD0M58JA" name="_6MD0M58JA">
+     <span class="PDMEXPR PDMNor" ><span class='PDMVar'>tcStorage</span></span>
+
+    </a>
+   </dt>
+   <dd class="dd_">
+    <span class="Params_Short">
+     Alias of the storage table.
+    </span>
+    <table class="Params_Info">
+     <colgroup>
+      <col class="ColumnValue" />
+      <col class="ColumnData" />
+     </colgroup>
+     <tbody>
+      <tr>
+       <td class="CellValue">Type</td>
+       <td class="CellData">Character</td>
+      </tr>
+      <tr>
+       <td class="CellValue">Direction</td>
+       <td class="CellData">Input</td>
+      </tr>
+     </tbody>
+    </table>
+   </dd>
+  </dl>
+ </div><!-- Parameters End -->
+
+ <div class="PDM_AB_Remarks"><!-- Remarks Begin -->
+  <span class="PDM_AB_Head">
+   Remarks
+  </span>
+  <div class="PDM_AB_Body">
+
+
+<p>Every item of the collection <a class="DIAMP_PDM_AB_Para_Link" href="#_6MD0M58J9">toSettings</a> will create a record in <a class="DIAMP_PDM_AB_Para_Link" href="#_6MD0M58JA">tcStorage</a>
+with key and value.</p>
+<p>Note that lenght of key is limited to 14 signs, see <a class="PDM_AB_See" href="../../classes/bin_2_text.vcx/cls.cusstorage.storage_open.htm" title="Skip to method Storage_Open">Storage_Open</a>.</p>
+
+  </div>
+ </div><!-- Remarks End -->
+
+ <div class="PDM_AB_SeeAlso"><!-- SeeAlso Begin -->
+  <span class="PDM_AB_Head">
+   See also
+  </span>
+  <div class="PDM_AB_Body">
+<a class="PDM_AB_See" href="../../classes/bin_2_text.vcx/cls.cusstorage.storage_open.htm" title="Skip to method Storage_Open">Storage_Open</a>
+  </div><!-- Body End -->
+  <!--- "Applies to" need to be inserted here---->
+  <PlaceAppliesTo_Here />
+  <!--- /"Applies to" need to be inserted here---->
+ </div><!-- SeeAlso End -->
+
+
+<!-- /Created with _diamp_pdm_ab by Agnes Beste    20.05.2023 10:19 -->
+
+ <div class="SC">
+  <img onclick="ExpandSC('SP_40',-1);"class="imgEC" src="../../imgs/dotab.gif" alt="Expand/Collapse source code of procedure storage_set" id="IMG_SP_40" />
+  <span ondblclick="ExpandSC('SP_40',-1);" class="SCCaption"><a name="cusstorage">Source Code</a></span>
+  <div ondblclick="ExpandSC('SP_40',-1);" class="SCE" style="display: none;" id="TX_SP_40">
+<!-- Code Begin -->
+<pre class="PDMCODE PDMNor" ><span class='PDMCnt'>   1</span> <span class='PDMInd'>  </span> <span class='PDMResK'>LPARAMETERS</span><span class='PDMOper'>;</span>
+<span class='PDMCnt'>   2</span> <span class='PDMInd'> 1</span>  <span class='PDMVar'>tcType</span><span class='PDMOper'>,</span><span class='PDMOper'>;</span>
+<span class='PDMCnt'>   3</span> <span class='PDMInd'> 1</span>  <span class='PDMVar'>toSettings</span> <span class='PDMResK'>AS</span> <span class='PDMResK'>COLLECTION</span><span class='PDMOper'>,</span><span class='PDMOper'>;</span>
+<span class='PDMCnt'>   4</span> <span class='PDMInd'> 1</span>  <span class='PDMVar'>tcStorage</span>
+<span class='PDMCnt'>   5</span> <span class='PDMInd'>  </span> 
+<span class='PDMCnt'>   6</span> <span class='PDMInd'>  </span> 
+<span class='PDMCnt'>  31</span> <span class='PDMInd'>  </span> 
+<span class='PDMCnt'>  32</span> <span class='PDMInd'>  </span> <span class='PDMResK'>LOCAL</span><span class='PDMOper'>;</span>
+<span class='PDMCnt'>  33</span> <span class='PDMInd'> 1</span>  <span class='PDMVar'>lcKey</span>     <span class='PDMResK'>AS</span> <span class='PDMResK'>CHARACTER</span><span class='PDMOper'>,</span><span class='PDMOper'>;</span>
+<span class='PDMCnt'>  34</span> <span class='PDMInd'> 1</span>  <span class='PDMVar'>lcValue</span>   <span class='PDMResK'>AS</span> <span class='PDMResK'>CHARACTER</span><span class='PDMOper'>,</span><span class='PDMOper'>;</span>
+<span class='PDMCnt'>  35</span> <span class='PDMInd'> 1</span>  <span class='PDMVar'>loSetting</span> <span class='PDMResK'>AS</span> <span class='PDMResK'>EMPTY</span>
+<span class='PDMCnt'>  36</span> <span class='PDMInd'>  </span> 
+<span class='PDMCnt'>  37</span> <span class='PDMInd'>  </span> <span class='PDMResK'>FOR</span> <span class='PDMResK'>EACH</span> <span class='PDMVar'>loSetting</span> <span class='PDMResK'>IN</span> <span class='PDMVar'>toSettings</span> <span class='PDMResK'>FOXOBJECT</span>  
+<span class='PDMCnt'>  38</span> <span class='PDMInd'>  </span> 
+<span class='PDMCnt'>  39</span> <span class='PDMInd'> 1</span>  <span class='PDMVar'>lcKey</span>    <span class='PDMOper'>=</span> <span class='PDMVar'>m</span><span class='PDMOper'>.</span><span class='PDMVar'>loSetting</span><span class='PDMOper'>.</span><span class='PDMVar'>gcUniqueId</span>
+<span class='PDMCnt'>  40</span> <span class='PDMInd'> 1</span>  <span class='PDMVar'>lcValue</span>  <span class='PDMOper'>=</span> <span class='PDMVar'>m</span><span class='PDMOper'>.</span><span class='PDMVar'>loSetting</span><span class='PDMOper'>.</span><span class='PDMVar'>gcFile</span>
+<span class='PDMCnt'>  41</span> <span class='PDMInd'>  </span> 
+<span class='PDMCnt'>  42</span> <span class='PDMInd'> 1</span>  <span class='PDMVar'>_SCREEN</span><span class='PDMOper'>.</span><span class='PDMResM'>ADDPROPERTY</span><span class='PDMOper'>(</span><span class='PDMVar'>m</span><span class='PDMOper'>.</span><span class='PDMVar'>lcKey</span><span class='PDMOper'>,</span><span class='PDMVar'>m</span><span class='PDMOper'>.</span><span class='PDMVar'>lcValue</span><span class='PDMOper'>)</span>
+<span class='PDMCnt'>  43</span> <span class='PDMInd'>  </span> 
+<span class='PDMCnt'>  44</span> <span class='PDMInd'> 1</span>  <span class='PDMResK'>UPDATE</span> <span class='PDMVar'>cur1</span> <span class='PDMResK'>SET</span><span class='PDMOper'>;</span>
+<span class='PDMCnt'>  45</span> <span class='PDMInd'> 2</span>   <span class='PDMVar'>cFile</span>    <span class='PDMOper'>=</span> <span class='PDMVar'>m</span><span class='PDMOper'>.</span><span class='PDMVar'>lcValue</span><span class='PDMOper'>,</span><span class='PDMOper'>;</span>
+<span class='PDMCnt'>  46</span> <span class='PDMInd'> 2</span>   <span class='PDMVar'>iDirty</span>   <span class='PDMOper'>=</span> <span class='PDMLit'>0</span><span class='PDMOper'>,</span><span class='PDMOper'>;</span>
+<span class='PDMCnt'>  47</span> <span class='PDMInd'> 2</span>   <span class='PDMVar'>tLastUse</span> <span class='PDMOper'>=</span> <span class='PDMResF'>DATETIME</span><span class='PDMOper'>(</span><span class='PDMOper'>)</span><span class='PDMOper'>;</span>
+<span class='PDMCnt'>  48</span> <span class='PDMInd'> 2</span>   <span class='PDMResK'>FROM</span> <span class='PDMOper'>(</span><span class='PDMVar'>m</span><span class='PDMOper'>.</span><span class='PDMVar'>tcStorage</span><span class='PDMOper'>)</span> <span class='PDMResK'>AS</span> <span class='PDMVar'>cur1</span><span class='PDMOper'>;</span>
+<span class='PDMCnt'>  49</span> <span class='PDMInd'> 2</span>   <span class='PDMResK'>WHERE</span> <span class='PDMVar'>cur1</span><span class='PDMOper'>.</span><span class='PDMVar'>cUniqueId</span><span class='PDMOper'>==</span><span class='PDMVar'>m</span><span class='PDMOper'>.</span><span class='PDMVar'>lcKey</span><span class='PDMOper'>;</span>
+<span class='PDMCnt'>  50</span> <span class='PDMInd'> 2</span>   <span class='PDMOper'>AND</span> <span class='PDMVar'>cur1</span><span class='PDMOper'>.</span><span class='PDMVar'>cType</span><span class='PDMOper'>==</span><span class='PDMVar'>m</span><span class='PDMOper'>.</span><span class='PDMVar'>tcType</span>
+<span class='PDMCnt'>  51</span> <span class='PDMInd'>  </span> 
+<span class='PDMCnt'>  52</span> <span class='PDMInd'> 1</span>  <span class='PDMResK'>IF</span> <span class='PDMVar'>_TALLY</span><span class='PDMOper'>=</span><span class='PDMLit'>0</span> <span class='PDMResK'>THEN</span>
+<span class='PDMCnt'>  53</span> <span class='PDMInd'> 2</span>   <span class='PDMResK'>INSERT</span> <span class='PDMResK'>INTO</span> <span class='PDMOper'>(</span><span class='PDMVar'>m</span><span class='PDMOper'>.</span><span class='PDMVar'>tcStorage</span><span class='PDMOper'>)</span><span class='PDMOper'>;</span>
+<span class='PDMCnt'>  54</span> <span class='PDMInd'> 3</span>    <span class='PDMOper'>(</span><span class='PDMVar'>cType</span><span class='PDMOper'>,</span> <span class='PDMVar'>cFile</span><span class='PDMOper'>,</span> <span class='PDMVar'>cUniqueId</span><span class='PDMOper'>,</span> <span class='PDMVar'>iDirty</span><span class='PDMOper'>,</span> <span class='PDMVar'>tLastUse</span><span class='PDMOper'>)</span><span class='PDMOper'>;</span>
+<span class='PDMCnt'>  55</span> <span class='PDMInd'> 3</span>    <span class='PDMResK'>VALUES</span><span class='PDMOper'>;</span>
+<span class='PDMCnt'>  56</span> <span class='PDMInd'> 3</span>    <span class='PDMOper'>(</span><span class='PDMVar'>m</span><span class='PDMOper'>.</span><span class='PDMVar'>tcType</span><span class='PDMOper'>,</span> <span class='PDMVar'>m</span><span class='PDMOper'>.</span><span class='PDMVar'>lcValue</span><span class='PDMOper'>,</span> <span class='PDMVar'>m</span><span class='PDMOper'>.</span><span class='PDMVar'>lcKey</span><span class='PDMOper'>,</span> <span class='PDMLit'>0</span><span class='PDMOper'>,</span> <span class='PDMResF'>DATETIME</span><span class='PDMOper'>(</span><span class='PDMOper'>)</span><span class='PDMOper'>)</span>
+<span class='PDMCnt'>  57</span> <span class='PDMInd'> 1</span>  <span class='PDMResK'>ENDIF</span> <span class='PDMCom'>&amp;&amp;_TALLY=0</span>
+<span class='PDMCnt'>  58</span> <span class='PDMInd'>  </span> <span class='PDMResK'>ENDFOR</span> <span class='PDMCom'>&amp;&amp;loSetting </span>
+<span class='PDMCnt'>  59</span> <span class='PDMInd'>  </span> </pre>
+ <!-- Code End -->
+  </div>
+ </div>
+</div>
+<div class="diaxp_mfoot"> <div class="PDM_AB_CopyRight"><!-- Footer Begin -->
+  <hr />
+  <div class="PDM_AB_Body">
+
+	<img src="../../repository/vfpxbanner_small.png" alt="VFPX logo"/><br/>
+	<p>This project is part of <a href="https://vfpx.github.io/"  title="Skip to VFPX" target="_blank">VFPX</a>.</p>
+	<p><i>&copy; 14.4.2015 Lutz Scheffler Software Ingenieurb&uuml;ro</i></p>
+	
+  </div><!-- Body End -->
+ </div><!-- Footer End -->
+</div>
+<script language="JavaScript" type="text/javascript">
+lo=document.getElementById("TX_SP_40");
+lo.XType="SourceCode";
+lo.Dir="../../imgs/";
+
+
+</script>
+</body>
+</html>

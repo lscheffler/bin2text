@@ -1,24 +1,24 @@
-# ![](content/home.png "Home") Bin 2 Text Extension
-## Provides better IDE integration of FoxBin2Prg in VFP
-**Version <!--VERNO-->1.2.1<!--/VerNo-->, <!--DeploymentDate-->2023-05-18<!--/DeploymentDate-->**   
+# ![Home](./docs/images/home.png "Home") Bin 2 Text Extension
+IDE integration of FoxBin2Prg in VFP   
+**Version <!--VERNO-->1.2.1<!--/VerNo-->, <!--DeploymentDate-->2023-05-20<!--/DeploymentDate-->**   
+Integration of FoxBin2Prg and git for fast snapshot like commits, and UI to work with single elements.
 
 ---
 ### Synopsis
+![VFPX Banner](./docs/images/vfpxbanner.gif "VFPX Banner")   
 This is project is part of [VFPX](https://vfpx.github.io/) 
-
-![VFPX](https://github.com/lscheffler/bin2text/blob/master/content/vfpxlogo.gif "VFPX")
 
 Project manager: [Lutz Scheffler](https://github.com/lscheffler)   
 Project location: [Bin2Text](https://github.com/lscheffler/bin2text)   
 
 The main goals of this project are:
-- The main goal is to do fast _git_ commits.
-- Visual FoxPro IDE integration that works with whole projects, not per file.
+- The main goal is to do fast *git* commits.
+- Visual FoxPro IDE integration that works with whole projects (sbapshot), not per file.
 
 The problems this project tries to solve:
 - Better IDE integration of FoxBin2Prg for VFP
 - Faster processing of PJX and groups of corresponding PJXs
-- _git commit_ integration
+- *git commit* integration
 - Processing of group of files that can not be addressed with FoxBin2PRG interface
 - Processing tables bound to databases by just calling the database
 
@@ -27,39 +27,47 @@ The problems this project tries to solve:
 - Requires: Microsoft Visual Foxpro; Version 9.0 SP2.
 - Runs with VFPA, compiling the APP with VP9 SP2 is recomended.
 - Requires: [FoxBin2Prg](https://github.com/fdbozzo/foxbin2prg), also found on VFPX.
-- Optional: The use of _[git for windows](https://git-scm.com/download/win)_ is optional.
+- Optional: The use of *[git for windows](https://git-scm.com/download/win)* is optional.
 
 ---
 ### Installation
+#### Via Thor
+This is the prefered method to run Bin2Text.
+1. Start Thor *Check for Updates*
+1. Install FoxBin2Prg
+1. Install Bin2Text
+2. Run Bin2Text Exe on every start of VFP to hook up the menu like:
+```
+lcFile   = Execscript (_Screen.cThorDispatcher, "Tool Folder=")+'Components\Bin2Text\Bin2Text.app'
+lcFolder = {Your local "root "folder to process from}
+DO InitMenu IN (m.lcFile) WITH (m.lcFolder)
+```
+
 #### From source
-1. Download or clone [this repository](https://github.com/lscheffler/bin2text).   
+1. Download or clone [this repository](https://github.com/lscheffler/bin2text).
 2. Downlod or clone FoxBin2Prg
 9. **This repository does not ship binary sources.**
 3. Run `DO FOXBIN2PRG.PRG WITH "bin2text.pj2", "*"`
-   - check appropriate for path
-4. Compile to EXE
-2. Run Bin2Text Exe on every start of VFP to hook up the menu.
-#### Via Thor
-1. Install FoxBin2Prg via Thor
-1. Install Bin2Text via Thor
-2. Run Bin2Text Exe on every start of VFP to hook up the menu.
+   - check for appropriate path
+4. Compile to app
+2. Run Bin2Text.app on every start of VFP to hook up the menu like: `DO InitMenu IN LOCFILE('Bin2Text.app')`.
 
 ---
 ### Documentation
-Full help and documentation is in _docs/index.htm_ in the download file.
+Full help and documentation is in *docs/index.htm* in the download file.
 
-For quick run see [Bin 2 Text Documentation](https://github.com/lscheffler/bin2text/blob/master/content/documentation.md).
+For quick run see [Bin 2 Text Documentation](https://github.com/lscheffler/bin2text/blob/master/docs/documentation.md).
 
 ### Changes
-See [changes](https://github.com/lscheffler/bin2text/blob/master/content/change_log.md)
+See [changes](https://github.com/lscheffler/bin2text/blob/master/docs/changelog.md)
 
 ## Helping with this project
 See [How to contribute to Bin2Text](https://github.com/lscheffler/bin2text/blob/master/.github/CONTRIBUTING.md) for details on how to help with this project.
 
 ---
 ## Note
-Bin 2 Text Extension is tested with _[git for windows](https://git-scm.com/download/win)_ version 2.39.2.windows.1 (2023-02-06) 32 and 64bit.
+Bin 2 Text Extension is tested with *[git for windows](https://git-scm.com/download/win)* version 2.39.2.windows.1 (2023-02-06) 32 and 64bit.
 
 ----
-Last changed: _<!--DeploymentDate-->2023-05-18<!--/DeploymentDate-->_   
- ![ Powered by VFPX](https://github.com/lscheffler/bin2text/blob/master/content/vfpxpoweredby_alternative.gif "powered by VFPX")
+Last changed: *<!--DeploymentDate-->2023-05-20<!--/DeploymentDate-->*   
+![powered by VFPX](./docs/images/vfpxpoweredby_alternative.gif "powered by VFPX")

@@ -1,0 +1,262 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="de" lang="de">
+<head>
+<title>Method get_converter of class cusstorage</title>
+<meta content="text/html; charset=windows-1252" http-equiv="Content-Type" />
+<meta name="Generator" content="Project Documenting Machine" />
+<meta name="Version" content="1.3.3" />
+<link rel="stylesheet" href="../../css/foxw.css" type="text/css" />
+<link rel="stylesheet" href="../../css/sc.css" type="text/css" />
+<link rel="stylesheet" href="../../repository/diamp_pdm_ab.css" type="text/css" />
+<link rel="stylesheet" href="../../repository/pdm_ab.css" type="text/css" />
+<link rel="stylesheet" href="../../repository/pdm_ab_notes.css" type="text/css" />
+<script src="../../js/pdm.js" language="JavaScript" type="text/javascript"></script>
+<script src="../../repository/pdm_ab.js" language="JavaScript" type="text/javascript"></script>
+</head>
+<body>
+<div class="diaxp_mhead">get_converter Method</div>
+<div class="diaxp_mbody_class">
+
+<table class="clear_table">
+ <tbody>
+  <tr><td>Class: </td><td><a href="cls.cusstorage.htm" title="Skip to class cusstorage">cusstorage</a></td></tr>
+  <tr><td>Description:</td><td>Create FoxBin2PRG object.</td></tr>
+ </tbody>
+</table>
+</div>
+<div class="diaxp_mbody">
+<!-- Created with _diamp_pdm_ab by Agnes Beste    20.05.2023 10:19 -->
+ <div class="PDM_AB_Descr"><!-- Descr Begin -->
+Create converter object and open storage table
+ </div><!-- Descr End -->
+
+ <div class="DIAMP_PDM_AB_Syntax"><!-- Syntax Begin -->
+  <div class="SColor">
+   <div class="RetVal"><a href="#_6MD0M583O">RetVal</a>&nbsp;</div>   <div class="RetValEq">=</div>   <div class="PEM">
+    Object.get_converter
+   </div>
+   <div class="Para">
+    (@<a href="#_6MD0M583P">tcStorage</a>
+     <wbr />,@<a href="#_6MD0M583Q">toConverter</a>
+     [<wbr />,<a href="#_6MD0M583R">tlCloseTable</a>])
+   </div>
+   <div style="clear: both"></div>
+  </div><!-- Colour End -->
+ </div><!-- Syntax End -->
+
+ <div class="DIAMP_PDM_AB_Params"><!-- Parameters Begin -->
+  <span class="PDM_AB_Head">
+   Parameter
+  </span>
+  <dl class="DIAMP_PDM_AB_Params_List">
+   <dt class="dt_">
+    <a class="DIAMP_PDM_AB_Params_ParaName" id="_6MD0M583P" name="_6MD0M583P">
+     <span class="PDMEXPR PDMNor" ><span class='PDMVar'>tcStorage</span></span>
+
+    </a>
+   </dt>
+   <dd class="dd_">
+    <span class="Params_Short">
+     Alias of storage table.
+    </span>
+    <table class="Params_Info">
+     <colgroup>
+      <col class="ColumnValue" />
+      <col class="ColumnData" />
+     </colgroup>
+     <tbody>
+      <tr>
+       <td class="CellValue">Type</td>
+       <td class="CellData">Character</td>
+      </tr>
+      <tr>
+       <td class="CellValue">By reference</td>
+       <td class="CellData">&nbsp;</td>
+      </tr>
+      <tr>
+       <td class="CellValue">Direction</td>
+       <td class="CellData">Out</td>
+      </tr>
+     </tbody>
+    </table>
+    <span class="Params_Detail">
+<span class="PDMEXPR PDMNor" ><span class='PDMOper'>.</span><span class='PDMResK'>NULL</span><span class='PDMOper'>.</span></span>
+ if not found or closed by <a class="DIAMP_PDM_AB_Para_Link" href="#_6MD0M583R">tlCloseTable</a>. 
+    </span>
+   </dd>
+   <dt class="dt_">
+    <a class="DIAMP_PDM_AB_Params_ParaName" id="_6MD0M583Q" name="_6MD0M583Q">
+     <span class="PDMEXPR PDMNor" ><span class='PDMVar'>toConverter</span></span>
+
+    </a>
+   </dt>
+   <dd class="dd_">
+    <span class="Params_Short">
+     Instance of FoxBin2PRG.
+    </span>
+    <table class="Params_Info">
+     <colgroup>
+      <col class="ColumnValue" />
+      <col class="ColumnData" />
+     </colgroup>
+     <tbody>
+      <tr>
+       <td class="CellValue">Type</td>
+       <td class="CellData">Character</td>
+      </tr>
+      <tr>
+       <td class="CellValue">By reference</td>
+       <td class="CellData">&nbsp;</td>
+      </tr>
+      <tr>
+       <td class="CellValue">Direction</td>
+       <td class="CellData">Out</td>
+      </tr>
+     </tbody>
+    </table>
+    <span class="Params_Detail">
+<span class="PDMEXPR PDMNor" ><span class='PDMOper'>.</span><span class='PDMResK'>NULL</span><span class='PDMOper'>.</span></span>
+ id not instantiated. 
+    </span>
+   </dd>
+   <dt class="dt_">
+    <a class="DIAMP_PDM_AB_Params_ParaName" id="_6MD0M583R" name="_6MD0M583R">
+     <span class="PDMEXPR PDMNor" ><span class='PDMVar'>tlCloseTable</span></span>
+
+    </a>
+   </dt>
+   <dd class="dd_">
+    <span class="Params_Short">
+     Do not keep storage table open.
+    </span>
+    <table class="Params_Info">
+     <colgroup>
+      <col class="ColumnValue" />
+      <col class="ColumnData" />
+     </colgroup>
+     <tbody>
+      <tr>
+       <td class="CellValue">Type</td>
+       <td class="CellData">Boolean</td>
+      </tr>
+      <tr>
+       <td class="CellValue">Direction</td>
+       <td class="CellData">Input</td>
+      </tr>
+      <tr>
+       <td class="CellValue">Optional</td>
+      <td class="CellData">&nbsp;</td>
+      </tr>
+     </tbody>
+    </table>
+   </dd>
+  </dl>
+ </div><!-- Parameters End -->
+
+ <div class="DIAMP_PDM_AB_RetVal"><!-- Returns Begin -->
+  <div>
+   <span class="PDM_AB_Head">
+    <a id="_6MD0M583O" name="_6MD0M583O">
+     Return value
+    </a>
+   </span> <span class="RetVal_Ttype">Boolean</span>
+  </div>
+  <div class="PDM_AB_Body">
+Error
+  </div>
+ </div><!-- Returns End -->
+
+
+<!-- /Created with _diamp_pdm_ab by Agnes Beste    20.05.2023 10:19 -->
+
+ <div class="SC">
+  <img onclick="ExpandSC('SP_40',-1);"class="imgEC" src="../../imgs/dotab.gif" alt="Expand/Collapse source code of procedure get_converter" id="IMG_SP_40" />
+  <span ondblclick="ExpandSC('SP_40',-1);" class="SCCaption"><a name="cusstorage">Source Code</a></span>
+  <div ondblclick="ExpandSC('SP_40',-1);" class="SCE" style="display: none;" id="TX_SP_40">
+<!-- Code Begin -->
+<pre class="PDMCODE PDMNor" ><span class='PDMCnt'>   1</span> <span class='PDMInd'>  </span> <span class='PDMResK'>LPARAMETERS</span><span class='PDMOper'>;</span>
+<span class='PDMCnt'>   2</span> <span class='PDMInd'> 1</span>  <span class='PDMVar'>tcStorage</span><span class='PDMOper'>,</span><span class='PDMOper'>;</span>
+<span class='PDMCnt'>   3</span> <span class='PDMInd'> 1</span>  <span class='PDMVar'>toConverter</span><span class='PDMOper'>,</span><span class='PDMOper'>;</span>
+<span class='PDMCnt'>   4</span> <span class='PDMInd'> 1</span>  <span class='PDMVar'>tlCloseTable</span>
+<span class='PDMCnt'>   5</span> <span class='PDMInd'>  </span> 
+<span class='PDMCnt'>   6</span> <span class='PDMInd'>  </span> 
+<span class='PDMCnt'>  27</span> <span class='PDMInd'>  </span> 
+<span class='PDMCnt'>  28</span> <span class='PDMInd'>  </span> <span class='PDMResK'>LOCAL</span><span class='PDMOper'>;</span>
+<span class='PDMCnt'>  29</span> <span class='PDMInd'> 1</span>  <span class='PDMVar'>lnResult</span> <span class='PDMResK'>AS</span> <span class='PDMResK'>NUMBER</span><span class='PDMOper'>,</span><span class='PDMOper'>;</span>
+<span class='PDMCnt'>  30</span> <span class='PDMInd'> 1</span>  <span class='PDMVar'>llOk</span>     <span class='PDMResK'>AS</span> <span class='PDMVar'>BOOLEAN</span>
+<span class='PDMCnt'>  31</span> <span class='PDMInd'>  </span> 
+<span class='PDMCnt'>  32</span> <span class='PDMInd'>  </span> <span class='PDMVar'>llOk</span> <span class='PDMOper'>=</span> <span class='PDMVar'>True</span>
+<span class='PDMCnt'>  33</span> <span class='PDMInd'>  </span> <span class='PDMResK'>IF</span> <span class='PDMResF'>PEMSTATUS</span><span class='PDMOper'>(</span><span class='PDMVar'>_SCREEN</span><span class='PDMOper'>,</span><span class='PDMStr'>'gcB2T_Path'</span><span class='PDMOper'>,</span><span class='PDMLit'>5</span><span class='PDMOper'>)</span> <span class='PDMOper'>AND</span> <span class='PDMResF'>VARTYPE</span><span class='PDMOper'>(</span><span class='PDMVar'>_SCREEN</span><span class='PDMOper'>.</span><span class='PDMVar'>gcB2T_Path</span><span class='PDMOper'>)</span><span class='PDMOper'>=</span><span class='PDMStr'>'C'</span> <span class='PDMOper'>AND</span> <span class='PDMResF'>FILE</span><span class='PDMOper'>(</span><span class='PDMVar'>_SCREEN</span><span class='PDMOper'>.</span><span class='PDMVar'>gcB2T_Path</span><span class='PDMOper'>)</span> <span class='PDMResK'>THEN</span>
+<span class='PDMCnt'>  34</span> <span class='PDMInd'> 1</span>  <span class='PDMVar'>tcStorage</span> <span class='PDMOper'>=</span> <span class='PDMResK'>THIS</span><span class='PDMOper'>.</span><span class='PDMVar'>Storage_Open</span><span class='PDMOper'>(</span><span class='PDMVar'>_SCREEN</span><span class='PDMOper'>.</span><span class='PDMVar'>gcB2T_Path</span><span class='PDMOper'>)</span>
+<span class='PDMCnt'>  35</span> <span class='PDMInd'>  </span> 
+<span class='PDMCnt'>  36</span> <span class='PDMInd'>  </span> <span class='PDMResK'>ELSE</span>  <span class='PDMCom'>&amp;&amp;PEMSTATUS(_SCREEN,'gcB2T_Path',5) AND VARTYPE(_SCREEN.gcB2T_Path)='C' AND FILE(_SCREEN.gcB2T_Path)</span>
+<span class='PDMCnt'>  37</span> <span class='PDMInd'> 1</span>  <span class='PDMVar'>tcStorage</span> <span class='PDMOper'>=</span> <span class='PDMResK'>THIS</span><span class='PDMOper'>.</span><span class='PDMVar'>Storage_Check</span><span class='PDMOper'>(</span><span class='PDMVar'>False</span><span class='PDMOper'>)</span>
+<span class='PDMCnt'>  38</span> <span class='PDMInd'>  </span> 
+<span class='PDMCnt'>  39</span> <span class='PDMInd'>  </span> <span class='PDMResK'>ENDIF</span> <span class='PDMCom'>&amp;&amp;PEMSTATUS(_SCREEN,'gcB2T_Path',5) AND VARTYPE(_SCREEN.gcB2T_Path)='C' AND FILE(_SCREEN.gcB2T_Path)</span>
+<span class='PDMCnt'>  40</span> <span class='PDMInd'>  </span> 
+<span class='PDMCnt'>  41</span> <span class='PDMInd'>  </span> <span class='PDMResK'>IF</span> <span class='PDMResF'>ISNULL</span><span class='PDMOper'>(</span><span class='PDMVar'>m</span><span class='PDMOper'>.</span><span class='PDMVar'>tcStorage</span><span class='PDMOper'>)</span> <span class='PDMResK'>THEN</span>
+<span class='PDMCnt'>  42</span> <span class='PDMInd'> 1</span>  <span class='PDMVar'>llOk</span> <span class='PDMOper'>=</span> <span class='PDMVar'>False</span>
+<span class='PDMCnt'>  43</span> <span class='PDMInd'>  </span> <span class='PDMResK'>ENDIF</span> <span class='PDMCom'>&amp;&amp;ISNULL(m.tcStorage)</span>
+<span class='PDMCnt'>  44</span> <span class='PDMInd'>  </span> 
+<span class='PDMCnt'>  45</span> <span class='PDMInd'>  </span> <span class='PDMResK'>IF</span> <span class='PDMVar'>m</span><span class='PDMOper'>.</span><span class='PDMVar'>llOk</span> <span class='PDMResK'>THEN</span>
+<span class='PDMCnt'>  46</span> <span class='PDMInd'> 1</span>  <span class='PDMVar'>toConverter</span> <span class='PDMOper'>=</span> <span class='PDMResM'>NEWOBJECT</span><span class='PDMOper'>(</span><span class='PDMStr'>"c_foxbin2prg"</span><span class='PDMOper'>,</span><span class='PDMVar'>_SCREEN</span><span class='PDMOper'>.</span><span class='PDMVar'>gcB2T_FB2T</span><span class='PDMOper'>)</span>
+<span class='PDMCnt'>  47</span> <span class='PDMInd'> 1</span>  <span class='PDMResK'>IF</span> <span class='PDMOper'>!</span><span class='PDMResF'>VARTYPE</span><span class='PDMOper'>(</span><span class='PDMVar'>m</span><span class='PDMOper'>.</span><span class='PDMVar'>toConverter</span><span class='PDMOper'>)</span><span class='PDMOper'>=</span><span class='PDMStr'>"O"</span> <span class='PDMOper'>OR</span> <span class='PDMResF'>ISNULL</span><span class='PDMOper'>(</span><span class='PDMVar'>m</span><span class='PDMOper'>.</span><span class='PDMVar'>toConverter</span><span class='PDMOper'>)</span> <span class='PDMResK'>THEN</span>
+<span class='PDMCnt'>  48</span> <span class='PDMInd'> 2</span>   <span class='PDMVar'>toConverter</span> <span class='PDMOper'>=</span> <span class='PDMVar'>NIL</span>
+<span class='PDMCnt'>  49</span> <span class='PDMInd'> 2</span>   <span class='PDMVar'>llOk</span>          <span class='PDMOper'>=</span> <span class='PDMVar'>False</span>
+<span class='PDMCnt'>  50</span> <span class='PDMInd'> 1</span>  <span class='PDMResK'>ENDIF</span> <span class='PDMCom'>&amp;&amp;!TYPE(toConverter)="O" OR ISNULL(m.toConverter)</span>
+<span class='PDMCnt'>  51</span> <span class='PDMInd'>  </span> <span class='PDMResK'>ELSE</span>  <span class='PDMCom'>&amp;&amp;m.llOk</span>
+<span class='PDMCnt'>  52</span> <span class='PDMInd'> 1</span>  <span class='PDMVar'>toConverter</span> <span class='PDMOper'>=</span> <span class='PDMVar'>NIL</span>
+<span class='PDMCnt'>  53</span> <span class='PDMInd'>  </span> <span class='PDMResK'>ENDIF</span> <span class='PDMCom'>&amp;&amp;m.llOk</span>
+<span class='PDMCnt'>  54</span> <span class='PDMInd'>  </span> 
+<span class='PDMCnt'>  55</span> <span class='PDMInd'>  </span> <span class='PDMResK'>IF</span> <span class='PDMVar'>m</span><span class='PDMOper'>.</span><span class='PDMVar'>llOk</span> <span class='PDMResK'>THEN</span>
+<span class='PDMCnt'>  56</span> <span class='PDMInd'> 1</span>  <span class='PDMVar'>lnResult</span> <span class='PDMOper'>=</span> <span class='PDMVar'>Compare_Verno</span><span class='PDMOper'>(</span><span class='PDMVar'>dcFB2P_Verno_Min</span><span class='PDMOper'>,</span><span class='PDMVar'>m</span><span class='PDMOper'>.</span><span class='PDMVar'>toConverter</span><span class='PDMOper'>.</span><span class='PDMVar'>c_FB2PRG_VERSION_REAL</span><span class='PDMOper'>)</span>
+<span class='PDMCnt'>  57</span> <span class='PDMInd'>  </span> 
+<span class='PDMCnt'>  58</span> <span class='PDMInd'> 1</span>  <span class='PDMResK'>DO</span> <span class='PDMResK'>CASE</span>
+<span class='PDMCnt'>  59</span> <span class='PDMInd'>  </span> 
+<span class='PDMCnt'>  60</span> <span class='PDMInd'> 2</span>   <span class='PDMResK'>CASE</span> <span class='PDMVar'>m</span><span class='PDMOper'>.</span><span class='PDMVar'>lnResult</span><span class='PDMOper'>=</span><span class='PDMLit'>1</span>
+<span class='PDMCnt'>  61</span> <span class='PDMInd'>  </span> <span class='PDMCom'>*FoxBin2Prg</span>
+<span class='PDMCnt'>  62</span> <span class='PDMInd'>  </span> <span class='PDMCom'>*update added here ....</span>
+<span class='PDMCnt'>  63</span> <span class='PDMInd'> 3</span>    <span class='PDMOper'>?</span><span class='PDMStr'>"Wrong version of FoxBin2Prg, min Version: "</span><span class='PDMOper'>+</span><span class='PDMVar'>dcFB2P_Verno_Min</span>
+<span class='PDMCnt'>  64</span> <span class='PDMInd'> 3</span>    <span class='PDMVar'>toConverter</span> <span class='PDMOper'>=</span> <span class='PDMVar'>NIL</span>
+<span class='PDMCnt'>  65</span> <span class='PDMInd'> 3</span>    <span class='PDMVar'>llOk</span>           <span class='PDMOper'>=</span> <span class='PDMVar'>False</span>
+<span class='PDMCnt'>  66</span> <span class='PDMInd'>  </span> 
+<span class='PDMCnt'>  67</span> <span class='PDMInd'> 2</span>   <span class='PDMResK'>OTHERWISE</span>
+<span class='PDMCnt'>  68</span> <span class='PDMInd'>  </span> <span class='PDMCom'>* m.lnResult In 0, 12</span>
+<span class='PDMCnt'>  69</span> <span class='PDMInd'>  </span> <span class='PDMCom'>*version fit, do nothing</span>
+<span class='PDMCnt'>  70</span> <span class='PDMInd'>  </span> 
+<span class='PDMCnt'>  71</span> <span class='PDMInd'> 1</span>  <span class='PDMResK'>ENDCASE</span>
+<span class='PDMCnt'>  72</span> <span class='PDMInd'>  </span> <span class='PDMResK'>ENDIF</span> <span class='PDMCom'>&amp;&amp;m.llOk</span>
+<span class='PDMCnt'>  73</span> <span class='PDMInd'>  </span> 
+<span class='PDMCnt'>  74</span> <span class='PDMInd'>  </span> <span class='PDMResK'>IF</span> <span class='PDMOper'>(</span><span class='PDMOper'>!</span><span class='PDMVar'>m</span><span class='PDMOper'>.</span><span class='PDMVar'>llOk</span> <span class='PDMOper'>OR</span> <span class='PDMVar'>m</span><span class='PDMOper'>.</span><span class='PDMVar'>tlCloseTable</span><span class='PDMOper'>)</span> <span class='PDMOper'>AND</span> <span class='PDMOper'>!</span><span class='PDMResF'>ISNULL</span><span class='PDMOper'>(</span><span class='PDMVar'>m</span><span class='PDMOper'>.</span><span class='PDMVar'>tcStorage</span><span class='PDMOper'>)</span> <span class='PDMResK'>THEN</span>
+<span class='PDMCnt'>  75</span> <span class='PDMInd'> 1</span>  <span class='PDMResK'>THIS</span><span class='PDMOper'>.</span><span class='PDMVar'>Storage_Close</span><span class='PDMOper'>(</span><span class='PDMVar'>m</span><span class='PDMOper'>.</span><span class='PDMVar'>tcStorage</span><span class='PDMOper'>,</span><span class='PDMVar'>True</span><span class='PDMOper'>)</span>
+<span class='PDMCnt'>  76</span> <span class='PDMInd'> 1</span>  <span class='PDMVar'>tcStorage</span> <span class='PDMOper'>=</span> <span class='PDMVar'>NIL</span>
+<span class='PDMCnt'>  77</span> <span class='PDMInd'>  </span> <span class='PDMResK'>ENDIF</span> <span class='PDMCom'>&amp;&amp;(!m.llOk OR tlCloseTable) AND !ISNULL(m.tcStorage)</span>
+<span class='PDMCnt'>  78</span> <span class='PDMInd'>  </span> 
+<span class='PDMCnt'>  79</span> <span class='PDMInd'>  </span> <span class='PDMVar'>llOk</span> <span class='PDMOper'>=</span> <span class='PDMOper'>!</span><span class='PDMVar'>m</span><span class='PDMOper'>.</span><span class='PDMVar'>llOk</span>
+<span class='PDMCnt'>  80</span> <span class='PDMInd'>  </span> 
+<span class='PDMCnt'>  81</span> <span class='PDMInd'>  </span> <span class='PDMResK'>RETURN</span> <span class='PDMVar'>m</span><span class='PDMOper'>.</span><span class='PDMVar'>llOk</span>
+<span class='PDMCnt'>  82</span> <span class='PDMInd'>  </span> </pre>
+ <!-- Code End -->
+  </div>
+ </div>
+</div>
+<div class="diaxp_mfoot"> <div class="PDM_AB_CopyRight"><!-- Footer Begin -->
+  <hr />
+  <div class="PDM_AB_Body">
+
+	<img src="../../repository/vfpxbanner_small.png" alt="VFPX logo"/><br/>
+	<p>This project is part of <a href="https://vfpx.github.io/"  title="Skip to VFPX" target="_blank">VFPX</a>.</p>
+	<p><i>&copy; 14.4.2015 Lutz Scheffler Software Ingenieurb&uuml;ro</i></p>
+	
+  </div><!-- Body End -->
+ </div><!-- Footer End -->
+</div>
+<script language="JavaScript" type="text/javascript">
+lo=document.getElementById("TX_SP_40");
+lo.XType="SourceCode";
+lo.Dir="../../imgs/";
+
+
+</script>
+</body>
+</html>

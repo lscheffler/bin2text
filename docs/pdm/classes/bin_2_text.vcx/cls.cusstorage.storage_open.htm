@@ -1,0 +1,496 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="de" lang="de">
+<head>
+<title>Method storage_open of class cusstorage</title>
+<meta content="text/html; charset=windows-1252" http-equiv="Content-Type" />
+<meta name="Generator" content="Project Documenting Machine" />
+<meta name="Version" content="1.3.3" />
+<link rel="stylesheet" href="../../css/foxw.css" type="text/css" />
+<link rel="stylesheet" href="../../css/sc.css" type="text/css" />
+<link rel="stylesheet" href="../../repository/diamp_pdm_ab.css" type="text/css" />
+<link rel="stylesheet" href="../../repository/pdm_ab.css" type="text/css" />
+<link rel="stylesheet" href="../../repository/pdm_ab_notes.css" type="text/css" />
+<script src="../../js/pdm.js" language="JavaScript" type="text/javascript"></script>
+<script src="../../repository/pdm_ab.js" language="JavaScript" type="text/javascript"></script>
+</head>
+<body>
+<div class="diaxp_mhead">storage_open Method</div>
+<div class="diaxp_mbody_class">
+
+<table class="clear_table">
+ <tbody>
+  <tr><td>Class: </td><td><a href="cls.cusstorage.htm" title="Skip to class cusstorage">cusstorage</a></td></tr>
+  <tr><td>Description:</td><td>Opens the storage file.</td></tr>
+ </tbody>
+</table>
+</div>
+<div class="diaxp_mbody">
+<!-- Created with _diamp_pdm_ab by Agnes Beste    20.05.2023 10:19 -->
+ <div class="PDM_AB_Descr"><!-- Descr Begin -->
+Opens / create storage table.
+ </div><!-- Descr End -->
+
+ <div class="DIAMP_PDM_AB_Syntax"><!-- Syntax Begin -->
+  <div class="SColor">
+   <div class="RetVal"><a href="#_6MD0M58GJ">RetVal</a>&nbsp;</div>   <div class="RetValEq">=</div>   <div class="PEM">
+    Object.storage_open
+   </div>
+   <div class="Para">
+    (<a href="#_6MD0M58GK">tcFile</a>)
+   </div>
+   <div style="clear: both"></div>
+  </div><!-- Colour End -->
+ </div><!-- Syntax End -->
+
+ <div class="DIAMP_PDM_AB_Params"><!-- Parameters Begin -->
+  <span class="PDM_AB_Head">
+   Parameter
+  </span>
+  <dl class="DIAMP_PDM_AB_Params_List">
+   <dt class="dt_">
+    <a class="DIAMP_PDM_AB_Params_ParaName" id="_6MD0M58GK" name="_6MD0M58GK">
+     <span class="PDMEXPR PDMNor" ><span class='PDMVar'>tcFile</span></span>
+
+    </a>
+   </dt>
+   <dd class="dd_">
+    <span class="Params_Short">
+     File to open or create.
+    </span>
+    <table class="Params_Info">
+     <colgroup>
+      <col class="ColumnValue" />
+      <col class="ColumnData" />
+     </colgroup>
+     <tbody>
+      <tr>
+       <td class="CellValue">Type</td>
+       <td class="CellData">Character</td>
+      </tr>
+      <tr>
+       <td class="CellValue">Direction</td>
+       <td class="CellData">Input</td>
+      </tr>
+     </tbody>
+    </table>
+   </dd>
+  </dl>
+ </div><!-- Parameters End -->
+
+ <div class="DIAMP_PDM_AB_RetVal"><!-- Returns Begin -->
+  <div>
+   <span class="PDM_AB_Head">
+    <a id="_6MD0M58GJ" name="_6MD0M58GJ">
+     Return value
+    </a>
+   </span> <span class="RetVal_Ttype">Character</span>
+  </div>
+  <div class="PDM_AB_Body">
+Alias of the storage table. <span class="PDMEXPR PDMNor" ><span class='PDMOper'>.</span><span class='PDMResK'>NULL</span><span class='PDMOper'>.</span></span>
+ if error.
+  </div>
+ </div><!-- Returns End -->
+
+ <div class="PDM_AB_Remarks"><!-- Remarks Begin -->
+  <span class="PDM_AB_Head">
+   Remarks
+  </span>
+  <div class="PDM_AB_Body">
+
+
+
+
+<p>Table structure of the storage table</p>
+ <table border="1" cellspacing="0">
+  <thead>
+   <tr>
+    <td>Field</td><td>type</td><td>usage</td>
+   </tr>
+  </thead>
+  <tbody>
+  <tr>
+  <td>cType</td>
+  <td>c(1)</td>
+  <td>
+   <p>A flag to mark the type of the record. Derived from SCCText / PJX</p>
+   <p>Not supported types of PJX:
+   H = Header, L = Library (DLL/FLL), P = Program, Q = Query, T = Text, X = other File, Z = Application</p>
+   <p>Type W (Project Hook) of PJX is mapped to V/v.</p>
+   <table border="1" cellspacing="0">
+    <thead>
+      <tr><td>Value</td><td>usage</td></tr>
+    </thead>
+    <tr><td>B</td><td>Label / </td></tr>
+    <tr><td>D</td><td>Table / DBF</td></tr>
+    <tr><td>d</td><td>Database / DBC</td></tr>
+    <tr><td>K</td><td>Form / SCX</td></tr>
+    <tr><td>k</td><td>Object of a Form</td></tr>
+    <tr><td>M</td><td>Menu / MNX</td></tr>
+    <tr><td>P</td><td>Project / PJX</td></tr>
+    <tr><td>R</td><td>Report / FRX</td></tr>
+    <tr><td>V</td><td>Classlibrary / VCX</td></tr>
+    <tr><td>v</td><td>Class of a Classlibrary</td></tr>
+    <tr><td></td><td><u>Other:</u></td></tr>
+    <tr><td>f</td><td>Macro / FKY</td></tr>
+    <tr><td>m</td><td>Variable file / MEM</td></tr>
+    <tr><td></td><td><u>Internal:</u></td></tr>
+    <tr><td>A</td><td>Additional file to process in <i>git commit All</i></td></tr>
+    <tr><td>S</td><td>Setting</td></tr>
+    <tr><td><b>X</b></td><td><b>Heart beat check</b></td></tr>
+    </table>
+   </td>
+  </tr>
+  <tr>
+   <td>cFile</td>
+   <td>c(240)</td>
+   <td>File to process. Allways the binary file, except for settings.</td>
+  </tr>
+  <tr>
+   <td>cObjName</td>
+   <td>c(240)</td>
+   <td>For v and k records, the ObjName field of the vcx / scx.<br/>For A records, descriptive name.</td>
+  </tr>
+  <tr>
+   <td>cUniqueID</td>
+   <td>c(16)</td>
+   <td>Something to identify the change status, timestamp field CRC etc.<br/>
+    For settings record: date described.<br/>
+    For Additional files record: UniqueID to identify record.<br/>
+    For Heart beat Record: Version number of the table.
+    Will be compared with internal number for structural changes.
+   </td>
+  </tr>
+  <tr>
+   <td>iDitry</td>
+   <td>I</td>
+   <td>
+   	<p>Marks an item as dirty from last run.</p>
+    <table border="1" cellspacing="0">
+     <tr><td colspan="2">Source; cType IN (B,D,d,f,K,k,M,m,R,V,v)</td></tr>
+     <tr>
+       <td>8</td>
+       <td>
+        Not deleted on last cleanup (full run with delete obsolete files)
+        w/o any other action.
+      </td>
+     </tr>
+     <tr><td>4</td><td>New</td></tr>
+     <tr><td>2</td><td>Changed</td></tr>
+     <tr><td>1</td><td>Direction to binaray. Additional to other positives</td></tr>
+     <tr><td>0</td><td>0k</td></tr>
+     <tr><td>-1</td><td>to delete</td></tr>
+     <tr><td>-2</td><td>deleted</td></tr>
+     <tr><td>-3</td><td>dirty by heart beat</td></tr>
+     <tr><td>-4</td><td>dirty by watch dog (time)</td></tr>
+     <tr><td colspan="2">Heart beat</td></tr>
+     <tr><td>0</td><td>ok</td></tr>
+     <tr><td><b>1</b></td><td><b>Error. Do not compare, process all.</b></td></tr>
+    </table>
+   </td>
+  </tr>
+  <tr>
+   <td>tLastUse</td>
+   <td>T</td>
+   <td>Internal timestamp, used for garbage collection.</td>
+  </tr>
+  </tbody>
+ </table>
+ <p>Checks version number on opening table.</p>
+
+  </div>
+ </div><!-- Remarks End -->
+
+ <div class="PDM_AB_Changes"><!-- Changes Begin -->
+  <hr />
+  <span class="PDM_AB_Head">
+   Changes
+  </span>
+  <div class="PDM_AB_Body">
+   <span class="Change_Time">
+    27.02.2023 14:58
+   </span><br />
+Changed by SF<br />
+	Problem with SCX just modified. Issue #4<br/>
+ Just remove all SCX VCX storage for simplicity
+	
+  </div>
+ </div><!-- Changes End -->
+
+
+<!-- /Created with _diamp_pdm_ab by Agnes Beste    20.05.2023 10:19 -->
+
+ <div class="SC">
+  <img onclick="ExpandSC('SP_40',-1);"class="imgEC" src="../../imgs/dotab.gif" alt="Expand/Collapse source code of procedure storage_open" id="IMG_SP_40" />
+  <span ondblclick="ExpandSC('SP_40',-1);" class="SCCaption"><a name="cusstorage">Source Code</a></span>
+  <div ondblclick="ExpandSC('SP_40',-1);" class="SCE" style="display: none;" id="TX_SP_40">
+<!-- Code Begin -->
+<pre class="PDMCODE PDMNor" ><span class='PDMCnt'>   1</span> <span class='PDMInd'>  </span> <span class='PDMResK'>LPARAMETERS</span><span class='PDMOper'>;</span>
+<span class='PDMCnt'>   2</span> <span class='PDMInd'> 1</span>  <span class='PDMVar'>tcFile</span>
+<span class='PDMCnt'>   3</span> <span class='PDMInd'>  </span> 
+<span class='PDMCnt'>   4</span> <span class='PDMInd'>  </span> 
+<span class='PDMCnt'> 124</span> <span class='PDMInd'>  </span> 
+<span class='PDMCnt'> 125</span> <span class='PDMInd'>  </span> <span class='PDMResK'>LOCAL</span><span class='PDMOper'>;</span>
+<span class='PDMCnt'> 126</span> <span class='PDMInd'> 1</span>  <span class='PDMVar'>llError</span>     <span class='PDMResK'>AS</span> <span class='PDMVar'>BOOLEAN</span><span class='PDMOper'>,</span><span class='PDMOper'>;</span>
+<span class='PDMCnt'> 127</span> <span class='PDMInd'> 1</span>  <span class='PDMVar'>loException</span> <span class='PDMResK'>AS</span> <span class='PDMResK'>EXCEPTION</span><span class='PDMOper'>,</span><span class='PDMOper'>;</span>
+<span class='PDMCnt'> 128</span> <span class='PDMInd'> 1</span>  <span class='PDMVar'>lnResult</span>    <span class='PDMResK'>AS</span> <span class='PDMResK'>NUMBER</span>
+<span class='PDMCnt'> 129</span> <span class='PDMInd'>  </span> 
+<span class='PDMCnt'> 130</span> <span class='PDMInd'>  </span> <span class='PDMVar'>llError</span> <span class='PDMOper'>=</span> <span class='PDMLit'>.F.</span>
+<span class='PDMCnt'> 131</span> <span class='PDMInd'>  </span> 
+<span class='PDMCnt'> 132</span> <span class='PDMInd'>  </span> <span class='PDMResK'>IF</span> <span class='PDMOper'>!</span><span class='PDMResF'>FILE</span><span class='PDMOper'>(</span><span class='PDMVar'>m</span><span class='PDMOper'>.</span><span class='PDMVar'>tcFile</span><span class='PDMOper'>)</span> <span class='PDMResK'>THEN</span>
+<span class='PDMCnt'> 133</span> <span class='PDMInd'> 1</span>  <span class='PDMResK'>TRY</span>
+<span class='PDMCnt'> 134</span> <span class='PDMInd'> 3</span>    <span class='PDMResK'>CREATE</span> <span class='PDMResK'>TABLE</span> <span class='PDMOper'>(</span><span class='PDMVar'>m</span><span class='PDMOper'>.</span><span class='PDMVar'>tcFile</span><span class='PDMOper'>)</span><span class='PDMOper'>(</span><span class='PDMOper'>;</span>
+<span class='PDMCnt'> 135</span> <span class='PDMInd'> 4</span>     <span class='PDMVar'>cType</span>     <span class='PDMVar'>c</span><span class='PDMOper'>(</span><span class='PDMLit'>1</span><span class='PDMOper'>)</span><span class='PDMOper'>,</span><span class='PDMOper'>;</span>
+<span class='PDMCnt'> 136</span> <span class='PDMInd'> 4</span>     <span class='PDMVar'>cFile</span>     <span class='PDMVar'>c</span><span class='PDMOper'>(</span><span class='PDMLit'>240</span><span class='PDMOper'>)</span><span class='PDMOper'>,</span><span class='PDMOper'>;</span>
+<span class='PDMCnt'> 137</span> <span class='PDMInd'> 4</span>     <span class='PDMVar'>cObjName</span>  <span class='PDMVar'>c</span><span class='PDMOper'>(</span><span class='PDMLit'>240</span><span class='PDMOper'>)</span><span class='PDMOper'>,</span><span class='PDMOper'>;</span>
+<span class='PDMCnt'> 138</span> <span class='PDMInd'> 4</span>     <span class='PDMVar'>cUniqueId</span> <span class='PDMVar'>c</span><span class='PDMOper'>(</span><span class='PDMLit'>16</span><span class='PDMOper'>)</span> <span class='PDMResK'>NOCPTRANS</span><span class='PDMOper'>,</span><span class='PDMOper'>;</span>
+<span class='PDMCnt'> 139</span> <span class='PDMInd'> 4</span>     <span class='PDMVar'>iDirty</span>    <span class='PDMVar'>I</span><span class='PDMOper'>,</span><span class='PDMOper'>;</span>
+<span class='PDMCnt'> 140</span> <span class='PDMInd'> 4</span>     <span class='PDMVar'>tLastUse</span>  <span class='PDMVar'>T</span><span class='PDMOper'>)</span>
+<span class='PDMCnt'> 141</span> <span class='PDMInd'> 3</span>    <span class='PDMResK'>INDEX</span> <span class='PDMResK'>ON</span> <span class='PDMVar'>cType</span>        <span class='PDMResK'>TAG</span> <span class='PDMVar'>_cType</span>
+<span class='PDMCnt'> 142</span> <span class='PDMInd'>  </span> <span class='PDMCom'>*Like SCCTEXT.prg</span>
+<span class='PDMCnt'> 143</span> <span class='PDMInd'>  </span> <span class='PDMCom'>*(d = DBC, D = DBF, K = Form, B = Label, M = Menu, R = Report, V = Classlibrary)</span>
+<span class='PDMCnt'> 144</span> <span class='PDMInd'>  </span> <span class='PDMCom'>*additional:</span>
+<span class='PDMCnt'> 145</span> <span class='PDMInd'>  </span> <span class='PDMCom'>*v = Class</span>
+<span class='PDMCnt'> 146</span> <span class='PDMInd'>  </span> <span class='PDMCom'>*k = Form timestamp</span>
+<span class='PDMCnt'> 147</span> <span class='PDMInd'>  </span> <span class='PDMCom'>*X = Heart beat check</span>
+<span class='PDMCnt'> 148</span> <span class='PDMInd'>  </span> <span class='PDMCom'>*S = Setting</span>
+<span class='PDMCnt'> 149</span> <span class='PDMInd'>  </span> <span class='PDMCom'>*A = Additional files</span>
+<span class='PDMCnt'> 150</span> <span class='PDMInd'> 3</span>    <span class='PDMResK'>INDEX</span> <span class='PDMResK'>ON</span> <span class='PDMVar'>cFile</span>        <span class='PDMResK'>TAG</span> <span class='PDMVar'>_cFile</span>
+<span class='PDMCnt'> 151</span> <span class='PDMInd'> 3</span>    <span class='PDMResK'>INDEX</span> <span class='PDMResK'>ON</span> <span class='PDMVar'>cObjName</span>    <span class='PDMResK'>TAG</span> <span class='PDMVar'>_cObj</span>
+<span class='PDMCnt'> 152</span> <span class='PDMInd'> 3</span>    <span class='PDMResK'>INDEX</span> <span class='PDMResK'>ON</span> <span class='PDMVar'>cUniqueId</span>    <span class='PDMResK'>TAG</span> <span class='PDMVar'>_cUni</span>
+<span class='PDMCnt'> 153</span> <span class='PDMInd'> 3</span>    <span class='PDMResK'>INDEX</span> <span class='PDMResK'>ON</span> <span class='PDMVar'>iDirty</span>        <span class='PDMResK'>TAG</span> <span class='PDMVar'>_iDirty</span>
+<span class='PDMCnt'> 154</span> <span class='PDMInd'> 3</span>    <span class='PDMResK'>INDEX</span> <span class='PDMResK'>ON</span> <span class='PDMVar'>tLastUse</span>    <span class='PDMResK'>TAG</span> <span class='PDMVar'>_tLast</span>
+<span class='PDMCnt'> 155</span> <span class='PDMInd'>  </span> 
+<span class='PDMCnt'> 156</span> <span class='PDMInd'> 3</span>    <span class='PDMResK'>USE</span>
+<span class='PDMCnt'> 157</span> <span class='PDMInd'> 2</span>   <span class='PDMResK'>CATCH</span> <span class='PDMResK'>TO</span> <span class='PDMVar'>m</span><span class='PDMOper'>.</span><span class='PDMVar'>loException</span>
+<span class='PDMCnt'> 158</span> <span class='PDMInd'>  </span> <span class='PDMCom'>* andere Fehler, Standardhandler rufen</span>
+<span class='PDMCnt'> 159</span> <span class='PDMInd'>  </span> <span class='PDMCom'>* ToDo</span>
+<span class='PDMCnt'> 160</span> <span class='PDMInd'> 3</span>    <span class='PDMVar'>llError</span> <span class='PDMOper'>=</span> <span class='PDMLit'>.T.</span>
+<span class='PDMCnt'> 161</span> <span class='PDMInd'> 2</span>   <span class='PDMResK'>FINALLY</span>
+<span class='PDMCnt'> 162</span> <span class='PDMInd'> 1</span>  <span class='PDMResK'>ENDTRY</span>
+<span class='PDMCnt'> 163</span> <span class='PDMInd'>  </span> 
+<span class='PDMCnt'> 164</span> <span class='PDMInd'> 1</span>  <span class='PDMResK'>IF</span> <span class='PDMVar'>m</span><span class='PDMOper'>.</span><span class='PDMVar'>llError</span> <span class='PDMResK'>THEN</span>
+<span class='PDMCnt'> 165</span> <span class='PDMInd'>  </span> <span class='PDMCom'>*we can't handle</span>
+<span class='PDMCnt'> 166</span> <span class='PDMInd'>  </span> <span class='PDMCom'>*process all</span>
+<span class='PDMCnt'> 167</span> <span class='PDMInd'> 2</span>   <span class='PDMResK'>USE</span> <span class='PDMResK'>IN</span> <span class='PDMResF'>SELECT</span><span class='PDMOper'>(</span><span class='PDMStr'>'Storage'</span><span class='PDMOper'>)</span>
+<span class='PDMCnt'> 168</span> <span class='PDMInd'> 2</span>   <span class='PDMResK'>RETURN</span> <span class='PDMVar'>NIL</span>
+<span class='PDMCnt'> 169</span> <span class='PDMInd'> 1</span>  <span class='PDMResK'>ENDIF</span> <span class='PDMCom'>&amp;&amp;m.llError</span>
+<span class='PDMCnt'> 170</span> <span class='PDMInd'>  </span> <span class='PDMResK'>ENDIF</span> <span class='PDMCom'>&amp;&amp;!FILE(m.tcFile)</span>
+<span class='PDMCnt'> 171</span> <span class='PDMInd'>  </span> 
+<span class='PDMCnt'> 172</span> <span class='PDMInd'>  </span> <span class='PDMResK'>TRY</span>
+<span class='PDMCnt'> 173</span> <span class='PDMInd'>  </span> <span class='PDMCom'>*Was zu testen ist</span>
+<span class='PDMCnt'> 174</span> <span class='PDMInd'> 2</span>   <span class='PDMResK'>USE</span> <span class='PDMOper'>(</span><span class='PDMVar'>m</span><span class='PDMOper'>.</span><span class='PDMVar'>tcFile</span><span class='PDMOper'>)</span> <span class='PDMResK'>ALIAS</span> <span class='PDMVar'>Storage</span> <span class='PDMResK'>IN</span> <span class='PDMResF'>SELECT</span><span class='PDMOper'>(</span><span class='PDMStr'>'Storage'</span><span class='PDMOper'>)</span> <span class='PDMResK'>EXCLUSIVE</span>
+<span class='PDMCnt'> 175</span> <span class='PDMInd'>  </span> 
+<span class='PDMCnt'> 176</span> <span class='PDMInd'> 2</span>   <span class='PDMResK'>SELECT</span> <span class='PDMVar'>Storage</span>
+<span class='PDMCnt'> 177</span> <span class='PDMInd'> 2</span>   <span class='PDMResK'>PACK</span>
+<span class='PDMCnt'> 178</span> <span class='PDMInd'> 1</span>  <span class='PDMResK'>CATCH</span> <span class='PDMResK'>TO</span> <span class='PDMVar'>m</span><span class='PDMOper'>.</span><span class='PDMVar'>loException</span>
+<span class='PDMCnt'> 179</span> <span class='PDMInd'>  </span> <span class='PDMCom'>* andere Fehler, Standardhandler rufen</span>
+<span class='PDMCnt'> 180</span> <span class='PDMInd'>  </span> <span class='PDMCom'>* ToDo</span>
+<span class='PDMCnt'> 181</span> <span class='PDMInd'>  </span> <span class='PDMCom'>*dann eben kein pack, egal</span>
+<span class='PDMCnt'> 182</span> <span class='PDMInd'> 2</span>   <span class='PDMVar'>llError</span> <span class='PDMOper'>=</span> <span class='PDMLit'>.T.</span>
+<span class='PDMCnt'> 183</span> <span class='PDMInd'> 1</span>  <span class='PDMResK'>FINALLY</span>
+<span class='PDMCnt'> 184</span> <span class='PDMInd'> 2</span>   <span class='PDMResK'>USE</span> <span class='PDMOper'>(</span><span class='PDMVar'>m</span><span class='PDMOper'>.</span><span class='PDMVar'>tcFile</span><span class='PDMOper'>)</span> <span class='PDMResK'>ALIAS</span> <span class='PDMVar'>Storage</span> <span class='PDMResK'>IN</span> <span class='PDMResF'>SELECT</span><span class='PDMOper'>(</span><span class='PDMStr'>'Storage'</span><span class='PDMOper'>)</span>
+<span class='PDMCnt'> 185</span> <span class='PDMInd'>  </span> 
+<span class='PDMCnt'> 186</span> <span class='PDMInd'>  </span> <span class='PDMResK'>ENDTRY</span>
+<span class='PDMCnt'> 187</span> <span class='PDMInd'>  </span> 
+<span class='PDMCnt'> 188</span> <span class='PDMInd'>  </span> <span class='PDMResK'>IF</span> <span class='PDMVar'>m</span><span class='PDMOper'>.</span><span class='PDMVar'>llError</span> <span class='PDMResK'>THEN</span>
+<span class='PDMCnt'> 189</span> <span class='PDMInd'>  </span> <span class='PDMCom'>*we can't handle</span>
+<span class='PDMCnt'> 190</span> <span class='PDMInd'>  </span> <span class='PDMCom'>*process all</span>
+<span class='PDMCnt'> 191</span> <span class='PDMInd'> 1</span>  <span class='PDMResK'>USE</span> <span class='PDMResK'>IN</span> <span class='PDMResF'>SELECT</span><span class='PDMOper'>(</span><span class='PDMStr'>'Storage'</span><span class='PDMOper'>)</span>
+<span class='PDMCnt'> 192</span> <span class='PDMInd'> 1</span>  <span class='PDMResK'>RETURN</span> <span class='PDMVar'>NIL</span>
+<span class='PDMCnt'> 193</span> <span class='PDMInd'>  </span> <span class='PDMResK'>ENDIF</span> <span class='PDMCom'>&amp;&amp;m.llError</span>
+<span class='PDMCnt'> 194</span> <span class='PDMInd'>  </span> 
+<span class='PDMCnt'> 195</span> <span class='PDMInd'>  </span> <span class='PDMCom'>*check heart beat for existence (and set as error to fix problems)</span>
+<span class='PDMCnt'> 196</span> <span class='PDMInd'>  </span> <span class='PDMResK'>SELECT</span><span class='PDMOper'>;</span>
+<span class='PDMCnt'> 197</span> <span class='PDMInd'> 1</span>  <span class='PDMVar'>Cur1</span><span class='PDMOper'>.</span><span class='PDMVar'>iDirty</span><span class='PDMOper'>,</span><span class='PDMOper'>;</span>
+<span class='PDMCnt'> 198</span> <span class='PDMInd'> 1</span>  <span class='PDMVar'>Cur1</span><span class='PDMOper'>.</span><span class='PDMVar'>cUniqueId</span><span class='PDMOper'>;</span>
+<span class='PDMCnt'> 199</span> <span class='PDMInd'> 1</span>  <span class='PDMResK'>FROM</span> <span class='PDMVar'>Storage</span> <span class='PDMResK'>AS</span> <span class='PDMVar'>Cur1</span><span class='PDMOper'>;</span>
+<span class='PDMCnt'> 200</span> <span class='PDMInd'> 1</span>  <span class='PDMResK'>INTO</span> <span class='PDMResK'>CURSOR</span> <span class='PDMVar'>curHelp</span><span class='PDMOper'>;</span>
+<span class='PDMCnt'> 201</span> <span class='PDMInd'> 1</span>  <span class='PDMResK'>WHERE</span> <span class='PDMVar'>Cur1</span><span class='PDMOper'>.</span><span class='PDMVar'>cType</span><span class='PDMOper'>==</span><span class='PDMStr'>"X"</span>
+<span class='PDMCnt'> 202</span> <span class='PDMInd'>  </span> 
+<span class='PDMCnt'> 203</span> <span class='PDMInd'>  </span> <span class='PDMResK'>IF</span> <span class='PDMResF'>RECCOUNT</span><span class='PDMOper'>(</span><span class='PDMOper'>)</span><span class='PDMOper'>=</span><span class='PDMLit'>0</span> <span class='PDMResK'>THEN</span>
+<span class='PDMCnt'> 204</span> <span class='PDMInd'> 1</span>  <span class='PDMResK'>INSERT</span> <span class='PDMResK'>INTO</span> <span class='PDMOper'>(</span><span class='PDMVar'>m</span><span class='PDMOper'>.</span><span class='PDMVar'>tcFile</span><span class='PDMOper'>)</span><span class='PDMOper'>;</span>
+<span class='PDMCnt'> 205</span> <span class='PDMInd'> 2</span>   <span class='PDMOper'>(</span><span class='PDMVar'>cFile</span><span class='PDMOper'>,</span><span class='PDMVar'>cObjName</span> <span class='PDMOper'>,</span><span class='PDMVar'>cType</span><span class='PDMOper'>,</span><span class='PDMVar'>cUniqueId</span><span class='PDMOper'>,</span><span class='PDMVar'>iDirty</span><span class='PDMOper'>)</span><span class='PDMOper'>;</span>
+<span class='PDMCnt'> 206</span> <span class='PDMInd'> 2</span>   <span class='PDMResK'>VALUES</span><span class='PDMOper'>;</span>
+<span class='PDMCnt'> 207</span> <span class='PDMInd'> 2</span>   <span class='PDMOper'>(</span><span class='PDMStr'>"Check heart beat"</span><span class='PDMOper'>,</span><span class='PDMStr'>"internal"</span><span class='PDMOper'>,</span><span class='PDMStr'>"X"</span><span class='PDMOper'>,</span><span class='PDMVar'>dcB2T_Verno</span>  <span class='PDMOper'>,</span> <span class='PDMLit'>2</span><span class='PDMOper'>)</span>
+<span class='PDMCnt'> 208</span> <span class='PDMInd'>  </span> 
+<span class='PDMCnt'> 209</span> <span class='PDMInd'> 1</span>  <span class='PDMResK'>SELECT</span><span class='PDMOper'>;</span>
+<span class='PDMCnt'> 210</span> <span class='PDMInd'> 2</span>   <span class='PDMVar'>Cur1</span><span class='PDMOper'>.</span><span class='PDMVar'>iDirty</span><span class='PDMOper'>,</span><span class='PDMOper'>;</span>
+<span class='PDMCnt'> 211</span> <span class='PDMInd'> 2</span>   <span class='PDMVar'>Cur1</span><span class='PDMOper'>.</span><span class='PDMVar'>cUniqueId</span><span class='PDMOper'>;</span>
+<span class='PDMCnt'> 212</span> <span class='PDMInd'> 2</span>   <span class='PDMResK'>FROM</span> <span class='PDMVar'>Storage</span> <span class='PDMResK'>AS</span> <span class='PDMVar'>Cur1</span><span class='PDMOper'>;</span>
+<span class='PDMCnt'> 213</span> <span class='PDMInd'> 2</span>   <span class='PDMResK'>INTO</span> <span class='PDMResK'>CURSOR</span> <span class='PDMVar'>curHelp</span><span class='PDMOper'>;</span>
+<span class='PDMCnt'> 214</span> <span class='PDMInd'> 2</span>   <span class='PDMResK'>WHERE</span> <span class='PDMVar'>Cur1</span><span class='PDMOper'>.</span><span class='PDMVar'>cType</span><span class='PDMOper'>==</span><span class='PDMStr'>"X"</span>
+<span class='PDMCnt'> 215</span> <span class='PDMInd'>  </span> <span class='PDMResK'>ENDIF</span> <span class='PDMCom'>&amp;&amp;RECCOUNT()=0</span>
+<span class='PDMCnt'> 216</span> <span class='PDMInd'>  </span> 
+<span class='PDMCnt'> 217</span> <span class='PDMInd'>  </span> <span class='PDMVar'>lnResult</span> <span class='PDMOper'>=</span> <span class='PDMVar'>Compare_Verno</span><span class='PDMOper'>(</span><span class='PDMVar'>cUniqueId</span><span class='PDMOper'>,</span><span class='PDMVar'>dcB2T_Verno</span><span class='PDMOper'>)</span>
+<span class='PDMCnt'> 218</span> <span class='PDMInd'>  </span> 
+<span class='PDMCnt'> 219</span> <span class='PDMInd'>  </span> <span class='PDMResK'>DO</span> <span class='PDMResK'>CASE</span>
+<span class='PDMCnt'> 220</span> <span class='PDMInd'> 1</span>  <span class='PDMResK'>CASE</span> <span class='PDMResF'>EMPTY</span><span class='PDMOper'>(</span><span class='PDMVar'>cUniqueId</span><span class='PDMOper'>)</span>
+<span class='PDMCnt'> 221</span> <span class='PDMInd'>  </span> <span class='PDMCom'>* we assume we are on the step to 1.x</span>
+<span class='PDMCnt'> 222</span> <span class='PDMInd'> 2</span>   <span class='PDMResK'>USE</span> <span class='PDMResK'>IN</span> <span class='PDMResF'>SELECT</span><span class='PDMOper'>(</span><span class='PDMStr'>'Storage'</span><span class='PDMOper'>)</span>
+<span class='PDMCnt'> 223</span> <span class='PDMInd'> 2</span>   <span class='PDMResK'>USE</span> <span class='PDMOper'>(</span><span class='PDMVar'>m</span><span class='PDMOper'>.</span><span class='PDMVar'>tcFile</span><span class='PDMOper'>)</span> <span class='PDMResK'>ALIAS</span> <span class='PDMVar'>Storage</span> <span class='PDMResK'>IN</span> <span class='PDMResF'>SELECT</span><span class='PDMOper'>(</span><span class='PDMStr'>'Storage'</span><span class='PDMOper'>)</span> <span class='PDMResK'>EXCLUSIVE</span>
+<span class='PDMCnt'> 224</span> <span class='PDMInd'>  </span> 
+<span class='PDMCnt'> 225</span> <span class='PDMInd'>  </span> <span class='PDMCom'>*check for misplaced Key DBF / DBC</span>
+<span class='PDMCnt'> 226</span> <span class='PDMInd'> 2</span>   <span class='PDMResK'>SELECT</span> <span class='PDMVar'>Storage</span>
+<span class='PDMCnt'> 227</span> <span class='PDMInd'> 2</span>   <span class='PDMResK'>LOCATE</span><span class='PDMOper'>;</span>
+<span class='PDMCnt'> 228</span> <span class='PDMInd'> 3</span>    <span class='PDMResK'>FOR</span> <span class='PDMOper'>(</span><span class='PDMVar'>cType</span><span class='PDMOper'>==</span><span class='PDMStr'>'D'</span><span class='PDMOper'>;</span>
+<span class='PDMCnt'> 229</span> <span class='PDMInd'> 3</span>    <span class='PDMOper'>AND</span> <span class='PDMResF'>ATC</span><span class='PDMOper'>(</span><span class='PDMStr'>'DBC'</span><span class='PDMOper'>,</span><span class='PDMResF'>JUSTEXT</span><span class='PDMOper'>(</span><span class='PDMVar'>cFile</span><span class='PDMOper'>)</span><span class='PDMOper'>)</span><span class='PDMOper'>&gt;</span><span class='PDMLit'>0</span><span class='PDMOper'>)</span><span class='PDMOper'>;</span>
+<span class='PDMCnt'> 230</span> <span class='PDMInd'> 3</span>    <span class='PDMOper'>OR</span> <span class='PDMOper'>(</span><span class='PDMVar'>cType</span><span class='PDMOper'>==</span><span class='PDMStr'>'d'</span><span class='PDMOper'>;</span>
+<span class='PDMCnt'> 231</span> <span class='PDMInd'> 3</span>    <span class='PDMOper'>AND</span> <span class='PDMResF'>ATC</span><span class='PDMOper'>(</span><span class='PDMStr'>'DBF'</span><span class='PDMOper'>,</span><span class='PDMResF'>JUSTEXT</span><span class='PDMOper'>(</span><span class='PDMVar'>cFile</span><span class='PDMOper'>)</span><span class='PDMOper'>)</span><span class='PDMOper'>&gt;</span><span class='PDMLit'>0</span><span class='PDMOper'>)</span>
+<span class='PDMCnt'> 232</span> <span class='PDMInd'>  </span> 
+<span class='PDMCnt'> 233</span> <span class='PDMInd'> 2</span>   <span class='PDMResK'>IF</span> <span class='PDMResF'>FOUND</span><span class='PDMOper'>(</span><span class='PDMOper'>)</span> <span class='PDMResK'>THEN</span>
+<span class='PDMCnt'> 234</span> <span class='PDMInd'>  </span> <span class='PDMCom'>*Version before 1.0.0</span>
+<span class='PDMCnt'> 235</span> <span class='PDMInd'> 3</span>    <span class='PDMResK'>REPLACE</span><span class='PDMOper'>;</span>
+<span class='PDMCnt'> 236</span> <span class='PDMInd'> 4</span>     <span class='PDMResK'>ALL</span><span class='PDMOper'>;</span>
+<span class='PDMCnt'> 237</span> <span class='PDMInd'> 4</span>     <span class='PDMVar'>cType</span> <span class='PDMResK'>WITH</span> <span class='PDMResF'>ICASE</span><span class='PDMOper'>(</span><span class='PDMVar'>cType</span><span class='PDMOper'>==</span><span class='PDMStr'>'D'</span><span class='PDMOper'>,</span><span class='PDMStr'>'d'</span><span class='PDMOper'>,</span><span class='PDMVar'>cType</span><span class='PDMOper'>==</span><span class='PDMStr'>'d'</span><span class='PDMOper'>,</span><span class='PDMStr'>'D'</span><span class='PDMOper'>,</span><span class='PDMVar'>cType</span><span class='PDMOper'>)</span>
+<span class='PDMCnt'> 238</span> <span class='PDMInd'>  </span> 
+<span class='PDMCnt'> 239</span> <span class='PDMInd'> 3</span>    <span class='PDMResK'>UPDATE</span> <span class='PDMVar'>Storage</span> <span class='PDMResK'>SET</span><span class='PDMOper'>;</span>
+<span class='PDMCnt'> 240</span> <span class='PDMInd'> 4</span>     <span class='PDMVar'>cUniqueId</span> <span class='PDMOper'>=</span> <span class='PDMVar'>dcB2T_Verno</span><span class='PDMOper'>;</span>
+<span class='PDMCnt'> 241</span> <span class='PDMInd'> 4</span>     <span class='PDMResK'>WHERE</span> <span class='PDMVar'>cType</span><span class='PDMOper'>==</span><span class='PDMStr'>"X"</span>
+<span class='PDMCnt'> 242</span> <span class='PDMInd'>  </span> 
+<span class='PDMCnt'> 243</span> <span class='PDMInd'> 2</span>   <span class='PDMResK'>ENDIF</span> <span class='PDMCom'>&amp;&amp;FOUND()</span>
+<span class='PDMCnt'> 244</span> <span class='PDMInd'>  </span> 
+<span class='PDMCnt'> 245</span> <span class='PDMInd'> 2</span>   <span class='PDMResK'>USE</span> <span class='PDMResK'>IN</span> <span class='PDMResF'>SELECT</span><span class='PDMOper'>(</span><span class='PDMStr'>'Storage'</span><span class='PDMOper'>)</span>
+<span class='PDMCnt'> 246</span> <span class='PDMInd'> 2</span>   <span class='PDMResK'>USE</span> <span class='PDMOper'>(</span><span class='PDMVar'>m</span><span class='PDMOper'>.</span><span class='PDMVar'>tcFile</span><span class='PDMOper'>)</span> <span class='PDMResK'>ALIAS</span> <span class='PDMVar'>Storage</span> <span class='PDMResK'>IN</span> <span class='PDMResF'>SELECT</span><span class='PDMOper'>(</span><span class='PDMStr'>'Storage'</span><span class='PDMOper'>)</span>
+<span class='PDMCnt'> 247</span> <span class='PDMInd'>  </span> 
+<span class='PDMCnt'> 248</span> <span class='PDMInd'> 1</span>  <span class='PDMResK'>CASE</span> <span class='PDMVar'>m</span><span class='PDMOper'>.</span><span class='PDMVar'>lnResult</span><span class='PDMOper'>=</span><span class='PDMLit'>1</span>
+<span class='PDMCnt'> 249</span> <span class='PDMInd'>  </span> <span class='PDMCom'>*table is of new version</span>
+<span class='PDMCnt'> 250</span> <span class='PDMInd'> 2</span>   <span class='PDMOper'>?</span><span class='PDMStr'>"Bin2Text"</span>
+<span class='PDMCnt'> 251</span> <span class='PDMInd'> 2</span>   <span class='PDMOper'>?</span><span class='PDMStr'>"Storage table is not fitting to this version. Expected: "</span><span class='PDMOper'>+</span><span class='PDMVar'>dcB2T_Verno</span><span class='PDMOper'>+</span><span class='PDMStr'>", new version found: "</span><span class='PDMOper'>+</span><span class='PDMVar'>cUniqueId</span>
+<span class='PDMCnt'> 252</span> <span class='PDMInd'> 2</span>   <span class='PDMOper'>?</span><span class='PDMStr'>'Table: '</span><span class='PDMOper'>+</span><span class='PDMResF'>DBF</span><span class='PDMOper'>(</span><span class='PDMStr'>'Storage'</span><span class='PDMOper'>)</span>
+<span class='PDMCnt'> 253</span> <span class='PDMInd'> 2</span>   <span class='PDMResK'>USE</span> <span class='PDMResK'>IN</span> <span class='PDMVar'>curHelp</span>
+<span class='PDMCnt'> 254</span> <span class='PDMInd'> 2</span>   <span class='PDMResK'>USE</span> <span class='PDMResK'>IN</span> <span class='PDMResF'>SELECT</span><span class='PDMOper'>(</span><span class='PDMStr'>'Storage'</span><span class='PDMOper'>)</span>
+<span class='PDMCnt'> 255</span> <span class='PDMInd'> 2</span>   <span class='PDMResK'>RETURN</span> <span class='PDMVar'>NIL</span>
+<span class='PDMCnt'> 256</span> <span class='PDMInd'>  </span> 
+<span class='PDMCnt'> 257</span> <span class='PDMInd'> 1</span>  <span class='PDMResK'>CASE</span> <span class='PDMVar'>m</span><span class='PDMOper'>.</span><span class='PDMVar'>lnResult</span><span class='PDMOper'>=</span><span class='PDMLit'>2</span><span class='PDMOper'>;</span>
+<span class='PDMCnt'> 258</span> <span class='PDMInd'> 3</span>    <span class='PDMOper'>AND</span> <span class='PDMResF'>SUBSTR</span><span class='PDMOper'>(</span><span class='PDMVar'>cUniqueId</span><span class='PDMOper'>,</span><span class='PDMLit'>1</span><span class='PDMOper'>,</span><span class='PDMResF'>AT</span><span class='PDMOper'>(</span><span class='PDMStr'>'.'</span><span class='PDMOper'>,</span><span class='PDMVar'>cUniqueId</span><span class='PDMOper'>,</span><span class='PDMLit'>2</span><span class='PDMOper'>)</span><span class='PDMOper'>)</span><span class='PDMOper'>==</span><span class='PDMResF'>SUBSTR</span><span class='PDMOper'>(</span><span class='PDMVar'>dcB2T_Verno</span><span class='PDMOper'>,</span><span class='PDMLit'>1</span><span class='PDMOper'>,</span><span class='PDMResF'>AT</span><span class='PDMOper'>(</span><span class='PDMStr'>'.'</span><span class='PDMOper'>,</span><span class='PDMVar'>dcB2T_Verno</span><span class='PDMOper'>,</span><span class='PDMLit'>2</span><span class='PDMOper'>)</span><span class='PDMOper'>)</span>
+<span class='PDMCnt'> 259</span> <span class='PDMInd'>  </span> <span class='PDMOper'>*</span><span class='PDMVar'>known</span> <span class='PDMVar'>pair</span><span class='PDMOper'>,</span> <span class='PDMResK'>go</span> <span class='PDMVar'>ahead</span> <span class='PDMOper'>(</span><span class='PDMResK'>only</span> <span class='PDMVar'>minor</span> <span class='PDMResK'>change</span> <span class='PDMVar'>w</span><span class='PDMOper'>/</span><span class='PDMVar'>o</span> <span class='PDMResF'>dbf</span> <span class='PDMResK'>change</span><span class='PDMOper'>)</span>
+<span class='PDMCnt'> 260</span> <span class='PDMInd'> 2</span>   <span class='PDMResK'>UPDATE</span> <span class='PDMVar'>Storage</span> <span class='PDMResK'>SET</span><span class='PDMOper'>;</span>
+<span class='PDMCnt'> 261</span> <span class='PDMInd'> 3</span>    <span class='PDMVar'>cUniqueId</span> <span class='PDMOper'>=</span> <span class='PDMVar'>dcB2T_Verno</span><span class='PDMOper'>;</span>
+<span class='PDMCnt'> 262</span> <span class='PDMInd'> 3</span>    <span class='PDMResK'>WHERE</span> <span class='PDMVar'>cType</span><span class='PDMOper'>==</span><span class='PDMStr'>"X"</span>
+<span class='PDMCnt'> 263</span> <span class='PDMInd'>  </span> 
+<span class='PDMCnt'> 264</span> <span class='PDMInd'> 1</span>  <span class='PDMResK'>CASE</span> <span class='PDMVar'>m</span><span class='PDMOper'>.</span><span class='PDMVar'>lnResult</span><span class='PDMOper'>=</span><span class='PDMLit'>2</span><span class='PDMOper'>;</span>
+<span class='PDMCnt'> 265</span> <span class='PDMInd'> 3</span>    <span class='PDMOper'>AND</span> <span class='PDMResF'>SUBSTR</span><span class='PDMOper'>(</span><span class='PDMVar'>cUniqueId</span><span class='PDMOper'>,</span><span class='PDMLit'>1</span><span class='PDMOper'>,</span><span class='PDMResF'>AT</span><span class='PDMOper'>(</span><span class='PDMStr'>'.'</span><span class='PDMOper'>,</span><span class='PDMVar'>cUniqueId</span><span class='PDMOper'>,</span><span class='PDMLit'>2</span><span class='PDMOper'>)</span><span class='PDMOper'>)</span><span class='PDMOper'>=</span><span class='PDMStr'>'1.0'</span> <span class='PDMOper'>AND</span> <span class='PDMResF'>SUBSTR</span><span class='PDMOper'>(</span><span class='PDMVar'>dcB2T_Verno</span><span class='PDMOper'>,</span><span class='PDMLit'>1</span><span class='PDMOper'>,</span><span class='PDMResF'>AT</span><span class='PDMOper'>(</span><span class='PDMStr'>'.'</span><span class='PDMOper'>,</span><span class='PDMVar'>dcB2T_Verno</span><span class='PDMOper'>,</span><span class='PDMLit'>2</span><span class='PDMOper'>)</span><span class='PDMOper'>)</span><span class='PDMOper'>=</span><span class='PDMStr'>'1.1'</span>
+<span class='PDMCnt'> 266</span> <span class='PDMInd'>  </span> <span class='PDMCom'>* change storage of additional path "inkomensurabel" to relative</span>
+<span class='PDMCnt'> 267</span> <span class='PDMInd'> 2</span>   <span class='PDMResK'>UPDATE</span> <span class='PDMVar'>Storage</span> <span class='PDMResK'>SET</span><span class='PDMOper'>;</span>
+<span class='PDMCnt'> 268</span> <span class='PDMInd'> 3</span>    <span class='PDMVar'>cFile</span> <span class='PDMOper'>=</span> <span class='PDMResF'>SYS</span><span class='PDMOper'>(</span><span class='PDMLit'>2014</span><span class='PDMOper'>,</span><span class='PDMVar'>cFile</span><span class='PDMOper'>,</span><span class='PDMResF'>DBF</span><span class='PDMOper'>(</span><span class='PDMStr'>'Storage'</span><span class='PDMOper'>)</span><span class='PDMOper'>)</span><span class='PDMOper'>;</span>
+<span class='PDMCnt'> 269</span> <span class='PDMInd'> 3</span>    <span class='PDMResK'>WHERE</span> <span class='PDMVar'>cType</span><span class='PDMOper'>==</span><span class='PDMStr'>"A"</span>
+<span class='PDMCnt'> 270</span> <span class='PDMInd'>  </span> 
+<span class='PDMCnt'> 271</span> <span class='PDMInd'>  </span> <span class='PDMCom'>*change  VerNo</span>
+<span class='PDMCnt'> 272</span> <span class='PDMInd'> 2</span>   <span class='PDMResK'>UPDATE</span> <span class='PDMVar'>Storage</span> <span class='PDMResK'>SET</span><span class='PDMOper'>;</span>
+<span class='PDMCnt'> 273</span> <span class='PDMInd'> 3</span>    <span class='PDMVar'>cUniqueId</span> <span class='PDMOper'>=</span> <span class='PDMVar'>dcB2T_Verno</span><span class='PDMOper'>;</span>
+<span class='PDMCnt'> 274</span> <span class='PDMInd'> 3</span>    <span class='PDMResK'>WHERE</span> <span class='PDMVar'>cType</span><span class='PDMOper'>==</span><span class='PDMStr'>"X"</span>
+<span class='PDMCnt'> 275</span> <span class='PDMInd'>  </span> 
+<span class='PDMCnt'> 276</span> <span class='PDMInd'> 1</span>  <span class='PDMResK'>CASE</span> <span class='PDMVar'>m</span><span class='PDMOper'>.</span><span class='PDMVar'>lnResult</span><span class='PDMOper'>=</span><span class='PDMLit'>2</span><span class='PDMOper'>;</span>
+<span class='PDMCnt'> 277</span> <span class='PDMInd'> 3</span>    <span class='PDMOper'>AND</span> <span class='PDMResF'>SUBSTR</span><span class='PDMOper'>(</span><span class='PDMVar'>cUniqueId</span><span class='PDMOper'>,</span><span class='PDMLit'>1</span><span class='PDMOper'>,</span><span class='PDMResF'>AT</span><span class='PDMOper'>(</span><span class='PDMStr'>'.'</span><span class='PDMOper'>,</span><span class='PDMVar'>cUniqueId</span><span class='PDMOper'>,</span><span class='PDMLit'>2</span><span class='PDMOper'>)</span><span class='PDMOper'>)</span><span class='PDMOper'>=</span><span class='PDMStr'>'1.1'</span> <span class='PDMOper'>AND</span> <span class='PDMResF'>SUBSTR</span><span class='PDMOper'>(</span><span class='PDMVar'>dcB2T_Verno</span><span class='PDMOper'>,</span><span class='PDMLit'>1</span><span class='PDMOper'>,</span><span class='PDMResF'>AT</span><span class='PDMOper'>(</span><span class='PDMStr'>'.'</span><span class='PDMOper'>,</span><span class='PDMVar'>dcB2T_Verno</span><span class='PDMOper'>,</span><span class='PDMLit'>2</span><span class='PDMOper'>)</span><span class='PDMOper'>)</span><span class='PDMOper'>=</span><span class='PDMStr'>'1.2'</span>
+<span class='PDMCnt'> 278</span> <span class='PDMInd'>  </span> <span class='PDMCom'>* objectname for SCX and VCX lower, somehow freshly aLtered SCX and not cleared expose mixed case</span>
+<span class='PDMCnt'> 279</span> <span class='PDMInd'>  </span> <span class='PDMCom'>* just remove SCX / VCX and rerun</span>
+<span class='PDMCnt'> 280</span> <span class='PDMInd'>  </span> <span class='PDMCom'>*!*    Changed by SF 27.2.2023</span>
+<span class='PDMCnt'> 281</span> <span class='PDMInd'>  </span> 
+<span class='PDMCnt'> 287</span> <span class='PDMInd'>  </span> <span class='PDMCom'>*!*    /Changed by SF 27.2.2023</span>
+<span class='PDMCnt'> 288</span> <span class='PDMInd'> 2</span>   <span class='PDMResK'>DELETE</span> <span class='PDMResK'>FROM</span> <span class='PDMVar'>Storage</span> <span class='PDMOper'>;</span>
+<span class='PDMCnt'> 289</span> <span class='PDMInd'> 3</span>    <span class='PDMResK'>WHERE</span> <span class='PDMResF'>INLIST</span><span class='PDMOper'>(</span><span class='PDMVar'>cType</span><span class='PDMOper'>,</span><span class='PDMStr'>"v"</span><span class='PDMOper'>,</span><span class='PDMStr'>"k"</span><span class='PDMOper'>,</span><span class='PDMStr'>"V"</span><span class='PDMOper'>,</span><span class='PDMStr'>"K"</span><span class='PDMOper'>)</span>
+<span class='PDMCnt'> 290</span> <span class='PDMInd'>  </span> 
+<span class='PDMCnt'> 291</span> <span class='PDMInd'>  </span> <span class='PDMCom'>*change  VerNo</span>
+<span class='PDMCnt'> 292</span> <span class='PDMInd'> 2</span>   <span class='PDMResK'>UPDATE</span> <span class='PDMVar'>Storage</span> <span class='PDMResK'>SET</span><span class='PDMOper'>;</span>
+<span class='PDMCnt'> 293</span> <span class='PDMInd'> 3</span>    <span class='PDMVar'>cUniqueId</span> <span class='PDMOper'>=</span> <span class='PDMVar'>dcB2T_Verno</span><span class='PDMOper'>;</span>
+<span class='PDMCnt'> 294</span> <span class='PDMInd'> 3</span>    <span class='PDMResK'>WHERE</span> <span class='PDMVar'>cType</span><span class='PDMOper'>==</span><span class='PDMStr'>"X"</span>
+<span class='PDMCnt'> 295</span> <span class='PDMInd'>  </span> 
+<span class='PDMCnt'> 296</span> <span class='PDMInd'> 1</span>  <span class='PDMResK'>CASE</span> <span class='PDMVar'>m</span><span class='PDMOper'>.</span><span class='PDMVar'>lnResult</span><span class='PDMOper'>=</span><span class='PDMLit'>2</span><span class='PDMOper'>;</span>
+<span class='PDMCnt'> 297</span> <span class='PDMInd'> 3</span>    <span class='PDMOper'>AND</span> <span class='PDMResF'>SUBSTR</span><span class='PDMOper'>(</span><span class='PDMVar'>cUniqueId</span><span class='PDMOper'>,</span><span class='PDMLit'>1</span><span class='PDMOper'>,</span><span class='PDMResF'>AT</span><span class='PDMOper'>(</span><span class='PDMStr'>'.'</span><span class='PDMOper'>,</span><span class='PDMVar'>cUniqueId</span><span class='PDMOper'>,</span><span class='PDMLit'>2</span><span class='PDMOper'>)</span><span class='PDMOper'>)</span><span class='PDMOper'>=</span><span class='PDMStr'>'1.0'</span> <span class='PDMOper'>AND</span> <span class='PDMResF'>SUBSTR</span><span class='PDMOper'>(</span><span class='PDMVar'>dcB2T_Verno</span><span class='PDMOper'>,</span><span class='PDMLit'>1</span><span class='PDMOper'>,</span><span class='PDMResF'>AT</span><span class='PDMOper'>(</span><span class='PDMStr'>'.'</span><span class='PDMOper'>,</span><span class='PDMVar'>dcB2T_Verno</span><span class='PDMOper'>,</span><span class='PDMLit'>2</span><span class='PDMOper'>)</span><span class='PDMOper'>)</span><span class='PDMOper'>=</span><span class='PDMStr'>'1.2'</span>
+<span class='PDMCnt'> 298</span> <span class='PDMInd'>  </span> <span class='PDMCom'>* just in case we update from 1.0 to 1.2</span>
+<span class='PDMCnt'> 299</span> <span class='PDMInd'>  </span> <span class='PDMCom'>* change storage of additional path "inkomensurabel" to relative</span>
+<span class='PDMCnt'> 300</span> <span class='PDMInd'> 2</span>   <span class='PDMResK'>UPDATE</span> <span class='PDMVar'>Storage</span> <span class='PDMResK'>SET</span><span class='PDMOper'>;</span>
+<span class='PDMCnt'> 301</span> <span class='PDMInd'> 3</span>    <span class='PDMVar'>cFile</span> <span class='PDMOper'>=</span> <span class='PDMResF'>SYS</span><span class='PDMOper'>(</span><span class='PDMLit'>2014</span><span class='PDMOper'>,</span><span class='PDMVar'>cFile</span><span class='PDMOper'>,</span><span class='PDMResF'>DBF</span><span class='PDMOper'>(</span><span class='PDMStr'>'Storage'</span><span class='PDMOper'>)</span><span class='PDMOper'>)</span><span class='PDMOper'>;</span>
+<span class='PDMCnt'> 302</span> <span class='PDMInd'> 3</span>    <span class='PDMResK'>WHERE</span> <span class='PDMVar'>cType</span><span class='PDMOper'>==</span><span class='PDMStr'>"A"</span>
+<span class='PDMCnt'> 303</span> <span class='PDMInd'>  </span> 
+<span class='PDMCnt'> 304</span> <span class='PDMInd'>  </span> <span class='PDMCom'>* objectname for SCX and VCX lower, somehow freshly aLtered SCX and not cleared expose mixed case</span>
+<span class='PDMCnt'> 305</span> <span class='PDMInd'>  </span> <span class='PDMCom'>* just remove SCX / VCX and rerun</span>
+<span class='PDMCnt'> 306</span> <span class='PDMInd'> 2</span>   <span class='PDMResK'>DELETE</span> <span class='PDMResK'>FROM</span> <span class='PDMVar'>Storage</span> <span class='PDMOper'>;</span>
+<span class='PDMCnt'> 307</span> <span class='PDMInd'> 3</span>    <span class='PDMResK'>WHERE</span> <span class='PDMResF'>INLIST</span><span class='PDMOper'>(</span><span class='PDMVar'>cType</span><span class='PDMOper'>,</span><span class='PDMStr'>"v"</span><span class='PDMOper'>,</span><span class='PDMStr'>"k"</span><span class='PDMOper'>,</span><span class='PDMStr'>"V"</span><span class='PDMOper'>,</span><span class='PDMStr'>"K"</span><span class='PDMOper'>)</span>
+<span class='PDMCnt'> 308</span> <span class='PDMInd'>  </span> 
+<span class='PDMCnt'> 309</span> <span class='PDMInd'>  </span> <span class='PDMCom'>*change  VerNo</span>
+<span class='PDMCnt'> 310</span> <span class='PDMInd'> 2</span>   <span class='PDMResK'>UPDATE</span> <span class='PDMVar'>Storage</span> <span class='PDMResK'>SET</span><span class='PDMOper'>;</span>
+<span class='PDMCnt'> 311</span> <span class='PDMInd'> 3</span>    <span class='PDMVar'>cUniqueId</span> <span class='PDMOper'>=</span> <span class='PDMVar'>dcB2T_Verno</span><span class='PDMOper'>;</span>
+<span class='PDMCnt'> 312</span> <span class='PDMInd'> 3</span>    <span class='PDMResK'>WHERE</span> <span class='PDMVar'>cType</span><span class='PDMOper'>==</span><span class='PDMStr'>"X"</span>
+<span class='PDMCnt'> 313</span> <span class='PDMInd'>  </span> 
+<span class='PDMCnt'> 314</span> <span class='PDMInd'> 1</span>  <span class='PDMResK'>CASE</span> <span class='PDMVar'>m</span><span class='PDMOper'>.</span><span class='PDMVar'>lnResult</span><span class='PDMOper'>=</span><span class='PDMLit'>2</span>
+<span class='PDMCnt'> 315</span> <span class='PDMInd'>  </span> <span class='PDMCom'>*table is of old version</span>
+<span class='PDMCnt'> 316</span> <span class='PDMInd'>  </span> <span class='PDMCom'>*update added here ....</span>
+<span class='PDMCnt'> 317</span> <span class='PDMInd'> 2</span>   <span class='PDMOper'>?</span><span class='PDMStr'>"Bin2Text"</span>
+<span class='PDMCnt'> 318</span> <span class='PDMInd'> 2</span>   <span class='PDMOper'>?</span><span class='PDMStr'>"Storage table is not fitting to this version. Expected: "</span><span class='PDMOper'>+</span><span class='PDMVar'>dcB2T_Verno</span><span class='PDMOper'>+</span><span class='PDMStr'>", old version found: "</span><span class='PDMOper'>+</span><span class='PDMVar'>cUniqueId</span>
+<span class='PDMCnt'> 319</span> <span class='PDMInd'> 2</span>   <span class='PDMOper'>?</span><span class='PDMStr'>'Table: '</span><span class='PDMOper'>+</span><span class='PDMResF'>DBF</span><span class='PDMOper'>(</span><span class='PDMStr'>'Storage'</span><span class='PDMOper'>)</span>
+<span class='PDMCnt'> 320</span> <span class='PDMInd'> 2</span>   <span class='PDMResK'>USE</span> <span class='PDMResK'>IN</span> <span class='PDMVar'>curHelp</span>
+<span class='PDMCnt'> 321</span> <span class='PDMInd'> 2</span>   <span class='PDMResK'>USE</span> <span class='PDMResK'>IN</span> <span class='PDMResF'>SELECT</span><span class='PDMOper'>(</span><span class='PDMStr'>'Storage'</span><span class='PDMOper'>)</span>
+<span class='PDMCnt'> 322</span> <span class='PDMInd'> 2</span>   <span class='PDMResK'>RETURN</span> <span class='PDMVar'>NIL</span>
+<span class='PDMCnt'> 323</span> <span class='PDMInd'>  </span> 
+<span class='PDMCnt'> 324</span> <span class='PDMInd'> 1</span>  <span class='PDMResK'>OTHERWISE</span>
+<span class='PDMCnt'> 325</span> <span class='PDMInd'>  </span> <span class='PDMOper'>*</span> <span class='PDMResK'>CASE</span> <span class='PDMVar'>m</span><span class='PDMOper'>.</span><span class='PDMVar'>lnResult</span><span class='PDMOper'>=</span><span class='PDMLit'>0</span>
+<span class='PDMCnt'> 326</span> <span class='PDMInd'>  </span> <span class='PDMOper'>*</span><span class='PDMResK'>version</span> <span class='PDMVar'>fit</span><span class='PDMOper'>,</span> <span class='PDMResK'>do</span> <span class='PDMVar'>nothing</span>
+<span class='PDMCnt'> 327</span> <span class='PDMInd'>  </span> 
+<span class='PDMCnt'> 328</span> <span class='PDMInd'>  </span> <span class='PDMResK'>ENDCASE</span>
+<span class='PDMCnt'> 329</span> <span class='PDMInd'>  </span> 
+<span class='PDMCnt'> 330</span> <span class='PDMInd'>  </span> <span class='PDMCom'>*garbage collection</span>
+<span class='PDMCnt'> 331</span> <span class='PDMInd'>  </span> <span class='PDMResK'>SELECT</span><span class='PDMOper'>;</span>
+<span class='PDMCnt'> 332</span> <span class='PDMInd'> 1</span>  <span class='PDMVar'>Cur1</span><span class='PDMOper'>.</span><span class='PDMVar'>iDirty</span><span class='PDMOper'>;</span>
+<span class='PDMCnt'> 333</span> <span class='PDMInd'> 1</span>  <span class='PDMResK'>FROM</span> <span class='PDMVar'>Storage</span> <span class='PDMResK'>AS</span> <span class='PDMVar'>Cur1</span><span class='PDMOper'>;</span>
+<span class='PDMCnt'> 334</span> <span class='PDMInd'> 1</span>  <span class='PDMResK'>INTO</span> <span class='PDMResK'>CURSOR</span> <span class='PDMVar'>curHelp</span><span class='PDMOper'>;</span>
+<span class='PDMCnt'> 335</span> <span class='PDMInd'> 1</span>  <span class='PDMResK'>WHERE</span> <span class='PDMVar'>Cur1</span><span class='PDMOper'>.</span><span class='PDMVar'>iDirty</span><span class='PDMOper'>#</span><span class='PDMLit'>0</span><span class='PDMOper'>;</span>
+<span class='PDMCnt'> 336</span> <span class='PDMInd'> 1</span>  <span class='PDMOper'>AND</span> <span class='PDMVar'>Cur1</span><span class='PDMOper'>.</span><span class='PDMVar'>cType</span><span class='PDMOper'>==</span><span class='PDMStr'>"X"</span>
+<span class='PDMCnt'> 337</span> <span class='PDMInd'>  </span> 
+<span class='PDMCnt'> 338</span> <span class='PDMInd'>  </span> <span class='PDMResK'>IF</span> <span class='PDMResF'>RECCOUNT</span><span class='PDMOper'>(</span><span class='PDMOper'>)</span><span class='PDMOper'>=</span><span class='PDMLit'>0</span> <span class='PDMResK'>THEN</span>
+<span class='PDMCnt'> 339</span> <span class='PDMInd'>  </span> <span class='PDMOper'>*</span><span class='PDMResK'>mark</span> <span class='PDMVar'>old</span> <span class='PDMResK'>files</span> <span class='PDMResK'>for</span> <span class='PDMResK'>reprocess</span>
+<span class='PDMCnt'> 340</span> <span class='PDMInd'> 1</span>  <span class='PDMResK'>UPDATE</span> <span class='PDMVar'>Cur1</span> <span class='PDMResK'>SET</span><span class='PDMOper'>;</span>
+<span class='PDMCnt'> 341</span> <span class='PDMInd'> 2</span>   <span class='PDMVar'>iDirty</span>    <span class='PDMOper'>=</span> <span class='PDMOper'>-</span><span class='PDMLit'>4</span><span class='PDMOper'>;</span>
+<span class='PDMCnt'> 342</span> <span class='PDMInd'> 2</span>   <span class='PDMResK'>FROM</span> <span class='PDMVar'>Storage</span> <span class='PDMResK'>AS</span> <span class='PDMVar'>Cur1</span><span class='PDMOper'>;</span>
+<span class='PDMCnt'> 343</span> <span class='PDMInd'> 2</span>   <span class='PDMResK'>WHERE</span> <span class='PDMVar'>Cur1</span><span class='PDMOper'>.</span><span class='PDMVar'>tLastUse</span><span class='PDMOper'>&lt;=</span><span class='PDMResF'>GOMONTH</span><span class='PDMOper'>(</span><span class='PDMResF'>DATETIME</span><span class='PDMOper'>(</span><span class='PDMOper'>)</span><span class='PDMOper'>,</span><span class='PDMOper'>-</span><span class='PDMLit'>3</span><span class='PDMOper'>)</span><span class='PDMOper'>;</span>
+<span class='PDMCnt'> 344</span> <span class='PDMInd'> 2</span>   <span class='PDMOper'>AND</span> <span class='PDMOper'>!</span><span class='PDMOper'>(</span><span class='PDMVar'>Cur1</span><span class='PDMOper'>.</span><span class='PDMVar'>cType</span><span class='PDMOper'>==</span><span class='PDMStr'>"X"</span><span class='PDMOper'>;</span>
+<span class='PDMCnt'> 345</span> <span class='PDMInd'> 2</span>   <span class='PDMOper'>OR</span> <span class='PDMVar'>Cur1</span><span class='PDMOper'>.</span><span class='PDMVar'>cType</span><span class='PDMOper'>==</span><span class='PDMStr'>"S"</span><span class='PDMOper'>;</span>
+<span class='PDMCnt'> 346</span> <span class='PDMInd'> 2</span>   <span class='PDMOper'>OR</span> <span class='PDMVar'>Cur1</span><span class='PDMOper'>.</span><span class='PDMVar'>cType</span><span class='PDMOper'>==</span><span class='PDMStr'>"A"</span><span class='PDMOper'>)</span>
+<span class='PDMCnt'> 347</span> <span class='PDMInd'>  </span> 
+<span class='PDMCnt'> 348</span> <span class='PDMInd'>  </span> <span class='PDMResK'>ELSE</span>  <span class='PDMCom'>&amp;&amp;RECCOUNT()=0</span>
+<span class='PDMCnt'> 349</span> <span class='PDMInd'>  </span> <span class='PDMCom'>*heart misses a beat, all dirty</span>
+<span class='PDMCnt'> 350</span> <span class='PDMInd'> 1</span>  <span class='PDMResK'>UPDATE</span> <span class='PDMVar'>Cur1</span> <span class='PDMResK'>SET</span><span class='PDMOper'>;</span>
+<span class='PDMCnt'> 351</span> <span class='PDMInd'> 2</span>   <span class='PDMVar'>iDirty</span>    <span class='PDMOper'>=</span> <span class='PDMOper'>-</span><span class='PDMLit'>3</span><span class='PDMOper'>;</span>
+<span class='PDMCnt'> 352</span> <span class='PDMInd'> 2</span>   <span class='PDMResK'>FROM</span> <span class='PDMVar'>Storage</span> <span class='PDMResK'>AS</span> <span class='PDMVar'>Cur1</span><span class='PDMOper'>;</span>
+<span class='PDMCnt'> 353</span> <span class='PDMInd'> 2</span>   <span class='PDMResK'>WHERE</span> <span class='PDMVar'>Cur1</span><span class='PDMOper'>.</span><span class='PDMVar'>tLastUse</span><span class='PDMOper'>&lt;=</span><span class='PDMResF'>GOMONTH</span><span class='PDMOper'>(</span><span class='PDMResF'>DATETIME</span><span class='PDMOper'>(</span><span class='PDMOper'>)</span><span class='PDMOper'>,</span><span class='PDMOper'>-</span><span class='PDMLit'>3</span><span class='PDMOper'>)</span><span class='PDMOper'>;</span>
+<span class='PDMCnt'> 354</span> <span class='PDMInd'> 2</span>   <span class='PDMOper'>AND</span> <span class='PDMOper'>!</span><span class='PDMOper'>(</span><span class='PDMVar'>Cur1</span><span class='PDMOper'>.</span><span class='PDMVar'>cType</span><span class='PDMOper'>==</span><span class='PDMStr'>"X"</span><span class='PDMOper'>;</span>
+<span class='PDMCnt'> 355</span> <span class='PDMInd'> 2</span>   <span class='PDMOper'>OR</span> <span class='PDMVar'>Cur1</span><span class='PDMOper'>.</span><span class='PDMVar'>cType</span><span class='PDMOper'>==</span><span class='PDMStr'>"S"</span><span class='PDMOper'>;</span>
+<span class='PDMCnt'> 356</span> <span class='PDMInd'> 2</span>   <span class='PDMOper'>OR</span> <span class='PDMVar'>Cur1</span><span class='PDMOper'>.</span><span class='PDMVar'>cType</span><span class='PDMOper'>==</span><span class='PDMStr'>"A"</span><span class='PDMOper'>)</span>
+<span class='PDMCnt'> 357</span> <span class='PDMInd'>  </span> 
+<span class='PDMCnt'> 358</span> <span class='PDMInd'>  </span> <span class='PDMResK'>ENDIF</span> <span class='PDMCom'>&amp;&amp;RECCOUNT()=0</span>
+<span class='PDMCnt'> 359</span> <span class='PDMInd'>  </span> 
+<span class='PDMCnt'> 360</span> <span class='PDMInd'>  </span> <span class='PDMResK'>USE</span> <span class='PDMResK'>IN</span> <span class='PDMVar'>curHelp</span>
+<span class='PDMCnt'> 361</span> <span class='PDMInd'>  </span> 
+<span class='PDMCnt'> 362</span> <span class='PDMInd'>  </span> <span class='PDMOper'>*</span><span class='PDMResK'>Set</span> <span class='PDMVar'>heart</span> <span class='PDMVar'>beat</span>
+<span class='PDMCnt'> 363</span> <span class='PDMInd'>  </span> <span class='PDMResK'>UPDATE</span> <span class='PDMVar'>Cur1</span> <span class='PDMResK'>SET</span><span class='PDMOper'>;</span>
+<span class='PDMCnt'> 364</span> <span class='PDMInd'> 1</span>  <span class='PDMVar'>iDirty</span>    <span class='PDMOper'>=</span> <span class='PDMLit'>1</span><span class='PDMOper'>,</span><span class='PDMOper'>;</span>
+<span class='PDMCnt'> 365</span> <span class='PDMInd'> 1</span>  <span class='PDMVar'>tLastUse</span>  <span class='PDMOper'>=</span> <span class='PDMResF'>DATETIME</span><span class='PDMOper'>(</span><span class='PDMOper'>)</span><span class='PDMOper'>;</span>
+<span class='PDMCnt'> 366</span> <span class='PDMInd'> 1</span>  <span class='PDMResK'>FROM</span> <span class='PDMVar'>Storage</span> <span class='PDMResK'>AS</span> <span class='PDMVar'>Cur1</span><span class='PDMOper'>;</span>
+<span class='PDMCnt'> 367</span> <span class='PDMInd'> 1</span>  <span class='PDMResK'>WHERE</span> <span class='PDMVar'>Cur1</span><span class='PDMOper'>.</span><span class='PDMVar'>cType</span><span class='PDMOper'>==</span><span class='PDMStr'>"X"</span>
+<span class='PDMCnt'> 368</span> <span class='PDMInd'>  </span> 
+<span class='PDMCnt'> 369</span> <span class='PDMInd'>  </span> <span class='PDMResK'>RETURN</span> <span class='PDMStr'>'Storage'</span>
+<span class='PDMCnt'> 370</span> <span class='PDMInd'>  </span> </pre>
+ <!-- Code End -->
+  </div>
+ </div>
+</div>
+<div class="diaxp_mfoot"> <div class="PDM_AB_CopyRight"><!-- Footer Begin -->
+  <hr />
+  <div class="PDM_AB_Body">
+
+	<img src="../../repository/vfpxbanner_small.png" alt="VFPX logo"/><br/>
+	<p>This project is part of <a href="https://vfpx.github.io/"  title="Skip to VFPX" target="_blank">VFPX</a>.</p>
+	<p><i>&copy; 02.03.2021 Lutz Scheffler Software Ingenieurb&uuml;ro</i></p>
+	
+  </div><!-- Body End -->
+ </div><!-- Footer End -->
+</div>
+<script language="JavaScript" type="text/javascript">
+lo=document.getElementById("TX_SP_40");
+lo.XType="SourceCode";
+lo.Dir="../../imgs/";
+
+
+</script>
+</body>
+</html>

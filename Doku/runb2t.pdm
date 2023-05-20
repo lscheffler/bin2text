@@ -11,7 +11,7 @@ AutoPrint=0
 ClearOutDir=1
 Incremental=0
 PJXFile=E:\SE\Bin2Text\Bin2Text.pjx
-OutDir=E:\SE\Bin2Text\docs
+OutDir=E:\SE\Bin2Text\docs\PDM
 IncludeSC=2
 IncludeSC_S=
 IncludeDD=2
@@ -39,6 +39,7 @@ ECPMDblclick=1
 TabSize=    4
 FirstPage=PO.htm
 FoxCodeTable=
+ShowQuickFileList=0
 [DEFEXT]
 =d:DBC,
 =D:DBF,
