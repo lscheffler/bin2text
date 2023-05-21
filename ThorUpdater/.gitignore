@@ -1,0 +1,8 @@
+#.gitignore for Bin2Text/ThorUpdater
+# a .gitignore for ThorUpdater to publish to Thor.
+# enable some files that are in general not under git control for VFP projects to publish to Thor
+
+!VFPX*.md
+!VFPX*.txt
+!VFPX*.zip
+!README.md
