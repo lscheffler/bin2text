@@ -9,9 +9,10 @@ A complete list of changes is available on the offline documentation via **local
 ## Release History
 
 ---
-### 2023-05-20, Version 1.2.1
+### 2023-05-21, Version 1.2.1
 Stable release.
 * FoxBin2Prg will now be loaded from Thor, if installed
+* Thor deployment of project now with VFPX Deployment (internal)
 
 ---
 ### 2023-02-27, Version 1.2.0
@@ -116,5 +117,5 @@ Stable release.
 * Initial push to github
 
 ----
-Last changed: *<!--DeploymentDate-->2023-05-20<!--/DeploymentDate-->*   
+Last changed: *<!--DeploymentDate-->2023-05-21<!--/DeploymentDate-->*   
 ![powered by VFPX](./docs/images/vfpxpoweredby_alternative.gif "powered by VFPX")

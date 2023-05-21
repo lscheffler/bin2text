@@ -23,7 +23,7 @@ Repository = https://github.com/lscheffler/bin2text
 
 *The changelog file. Might be merged into the {AppID}Version.txt
 *The file installed as template (uncomment to use):
-*ChangeLog = docs\ChangeLog.md
+ChangeLog = docs\ChangeLog.md
 
 *Create VFPX community folders and files. Will not overwrite existing files.
 Inculde_VFPX = Yes
@@ -62,4 +62,6 @@ Recompile = Yes
 *A different name for the staging folder.
 *InstalledFilesFolder = {MyInstallFolder}
 
+*A different name for version file used to publish info on the remote server.
+*A help with old projects using a different name for the version file
 VersionFile_Remote = Version.txt

@@ -1,20 +1,22 @@
-*BuildMe.prg for [add your application]
+*BuildMe.prg for for Bin2Text
 *
 * This program should perform any build tasks necessary for the project, such
 * as updating version numbers in code or include files. This program can use the public
 * variables discussed in the documentation as necessary.
 
-return
+* This code is specific for Bin2Text project
+* insert projects version number into stuff.h
 
-*Stuff we can do:
-* - get version number (pcVersion) from an include file
-* - set version number (pcVersion) to an include file
-* - set version number to pjx used
-* - set debug info off in pjx or include file
-* - If FoxBin2Prg internal to VFPXDeployment is not fitting, run own way
-* - create pcFullVersion like you use in the .VersionNumber of Version*.txt file for use in README.md
-*   (else it will use pcVersion)
-*   like the example in the Version text template:
-pcFullVersion = pcVersion+' - ' + pcJulian
-* - copy files to ../InstalledFiles subfolder
-* - modify documentation
+local;
+ lcText,;
+ lnLen,;
+ lnStart
+ 
+lcText  = filetostr('stuff.h')
+lnStart = atc('#DEFINE dcB2T_Verno',m.lcText)
+lnLen   = atc(0h0D,substr(m.lcText,m.lnStart))
+lcText  = stuff(m.lcText,m.lnStart,m.lnLen,'#DEFINE dcB2T_Verno							"'+m.pcVersion+'"')
+
+strtofile(m.lcText,'stuff.h')
+
+return

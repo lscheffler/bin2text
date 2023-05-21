@@ -11,6 +11,11 @@
 * This program can use the public
 * variables discussed in the documentation as necessary.
 
-* Bin2Text for whole project
-DO Pjx2Commit IN (_SCREEN.gcB2T_App) WITH .T.
+* Bin2Text for whole folder
+try
+  do Pjx2Commit in (_screen.gcB2T_App)
+ catch
+ messagebox('Failed to invoke "Bin2Text" to create text files and commit.',16,'VFPX DEployment Bin2Text')
+endtry
+
 return
