@@ -26,10 +26,10 @@ Repository = https://github.com/lscheffler/bin2text
 ChangeLog = docs\ChangeLog.md
 
 *Create VFPX community folders and files. Will not overwrite existing files.
-Inculde_VFPX = Yes
+Include_VFPX = Yes
 
 *Do not create Thor folders and files (uncomment to use):
-*Inculde_Thor = No
+*Include_Thor = No
 
 
 * The remaining lines are options to are not mandatory uncomment the options to use *
@@ -61,6 +61,9 @@ Recompile = Yes
 
 *A different name for the staging folder.
 *InstalledFilesFolder = {MyInstallFolder}
+
+*Remove all files from InstalledFiles folder if InstalledFiles.txt is given
+*Clear_InstalledFiles = No
 
 *A different name for version file used to publish info on the remote server.
 *A help with old projects using a different name for the version file
