@@ -9,6 +9,11 @@ A complete list of changes is available on the offline documentation via **local
 ## Release History
 
 ---
+### 2023-06-11, Version 1.2.2
+Stable release.
+* Search for FoxBin2Prg with Thor failed, issue #5
+
+---
 ### 2023-05-21, Version 1.2.1
 Stable release.
 * FoxBin2Prg will now be loaded from Thor, if installed
@@ -117,5 +122,5 @@ Stable release.
 * Initial push to github
 
 ----
-Last changed: *<!--DeploymentDate-->2023-05-21<!--/DeploymentDate-->*   
+Last changed: *<!--CVERSIONDATE-->2023-05-21<!--/CVERSIONDATE-->*   
 ![powered by VFPX](./docs/images/vfpxpoweredby_alternative.gif "powered by VFPX")

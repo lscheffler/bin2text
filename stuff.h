@@ -29,5 +29,5 @@
 #DEFINE NIL									.NULL.
 
 *Version number of Bin2Text. May be changed by VFPX Deployment
-#DEFINE dcB2T_Verno							"1.2.1"
+#DEFINE dcB2T_Verno							"1.2.2"
 #DEFINE dcFB2P_Verno_Min					"1.19.57"

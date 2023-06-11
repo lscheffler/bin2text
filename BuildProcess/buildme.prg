@@ -11,11 +11,11 @@ local;
  lcText,;
  lnLen,;
  lnStart
- 
+
 lcText  = filetostr('stuff.h')
 lnStart = atc('#DEFINE dcB2T_Verno',m.lcText)
-lnLen   = atc(0h0D,substr(m.lcText,m.lnStart))
-lcText  = stuff(m.lcText,m.lnStart,m.lnLen,'#DEFINE dcB2T_Verno							"'+m.pcVersion+'"')
+lnLen   = atc(0h0A,substr(m.lcText,m.lnStart))
+lcText  = stuff(m.lcText,m.lnStart,m.lnLen-1,'#DEFINE dcB2T_Verno							"'+m.pcVersion+'"')
 
 strtofile(m.lcText,'stuff.h')
 

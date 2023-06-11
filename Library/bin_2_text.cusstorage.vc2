@@ -2970,7 +2970,7 @@ DEFINE CLASS cusstorage AS custom 		&& The stuff that does the work.
 		
 		TRY
 		*Was zu testen ist
-		  lcFoxBin2PRG = EXECSCRIPT(_SCREEN.cThorDispatcher, 'Thor_Proc_GetFoxBin2PrgFolder')
+		  lcFoxBin2PRG = NVL(EXECSCRIPT(_SCREEN.cThorDispatcher, 'Thor_Proc_GetFoxBin2PrgFolder'),'')
 		 CATCH
 		* Abzufangender Fehler
 		  lcFoxBin2PRG = ""

@@ -71,6 +71,6 @@ Thor update for this project works best with [VFPX Deployment](https://github.co
 7. push
 
 ----
-Last changed: <!--DeploymentDate-->2023-05-21<!--/DeploymentDate-->
+Last changed: <!--CVERSIONDATE-->2023-05-21<!--/CVERSIONDATE-->
 
 ![powered by VFPX](../docs/Images/vfpxpoweredby_alternative.gif "powered by VFPX")

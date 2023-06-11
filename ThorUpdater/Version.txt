@@ -3,8 +3,8 @@ lparameters toUpdateObject
 * Set the properties of the passed updater object.
 
 with toUpdateObject
-	.VersionNumber    = '1.2.1 - 20230521'
-	.AvailableVersion = 'Bin2Text-1.2.1-update-20230521'
+	.VersionNumber    = '1.2.2 - 20230611'
+	.AvailableVersion = 'Bin2Text-1.2.2-update-20230611'
 	.Notes            = GetNotes()
 *	.RegisterWithThor = GetRegisterWithThor()
 endwith
@@ -24,6 +24,11 @@ This page gives a brief overview of changes to the [Bin 2 Text Extension](https:
 A complete list of changes is available on the offline documentation via **local folder** _docu/index.htm_.
 
 ## Release History
+
+---
+### 2023-06-11, Version 1.2.2
+Stable release.
+* Search for FoxBin2Prg with Thor failed, issue #5
 
 ---
 ### 2023-05-21, Version 1.2.1
@@ -134,7 +139,7 @@ Stable release.
 * Initial push to github
 
 ----
-Last changed: *<!--DeploymentDate-->2023-05-21<!--/DeploymentDate-->*   
+Last changed: *<!--CVERSIONDATE-->2023-05-21<!--/CVERSIONDATE-->*   
 ![powered by VFPX](./docs/images/vfpxpoweredby_alternative.gif "powered by VFPX")
 
 endtext
@@ -146,4 +151,4 @@ return lcNotes
 
 * "Bin2Text" is a Component. No procedure GetRegisterWithThor created by VFPX Deployment 
 
-*created by VFPX Deployment, 21.05.2023 15:41:45
+*created by VFPX Deployment, 11.06.2023 11:59:31

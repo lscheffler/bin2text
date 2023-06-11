@@ -38,5 +38,5 @@ Help and documentation is in the **local folder** _PDM/index.htm_.
 Basic information is on section _How to get it to work_.
 
 ----
-Last changed: *<!--DeploymentDate-->2023-05-20<!--/DeploymentDate-->*   
+Last changed: *<!--CVERSIONDATE-->2023-05-20<!--/CVERSIONDATE-->*   
 ![powered by VFPX](./docs/images/vfpxpoweredby_alternative.gif "powered by VFPX")
