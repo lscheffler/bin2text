@@ -86,7 +86,7 @@ DEFINE CLASS api_apprun AS custom 		&& Ed Raus API_AppRun, see UT download
 									ASC(LEFT(cStringToExtractFrom,1))
 		ELSE
 			this.icErrorMessage = 'Invalid DWORD string passed for conversion'
-			RETURN NULL
+			RETURN .NULL.
 		ENDIF
 		
 	ENDPROC

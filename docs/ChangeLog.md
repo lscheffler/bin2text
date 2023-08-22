@@ -9,6 +9,11 @@ A complete list of changes is available on the offline documentation via **local
 ## Release History
 
 ---
+### 2023-08-22, Version 1.2.3
+Stable release.
+* Fixed an issue where tables of a database where not recreated
+
+---
 ### 2023-06-11, Version 1.2.2
 Stable release.
 * Search for FoxBin2Prg with Thor failed, issue #5

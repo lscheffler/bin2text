@@ -853,7 +853,7 @@ DEFINE CLASS cusstorage AS custom 		&& The stuff that does the work.
 		*!*	<descr>Resolve tables of databases.</descr>
 		*!*	<params name="taSource" type="Array" byref="1" dir="In" inb="0" outb="0">
 		*!*	<short>Source array.</short>
-		*!*	<detail>Array what is parsed for Datrabases. The databases found in column 1 where searched for tables.</detail>
+		*!*	<detail>Array what is parsed for Databases. The databases found in column 1 where searched for tables.</detail>
 		*!*	</params>
 		*!*	<params name="taSearched" type="Array" byref="1" dir="In" inb="0" outb="0">
 		*!*	<short>Array with tables.</short>
@@ -2050,6 +2050,8 @@ DEFINE CLASS cusstorage AS custom 		&& The stuff that does the work.
 		*!*	</change>
 		*!*	</pdm>
 		
+		LOCAL lnFiles
+		
 		EXTERNAL ARRAY;
 		 taFiles
 		
@@ -2094,8 +2096,8 @@ DEFINE CLASS cusstorage AS custom 		&& The stuff that does the work.
 		THIS.Storage_Get("S",m.loExtraFiles,m.lcStorage)
 		
 		* Check Include DBF of DBC [1 On; else OFF]
-		IF !EMPTY(m.loExtraFiles.GETKEY("gcB2T_DBC")) THEN
-		 loSetting = m.loExtraFiles.ITEM("gcB2T_DBC")
+		IF !EMPTY(loExtraFiles.GETKEY("gcB2T_DBC")) THEN
+		 loSetting   = loExtraFiles.ITEM("gcB2T_DBC")
 		 llExpandDBC = m.loSetting.gcFile=="1"
 		ENDIF &&!EMPTY(loExtraFiles.GetKey("gcB2T_DBC"))
 		* /Check Include DBF of DBC [1 On; else OFF]
@@ -2110,19 +2112,19 @@ DEFINE CLASS cusstorage AS custom 		&& The stuff that does the work.
 		IF ATC('-IncludeList',m.tcMode)>0 THEN
 		 tcMode        = STRTRAN(m.tcMode,'-IncludeList','',1,-1,1)
 		
-		 m.loExtraFiles.REMOVE(-1)
+		 loExtraFiles.REMOVE(-1)
 		 THIS.Storage_Get("A",m.loExtraFiles,m.lcStorage)
 		
-		 FOR EACH loSetting IN m.loExtraFiles FOXOBJECT
+		 FOR EACH m.loSetting IN m.loExtraFiles FOXOBJECT
 		  IF EMPTY(ASCAN(m.taFiles,m.loSetting.gcFile,1,-1,2,15)) THEN
 		*additional file not found. Add
 		   lnFiles   = m.lnFiles+1
-		   lnOffsets = m.lnOffsets+1 
+		   lnOffsets = m.lnOffsets+1
 		   DIMENSION;
-		    m.taFiles(m.lnFiles,ALEN(m.taFiles,2))
+		    taFiles(m.lnFiles,ALEN(m.taFiles,2))
 		
-		   taFiles(m.lnFiles,1)	= m.loSetting.gcFile
-		   taFiles(m.lnFiles,2)	= m.lcMode
+		   taFiles(m.lnFiles,1) = m.loSetting.gcFile
+		   taFiles(m.lnFiles,2) = m.lcMode
 		  ENDIF &&EMPTY(ASCAN(m.taFiles,m.lcFile,1,-1,2,15))
 		
 		 ENDFOR &&loSetting
@@ -2142,27 +2144,26 @@ DEFINE CLASS cusstorage AS custom 		&& The stuff that does the work.
 		lnFilesFound = 0
 		lnTableFound = 0
 		
-		
 		laFiles     = NIL
 		
 		*process sourcefiles
 		lnFile = 0
 		DO WHILE m.lnFile<m.lnFiles
-		 lnFile		  = m.lnFile+1
+		 lnFile       = m.lnFile+1
 		 lnFilesFound = m.lnFilesFound+1
 		*wie machen wir das, wenn wir noch keine pjx haben?!!!
 		
 		*extract class for processing
 		 lcClass = ""
-		 IF '::'$m.taFiles(m.lnFile,1) THEN
-		  taFiles(m.lnFile,1) = STRTRAN(m.taFiles(m.lnFile,1),'::','.',1,1)
-		  lcClass			  = "::"+JUSTEXT(m.taFiles(m.lnFile,1))
-		  taFiles(m.lnFile,1) = FORCEEXT( m.taFiles(m.lnFile,1),'')
-		  llSingleClass		  = True
+		 IF '::'$taFiles(m.lnFile,1) THEN
+		  taFiles(m.lnFile,1) = STRTRAN(taFiles(m.lnFile,1),'::','.',1,1)
+		  lcClass             = "::"+JUSTEXT(taFiles(m.lnFile,1))
+		  taFiles(m.lnFile,1) = FORCEEXT( taFiles(m.lnFile,1),'')
+		  llSingleClass       = True
 		 ENDIF &&'::'$taFiles(m.lnFile,1)
 		
-		 loSett		 = THIS.oGet_Setting(JUSTPATH(m.taFiles(m.lnFile,1)),m.loConverter)
-		 lcSourceExt = UPPER(JUSTEXT(m.taFiles(m.lnFile,1)))
+		 loSett      = THIS.oGet_Setting(JUSTPATH(taFiles(m.lnFile,1)),m.loConverter)
+		 lcSourceExt = UPPER(JUSTEXT(taFiles(m.lnFile,1)))
 		
 		*if binary file is send, gather text file extension
 		 DO CASE
@@ -2193,26 +2194,26 @@ DEFINE CLASS cusstorage AS custom 		&& The stuff that does the work.
 		*check if just a text file name is send,
 		*for the logic of the programm, we need the binary, so we swap
 		  CASE UPPER(m.lcSourceExt)==m.loSett.c_VC2
-		   taFiles(m.lnFile,1) = FORCEEXT(m.taFiles(m.lnFile,1),"VCX")
+		   taFiles(m.lnFile,1) = FORCEEXT(taFiles(m.lnFile,1),"VCX")
 		  CASE UPPER(m.lcSourceExt)==m.loSett.c_FR2
-		   taFiles(m.lnFile,1) = FORCEEXT(m.taFiles(m.lnFile,1),"FRX")
+		   taFiles(m.lnFile,1) = FORCEEXT(taFiles(m.lnFile,1),"FRX")
 		  CASE UPPER(m.lcSourceExt)==m.loSett.c_MN2
-		   taFiles(m.lnFile,1) = FORCEEXT(m.taFiles(m.lnFile,1),"MNX")
+		   taFiles(m.lnFile,1) = FORCEEXT(taFiles(m.lnFile,1),"MNX")
 		  CASE UPPER(m.lcSourceExt)==m.loSett.c_DB2
-		   taFiles(m.lnFile,1) = FORCEEXT(m.taFiles(m.lnFile,1),"DBF")
+		   taFiles(m.lnFile,1) = FORCEEXT(taFiles(m.lnFile,1),"DBF")
 		  CASE UPPER(m.lcSourceExt)==m.loSett.c_DC2
-		   taFiles(m.lnFile,1) = FORCEEXT(m.taFiles(m.lnFile,1),"DBC")
+		   taFiles(m.lnFile,1) = FORCEEXT(taFiles(m.lnFile,1),"DBC")
 		  CASE UPPER(m.lcSourceExt)==m.loSett.c_PJ2
-		   taFiles(m.lnFile,1) = FORCEEXT(m.taFiles(m.lnFile,1),"PJX")
+		   taFiles(m.lnFile,1) = FORCEEXT(taFiles(m.lnFile,1),"PJX")
 		  CASE UPPER(m.lcSourceExt)==m.loSett.c_LB2
-		   taFiles(m.lnFile,1) = FORCEEXT(m.taFiles(m.lnFile,1),"LBX")
+		   taFiles(m.lnFile,1) = FORCEEXT(taFiles(m.lnFile,1),"LBX")
 		  CASE UPPER(m.lcSourceExt)==m.loSett.c_SC2
-		   taFiles(m.lnFile,1) = FORCEEXT(m.taFiles(m.lnFile,1),"SCX")
+		   taFiles(m.lnFile,1) = FORCEEXT(taFiles(m.lnFile,1),"SCX")
 		*Additional extensions
 		  CASE UPPER(m.lcSourceExt)==m.loSett.c_FK2
-		   taFiles(m.lnFile,1) = FORCEEXT(m.taFiles(m.lnFile,1),"FKY")
+		   taFiles(m.lnFile,1) = FORCEEXT(taFiles(m.lnFile,1),"FKY")
 		  CASE UPPER(m.lcSourceExt)==m.loSett.c_ME2
-		   taFiles(m.lnFile,1) = FORCEEXT(m.taFiles(m.lnFile,1),"MEM")
+		   taFiles(m.lnFile,1) = FORCEEXT(taFiles(m.lnFile,1),"MEM")
 		  OTHERWISE
 		*Error, no known extension
 		   lcSourceExt = ""
@@ -2222,25 +2223,25 @@ DEFINE CLASS cusstorage AS custom 		&& The stuff that does the work.
 		*undefined extension, just ignore
 		  ADEL(m.laFiles,m.lnFilesFound)
 		  lnFilesFound = m.lnFilesFound-1
-		  lnOffsets	   = m.lnOffsets-1
+		  lnOffsets    = m.lnOffsets-1
 		  IF m.lnFilesFound=0 THEN
 		   EXIT
 		
 		  ELSE  &&m.lnFilesFound=0
 		   DIMENSION;
-		    m.laFiles(m.lnOffsets,4)
+		    laFiles(m.lnOffsets,4)
 		   LOOP
 		  ENDIF &&m.lnFilesFound=0
 		
 		 ELSE  &&EMPTY(m.lcSourceExt)
-		  laFiles(m.lnFilesFound,1) = FORCEEXT(m.taFiles(m.lnFile,1),m.lcSourceExt)+;
+		  laFiles(m.lnFilesFound,1) = FORCEEXT(taFiles(m.lnFile,1),m.lcSourceExt)+;
 		   m.lcClass															&&Source File of transformation; Text or Text
 		 ENDIF &&EMPTY(m.lcSourceExt)
 		
 		 laFiles(m.lnFilesFound,2) = m.tcMode 									&&a project file bin or text
-		 laFiles(m.lnFilesFound,3) = m.taFiles(m.lnFile,1)						&&VFP Bin File
+		 laFiles(m.lnFilesFound,3) = taFiles(m.lnFile,1)						&&VFP Bin File
 		 DO CASE
-		  CASE !UPPER(JUSTEXT(m.taFiles(m.lnFile,1)))='PJX'
+		  CASE !UPPER(JUSTEXT(taFiles(m.lnFile,1)))='PJX'
 		*nothing to do
 		   laFiles(m.lnFilesFound,2) = m.lcMode									&&not a project file
 		   laFiles(m.lnFilesFound,4) = 0										&&No Hook
@@ -2252,14 +2253,14 @@ DEFINE CLASS cusstorage AS custom 		&& The stuff that does the work.
 		*!*	*nothing defined, parse later
 		*!*	   laFiles(m.lnFilesFound,4) = 1										&&No Hook, but maybe
 		
-		  CASE ISNULL(m.taFiles(m.lnFile,2))
+		  CASE ISNULL(taFiles(m.lnFile,2))
 		*nothing defined yet, parse again after processing (if pjx changed)
 		   laFiles(m.lnFilesFound,4) = 2										&&No Hook, but mybe after conversion
 		*!*	  CASE ISNULL(m.taFiles(m.lnFile,2)) AND !m.tlText2Bin
 		*!*	*nothing defined yet, parse later
 		*!*	   laFiles(m.lnFilesFound,4) = 1										&&No Hook, but maybe
 		
-		  CASE EMPTY(m.taFiles(m.lnFile,2))
+		  CASE EMPTY(taFiles(m.lnFile,2))
 		*nothing hook defined yet, but may change again after processing (if pjx changed)
 		   laFiles(m.lnFilesFound,4) = 2										&&No Hook, but mybe after conversion
 		*!*	  CASE EMPTY(m.taFiles(m.lnFile,2)) AND !m.tlText2Bin
@@ -2281,7 +2282,7 @@ DEFINE CLASS cusstorage AS custom 		&& The stuff that does the work.
 		
 		lcPath = JUSTPATH(_SCREEN.gcB2T_Path)
 		
-		m.loConverter.LoadProgressbarForm()
+		loConverter.LoadProgressbarForm()
 		ACTIVATE SCREEN
 		
 		IF m.lnFilesFound>0 THEN
@@ -2294,16 +2295,16 @@ DEFINE CLASS cusstorage AS custom 		&& The stuff that does the work.
 		* files in parameters section
 		* must be shown, because they are processed or pre-processed
 		 FOR lnConvert = 1 TO m.lnFilesFound
-		  laToConvert(m.lnConvert,1) = m.laFiles(m.lnConvert,1)
-		  laToConvert(m.lnConvert,2) = m.laFiles(m.lnConvert,2)
+		  laToConvert(m.lnConvert,1) = laFiles(m.lnConvert,1)
+		  laToConvert(m.lnConvert,2) = laFiles(m.lnConvert,2)
 		  laToConvert(m.lnConvert,3) = .T.
 		 ENDFOR &&lnConvert
 		* Hooks
 		* must be shown as only if we not pre-process
 		* iow parse all (projects via FoxBin2Prg auto expanding PJX function, all other files via this array)
 		 FOR lnConvert = m.lnFilesFound+1 TO m.lnOffsets
-		  laToConvert(m.lnConvert,1) = m.laFiles(m.lnConvert,1)
-		  laToConvert(m.lnConvert,2) = m.laFiles(m.lnConvert,2)
+		  laToConvert(m.lnConvert,1) = laFiles(m.lnConvert,1)
+		  laToConvert(m.lnConvert,2) = laFiles(m.lnConvert,2)
 		  laToConvert(m.lnConvert,3) = .T.
 		 ENDFOR &&lnConvert
 		
@@ -2314,16 +2315,16 @@ DEFINE CLASS cusstorage AS custom 		&& The stuff that does the work.
 		* must be shown as only if we not pre-process
 		* iow parse all (projects via FoxBin2Prg auto expanding PJX function, all other files via this array)
 		 FOR lnConvert = 1 TO m.lnTableFound
-		  laFiles(m.lnOffsets+m.lnConvert,1) = m.laDBC_Tables(m.lnConvert,1)
-		  laFiles(m.lnOffsets+m.lnConvert,2) = m.laDBC_Tables(m.lnConvert,2)
-		  laFiles(m.lnOffsets+m.lnConvert,3) = m.laDBC_Tables(m.lnConvert,4)
+		  laFiles(m.lnOffsets+m.lnConvert,1) = laDBC_Tables(m.lnConvert,1)
+		  laFiles(m.lnOffsets+m.lnConvert,2) = laDBC_Tables(m.lnConvert,2)
+		  laFiles(m.lnOffsets+m.lnConvert,3) = laDBC_Tables(m.lnConvert,4)
 		
-		  laToConvert(m.lnOffsets+m.lnConvert,1) = m.laDBC_Tables(m.lnConvert,1)
-		  laToConvert(m.lnOffsets+m.lnConvert,2) = m.laDBC_Tables(m.lnConvert,2)
+		  laToConvert(m.lnOffsets+m.lnConvert,1) = laDBC_Tables(m.lnConvert,1)
+		  laToConvert(m.lnOffsets+m.lnConvert,2) = laDBC_Tables(m.lnConvert,2)
 		  laToConvert(m.lnOffsets+m.lnConvert,3) = .T.
 		 ENDFOR &&lnConvert
 		
-		  ?'Processing:'
+		 ?'Processing:'
 		 llFound = THIS.Convert(@laToConvert,.T.,m.loConverter,0,m.toFB2T_Setting)
 		ELSE  &&m.lnFilesFound>0
 		 llFound = False
@@ -2337,7 +2338,7 @@ DEFINE CLASS cusstorage AS custom 		&& The stuff that does the work.
 		   laFiles2(1,2)
 		
 		  laFiles2 = ''
-		  IF m.loConverter.Get_Processed(@laFiles2)#0 THEN
+		  IF loConverter.Get_Processed(@laFiles2)#0 THEN
 		*Call FilesToProcess in every case, if run after Text2Bin it will set Storage to
 		*actual values
 		
@@ -2352,15 +2353,50 @@ DEFINE CLASS cusstorage AS custom 		&& The stuff that does the work.
 		*but if we create binaries we may have still undone stuff like new hooks or DBFs of DBCs
 		
 		    DIMENSION;
-		     m.laFiles2(1,4)
+		     laFiles2(1,4)
 		
 		    lnOffset = 0
+		    lnTable  = 0
+		
+		* parse out extra DBC
+		    IF m.llExpandDBC THEN
+		     FOR lnFile = 1 TO m.lnFilesFound
+		
+		      lcFile = laFiles(m.lnFile,3)
+		
+		      IF FILE(m.lcFile) AND UPPER(JUSTEXT(m.lcFile))=='DBC' THEN
+		       lnTable = m.lnTable+1
+		       DIMENSION;
+		        laDBCs(m.lnTable,2)
+		
+		       loSett      = THIS.oGet_Setting(JUSTPATH(m.lcFile),m.loConverter)
+		       lcSourceExt = m.loSett.c_DC2
+		
+		       laDBCs(m.lnTable,1) = FORCEEXT(m.lcFile,m.lcSourceExt)			&&Source File of transformation; Bin
+		       laDBCs(m.lnTable,2) = m.lcMode									&&not a project file
+		
+		      ENDIF &&FILE(m.lcFile) AND UPPER(JUSTEXT(m.lcFile))=='DBC'
+		     ENDFOR &&lnFile
+		
+		     IF m.lnTable>0 THEN
+		      THIS.Get_DBC_Tables(@laDBCs,@laFiles2,@laFiles2,@lnOffset,m.lcMode,.T.,m.loConverter)
+		     ENDIF &&lnTable>0
+		
+		     lnTable = 0
+		     DIMENSION;
+		      laDBCs(1,2)
+		
+		     laDBCs = .NULL.
+		    ENDIF &&m.llExpandDBC
+		
 		    FOR lnFile = 1 TO m.lnFilesFound
-		     lcFile = m.laFiles(m.lnFile,3)
+		
+		     lcFile = laFiles(m.lnFile,3)
+		
 		*search for project hooks
 		     IF FILE(m.lcFile) AND UPPER(JUSTEXT(m.lcFile))=='PJX' THEN
 		
-		* parse out DBC
+		* parse out DBC of PJX
 		      IF m.llExpandDBC THEN
 		       USE (m.lcFile) ALIAS curPJX IN SELECT('curPJX')
 		       llPJXUsed = .T.
@@ -2378,9 +2414,9 @@ DEFINE CLASS cusstorage AS custom 		&& The stuff that does the work.
 		
 		        lnTable = m.lnTable+1
 		        DIMENSION;
-		         m.laDBCs(m.lnTable,2)
+		         laDBCs(m.lnTable,2)
 		
-		        loSett		 = THIS.oGet_Setting(JUSTPATH(m.lcTarget),m.loConverter)
+		        loSett      = THIS.oGet_Setting(JUSTPATH(m.lcTarget),m.loConverter)
 		        lcSourceExt = m.loSett.c_DC2
 		
 		        laDBCs(m.lnTable,1) = FORCEEXT(m.lcTarget,m.lcSourceExt)			&&Source File of transformation; Bin
@@ -2393,14 +2429,14 @@ DEFINE CLASS cusstorage AS custom 		&& The stuff that does the work.
 		
 		       lnTable = 0
 		       DIMENSION;
-		        m.laDBCs(1,2)
+		        laDBCs(1,2)
 		
 		       laDBCs = .NULL.
 		      ENDIF &&m.llExpandDBC
 		* /parse out DBC
 		
 		*Project Hook
-		      IF m.laFiles(m.lnFile,4)>1 THEN
+		      IF laFiles(m.lnFile,4)>1 THEN
 		       IF !m.llPJXUsed THEN
 		        USE (m.lcFile) ALIAS curPJX IN SELECT('curPJX')
 		        llPJXUsed = .T.
@@ -2421,16 +2457,16 @@ DEFINE CLASS cusstorage AS custom 		&& The stuff that does the work.
 		       IF !EMPTY(m.lcFile) THEN
 		        lnOffset = m.lnOffset+1
 		        DIMENSION;
-		         m.laFiles2(m.lnOffset,3)
+		         laFiles2(m.lnOffset,4)
 		
-		        loSett		 = THIS.oGet_Setting(JUSTPATH(m.lcFile),m.loConverter)
+		        loSett      = THIS.oGet_Setting(JUSTPATH(m.lcFile),m.loConverter)
 		        lcSourceExt = m.loSett.c_VC2
 		
-		        laFiles2(m.lnOffset,1)	= FORCEEXT(m.lcFile,m.lcSourceExt)			&& Source File of transformation; Bin
-		        laFiles2(m.lnOffset,2)	= m.lcMode									&& not a project file
-		        laFiles2(m.lnOffset,3)	= 0											&& has no hook
+		        laFiles2(m.lnOffset,1) = FORCEEXT(m.lcFile,m.lcSourceExt)			&& Source File of transformation; Bin
+		        laFiles2(m.lnOffset,2) = m.lcMode									&& not a project file
+		        laFiles2(m.lnOffset,3) = 0											&& has no hook
 		       ENDIF &&!EMPTY(m.lcFile)
-		      ENDIF &&m.laFiles(m.lnFile,4)>1
+		      ENDIF &&laFiles(m.lnFile,4)>1
 		
 		      IF m.llPJXUsed THEN
 		       USE IN curPJX
@@ -2455,13 +2491,13 @@ DEFINE CLASS cusstorage AS custom 		&& The stuff that does the work.
 		     ACTIVATE SCREEN
 		
 		     DIMENSION;
-		      m.laToConvert(m.lnOffset,3)
+		      laToConvert(m.lnOffset,3)
 		
 		* files in parameters section
 		* must be show, because they are processed
 		     FOR lnConvert = 1 TO m.lnOffset
-		      laToConvert(m.lnConvert,1) = m.laFiles2(m.lnConvert,1)
-		      laToConvert(m.lnConvert,2) = m.laFiles2(m.lnConvert,2)
+		      laToConvert(m.lnConvert,1) = laFiles2(m.lnConvert,1)
+		      laToConvert(m.lnConvert,2) = laFiles2(m.lnConvert,2)
 		      laToConvert(m.lnConvert,3) = .T.
 		     ENDFOR &&lnConvert
 		
@@ -2469,9 +2505,9 @@ DEFINE CLASS cusstorage AS custom 		&& The stuff that does the work.
 		     llFound = THIS.Convert(@laToConvert,.T.,m.loConverter,m.lnFilesFound,m.toFB2T_Setting)
 		
 		     DIMENSION;
-		      m.laFiles2(1,1)
+		      laFiles2(1,1)
 		*just rework hooks and DBF's in storage table
-		     IF m.loConverter.Get_Processed(@laFiles2)#0 THEN
+		     IF loConverter.Get_Processed(@laFiles2)#0 THEN
 		      THIS.FilesToProcess(@laFiles2,m.lcPath,.T.,.F.,m.lcStorage,m.loConverter)
 		     ENDIF &&loConverter.Get_Processed(@laFiles2)#0
 		    ENDIF &&m.lnOffset>0
@@ -2482,12 +2518,12 @@ DEFINE CLASS cusstorage AS custom 		&& The stuff that does the work.
 		     CASE ISNULL(m.llProcess)
 		*need to process all files -> just let FoxBin2PRG do, faster.
 		      DIMENSION;
-		       m.laToConvert(ALEN(m.laFiles,1),3)
+		       laToConvert(ALEN(m.laFiles,1),3)
 		
 		* must be show, because they are processed
 		      FOR lnConvert = 1 TO ALEN(m.laFiles,1)
-		       laToConvert(m.lnConvert,1) = m.laFiles(m.lnConvert,1)
-		       laToConvert(m.lnConvert,2) = m.laFiles(m.lnConvert,2)
+		       laToConvert(m.lnConvert,1) = laFiles(m.lnConvert,1)
+		       laToConvert(m.lnConvert,2) = laFiles(m.lnConvert,2)
 		       laToConvert(m.lnConvert,3) = .T.
 		      ENDFOR &&lnConvert
 		
@@ -2495,8 +2531,8 @@ DEFINE CLASS cusstorage AS custom 		&& The stuff that does the work.
 		      llFound = THIS.Convert(@laToConvert,.T.,m.loConverter,m.lnFilesFound,m.toFB2T_Setting)
 		     CASE m.llProcess
 		*If not processed in first loop, process now, file by file.
-		      loConverter.l_ProcessFiles			= .T.
-		      loConverter.l_AutoClearProcessedFiles	= .T.
+		      loConverter.l_ProcessFiles            = .T.
+		      loConverter.l_AutoClearProcessedFiles = .T.
 		
 		      lnFiles  = ALEN(m.laFiles2,1)
 		*just set "not a project"
@@ -2504,11 +2540,11 @@ DEFINE CLASS cusstorage AS custom 		&& The stuff that does the work.
 		       laFiles2(m.lnFile,2) = m.lcMode
 		      ENDFOR &&lnFile
 		      DIMENSION;
-		       m.laToConvert(ALEN(m.laFiles2,1),3)
+		       laToConvert(ALEN(m.laFiles2,1),3)
 		
 		      FOR lnConvert = 1 TO ALEN(m.laFiles2,1)
-		       laToConvert(m.lnConvert,1) = m.laFiles2(m.lnConvert,1)
-		       laToConvert(m.lnConvert,2) = m.laFiles2(m.lnConvert,2)
+		       laToConvert(m.lnConvert,1) = laFiles2(m.lnConvert,1)
+		       laToConvert(m.lnConvert,2) = laFiles2(m.lnConvert,2)
 		       laToConvert(m.lnConvert,3) = .T.
 		      ENDFOR &&lnConvert
 		
@@ -2530,7 +2566,7 @@ DEFINE CLASS cusstorage AS custom 		&& The stuff that does the work.
 		*sfx todo SQL
 		    SCAN FOR iDirty=-1
 		
-		     loSett		 = THIS.oGet_Setting(JUSTPATH(cFile),m.loConverter)
+		     loSett      = THIS.oGet_Setting(JUSTPATH(cFile),m.loConverter)
 		     lcSourceExt = UPPER(JUSTEXT(cFile))
 		
 		     DO CASE
@@ -2588,7 +2624,7 @@ DEFINE CLASS cusstorage AS custom 		&& The stuff that does the work.
 		   ENDIF &&_SCREEN.gcB2T_Delete=="1"
 		*!*	/Changed by: SF 4.6.2015
 		
-		  ENDIF &&m.loConverter.Get_Processed(@laFiles2)#0
+		  ENDIF &&loConverter.Get_Processed(@laFiles2)#0
 		 ELSE  &&NVL(!m.tlIncludeAll,True)
 		
 		*!*	Changed by: SF 11.6.2015
@@ -2599,7 +2635,7 @@ DEFINE CLASS cusstorage AS custom 		&& The stuff that does the work.
 		*!*	</pdm>
 		
 		  DIMENSION;
-		   m.laFiles2(1,4)
+		   laFiles2(1,4)
 		
 		  lnOffset = 0
 		
@@ -2612,13 +2648,13 @@ DEFINE CLASS cusstorage AS custom 		&& The stuff that does the work.
 		  IF m.lnOffset>0 THEN
 		   ACTIVATE SCREEN
 		   DIMENSION;
-		    m.laToConvert(m.lnOffset,3)
+		    laToConvert(m.lnOffset,3)
 		
 		* files in parameters section
 		* must be show, because they are processed
 		   FOR lnConvert = 1 TO m.lnOffset
-		    laToConvert(m.lnConvert,1) = m.laFiles2(m.lnConvert,1)
-		    laToConvert(m.lnConvert,2) = m.laFiles2(m.lnConvert,2)
+		    laToConvert(m.lnConvert,1) = laFiles2(m.lnConvert,1)
+		    laToConvert(m.lnConvert,2) = laFiles2(m.lnConvert,2)
 		    laToConvert(m.lnConvert,3) = .T.
 		   ENDFOR &&lnConvert
 		
@@ -2626,9 +2662,9 @@ DEFINE CLASS cusstorage AS custom 		&& The stuff that does the work.
 		   llFound = THIS.Convert(@laToConvert,.T.,m.loConverter,m.lnFilesFound,m.toFB2T_Setting)
 		
 		   DIMENSION;
-		    m.laFiles2(1,1)
+		    laFiles2(1,1)
 		*just rework hooks and DBF's in storage table
-		   IF m.loConverter.Get_Processed(@laFiles2)#0 THEN
+		   IF loConverter.Get_Processed(@laFiles2)#0 THEN
 		    THIS.FilesToProcess(@laFiles2,m.lcPath,.T.,.F.,m.lcStorage,m.loConverter)
 		   ENDIF &&loConverter.Get_Processed(@laFiles2)#0
 		  ENDIF &&m.lnOffset>0
@@ -2638,7 +2674,7 @@ DEFINE CLASS cusstorage AS custom 		&& The stuff that does the work.
 		 ENDIF &&NVL(!m.tlIncludeAll,True)
 		ENDIF &&m.llFound
 		
-		m.loConverter.UnloadProgressbarForm()
+		loConverter.UnloadProgressbarForm()
 		loConverter =  NIL
 		
 		THIS.Storage_Close(m.lcStorage,m.llFound)

@@ -62,6 +62,9 @@ Recompile = Yes
 *A different name for the staging folder.
 *InstalledFilesFolder = {MyInstallFolder}
 
+*add a gitignore to InstalledFiles directory to not add this directory to git repository
+gitIgnore_InstalledFiles = Yes
+
 *Remove all files from InstalledFiles folder if InstalledFiles.txt is given
 *Clear_InstalledFiles = No
 
