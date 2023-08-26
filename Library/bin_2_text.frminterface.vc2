@@ -570,13 +570,18 @@ DEFINE CLASS frminterface AS form 		&& Just to create an interface as well as a 
 		 tnStyle
 		
 		LOCAL;
-		 lcBranch  AS STRING,;
-		 lnAnchor1 AS NUMBER,;
-		 lnAnchor2 AS NUMBER,;
-		 lnAnchor3 AS NUMBER
+		 lcBranch    AS STRING,;
+		 lnAnchor1   AS NUMBER,;
+		 lnAnchor2   AS NUMBER,;
+		 lnAnchor3   AS NUMBER,;
+		 loConverter AS OBJECT
 		
-		lcBranch = GetBranch()
-		THIS.CAPTION = 'Bin2Text v'+dcB2T_Verno+'  Bin <> Text'
+		lcBranch    = GetBranch()
+		IF THIS.cusB2T.Get_Converter(,@loConverter,.T.) THEN
+		 THIS.CAPTION = 'Bin2Text v'+dcB2T_Verno+'  Bin <> Text, Error FoxBin2Prg'
+		ELSE  &&this.cusB2T.Get_Converter(,@loConverter,.T.)
+		 THIS.CAPTION = 'Bin2Text v'+dcB2T_Verno+'  Bin <> Text, FoxBin2Prg v'+m.loConverter.c_FB2PRG_VERSION_REAL
+		ENDIF &&this.cusB2T.Get_Converter(,@loConverter,.T.)
 		
 		lnAnchor1 = THIS.grdList.ANCHOR
 		lnAnchor2 = THIS.cmdOK.ANCHOR
@@ -605,8 +610,8 @@ DEFINE CLASS frminterface AS form 		&& Just to create an interface as well as a 
 		 THIS.lblGit_PJX.VISIBLE = .F.
 		 THIS.chkGit_PJX.VISIBLE = .F.
 		
-		 THIS.cmdOK.TOP        = THIS.Shape1.TOP
-		 THIS.cmdCancel.TOP    = THIS.Shape1.TOP
+		 THIS.cmdOK.TOP     = THIS.Shape1.TOP
+		 THIS.cmdCancel.TOP = THIS.Shape1.TOP
 		
 		 THIS.MINHEIGHT = THIS.cmdCancel.TOP+THIS.cmdCancel.HEIGHT+5
 		 THIS.HEIGHT    = THIS.MINHEIGHT
@@ -647,8 +652,8 @@ DEFINE CLASS frminterface AS form 		&& Just to create an interface as well as a 
 		  THIS.cmdPick.VISIBLE    = .F.
 		  THIS.grdList.VISIBLE    = .F.
 		
-		  THIS.cmdOK.TOP        = THIS.Shape3.TOP
-		  THIS.cmdCancel.TOP    = THIS.Shape3.TOP
+		  THIS.cmdOK.TOP     = THIS.Shape3.TOP
+		  THIS.cmdCancel.TOP = THIS.Shape3.TOP
 		
 		  THIS.MINHEIGHT = THIS.cmdCancel.TOP+THIS.cmdCancel.HEIGHT+5
 		  THIS.HEIGHT    = .MINHEIGHT
