@@ -1,3 +1,0 @@
-docs\pdm\||PDM\
-Bin2Text.exe
-README.md
