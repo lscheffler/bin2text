@@ -6,7 +6,16 @@ This page gives a brief overview of changes to the [Bin 2 Text Extension](https:
 
 A complete list of changes is available on the offline documentation via **local folder** _docu/index.htm_.
 
+This version of Bin2Text requires version [1.20.04](https://github.com/lscheffler/foxbin2prg/releases/tag/v1.20.04) of FoxBin2Prg.
+
 ## Release History
+
+---
+### 2023-09-01, Version 1.3.0
+Stable release.
+* Removed Thor support
+* New option to use a fixed config file for FoxBin2Prg
+* New option to allow logging for FoxBin2Prg
 
 ---
 ### 2023-08-22, Version 1.2.3
@@ -127,5 +136,5 @@ Stable release.
 * Initial push to github
 
 ----
-Last changed: *<!--CVERSIONDATE-->2023-05-21<!--/CVERSIONDATE-->*   
+Last changed: *2023-09-01*   
 ![powered by VFPX](./docs/images/vfpxpoweredby_alternative.gif "powered by VFPX")

@@ -69,12 +69,15 @@ classes/bin_2_text.vcx/cls.frminterface.show.htm
 classes/bin_2_text.vcx/cls.frminterface.storage_get.htm
 classes/bin_2_text.vcx/cls.frminterface.storage_put.htm
 classes/bin_2_text.vcx/cls.frminterface.cmdcancel.click.htm
+classes/bin_2_text.vcx/cls.frminterface.cmdconfig.click.htm
+classes/bin_2_text.vcx/cls.frminterface.cmdconfig_del.click.htm
 classes/bin_2_text.vcx/cls.frminterface.cmddel.click.htm
 classes/bin_2_text.vcx/cls.frminterface.cmdgui.click.htm
 classes/bin_2_text.vcx/cls.frminterface.cmdmain.click.htm
 classes/bin_2_text.vcx/cls.frminterface.cmdnew.click.htm
 classes/bin_2_text.vcx/cls.frminterface.cmdok.click.htm
 classes/bin_2_text.vcx/cls.frminterface.cmdpick.click.htm
+classes/bin_2_text.vcx/cls.frminterface.txtconfig.when.htm
 classes/bin_2_text.vcx/cls.frminterface.txtgui.when.htm
 classes/bin_2_text.vcx/cls.frminterface.txtmain.when.htm
 classes/bin_2_text.vcx/cls.frminterface.txtpath.when.htm

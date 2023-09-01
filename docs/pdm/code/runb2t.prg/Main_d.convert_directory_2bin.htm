@@ -16,18 +16,18 @@
 <body>
 <div class="diaxp_mhead">Convert_Directory_2Bin Function</div>
 <div class="diaxp_mbody">
-<!-- Created with _diamp_pdm_ab by Agnes Beste    22.05.2023 10:54 -->
+<!-- Created with _diamp_pdm_ab by Agnes Beste    01.09.2023 16:44 -->
  <div class="PDM_AB_Descr"><!-- Descr Begin -->
 Runs FoxBin2Prg for a directory to create binaries.
  </div><!-- Descr End -->
 
  <div class="DIAMP_PDM_AB_Syntax"><!-- Syntax Begin -->
   <div class="SColor">
-   <div class="RetVal"><a href="#_6MF0NDRLC">RetVal</a>&nbsp;</div>   <div class="RetValEq">=</div>   <div class="PEM">
+   <div class="RetVal"><a href="#_6P90ZVZ6O">RetVal</a>&nbsp;</div>   <div class="RetValEq">=</div>   <div class="PEM">
     Convert_Directory_2Bin
    </div>
    <div class="Para">
-    ([<a href="#_6MF0NDRLD">tcDirectory</a>])
+    ([<a href="#_6P90ZVZ6P">tcDirectory</a>])
    </div>
    <div style="clear: both"></div>
   </div><!-- Colour End -->
@@ -39,7 +39,7 @@ Runs FoxBin2Prg for a directory to create binaries.
   </span>
   <dl class="DIAMP_PDM_AB_Params_List">
    <dt class="dt_">
-    <a class="DIAMP_PDM_AB_Params_ParaName" id="_6MF0NDRLD" name="_6MF0NDRLD">
+    <a class="DIAMP_PDM_AB_Params_ParaName" id="_6P90ZVZ6P" name="_6P90ZVZ6P">
      <span class="PDMEXPR PDMNor" ><span class='PDMVar'>tcDirectory</span></span>
 
     </a>
@@ -75,7 +75,7 @@ Runs FoxBin2Prg for a directory to create binaries.
  <div class="DIAMP_PDM_AB_RetVal"><!-- Returns Begin -->
   <div>
    <span class="PDM_AB_Head">
-    <a id="_6MF0NDRLC" name="_6MF0NDRLC">
+    <a id="_6P90ZVZ6O" name="_6P90ZVZ6O">
      Return value
     </a>
    </span> <span class="RetVal_Ttype">Boolean</span>
@@ -100,7 +100,7 @@ Returns success of operation.
  </div><!-- Remarks End -->
 
 
-<!-- /Created with _diamp_pdm_ab by Agnes Beste    22.05.2023 10:54 -->
+<!-- /Created with _diamp_pdm_ab by Agnes Beste    01.09.2023 16:44 -->
 
  <div class="SC">
   <img onclick="ExpandSC('SP_P9',-1);" class="imgEC" src="../../imgs/dotab.gif" alt="Expand/Collapse source code of procedure Convert_Directory_2Bin" id="IMG_SP_P9" />
@@ -207,7 +207,7 @@ Returns success of operation.
 <span class='PDMCnt'>2459</span> <span class='PDMInd'>  </span> 
 <span class='PDMCnt'>2460</span> <span class='PDMInd'> 3</span>    <span class='PDMResF'>ACOPY</span><span class='PDMOper'>(</span><span class='PDMVar'>_SCREEN</span><span class='PDMOper'>.</span><span class='PDMVar'>gaFiles</span><span class='PDMOper'>,</span><span class='PDMVar'>m</span><span class='PDMOper'>.</span><span class='PDMVar'>laFiles</span><span class='PDMOper'>)</span>    <span class='PDMCom'>&amp;&amp; will autoresize laFiles</span>
 <span class='PDMCnt'>2461</span> <span class='PDMInd'>  </span> 
-<span class='PDMCnt'>2462</span> <span class='PDMInd'> 3</span>    <span class='PDMVar'>llReturn</span> <span class='PDMOper'>=</span> <span class='PDMVar'>m</span><span class='PDMOper'>.</span><span class='PDMVar'>llReturn</span> <span class='PDMOper'>AND</span> <span class='PDMVar'>_SCREEN</span><span class='PDMOper'>.</span><span class='PDMVar'>frmB2T_Envelop</span><span class='PDMOper'>.</span><span class='PDMVar'>cusB2T</span><span class='PDMOper'>.</span><span class='PDMVar'>Process_Txt2Bin_Dir</span><span class='PDMOper'>(</span><span class='PDMOper'>@</span><span class='PDMVar'>laFiles</span><span class='PDMOper'>)</span>
+<span class='PDMCnt'>2462</span> <span class='PDMInd'> 3</span>    <span class='PDMVar'>llReturn</span> <span class='PDMOper'>=</span> <span class='PDMVar'>m</span><span class='PDMOper'>.</span><span class='PDMVar'>llReturn</span> <span class='PDMOper'>AND</span> <span class='PDMVar'>_SCREEN</span><span class='PDMOper'>.</span><span class='PDMVar'>frmB2T_Envelop</span><span class='PDMOper'>.</span><span class='PDMVar'>cusB2T</span><span class='PDMOper'>.</span><span class='PDMVar'>Process_Txt2Bin_Dir</span><span class='PDMOper'>(</span><span class='PDMOper'>@</span><span class='PDMVar'>laFiles</span><span class='PDMOper'>,</span><span class='PDMLit'>.F.</span><span class='PDMOper'>)</span>
 <span class='PDMCnt'>2463</span> <span class='PDMInd'>  </span> 
 <span class='PDMCnt'>2464</span> <span class='PDMInd'> 2</span>   <span class='PDMResK'>ENDIF</span> <span class='PDMCom'>&amp;&amp;m.llReturn</span>
 <span class='PDMCnt'>2465</span> <span class='PDMInd'>  </span> 

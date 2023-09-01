@@ -25,19 +25,19 @@
 </table>
 </div>
 <div class="diaxp_mbody">
-<!-- Created with _diamp_pdm_ab by Agnes Beste    22.05.2023 10:54 -->
+<!-- Created with _diamp_pdm_ab by Agnes Beste    01.09.2023 16:44 -->
  <div class="PDM_AB_Descr"><!-- Descr Begin -->
 Returns FoxBin2Prg's setting.
  </div><!-- Descr End -->
 
  <div class="DIAMP_PDM_AB_Syntax"><!-- Syntax Begin -->
   <div class="SColor">
-   <div class="RetVal"><a href="#_6MF0NDQAQ">RetVal</a>&nbsp;</div>   <div class="RetValEq">=</div>   <div class="PEM">
+   <div class="RetVal"><a href="#_6P90ZVXTH">RetVal</a>&nbsp;</div>   <div class="RetValEq">=</div>   <div class="PEM">
     Object.oget_setting
    </div>
    <div class="Para">
-    (<a href="#_6MF0NDQAR">tcPath</a>
-     <wbr />,<a href="#_6MF0NDQAS">toConverter</a>)
+    (<a href="#_6P90ZVXTI">tcPath</a>
+     <wbr />,<a href="#_6P90ZVXTJ">toConverter</a>)
    </div>
    <div style="clear: both"></div>
   </div><!-- Colour End -->
@@ -49,7 +49,7 @@ Returns FoxBin2Prg's setting.
   </span>
   <dl class="DIAMP_PDM_AB_Params_List">
    <dt class="dt_">
-    <a class="DIAMP_PDM_AB_Params_ParaName" id="_6MF0NDQAR" name="_6MF0NDQAR">
+    <a class="DIAMP_PDM_AB_Params_ParaName" id="_6P90ZVXTI" name="_6P90ZVXTI">
      <span class="PDMEXPR PDMNor" ><span class='PDMVar'>tcPath</span></span>
 
     </a>
@@ -76,7 +76,7 @@ Returns FoxBin2Prg's setting.
     </table>
    </dd>
    <dt class="dt_">
-    <a class="DIAMP_PDM_AB_Params_ParaName" id="_6MF0NDQAS" name="_6MF0NDQAS">
+    <a class="DIAMP_PDM_AB_Params_ParaName" id="_6P90ZVXTJ" name="_6P90ZVXTJ">
      <span class="PDMEXPR PDMNor" ><span class='PDMVar'>toConverter</span></span>
 
     </a>
@@ -111,7 +111,7 @@ Instance of FoxBin2PRG for further operation.
  <div class="DIAMP_PDM_AB_RetVal"><!-- Returns Begin -->
   <div>
    <span class="PDM_AB_Head">
-    <a id="_6MF0NDQAQ" name="_6MF0NDQAQ">
+    <a id="_6P90ZVXTH" name="_6P90ZVXTH">
      Return value
     </a>
    </span> <span class="RetVal_Ttype">Object</span>
@@ -127,17 +127,17 @@ Settings object of FoxBin2Prg.
   </span>
   <div class="PDM_AB_Body">
 
-Returns FoxBin2Prg's setting for path <a class="DIAMP_PDM_AB_Para_Link" href="#_6MF0NDQAR">tcPath</a>.
+Returns FoxBin2Prg's setting for path <a class="DIAMP_PDM_AB_Para_Link" href="#_6P90ZVXTI">tcPath</a>.
   </div>
  </div><!-- Remarks End -->
 
 
-<!-- /Created with _diamp_pdm_ab by Agnes Beste    22.05.2023 10:54 -->
+<!-- /Created with _diamp_pdm_ab by Agnes Beste    01.09.2023 16:44 -->
 
  <div class="SC">
-  <img onclick="ExpandSC('SP_40',-1);"class="imgEC" src="../../imgs/dotab.gif" alt="Expand/Collapse source code of procedure oget_setting" id="IMG_SP_40" />
-  <span ondblclick="ExpandSC('SP_40',-1);" class="SCCaption"><a name="cusstorage">Source Code</a></span>
-  <div ondblclick="ExpandSC('SP_40',-1);" class="SCE" style="display: none;" id="TX_SP_40">
+  <img onclick="ExpandSC('SP_46',-1);"class="imgEC" src="../../imgs/dotab.gif" alt="Expand/Collapse source code of procedure oget_setting" id="IMG_SP_46" />
+  <span ondblclick="ExpandSC('SP_46',-1);" class="SCCaption"><a name="cusstorage">Source Code</a></span>
+  <div ondblclick="ExpandSC('SP_46',-1);" class="SCE" style="display: none;" id="TX_SP_46">
 <!-- Code Begin -->
 <pre class="PDMCODE PDMNor" ><span class='PDMCnt'>   1</span> <span class='PDMInd'>  </span> <span class='PDMResK'>LPARAMETERS</span><span class='PDMOper'>;</span>
 <span class='PDMCnt'>   2</span> <span class='PDMInd'> 1</span>  <span class='PDMVar'>tcPath</span><span class='PDMOper'>,</span><span class='PDMOper'>;</span>
@@ -158,7 +158,7 @@ Returns FoxBin2Prg's setting for path <a class="DIAMP_PDM_AB_Para_Link" href="#_
 <span class='PDMCnt'>  41</span> <span class='PDMInd'>  </span> <span class='PDMResK'>IF</span> <span class='PDMResK'>THIS</span><span class='PDMOper'>.</span><span class='PDMVar'>goSetts</span><span class='PDMOper'>.</span><span class='PDMResM'>GETKEY</span><span class='PDMOper'>(</span><span class='PDMVar'>m</span><span class='PDMOper'>.</span><span class='PDMVar'>lcTemp</span><span class='PDMOper'>)</span><span class='PDMOper'>#</span><span class='PDMLit'>0</span> <span class='PDMResK'>THEN</span>
 <span class='PDMCnt'>  42</span> <span class='PDMInd'> 1</span>  <span class='PDMVar'>loSett</span> <span class='PDMOper'>=</span> <span class='PDMResK'>THIS</span><span class='PDMOper'>.</span><span class='PDMVar'>goSetts</span><span class='PDMOper'>.</span><span class='PDMResM'>ITEM</span><span class='PDMOper'>(</span><span class='PDMVar'>m</span><span class='PDMOper'>.</span><span class='PDMVar'>lcTemp</span><span class='PDMOper'>)</span>
 <span class='PDMCnt'>  43</span> <span class='PDMInd'>  </span> <span class='PDMResK'>ELSE</span>  <span class='PDMCom'>&amp;&amp;THIS.goSetts.GETKEY(m.lcTemp)#0</span>
-<span class='PDMCnt'>  44</span> <span class='PDMInd'> 1</span>  <span class='PDMVar'>loSett</span> <span class='PDMOper'>=</span> <span class='PDMVar'>toConverter</span><span class='PDMOper'>.</span><span class='PDMVar'>Get_DirSettings</span><span class='PDMOper'>(</span><span class='PDMVar'>tcPath</span><span class='PDMOper'>)</span>
+<span class='PDMCnt'>  44</span> <span class='PDMInd'> 1</span>  <span class='PDMVar'>loSett</span> <span class='PDMOper'>=</span> <span class='PDMVar'>toConverter</span><span class='PDMOper'>.</span><span class='PDMVar'>Get_DirSettings</span><span class='PDMOper'>(</span><span class='PDMVar'>tcPath</span><span class='PDMOper'>,</span><span class='PDMVar'>_SCREEN</span><span class='PDMOper'>.</span><span class='PDMVar'>gcB2T_Log</span><span class='PDMOper'>,</span><span class='PDMVar'>_SCREEN</span><span class='PDMOper'>.</span><span class='PDMVar'>gcB2T_Config</span><span class='PDMOper'>)</span>
 <span class='PDMCnt'>  45</span> <span class='PDMInd'> 1</span>  <span class='PDMResK'>THIS</span><span class='PDMOper'>.</span><span class='PDMVar'>goSetts</span><span class='PDMOper'>.</span><span class='PDMResK'>ADD</span><span class='PDMOper'>(</span><span class='PDMVar'>m</span><span class='PDMOper'>.</span><span class='PDMVar'>loSett</span><span class='PDMOper'>,</span><span class='PDMVar'>m</span><span class='PDMOper'>.</span><span class='PDMVar'>lcTemp</span><span class='PDMOper'>)</span>
 <span class='PDMCnt'>  46</span> <span class='PDMInd'>  </span> <span class='PDMResK'>ENDIF</span> <span class='PDMCom'>&amp;&amp;THIS.goSetts.GETKEY(m.lcTemp)#0</span>
 <span class='PDMCnt'>  47</span> <span class='PDMInd'>  </span> 
@@ -180,7 +180,7 @@ Returns FoxBin2Prg's setting for path <a class="DIAMP_PDM_AB_Para_Link" href="#_
  </div><!-- Footer End -->
 </div>
 <script language="JavaScript" type="text/javascript">
-lo=document.getElementById("TX_SP_40");
+lo=document.getElementById("TX_SP_46");
 lo.XType="SourceCode";
 lo.Dir="../../imgs/";
 

@@ -89,12 +89,13 @@ bin2txt.*
 #Doku
 !/.github/
 !/docs/**/*.*
+/docs/**/*.bak
 !Doku/*.pdm*
 !Doku/Source/*.gif
 !Doku/Source/*.png
 !Doku/Source/*.htm
 !Doku/Source/*.html
-#/Doku/**/*.**.bak
+/Doku/**/*.**.bak
 
 #reinclude
 !docs/classes/bin_2_text.vcx/*.*.htm*

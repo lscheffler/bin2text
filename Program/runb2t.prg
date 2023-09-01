@@ -708,7 +708,7 @@ FUNCTION Convert_Pjx_2Bin &&Runs FoxBin2Prg for multiple projects to create bina
 *process Transformation
  Construct_Objects()
 
- _SCREEN.frmB2T_Envelop.cusB2T.Process_Txt2Bin(@laFiles,_SCREEN.gvMode,.F.)
+ _SCREEN.frmB2T_Envelop.cusB2T.Process_Txt2Bin(@laFiles,_SCREEN.gvMode)
  Destruct_Objects()
 
  CLEAR ALL
@@ -2459,7 +2459,7 @@ FUNCTION Convert_Directory_2Bin  	&&Runs FoxBin2Prg for a single directory and i
 
    ACOPY(_SCREEN.gaFiles,m.laFiles)	&& will autoresize laFiles
 
-   llReturn = m.llReturn AND _SCREEN.frmB2T_Envelop.cusB2T.Process_Txt2Bin_Dir(@laFiles)
+   llReturn = m.llReturn AND _SCREEN.frmB2T_Envelop.cusB2T.Process_Txt2Bin_Dir(@laFiles,.F.)
 
   ENDIF &&m.llReturn
 
@@ -2805,6 +2805,7 @@ FUNCTION InitMenu	&&Starts the IDE menu.
 
  LOCAL;
   lcOldExact	AS STRING
+
  IF _VFP.STARTMODE#0 THEN
   HelpMsg(6)
   RETURN .F.
@@ -4295,7 +4296,7 @@ FUNCTION IsFile  &&Check if a single file exists on Deic vai ADIR (since FILE() 
   tcFile
 
 *!*	<pdm>
-*!*	<descr>Check if a single file exists on Deic vai ADIR (since FILE() sees stuff inside APP)</descr>
+*!*	<descr>Check if a single file exists on Deic via ADIR (since FILE() sees stuff inside APP)</descr>
 *!*	<params name="tcFile" type="Character" byref="0" dir="" inb="0" outb="0">
 *!*	<short>Filename to test</short>
 *!*	<detail></detail>

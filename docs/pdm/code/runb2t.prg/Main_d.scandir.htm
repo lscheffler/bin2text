@@ -16,7 +16,7 @@
 <body>
 <div class="diaxp_mhead">ScanDir Function</div>
 <div class="diaxp_mbody">
-<!-- Created with _diamp_pdm_ab by Agnes Beste    22.05.2023 10:54 -->
+<!-- Created with _diamp_pdm_ab by Agnes Beste    01.09.2023 16:44 -->
  <div class="PDM_AB_Descr"><!-- Descr Begin -->
 Scan a directory recursive.
  </div><!-- Descr End -->
@@ -27,10 +27,10 @@ Scan a directory recursive.
     ScanDir
    </div>
    <div class="Para">
-    (<a href="#_6MF0NDRYE">tnAction</a>
-     <wbr />,<a href="#_6MF0NDRYF">tcDir</a>
-     <wbr />,<a href="#_6MF0NDRYG">tlText2Bin</a>
-     <wbr />,<a href="#_6MF0NDRYH">toConverter</a>)
+    (<a href="#_6P90ZVZK0">tnAction</a>
+     <wbr />,<a href="#_6P90ZVZK1">tcDir</a>
+     <wbr />,<a href="#_6P90ZVZK2">tlText2Bin</a>
+     <wbr />,<a href="#_6P90ZVZK3">toConverter</a>)
    </div>
    <div style="clear: both"></div>
   </div><!-- Colour End -->
@@ -42,7 +42,7 @@ Scan a directory recursive.
   </span>
   <dl class="DIAMP_PDM_AB_Params_List">
    <dt class="dt_">
-    <a class="DIAMP_PDM_AB_Params_ParaName" id="_6MF0NDRYE" name="_6MF0NDRYE">
+    <a class="DIAMP_PDM_AB_Params_ParaName" id="_6P90ZVZK0" name="_6P90ZVZK0">
      <span class="PDMEXPR PDMNor" ><span class='PDMVar'>tnAction</span></span>
 
     </a>
@@ -74,7 +74,7 @@ Scan a directory recursive.
     </span>
    </dd>
    <dt class="dt_">
-    <a class="DIAMP_PDM_AB_Params_ParaName" id="_6MF0NDRYF" name="_6MF0NDRYF">
+    <a class="DIAMP_PDM_AB_Params_ParaName" id="_6P90ZVZK1" name="_6P90ZVZK1">
      <span class="PDMEXPR PDMNor" ><span class='PDMVar'>tcDir</span></span>
 
     </a>
@@ -101,7 +101,7 @@ Scan a directory recursive.
     </table>
    </dd>
    <dt class="dt_">
-    <a class="DIAMP_PDM_AB_Params_ParaName" id="_6MF0NDRYG" name="_6MF0NDRYG">
+    <a class="DIAMP_PDM_AB_Params_ParaName" id="_6P90ZVZK2" name="_6P90ZVZK2">
      <span class="PDMEXPR PDMNor" ><span class='PDMVar'>tlText2Bin</span></span>
 
     </a>
@@ -128,7 +128,7 @@ Scan a directory recursive.
     </table>
    </dd>
    <dt class="dt_">
-    <a class="DIAMP_PDM_AB_Params_ParaName" id="_6MF0NDRYH" name="_6MF0NDRYH">
+    <a class="DIAMP_PDM_AB_Params_ParaName" id="_6P90ZVZK3" name="_6P90ZVZK3">
      <span class="PDMEXPR PDMNor" ><span class='PDMVar'>toConverter</span></span>
 
     </a>
@@ -158,45 +158,45 @@ Scan a directory recursive.
  </div><!-- Parameters End -->
 
 
-<!-- /Created with _diamp_pdm_ab by Agnes Beste    22.05.2023 10:54 -->
+<!-- /Created with _diamp_pdm_ab by Agnes Beste    01.09.2023 16:44 -->
 
  <div class="SC">
   <img onclick="ExpandSC('SP_P31',-1);" class="imgEC" src="../../imgs/dotab.gif" alt="Expand/Collapse source code of procedure ScanDir" id="IMG_SP_P31" />
   <span onclick="ExpandSC('SP_P31',-1);" class="SCCaption"><a name="pm.scandir">Source Code</a></span>
   <div ondblclick="ExpandSC('SP_P31',-1);" class="SCE" style="display: none;" id="TX_SP_P31">
 <!-- Code Begin -->
-<pre class="PDMCODE PDMNor" ><span class='PDMCnt'>4327</span> <span class='PDMInd'> 1</span>  <span class='PDMResK'>LPARAMETERS</span><span class='PDMOper'>;</span>
-<span class='PDMCnt'>4328</span> <span class='PDMInd'> 2</span>   <span class='PDMVar'>tnAction</span><span class='PDMOper'>,</span><span class='PDMOper'>;</span>
-<span class='PDMCnt'>4329</span> <span class='PDMInd'> 2</span>   <span class='PDMVar'>tcDir</span><span class='PDMOper'>,</span><span class='PDMOper'>;</span>
-<span class='PDMCnt'>4330</span> <span class='PDMInd'> 2</span>   <span class='PDMVar'>tlText2Bin</span><span class='PDMOper'>,</span><span class='PDMOper'>;</span>
-<span class='PDMCnt'>4331</span> <span class='PDMInd'> 2</span>   <span class='PDMVar'>toConverter</span>
-<span class='PDMCnt'>4332</span> <span class='PDMInd'>  </span> 
+<pre class="PDMCODE PDMNor" ><span class='PDMCnt'>4328</span> <span class='PDMInd'> 1</span>  <span class='PDMResK'>LPARAMETERS</span><span class='PDMOper'>;</span>
+<span class='PDMCnt'>4329</span> <span class='PDMInd'> 2</span>   <span class='PDMVar'>tnAction</span><span class='PDMOper'>,</span><span class='PDMOper'>;</span>
+<span class='PDMCnt'>4330</span> <span class='PDMInd'> 2</span>   <span class='PDMVar'>tcDir</span><span class='PDMOper'>,</span><span class='PDMOper'>;</span>
+<span class='PDMCnt'>4331</span> <span class='PDMInd'> 2</span>   <span class='PDMVar'>tlText2Bin</span><span class='PDMOper'>,</span><span class='PDMOper'>;</span>
+<span class='PDMCnt'>4332</span> <span class='PDMInd'> 2</span>   <span class='PDMVar'>toConverter</span>
 <span class='PDMCnt'>4333</span> <span class='PDMInd'>  </span> 
-<span class='PDMCnt'>4368</span> <span class='PDMInd'>  </span> 
-<span class='PDMCnt'>4369</span> <span class='PDMInd'> 1</span>  <span class='PDMResK'>LOCAL</span><span class='PDMOper'>;</span>
-<span class='PDMCnt'>4370</span> <span class='PDMInd'> 2</span>   <span class='PDMVar'>lnLoop1</span><span class='PDMOper'>,</span><span class='PDMOper'>;</span>
-<span class='PDMCnt'>4371</span> <span class='PDMInd'> 2</span>   <span class='PDMVar'>lcOldDir</span>
-<span class='PDMCnt'>4372</span> <span class='PDMInd'>  </span> 
-<span class='PDMCnt'>4373</span> <span class='PDMInd'> 1</span>  <span class='PDMResK'>LOCAL</span> <span class='PDMResK'>ARRAY</span><span class='PDMOper'>;</span>
-<span class='PDMCnt'>4374</span> <span class='PDMInd'> 2</span>   <span class='PDMVar'>laDir</span><span class='PDMOper'>(</span><span class='PDMLit'>1</span><span class='PDMOper'>)</span>
-<span class='PDMCnt'>4375</span> <span class='PDMInd'>  </span> 
-<span class='PDMCnt'>4376</span> <span class='PDMInd'> 1</span>  <span class='PDMVar'>lcOldDir</span> <span class='PDMOper'>=</span> <span class='PDMResF'>FULLPATH</span><span class='PDMOper'>(</span><span class='PDMResF'>CURDIR</span><span class='PDMOper'>(</span><span class='PDMOper'>)</span><span class='PDMOper'>)</span>
-<span class='PDMCnt'>4377</span> <span class='PDMInd'> 1</span>  <span class='PDMResK'>CD</span> <span class='PDMOper'>(</span><span class='PDMVar'>m</span><span class='PDMOper'>.</span><span class='PDMVar'>tcDir</span><span class='PDMOper'>)</span>
-<span class='PDMCnt'>4378</span> <span class='PDMInd'> 1</span>  <span class='PDMResK'>FOR</span> <span class='PDMVar'>lnLoop1</span> <span class='PDMOper'>=</span> <span class='PDMLit'>1</span> <span class='PDMResK'>TO</span> <span class='PDMResF'>ADIR</span><span class='PDMOper'>(</span><span class='PDMVar'>laDir</span><span class='PDMOper'>,</span><span class='PDMStr'>''</span><span class='PDMOper'>,</span><span class='PDMStr'>'D'</span><span class='PDMOper'>)</span>
-<span class='PDMCnt'>4379</span> <span class='PDMInd'> 2</span>   <span class='PDMResK'>IF</span> <span class='PDMResF'>INLIST</span><span class='PDMOper'>(</span><span class='PDMVar'>m</span><span class='PDMOper'>.</span><span class='PDMVar'>laDir</span><span class='PDMOper'>(</span><span class='PDMVar'>m</span><span class='PDMOper'>.</span><span class='PDMVar'>lnLoop1</span><span class='PDMOper'>,</span><span class='PDMLit'>1</span><span class='PDMOper'>)</span><span class='PDMOper'>,</span><span class='PDMStr'>'.'</span><span class='PDMOper'>,</span><span class='PDMStr'>'..'</span><span class='PDMOper'>)</span> <span class='PDMResK'>THEN</span>
-<span class='PDMCnt'>4380</span> <span class='PDMInd'> 3</span>    <span class='PDMResK'>LOOP</span>
-<span class='PDMCnt'>4381</span> <span class='PDMInd'> 2</span>   <span class='PDMResK'>ENDIF</span> <span class='PDMCom'>&amp;&amp;INLIST(laDir(m.lnLoop1,1),'.','..')</span>
-<span class='PDMCnt'>4382</span> <span class='PDMInd'> 2</span>   <span class='PDMVar'>ScanDir</span><span class='PDMOper'>(</span><span class='PDMVar'>m</span><span class='PDMOper'>.</span><span class='PDMVar'>tnAction</span><span class='PDMOper'>,</span><span class='PDMResF'>ADDBS</span><span class='PDMOper'>(</span><span class='PDMResF'>ADDBS</span><span class='PDMOper'>(</span><span class='PDMVar'>m</span><span class='PDMOper'>.</span><span class='PDMVar'>tcDir</span><span class='PDMOper'>)</span><span class='PDMOper'>+</span><span class='PDMVar'>m</span><span class='PDMOper'>.</span><span class='PDMVar'>laDir</span><span class='PDMOper'>(</span><span class='PDMVar'>m</span><span class='PDMOper'>.</span><span class='PDMVar'>lnLoop1</span><span class='PDMOper'>,</span><span class='PDMLit'>1</span><span class='PDMOper'>)</span><span class='PDMOper'>)</span><span class='PDMOper'>,</span><span class='PDMVar'>m</span><span class='PDMOper'>.</span><span class='PDMVar'>tlText2Bin</span><span class='PDMOper'>,</span><span class='PDMVar'>m</span><span class='PDMOper'>.</span><span class='PDMVar'>toConverter</span><span class='PDMOper'>)</span>
-<span class='PDMCnt'>4383</span> <span class='PDMInd'> 1</span>  <span class='PDMResK'>ENDFOR</span> <span class='PDMCom'>&amp;&amp;lnLoop1</span>
-<span class='PDMCnt'>4384</span> <span class='PDMInd'>  </span> 
-<span class='PDMCnt'>4385</span> <span class='PDMInd'> 1</span>  <span class='PDMResK'>DO</span> <span class='PDMResK'>CASE</span>
-<span class='PDMCnt'>4386</span> <span class='PDMInd'> 2</span>   <span class='PDMResK'>CASE</span> <span class='PDMVar'>m</span><span class='PDMOper'>.</span><span class='PDMVar'>tnAction</span><span class='PDMOper'>=</span><span class='PDMLit'>1</span>
-<span class='PDMCnt'>4387</span> <span class='PDMInd'> 3</span>    <span class='PDMVar'>Dir_Action_PJX</span><span class='PDMOper'>(</span><span class='PDMVar'>m</span><span class='PDMOper'>.</span><span class='PDMVar'>tcDir</span><span class='PDMOper'>,</span><span class='PDMVar'>m</span><span class='PDMOper'>.</span><span class='PDMVar'>tlText2Bin</span><span class='PDMOper'>,</span><span class='PDMVar'>m</span><span class='PDMOper'>.</span><span class='PDMVar'>toConverter</span><span class='PDMOper'>)</span>
-<span class='PDMCnt'>4388</span> <span class='PDMInd'>  </span> 
-<span class='PDMCnt'>4389</span> <span class='PDMInd'> 2</span>   <span class='PDMResK'>OTHERWISE</span>
-<span class='PDMCnt'>4390</span> <span class='PDMInd'> 3</span>    <span class='PDMOper'>?</span><span class='PDMStr'>"error"</span>
-<span class='PDMCnt'>4391</span> <span class='PDMInd'> 1</span>  <span class='PDMResK'>ENDCASE</span>
-<span class='PDMCnt'>4392</span> <span class='PDMInd'> 1</span>  <span class='PDMResK'>CD</span> <span class='PDMOper'>(</span><span class='PDMVar'>m</span><span class='PDMOper'>.</span><span class='PDMVar'>lcOldDir</span><span class='PDMOper'>)</span></pre>
+<span class='PDMCnt'>4334</span> <span class='PDMInd'>  </span> 
+<span class='PDMCnt'>4369</span> <span class='PDMInd'>  </span> 
+<span class='PDMCnt'>4370</span> <span class='PDMInd'> 1</span>  <span class='PDMResK'>LOCAL</span><span class='PDMOper'>;</span>
+<span class='PDMCnt'>4371</span> <span class='PDMInd'> 2</span>   <span class='PDMVar'>lnLoop1</span><span class='PDMOper'>,</span><span class='PDMOper'>;</span>
+<span class='PDMCnt'>4372</span> <span class='PDMInd'> 2</span>   <span class='PDMVar'>lcOldDir</span>
+<span class='PDMCnt'>4373</span> <span class='PDMInd'>  </span> 
+<span class='PDMCnt'>4374</span> <span class='PDMInd'> 1</span>  <span class='PDMResK'>LOCAL</span> <span class='PDMResK'>ARRAY</span><span class='PDMOper'>;</span>
+<span class='PDMCnt'>4375</span> <span class='PDMInd'> 2</span>   <span class='PDMVar'>laDir</span><span class='PDMOper'>(</span><span class='PDMLit'>1</span><span class='PDMOper'>)</span>
+<span class='PDMCnt'>4376</span> <span class='PDMInd'>  </span> 
+<span class='PDMCnt'>4377</span> <span class='PDMInd'> 1</span>  <span class='PDMVar'>lcOldDir</span> <span class='PDMOper'>=</span> <span class='PDMResF'>FULLPATH</span><span class='PDMOper'>(</span><span class='PDMResF'>CURDIR</span><span class='PDMOper'>(</span><span class='PDMOper'>)</span><span class='PDMOper'>)</span>
+<span class='PDMCnt'>4378</span> <span class='PDMInd'> 1</span>  <span class='PDMResK'>CD</span> <span class='PDMOper'>(</span><span class='PDMVar'>m</span><span class='PDMOper'>.</span><span class='PDMVar'>tcDir</span><span class='PDMOper'>)</span>
+<span class='PDMCnt'>4379</span> <span class='PDMInd'> 1</span>  <span class='PDMResK'>FOR</span> <span class='PDMVar'>lnLoop1</span> <span class='PDMOper'>=</span> <span class='PDMLit'>1</span> <span class='PDMResK'>TO</span> <span class='PDMResF'>ADIR</span><span class='PDMOper'>(</span><span class='PDMVar'>laDir</span><span class='PDMOper'>,</span><span class='PDMStr'>''</span><span class='PDMOper'>,</span><span class='PDMStr'>'D'</span><span class='PDMOper'>)</span>
+<span class='PDMCnt'>4380</span> <span class='PDMInd'> 2</span>   <span class='PDMResK'>IF</span> <span class='PDMResF'>INLIST</span><span class='PDMOper'>(</span><span class='PDMVar'>m</span><span class='PDMOper'>.</span><span class='PDMVar'>laDir</span><span class='PDMOper'>(</span><span class='PDMVar'>m</span><span class='PDMOper'>.</span><span class='PDMVar'>lnLoop1</span><span class='PDMOper'>,</span><span class='PDMLit'>1</span><span class='PDMOper'>)</span><span class='PDMOper'>,</span><span class='PDMStr'>'.'</span><span class='PDMOper'>,</span><span class='PDMStr'>'..'</span><span class='PDMOper'>)</span> <span class='PDMResK'>THEN</span>
+<span class='PDMCnt'>4381</span> <span class='PDMInd'> 3</span>    <span class='PDMResK'>LOOP</span>
+<span class='PDMCnt'>4382</span> <span class='PDMInd'> 2</span>   <span class='PDMResK'>ENDIF</span> <span class='PDMCom'>&amp;&amp;INLIST(laDir(m.lnLoop1,1),'.','..')</span>
+<span class='PDMCnt'>4383</span> <span class='PDMInd'> 2</span>   <span class='PDMVar'>ScanDir</span><span class='PDMOper'>(</span><span class='PDMVar'>m</span><span class='PDMOper'>.</span><span class='PDMVar'>tnAction</span><span class='PDMOper'>,</span><span class='PDMResF'>ADDBS</span><span class='PDMOper'>(</span><span class='PDMResF'>ADDBS</span><span class='PDMOper'>(</span><span class='PDMVar'>m</span><span class='PDMOper'>.</span><span class='PDMVar'>tcDir</span><span class='PDMOper'>)</span><span class='PDMOper'>+</span><span class='PDMVar'>m</span><span class='PDMOper'>.</span><span class='PDMVar'>laDir</span><span class='PDMOper'>(</span><span class='PDMVar'>m</span><span class='PDMOper'>.</span><span class='PDMVar'>lnLoop1</span><span class='PDMOper'>,</span><span class='PDMLit'>1</span><span class='PDMOper'>)</span><span class='PDMOper'>)</span><span class='PDMOper'>,</span><span class='PDMVar'>m</span><span class='PDMOper'>.</span><span class='PDMVar'>tlText2Bin</span><span class='PDMOper'>,</span><span class='PDMVar'>m</span><span class='PDMOper'>.</span><span class='PDMVar'>toConverter</span><span class='PDMOper'>)</span>
+<span class='PDMCnt'>4384</span> <span class='PDMInd'> 1</span>  <span class='PDMResK'>ENDFOR</span> <span class='PDMCom'>&amp;&amp;lnLoop1</span>
+<span class='PDMCnt'>4385</span> <span class='PDMInd'>  </span> 
+<span class='PDMCnt'>4386</span> <span class='PDMInd'> 1</span>  <span class='PDMResK'>DO</span> <span class='PDMResK'>CASE</span>
+<span class='PDMCnt'>4387</span> <span class='PDMInd'> 2</span>   <span class='PDMResK'>CASE</span> <span class='PDMVar'>m</span><span class='PDMOper'>.</span><span class='PDMVar'>tnAction</span><span class='PDMOper'>=</span><span class='PDMLit'>1</span>
+<span class='PDMCnt'>4388</span> <span class='PDMInd'> 3</span>    <span class='PDMVar'>Dir_Action_PJX</span><span class='PDMOper'>(</span><span class='PDMVar'>m</span><span class='PDMOper'>.</span><span class='PDMVar'>tcDir</span><span class='PDMOper'>,</span><span class='PDMVar'>m</span><span class='PDMOper'>.</span><span class='PDMVar'>tlText2Bin</span><span class='PDMOper'>,</span><span class='PDMVar'>m</span><span class='PDMOper'>.</span><span class='PDMVar'>toConverter</span><span class='PDMOper'>)</span>
+<span class='PDMCnt'>4389</span> <span class='PDMInd'>  </span> 
+<span class='PDMCnt'>4390</span> <span class='PDMInd'> 2</span>   <span class='PDMResK'>OTHERWISE</span>
+<span class='PDMCnt'>4391</span> <span class='PDMInd'> 3</span>    <span class='PDMOper'>?</span><span class='PDMStr'>"error"</span>
+<span class='PDMCnt'>4392</span> <span class='PDMInd'> 1</span>  <span class='PDMResK'>ENDCASE</span>
+<span class='PDMCnt'>4393</span> <span class='PDMInd'> 1</span>  <span class='PDMResK'>CD</span> <span class='PDMOper'>(</span><span class='PDMVar'>m</span><span class='PDMOper'>.</span><span class='PDMVar'>lcOldDir</span><span class='PDMOper'>)</span></pre>
  <!-- Code End -->
   </div>
  </div>
