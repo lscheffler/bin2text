@@ -518,7 +518,7 @@ DEFINE CLASS cusstorage AS custom 		&& The stuff that does the work.
 		 toConverter.l_ProcessFiles				  = m.tlProcess
 		 toConverter.l_ClassPerFileCheck		  = .F.
 		 toConverter.l_RedirectClassPerFileToMain = .T.
-		 toFB2T_Setting = EVL(toFB2T_Setting,_SCREEN.gcB2T_Config)
+		 toFB2T_Setting = IIF(VARTYPE(toFB2T_Setting)='O' AND !ISNULL(toFB2T_Setting),toFB2T_Setting,_SCREEN.gcB2T_Config)
 		
 		*!*	obj.execute(cInputFile [,cType [,cTextName [,lGenText [,cDontShowErrors [,cDebug;
 		*!*	 [,cDontShowProgress [,oModule [,oEx [,lRelanzarError [,cOriginalFileName;
@@ -3048,13 +3048,13 @@ DEFINE CLASS cusstorage AS custom 		&& The stuff that does the work.
 		*!*	 llError     AS BOOLEAN,;
 		*!*	 loException AS EXCEPTION
 		
-		TRY
-		*Was zu testen ist
-		  lcFoxBin2PRG = NVL(EXECSCRIPT(_SCREEN.cThorDispatcher, 'Thor_Proc_GetFoxBin2PrgFolder'),'')
-		 CATCH
-		* Abzufangender Fehler
-		  lcFoxBin2PRG = ""
-		ENDTRY
+		*!*	TRY
+		*!*	*Was zu testen ist
+		*!*	  lcFoxBin2PRG = NVL(EXECSCRIPT(_SCREEN.cThorDispatcher, 'Thor_Proc_GetFoxBin2PrgFolder'),'')
+		*!*	 CATCH
+		*!*	* Abzufangender Fehler
+		*!*	  lcFoxBin2PRG = ""
+		*!*	ENDTRY
 		
 		llSearch = False
 		DO CASE
@@ -3062,10 +3062,10 @@ DEFINE CLASS cusstorage AS custom 		&& The stuff that does the work.
 		*nmot defined
 		  llSearch = True
 		
-		 CASE!EMPTY(m.lcFoxBin2PRG) AND !UPPER(_SCREEN.gcB2T_FB2T)==UPPER(m.lcFoxBin2PRG+'FoxBin2Prg.prg') AND FILE(m.lcFoxBin2PRG+'FoxBin2Prg.prg')
-		*force Thor install
-		  llSearch = False
-		  _SCREEN.gcB2T_FB2T = m.lcFoxBin2PRG+'FoxBin2Prg.prg'
+		*!*	 CASE!EMPTY(m.lcFoxBin2PRG) AND !UPPER(_SCREEN.gcB2T_FB2T)==UPPER(m.lcFoxBin2PRG+'FoxBin2Prg.prg') AND FILE(m.lcFoxBin2PRG+'FoxBin2Prg.prg')
+		*!*	*force Thor install
+		*!*	  llSearch = False
+		*!*	  _SCREEN.gcB2T_FB2T = m.lcFoxBin2PRG+'FoxBin2Prg.prg'
 		  lcFile = _SCREEN.gcB2T_FB2T
 		
 		 CASE !FILE(_SCREEN.gcB2T_FB2T)
