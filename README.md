@@ -1,6 +1,6 @@
 # ![Home](./docs/images/home.png "Home") Bin 2 Text Extension
 IDE integration of FoxBin2Prg in VFP   
-**Version 1.3.1, 2023-09-03*   
+**Version <!--VERNO-->1.3.1<!--/VerNo-->, <!--CVERSIONDATE-->2023-11-30<!--/CVERSIONDATE-->**   
 Integration of FoxBin2Prg and git for fast snapshot like commits, and UI to work with single elements.
 
 ---
@@ -13,7 +13,7 @@ Project location: [Bin2Text](https://github.com/lscheffler/bin2text)
 
 The main goals of this project are:
 - The main goal is to do fast *git* commits.
-- Visual FoxPro IDE integration that works with whole projects (sbapshot), not per file.
+- Visual FoxPro IDE integration that works with whole projects (snapshot), not per file.
 
 The problems this project tries to solve:
 - Better IDE integration of FoxBin2Prg for VFP
@@ -26,21 +26,34 @@ The problems this project tries to solve:
 ### Requirements
 - Requires: Microsoft Visual Foxpro; Version 9.0 SP2.
 - Runs with VFPA, compiling the APP with VP9 SP2 is recomended.
-- Requires: [FoxBin2Prg](https://github.com/lscheffler/foxbin2prg). This version of Bin2Text requires version [1.20.05](https://github.com/lscheffler/foxbin2prg/releases/tag/v1.20.05).
+- Requires: [FoxBin2Prg](https://github.com/fdbozzo/foxbin2prg), also found on VFPX. This version of Bin2Text requires version 1.21.01.
 - Optional: The use of *[git for windows](https://git-scm.com/download/win)* is optional.
 
 ---
 ### Installation
+#### Via Thor
+This is the prefered method to run Bin2Text.
+1. Start Thor *Check for Updates*
+1. Install FoxBin2Prg
+1. Install Bin2Text
+2. Run Bin2Text Exe on every start of VFP to hook up the menu like:
+```
+lcFile   = Execscript (_Screen.cThorDispatcher, "Tool Folder=")+'Components\Bin2Text\Bin2Text.app'
+lcFolder = {Your local "root "folder to process from}
+DO InitMenu IN (m.lcFile) WITH (m.lcFolder)
+```
+
+#### From source
 1. Download or clone [this repository](https://github.com/lscheffler/bin2text).
 2. Downlod or clone FoxBin2Prg
-9. **This repository does not ship binary sources.**
-3. Run 
+3. **This repository does not ship binary sources.**
+4. Run 
 ```
 CD (path_to_Bin2Text)
-DO (path_to_)FOXBIN2PRG.PRG WITH JUSTPATH(FULLPATH("bin2text.pj22,"")),"*",,,,,,,,,FULLPATH("Create_Project.cfg","")
+DO (path_to_)FOXBIN2PRG.PRG WITH JUSTPATH(FULLPATH("bin2text.pj2","")),"*",,,,,,,,,FULLPATH("Create_Project.cfg","")
 ```
-4. Compile to app
-2. Run Bin2Text.app on every start of VFP to hook up the menu like: `DO InitMenu IN LOCFILE('Bin2Text.app')`.
+5. Compile to app
+6. Run Bin2Text.app on every start of VFP to hook up the menu like: `DO InitMenu IN LOCFILE('Bin2Text.app')`.
 
 ---
 ### Documentation
@@ -59,5 +72,5 @@ See [How to contribute to Bin2Text](https://github.com/lscheffler/bin2text/blob/
 Bin 2 Text Extension is tested with *[git for windows](https://git-scm.com/download/win)* version 2.39.2.windows.1 (2023-02-06) 32 and 64bit.
 
 ----
-Last changed: *2023-09-03*   
+Last changed: *<!--CVERSIONDATE-->2023-11-30<!--/CVERSIONDATE-->*   
 ![powered by VFPX](./docs/images/vfpxpoweredby_alternative.gif "powered by VFPX")

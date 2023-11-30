@@ -30,4 +30,4 @@
 
 *Version number of Bin2Text. May be changed by VFPX Deployment
 #DEFINE dcB2T_Verno							"1.3.1"
-#DEFINE dcFB2P_Verno_Min					"1.20.5"
+#DEFINE dcFB2P_Verno_Min					"1.21.1"
