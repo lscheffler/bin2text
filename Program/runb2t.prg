@@ -613,69 +613,12 @@ FUNCTION Convert_Pjx_2Bin &&Runs FoxBin2Prg for multiple projects to create bina
 *close all the projects in the IDE / from StorePjx
 *just to keep data over CLEAR ALL
  _SCREEN.ADDPROPERTY('gaProjects(1,2)')
+ _SCREEN.gaProjects = .NULL.
 
- IF m.tnMode=3 THEN
-*keep projects open, (do not parse hooks)
-  _SCREEN.gaProjects = .NULL.
- ELSE  &&m.tnMode=3
-  lnProjs = _VFP.PROJECTS.COUNT
-
-  IF m.lnProjs=0 THEN
-*nothing to do
-   _SCREEN.gaProjects = .NULL.
-   FOR lnProj = 1 TO m.lnProjs
-    _SCREEN.gaFiles(m.lnProj,2) = "" && "no hook defined" -> no hook processed :)
-   ENDFOR &&lnProjs
-  ELSE  &&m.lnProjs=0
-   DIMENSION;
-    _SCREEN.gaProjects(m.lnProjs,2)
-
-*!*	Changed by SF 12.5.2015
-*!*	<pdm>
-*!*	<change date="{^2015-05-12,11:36:00}">Changed by SF<br />
-*!*	Make <expr>ACTIVEPROJECT</expr> active after reopen
-*!*	</change>
-*!*	</pdm>
-
-*Active on top, to make it active on reopen
-   lnProj						  = 1
-   loProject					  = _VFP.ACTIVEPROJECT
-   _SCREEN.gaProjects(m.lnProj,1) = m.loProject.NAME
-*SF internal
-   _SCREEN.gaProjects(m.lnProj,2) = VARTYPE(m.loProject.PROJECTHOOK)='O';
-    AND !ISNULL(m.loProject.PROJECTHOOK);
-    AND PEMSTATUS(m.loProject.PROJECTHOOK,'glCompileAll',5);
-    AND m.loProject.PROJECTHOOK.glCompileAll
-*/SF internal
-   m.loProject.CLOSE
-
-*   lnProj = 0
-
-*!*	/Changed by SF 12.5.2015
-
-   FOR EACH m.loProject IN _VFP.PROJECTS FOXOBJECT
-*!*	Changed by: SF 7.12.2017
-*!*	<pdm>
-*!*	<change date="{^2017-12-07,14:10:00}">Changed by: SF<br />
-*!*	Active project should not be added twice
-*!*	</change>
-*!*	</pdm>
-
-    IF _SCREEN.gaProjects(1,1)==m.loProject.NAME THEN
-     LOOP
-    ENDIF &&_SCREEN.gaProjects(1,1)==m.loProject.NAME
-    lnProj						   = m.lnProj+1
-    _SCREEN.gaProjects(m.lnProj,1) = m.loProject.NAME
-*SF internal
-    _SCREEN.gaProjects(m.lnProj,2) = VARTYPE(m.loProject.PROJECTHOOK)='O';
-     AND !ISNULL(m.loProject.PROJECTHOOK);
-     AND PEMSTATUS(m.loProject.PROJECTHOOK,'glCompileAll',5);
-     AND m.loProject.PROJECTHOOK.glCompileAll
-*/SF internal
-    m.loProject.CLOSE
-   ENDFOR &&loProject
-  ENDIF &&m.lnProjs=0
- ENDIF &&m.tnMode=3
+ IF m.tnMode#3 THEN
+*Mode 3 keep projects open, (do not parse hooks)
+  Store_IDEProjects()
+ ENDIF &&m.tnMode#3
 
 *!*	Changed  by: SF 28.2.2021
 *!*	<pdm>
@@ -717,52 +660,9 @@ FUNCTION Convert_Pjx_2Bin &&Runs FoxBin2Prg for multiple projects to create bina
 */Move
  REMOVEPROPERTY(_SCREEN,'gvMode')
 
-
-*Move
- LOCAL;
-  lcProj      AS CHARACTER,;
-  lcSourceExt AS CHARACTER,;
-  lnProj      AS NUMBER,;
-  lnProjs     AS NUMBER,;
-  lnReturn    AS NUMBER,;
-  llNotFound  AS BOOLEAN,;
-  loProject   AS PROJECT
-
- IF !ISNULL(_SCREEN.gaProjects(1,1)) THEN
-
 */process Transformation
 
-*reopen  all the projects in the IDE / from ReStorePjx
-  lnProjs = ALEN(_SCREEN.gaProjects,1)
-  FOR lnProj = m.lnProjs TO 1 STEP -1
-   lcProj = _SCREEN.gaProjects(m.lnProj,1)
-   IF !FILE(m.lcProj) THEN
-    LOOP
-   ENDIF &&!FILE(m.lcProj)
-
-   llNotFound = .T.
-   FOR EACH m.loProject IN _VFP.PROJECTS FOXOBJECT
-    IF UPPER(JUSTSTEM(m.loProject.NAME))==m.lcProj THEN
-     llNotFound = .F.
-     EXIT
-    ENDIF &&UPPER(JUSTSTEM(m.loProject.NAME))==m.lcProj
-   ENDFOR &&loProject
-
-   IF m.llNotFound THEN
-    MODIFY PROJECT (m.lcProj) NOWAIT SAVE
-    loProject		  = _VFP.ACTIVEPROJECT
-    loProject.VISIBLE = .F.
-    loProject.VISIBLE = .T.
-*SF internal
-    IF VARTYPE(m.loProject.PROJECTHOOK)='O';
-      AND !ISNULL(m.loProject.PROJECTHOOK);
-      AND PEMSTATUS(m.loProject.PROJECTHOOK,'glCompileAll',5) THEN
-     loProject.PROJECTHOOK.glCompileAll = _SCREEN.gaProjects(m.lnProj,2)
-    ENDIF &&VARTYPE(m.loProject.PROJECTHOOK)='O' AND !ISNULL(m.loProject.PROJECTHOOK) AND PEMSTATUS(m.loProject. ...
-*/SF internal
-   ENDIF &&m.llNotFound
-  ENDFOR &&lnProj
- ENDIF &&!ISNULL(_SCREEN.gaProjects(1,1))
+ ReStore_IDEProjects()
 
  REMOVEPROPERTY(_SCREEN,'gaProjects')
 
@@ -1056,19 +956,16 @@ FUNCTION Convert_Pjx_2Txt &&Runs FoxBin2Prg for multiple projects to create text
 
    lnProjs = ADIR(laFiles,'*.'+m.lcSourceExt,'HS')
 
-   IF m.lnProjs=0 THEN
-    CD (m.lcOldPath)
-    ?'No project found.' FONT '' STYLE 'B'
-    SwitchErrorHandler(.F.)
-    RETURN .F.
-   ENDIF &&m.lnProjs=0
+   IF m.lnProjs>0 THEN
+    _SCREEN.ADDPROPERTY('gaFiles('+TRIM(PADR(m.lnProjs,11))+',2)')
 
-   _SCREEN.ADDPROPERTY('gaFiles('+TRIM(PADR(m.lnProjs,11))+',2)')
+    FOR lnProj = 1 TO m.lnProjs
+     _SCREEN.gaFiles(m.lnProj,1)	= FORCEPATH(FORCEEXT(m.laFiles(m.lnProj,1),"PJX"),m.lcPath)
+     _SCREEN.gaFiles(m.lnProj,2)	= ICASE(m.tnMode=3,"",m.tnMode=4,"",.NULL.)
+    ENDFOR &&lnProjs
 
-   FOR lnProj = 1 TO m.lnProjs
-    _SCREEN.gaFiles(m.lnProj,1)	= FORCEPATH(FORCEEXT(m.laFiles(m.lnProj,1),"PJX"),m.lcPath)
-    _SCREEN.gaFiles(m.lnProj,2)	= ICASE(m.tnMode=3,"",m.tnMode=4,"",.NULL.)
-   ENDFOR &&lnProjs
+   ENDIF &&m.lnProjs>0
+
 *  &&m.tnProjects=3
   CASE m.tnProjects=4
 *path, recursive
@@ -1106,6 +1003,13 @@ FUNCTION Convert_Pjx_2Txt &&Runs FoxBin2Prg for multiple projects to create text
    RETURN .F.
  ENDCASE
 
+ IF m.lnProjs=0 THEN
+  CD (m.lcOldPath)
+  ?'No project found.' FONT '' STYLE 'B'
+  SwitchErrorHandler(.F.)
+  RETURN .F.
+ ENDIF &&m.lnProjs=0
+
  DO CASE
   CASE m.tnMode=0
    lvMode     = "*"
@@ -1133,69 +1037,13 @@ FUNCTION Convert_Pjx_2Txt &&Runs FoxBin2Prg for multiple projects to create text
 *close all the projects in the IDE / from StorePjx
 *just to keep data over CLEAR ALL
  _SCREEN.ADDPROPERTY('gaProjects(1,2)')
+ _SCREEN.gaProjects = .NULL.
 
- IF m.tnMode=3 THEN
-*keep projects open, (do not parse hooks)
-  _SCREEN.gaProjects = .NULL.
- ELSE  &&m.tnMode=3
-  lnProjs = _VFP.PROJECTS.COUNT
+ IF m.tnMode#3 THEN
+*Mode 3 keep projects open, (do not parse hooks)
+  Store_IDEProjects()
 
-  IF m.lnProjs=0 THEN
-*nothing to do
-   _SCREEN.gaProjects = .NULL.
-   FOR lnProj = 1 TO m.lnProjs
-    _SCREEN.gaFiles(m.lnProj,2) = "" && "no hook defined" -> no hook processed :)
-   ENDFOR &&lnProjs
-  ELSE  &&m.lnProjs=0
-   DIMENSION;
-    _SCREEN.gaProjects(m.lnProjs,2)
-
-*!*	Changed by SF 12.5.2015
-*!*	<pdm>
-*!*	<change date="{^2015-05-12,11:36:00}">Changed by SF<br />
-*!*	Make <expr>ACTIVEPROJECT</expr> active after reopen
-*!*	</change>
-*!*	</pdm>
-
-*Active on top, to make it active on reopen
-   lnProj						  = 1
-   loProject					  = _VFP.ACTIVEPROJECT
-   _SCREEN.gaProjects(m.lnProj,1) = m.loProject.NAME
-*SF internal
-   _SCREEN.gaProjects(m.lnProj,2) = VARTYPE(m.loProject.PROJECTHOOK)='O';
-    AND !ISNULL(m.loProject.PROJECTHOOK);
-    AND PEMSTATUS(m.loProject.PROJECTHOOK,'glCompileAll',5);
-    AND m.loProject.PROJECTHOOK.glCompileAll
-*/SF internal
-   m.loProject.CLOSE
-
-*   lnProj = 0
-
-*!*	/Changed by SF 12.5.2015
-
-   FOR EACH m.loProject IN _VFP.PROJECTS FOXOBJECT
-*!*	Changed by: SF 7.12.2017
-*!*	<pdm>
-*!*	<change date="{^2017-12-07,14:10:00}">Changed by: SF<br />
-*!*	Active project should not be added twice
-*!*	</change>
-*!*	</pdm>
-
-    IF _SCREEN.gaProjects(1,1)==m.loProject.NAME THEN
-     LOOP
-    ENDIF &&_SCREEN.gaProjects(1,1)==m.loProject.NAME
-    lnProj						   = m.lnProj+1
-    _SCREEN.gaProjects(m.lnProj,1) = m.loProject.NAME
-*SF internal
-    _SCREEN.gaProjects(m.lnProj,2) = VARTYPE(m.loProject.PROJECTHOOK)='O';
-     AND !ISNULL(m.loProject.PROJECTHOOK);
-     AND PEMSTATUS(m.loProject.PROJECTHOOK,'glCompileAll',5);
-     AND m.loProject.PROJECTHOOK.glCompileAll
-*/SF internal
-    m.loProject.CLOSE
-   ENDFOR &&loProject
-  ENDIF &&m.lnProjs=0
- ENDIF &&m.tnMode=3
+ ENDIF &&m.tnMode#3
 
 *!*	Changed  by: SF 28.2.2021
 *!*	<pdm>
@@ -1241,52 +1089,9 @@ FUNCTION Convert_Pjx_2Txt &&Runs FoxBin2Prg for multiple projects to create text
  REMOVEPROPERTY(_SCREEN,'gvMode')
  REMOVEPROPERTY(_SCREEN,'glCheckAll')
 
-
-*Move
- LOCAL;
-  lcProj      AS CHARACTER,;
-  lcSourceExt AS CHARACTER,;
-  lnProj      AS NUMBER,;
-  lnProjs     AS NUMBER,;
-  lnReturn    AS NUMBER,;
-  llNotFound  AS BOOLEAN,;
-  loProject   AS PROJECT
-
- IF !ISNULL(_SCREEN.gaProjects(1,1)) THEN
-
 */process Transformation
 
-*reopen  all the projects in the IDE / from ReStorePjx
-  lnProjs = ALEN(_SCREEN.gaProjects,1)
-  FOR lnProj = m.lnProjs TO 1 STEP -1
-   lcProj = _SCREEN.gaProjects(m.lnProj,1)
-   IF !FILE(m.lcProj) THEN
-    LOOP
-   ENDIF &&!FILE(m.lcProj)
-
-   llNotFound = .T.
-   FOR EACH m.loProject IN _VFP.PROJECTS FOXOBJECT
-    IF UPPER(JUSTSTEM(m.loProject.NAME))==m.lcProj THEN
-     llNotFound = .F.
-     EXIT
-    ENDIF &&UPPER(JUSTSTEM(m.loProject.NAME))==m.lcProj
-   ENDFOR &&loProject
-
-   IF m.llNotFound THEN
-    MODIFY PROJECT (m.lcProj) NOWAIT SAVE
-    loProject		  = _VFP.ACTIVEPROJECT
-    loProject.VISIBLE = .F.
-    loProject.VISIBLE = .T.
-*SF internal
-    IF VARTYPE(m.loProject.PROJECTHOOK)='O';
-      AND !ISNULL(m.loProject.PROJECTHOOK);
-      AND PEMSTATUS(m.loProject.PROJECTHOOK,'glCompileAll',5) THEN
-     loProject.PROJECTHOOK.glCompileAll = _SCREEN.gaProjects(m.lnProj,2)
-    ENDIF &&VARTYPE(m.loProject.PROJECTHOOK)='O' AND !ISNULL(m.loProject.PROJECTHOOK) AND PEMSTATUS(m.loProject. ...
-*/SF internal
-   ENDIF &&m.llNotFound
-  ENDFOR &&lnProj
- ENDIF &&!ISNULL(_SCREEN.gaProjects(1,1))
+ ReStore_IDEProjects()
 
  REMOVEPROPERTY(_SCREEN,'gaProjects')
 
@@ -1738,6 +1543,8 @@ FUNCTION Convert_File_2Bin  	&&Runs FoxBin2Prg for a single file or vcx/class to
   lcFileTypes = m.lcFileTypes+";Table:DBF,"+m.lvTemp
   lvTemp	  = UPPER(m.loFB2T_Setting.c_DC2)
   lcFileTypes = m.lcFileTypes+";Database:DBC,"+m.lvTemp
+  lvTemp	  = UPPER(m.loFB2T_Setting.c_PJ2)
+  lcFileTypes = m.lcFileTypes+";Project:PJX,"+m.lvTemp
 *Additional extensions
   lvTemp	  = UPPER(m.loFB2T_Setting.c_FK2)
   lcFileTypes = m.lcFileTypes+";Memo File:MEM,"+m.lvTemp
@@ -1778,6 +1585,9 @@ FUNCTION Convert_File_2Bin  	&&Runs FoxBin2Prg for a single file or vcx/class to
 
  ENDCASE
 
+ _SCREEN.ADDPROPERTY('gaProjects(1,2)')
+ _SCREEN.gaProjects = .NULL.
+
  IF m.llReturn AND EMPTY(_SCREEN.gaFiles(1,1)) THEN
 *Nothing selected, GetFile cancled
 *No Message
@@ -1786,11 +1596,11 @@ FUNCTION Convert_File_2Bin  	&&Runs FoxBin2Prg for a single file or vcx/class to
 
  loFB2T_Setting = m.loConverter.Get_DirSettings(JUSTPATH(_SCREEN.gaFiles(1,1)))
 
- IF m.llReturn AND INLIST(UPPER(JUSTEXT(_SCREEN.gaFiles(1,1))),'PJX',m.loFB2T_Setting.c_PJ2) THEN
-*no project here
-  ?JUSTEXT(_SCREEN.gaFiles(1,1))+' file not allowed here.' FONT '' STYLE 'B'
-  llReturn = .F.
- ENDIF &&m.llReturn AND INLIST(UPPER(JUSTEXT(_SCREEN.gaFiles(1,1))),'PJX',m.loFB2T_Setting.c_PJ2)
+*!*	 IF m.llReturn AND INLIST(UPPER(JUSTEXT(_SCREEN.gaFiles(1,1))),'PJX',m.loFB2T_Setting.c_PJ2) THEN
+*!*	*no project here
+*!*	  ?JUSTEXT(_SCREEN.gaFiles(1,1))+' file not allowed here.' FONT '' STYLE 'B'
+*!*	  llReturn = .F.
+*!*	 ENDIF &&m.llReturn AND INLIST(UPPER(JUSTEXT(_SCREEN.gaFiles(1,1))),'PJX',m.loFB2T_Setting.c_PJ2)
 
  IF m.llReturn THEN
   lcSourceExt = UPPER(JUSTEXT(_SCREEN.gaFiles(1,1)))
@@ -1846,6 +1656,9 @@ FUNCTION Convert_File_2Bin  	&&Runs FoxBin2Prg for a single file or vcx/class to
     lcSourceExt = m.loFB2T_Setting.c_DC2
    CASE m.lcSourceExt=="PJX"
     lcSourceExt = m.loFB2T_Setting.c_PJ2
+*close all the projects in the IDE / from StorePjx
+*just to keep data over CLEAR ALL
+    Store_IDEProjects()
    CASE m.lcSourceExt=="LBX"
     lcSourceExt = m.loFB2T_Setting.c_LB2
    CASE m.lcSourceExt=="SCX"
@@ -1863,6 +1676,9 @@ FUNCTION Convert_File_2Bin  	&&Runs FoxBin2Prg for a single file or vcx/class to
    CASE m.lcSourceExt==m.loFB2T_Setting.c_DB2
    CASE m.lcSourceExt==m.loFB2T_Setting.c_DC2
    CASE m.lcSourceExt==m.loFB2T_Setting.c_PJ2
+*close all the projects in the IDE / from StorePjx
+*just to keep data over CLEAR ALL
+    Store_IDEProjects()
    CASE m.lcSourceExt==m.loFB2T_Setting.c_LB2
    CASE m.lcSourceExt==m.loFB2T_Setting.c_SC2
 *Additional extensions
@@ -1987,6 +1803,9 @@ FUNCTION Convert_File_2Bin  	&&Runs FoxBin2Prg for a single file or vcx/class to
  REMOVEPROPERTY(_SCREEN,'gaFiles')
  REMOVEPROPERTY(_SCREEN,'glInfo')
  REMOVEPROPERTY(_SCREEN,'gcOld_Path')
+
+ ReStore_IDEProjects()
+ REMOVEPROPERTY(_SCREEN,'gaProjects')
 
  SwitchErrorHandler(.F.)
 
@@ -2125,7 +1944,7 @@ FUNCTION Convert_File_2Txt  	&&Runs FoxBin2Prg for a single file or vcx/class to
  IF m.llReturn THEN
   loFB2T_Setting = m.loConverter.Get_DirSettings(m.lcPath)
 
-  lcFileTypes = "VCX;FRX;MNX;SCX;LBX;DBF;DBC"
+  lcFileTypes = "VCX;FRX;MNX;SCX;LBX;DBF;DBC;PJX"
 *Additional extensions
   lcFileTypes = m.lcFileTypes+";Memo file:MEM;FKY"
 
@@ -2171,15 +1990,19 @@ FUNCTION Convert_File_2Txt  	&&Runs FoxBin2Prg for a single file or vcx/class to
 
  loFB2T_Setting = m.loConverter.Get_DirSettings(JUSTPATH(_SCREEN.gaFiles(1,1)))
 
- IF m.llReturn AND INLIST(UPPER(JUSTEXT(_SCREEN.gaFiles(1,1))),'PJX',m.loFB2T_Setting.c_PJ2) THEN
-*no project here
-  ?JUSTEXT(_SCREEN.gaFiles(1,1))+' file not allowed here.' FONT '' STYLE 'B'
-  llReturn = .F.
- ENDIF &&m.llReturn AND INLIST(UPPER(JUSTEXT(_SCREEN.gaFiles(1,1))),'PJX',m.loFB2T_Setting.c_PJ2)
+*!*	 IF m.llReturn AND INLIST(UPPER(JUSTEXT(_SCREEN.gaFiles(1,1))),'PJX',m.loFB2T_Setting.c_PJ2) THEN
+*!*	*no project here
+*!*	  ?JUSTEXT(_SCREEN.gaFiles(1,1))+' file not allowed here.' FONT '' STYLE 'B'
+*!*	  llReturn = .F.
+*!*	 ENDIF &&m.llReturn AND INLIST(UPPER(JUSTEXT(_SCREEN.gaFiles(1,1))),'PJX',m.loFB2T_Setting.c_PJ2)
+
+ _SCREEN.ADDPROPERTY('gaProjects(1,2)')
+ _SCREEN.gaProjects = .NULL.
 
  IF m.llReturn THEN
   lcSourceExt = UPPER(JUSTEXT(_SCREEN.gaFiles(1,1)))
-
+*SF
+SET STEP ON 
 *if binary file is send, gather text file extension
   DO CASE
 *rethink this
@@ -2231,6 +2054,9 @@ FUNCTION Convert_File_2Txt  	&&Runs FoxBin2Prg for a single file or vcx/class to
     lcSourceExt = m.lcSourceExt
    CASE m.lcSourceExt=="PJX"
     lcSourceExt = m.lcSourceExt
+*close all the projects in the IDE / from StorePjx
+*just to keep data over CLEAR ALL
+    Store_IDEProjects()
    CASE m.lcSourceExt=="LBX"
     lcSourceExt = m.lcSourceExt
    CASE m.lcSourceExt=="SCX"
@@ -2328,6 +2154,9 @@ FUNCTION Convert_File_2Txt  	&&Runs FoxBin2Prg for a single file or vcx/class to
  REMOVEPROPERTY(_SCREEN,'gaFiles')
  REMOVEPROPERTY(_SCREEN,'glInfo')
  REMOVEPROPERTY(_SCREEN,'gcOld_Path')
+
+ ReStore_IDEProjects()
+ REMOVEPROPERTY(_SCREEN,'gaProjects')
 
  SwitchErrorHandler(.F.)
 
@@ -4466,3 +4295,139 @@ FUNCTION Dir_Action_PJX		&&Internal. Parse a directory for projects (binary or t
  ENDIF &&m.lnProjs>0
 
 ENDFUNC &&Dir_Action_PJX
+
+PROCEDURE Store_IDEProjects
+*!*	<pdm>
+*!*	<descr>Close and store all projects open in the IDE for later reopen.</descr>
+*!*	<comment>
+*!*	<retval type=""></retval>
+*!*	<remarks></remarks>
+*!*	<example></example>
+*!*	<seealso>
+*!*	 <see loca="" class="" pem=""></see>
+*!*	</seealso>
+*!*	<appliesto toref="0" toalso="0" />
+*!*	</comment>
+*!*	<copyright><i>&copy; 4.12.2023 Lutz Scheffler Software Ingenieurbüro</i></copyright>
+*!*	</pdm>
+
+ LOCAL;
+  lnProjs   AS INTEGER,;
+  lnProj    AS INTEGER,;
+  loProject AS PROJECT
+
+ lnProjs = _VFP.PROJECTS.COUNT
+
+ IF m.lnProjs=0 THEN
+*nothing to do
+  _SCREEN.gaProjects = .NULL.
+  FOR lnProj = 1 TO m.lnProjs
+   _SCREEN.gaFiles(m.lnProj,2) = "" && "no hook defined" -> no hook processed :)
+  ENDFOR &&lnProjs
+ ELSE  &&m.lnProjs=0
+  DIMENSION;
+   _SCREEN.gaProjects(m.lnProjs,2)
+
+*!*	Changed by SF 12.5.2015
+*!*	<pdm>
+*!*	<change date="{^2015-05-12,11:36:00}">Changed by SF<br />
+*!*	Make <expr>ACTIVEPROJECT</expr> active after reopen
+*!*	</change>
+*!*	</pdm>
+
+*Active on top, to make it active on reopen
+  lnProj						  = 1
+  loProject					  = _VFP.ACTIVEPROJECT
+  _SCREEN.gaProjects(m.lnProj,1) = m.loProject.NAME
+*SF internal
+  _SCREEN.gaProjects(m.lnProj,2) = VARTYPE(m.loProject.PROJECTHOOK)='O';
+   AND !ISNULL(m.loProject.PROJECTHOOK);
+   AND PEMSTATUS(m.loProject.PROJECTHOOK,'glCompileAll',5);
+   AND m.loProject.PROJECTHOOK.glCompileAll
+*/SF internal
+  m.loProject.CLOSE
+
+*   lnProj = 0
+
+*!*	/Changed by SF 12.5.2015
+
+  FOR EACH m.loProject IN _VFP.PROJECTS FOXOBJECT
+*!*	Changed by: SF 7.12.2017
+*!*	<pdm>
+*!*	<change date="{^2017-12-07,14:10:00}">Changed by: SF<br />
+*!*	Active project should not be added twice
+*!*	</change>
+*!*	</pdm>
+
+   IF _SCREEN.gaProjects(1,1)==m.loProject.NAME THEN
+    LOOP
+   ENDIF &&_SCREEN.gaProjects(1,1)==m.loProject.NAME
+   lnProj						   = m.lnProj+1
+   _SCREEN.gaProjects(m.lnProj,1) = m.loProject.NAME
+*SF internal
+   _SCREEN.gaProjects(m.lnProj,2) = VARTYPE(m.loProject.PROJECTHOOK)='O';
+    AND !ISNULL(m.loProject.PROJECTHOOK);
+    AND PEMSTATUS(m.loProject.PROJECTHOOK,'glCompileAll',5);
+    AND m.loProject.PROJECTHOOK.glCompileAll
+*/SF internal
+   m.loProject.CLOSE
+  ENDFOR &&loProject
+ ENDIF &&m.lnProjs=0
+ENDPROC &&Store_IDEProjects
+
+PROCEDURE ReStore_IDEProjects
+*!*	<pdm>
+*!*	<descr>Reopen projects to IDE.</descr>
+*!*	<comment>
+*!*	<retval type=""></retval>
+*!*	<remarks></remarks>
+*!*	<example></example>
+*!*	<seealso>
+*!*	 <see loca="" class="" pem=""></see>
+*!*	</seealso>
+*!*	<appliesto toref="0" toalso="0" />
+*!*	</comment>
+*!*	<copyright><i>&copy; 4.12.2023 Lutz Scheffler Software Ingenieurbüro</i></copyright>
+*!*	</pdm>
+
+ LOCAL;
+  lcProj      AS CHARACTER,;
+  lnProj      AS NUMBER,;
+  lnProjs     AS NUMBER,;
+  llNotFound  AS BOOLEAN,;
+  loProject   AS PROJECT
+
+ IF !ISNULL(_SCREEN.gaProjects(1,1)) THEN
+
+*reopen  all the projects in the IDE / from ReStorePjx
+  lnProjs = ALEN(_SCREEN.gaProjects,1)
+  FOR lnProj = m.lnProjs TO 1 STEP -1
+   lcProj = _SCREEN.gaProjects(m.lnProj,1)
+   IF !FILE(m.lcProj) THEN
+    LOOP
+   ENDIF &&!FILE(m.lcProj)
+
+   llNotFound = .T.
+   FOR EACH m.loProject IN _VFP.PROJECTS FOXOBJECT
+    IF UPPER(JUSTSTEM(m.loProject.NAME))==m.lcProj THEN
+     llNotFound = .F.
+     EXIT
+    ENDIF &&UPPER(JUSTSTEM(m.loProject.NAME))==m.lcProj
+   ENDFOR &&loProject
+
+   IF m.llNotFound THEN
+    MODIFY PROJECT (m.lcProj) NOWAIT SAVE
+    loProject		  = _VFP.ACTIVEPROJECT
+    loProject.VISIBLE = .F.
+    loProject.VISIBLE = .T.
+*SF internal
+    IF VARTYPE(m.loProject.PROJECTHOOK)='O';
+      AND !ISNULL(m.loProject.PROJECTHOOK);
+      AND PEMSTATUS(m.loProject.PROJECTHOOK,'glCompileAll',5) THEN
+     loProject.PROJECTHOOK.glCompileAll = _SCREEN.gaProjects(m.lnProj,2)
+    ENDIF &&VARTYPE(m.loProject.PROJECTHOOK)='O' AND !ISNULL(m.loProject.PROJECTHOOK) AND PEMSTATUS(m.loProject. ...
+*/SF internal
+   ENDIF &&m.llNotFound
+  ENDFOR &&lnProj
+ ENDIF &&!ISNULL(_SCREEN.gaProjects(1,1))
+ENDPROC &&ReStore_IDEProjects
