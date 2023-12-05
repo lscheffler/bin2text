@@ -113,9 +113,11 @@ code/runb2t.prg/Main_d.is_git.htm
 code/runb2t.prg/Main_d.isfile.htm
 code/runb2t.prg/Main_d.pjx2commit.htm
 code/runb2t.prg/Main_d.print_activebranch.htm
+code/runb2t.prg/Main_d.restore_ideprojects.htm
 code/runb2t.prg/Main_d.run_extapp.htm
 code/runb2t.prg/Main_d.run_git.htm
 code/runb2t.prg/Main_d.scandir.htm
+code/runb2t.prg/Main_d.store_ideprojects.htm
 code/runb2t.prg/Main_d.switcherrorhandler.htm
 menus/MNX_Page.htm
 menus/bin2text.mnx/Main_h.htm
