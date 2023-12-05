@@ -6,22 +6,20 @@ This page gives a brief overview of changes to the [Bin 2 Text Extension](https:
 
 A complete list of changes is available on the offline documentation via **local folder** _docu/index.htm_.
 
-This version of Bin2Text requires version [1.20.05](https://github.com/lscheffler/foxbin2prg/releases/tag/v1.20.05) of FoxBin2Prg.
+This version of Bin2Text requires version [1.21.01](https://github.com/fdbozzo/foxbin2prg/releases/tag/v1.21.01) of FoxBin2Prg.
 
 ## Release History
 
 ---
-### 2023-09-03, Version 1.3.1
+### 2023-12-05, Version 1.3.0
 Stable release.
-* Fixed pjx version number
 * Fit to latest version of FoxBin2Prg.
-
-### 2023-09-01, Version 1.3.0
-Stable release.
-* Removed Thor support
-* New option to use a fixed config file for FoxBin2Prg
-* New option to allow logging for FoxBin2Prg
-
+* New option to use a fixed config file for FoxBin2Prg.
+* New option to allow logging for FoxBin2Prg.
+* Optimized temp storage of open PJX.
+* Fixed issue with "Path recursive" on 2Bin, if no pj2 was found.
+* Allowed (re)generation of single file PJX.
+         
 ---
 ### 2023-08-22, Version 1.2.3
 Stable release.
@@ -141,5 +139,5 @@ Stable release.
 * Initial push to github
 
 ----
-Last changed: *2023-09-03*   
+Last changed: *2023-12-05*   
 ![powered by VFPX](./docs/images/vfpxpoweredby_alternative.gif "powered by VFPX")
