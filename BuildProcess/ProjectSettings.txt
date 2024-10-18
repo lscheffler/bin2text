@@ -12,13 +12,21 @@ AppID     = Bin2Text
 *A string, or enter pjx to use _VFP.ActiveProject.VersionNumber or, if defined PJXFile
 Version   = pjx
 
-
 *Component of Thor or Tool. Use No for Tool.
 Component = Yes
 
-*Remote repository on a git server. There are two ways for the remote repository.
-*- the builder assumes https://github.com/VFPX/{AppId}
-*- or enter the URL here (uncomment to use):
+*Remote repository on a git server. There three ways for the remote repository.
+*==============================================================================
+*- the builder assumes https://github.com/VFPX/{AppId}/master
+*-------------------------------------------
+*- or enter the single parts of the github URL
+*  A github URL comes like https://github.com/Project/Repository/Branch
+*  first enter the repository, this is "Project/Repository"
+*Repository_URL    = {Project/Repository}
+* second enter the repository, this is "Branch"
+*Repository_Branch = {Branch}
+*-------------------------------------------
+*- or enter the URL here. This has precedence.
 Repository = https://github.com/lscheffler/bin2text
 
 *The changelog file. Might be merged into the {AppID}Version.txt
@@ -32,7 +40,7 @@ Include_VFPX = Yes
 *Include_Thor = No
 
 
-* The remaining lines are options to are not mandatory uncomment the options to use *
+* The remaining lines are options are not mandatory. Uncomment the options to use.
 
 *"Yes" to auto run FoxBin2prg (Default), else "No" to not run.
 RunBin2Prg = No

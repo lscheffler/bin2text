@@ -3,8 +3,76 @@
 *--------------------------------------------------------------------------------------------------------------------------------------------------------
 *< FOXBIN2PRG: Version="1.21" SourceFile="hook.vcx" CPID="1252" /> (Solo para binarios VFP 9 / Only for VFP 9 binaries)
 *
-*-- EXTERNAL_CLASS identify external member Class names / EXTERNAL_CLASS identifica los nombres de las Clases externas
-*< EXTERNAL_CLASS: Name="base_hook" Baseclass="projecthook" />
-*< EXTERNAL_CLASS: Name="bin2text_hook" Baseclass="projecthook" />
-
 *
+DEFINE CLASS base_hook AS projecthook 		&& Allgemeiner Projekt - Hook
+ 	*< CLASSDATA: Baseclass="projecthook" Timestamp="" Scale="Pixels" Uniqueid="" />
+
+	*<DefinedPropArrayMethod>
+		*p: gnbuildaction		&& BuildAction wie im BeforeBuild Event.
+	*</DefinedPropArrayMethod>
+
+	*<PropValue>
+		gnbuildaction = 3
+		Name = "base_hook"
+	*</PropValue>
+	
+	PROCEDURE AfterBuild
+		LPARAMETERS;
+		 tnError
+		
+		IF !EMPTY(m.tnError) THEN
+		 ?CHR(7) FONT (_SCREEN.FONTNAME) STYLE 'BU', 'Error '+TRIM(PADR(m.tnError,23)) , MESSAGE()
+		ENDIF &&!EMPTY(m.tnError)
+		nodefault
+	ENDPROC
+
+	PROCEDURE BeforeBuild
+		LPARAMETERS;
+		 tcOutputName,;
+		 tnBuildAction,;
+		 tlRebuildAll,;
+		 tlShowErrors,;
+		 tlBuildNewGuids
+		
+		LOCAL;
+		 lnLoop1      AS INTEGER,;
+		 loProject    AS PROJECT
+		
+		*bestimme link zu diesem Hook (this will irgenwie nicht)
+		FOR lnLoop2 = 1 TO _VFP.PROJECTS.COUNT
+		 IF TYPE('_VFP.Projects(lnLoop2).PROJECTHOOK')='O';
+		   AND !ISNULL(_VFP.PROJECTS(lnLoop2).PROJECTHOOK);
+		   AND _VFP.PROJECTS(lnLoop2).PROJECTHOOK.TAG=THIS.TAG THEN
+		  loProject = _VFP.PROJECTS(lnLoop2)
+		  EXIT
+		 ENDIF &&TYPE('_VFP.Projects(lnLoop2) ...
+		ENDFOR &&lnLoop2
+		
+		IF m.tlRebuildAll THEN
+		 FOR lnLoop1 = 1 TO loProject.FILES.COUNT
+		  IF JUSTEXT(loProject.FILES(m.lnLoop1).NAME)=='vcx' THEN
+		   CLEAR CLASSLIB (loProject.FILES(m.lnLoop1).NAME)
+		  ENDIF &&JUSTEXT(loProject.FILES(m.lnLoop1).NAME)=='vcx'
+		 ENDFOR &&lnLoop1
+		ENDIF &&tlRebuildAll
+		
+		*tcOutputName = FORCEEXT(tcOutputName,'app')
+		DODEFAULT(tcOutputName, tnBuildAction, tlRebuildAll, tlShowErrors, tlBuildNewGuids)
+		
+	ENDPROC
+
+	PROCEDURE Init
+		THIS.TAG = SYS(2015)
+		
+	ENDPROC
+
+ENDDEFINE
+
+DEFINE CLASS bin2text_hook AS base_hook OF "hook.vcx" 
+ 	*< CLASSDATA: Baseclass="projecthook" Timestamp="" Scale="Pixels" Uniqueid="" />
+
+	*<PropValue>
+		Name = "bin2text_hook"
+	*</PropValue>
+
+ENDDEFINE

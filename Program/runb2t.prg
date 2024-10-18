@@ -1,4 +1,4 @@
-#INCLUDE STUFF.h
+#INCLUDE ..\STUFF.h
 LPARAMETERS;
  tv01,tv02,tv03,tv04,tv05,tv06,tv07,tv08,;
  tv09,tv10,tv11,tv12,tv13,tv14,tv15,tv16,;

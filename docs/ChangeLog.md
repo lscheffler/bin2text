@@ -11,6 +11,11 @@ This version of Bin2Text requires version [1.21.01](https://github.com/fdbozzo/f
 ## Release History
 
 ---
+### 2024-10-18, Version 1.3.1
+Stable release.
+* The property to store the location of FoxBin2Prg was not created and failed. Issue #7 (auerswald)
+
+---
 ### 2023-12-05, Version 1.3.0
 Stable release.
 * Fit to latest version of FoxBin2Prg.
@@ -139,5 +144,5 @@ Stable release.
 * Initial push to github
 
 ----
-Last changed: *2023-12-05*   
+Last changed: *2024-10-18*   
 ![powered by VFPX](./docs/images/vfpxpoweredby_alternative.gif "powered by VFPX")

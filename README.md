@@ -1,6 +1,6 @@
 # ![Home](./docs/images/home.png "Home") Bin 2 Text Extension
 IDE integration of FoxBin2Prg in VFP   
-**Version <!--VERNO-->1.3.0<!--/VerNo-->, <!--CVERSIONDATE-->2023-12-05<!--/CVERSIONDATE-->**   
+**Version <!--VERNO-->1.3.1<!--/VerNo-->, <!--CVERSIONDATE-->2024-10-18<!--/CVERSIONDATE-->**   
 Integration of FoxBin2Prg and git for fast snapshot like commits, and UI to work with single elements.
 
 ---
@@ -62,7 +62,7 @@ Full help and documentation is in *docs/index.htm* in the download file.
 For quick run see [Bin 2 Text Documentation](https://github.com/lscheffler/bin2text/blob/master/docs/documentation.md).
 
 ### Changes
-See [changes](https://github.com/lscheffler/bin2text/blob/master/docs/changelog.md)
+See [changes](https://github.com/lscheffler/bin2text/blob/master/docs/ChangeLog.md)
 
 ## Helping with this project
 See [How to contribute to Bin2Text](https://github.com/lscheffler/bin2text/blob/master/.github/CONTRIBUTING.md) for details on how to help with this project.
@@ -72,5 +72,5 @@ See [How to contribute to Bin2Text](https://github.com/lscheffler/bin2text/blob/
 Bin 2 Text Extension is tested with *[git for windows](https://git-scm.com/download/win)* version 2.39.2.windows.1 (2023-02-06) 32 and 64bit.
 
 ----
-Last changed: *<!--CVERSIONDATE-->2023-12-05<!--/CVERSIONDATE-->*   
+Last changed: *<!--CVERSIONDATE-->2024-10-18<!--/CVERSIONDATE-->*   
 ![powered by VFPX](./docs/images/vfpxpoweredby_alternative.gif "powered by VFPX")
