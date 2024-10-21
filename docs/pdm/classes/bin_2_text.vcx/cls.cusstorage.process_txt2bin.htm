@@ -4,7 +4,7 @@
 <title>Method process_txt2bin of class cusstorage</title>
 <meta content="text/html; charset=windows-1252" http-equiv="Content-Type" />
 <meta name="Generator" content="Project Documenting Machine" />
-<meta name="Version" content="1.3.3" />
+<meta name="Version" content="1.3.1" />
 <link rel="stylesheet" href="../../css/foxw.css" type="text/css" />
 <link rel="stylesheet" href="../../css/sc.css" type="text/css" />
 <link rel="stylesheet" href="../../repository/diamp_pdm_ab.css" type="text/css" />
@@ -25,21 +25,21 @@
 </table>
 </div>
 <div class="diaxp_mbody">
-<!-- Created with _diamp_pdm_ab by Agnes Beste    21.10.2024 11:33 -->
+<!-- Created with _diamp_pdm_ab by Agnes Beste    21.10.2024 19:49 -->
  <div class="PDM_AB_Descr"><!-- Descr Begin -->
 Process all files of a given Array.
  </div><!-- Descr End -->
 
  <div class="DIAMP_PDM_AB_Syntax"><!-- Syntax Begin -->
   <div class="SColor">
-   <div class="RetVal"><a href="#_70V0OS7GU">RetVal</a>&nbsp;</div>   <div class="RetValEq">=</div>   <div class="PEM">
+   <div class="RetVal"><a href="#_70V16HA54">RetVal</a>&nbsp;</div>   <div class="RetValEq">=</div>   <div class="PEM">
     Object.process_txt2bin
    </div>
    <div class="Para">
-    (@<a href="#_70V0OS7GV">taFiles</a>
-     <wbr />,<a href="#_70V0OS7GW">tlCheckAll</a>
-     [<wbr />,<a href="#_70V0OS7GX">tlIncludeAll</a>
-     [<wbr />,<a href="#_70V0OS7GY">toFB2T_Setting</a>]])
+    (@<a href="#_70V16HA55">taFiles</a>
+     <wbr />,<a href="#_70V16HA56">tlCheckAll</a>
+     [<wbr />,<a href="#_70V16HA57">tlIncludeAll</a>
+     [<wbr />,<a href="#_70V16HA58">toFB2T_Setting</a>]])
    </div>
    <div style="clear: both"></div>
   </div><!-- Colour End -->
@@ -51,7 +51,7 @@ Process all files of a given Array.
   </span>
   <dl class="DIAMP_PDM_AB_Params_List">
    <dt class="dt_">
-    <a class="DIAMP_PDM_AB_Params_ParaName" id="_70V0OS7GV" name="_70V0OS7GV">
+    <a class="DIAMP_PDM_AB_Params_ParaName" id="_70V16HA55" name="_70V16HA55">
      <span class="PDMEXPR PDMNor" ><span class='PDMVar'>taFiles</span></span>
 
     </a>
@@ -104,7 +104,7 @@ Process all files of a given Array.
     </span>
    </dd>
    <dt class="dt_">
-    <a class="DIAMP_PDM_AB_Params_ParaName" id="_70V0OS7GW" name="_70V0OS7GW">
+    <a class="DIAMP_PDM_AB_Params_ParaName" id="_70V16HA56" name="_70V16HA56">
      <span class="PDMEXPR PDMNor" ><span class='PDMVar'>tlCheckAll</span></span>
 
     </a>
@@ -131,14 +131,14 @@ Process all files of a given Array.
     </table>
     <span class="Params_Detail">
 
-	<p>Checks if all files listed in <a class="DIAMP_PDM_AB_Para_Link" href="#_70V0OS7GV">taFiles</a> are used.</p>
+	<p>Checks if all files listed in <a class="DIAMP_PDM_AB_Para_Link" href="#_70V16HA55">taFiles</a> are used.</p>
 	<p>If a file is not found, text file corresponding will be deleted.</p>
 	<p>Only if <b>Delete obsolete files</b> is checked in settings dialog.</p>
 	
     </span>
    </dd>
    <dt class="dt_">
-    <a class="DIAMP_PDM_AB_Params_ParaName" id="_70V0OS7GX" name="_70V0OS7GX">
+    <a class="DIAMP_PDM_AB_Params_ParaName" id="_70V16HA57" name="_70V16HA57">
      <span class="PDMEXPR PDMNor" ><span class='PDMVar'>tlIncludeAll</span></span>
 
     </a>
@@ -176,7 +176,7 @@ Process all files of a given Array.
     </span>
    </dd>
    <dt class="dt_">
-    <a class="DIAMP_PDM_AB_Params_ParaName" id="_70V0OS7GY" name="_70V0OS7GY">
+    <a class="DIAMP_PDM_AB_Params_ParaName" id="_70V16HA58" name="_70V16HA58">
      <span class="PDMEXPR PDMNor" ><span class='PDMVar'>toFB2T_Setting</span></span>
 
     </a>
@@ -207,7 +207,7 @@ Process all files of a given Array.
     </table>
     <span class="Params_Detail">
 A settings object as returned by FoxBin2PRgs Get_DirSettings. May be used to manipulate special settings.<br />
-	Will be passed to <a class="PDM_AB_See" href="../../classes/bin_2_text.vcx/cls.cusstorage.convert.htm" title="Skip to method Convert">Convert</a>
+	Will be passed to <span title="link not found" class="PDM_AB_See_Err">Convert</span>
     </span>
    </dd>
   </dl>
@@ -216,7 +216,7 @@ A settings object as returned by FoxBin2PRgs Get_DirSettings. May be used to man
  <div class="DIAMP_PDM_AB_RetVal"><!-- Returns Begin -->
   <div>
    <span class="PDM_AB_Head">
-    <a id="_70V0OS7GU" name="_70V0OS7GU">
+    <a id="_70V16HA54" name="_70V16HA54">
      Return value
     </a>
    </span> <span class="RetVal_Ttype">Boolean</span>
@@ -238,30 +238,17 @@ Returns succcess of operation.
 	 <li>Accepts a mixed array of files. (including whole PJX) </li>
 	 <li>Can limit the Bin2Text operation to dirty files only.</li>
 	 <li>Can delete obsolete class files in ClassPerFile operations.</li>
-	 <li>Can delete obsolete files for removed binaries if <a class="DIAMP_PDM_AB_Para_Link" href="#_70V0OS7GX">tlIncludeAll</a>.</li>
+	 <li>Can delete obsolete files for removed binaries if <a class="DIAMP_PDM_AB_Para_Link" href="#_70V16HA57">tlIncludeAll</a>.</li>
 	</ul>
 	<p>If text to binary, it just passes the files to FoxBin2Prg</p>
 	<p>Creating text files, depending on a setting, it first let check FoxBin2Prg what to do.
 	 IOW what files are included in the process.</p>
-	<p>Then it calls for <a class="PDM_AB_See" href="../../classes/bin_2_text.vcx/cls.cusstorage.filestoprocess.htm" title="Skip to method FilesToProcess">FilesToProcess</a> to see if files are changed.
+	<p>Then it calls for <span title="link not found" class="PDM_AB_See_Err">FilesToProcess</span> to see if files are changed.
 	 Only files marked as dirty will be processed.</p>
 	<p>A postprocess will delete / remove obsolete text files.</p>
 	
   </div>
  </div><!-- Remarks End -->
-
- <div class="PDM_AB_SeeAlso"><!-- SeeAlso Begin -->
-  <span class="PDM_AB_Head">
-   See also
-  </span>
-  <div class="PDM_AB_Body">
-<a class="PDM_AB_See" href="../../classes/bin_2_text.vcx/cls.cusstorage.convert.htm" title="Skip to method Convert">Convert</a>&nbsp;|
-<a class="PDM_AB_See" href="../../classes/bin_2_text.vcx/cls.cusstorage.filestoprocess.htm" title="Skip to method FilesToProcess">FilesToProcess</a>
-  </div><!-- Body End -->
-  <!--- "Applies to" need to be inserted here---->
-  <PlaceAppliesTo_Here />
-  <!--- /"Applies to" need to be inserted here---->
- </div><!-- SeeAlso End -->
 
  <div class="PDM_AB_Changes"><!-- Changes Begin -->
   <hr />
@@ -281,7 +268,7 @@ Changed by: SF<br />
     05.06.2015 11:19
    </span><br />
 Changed by: SF<br />
-	New parameter <a class="DIAMP_PDM_AB_Para_Link" href="#_70V0OS7GX">tlIncludeAll</a>
+	New parameter <a class="DIAMP_PDM_AB_Para_Link" href="#_70V16HA57">tlIncludeAll</a>
 	
   </div>
   <div class="PDM_AB_Body">
@@ -315,7 +302,7 @@ Changed by: SF<br />
     13.03.2017 14:00
    </span><br />
 Changed by: SF<br />
-	<a class="DIAMP_PDM_AB_Para_Link" href="#_70V0OS7GV">taFiles</a> may now hold text files for Text To Bin operation.
+	<a class="DIAMP_PDM_AB_Para_Link" href="#_70V16HA55">taFiles</a> may now hold text files for Text To Bin operation.
 	
   </div>
   <div class="PDM_AB_Body">
@@ -323,7 +310,7 @@ Changed by: SF<br />
     13.03.2017 16:00
    </span><br />
 Changed by: SF<br />
-	New parameter <a class="DIAMP_PDM_AB_Para_Link" href="#_70V0OS7GY">toFB2T_Setting</a> to force single file operation.
+	New parameter <a class="DIAMP_PDM_AB_Para_Link" href="#_70V16HA58">toFB2T_Setting</a> to force single file operation.
 	
   </div>
   <div class="PDM_AB_Body">
@@ -345,7 +332,7 @@ Changed  by: SF<br />
  </div><!-- Changes End -->
 
 
-<!-- /Created with _diamp_pdm_ab by Agnes Beste    21.10.2024 11:33 -->
+<!-- /Created with _diamp_pdm_ab by Agnes Beste    21.10.2024 19:49 -->
 
  <div class="SC">
   <img onclick="ExpandSC('SP_46',-1);"class="imgEC" src="../../imgs/dotab.gif" alt="Expand/Collapse source code of procedure process_txt2bin" id="IMG_SP_46" />

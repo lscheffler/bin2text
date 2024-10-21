@@ -4,7 +4,7 @@
 <title>Procedure Convert_File_2Bin</title>
 <meta content="text/html; charset=windows-1252" http-equiv="Content-Type" />
 <meta name="Generator" content="Project Documenting Machine" />
-<meta name="Version" content="1.3.3" />
+<meta name="Version" content="1.3.1" />
 <link rel="stylesheet" href="../../css/foxw.css" type="text/css" />
 <link rel="stylesheet" href="../../css/sc.css" type="text/css" />
 <link rel="stylesheet" href="../../repository/diamp_pdm_ab.css" type="text/css" />
@@ -16,20 +16,20 @@
 <body>
 <div class="diaxp_mhead">Convert_File_2Bin Function</div>
 <div class="diaxp_mbody">
-<!-- Created with _diamp_pdm_ab by Agnes Beste    21.10.2024 11:33 -->
+<!-- Created with _diamp_pdm_ab by Agnes Beste    21.10.2024 19:49 -->
  <div class="PDM_AB_Descr"><!-- Descr Begin -->
 Runs FoxBin2Prg for a single file or class to create binary files.
  </div><!-- Descr End -->
 
  <div class="DIAMP_PDM_AB_Syntax"><!-- Syntax Begin -->
   <div class="SColor">
-   <div class="RetVal"><a href="#_70V0OS8FH">RetVal</a>&nbsp;</div>   <div class="RetValEq">=</div>   <div class="PEM">
+   <div class="RetVal"><a href="#_70V16HB3Q">RetVal</a>&nbsp;</div>   <div class="RetValEq">=</div>   <div class="PEM">
     Convert_File_2Bin
    </div>
    <div class="Para">
-    (<a href="#_70V0OS8FI">tlSingleClass</a>
-     [<wbr />,<a href="#_70V0OS8FJ">tcFile</a>
-     [<wbr />,<a href="#_70V0OS8FK">tcClass</a>]])
+    (<a href="#_70V16HB3R">tlSingleClass</a>
+     [<wbr />,<a href="#_70V16HB3S">tcFile</a>
+     [<wbr />,<a href="#_70V16HB3T">tcClass</a>]])
    </div>
    <div style="clear: both"></div>
   </div><!-- Colour End -->
@@ -41,7 +41,7 @@ Runs FoxBin2Prg for a single file or class to create binary files.
   </span>
   <dl class="DIAMP_PDM_AB_Params_List">
    <dt class="dt_">
-    <a class="DIAMP_PDM_AB_Params_ParaName" id="_70V0OS8FI" name="_70V0OS8FI">
+    <a class="DIAMP_PDM_AB_Params_ParaName" id="_70V16HB3R" name="_70V16HB3R">
      <span class="PDMEXPR PDMNor" ><span class='PDMVar'>tlSingleClass</span></span>
 
     </a>
@@ -69,15 +69,15 @@ Runs FoxBin2Prg for a single file or class to create binary files.
     <span class="Params_Detail">
 
 	<p>If true, pick up a single class via <span class="PDMEXPR PDMNor" ><span class='PDMResF'>AGETCLASS</span><span class='PDMOper'>(</span><span class='PDMOper'>)</span></span>
- or Input on <a class="DIAMP_PDM_AB_Para_Link" href="#_70V0OS8FJ">tcFile</a> and <a class="DIAMP_PDM_AB_Para_Link" href="#_70V0OS8FK">tcClass</a>.</p>
+ or Input on <a class="DIAMP_PDM_AB_Para_Link" href="#_70V16HB3S">tcFile</a> and <a class="DIAMP_PDM_AB_Para_Link" href="#_70V16HB3T">tcClass</a>.</p>
 	<p>If false, <span class="PDMEXPR PDMNor" ><span class='PDMResF'>GetFile</span><span class='PDMOper'>(</span><span class='PDMOper'>)</span></span>
- any source file (Default), or <a class="DIAMP_PDM_AB_Para_Link" href="#_70V0OS8FJ">tcFile</a>.</p>
+ any source file (Default), or <a class="DIAMP_PDM_AB_Para_Link" href="#_70V16HB3S">tcFile</a>.</p>
 	<p>FoxBin2Prg will run in appropriate mode.</p>
 	
     </span>
    </dd>
    <dt class="dt_">
-    <a class="DIAMP_PDM_AB_Params_ParaName" id="_70V0OS8FJ" name="_70V0OS8FJ">
+    <a class="DIAMP_PDM_AB_Params_ParaName" id="_70V16HB3S" name="_70V16HB3S">
      <span class="PDMEXPR PDMNor" ><span class='PDMVar'>tcFile</span></span>
 
     </a>
@@ -108,16 +108,16 @@ Runs FoxBin2Prg for a single file or class to create binary files.
     </table>
     <span class="Params_Detail">
 
-	<p>Any file except project, what must be processed with <a class="PDM_AB_See" href="../../code/runb2t.prg/main_d.convert_pjx_2bin.htm" title="Skip to file Convert_Pjx_2Bin">Convert_Pjx_2Bin</a>.</p>
+	<p>Any file except project, what must be processed with <span title="link not found" class="PDM_AB_See_Err">Convert_Pjx_2Bin</span>.</p>
 	<p>Iput might be <em>Binary</em> or <em>Text</em>.</p>
-	<p>If <a class="DIAMP_PDM_AB_Para_Link" href="#_70V0OS8FI">tlSingleClass</a>, in combination with <a class="DIAMP_PDM_AB_Para_Link" href="#_70V0OS8FK">tcClass</a>.</p>
+	<p>If <a class="DIAMP_PDM_AB_Para_Link" href="#_70V16HB3R">tlSingleClass</a>, in combination with <a class="DIAMP_PDM_AB_Para_Link" href="#_70V16HB3T">tcClass</a>.</p>
 	<p>Does not accept class in form library::class.</p>
 	<p>Do not add the structural index file, it will autoprocessed.</p>
 	
     </span>
    </dd>
    <dt class="dt_">
-    <a class="DIAMP_PDM_AB_Params_ParaName" id="_70V0OS8FK" name="_70V0OS8FK">
+    <a class="DIAMP_PDM_AB_Params_ParaName" id="_70V16HB3T" name="_70V16HB3T">
      <span class="PDMEXPR PDMNor" ><span class='PDMVar'>tcClass</span></span>
 
     </a>
@@ -148,7 +148,7 @@ Runs FoxBin2Prg for a single file or class to create binary files.
     </table>
     <span class="Params_Detail">
 
-	<p>Only with <a class="DIAMP_PDM_AB_Para_Link" href="#_70V0OS8FJ">tcFile</a>, if <a class="DIAMP_PDM_AB_Para_Link" href="#_70V0OS8FI">tlSingleClass</a> is true.</p>
+	<p>Only with <a class="DIAMP_PDM_AB_Para_Link" href="#_70V16HB3S">tcFile</a>, if <a class="DIAMP_PDM_AB_Para_Link" href="#_70V16HB3R">tlSingleClass</a> is true.</p>
 	
     </span>
    </dd>
@@ -158,7 +158,7 @@ Runs FoxBin2Prg for a single file or class to create binary files.
  <div class="DIAMP_PDM_AB_RetVal"><!-- Returns Begin -->
   <div>
    <span class="PDM_AB_Head">
-    <a id="_70V0OS8FH" name="_70V0OS8FH">
+    <a id="_70V16HB3Q" name="_70V16HB3Q">
      Return value
     </a>
    </span> <span class="RetVal_Ttype">Boolean</span>
@@ -183,18 +183,6 @@ Returns success of operation.
   </div>
  </div><!-- Remarks End -->
 
- <div class="PDM_AB_SeeAlso"><!-- SeeAlso Begin -->
-  <span class="PDM_AB_Head">
-   See also
-  </span>
-  <div class="PDM_AB_Body">
-<a class="PDM_AB_See" href="../../code/runb2t.prg/main_d.convert_pjx_2bin.htm" title="Skip to file Convert_Pjx_2Bin">Convert_Pjx_2Bin</a>
-  </div><!-- Body End -->
-  <!--- "Applies to" need to be inserted here---->
-  <PlaceAppliesTo_Here />
-  <!--- /"Applies to" need to be inserted here---->
- </div><!-- SeeAlso End -->
-
  <div class="PDM_AB_Changes"><!-- Changes Begin -->
   <hr />
   <span class="PDM_AB_Head">
@@ -211,7 +199,7 @@ Changed by: SF<br />
  </div><!-- Changes End -->
 
 
-<!-- /Created with _diamp_pdm_ab by Agnes Beste    21.10.2024 11:33 -->
+<!-- /Created with _diamp_pdm_ab by Agnes Beste    21.10.2024 19:49 -->
 
  <div class="SC">
   <img onclick="ExpandSC('SP_P7',-1);" class="imgEC" src="../../imgs/dotab.gif" alt="Expand/Collapse source code of procedure Convert_File_2Bin" id="IMG_SP_P7" />

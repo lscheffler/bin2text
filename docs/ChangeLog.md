@@ -11,6 +11,11 @@ This version of Bin2Text requires version [1.21.01](https://github.com/fdbozzo/f
 ## Release History
 
 ---
+### 2024-10-21, Version 1.3.3
+Stable release.
+* Missing xxx while processing. Randomly missing variable error. Issue #9
+
+---
 ### 2024-10-21, Version 1.3.2
 Stable release.
 * Problem running Bin2Text.exe when the path to it conataines a space. Issue #8

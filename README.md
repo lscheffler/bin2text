@@ -1,6 +1,6 @@
 # ![Home](./docs/images/home.png "Home") Bin 2 Text Extension
 IDE integration of FoxBin2Prg in VFP   
-**Version <!--VERNO-->1.3.2<!--/VerNo-->, <!--CVERSIONDATE-->2024-10-21<!--/CVERSIONDATE-->**   
+**Version <!--VERNO-->1.3.3<!--/VerNo-->, <!--CVERSIONDATE-->2024-10-21<!--/CVERSIONDATE-->**   
 Integration of FoxBin2Prg and git for fast snapshot like commits, and UI to work with single elements.
 
 ---

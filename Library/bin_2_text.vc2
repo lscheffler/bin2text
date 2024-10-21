@@ -5465,6 +5465,15 @@ DEFINE CLASS cusstorage AS custom 		&& The stuff that does the work.
 		*!*	</copyright>
 		*!*	</pdm>
 		
+		*!*	Changed by SF 21.10.2024
+		*!*	<pdm>
+		*!*	<change date="{^2024-10-21,17:56:00}">Changed by SF<br />
+		*!*	Randomly the cursor curHelp is not longer the active one. This results in errors. Using Alias.Field syntax to fix
+		*!*	issue #9
+		*!*	</change>
+		*!*	</pdm>
+		*!*	/Changed by SF 21.10.2024
+		 
 		LOCAL;
 		 lcFile2    AS STRING,;
 		 lcCell     AS STRING,;
@@ -5596,7 +5605,7 @@ DEFINE CLASS cusstorage AS custom 		&& The stuff that does the work.
 		lnStep  = 1
 		DO WHILE .T.
 		 DO CASE
-		  CASE m.lnStep=1 AND RECCOUNT()=0   &&unknown, create
+		  CASE m.lnStep=1 AND RECCOUNT("curHelp")=0   &&unknown, create
 		   llDirty = True
 		
 		   lnDirty = IIF(m.tlText2Bin,5,4)
@@ -5604,12 +5613,12 @@ DEFINE CLASS cusstorage AS custom 		&& The stuff that does the work.
 		    (cType, cFile, cUniqueId, iDirty, tLastUse);
 		    VALUES;
 		    (m.tcType, m.tcFile, m.lcFile2, m.lnDirty, DATETIME())
-		*/  &&m.lnStep=1 AND RECCOUNT()=0  &&unknown, create
+		*/  &&m.lnStep=1 AND RECCOUNT("curHelp")=0  &&unknown, create
 		
 		  CASE m.lnStep=1    &&just loop
 		*/  &&m.lnStep=1   &&just loop
 		
-		  CASE m.lnStep=2 AND INLIST(iDirty,-3,-4)	  &&file is marked as dirty, process dirty
+		  CASE m.lnStep=2 AND INLIST(curHelp.iDirty,-3,-4)	  &&file is marked as dirty, process dirty
 		   llDirty = True
 		
 		   lnDirty = IIF(m.tlText2Bin,3,2)
@@ -5620,7 +5629,7 @@ DEFINE CLASS cusstorage AS custom 		&& The stuff that does the work.
 		    FROM (m.tcStorage) AS Cur1;
 		    WHERE Cur1.cFile==m.tcFile;
 		    AND Cur1.cType==m.tcType
-		*/ &&m.lnStep=2 AND INLIST(iDirty,-3,-4)  &&file is marked as dirty, process dirty
+		*/ &&m.lnStep=2 AND INLIST(curHelp.iDirty,-3,-4)  &&file is marked as dirty, process dirty
 		
 		  CASE m.lnStep=2    &&just loop
 		*/  &&m.lnStep=2   &&just loop
@@ -5704,7 +5713,7 @@ DEFINE CLASS cusstorage AS custom 		&& The stuff that does the work.
 		
 		*/	&&m.lnStep=3 	&&get file checksum
 		
-		  CASE m.lnStep=4 AND !TRIM(cUniqueId)==m.lcFile2   	 	&&changed, process dirty
+		  CASE m.lnStep=4 AND !TRIM(curHelp.cUniqueId)==m.lcFile2   	 	&&changed, process dirty
 		*just do something for long files
 		   lcFile2 = EVL(m.lcFile2,"File to long.")
 		   llDirty = True
@@ -5717,7 +5726,7 @@ DEFINE CLASS cusstorage AS custom 		&& The stuff that does the work.
 		    FROM (m.tcStorage) AS Cur1;
 		    WHERE Cur1.cFile==m.tcFile;
 		    AND Cur1.cType==m.tcType
-		*/  &&m.lnStep=4 AND !TRIM(cUniqueId)==m.lcFile2  	 	&&changed, process dirty
+		*/  &&m.lnStep=4 AND !TRIM(curHelp.cUniqueId)==m.lcFile2  	 	&&changed, process dirty
 		
 		  OTHERWISE
 		*ok
