@@ -16,19 +16,19 @@
 <body>
 <div class="diaxp_mhead">InitMenu Function</div>
 <div class="diaxp_mbody">
-<!-- Created with _diamp_pdm_ab by Agnes Beste    05.12.2023 08:21 -->
+<!-- Created with _diamp_pdm_ab by Agnes Beste    21.10.2024 11:33 -->
  <div class="PDM_AB_Descr"><!-- Descr Begin -->
 Starts the IDE menu.
  </div><!-- Descr End -->
 
  <div class="DIAMP_PDM_AB_Syntax"><!-- Syntax Begin -->
   <div class="SColor">
-   <div class="RetVal"><a href="#_6RW0HWZ8T">RetVal</a>&nbsp;</div>   <div class="RetValEq">=</div>   <div class="PEM">
+   <div class="RetVal"><a href="#_70V0OS8LS">RetVal</a>&nbsp;</div>   <div class="RetValEq">=</div>   <div class="PEM">
     InitMenu
    </div>
    <div class="Para">
-    ([<a href="#_6RW0HWZ8U">tcHomePath</a>]
-     [<wbr />,<a href="#_6RW0HWZ8V">tlNoMenu</a>])
+    ([<a href="#_70V0OS8LT">tcHomePath</a>]
+     [<wbr />,<a href="#_70V0OS8LU">tlNoMenu</a>])
    </div>
    <div style="clear: both"></div>
   </div><!-- Colour End -->
@@ -40,7 +40,7 @@ Starts the IDE menu.
   </span>
   <dl class="DIAMP_PDM_AB_Params_List">
    <dt class="dt_">
-    <a class="DIAMP_PDM_AB_Params_ParaName" id="_6RW0HWZ8U" name="_6RW0HWZ8U">
+    <a class="DIAMP_PDM_AB_Params_ParaName" id="_70V0OS8LT" name="_70V0OS8LT">
      <span class="PDMEXPR PDMNor" ><span class='PDMVar'>tcHomePath</span></span>
 
     </a>
@@ -74,7 +74,7 @@ The default is not easy. If under <i>git</i> control, <i>git root</i>
     </span>
    </dd>
    <dt class="dt_">
-    <a class="DIAMP_PDM_AB_Params_ParaName" id="_6RW0HWZ8V" name="_6RW0HWZ8V">
+    <a class="DIAMP_PDM_AB_Params_ParaName" id="_70V0OS8LU" name="_70V0OS8LU">
      <span class="PDMEXPR PDMNor" ><span class='PDMVar'>tlNoMenu</span></span>
 
     </a>
@@ -110,7 +110,7 @@ The default is not easy. If under <i>git</i> control, <i>git root</i>
  <div class="DIAMP_PDM_AB_RetVal"><!-- Returns Begin -->
   <div>
    <span class="PDM_AB_Head">
-    <a id="_6RW0HWZ8T" name="_6RW0HWZ8T">
+    <a id="_70V0OS8LS" name="_70V0OS8LS">
      Return value
     </a>
    </span> <span class="RetVal_Ttype">Boolean</span>
@@ -127,7 +127,7 @@ The default is not easy. If under <i>git</i> control, <i>git root</i>
   <div class="PDM_AB_Body">
 
 
-<p>Read the settings file in <a class="DIAMP_PDM_AB_Para_Link" href="#_6RW0HWZ8U">tcHomePath</a>.</p>
+<p>Read the settings file in <a class="DIAMP_PDM_AB_Para_Link" href="#_70V0OS8LT">tcHomePath</a>.</p>
 <p>If the file not exists, create and initialize settings.</p>
 <p>The VFP search path will be altered to keep the path to the application.</p>
 <p>Places menu into <span class="PDMEXPR PDMNor" ><span class='PDMVar'>_SYSMENU</span></span>
@@ -150,10 +150,18 @@ Changed by: SF<br />
 
 	
   </div>
+  <div class="PDM_AB_Body">
+   <span class="Change_Time">
+    21.10.2024 11:11
+   </span><br />
+Changed by SF<br />
+	Problem running Bin2Text when path to it's exe contains a space. #8
+	
+  </div>
  </div><!-- Changes End -->
 
 
-<!-- /Created with _diamp_pdm_ab by Agnes Beste    05.12.2023 08:21 -->
+<!-- /Created with _diamp_pdm_ab by Agnes Beste    21.10.2024 11:33 -->
 
  <div class="SC">
   <img onclick="ExpandSC('SP_P13',-1);" class="imgEC" src="../../imgs/dotab.gif" alt="Expand/Collapse source code of procedure InitMenu" id="IMG_SP_P13" />
@@ -225,56 +233,62 @@ Changed by: SF<br />
 <span class='PDMCnt'>2695</span> <span class='PDMInd'>  </span> 
 <span class='PDMCnt'>2696</span> <span class='PDMInd'> 2</span>   <span class='PDMVar'>_SCREEN</span><span class='PDMOper'>.</span><span class='PDMVar'>frmB2T_Envelop</span><span class='PDMOper'>.</span><span class='PDMVar'>cusB2T</span><span class='PDMOper'>.</span><span class='PDMVar'>Storage_Close</span><span class='PDMOper'>(</span><span class='PDMVar'>m</span><span class='PDMOper'>.</span><span class='PDMVar'>lcFile</span><span class='PDMOper'>,</span><span class='PDMLit'>.T.</span><span class='PDMOper'>)</span>
 <span class='PDMCnt'>2697</span> <span class='PDMInd'> 2</span>   <span class='PDMResK'>IF</span> <span class='PDMOper'>!</span><span class='PDMVar'>m</span><span class='PDMOper'>.</span><span class='PDMVar'>tlNoMenu</span> <span class='PDMResK'>THEN</span>
-<span class='PDMCnt'>2698</span> <span class='PDMInd'>  </span> 
-<span class='PDMCnt'>2699</span> <span class='PDMInd'> 3</span>    <span class='PDMVar'>lnLoop</span> <span class='PDMOper'>=</span> <span class='PDMLit'>1</span>
-<span class='PDMCnt'>2700</span> <span class='PDMInd'> 3</span>    <span class='PDMVar'>lcFile</span> <span class='PDMOper'>=</span> <span class='PDMResF'>SYS</span><span class='PDMOper'>(</span><span class='PDMLit'>16</span><span class='PDMOper'>,</span><span class='PDMVar'>m</span><span class='PDMOper'>.</span><span class='PDMVar'>lnLoop</span><span class='PDMOper'>)</span>
-<span class='PDMCnt'>2701</span> <span class='PDMInd'> 3</span>    <span class='PDMResK'>DO</span> <span class='PDMResK'>WHILE</span> <span class='PDMResF'>LEN</span><span class='PDMOper'>(</span><span class='PDMVar'>m</span><span class='PDMOper'>.</span><span class='PDMVar'>lcFile</span><span class='PDMOper'>)</span><span class='PDMOper'>&gt;</span><span class='PDMLit'>0</span>
-<span class='PDMCnt'>2702</span> <span class='PDMInd'> 4</span>     <span class='PDMVar'>lnLoop</span> <span class='PDMOper'>=</span> <span class='PDMVar'>m</span><span class='PDMOper'>.</span><span class='PDMVar'>lnLoop</span><span class='PDMOper'>+</span><span class='PDMLit'>1</span>
-<span class='PDMCnt'>2703</span> <span class='PDMInd'> 4</span>     <span class='PDMVar'>lcProc</span> <span class='PDMOper'>=</span> <span class='PDMVar'>STREXTRACT</span><span class='PDMOper'>(</span><span class='PDMVar'>m</span><span class='PDMOper'>.</span><span class='PDMVar'>lcFile</span><span class='PDMOper'>,</span><span class='PDMStr'>' '</span><span class='PDMOper'>,</span><span class='PDMStr'>' '</span><span class='PDMOper'>,</span><span class='PDMLit'>1</span><span class='PDMOper'>)</span>
-<span class='PDMCnt'>2704</span> <span class='PDMInd'> 4</span>     <span class='PDMVar'>lcFile</span> <span class='PDMOper'>=</span> <span class='PDMVar'>STREXTRACT</span><span class='PDMOper'>(</span><span class='PDMVar'>m</span><span class='PDMOper'>.</span><span class='PDMVar'>lcFile</span><span class='PDMOper'>,</span><span class='PDMStr'>' '</span><span class='PDMOper'>,</span><span class='PDMStr'>' '</span><span class='PDMOper'>,</span><span class='PDMLit'>2</span><span class='PDMOper'>,</span><span class='PDMLit'>2</span><span class='PDMOper'>)</span>
+<span class='PDMCnt'>2698</span> <span class='PDMInd'> 3</span>    <span class='PDMVar'>lnLoop</span> <span class='PDMOper'>=</span> <span class='PDMLit'>1</span>
+<span class='PDMCnt'>2699</span> <span class='PDMInd'> 3</span>    <span class='PDMVar'>lcFile</span> <span class='PDMOper'>=</span> <span class='PDMResF'>SYS</span><span class='PDMOper'>(</span><span class='PDMLit'>16</span><span class='PDMOper'>,</span><span class='PDMVar'>m</span><span class='PDMOper'>.</span><span class='PDMVar'>lnLoop</span><span class='PDMOper'>)</span>
+<span class='PDMCnt'>2700</span> <span class='PDMInd'> 3</span>    <span class='PDMResK'>DO</span> <span class='PDMResK'>WHILE</span> <span class='PDMResF'>LEN</span><span class='PDMOper'>(</span><span class='PDMVar'>m</span><span class='PDMOper'>.</span><span class='PDMVar'>lcFile</span><span class='PDMOper'>)</span><span class='PDMOper'>&gt;</span><span class='PDMLit'>0</span>
+<span class='PDMCnt'>2701</span> <span class='PDMInd'> 4</span>     <span class='PDMVar'>lnLoop</span> <span class='PDMOper'>=</span> <span class='PDMVar'>m</span><span class='PDMOper'>.</span><span class='PDMVar'>lnLoop</span><span class='PDMOper'>+</span><span class='PDMLit'>1</span>
+<span class='PDMCnt'>2702</span> <span class='PDMInd'> 4</span>     <span class='PDMVar'>lcProc</span> <span class='PDMOper'>=</span> <span class='PDMVar'>STREXTRACT</span><span class='PDMOper'>(</span><span class='PDMVar'>m</span><span class='PDMOper'>.</span><span class='PDMVar'>lcFile</span><span class='PDMOper'>,</span><span class='PDMStr'>' '</span><span class='PDMOper'>,</span><span class='PDMStr'>' '</span><span class='PDMOper'>,</span><span class='PDMLit'>1</span><span class='PDMOper'>)</span>
+<span class='PDMCnt'>2703</span> <span class='PDMInd'>  </span> 
+<span class='PDMCnt'>2704</span> <span class='PDMInd'>  </span> <span class='PDMCom'>*!*    Changed by SF 21.10.2024</span>
 <span class='PDMCnt'>2705</span> <span class='PDMInd'>  </span> 
-<span class='PDMCnt'>2706</span> <span class='PDMInd'> 4</span>     <span class='PDMResK'>IF</span> <span class='PDMResF'>UPPER</span><span class='PDMOper'>(</span><span class='PDMVar'>m</span><span class='PDMOper'>.</span><span class='PDMVar'>lcProc</span><span class='PDMOper'>)</span><span class='PDMOper'>==</span><span class='PDMStr'>"INITMENU"</span><span class='PDMOper'>;</span>
-<span class='PDMCnt'>2707</span> <span class='PDMInd'> 6</span>       <span class='PDMOper'>OR</span> <span class='PDMResF'>UPPER</span><span class='PDMOper'>(</span><span class='PDMResF'>JUSTFNAME</span><span class='PDMOper'>(</span><span class='PDMVar'>m</span><span class='PDMOper'>.</span><span class='PDMVar'>lcFile</span><span class='PDMOper'>)</span><span class='PDMOper'>)</span><span class='PDMOper'>==</span><span class='PDMStr'>"BIN2TEXT.EXE"</span> <span class='PDMResK'>THEN</span>
-<span class='PDMCnt'>2708</span> <span class='PDMInd'>  </span> 
-<span class='PDMCnt'>2709</span> <span class='PDMInd'> 5</span>      <span class='PDMResF'>ADDPROPERTY</span><span class='PDMOper'>(</span><span class='PDMVar'>_SCREEN</span><span class='PDMOper'>,</span><span class='PDMStr'>'gcB2T_App'</span><span class='PDMOper'>,</span><span class='PDMVar'>m</span><span class='PDMOper'>.</span><span class='PDMVar'>lcFile</span><span class='PDMOper'>)</span>
 <span class='PDMCnt'>2710</span> <span class='PDMInd'>  </span> 
-<span class='PDMCnt'>2711</span> <span class='PDMInd'> 5</span>      <span class='PDMVar'>lcPath</span> <span class='PDMOper'>=</span> <span class='PDMResF'>UPPER</span><span class='PDMOper'>(</span><span class='PDMResF'>JUSTPATH</span><span class='PDMOper'>(</span><span class='PDMVar'>m</span><span class='PDMOper'>.</span><span class='PDMVar'>lcFile</span><span class='PDMOper'>)</span><span class='PDMOper'>)</span>
-<span class='PDMCnt'>2712</span> <span class='PDMInd'>  </span> 
-<span class='PDMCnt'>2713</span> <span class='PDMInd'> 5</span>      <span class='PDMVar'>lcMenu</span> <span class='PDMOper'>=</span> <span class='PDMStr'>"Bin2Text.mpr"</span>
-<span class='PDMCnt'>2714</span> <span class='PDMInd'> 5</span>      <span class='PDMResK'>IF</span> <span class='PDMResF'>LEN</span><span class='PDMOper'>(</span><span class='PDMResF'>SET</span><span class='PDMOper'>(</span><span class='PDMStr'>"Path"</span><span class='PDMOper'>)</span><span class='PDMOper'>)</span><span class='PDMOper'>#</span><span class='PDMLit'>0</span> <span class='PDMResK'>THEN</span>
-<span class='PDMCnt'>2715</span> <span class='PDMInd'>  </span> <span class='PDMCom'>*check VFP path to figure out if we are within</span>
-<span class='PDMCnt'>2716</span> <span class='PDMInd'> 6</span>       <span class='PDMResK'>FOR</span> <span class='PDMVar'>lnLoop</span> <span class='PDMOper'>=</span> <span class='PDMLit'>1</span> <span class='PDMResK'>TO</span> <span class='PDMResF'>ALINES</span><span class='PDMOper'>(</span><span class='PDMVar'>laDirs</span><span class='PDMOper'>,</span><span class='PDMResF'>SET</span><span class='PDMOper'>(</span><span class='PDMStr'>"Path"</span><span class='PDMOper'>)</span><span class='PDMOper'>,</span><span class='PDMStr'>';'</span><span class='PDMOper'>)</span>
-<span class='PDMCnt'>2717</span> <span class='PDMInd'> 7</span>        <span class='PDMResK'>IF</span> <span class='PDMVar'>m</span><span class='PDMOper'>.</span><span class='PDMVar'>lcPath</span><span class='PDMOper'>==</span><span class='PDMResF'>UPPER</span><span class='PDMOper'>(</span><span class='PDMVar'>m</span><span class='PDMOper'>.</span><span class='PDMVar'>laDirs</span><span class='PDMOper'>(</span><span class='PDMVar'>m</span><span class='PDMOper'>.</span><span class='PDMVar'>lnLoop</span><span class='PDMOper'>)</span><span class='PDMOper'>)</span> <span class='PDMResK'>THEN</span>
-<span class='PDMCnt'>2718</span> <span class='PDMInd'> 8</span>         <span class='PDMVar'>lcPath</span> <span class='PDMOper'>=</span> <span class='PDMStr'>""</span>
-<span class='PDMCnt'>2719</span> <span class='PDMInd'> 8</span>         <span class='PDMResK'>EXIT</span>
-<span class='PDMCnt'>2720</span> <span class='PDMInd'> 7</span>        <span class='PDMResK'>ENDIF</span> <span class='PDMCom'>&amp;&amp;m.lcPath==UPPER(laDirs(m.lnLoop))</span>
-<span class='PDMCnt'>2721</span> <span class='PDMInd'> 6</span>       <span class='PDMResK'>ENDFOR</span> <span class='PDMCom'>&amp;&amp;lnLoop</span>
-<span class='PDMCnt'>2722</span> <span class='PDMInd'> 6</span>       <span class='PDMResK'>IF</span> <span class='PDMOper'>!</span><span class='PDMResF'>EMPTY</span><span class='PDMOper'>(</span><span class='PDMVar'>m</span><span class='PDMOper'>.</span><span class='PDMVar'>lcPath</span><span class='PDMOper'>)</span> <span class='PDMResK'>THEN</span>
-<span class='PDMCnt'>2723</span> <span class='PDMInd'> 7</span>        <span class='PDMVar'>lcPath</span> <span class='PDMOper'>=</span> <span class='PDMVar'>m</span><span class='PDMOper'>.</span><span class='PDMVar'>lcPath</span><span class='PDMOper'>+</span><span class='PDMStr'>';'</span><span class='PDMOper'>+</span><span class='PDMResF'>SET</span><span class='PDMOper'>(</span><span class='PDMStr'>"Path"</span><span class='PDMOper'>)</span>
-<span class='PDMCnt'>2724</span> <span class='PDMInd'> 6</span>       <span class='PDMResK'>ENDIF</span> <span class='PDMCom'>&amp;&amp;!EMPTY(m.lcPath)</span>
-<span class='PDMCnt'>2725</span> <span class='PDMInd'> 5</span>      <span class='PDMResK'>ENDIF</span> <span class='PDMCom'>&amp;&amp;LEN(SET("Path"))#0</span>
-<span class='PDMCnt'>2726</span> <span class='PDMInd'>  </span> 
-<span class='PDMCnt'>2727</span> <span class='PDMInd'> 5</span>      <span class='PDMResK'>IF</span> <span class='PDMOper'>!</span><span class='PDMResF'>EMPTY</span><span class='PDMOper'>(</span><span class='PDMVar'>m</span><span class='PDMOper'>.</span><span class='PDMVar'>lcPath</span><span class='PDMOper'>)</span> <span class='PDMResK'>THEN</span>
-<span class='PDMCnt'>2728</span> <span class='PDMInd'> 6</span>       <span class='PDMResK'>SET</span> <span class='PDMResK'>PATH</span> <span class='PDMResK'>TO</span> <span class='PDMOper'>(</span><span class='PDMVar'>m</span><span class='PDMOper'>.</span><span class='PDMVar'>lcPath</span><span class='PDMOper'>)</span>
-<span class='PDMCnt'>2729</span> <span class='PDMInd'> 5</span>      <span class='PDMResK'>ENDIF</span> <span class='PDMCom'>&amp;&amp;!EMPTY(m.lcPath)</span>
-<span class='PDMCnt'>2730</span> <span class='PDMInd'>  </span> 
-<span class='PDMCnt'>2731</span> <span class='PDMInd'> 5</span>      <span class='PDMResK'>EXIT</span>
-<span class='PDMCnt'>2732</span> <span class='PDMInd'> 4</span>     <span class='PDMResK'>ENDIF</span> <span class='PDMCom'>&amp;&amp;UPPER(m.lcProc)=="INITMENU" OR UPPER(JUSTFNAME(m.lcFile))=="BIN2TEXT.EXE"</span>
-<span class='PDMCnt'>2733</span> <span class='PDMInd'>  </span> 
-<span class='PDMCnt'>2734</span> <span class='PDMInd'> 4</span>     <span class='PDMVar'>lcFile</span> <span class='PDMOper'>=</span> <span class='PDMResF'>SYS</span><span class='PDMOper'>(</span><span class='PDMLit'>16</span><span class='PDMOper'>,</span><span class='PDMVar'>m</span><span class='PDMOper'>.</span><span class='PDMVar'>lnLoop</span><span class='PDMOper'>)</span>
-<span class='PDMCnt'>2735</span> <span class='PDMInd'> 3</span>    <span class='PDMResK'>ENDDO</span> <span class='PDMCom'>&amp;&amp;LEN(m.lcFile)&gt;0</span>
+<span class='PDMCnt'>2711</span> <span class='PDMInd'>  </span> <span class='PDMCom'>*    lcFile = STREXTRACT(m.lcFile,' ',' ',2,2)</span>
+<span class='PDMCnt'>2712</span> <span class='PDMInd'> 4</span>     <span class='PDMVar'>lcFile</span> <span class='PDMOper'>=</span> <span class='PDMResF'>RIGHT</span><span class='PDMOper'>(</span><span class='PDMVar'>m</span><span class='PDMOper'>.</span><span class='PDMVar'>lcFile</span><span class='PDMOper'>,</span><span class='PDMResF'>LEN</span><span class='PDMOper'>(</span><span class='PDMVar'>m</span><span class='PDMOper'>.</span><span class='PDMVar'>lcFile</span><span class='PDMOper'>)</span><span class='PDMOper'>-</span><span class='PDMResF'>AT</span><span class='PDMOper'>(</span><span class='PDMStr'>" "</span><span class='PDMOper'>,</span><span class='PDMVar'>m</span><span class='PDMOper'>.</span><span class='PDMVar'>lcFile</span><span class='PDMOper'>,</span><span class='PDMLit'>2</span><span class='PDMOper'>)</span><span class='PDMOper'>)</span>
+<span class='PDMCnt'>2713</span> <span class='PDMInd'>  </span> 
+<span class='PDMCnt'>2714</span> <span class='PDMInd'>  </span> <span class='PDMOper'>*</span><span class='PDMOper'>!</span><span class='PDMOper'>*</span>    <span class='PDMOper'>/</span><span class='PDMVar'>Changed</span> <span class='PDMResK'>by</span> <span class='PDMVar'>SF</span> <span class='PDMLit'>21</span><span class='PDMOper'>.</span><span class='PDMLit'>10</span><span class='PDMOper'>.</span><span class='PDMLit'>2024</span>
+<span class='PDMCnt'>2715</span> <span class='PDMInd'>  </span> 
+<span class='PDMCnt'>2716</span> <span class='PDMInd'> 4</span>     <span class='PDMResK'>IF</span> <span class='PDMResF'>UPPER</span><span class='PDMOper'>(</span><span class='PDMVar'>m</span><span class='PDMOper'>.</span><span class='PDMVar'>lcProc</span><span class='PDMOper'>)</span><span class='PDMOper'>==</span><span class='PDMStr'>"INITMENU"</span><span class='PDMOper'>;</span>
+<span class='PDMCnt'>2717</span> <span class='PDMInd'> 6</span>       <span class='PDMOper'>OR</span> <span class='PDMResF'>UPPER</span><span class='PDMOper'>(</span><span class='PDMResF'>JUSTFNAME</span><span class='PDMOper'>(</span><span class='PDMVar'>m</span><span class='PDMOper'>.</span><span class='PDMVar'>lcFile</span><span class='PDMOper'>)</span><span class='PDMOper'>)</span><span class='PDMOper'>==</span><span class='PDMStr'>"BIN2TEXT.EXE"</span> <span class='PDMResK'>THEN</span>
+<span class='PDMCnt'>2718</span> <span class='PDMInd'>  </span> 
+<span class='PDMCnt'>2719</span> <span class='PDMInd'> 5</span>      <span class='PDMResF'>ADDPROPERTY</span><span class='PDMOper'>(</span><span class='PDMVar'>_SCREEN</span><span class='PDMOper'>,</span><span class='PDMStr'>'gcB2T_App'</span><span class='PDMOper'>,</span><span class='PDMVar'>m</span><span class='PDMOper'>.</span><span class='PDMVar'>lcFile</span><span class='PDMOper'>)</span>
+<span class='PDMCnt'>2720</span> <span class='PDMInd'>  </span> 
+<span class='PDMCnt'>2721</span> <span class='PDMInd'> 5</span>      <span class='PDMVar'>lcPath</span> <span class='PDMOper'>=</span> <span class='PDMResF'>UPPER</span><span class='PDMOper'>(</span><span class='PDMResF'>JUSTPATH</span><span class='PDMOper'>(</span><span class='PDMVar'>m</span><span class='PDMOper'>.</span><span class='PDMVar'>lcFile</span><span class='PDMOper'>)</span><span class='PDMOper'>)</span>
+<span class='PDMCnt'>2722</span> <span class='PDMInd'>  </span> 
+<span class='PDMCnt'>2723</span> <span class='PDMInd'> 5</span>      <span class='PDMVar'>lcMenu</span> <span class='PDMOper'>=</span> <span class='PDMStr'>"Bin2Text.mpr"</span>
+<span class='PDMCnt'>2724</span> <span class='PDMInd'> 5</span>      <span class='PDMResK'>IF</span> <span class='PDMResF'>LEN</span><span class='PDMOper'>(</span><span class='PDMResF'>SET</span><span class='PDMOper'>(</span><span class='PDMStr'>"Path"</span><span class='PDMOper'>)</span><span class='PDMOper'>)</span><span class='PDMOper'>#</span><span class='PDMLit'>0</span> <span class='PDMResK'>THEN</span>
+<span class='PDMCnt'>2725</span> <span class='PDMInd'>  </span> <span class='PDMCom'>*check VFP path to figure out if we are within</span>
+<span class='PDMCnt'>2726</span> <span class='PDMInd'> 6</span>       <span class='PDMResK'>FOR</span> <span class='PDMVar'>lnLoop</span> <span class='PDMOper'>=</span> <span class='PDMLit'>1</span> <span class='PDMResK'>TO</span> <span class='PDMResF'>ALINES</span><span class='PDMOper'>(</span><span class='PDMVar'>laDirs</span><span class='PDMOper'>,</span><span class='PDMResF'>SET</span><span class='PDMOper'>(</span><span class='PDMStr'>"Path"</span><span class='PDMOper'>)</span><span class='PDMOper'>,</span><span class='PDMStr'>';'</span><span class='PDMOper'>)</span>
+<span class='PDMCnt'>2727</span> <span class='PDMInd'> 7</span>        <span class='PDMResK'>IF</span> <span class='PDMVar'>m</span><span class='PDMOper'>.</span><span class='PDMVar'>lcPath</span><span class='PDMOper'>==</span><span class='PDMResF'>UPPER</span><span class='PDMOper'>(</span><span class='PDMVar'>m</span><span class='PDMOper'>.</span><span class='PDMVar'>laDirs</span><span class='PDMOper'>(</span><span class='PDMVar'>m</span><span class='PDMOper'>.</span><span class='PDMVar'>lnLoop</span><span class='PDMOper'>)</span><span class='PDMOper'>)</span> <span class='PDMResK'>THEN</span>
+<span class='PDMCnt'>2728</span> <span class='PDMInd'> 8</span>         <span class='PDMVar'>lcPath</span> <span class='PDMOper'>=</span> <span class='PDMStr'>""</span>
+<span class='PDMCnt'>2729</span> <span class='PDMInd'> 8</span>         <span class='PDMResK'>EXIT</span>
+<span class='PDMCnt'>2730</span> <span class='PDMInd'> 7</span>        <span class='PDMResK'>ENDIF</span> <span class='PDMCom'>&amp;&amp;m.lcPath==UPPER(laDirs(m.lnLoop))</span>
+<span class='PDMCnt'>2731</span> <span class='PDMInd'> 6</span>       <span class='PDMResK'>ENDFOR</span> <span class='PDMCom'>&amp;&amp;lnLoop</span>
+<span class='PDMCnt'>2732</span> <span class='PDMInd'> 6</span>       <span class='PDMResK'>IF</span> <span class='PDMOper'>!</span><span class='PDMResF'>EMPTY</span><span class='PDMOper'>(</span><span class='PDMVar'>m</span><span class='PDMOper'>.</span><span class='PDMVar'>lcPath</span><span class='PDMOper'>)</span> <span class='PDMResK'>THEN</span>
+<span class='PDMCnt'>2733</span> <span class='PDMInd'> 7</span>        <span class='PDMVar'>lcPath</span> <span class='PDMOper'>=</span> <span class='PDMVar'>m</span><span class='PDMOper'>.</span><span class='PDMVar'>lcPath</span><span class='PDMOper'>+</span><span class='PDMStr'>';'</span><span class='PDMOper'>+</span><span class='PDMResF'>SET</span><span class='PDMOper'>(</span><span class='PDMStr'>"Path"</span><span class='PDMOper'>)</span>
+<span class='PDMCnt'>2734</span> <span class='PDMInd'> 6</span>       <span class='PDMResK'>ENDIF</span> <span class='PDMCom'>&amp;&amp;!EMPTY(m.lcPath)</span>
+<span class='PDMCnt'>2735</span> <span class='PDMInd'> 5</span>      <span class='PDMResK'>ENDIF</span> <span class='PDMCom'>&amp;&amp;LEN(SET("Path"))#0</span>
 <span class='PDMCnt'>2736</span> <span class='PDMInd'>  </span> 
-<span class='PDMCnt'>2737</span> <span class='PDMInd'>  </span> 
-<span class='PDMCnt'>2738</span> <span class='PDMInd'> 3</span>    <span class='PDMResK'>IF</span> <span class='PDMOper'>!</span><span class='PDMResF'>EMPTY</span><span class='PDMOper'>(</span><span class='PDMVar'>m</span><span class='PDMOper'>.</span><span class='PDMVar'>lcMenu</span><span class='PDMOper'>)</span> <span class='PDMResK'>THEN</span>
-<span class='PDMCnt'>2739</span> <span class='PDMInd'> 4</span>     <span class='PDMResK'>DO</span> <span class='PDMOper'>(</span><span class='PDMVar'>m</span><span class='PDMOper'>.</span><span class='PDMVar'>lcMenu</span><span class='PDMOper'>)</span>
-<span class='PDMCnt'>2740</span> <span class='PDMInd'> 3</span>    <span class='PDMResK'>ENDIF</span> <span class='PDMCom'>&amp;&amp;!EMPTY(m.lcMenu)</span>
-<span class='PDMCnt'>2741</span> <span class='PDMInd'>  </span> 
-<span class='PDMCnt'>2742</span> <span class='PDMInd'> 2</span>   <span class='PDMResK'>ENDIF</span> <span class='PDMCom'>&amp;&amp;!m.tlNoMenu</span>
-<span class='PDMCnt'>2743</span> <span class='PDMInd'> 1</span>  <span class='PDMResK'>ENDIF</span> <span class='PDMCom'>&amp;&amp;ISNULL(m.lcFile)</span>
-<span class='PDMCnt'>2744</span> <span class='PDMInd'> 1</span>  <span class='PDMVar'>Destruct_Objects</span><span class='PDMOper'>(</span><span class='PDMOper'>)</span>
-<span class='PDMCnt'>2745</span> <span class='PDMInd'>  </span> 
-<span class='PDMCnt'>2746</span> <span class='PDMInd'> 1</span>  <span class='PDMVar'>SwitchErrorHandler</span><span class='PDMOper'>(</span><span class='PDMLit'>.F.</span><span class='PDMOper'>)</span>
-<span class='PDMCnt'>2747</span> <span class='PDMInd'>  </span> </pre>
+<span class='PDMCnt'>2737</span> <span class='PDMInd'> 5</span>      <span class='PDMResK'>IF</span> <span class='PDMOper'>!</span><span class='PDMResF'>EMPTY</span><span class='PDMOper'>(</span><span class='PDMVar'>m</span><span class='PDMOper'>.</span><span class='PDMVar'>lcPath</span><span class='PDMOper'>)</span> <span class='PDMResK'>THEN</span>
+<span class='PDMCnt'>2738</span> <span class='PDMInd'> 6</span>       <span class='PDMResK'>SET</span> <span class='PDMResK'>PATH</span> <span class='PDMResK'>TO</span> <span class='PDMOper'>(</span><span class='PDMVar'>m</span><span class='PDMOper'>.</span><span class='PDMVar'>lcPath</span><span class='PDMOper'>)</span>
+<span class='PDMCnt'>2739</span> <span class='PDMInd'> 5</span>      <span class='PDMResK'>ENDIF</span> <span class='PDMCom'>&amp;&amp;!EMPTY(m.lcPath)</span>
+<span class='PDMCnt'>2740</span> <span class='PDMInd'>  </span> 
+<span class='PDMCnt'>2741</span> <span class='PDMInd'> 5</span>      <span class='PDMResK'>EXIT</span>
+<span class='PDMCnt'>2742</span> <span class='PDMInd'> 4</span>     <span class='PDMResK'>ENDIF</span> <span class='PDMCom'>&amp;&amp;UPPER(m.lcProc)=="INITMENU" OR UPPER(JUSTFNAME(m.lcFile))=="BIN2TEXT.EXE"</span>
+<span class='PDMCnt'>2743</span> <span class='PDMInd'>  </span> 
+<span class='PDMCnt'>2744</span> <span class='PDMInd'> 4</span>     <span class='PDMVar'>lcFile</span> <span class='PDMOper'>=</span> <span class='PDMResF'>SYS</span><span class='PDMOper'>(</span><span class='PDMLit'>16</span><span class='PDMOper'>,</span><span class='PDMVar'>m</span><span class='PDMOper'>.</span><span class='PDMVar'>lnLoop</span><span class='PDMOper'>)</span>
+<span class='PDMCnt'>2745</span> <span class='PDMInd'> 3</span>    <span class='PDMResK'>ENDDO</span> <span class='PDMCom'>&amp;&amp;LEN(m.lcFile)&gt;0</span>
+<span class='PDMCnt'>2746</span> <span class='PDMInd'>  </span> 
+<span class='PDMCnt'>2747</span> <span class='PDMInd'>  </span> 
+<span class='PDMCnt'>2748</span> <span class='PDMInd'> 3</span>    <span class='PDMResK'>IF</span> <span class='PDMOper'>!</span><span class='PDMResF'>EMPTY</span><span class='PDMOper'>(</span><span class='PDMVar'>m</span><span class='PDMOper'>.</span><span class='PDMVar'>lcMenu</span><span class='PDMOper'>)</span> <span class='PDMResK'>THEN</span>
+<span class='PDMCnt'>2749</span> <span class='PDMInd'> 4</span>     <span class='PDMResK'>DO</span> <span class='PDMOper'>(</span><span class='PDMVar'>m</span><span class='PDMOper'>.</span><span class='PDMVar'>lcMenu</span><span class='PDMOper'>)</span>
+<span class='PDMCnt'>2750</span> <span class='PDMInd'> 3</span>    <span class='PDMResK'>ENDIF</span> <span class='PDMCom'>&amp;&amp;!EMPTY(m.lcMenu)</span>
+<span class='PDMCnt'>2751</span> <span class='PDMInd'>  </span> 
+<span class='PDMCnt'>2752</span> <span class='PDMInd'> 2</span>   <span class='PDMResK'>ENDIF</span> <span class='PDMCom'>&amp;&amp;!m.tlNoMenu</span>
+<span class='PDMCnt'>2753</span> <span class='PDMInd'> 1</span>  <span class='PDMResK'>ENDIF</span> <span class='PDMCom'>&amp;&amp;ISNULL(m.lcFile)</span>
+<span class='PDMCnt'>2754</span> <span class='PDMInd'> 1</span>  <span class='PDMVar'>Destruct_Objects</span><span class='PDMOper'>(</span><span class='PDMOper'>)</span>
+<span class='PDMCnt'>2755</span> <span class='PDMInd'>  </span> 
+<span class='PDMCnt'>2756</span> <span class='PDMInd'> 1</span>  <span class='PDMVar'>SwitchErrorHandler</span><span class='PDMOper'>(</span><span class='PDMLit'>.F.</span><span class='PDMOper'>)</span>
+<span class='PDMCnt'>2757</span> <span class='PDMInd'>  </span> </pre>
  <!-- Code End -->
   </div>
  </div>

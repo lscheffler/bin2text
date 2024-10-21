@@ -2695,13 +2695,23 @@ FUNCTION InitMenu	&&Starts the IDE menu.
 
   _SCREEN.frmB2T_Envelop.cusB2T.Storage_Close(m.lcFile,.T.)
   IF !m.tlNoMenu THEN
-
    lnLoop = 1
    lcFile = SYS(16,m.lnLoop)
    DO WHILE LEN(m.lcFile)>0
     lnLoop = m.lnLoop+1
     lcProc = STREXTRACT(m.lcFile,' ',' ',1)
-    lcFile = STREXTRACT(m.lcFile,' ',' ',2,2)
+
+*!*	Changed by SF 21.10.2024
+*!*	<pdm>
+*!*	<change date="{^2024-10-21,11:11:00}">Changed by SF<br />
+*!*	Problem running Bin2Text when path to it's exe contains a space. #8
+*!*	</change>
+*!*	</pdm>
+ 
+*    lcFile = STREXTRACT(m.lcFile,' ',' ',2,2)
+    lcFile = RIGHT(m.lcFile,LEN(m.lcFile)-AT(" ",m.lcFile,2))
+
+*!*	/Changed by SF 21.10.2024
 
     IF UPPER(m.lcProc)=="INITMENU";
       OR UPPER(JUSTFNAME(m.lcFile))=="BIN2TEXT.EXE" THEN

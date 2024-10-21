@@ -16,7 +16,7 @@
 <body>
 <div class="diaxp_mhead">Destruct_Objects Function</div>
 <div class="diaxp_mbody">
-<!-- Created with _diamp_pdm_ab by Agnes Beste    05.12.2023 08:21 -->
+<!-- Created with _diamp_pdm_ab by Agnes Beste    21.10.2024 11:33 -->
  <div class="PDM_AB_Descr"><!-- Descr Begin -->
 Remove an instance of the business object of this application.
  </div><!-- Descr End -->
@@ -34,23 +34,23 @@ Remove an instance of the business object of this application.
  </div><!-- Syntax End -->
 
 
-<!-- /Created with _diamp_pdm_ab by Agnes Beste    05.12.2023 08:21 -->
+<!-- /Created with _diamp_pdm_ab by Agnes Beste    21.10.2024 11:33 -->
 
  <div class="SC">
   <img onclick="ExpandSC('SP_P17',-1);" class="imgEC" src="../../imgs/dotab.gif" alt="Expand/Collapse source code of procedure Destruct_Objects" id="IMG_SP_P17" />
   <span onclick="ExpandSC('SP_P17',-1);" class="SCCaption"><a name="pm.destruct_objects">Source Code</a></span>
   <div ondblclick="ExpandSC('SP_P17',-1);" class="SCE" style="display: none;" id="TX_SP_P17">
 <!-- Code Begin -->
-<pre class="PDMCODE PDMNor" ><span class='PDMCnt'>2890</span> <span class='PDMInd'>  </span> 
-<span class='PDMCnt'>2891</span> <span class='PDMInd'>  </span> 
-<span class='PDMCnt'>2899</span> <span class='PDMInd'>  </span> 
-<span class='PDMCnt'>2900</span> <span class='PDMInd'> 1</span>  <span class='PDMResK'>IF</span> <span class='PDMOper'>!</span><span class='PDMResF'>PEMSTATUS</span><span class='PDMOper'>(</span><span class='PDMVar'>_SCREEN</span><span class='PDMOper'>,</span><span class='PDMStr'>'frmB2T_Envelop'</span><span class='PDMOper'>,</span><span class='PDMLit'>5</span><span class='PDMOper'>)</span> <span class='PDMResK'>THEN</span>
-<span class='PDMCnt'>2901</span> <span class='PDMInd'> 2</span>   <span class='PDMResK'>RETURN</span>
-<span class='PDMCnt'>2902</span> <span class='PDMInd'> 1</span>  <span class='PDMResK'>ENDIF</span> <span class='PDMCom'>&amp;&amp;!PEMSTATUS(_SCREEN,'frmB2T_Envelop',5)</span>
-<span class='PDMCnt'>2903</span> <span class='PDMInd'>  </span> 
-<span class='PDMCnt'>2904</span> <span class='PDMInd'> 1</span>  <span class='PDMVar'>_SCREEN</span><span class='PDMOper'>.</span><span class='PDMVar'>frmB2T_Envelop</span> <span class='PDMOper'>=</span> <span class='PDMOper'>.</span><span class='PDMResK'>NULL</span><span class='PDMOper'>.</span>
-<span class='PDMCnt'>2905</span> <span class='PDMInd'> 1</span>  <span class='PDMResF'>REMOVEPROPERTY</span><span class='PDMOper'>(</span><span class='PDMVar'>_SCREEN</span><span class='PDMOper'>,</span><span class='PDMStr'>'frmB2T_Envelop'</span><span class='PDMOper'>)</span>
-<span class='PDMCnt'>2906</span> <span class='PDMInd'>  </span> </pre>
+<pre class="PDMCODE PDMNor" ><span class='PDMCnt'>2900</span> <span class='PDMInd'>  </span> 
+<span class='PDMCnt'>2901</span> <span class='PDMInd'>  </span> 
+<span class='PDMCnt'>2909</span> <span class='PDMInd'>  </span> 
+<span class='PDMCnt'>2910</span> <span class='PDMInd'> 1</span>  <span class='PDMResK'>IF</span> <span class='PDMOper'>!</span><span class='PDMResF'>PEMSTATUS</span><span class='PDMOper'>(</span><span class='PDMVar'>_SCREEN</span><span class='PDMOper'>,</span><span class='PDMStr'>'frmB2T_Envelop'</span><span class='PDMOper'>,</span><span class='PDMLit'>5</span><span class='PDMOper'>)</span> <span class='PDMResK'>THEN</span>
+<span class='PDMCnt'>2911</span> <span class='PDMInd'> 2</span>   <span class='PDMResK'>RETURN</span>
+<span class='PDMCnt'>2912</span> <span class='PDMInd'> 1</span>  <span class='PDMResK'>ENDIF</span> <span class='PDMCom'>&amp;&amp;!PEMSTATUS(_SCREEN,'frmB2T_Envelop',5)</span>
+<span class='PDMCnt'>2913</span> <span class='PDMInd'>  </span> 
+<span class='PDMCnt'>2914</span> <span class='PDMInd'> 1</span>  <span class='PDMVar'>_SCREEN</span><span class='PDMOper'>.</span><span class='PDMVar'>frmB2T_Envelop</span> <span class='PDMOper'>=</span> <span class='PDMOper'>.</span><span class='PDMResK'>NULL</span><span class='PDMOper'>.</span>
+<span class='PDMCnt'>2915</span> <span class='PDMInd'> 1</span>  <span class='PDMResF'>REMOVEPROPERTY</span><span class='PDMOper'>(</span><span class='PDMVar'>_SCREEN</span><span class='PDMOper'>,</span><span class='PDMStr'>'frmB2T_Envelop'</span><span class='PDMOper'>)</span>
+<span class='PDMCnt'>2916</span> <span class='PDMInd'>  </span> </pre>
  <!-- Code End -->
   </div>
  </div>

@@ -16,14 +16,14 @@
 <body>
 <div class="diaxp_mhead">GetBranch Function</div>
 <div class="diaxp_mbody">
-<!-- Created with _diamp_pdm_ab by Agnes Beste    05.12.2023 08:21 -->
+<!-- Created with _diamp_pdm_ab by Agnes Beste    21.10.2024 11:33 -->
  <div class="PDM_AB_Descr"><!-- Descr Begin -->
 Output of current git branch
  </div><!-- Descr End -->
 
  <div class="DIAMP_PDM_AB_Syntax"><!-- Syntax Begin -->
   <div class="SColor">
-   <div class="RetVal"><a href="#_6RW0HWZCW">RetVal</a>&nbsp;</div>   <div class="RetValEq">=</div>   <div class="PEM">
+   <div class="RetVal"><a href="#_70V0OS8PW">RetVal</a>&nbsp;</div>   <div class="RetValEq">=</div>   <div class="PEM">
     GetBranch
    </div>
    <div class="Para">
@@ -36,7 +36,7 @@ Output of current git branch
  <div class="DIAMP_PDM_AB_RetVal"><!-- Returns Begin -->
   <div>
    <span class="PDM_AB_Head">
-    <a id="_6RW0HWZCW" name="_6RW0HWZCW">
+    <a id="_70V0OS8PW" name="_70V0OS8PW">
      Return value
     </a>
    </span> <span class="RetVal_Ttype">Character</span>
@@ -47,41 +47,41 @@ Branch, empty if no git active
  </div><!-- Returns End -->
 
 
-<!-- /Created with _diamp_pdm_ab by Agnes Beste    05.12.2023 08:21 -->
+<!-- /Created with _diamp_pdm_ab by Agnes Beste    21.10.2024 11:33 -->
 
  <div class="SC">
   <img onclick="ExpandSC('SP_P23',-1);" class="imgEC" src="../../imgs/dotab.gif" alt="Expand/Collapse source code of procedure GetBranch" id="IMG_SP_P23" />
   <span onclick="ExpandSC('SP_P23',-1);" class="SCCaption"><a name="pm.getbranch">Source Code</a></span>
   <div ondblclick="ExpandSC('SP_P23',-1);" class="SCE" style="display: none;" id="TX_SP_P23">
 <!-- Code Begin -->
-<pre class="PDMCODE PDMNor" ><span class='PDMCnt'>3268</span> <span class='PDMInd'>  </span> 
-<span class='PDMCnt'>3269</span> <span class='PDMInd'>  </span> 
-<span class='PDMCnt'>3286</span> <span class='PDMInd'>  </span> 
-<span class='PDMCnt'>3287</span> <span class='PDMInd'> 1</span>  <span class='PDMResK'>LOCAL</span><span class='PDMOper'>;</span>
-<span class='PDMCnt'>3288</span> <span class='PDMInd'> 2</span>   <span class='PDMVar'>lcRet</span> <span class='PDMResK'>AS</span> <span class='PDMResK'>CHARACTER</span><span class='PDMOper'>,</span><span class='PDMOper'>;</span>
-<span class='PDMCnt'>3289</span> <span class='PDMInd'> 2</span>   <span class='PDMVar'>lnSec</span> <span class='PDMResK'>AS</span> <span class='PDMResK'>NUMBER</span>
-<span class='PDMCnt'>3290</span> <span class='PDMInd'>  </span> 
-<span class='PDMCnt'>3291</span> <span class='PDMInd'> 1</span>  <span class='PDMVar'>lcRet</span> <span class='PDMOper'>=</span> <span class='PDMStr'>''</span>
-<span class='PDMCnt'>3292</span> <span class='PDMInd'> 1</span>  <span class='PDMResK'>IF</span> <span class='PDMVar'>Is_git</span><span class='PDMOper'>(</span><span class='PDMOper'>)</span> <span class='PDMResK'>THEN</span>
-<span class='PDMCnt'>3293</span> <span class='PDMInd'>  </span> <span class='PDMCom'>*schlägt irgendwie mit bash fehl, daher erstmal wieder cmd</span>
-<span class='PDMCnt'>3294</span> <span class='PDMInd'> 2</span>   <span class='PDMResK'>IF</span> <span class='PDMVar'>Run_git</span><span class='PDMOper'>(</span><span class='PDMStr'>'rev-parse --abbrev-ref HEAD&gt;git_x.tmp'</span><span class='PDMOper'>)</span> <span class='PDMResK'>THEN</span>
-<span class='PDMCnt'>3295</span> <span class='PDMInd'>  </span> <span class='PDMCom'>*  IF Run_git('rev-parse --abbrev-ref HEAD&gt;git_x.tmp',,.F.,.F.,.T.) THEN</span>
+<pre class="PDMCODE PDMNor" ><span class='PDMCnt'>3278</span> <span class='PDMInd'>  </span> 
+<span class='PDMCnt'>3279</span> <span class='PDMInd'>  </span> 
 <span class='PDMCnt'>3296</span> <span class='PDMInd'>  </span> 
-<span class='PDMCnt'>3297</span> <span class='PDMInd'> 3</span>    <span class='PDMVar'>lnSec</span> <span class='PDMOper'>=</span> <span class='PDMResF'>SECONDS</span><span class='PDMOper'>(</span><span class='PDMOper'>)</span>
-<span class='PDMCnt'>3298</span> <span class='PDMInd'>  </span> 
-<span class='PDMCnt'>3299</span> <span class='PDMInd'> 3</span>    <span class='PDMResK'>IF</span> <span class='PDMResF'>FILE</span><span class='PDMOper'>(</span><span class='PDMStr'>'git_x.tmp'</span><span class='PDMOper'>)</span> <span class='PDMResK'>THEN</span>
-<span class='PDMCnt'>3300</span> <span class='PDMInd'> 4</span>     <span class='PDMVar'>lcRet</span> <span class='PDMOper'>=</span> <span class='PDMResF'>CHRTRAN</span><span class='PDMOper'>(</span><span class='PDMResF'>FILETOSTR</span><span class='PDMOper'>(</span><span class='PDMStr'>'git_x.tmp'</span><span class='PDMOper'>)</span><span class='PDMOper'>,</span><span class='PDMVar'>0h0d0a</span><span class='PDMOper'>,</span><span class='PDMStr'>''</span><span class='PDMOper'>)</span>
-<span class='PDMCnt'>3301</span> <span class='PDMInd'> 4</span>     <span class='PDMResK'>DELETE</span> <span class='PDMResK'>FILE</span> <span class='PDMVar'>git_x</span><span class='PDMOper'>.</span><span class='PDMVar'>tmp</span>
-<span class='PDMCnt'>3302</span> <span class='PDMInd'> 3</span>    <span class='PDMResK'>ENDIF</span> <span class='PDMCom'>&amp;&amp;FILE('git_x.tmp')</span>
-<span class='PDMCnt'>3303</span> <span class='PDMInd'> 2</span>   <span class='PDMResK'>ENDIF</span> <span class='PDMCom'>&amp;&amp;Run_git('rev-parse --abbrev-ref HEAD&gt;git_x.tmp',,.F.,.F.,.T.)</span>
-<span class='PDMCnt'>3304</span> <span class='PDMInd'> 1</span>  <span class='PDMResK'>ENDIF</span> <span class='PDMCom'>&amp;&amp;Is_git()</span>
-<span class='PDMCnt'>3305</span> <span class='PDMInd'>  </span> 
-<span class='PDMCnt'>3306</span> <span class='PDMInd'> 1</span>  <span class='PDMResK'>IF</span> <span class='PDMOper'>!</span><span class='PDMResF'>EMPTY</span><span class='PDMOper'>(</span><span class='PDMVar'>m</span><span class='PDMOper'>.</span><span class='PDMVar'>lcRet</span><span class='PDMOper'>)</span> <span class='PDMResK'>THEN</span>
-<span class='PDMCnt'>3307</span> <span class='PDMInd'> 2</span>   <span class='PDMVar'>lcCap</span> <span class='PDMOper'>=</span> <span class='PDMVar'>_SCREEN</span><span class='PDMOper'>.</span><span class='PDMResP'>CAPTION</span>
-<span class='PDMCnt'>3308</span> <span class='PDMInd'> 2</span>   <span class='PDMVar'>_SCREEN</span><span class='PDMOper'>.</span><span class='PDMResP'>CAPTION</span> <span class='PDMOper'>=</span> <span class='PDMResF'>SUBSTR</span><span class='PDMOper'>(</span><span class='PDMVar'>m</span><span class='PDMOper'>.</span><span class='PDMVar'>lcCap</span><span class='PDMOper'>,</span><span class='PDMLit'>1</span><span class='PDMOper'>,</span><span class='PDMResF'>EVL</span><span class='PDMOper'>(</span><span class='PDMResF'>AT</span><span class='PDMOper'>(</span><span class='PDMStr'>' on branch'</span><span class='PDMOper'>,</span><span class='PDMVar'>m</span><span class='PDMOper'>.</span><span class='PDMVar'>lcCap</span><span class='PDMOper'>)</span><span class='PDMOper'>,</span><span class='PDMResF'>LEN</span><span class='PDMOper'>(</span><span class='PDMVar'>m</span><span class='PDMOper'>.</span><span class='PDMVar'>lcCap</span><span class='PDMOper'>)</span><span class='PDMOper'>+</span><span class='PDMLit'>1</span><span class='PDMOper'>)</span><span class='PDMOper'>-</span><span class='PDMLit'>1</span><span class='PDMOper'>)</span><span class='PDMOper'>+</span><span class='PDMStr'>' on branch '</span><span class='PDMOper'>+</span><span class='PDMVar'>m</span><span class='PDMOper'>.</span><span class='PDMVar'>lcRet</span>
-<span class='PDMCnt'>3309</span> <span class='PDMInd'> 1</span>  <span class='PDMResK'>ENDIF</span> <span class='PDMCom'>&amp;&amp;!EMPTY(m.lcRet)</span>
-<span class='PDMCnt'>3310</span> <span class='PDMInd'>  </span> 
-<span class='PDMCnt'>3311</span> <span class='PDMInd'> 1</span>  <span class='PDMResK'>RETURN</span> <span class='PDMVar'>m</span><span class='PDMOper'>.</span><span class='PDMVar'>lcRet</span></pre>
+<span class='PDMCnt'>3297</span> <span class='PDMInd'> 1</span>  <span class='PDMResK'>LOCAL</span><span class='PDMOper'>;</span>
+<span class='PDMCnt'>3298</span> <span class='PDMInd'> 2</span>   <span class='PDMVar'>lcRet</span> <span class='PDMResK'>AS</span> <span class='PDMResK'>CHARACTER</span><span class='PDMOper'>,</span><span class='PDMOper'>;</span>
+<span class='PDMCnt'>3299</span> <span class='PDMInd'> 2</span>   <span class='PDMVar'>lnSec</span> <span class='PDMResK'>AS</span> <span class='PDMResK'>NUMBER</span>
+<span class='PDMCnt'>3300</span> <span class='PDMInd'>  </span> 
+<span class='PDMCnt'>3301</span> <span class='PDMInd'> 1</span>  <span class='PDMVar'>lcRet</span> <span class='PDMOper'>=</span> <span class='PDMStr'>''</span>
+<span class='PDMCnt'>3302</span> <span class='PDMInd'> 1</span>  <span class='PDMResK'>IF</span> <span class='PDMVar'>Is_git</span><span class='PDMOper'>(</span><span class='PDMOper'>)</span> <span class='PDMResK'>THEN</span>
+<span class='PDMCnt'>3303</span> <span class='PDMInd'>  </span> <span class='PDMCom'>*schlägt irgendwie mit bash fehl, daher erstmal wieder cmd</span>
+<span class='PDMCnt'>3304</span> <span class='PDMInd'> 2</span>   <span class='PDMResK'>IF</span> <span class='PDMVar'>Run_git</span><span class='PDMOper'>(</span><span class='PDMStr'>'rev-parse --abbrev-ref HEAD&gt;git_x.tmp'</span><span class='PDMOper'>)</span> <span class='PDMResK'>THEN</span>
+<span class='PDMCnt'>3305</span> <span class='PDMInd'>  </span> <span class='PDMCom'>*  IF Run_git('rev-parse --abbrev-ref HEAD&gt;git_x.tmp',,.F.,.F.,.T.) THEN</span>
+<span class='PDMCnt'>3306</span> <span class='PDMInd'>  </span> 
+<span class='PDMCnt'>3307</span> <span class='PDMInd'> 3</span>    <span class='PDMVar'>lnSec</span> <span class='PDMOper'>=</span> <span class='PDMResF'>SECONDS</span><span class='PDMOper'>(</span><span class='PDMOper'>)</span>
+<span class='PDMCnt'>3308</span> <span class='PDMInd'>  </span> 
+<span class='PDMCnt'>3309</span> <span class='PDMInd'> 3</span>    <span class='PDMResK'>IF</span> <span class='PDMResF'>FILE</span><span class='PDMOper'>(</span><span class='PDMStr'>'git_x.tmp'</span><span class='PDMOper'>)</span> <span class='PDMResK'>THEN</span>
+<span class='PDMCnt'>3310</span> <span class='PDMInd'> 4</span>     <span class='PDMVar'>lcRet</span> <span class='PDMOper'>=</span> <span class='PDMResF'>CHRTRAN</span><span class='PDMOper'>(</span><span class='PDMResF'>FILETOSTR</span><span class='PDMOper'>(</span><span class='PDMStr'>'git_x.tmp'</span><span class='PDMOper'>)</span><span class='PDMOper'>,</span><span class='PDMVar'>0h0d0a</span><span class='PDMOper'>,</span><span class='PDMStr'>''</span><span class='PDMOper'>)</span>
+<span class='PDMCnt'>3311</span> <span class='PDMInd'> 4</span>     <span class='PDMResK'>DELETE</span> <span class='PDMResK'>FILE</span> <span class='PDMVar'>git_x</span><span class='PDMOper'>.</span><span class='PDMVar'>tmp</span>
+<span class='PDMCnt'>3312</span> <span class='PDMInd'> 3</span>    <span class='PDMResK'>ENDIF</span> <span class='PDMCom'>&amp;&amp;FILE('git_x.tmp')</span>
+<span class='PDMCnt'>3313</span> <span class='PDMInd'> 2</span>   <span class='PDMResK'>ENDIF</span> <span class='PDMCom'>&amp;&amp;Run_git('rev-parse --abbrev-ref HEAD&gt;git_x.tmp',,.F.,.F.,.T.)</span>
+<span class='PDMCnt'>3314</span> <span class='PDMInd'> 1</span>  <span class='PDMResK'>ENDIF</span> <span class='PDMCom'>&amp;&amp;Is_git()</span>
+<span class='PDMCnt'>3315</span> <span class='PDMInd'>  </span> 
+<span class='PDMCnt'>3316</span> <span class='PDMInd'> 1</span>  <span class='PDMResK'>IF</span> <span class='PDMOper'>!</span><span class='PDMResF'>EMPTY</span><span class='PDMOper'>(</span><span class='PDMVar'>m</span><span class='PDMOper'>.</span><span class='PDMVar'>lcRet</span><span class='PDMOper'>)</span> <span class='PDMResK'>THEN</span>
+<span class='PDMCnt'>3317</span> <span class='PDMInd'> 2</span>   <span class='PDMVar'>lcCap</span> <span class='PDMOper'>=</span> <span class='PDMVar'>_SCREEN</span><span class='PDMOper'>.</span><span class='PDMResP'>CAPTION</span>
+<span class='PDMCnt'>3318</span> <span class='PDMInd'> 2</span>   <span class='PDMVar'>_SCREEN</span><span class='PDMOper'>.</span><span class='PDMResP'>CAPTION</span> <span class='PDMOper'>=</span> <span class='PDMResF'>SUBSTR</span><span class='PDMOper'>(</span><span class='PDMVar'>m</span><span class='PDMOper'>.</span><span class='PDMVar'>lcCap</span><span class='PDMOper'>,</span><span class='PDMLit'>1</span><span class='PDMOper'>,</span><span class='PDMResF'>EVL</span><span class='PDMOper'>(</span><span class='PDMResF'>AT</span><span class='PDMOper'>(</span><span class='PDMStr'>' on branch'</span><span class='PDMOper'>,</span><span class='PDMVar'>m</span><span class='PDMOper'>.</span><span class='PDMVar'>lcCap</span><span class='PDMOper'>)</span><span class='PDMOper'>,</span><span class='PDMResF'>LEN</span><span class='PDMOper'>(</span><span class='PDMVar'>m</span><span class='PDMOper'>.</span><span class='PDMVar'>lcCap</span><span class='PDMOper'>)</span><span class='PDMOper'>+</span><span class='PDMLit'>1</span><span class='PDMOper'>)</span><span class='PDMOper'>-</span><span class='PDMLit'>1</span><span class='PDMOper'>)</span><span class='PDMOper'>+</span><span class='PDMStr'>' on branch '</span><span class='PDMOper'>+</span><span class='PDMVar'>m</span><span class='PDMOper'>.</span><span class='PDMVar'>lcRet</span>
+<span class='PDMCnt'>3319</span> <span class='PDMInd'> 1</span>  <span class='PDMResK'>ENDIF</span> <span class='PDMCom'>&amp;&amp;!EMPTY(m.lcRet)</span>
+<span class='PDMCnt'>3320</span> <span class='PDMInd'>  </span> 
+<span class='PDMCnt'>3321</span> <span class='PDMInd'> 1</span>  <span class='PDMResK'>RETURN</span> <span class='PDMVar'>m</span><span class='PDMOper'>.</span><span class='PDMVar'>lcRet</span></pre>
  <!-- Code End -->
   </div>
  </div>

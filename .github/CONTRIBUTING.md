@@ -40,10 +40,10 @@ Stuff is a bit scattered, so this is where to look up.
 5. For changed functionality, add descriptive text to _Doku/Source/Preface.html_ file. (this is for PDM docu)
 6. Check of the git version mentioned in _Doku/Source/Preface.html_ and _README.md_ might be updated.
 7. Highlight the change on _README.md_ in projects root
-8. Add a description of changes to _.github/ChangeLog.md_ (this is for github docu)
+8. Add a description of changes to _docs/ChangeLog.md_ (this is for github docu)
 9. Change date in the footer of documentation files touched.
 10. If available run PDM <a href="http://gorila.netlab.cz/pdm.html" title="PDM"  target="_blank">Project Documenting Machine</a> by Martina Jindrová using the AB-plugins.
-  The pdm setting is stored in the _Doku/_ folder.
+  The pdm setting is stored in the _Doku/_ folder, **run _Doku/runb2t.pdm_**
 
 ## Thor conventions
 This project is part of [VFPX](https://vfpx.github.io/) and published via [Thor](https://github.com/VFPX/Thor) Check for Updates..   
@@ -71,6 +71,6 @@ Thor update for this project works best with [VFPX Deployment](https://github.co
 7. push
 
 ----
-Last changed: <!--CVERSIONDATE-->2023-05-21<!--/CVERSIONDATE-->
+Last changed: <!--CVERSIONDATE-->2024-10-21<!--/CVERSIONDATE-->
 
 ![powered by VFPX](../docs/Images/vfpxpoweredby_alternative.gif "powered by VFPX")

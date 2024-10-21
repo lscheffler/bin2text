@@ -16,18 +16,18 @@
 <body>
 <div class="diaxp_mhead">IsFile Function</div>
 <div class="diaxp_mbody">
-<!-- Created with _diamp_pdm_ab by Agnes Beste    05.12.2023 08:21 -->
+<!-- Created with _diamp_pdm_ab by Agnes Beste    21.10.2024 11:33 -->
  <div class="PDM_AB_Descr"><!-- Descr Begin -->
 Check if a single file exists on Deic via ADIR (since FILE() sees stuff inside APP)
  </div><!-- Descr End -->
 
  <div class="DIAMP_PDM_AB_Syntax"><!-- Syntax Begin -->
   <div class="SColor">
-   <div class="RetVal"><a href="#_6RW0HWZIG">RetVal</a>&nbsp;</div>   <div class="RetValEq">=</div>   <div class="PEM">
+   <div class="RetVal"><a href="#_70V0OS8VG">RetVal</a>&nbsp;</div>   <div class="RetValEq">=</div>   <div class="PEM">
     IsFile
    </div>
    <div class="Para">
-    (<a href="#_6RW0HWZIH">tcFile</a>)
+    (<a href="#_70V0OS8VH">tcFile</a>)
    </div>
    <div style="clear: both"></div>
   </div><!-- Colour End -->
@@ -39,7 +39,7 @@ Check if a single file exists on Deic via ADIR (since FILE() sees stuff inside A
   </span>
   <dl class="DIAMP_PDM_AB_Params_List">
    <dt class="dt_">
-    <a class="DIAMP_PDM_AB_Params_ParaName" id="_6RW0HWZIH" name="_6RW0HWZIH">
+    <a class="DIAMP_PDM_AB_Params_ParaName" id="_70V0OS8VH" name="_70V0OS8VH">
      <span class="PDMEXPR PDMNor" ><span class='PDMVar'>tcFile</span></span>
 
     </a>
@@ -71,7 +71,7 @@ Check if a single file exists on Deic via ADIR (since FILE() sees stuff inside A
  <div class="DIAMP_PDM_AB_RetVal"><!-- Returns Begin -->
   <div>
    <span class="PDM_AB_Head">
-    <a id="_6RW0HWZIG" name="_6RW0HWZIG">
+    <a id="_70V0OS8VG" name="_70V0OS8VG">
      Return value
     </a>
    </span> <span class="RetVal_Ttype">Boolean</span>
@@ -93,23 +93,23 @@ Just to circumvent the isues of <span class="PDMEXPR PDMNor" ><span class='PDMRe
  </div><!-- Remarks End -->
 
 
-<!-- /Created with _diamp_pdm_ab by Agnes Beste    05.12.2023 08:21 -->
+<!-- /Created with _diamp_pdm_ab by Agnes Beste    21.10.2024 11:33 -->
 
  <div class="SC">
   <img onclick="ExpandSC('SP_P30',-1);" class="imgEC" src="../../imgs/dotab.gif" alt="Expand/Collapse source code of procedure IsFile" id="IMG_SP_P30" />
   <span onclick="ExpandSC('SP_P30',-1);" class="SCCaption"><a name="pm.isfile">Source Code</a></span>
   <div ondblclick="ExpandSC('SP_P30',-1);" class="SCE" style="display: none;" id="TX_SP_P30">
 <!-- Code Begin -->
-<pre class="PDMCODE PDMNor" ><span class='PDMCnt'>4124</span> <span class='PDMInd'> 1</span>  <span class='PDMResK'>LPARAMETERS</span><span class='PDMOper'>;</span>
-<span class='PDMCnt'>4125</span> <span class='PDMInd'> 2</span>   <span class='PDMVar'>tcFile</span>
-<span class='PDMCnt'>4126</span> <span class='PDMInd'>  </span> 
-<span class='PDMCnt'>4127</span> <span class='PDMInd'>  </span> 
-<span class='PDMCnt'>4148</span> <span class='PDMInd'>  </span> 
-<span class='PDMCnt'>4149</span> <span class='PDMInd'> 1</span>  <span class='PDMResK'>LOCAL</span> <span class='PDMResK'>ARRAY</span><span class='PDMOper'>;</span>
-<span class='PDMCnt'>4150</span> <span class='PDMInd'> 2</span>   <span class='PDMVar'>laDir</span><span class='PDMOper'>(</span><span class='PDMLit'>1</span><span class='PDMOper'>,</span><span class='PDMLit'>5</span><span class='PDMOper'>)</span>
-<span class='PDMCnt'>4151</span> <span class='PDMInd'>  </span> 
-<span class='PDMCnt'>4152</span> <span class='PDMInd'> 1</span>  <span class='PDMResK'>RETURN</span> <span class='PDMResF'>ADIR</span><span class='PDMOper'>(</span><span class='PDMVar'>laDir</span><span class='PDMOper'>,</span> <span class='PDMVar'>m</span><span class='PDMOper'>.</span><span class='PDMVar'>tcFile</span><span class='PDMOper'>)</span><span class='PDMOper'>=</span><span class='PDMLit'>1</span>
-<span class='PDMCnt'>4153</span> <span class='PDMInd'>  </span> </pre>
+<pre class="PDMCODE PDMNor" ><span class='PDMCnt'>4134</span> <span class='PDMInd'> 1</span>  <span class='PDMResK'>LPARAMETERS</span><span class='PDMOper'>;</span>
+<span class='PDMCnt'>4135</span> <span class='PDMInd'> 2</span>   <span class='PDMVar'>tcFile</span>
+<span class='PDMCnt'>4136</span> <span class='PDMInd'>  </span> 
+<span class='PDMCnt'>4137</span> <span class='PDMInd'>  </span> 
+<span class='PDMCnt'>4158</span> <span class='PDMInd'>  </span> 
+<span class='PDMCnt'>4159</span> <span class='PDMInd'> 1</span>  <span class='PDMResK'>LOCAL</span> <span class='PDMResK'>ARRAY</span><span class='PDMOper'>;</span>
+<span class='PDMCnt'>4160</span> <span class='PDMInd'> 2</span>   <span class='PDMVar'>laDir</span><span class='PDMOper'>(</span><span class='PDMLit'>1</span><span class='PDMOper'>,</span><span class='PDMLit'>5</span><span class='PDMOper'>)</span>
+<span class='PDMCnt'>4161</span> <span class='PDMInd'>  </span> 
+<span class='PDMCnt'>4162</span> <span class='PDMInd'> 1</span>  <span class='PDMResK'>RETURN</span> <span class='PDMResF'>ADIR</span><span class='PDMOper'>(</span><span class='PDMVar'>laDir</span><span class='PDMOper'>,</span> <span class='PDMVar'>m</span><span class='PDMOper'>.</span><span class='PDMVar'>tcFile</span><span class='PDMOper'>)</span><span class='PDMOper'>=</span><span class='PDMLit'>1</span>
+<span class='PDMCnt'>4163</span> <span class='PDMInd'>  </span> </pre>
  <!-- Code End -->
   </div>
  </div>

@@ -25,21 +25,21 @@
 </table>
 </div>
 <div class="diaxp_mbody">
-<!-- Created with _diamp_pdm_ab by Agnes Beste    05.12.2023 08:21 -->
+<!-- Created with _diamp_pdm_ab by Agnes Beste    21.10.2024 11:33 -->
  <div class="PDM_AB_Descr"><!-- Descr Begin -->
 Process all files of a given Array.
  </div><!-- Descr End -->
 
  <div class="DIAMP_PDM_AB_Syntax"><!-- Syntax Begin -->
   <div class="SColor">
-   <div class="RetVal"><a href="#_6RW0HWY0E">RetVal</a>&nbsp;</div>   <div class="RetValEq">=</div>   <div class="PEM">
+   <div class="RetVal"><a href="#_70V0OS7GU">RetVal</a>&nbsp;</div>   <div class="RetValEq">=</div>   <div class="PEM">
     Object.process_txt2bin
    </div>
    <div class="Para">
-    (@<a href="#_6RW0HWY0F">taFiles</a>
-     <wbr />,<a href="#_6RW0HWY0G">tlCheckAll</a>
-     [<wbr />,<a href="#_6RW0HWY0H">tlIncludeAll</a>
-     [<wbr />,<a href="#_6RW0HWY0I">toFB2T_Setting</a>]])
+    (@<a href="#_70V0OS7GV">taFiles</a>
+     <wbr />,<a href="#_70V0OS7GW">tlCheckAll</a>
+     [<wbr />,<a href="#_70V0OS7GX">tlIncludeAll</a>
+     [<wbr />,<a href="#_70V0OS7GY">toFB2T_Setting</a>]])
    </div>
    <div style="clear: both"></div>
   </div><!-- Colour End -->
@@ -51,7 +51,7 @@ Process all files of a given Array.
   </span>
   <dl class="DIAMP_PDM_AB_Params_List">
    <dt class="dt_">
-    <a class="DIAMP_PDM_AB_Params_ParaName" id="_6RW0HWY0F" name="_6RW0HWY0F">
+    <a class="DIAMP_PDM_AB_Params_ParaName" id="_70V0OS7GV" name="_70V0OS7GV">
      <span class="PDMEXPR PDMNor" ><span class='PDMVar'>taFiles</span></span>
 
     </a>
@@ -104,7 +104,7 @@ Process all files of a given Array.
     </span>
    </dd>
    <dt class="dt_">
-    <a class="DIAMP_PDM_AB_Params_ParaName" id="_6RW0HWY0G" name="_6RW0HWY0G">
+    <a class="DIAMP_PDM_AB_Params_ParaName" id="_70V0OS7GW" name="_70V0OS7GW">
      <span class="PDMEXPR PDMNor" ><span class='PDMVar'>tlCheckAll</span></span>
 
     </a>
@@ -131,14 +131,14 @@ Process all files of a given Array.
     </table>
     <span class="Params_Detail">
 
-	<p>Checks if all files listed in <a class="DIAMP_PDM_AB_Para_Link" href="#_6RW0HWY0F">taFiles</a> are used.</p>
+	<p>Checks if all files listed in <a class="DIAMP_PDM_AB_Para_Link" href="#_70V0OS7GV">taFiles</a> are used.</p>
 	<p>If a file is not found, text file corresponding will be deleted.</p>
 	<p>Only if <b>Delete obsolete files</b> is checked in settings dialog.</p>
 	
     </span>
    </dd>
    <dt class="dt_">
-    <a class="DIAMP_PDM_AB_Params_ParaName" id="_6RW0HWY0H" name="_6RW0HWY0H">
+    <a class="DIAMP_PDM_AB_Params_ParaName" id="_70V0OS7GX" name="_70V0OS7GX">
      <span class="PDMEXPR PDMNor" ><span class='PDMVar'>tlIncludeAll</span></span>
 
     </a>
@@ -176,7 +176,7 @@ Process all files of a given Array.
     </span>
    </dd>
    <dt class="dt_">
-    <a class="DIAMP_PDM_AB_Params_ParaName" id="_6RW0HWY0I" name="_6RW0HWY0I">
+    <a class="DIAMP_PDM_AB_Params_ParaName" id="_70V0OS7GY" name="_70V0OS7GY">
      <span class="PDMEXPR PDMNor" ><span class='PDMVar'>toFB2T_Setting</span></span>
 
     </a>
@@ -216,7 +216,7 @@ A settings object as returned by FoxBin2PRgs Get_DirSettings. May be used to man
  <div class="DIAMP_PDM_AB_RetVal"><!-- Returns Begin -->
   <div>
    <span class="PDM_AB_Head">
-    <a id="_6RW0HWY0E" name="_6RW0HWY0E">
+    <a id="_70V0OS7GU" name="_70V0OS7GU">
      Return value
     </a>
    </span> <span class="RetVal_Ttype">Boolean</span>
@@ -238,7 +238,7 @@ Returns succcess of operation.
 	 <li>Accepts a mixed array of files. (including whole PJX) </li>
 	 <li>Can limit the Bin2Text operation to dirty files only.</li>
 	 <li>Can delete obsolete class files in ClassPerFile operations.</li>
-	 <li>Can delete obsolete files for removed binaries if <a class="DIAMP_PDM_AB_Para_Link" href="#_6RW0HWY0H">tlIncludeAll</a>.</li>
+	 <li>Can delete obsolete files for removed binaries if <a class="DIAMP_PDM_AB_Para_Link" href="#_70V0OS7GX">tlIncludeAll</a>.</li>
 	</ul>
 	<p>If text to binary, it just passes the files to FoxBin2Prg</p>
 	<p>Creating text files, depending on a setting, it first let check FoxBin2Prg what to do.
@@ -281,7 +281,7 @@ Changed by: SF<br />
     05.06.2015 11:19
    </span><br />
 Changed by: SF<br />
-	New parameter <a class="DIAMP_PDM_AB_Para_Link" href="#_6RW0HWY0H">tlIncludeAll</a>
+	New parameter <a class="DIAMP_PDM_AB_Para_Link" href="#_70V0OS7GX">tlIncludeAll</a>
 	
   </div>
   <div class="PDM_AB_Body">
@@ -315,7 +315,7 @@ Changed by: SF<br />
     13.03.2017 14:00
    </span><br />
 Changed by: SF<br />
-	<a class="DIAMP_PDM_AB_Para_Link" href="#_6RW0HWY0F">taFiles</a> may now hold text files for Text To Bin operation.
+	<a class="DIAMP_PDM_AB_Para_Link" href="#_70V0OS7GV">taFiles</a> may now hold text files for Text To Bin operation.
 	
   </div>
   <div class="PDM_AB_Body">
@@ -323,7 +323,7 @@ Changed by: SF<br />
     13.03.2017 16:00
    </span><br />
 Changed by: SF<br />
-	New parameter <a class="DIAMP_PDM_AB_Para_Link" href="#_6RW0HWY0I">toFB2T_Setting</a> to force single file operation.
+	New parameter <a class="DIAMP_PDM_AB_Para_Link" href="#_70V0OS7GY">toFB2T_Setting</a> to force single file operation.
 	
   </div>
   <div class="PDM_AB_Body">
@@ -345,12 +345,12 @@ Changed  by: SF<br />
  </div><!-- Changes End -->
 
 
-<!-- /Created with _diamp_pdm_ab by Agnes Beste    05.12.2023 08:21 -->
+<!-- /Created with _diamp_pdm_ab by Agnes Beste    21.10.2024 11:33 -->
 
  <div class="SC">
-  <img onclick="ExpandSC('SP_5',-1);"class="imgEC" src="../../imgs/dotab.gif" alt="Expand/Collapse source code of procedure process_txt2bin" id="IMG_SP_5" />
-  <span ondblclick="ExpandSC('SP_5',-1);" class="SCCaption"><a name="cusstorage">Source Code</a></span>
-  <div ondblclick="ExpandSC('SP_5',-1);" class="SCE" style="display: none;" id="TX_SP_5">
+  <img onclick="ExpandSC('SP_46',-1);"class="imgEC" src="../../imgs/dotab.gif" alt="Expand/Collapse source code of procedure process_txt2bin" id="IMG_SP_46" />
+  <span ondblclick="ExpandSC('SP_46',-1);" class="SCCaption"><a name="cusstorage">Source Code</a></span>
+  <div ondblclick="ExpandSC('SP_46',-1);" class="SCE" style="display: none;" id="TX_SP_46">
 <!-- Code Begin -->
 <pre class="PDMCODE PDMNor" ><span class='PDMCnt'>   1</span> <span class='PDMInd'>  </span> <span class='PDMResK'>LPARAMETERS</span><span class='PDMOper'>;</span>
 <span class='PDMCnt'>   2</span> <span class='PDMInd'> 1</span>  <span class='PDMVar'>taFiles</span><span class='PDMOper'>,</span><span class='PDMOper'>;</span>
@@ -1006,7 +1006,7 @@ Changed  by: SF<br />
  </div><!-- Footer End -->
 </div>
 <script language="JavaScript" type="text/javascript">
-lo=document.getElementById("TX_SP_5");
+lo=document.getElementById("TX_SP_46");
 lo.XType="SourceCode";
 lo.Dir="../../imgs/";
 

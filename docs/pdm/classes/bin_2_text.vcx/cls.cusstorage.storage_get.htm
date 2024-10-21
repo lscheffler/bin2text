@@ -25,21 +25,21 @@
 </table>
 </div>
 <div class="diaxp_mbody">
-<!-- Created with _diamp_pdm_ab by Agnes Beste    05.12.2023 08:21 -->
+<!-- Created with _diamp_pdm_ab by Agnes Beste    21.10.2024 11:33 -->
  <div class="PDM_AB_Descr"><!-- Descr Begin -->
 Get settings from storage file.
  </div><!-- Descr End -->
 
  <div class="DIAMP_PDM_AB_Syntax"><!-- Syntax Begin -->
   <div class="SColor">
-   <div class="RetVal"><a href="#_6RW0HWY4V">RetVal</a>&nbsp;</div>   <div class="RetValEq">=</div>   <div class="PEM">
+   <div class="RetVal"><a href="#_70V0OS7LC">RetVal</a>&nbsp;</div>   <div class="RetValEq">=</div>   <div class="PEM">
     Object.storage_get
    </div>
    <div class="Para">
-    (<a href="#_6RW0HWY4W">tcType</a>
-     <wbr />,<a href="#_6RW0HWY4X">toSettings</a>
-     <wbr />,<a href="#_6RW0HWY4Y">tcStorage</a>
-     [<wbr />,<a href="#_6RW0HWY4Z">tcWhere</a>])
+    (<a href="#_70V0OS7LD">tcType</a>
+     <wbr />,<a href="#_70V0OS7LE">toSettings</a>
+     <wbr />,<a href="#_70V0OS7LF">tcStorage</a>
+     [<wbr />,<a href="#_70V0OS7LG">tcWhere</a>])
    </div>
    <div style="clear: both"></div>
   </div><!-- Colour End -->
@@ -51,7 +51,7 @@ Get settings from storage file.
   </span>
   <dl class="DIAMP_PDM_AB_Params_List">
    <dt class="dt_">
-    <a class="DIAMP_PDM_AB_Params_ParaName" id="_6RW0HWY4W" name="_6RW0HWY4W">
+    <a class="DIAMP_PDM_AB_Params_ParaName" id="_70V0OS7LD" name="_70V0OS7LD">
      <span class="PDMEXPR PDMNor" ><span class='PDMVar'>tcType</span></span>
 
     </a>
@@ -78,7 +78,7 @@ Get settings from storage file.
     </table>
    </dd>
    <dt class="dt_">
-    <a class="DIAMP_PDM_AB_Params_ParaName" id="_6RW0HWY4X" name="_6RW0HWY4X">
+    <a class="DIAMP_PDM_AB_Params_ParaName" id="_70V0OS7LE" name="_70V0OS7LE">
      <span class="PDMEXPR PDMNor" ><span class='PDMVar'>toSettings</span></span>
 
     </a>
@@ -105,7 +105,7 @@ Get settings from storage file.
     </table>
    </dd>
    <dt class="dt_">
-    <a class="DIAMP_PDM_AB_Params_ParaName" id="_6RW0HWY4Y" name="_6RW0HWY4Y">
+    <a class="DIAMP_PDM_AB_Params_ParaName" id="_70V0OS7LF" name="_70V0OS7LF">
      <span class="PDMEXPR PDMNor" ><span class='PDMVar'>tcStorage</span></span>
 
     </a>
@@ -132,7 +132,7 @@ Get settings from storage file.
     </table>
    </dd>
    <dt class="dt_">
-    <a class="DIAMP_PDM_AB_Params_ParaName" id="_6RW0HWY4Z" name="_6RW0HWY4Z">
+    <a class="DIAMP_PDM_AB_Params_ParaName" id="_70V0OS7LG" name="_70V0OS7LG">
      <span class="PDMEXPR PDMNor" ><span class='PDMVar'>tcWhere</span></span>
 
     </a>
@@ -171,7 +171,7 @@ Used to filter records, in special the DBF for additional index per DBF (cType I
  <div class="DIAMP_PDM_AB_RetVal"><!-- Returns Begin -->
   <div>
    <span class="PDM_AB_Head">
-    <a id="_6RW0HWY4V" name="_6RW0HWY4V">
+    <a id="_70V0OS7LC" name="_70V0OS7LC">
      Return value
     </a>
    </span> <span class="RetVal_Ttype">Boolean</span>
@@ -188,10 +188,10 @@ At least one setting found.
   <div class="PDM_AB_Body">
 
 
-<p>Every record in <a class="DIAMP_PDM_AB_Para_Link" href="#_6RW0HWY4Y">tcStorage</a> marked with <a class="DIAMP_PDM_AB_Para_Link" href="#_6RW0HWY4W">tcType</a> will be read
-and stored into <a class="DIAMP_PDM_AB_Para_Link" href="#_6RW0HWY4X">toSettings</a>.</p>
-<p><a class="DIAMP_PDM_AB_Para_Link" href="#_6RW0HWY4X">toSettings</a> will be cleared before read.</p>
-<p>For every item in <a class="DIAMP_PDM_AB_Para_Link" href="#_6RW0HWY4X">toSettings</a> a property of <span class="PDMEXPR PDMNor" ><span class='PDMVar'>_SCREEN</span></span>
+<p>Every record in <a class="DIAMP_PDM_AB_Para_Link" href="#_70V0OS7LF">tcStorage</a> marked with <a class="DIAMP_PDM_AB_Para_Link" href="#_70V0OS7LD">tcType</a> will be read
+and stored into <a class="DIAMP_PDM_AB_Para_Link" href="#_70V0OS7LE">toSettings</a>.</p>
+<p><a class="DIAMP_PDM_AB_Para_Link" href="#_70V0OS7LE">toSettings</a> will be cleared before read.</p>
+<p>For every item in <a class="DIAMP_PDM_AB_Para_Link" href="#_70V0OS7LE">toSettings</a> a property of <span class="PDMEXPR PDMNor" ><span class='PDMVar'>_SCREEN</span></span>
  will be created.
 Form: <span class="PDMEXPR PDMNor" ><span class='PDMVar'>_SCREEN</span><span class='PDMOper'>.</span><span class='PDMResM'>ADDPROPERTY</span><span class='PDMOper'>(</span><span class='PDMResF'>TRIM</span><span class='PDMOper'>(</span><span class='PDMVar'>cUniqueID</span><span class='PDMOper'>)</span><span class='PDMOper'>,</span><span class='PDMResF'>TRIM</span><span class='PDMOper'>(</span><span class='PDMVar'>cFile</span><span class='PDMOper'>)</span><span class='PDMOper'>)</span></span>
 </p>
@@ -200,12 +200,12 @@ Form: <span class="PDMEXPR PDMNor" ><span class='PDMVar'>_SCREEN</span><span cla
  </div><!-- Remarks End -->
 
 
-<!-- /Created with _diamp_pdm_ab by Agnes Beste    05.12.2023 08:21 -->
+<!-- /Created with _diamp_pdm_ab by Agnes Beste    21.10.2024 11:33 -->
 
  <div class="SC">
-  <img onclick="ExpandSC('SP_5',-1);"class="imgEC" src="../../imgs/dotab.gif" alt="Expand/Collapse source code of procedure storage_get" id="IMG_SP_5" />
-  <span ondblclick="ExpandSC('SP_5',-1);" class="SCCaption"><a name="cusstorage">Source Code</a></span>
-  <div ondblclick="ExpandSC('SP_5',-1);" class="SCE" style="display: none;" id="TX_SP_5">
+  <img onclick="ExpandSC('SP_46',-1);"class="imgEC" src="../../imgs/dotab.gif" alt="Expand/Collapse source code of procedure storage_get" id="IMG_SP_46" />
+  <span ondblclick="ExpandSC('SP_46',-1);" class="SCCaption"><a name="cusstorage">Source Code</a></span>
+  <div ondblclick="ExpandSC('SP_46',-1);" class="SCE" style="display: none;" id="TX_SP_46">
 <!-- Code Begin -->
 <pre class="PDMCODE PDMNor" ><span class='PDMCnt'>   1</span> <span class='PDMInd'>  </span> <span class='PDMResK'>LPARAMETERS</span><span class='PDMOper'>;</span>
 <span class='PDMCnt'>   2</span> <span class='PDMInd'> 1</span>  <span class='PDMVar'>tcType</span><span class='PDMOper'>,</span><span class='PDMOper'>;</span>
@@ -264,7 +264,7 @@ Form: <span class="PDMEXPR PDMNor" ><span class='PDMVar'>_SCREEN</span><span cla
  </div><!-- Footer End -->
 </div>
 <script language="JavaScript" type="text/javascript">
-lo=document.getElementById("TX_SP_5");
+lo=document.getElementById("TX_SP_46");
 lo.XType="SourceCode";
 lo.Dir="../../imgs/";
 
