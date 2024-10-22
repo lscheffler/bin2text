@@ -4670,7 +4670,7 @@ DEFINE CLASS cusstorage AS custom 		&& The stuff that does the work.
 		  llSearch = True
 		
 		  loSetting = CREATEOBJECT('EMPTY')
-		  ADDPROPERTY(m.loSetting,'gcFile',"")
+		  ADDPROPERTY(m.loSetting,'gcFile',m.lcFile)
 		  ADDPROPERTY(m.loSetting,'gcUniqueId',"gcB2T_FB2T")
 		  toSettings.ADD(m.loSetting,m.loSetting.gcUniqueId)
 		
@@ -4703,36 +4703,55 @@ DEFINE CLASS cusstorage AS custom 		&& The stuff that does the work.
 		IF m.llSearch THEN
 		*new install
 		 lcFile = ''
+		*!*	Changed by: SF 22.10.2024
+		*!*	<pdm>
+		*!*	<change date="{^2024-10-22,15:44:00}">Changed by: SF<br />
+		*!*	Better integration with Thor, use FoxBin2Prg of Thor if installed.
+		*!*	</change>
+		*!*	</pdm>
 		
-		 IF FILE("FoxBin2PRG.prg") THEN
+		 IF PEMSTATUS(_SCREEN,"cThorDispatcher",5) AND VARTYPE(_SCREEN.cThorDispatcher)='C' AND !EMPTY(_SCREEN.cThorDispatcher) THEN
+		  lcFile = EXECSCRIPT(_SCREEN.cThorDispatcher,'Thor_Proc_GetFoxBin2PrgFolder')	&&+'FoxBin2Prg.exe'
+		 ENDIF &&PEMSTATUS(_Screen,"cThorDispatcher",5) AND VARTYPE(_Screen.cThorDispatcher)='C' AND !EMPTY(_Screen. ...
+		 IF EMPTY(m.lcFile) THEN
+		  lcFile = ""
+		 ELSE  &&EMPTY(m.lcFile)
+		  llSearch = .F.
+		 ENDIF &&EMPTY(m.lcFile)
+		
+		 IF m.llSearch THEN
+		  IF FILE("FoxBin2PRG.prg") THEN
 		*in search path
-		  lcFile = FULLPATH("FoxBin2PRG.prg")
-		 ELSE  &&FILE("FoxBin2PRG.prg")
+		   lcFile = FULLPATH("FoxBin2PRG.prg")
+		  ELSE  &&FILE("FoxBin2PRG.prg")
 		*search start
-		  lnLoop = 1
-		  lcFile = SYS(16,m.lnLoop)
-		
-		  DO WHILE LEN(m.lcFile)>0
-		
-		   IF UPPER(JUSTEXT(m.lcFile)) = "APP" THEN
-		    IF m.lcFile="PROCEDURE " THEN
-		     lcFile = ADDBS(JUSTPATH(STREXTRACT(m.lcFile,' ',' ',2,2)))
-		    ELSE  &&m.lcFile="PROCEDURE "
-		     lcFile = JUSTPATH(m.lcFile)
-		    ENDIF &&m.lcFile="PROCEDURE "
-		    EXIT
-		   ENDIF &&UPPER(JUSTEXT(m.lcFile)) = "APP"
-		
-		   IF UPPER(STREXTRACT(m.lcFile,' ',' ',1))=="BIN2PRG";
-		     OR UPPER(STREXTRACT(m.lcFile,' ',' ',1))=="INTER_ACTIVE" THEN
-		    lcFile = ADDBS(JUSTPATH(STREXTRACT(m.lcFile,' ',' ',2,2)))
-		    EXIT
-		   ENDIF &&UPPER(STREXTRACT(m.lcFile,' ',' ',1))=="BIN2PRG" OR UPPER(STREXTRACT(m.lcFile,' ',' ',1))=="INTER_ACTIVE"
-		   lnLoop = m.lnLoop+1
+		   lnLoop = 1
 		   lcFile = SYS(16,m.lnLoop)
-		  ENDDO &&LEN(m.lcFile)>0
 		
-		 ENDIF &&FILE("FoxBin2PRG.prg")
+		   DO WHILE LEN(m.lcFile)>0
+		
+		    IF UPPER(JUSTEXT(m.lcFile)) = "APP" THEN
+		     IF m.lcFile="PROCEDURE " THEN
+		      lcFile = ADDBS(JUSTPATH(STREXTRACT(m.lcFile,' ',' ',2,2)))
+		     ELSE  &&m.lcFile="PROCEDURE "
+		      lcFile = JUSTPATH(m.lcFile)
+		     ENDIF &&m.lcFile="PROCEDURE "
+		     EXIT
+		    ENDIF &&UPPER(JUSTEXT(m.lcFile)) = "APP"
+		
+		    IF UPPER(STREXTRACT(m.lcFile,' ',' ',1))=="BIN2PRG";
+		      OR UPPER(STREXTRACT(m.lcFile,' ',' ',1))=="INTER_ACTIVE" THEN
+		     lcFile = ADDBS(JUSTPATH(STREXTRACT(m.lcFile,' ',' ',2,2)))
+		     EXIT
+		    ENDIF &&UPPER(STREXTRACT(m.lcFile,' ',' ',1))=="BIN2PRG" OR UPPER(STREXTRACT(m.lcFile,' ',' ',1))=="INTER_ACTIVE"
+		    lnLoop = m.lnLoop+1
+		    lcFile = SYS(16,m.lnLoop)
+		   ENDDO &&LEN(m.lcFile)>0
+		
+		  ENDIF &&FILE("FoxBin2PRG.prg")
+		 ENDIF &&m.llSearch
+		
+		*!*	/Changed by: SF 22.10.2024
 		
 		*Try .. EndTry bei IntelliScript
 		 LOCAL;

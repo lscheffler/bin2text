@@ -11,6 +11,11 @@ This version of Bin2Text requires version [1.21.01](https://github.com/fdbozzo/f
 ## Release History
 
 ---
+### 2024-10-22, Version 1.3.4
+Stable release.
+* Better integration with Thor, use FoxBin2Prg if installed by Thor as default.
+
+---
 ### 2024-10-21, Version 1.3.3
 Stable release.
 * Missing xxx while processing. Randomly missing variable error. Issue #9
@@ -154,5 +159,5 @@ Stable release.
 * Initial push to github
 
 ----
-Last changed: *<!--CVERSIONDATE-->2024-10-21<!--/CVERSIONDATE-->*   
+Last changed: *<!--CVERSIONDATE-->2024-10-22<!--/CVERSIONDATE-->*   
 ![powered by VFPX](./images/vfpxpoweredby_alternative.gif "powered by VFPX")
