@@ -16,19 +16,19 @@
 <body>
 <div class="diaxp_mhead">Get_git_Path Function</div>
 <div class="diaxp_mbody">
-<!-- Created with _diamp_pdm_ab by Agnes Beste    28.10.2026 12:42 -->
+<!-- Created with _diamp_pdm_ab by Agnes Beste    28.10.2026 12:51 -->
  <div class="PDM_AB_Descr"><!-- Descr Begin -->
 Get installation status of git and paht to git binaries.
  </div><!-- Descr End -->
 
  <div class="DIAMP_PDM_AB_Syntax"><!-- Syntax Begin -->
   <div class="SColor">
-   <div class="RetVal"><a href="#_7LF0R86IV">RetVal</a>&nbsp;</div>   <div class="RetValEq">=</div>   <div class="PEM">
+   <div class="RetVal"><a href="#_7LF0RKEC3">RetVal</a>&nbsp;</div>   <div class="RetValEq">=</div>   <div class="PEM">
     Get_git_Path
    </div>
    <div class="Para">
-    (@<a href="#_7LF0R86IW">tc_git</a>
-     [<wbr />,@<a href="#_7LF0R86IX">tlIs64</a>])
+    (@<a href="#_7LF0RKEC4">tc_git</a>
+     [<wbr />,@<a href="#_7LF0RKEC5">tlIs64</a>])
    </div>
    <div style="clear: both"></div>
   </div><!-- Colour End -->
@@ -40,7 +40,7 @@ Get installation status of git and paht to git binaries.
   </span>
   <dl class="DIAMP_PDM_AB_Params_List">
    <dt class="dt_">
-    <a class="DIAMP_PDM_AB_Params_ParaName" id="_7LF0R86IW" name="_7LF0R86IW">
+    <a class="DIAMP_PDM_AB_Params_ParaName" id="_7LF0RKEC4" name="_7LF0RKEC4">
      <span class="PDMEXPR PDMNor" ><span class='PDMVar'>tc_git</span></span>
 
     </a>
@@ -74,7 +74,7 @@ Includes git.exe
     </span>
    </dd>
    <dt class="dt_">
-    <a class="DIAMP_PDM_AB_Params_ParaName" id="_7LF0R86IX" name="_7LF0R86IX">
+    <a class="DIAMP_PDM_AB_Params_ParaName" id="_7LF0RKEC5" name="_7LF0RKEC5">
      <span class="PDMEXPR PDMNor" ><span class='PDMVar'>tlIs64</span></span>
 
     </a>
@@ -117,7 +117,7 @@ Checks if 64bit is installed. 64bit needs different calling then 32bit, because 
  <div class="DIAMP_PDM_AB_RetVal"><!-- Returns Begin -->
   <div>
    <span class="PDM_AB_Head">
-    <a id="_7LF0R86IV" name="_7LF0R86IV">
+    <a id="_7LF0RKEC3" name="_7LF0RKEC3">
      Return value
     </a>
    </span> <span class="RetVal_Ttype">Boolean</span>
@@ -173,7 +173,7 @@ SF Changed by<br />
  </div><!-- Changes End -->
 
 
-<!-- /Created with _diamp_pdm_ab by Agnes Beste    28.10.2026 12:42 -->
+<!-- /Created with _diamp_pdm_ab by Agnes Beste    28.10.2026 12:51 -->
 
  <div class="SC">
   <img onclick="ExpandSC('SP_P22',-1);" class="imgEC" src="../../imgs/dotab.gif" alt="Expand/Collapse source code of procedure Get_git_Path" id="IMG_SP_P22" />
@@ -202,12 +202,12 @@ SF Changed by<br />
 <span class='PDMCnt'>3155</span> <span class='PDMInd'> 1</span>  <span class='PDMResK'>LOCAL</span><span class='PDMOper'>;</span>
 <span class='PDMCnt'>3156</span> <span class='PDMInd'> 2</span>   <span class='PDMVar'>llReturn</span> <span class='PDMResK'>AS</span> <span class='PDMVar'>BOOLEAN</span>
 <span class='PDMCnt'>3157</span> <span class='PDMInd'>  </span> 
-<span class='PDMCnt'>3158</span> <span class='PDMInd'> 1</span>  <span class='PDMResK'>IF</span> <span class='PDMResF'>PEMSTATUS</span><span class='PDMOper'>(</span><span class='PDMVar'>_SCREEN</span><span class='PDMOper'>,</span><span class='PDMStr'>'gcB2T_git'</span><span class='PDMOper'>,</span><span class='PDMLit'>5</span><span class='PDMOper'>)</span> <span class='PDMResK'>THEN</span>
+<span class='PDMCnt'>3158</span> <span class='PDMInd'> 1</span>  <span class='PDMResK'>IF</span> <span class='PDMResF'>PEMSTATUS</span><span class='PDMOper'>(</span><span class='PDMVar'>_SCREEN</span><span class='PDMOper'>,</span><span class='PDMStr'>'glB2T_git_64'</span><span class='PDMOper'>,</span><span class='PDMLit'>5</span><span class='PDMOper'>)</span> <span class='PDMResK'>THEN</span>
 <span class='PDMCnt'>3159</span> <span class='PDMInd'>  </span> <span class='PDMCom'>*read from storage or set</span>
 <span class='PDMCnt'>3160</span> <span class='PDMInd'> 2</span>   <span class='PDMVar'>tc_git</span> <span class='PDMOper'>=</span> <span class='PDMVar'>_SCREEN</span><span class='PDMOper'>.</span><span class='PDMVar'>gcB2T_git</span>
 <span class='PDMCnt'>3161</span> <span class='PDMInd'> 2</span>   <span class='PDMVar'>tlIs64</span> <span class='PDMOper'>=</span> <span class='PDMVar'>_SCREEN</span><span class='PDMOper'>.</span><span class='PDMVar'>glB2T_git_64</span>
 <span class='PDMCnt'>3162</span> <span class='PDMInd'>  </span> 
-<span class='PDMCnt'>3163</span> <span class='PDMInd'> 1</span>  <span class='PDMResK'>ELSE</span>  <span class='PDMCom'>&amp;&amp;PEMSTATUS(_SCREEN,'gcB2T_git',5)</span>
+<span class='PDMCnt'>3163</span> <span class='PDMInd'> 1</span>  <span class='PDMResK'>ELSE</span>  <span class='PDMCom'>&amp;&amp;PEMSTATUS(_SCREEN,'glB2T_git_64',5)</span>
 <span class='PDMCnt'>3164</span> <span class='PDMInd'>  </span> <span class='PDMCom'>*try to read registry</span>
 <span class='PDMCnt'>3165</span> <span class='PDMInd'> 2</span>   <span class='PDMResK'>DECLARE</span> <span class='PDMResK'>INTEGER</span> <span class='PDMVar'><a href="http://www.news2news.com/vfp/?search=RegOpenKeyEx&x=7&y=5" target="blank">RegOpenKeyEx</a></span> <span class='PDMResK'>IN</span> <span class='PDMVar'>advapi32</span><span class='PDMOper'>;</span>
 <span class='PDMCnt'>3166</span> <span class='PDMInd'> 3</span>    <span class='PDMResK'>INTEGER</span> <span class='PDMVar'>nHKey</span><span class='PDMOper'>,</span> <span class='PDMResK'>STRING</span> <span class='PDMVar'>cSubKey</span><span class='PDMOper'>,</span> <span class='PDMResK'>INTEGER</span> <span class='PDMVar'>ulOptions</span><span class='PDMOper'>,</span> <span class='PDMResK'>INTEGER</span> <span class='PDMVar'>samDesired</span><span class='PDMOper'>,</span> <span class='PDMResK'>INTEGER</span> <span class='PDMOper'>@</span><span class='PDMVar'>nResult</span>
@@ -311,7 +311,7 @@ SF Changed by<br />
 <span class='PDMCnt'>3268</span> <span class='PDMInd'> 2</span>   <span class='PDMVar'>_SCREEN</span><span class='PDMOper'>.</span><span class='PDMResM'>ADDPROPERTY</span><span class='PDMOper'>(</span><span class='PDMStr'>'gcB2T_git'</span><span class='PDMOper'>,</span><span class='PDMResF'>IIF</span><span class='PDMOper'>(</span><span class='PDMResF'>FILE</span><span class='PDMOper'>(</span><span class='PDMVar'>m</span><span class='PDMOper'>.</span><span class='PDMVar'>tc_git</span><span class='PDMOper'>)</span><span class='PDMOper'>,</span><span class='PDMVar'>m</span><span class='PDMOper'>.</span><span class='PDMVar'>tc_git</span><span class='PDMOper'>,</span><span class='PDMStr'>''</span><span class='PDMOper'>)</span><span class='PDMOper'>)</span>
 <span class='PDMCnt'>3269</span> <span class='PDMInd'> 2</span>   <span class='PDMVar'>_SCREEN</span><span class='PDMOper'>.</span><span class='PDMResM'>ADDPROPERTY</span><span class='PDMOper'>(</span><span class='PDMStr'>'glB2T_git_64'</span><span class='PDMOper'>,</span><span class='PDMVar'>m</span><span class='PDMOper'>.</span><span class='PDMVar'>tlIs64</span><span class='PDMOper'>)</span>
 <span class='PDMCnt'>3270</span> <span class='PDMInd'>  </span> 
-<span class='PDMCnt'>3271</span> <span class='PDMInd'> 1</span>  <span class='PDMResK'>ENDIF</span> <span class='PDMCom'>&amp;&amp;PEMSTATUS(_SCREEN,'gcB2T_git',5)</span>
+<span class='PDMCnt'>3271</span> <span class='PDMInd'> 1</span>  <span class='PDMResK'>ENDIF</span> <span class='PDMCom'>&amp;&amp;PEMSTATUS(_SCREEN,'glB2T_git_64',5)</span>
 <span class='PDMCnt'>3272</span> <span class='PDMInd'>  </span> 
 <span class='PDMCnt'>3273</span> <span class='PDMInd'> 1</span>  <span class='PDMVar'>llReturn</span> <span class='PDMOper'>=</span> <span class='PDMResF'>FILE</span><span class='PDMOper'>(</span><span class='PDMVar'>m</span><span class='PDMOper'>.</span><span class='PDMVar'>tc_git</span><span class='PDMOper'>)</span>
 <span class='PDMCnt'>3274</span> <span class='PDMInd'>  </span> 

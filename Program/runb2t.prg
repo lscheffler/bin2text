@@ -3155,12 +3155,12 @@ FUNCTION Get_git_Path &&Internal. Get installation status of git and path to bin
  LOCAL;
   llReturn AS BOOLEAN
 
- IF PEMSTATUS(_SCREEN,'gcB2T_git',5) THEN
+ IF PEMSTATUS(_SCREEN,'glB2T_git_64',5) THEN
 *read from storage or set
   tc_git = _SCREEN.gcB2T_git
   tlIs64 = _SCREEN.glB2T_git_64
 
- ELSE  &&PEMSTATUS(_SCREEN,'gcB2T_git',5)
+ ELSE  &&PEMSTATUS(_SCREEN,'glB2T_git_64',5)
 *try to read registry
   DECLARE INTEGER RegOpenKeyEx IN advapi32;
    INTEGER nHKey, STRING cSubKey, INTEGER ulOptions, INTEGER samDesired, INTEGER @nResult
@@ -3268,7 +3268,7 @@ FUNCTION Get_git_Path &&Internal. Get installation status of git and path to bin
   _SCREEN.ADDPROPERTY('gcB2T_git',IIF(FILE(m.tc_git),m.tc_git,''))
   _SCREEN.ADDPROPERTY('glB2T_git_64',m.tlIs64)
 
- ENDIF &&PEMSTATUS(_SCREEN,'gcB2T_git',5)
+ ENDIF &&PEMSTATUS(_SCREEN,'glB2T_git_64',5)
 
  llReturn = FILE(m.tc_git)
 

@@ -193,4 +193,4 @@ return lcNotes
 
 * "Bin2Text" is a Component. No procedure GetRegisterWithThor created by VFPX Deployment 
 
-*created by VFPX Deployment, 28.10.2026 12:45:48
+*created by VFPX Deployment, 28.10.2026 12:52:11
