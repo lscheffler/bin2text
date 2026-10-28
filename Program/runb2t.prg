@@ -3128,6 +3128,14 @@ FUNCTION Get_git_Path &&Internal. Get installation status of git and path to bin
 *!*	</copyright>
 *!*	</pdm>
 
+*!*	SF Changed by 28.10.2026
+*!*	<pdm>
+*!*	<change date="{^2026-10-28,12:07:00}">SF Changed by<br />
+*!*	Renamed glB2T_git64 to glB2T_git_64<br />
+*!*	Strange error with properties window, see issue #11
+*!*	</change>
+*!*	</pdm>
+
 *!*	SF Changed by 11.2.2021
 *!*	<pdm>
 *!*	<change date="{^2021-02-11,12:55:00}">SF Changed by<br />
@@ -3150,7 +3158,7 @@ FUNCTION Get_git_Path &&Internal. Get installation status of git and path to bin
  IF PEMSTATUS(_SCREEN,'gcB2T_git',5) THEN
 *read from storage or set
   tc_git = _SCREEN.gcB2T_git
-  tlIs64 = _SCREEN.glB2T_git64
+  tlIs64 = _SCREEN.glB2T_git_64
 
  ELSE  &&PEMSTATUS(_SCREEN,'gcB2T_git',5)
 *try to read registry
@@ -3258,13 +3266,14 @@ FUNCTION Get_git_Path &&Internal. Get installation status of git and path to bin
 *!*	/Changed by: SF 1.12.2015
 
   _SCREEN.ADDPROPERTY('gcB2T_git',IIF(FILE(m.tc_git),m.tc_git,''))
-  _SCREEN.ADDPROPERTY('glB2T_git64',m.tlIs64)
+  _SCREEN.ADDPROPERTY('glB2T_git_64',m.tlIs64)
 
  ENDIF &&PEMSTATUS(_SCREEN,'gcB2T_git',5)
 
  llReturn = FILE(m.tc_git)
 
  RETURN m.llReturn
+*!*	/Changed by: SF 28.10.2026
 ENDFUNC &&Get_git_Path
 
 *!*	Geändert durch: SF 4.6.2015

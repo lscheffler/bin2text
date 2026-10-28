@@ -6,9 +6,14 @@ This page gives a brief overview of changes to the [Bin 2 Text Extension](https:
 
 A complete list of changes is available on the offline documentation via **local folder** _docu/index.htm_.
 
-This version of Bin2Text requires version [1.21.01](https://github.com/fdbozzo/foxbin2prg/releases/tag/v1.21.01) of FoxBin2Prg.
+This version of Bin2Text requires minimal version [1.21.01](https://github.com/fdbozzo/foxbin2prg/releases/tag/v1.21.01) of FoxBin2Prg.
 
 ## Release History
+
+---
+### 2026-10-28, Version 1.3.5
+Stable release.
+* Error runing multiple times. Akwardly changed property of _SCREEN. Issue #11
 
 ---
 ### 2024-10-22, Version 1.3.4
@@ -159,5 +164,5 @@ Stable release.
 * Initial push to github
 
 ----
-Last changed: *<!--CVERSIONDATE-->2024-10-22<!--/CVERSIONDATE-->*   
+Last changed: *<!--CVERSIONDATE-->2026-10-28<!--/CVERSIONDATE-->*   
 ![powered by VFPX](./images/vfpxpoweredby_alternative.gif "powered by VFPX")
